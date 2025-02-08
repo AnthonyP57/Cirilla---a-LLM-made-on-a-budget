@@ -1,1 +1,125 @@
 import torch
+import torch.nn as nn
+
+class InputEmbeddings(nn.Module):
+    def __init__(self, vocab_size, d_model):
+        super().__init__()
+        self.d_model = d_model
+        self.max_seq_len = vocab_size
+        #positional embeddings are learnable params
+        self.positional_embeddings = nn.Embedding(vocab_size, d_model)
+
+    def forward(self, x):
+        return self.positional_embeddings(x)
+
+class PositionalEncodings(nn.Module):
+    def __init__(self, max_seq_len, d_model, drop=0.1):
+        super().__init__()
+        pe = torch.zeros(max_seq_len, d_model)
+        position = torch.arange(0, max_seq_len, dtype=torch.float).unsqueeze(1)
+        div_term = torch.arange(0, d_model, 2).float()
+        div_term = torch.pow(10000, -div_term / d_model)
+        
+        pe[:, 0::2] = torch.sin(position * div_term)
+        pe[:, 1::2] = torch.cos(position * div_term)
+        
+        pe = pe.unsqueeze(0)
+        self.register_buffer('pe', pe)
+        self.drop = nn.Dropout(drop)
+
+    def forward(self, x):
+        x += self.pe[:, :x.size(1), :].detach()
+        return self.drop(x) #dropout same as in paper
+
+# import matplotlib.pyplot as plt
+# import seaborn as sns
+# x = torch.zeros(1, 2000, 512)
+# pos_encoder = PositionalEncodings(2000, 512)
+# encoded_x = pos_encoder(x)
+
+# plt.figure(figsize=(10, 5))
+# sns.heatmap(encoded_x[0, :, :].detach().numpy(), cmap='coolwarm')
+# plt.xlabel('Position')
+# plt.ylabel('Dimension')
+# plt.title('Positional Encodings')
+# plt.savefig('./img/embeddings.png')
+
+class MultiHeadAttention(nn.Module):
+    def __init__(self, d_model, num_heads):
+        super().__init__()
+        self.d_model = d_model
+        self.num_heads = num_heads
+        self.head_dim = d_model // num_heads
+        assert d_model % num_heads == 0, "d_model must be divisible by num_heads"
+        self.wq = nn.Linear(d_model, d_model, bias=False)
+        self.wk = nn.Linear(d_model, d_model, bias=False)
+        self.wv = nn.Linear(d_model, d_model, bias=False)
+        self.wout = nn.Linear(d_model, d_model, bias=False)
+
+    @staticmethod
+    def attention(q, k, v, mask=None, dropout=None):
+
+        attention = torch.softmax((q @ k.transpose(-2, -1)) / (k.size(-1) ** 0.5), dim=-1)
+
+        if mask is not None:
+            attention = attention.masked_fill(mask == 0, float('-inf'))
+
+        if dropout is not None:
+            attention = dropout(attention)
+
+        return (attention @ v), attention
+
+    def forward(self, q, k, v, mask=None):
+        batch, seq, d_model = q.size()
+        q = self.wq(q)
+        k = self.wk(k)
+        v = self.wv(v)
+
+        q = q.view(batch, seq, self.num_heads, self.head_dim).transpose(1, 2) #(batch, heads, seq, head_dim)
+        k = k.view(batch, seq, self.num_heads, self.head_dim).transpose(1, 2)
+        v = v.view(batch, seq, self.num_heads, self.head_dim).transpose(1, 2)
+
+        out = self.attention(q, k, v, mask=mask)[0]
+
+        out = out.transpose(1, 2).contiguous().view(batch, seq, d_model)
+
+        return self.wout(out)
+
+class LayerNorm(nn.Module):
+    def __init__(self, d_model, eps=1e-6):
+        super().__init__()
+        self.d_model = d_model
+        self.eps = eps
+        self.gamma = nn.Parameter(torch.ones(d_model))
+        self.beta = nn.Parameter(torch.zeros(d_model))
+
+    def forward(self, x):
+        mean = x.mean(-1, keepdim=True)
+        std = x.std(-1, keepdim=True)
+        return self.gamma * (x - mean) / (std + self.eps) + self.beta
+    
+class AddAndNorm(nn.Module):
+    def __init__(self, d_model):
+        super().__init__()
+        self.norm = LayerNorm(d_model)
+        self.dropout = nn.Dropout(0.1)
+
+    def forward(self, x, sublayer):
+        return self.norm(x + self.dropout(sublayer(x)))
+    
+class FeedForward(nn.Module):
+    def __init__(self, d_model, d_ff=2048):
+        super().__init__()
+        self.w1 = nn.Linear(d_model, d_ff)
+        self.w2 = nn.Linear(d_ff, d_model)
+
+    def forward(self, x):
+        return self.w2(torch.relu(self.w1(x)))
+    
+class Linear(nn.Module):
+    def __init__(self, d_model, vocab_size):
+        super().__init__()
+        self.linear = nn.Linear(d_model, vocab_size)
+
+    def forward(self, x):
+        return self.linear(x)
