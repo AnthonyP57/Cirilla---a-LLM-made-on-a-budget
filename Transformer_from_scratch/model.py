@@ -66,7 +66,7 @@ class MultiHeadAttention(nn.Module):
         # print(attention.size())
 
         if mask is not None:
-            attention = attention.masked_fill(mask == 0, float('-inf'))
+            attention = attention.masked_fill(mask == 0, -1e-9)
 
         return (attention @ v), attention
 
