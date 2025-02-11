@@ -59,7 +59,11 @@ class MultiHeadAttention(nn.Module):
     @staticmethod
     def attention(q, k, v, mask=None):
 
+        # print(q.size(), k.size(), v.size(), mask.size())
+
         attention = torch.softmax((q @ k.transpose(-2, -1)) / (k.size(-1) ** 0.5), dim=-1)
+
+        # print(attention.size())
 
         if mask is not None:
             attention = attention.masked_fill(mask == 0, float('-inf'))
@@ -72,13 +76,13 @@ class MultiHeadAttention(nn.Module):
         k = self.wk(k)
         v = self.wv(v)
 
-        q = q.view(batch, seq, self.num_heads, self.head_dim).transpose(1, 2) #(batch, heads, seq, head_dim)
-        k = k.view(batch, seq, self.num_heads, self.head_dim).transpose(1, 2)
-        v = v.view(batch, seq, self.num_heads, self.head_dim).transpose(1, 2)
+        q = q.view(batch, -1, self.num_heads, self.head_dim).transpose(1, 2) #(batch, heads, seq, head_dim)
+        k = k.view(batch, -1, self.num_heads, self.head_dim).transpose(1, 2)
+        v = v.view(batch, -1, self.num_heads, self.head_dim).transpose(1, 2)
 
         out = self.attention(q, k, v, mask=mask)[0]
 
-        out = out.transpose(1, 2).contiguous().view(batch, seq, d_model)
+        out = out.transpose(1, 2).contiguous().view(batch, -1, d_model)
 
         return self.wout(out)
 
@@ -171,4 +175,18 @@ class Transformer(nn.Module):
         for decoder_block in self.decoder_blocks:
             dec_in = decoder_block(dec_in, enc_in, dec_self_att_mask, dec_cross_att_mask)
 
+        return self.linear(dec_in)
+    
+    def encode(self, enc_in, enc_mask):
+        enc_in = self.input_emb(enc_in)
+        enc_in = self.pos_enc_enc(enc_in)
+        for encoder_block in self.encoder_blocks:
+            enc_in = encoder_block(enc_in, enc_mask)
+        return enc_in
+    
+    def decode(self, dec_in, enc_out, dec_self_att_mask, dec_cross_att_mask):
+        dec_in = self.input_emb(dec_in)
+        dec_in = self.pos_enc_dec(dec_in)
+        for decoder_block in self.decoder_blocks:
+            dec_in = decoder_block(dec_in, enc_out, dec_self_att_mask, dec_cross_att_mask)
         return self.linear(dec_in)

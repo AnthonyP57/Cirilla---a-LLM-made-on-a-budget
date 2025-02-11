@@ -1,26 +1,57 @@
 from tokenizers import Tokenizer
-from tokenizers.models import WordPiece
+from tokenizers.models import WordPiece, WordLevel
 from tokenizers.pre_tokenizers import Digits, Whitespace, Sequence
-from tokenizers.trainers import WordPieceTrainer
+from tokenizers.trainers import WordPieceTrainer, WordLevelTrainer
 import torch.nn as nn
-from torch.utils.data import Dataset
+from torch.utils.data import Dataset, DataLoader, random_split
 import numpy as np
 import torch
+import os
+from datasets import load_dataset
 
-# if not Path.exists(tokenizer_path):
-#     tokenizer = Tokenizer(WordPiece(unk_token='[UNK]'))
-#     tokenizer.pre_tokenizer = Sequence([Whitespace(), Digits(individual_digits=True)])
-#     trainer = WordPieceTrainer(special_tokens=['[UNK]', '[PAD]', '[SOS]', '[EOS]'], min_frequency=2)
-#     tokenizer.train_from_iterator(get_all_sentences(ds, lang), trainer=trainer)
-#     tokenizer.save(str(tokenizer_path))
-# else:
-#     tokenizer = Tokenizer.from_file(str(tokenizer_path))
+def get_all_sentences(ds):
+    for item in ds:
+        yield item['translation']['en']
 
-def get_all_sentences(paths):
-    for path in paths:
-        with open(path) as f:
-            for line in f:
-                yield line
+def get_or_build_tokenizer(ds):
+    if not os.path.exists('tokenizer.json'):
+        tokenizer = Tokenizer(WordPiece(unk_token='[UNK]'))
+        # tokenizer = Tokenizer(WordLevel(unk_token='[UNK]'))
+        tokenizer.pre_tokenizer = Sequence([Whitespace(), Digits(individual_digits=True)])
+        trainer = WordPieceTrainer(special_tokens=['[UNK]', '[PAD]', '[SOS]', '[EOS]', '[MASK]'], min_frequency=2)
+        # trainer = WordLevelTrainer(special_tokens=['[UNK]', '[PAD]', '[SOS]', '[EOS]', '[MASK]'], min_frequency=2)
+        tokenizer.train_from_iterator(get_all_sentences(ds), trainer=trainer)
+        tokenizer.save(str('tokenizer.json'))
+    else:
+        tokenizer = Tokenizer.from_file(str('tokenizer.json'))
+
+    return tokenizer
+
+def get_dataset(config):
+    ds_raw = load_dataset('opus_books', 'en-it', split='train') #en-hu has the most sentences
+
+    tokenizer = get_or_build_tokenizer(ds_raw)
+
+    train_ds_size = int(0.9*len(ds_raw))
+    val_ds_size = len(ds_raw) - train_ds_size
+
+    train_ds_raw, val_sd_raw = random_split(ds_raw, [train_ds_size, val_ds_size])
+
+    train_ds = FillBlankDataset(train_ds_raw, tokenizer, config['seq_len'])
+    val_ds = FillBlankDataset(val_sd_raw, tokenizer, config['seq_len'])
+
+    max_len=0
+
+    for item in ds_raw:
+        ids = tokenizer.encode(item['translation']['en']).ids
+        max_len = max(max_len, len(ids))
+
+    print(f"Max length of sentence: {max_len}")
+
+    train_dataloader = DataLoader(train_ds, batch_size=config['batch_size'], shuffle=True)
+    val_dataloader = DataLoader(val_ds, batch_size=1, shuffle=True)
+
+    return train_dataloader, val_dataloader, tokenizer
 
 class FillBlankDataset(Dataset):
     def __init__(self, data, tokenizer, seq_len):
@@ -28,46 +59,46 @@ class FillBlankDataset(Dataset):
         self.data = data
         self.tokenizer = tokenizer
         self.seq_len = seq_len
-        self.pad_token = torch.tensor([tokenizer.token_to_id("[PAD]")], dtype=torch.int16)
-        self.mask_token = torch.tensor([tokenizer.token_to_id("[MASK]")], dtype=torch.int16)
-        self.sos_token = torch.tensor([tokenizer.token_to_id("[SOS]")], dtype=torch.int16)
-        self.eos_token = torch.tensor([tokenizer.token_to_id("[EOS]")], dtype=torch.int16)
+        self.pad_token = torch.tensor([tokenizer.token_to_id("[PAD]")], dtype=torch.int64)
+        self.mask_token = torch.tensor([tokenizer.token_to_id("[MASK]")], dtype=torch.int64)
+        self.sos_token = torch.tensor([tokenizer.token_to_id("[SOS]")], dtype=torch.int64)
+        self.eos_token = torch.tensor([tokenizer.token_to_id("[EOS]")], dtype=torch.int64)
 
     def __len__(self):
         return len(self.data)
     
     def __getitem__(self, idx):
-        sentence = self.data[idx]
+        sentence = self.data[idx]['translation']['en']
         masked = self._make_blank(sentence)
 
         sentence = self.tokenizer.encode(sentence).ids
         masked = self.tokenizer.encode(masked).ids
 
-        enc_num_padding_tokens = self.seq_len - len(sentence) - 2
-        dec_num_padding_tokens = self.seq_len - len(masked) - 1
+        enc_num_padding_tokens = self.seq_len - len(masked) - 2
+        dec_num_padding_tokens = self.seq_len - len(sentence) - 1
 
         enc_in = torch.concatenate(
             [
                 self.sos_token,
-                torch.tensor(masked, dtype=torch.int16),
-                self.pad_token * enc_num_padding_tokens,
-                self.eos_token
+                torch.tensor(masked, dtype=torch.int64),
+                self.eos_token,
+                torch.tensor([self.pad_token] * enc_num_padding_tokens, dtype=torch.int64)
             ]
         )
 
         dec_in = torch.concatenate(
             [
                 self.sos_token,
-                torch.tensor(sentence, dtype=torch.int16),
-                self.pad_token * dec_num_padding_tokens
+                torch.tensor(sentence, dtype=torch.int64),
+                torch.tensor([self.pad_token] * dec_num_padding_tokens, dtype=torch.int64)
             ]
         )
 
         dec_out = torch.concatenate(
             [
-                torch.tensor(sentence, dtype=torch.int16),
+                torch.tensor(sentence, dtype=torch.int64),
                 self.eos_token,
-                self.pad_token * dec_num_padding_tokens
+                torch.tensor([self.pad_token] * dec_num_padding_tokens, dtype=torch.int64)
             ]
         )
 
@@ -83,14 +114,12 @@ class FillBlankDataset(Dataset):
     def _make_blank(self, text):
         text = text.split(' ')
         l = len(text)
-        n_blank = np.abs(np.random.normal(0, l/3)).astype(int)
+        n_blank = min(np.abs(np.random.normal(0, l//3)).astype(int), 3)
 
         if n_blank == 0:
             n_blank = 1
-        if n_blank > l/3:
-            n_blank = l//3
         
-        n_blank = [np.random.randint(0, l-1) for _ in range(n_blank)]
+        n_blank = [np.random.randint(0, max(l-1, 1)) for _ in range(n_blank)]
         n_blank.sort()
 
         masked=[]
@@ -106,20 +135,23 @@ class FillBlankDataset(Dataset):
             if l == "[MASK]":
                 if l != f[-1]:
                     f.append(l)
+            else:
+                f.append(l)
 
         masked = " ".join(f)
+
+        return masked
         
 
-def mask(sentence1, sentence2, pad_token, causal=False):
+def mask(sentence1, sentence2, pad_token, seq_len=320, dec_len=320, causal=False):
     non_pad1 = (sentence1 != pad_token).sum().item()
     non_pad2 = (sentence2 != pad_token).sum().item()
 
-    seq_len = sentence1.size(0)
-    mask=torch.zeros(seq_len, seq_len, dtype=torch.int16)
+    mask=torch.zeros(dec_len, seq_len, dtype=torch.int64)
 
     mask[:non_pad1, :non_pad2] = 1
 
     if causal:
-        mask = nn.triu(mask, diagonal=1)
+        mask = mask & torch.tril(torch.ones(seq_len, seq_len, dtype=torch.int64), diagonal=1)
 
-    return mask
+    return mask.unsqueeze(0)
