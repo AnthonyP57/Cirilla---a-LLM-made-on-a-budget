@@ -5,21 +5,26 @@ from dataset import mask
 def greedy_decode(model, enc_in, enc_mask, tokenizer, seq_len, device = torch.device('cuda')):
     sos_idx = tokenizer.token_to_id('[SOS]')
     eos_ind = tokenizer.token_to_id('[EOS]')
+    mask_token = tokenizer.token_to_id('[MASK]')
+    pad_token = tokenizer.token_to_id('[PAD]')
 
     encoder_output = model.encode(enc_in, enc_mask)
 
-    decoder_input = torch.tensor([[sos_idx]], dtype=torch.int64).to(device)
+    decoder_input = torch.tensor([[sos_idx]]).type_as(enc_in).to(device)
 
     while True:
         if decoder_input.size(1) == seq_len:
             break
 
-        out = model.decode(decoder_input, encoder_output, mask(decoder_input, decoder_input, pad_token=eos_ind, seq_len=decoder_input.size(1), dec_len=decoder_input.size(1), causal=True).to(device),
-                           mask(decoder_input, encoder_output, pad_token=eos_ind, dec_len=decoder_input.size(1)).to(device))[:,-1]
+        out = model.decode(decoder_input, encoder_output,
+                           mask(decoder_input, decoder_input, pad_token=pad_token, seq_len=decoder_input.size(1),dec_len=decoder_input.size(1), causal=True).to(device),
+                           mask(decoder_input, encoder_output, pad_token=pad_token, mask_token=mask_token, dec_len=decoder_input.size(1)).to(device))
+        
+        out = model.project(out[:, -1])
 
         _, next_word = torch.max(out, dim=1) #greedy
 
-        decoder_input = torch.cat([decoder_input, torch.tensor([[next_word]], dtype=torch.int64).to(device)], dim=1)
+        decoder_input = torch.cat([decoder_input, torch.tensor([[next_word]]).type_as(enc_in).to(device)], dim=1)
 
         if next_word == eos_ind:
             break
@@ -35,6 +40,7 @@ def show_valid(data_valid, model, tokenizer, writer, seq_len, device=torch.devic
             enc_in = data['enc_in'].to(device)
             expected = data['dec_out']
             enc_mask = data['enc_mask'].to(device)
+            masked_text = data['masked']
 
             dec_out = greedy_decode(model, enc_in, enc_mask, tokenizer, seq_len, device)
 
@@ -42,12 +48,12 @@ def show_valid(data_valid, model, tokenizer, writer, seq_len, device=torch.devic
             enc_in = tokenizer.decode(enc_in[0].detach().cpu().numpy())
             expected = tokenizer.decode(expected[0].detach().cpu().numpy())
 
-            writer.write(f'INPUT: {enc_in}')
+            writer.write(f'INPUT: {masked_text[0]}')
             writer.write(f'EXPECTED: {expected}')
             writer.write(f'PREDICTED: {dec_out}')
             writer.write('\n')
 
-            if sample > n_samples:
+            if sample >= n_samples:
                 break
 
 class ModelConfig:

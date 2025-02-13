@@ -1,24 +1,26 @@
 import torch
 import torch.nn as nn
+import math
 
 class InputEmbeddings(nn.Module):
     def __init__(self, vocab_size, d_model):
         super().__init__()
         self.d_model = d_model
         self.max_seq_len = vocab_size
-        #positional embeddings are learnable params
         self.positional_embeddings = nn.Embedding(vocab_size, d_model)
 
     def forward(self, x):
-        return self.positional_embeddings(x)
+        return self.positional_embeddings(x) * math.sqrt(self.d_model)
 
 class PositionalEncodings(nn.Module):
     def __init__(self, max_seq_len, d_model, drop=0.1):
         super().__init__()
         pe = torch.zeros(max_seq_len, d_model)
         position = torch.arange(0, max_seq_len, dtype=torch.float).unsqueeze(1)
-        div_term = torch.arange(0, d_model, 2).float()
-        div_term = torch.pow(10000, -div_term / d_model)
+        # div_term = torch.arange(0, d_model, 2).float()
+        # div_term = torch.pow(10000, -div_term / d_model)
+        div_term = torch.exp(torch.arange(0, d_model, 2).float() * (-math.log(10000.0) / d_model)) # faster convergence
+
         
         pe[:, 0::2] = torch.sin(position * div_term)
         pe[:, 1::2] = torch.cos(position * div_term)
@@ -28,7 +30,7 @@ class PositionalEncodings(nn.Module):
         self.drop = nn.Dropout(drop)
 
     def forward(self, x):
-        x += self.pe[:, :x.size(1), :].detach()
+        x = x + self.pe[:, :x.size(1), :].requires_grad_(False)
         return self.drop(x) #dropout same as in paper
 
 # import matplotlib.pyplot as plt
@@ -42,7 +44,7 @@ class PositionalEncodings(nn.Module):
 # plt.xlabel('Position')
 # plt.ylabel('Dimension')
 # plt.title('Positional Encodings')
-# plt.savefig('./img/embeddings.png')
+# plt.savefig('embeddings.png')
 
 class MultiHeadAttention(nn.Module):
     def __init__(self, d_model, num_heads):
@@ -58,15 +60,12 @@ class MultiHeadAttention(nn.Module):
 
     @staticmethod
     def attention(q, k, v, mask=None):
-
-        # print(q.size(), k.size(), v.size(), mask.size())
-
-        attention = torch.softmax((q @ k.transpose(-2, -1)) / (k.size(-1) ** 0.5), dim=-1)
-
-        # print(attention.size())
+        attention = (q @ k.transpose(-2, -1)) / math.sqrt(q.shape[-1])
 
         if mask is not None:
             attention = attention.masked_fill(mask == 0, -1e-9)
+
+        attention = torch.softmax(attention, dim=-1)
 
         return (attention @ v), attention
 
@@ -106,7 +105,7 @@ class AddAndNorm(nn.Module):
         self.dropout = nn.Dropout(drop)
 
     def forward(self, x, sublayer):
-        return self.norm(x + self.dropout(sublayer(x)))
+        return x + self.dropout(sublayer(self.norm(x)))
     
 class FeedForward(nn.Module):
     def __init__(self, d_model, d_ff=2048):
@@ -163,6 +162,8 @@ class Transformer(nn.Module):
         self.encoder_blocks = nn.ModuleList([EncoderBlock(d_model, num_heads, d_ff, drop) for _ in range(num_layers)])
         self.decoder_blocks = nn.ModuleList([DecoderBlock(d_model, num_heads, d_ff, drop) for _ in range(num_layers)])
         self.linear = Projection(d_model, vocab_size)
+        self.enc_norm = LayerNorm(d_model)
+        self.dec_norm = LayerNorm(d_model)
 
     def forward(self, enc_in, dec_in, enc_mask, dec_self_att_mask, dec_cross_att_mask):
         enc_in = self.input_emb(enc_in)
@@ -170,10 +171,14 @@ class Transformer(nn.Module):
         for encoder_block in self.encoder_blocks:
             enc_in = encoder_block(enc_in, enc_mask)
 
+        enc_in = self.enc_norm(enc_in)
+
         dec_in = self.input_emb(dec_in)
         dec_in = self.pos_enc_dec(dec_in)
         for decoder_block in self.decoder_blocks:
             dec_in = decoder_block(dec_in, enc_in, dec_self_att_mask, dec_cross_att_mask)
+
+        dec_in = self.dec_norm(dec_in)
 
         return self.linear(dec_in)
     
@@ -182,6 +187,7 @@ class Transformer(nn.Module):
         enc_in = self.pos_enc_enc(enc_in)
         for encoder_block in self.encoder_blocks:
             enc_in = encoder_block(enc_in, enc_mask)
+        enc_in = self.enc_norm(enc_in)
         return enc_in
     
     def decode(self, dec_in, enc_out, dec_self_att_mask, dec_cross_att_mask):
@@ -189,4 +195,8 @@ class Transformer(nn.Module):
         dec_in = self.pos_enc_dec(dec_in)
         for decoder_block in self.decoder_blocks:
             dec_in = decoder_block(dec_in, enc_out, dec_self_att_mask, dec_cross_att_mask)
-        return self.linear(dec_in)
+        dec_in = self.dec_norm(dec_in)
+        return dec_in
+    
+    def project(self, x):
+        return self.linear(x)

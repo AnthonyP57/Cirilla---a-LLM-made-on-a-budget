@@ -1,13 +1,13 @@
 from dataset import get_dataset
 from model import Transformer
 from modules import ModelConfig, show_valid
-import torch.nn.functional as F
 import torch
 import warnings
 import torch.nn as nn
 from tqdm import tqdm
 
 warnings.filterwarnings("ignore")
+torch.cuda.empty_cache()
 
 if torch.cuda.is_available():
     device = torch.device("cuda:0")
@@ -19,13 +19,13 @@ else:
 
 
 data_train, data_val, tokenizer = get_dataset({
-    'batch_size': 4,
+    'batch_size': 32,
     'seq_len': 320
 })
 
-config = ModelConfig('./Transformer_from_scratch/checkpoints',
-                     lr=1e-4, wd=1e-6, d_model=512, num_heads=8, num_layers=3,
-                     vocab_size=tokenizer.get_vocab_size(), max_seq_len=350, d_ff=2048, drop=0.1, resume=False)
+config = ModelConfig('/home/anthonyp57/VSCode_projects/Radovid/Transformer_from_scratch/checkpoints/',
+                     lr=1e-4, wd=0, d_model=512, num_heads=8, num_layers=6,
+                     vocab_size=tokenizer.get_vocab_size(), max_seq_len=320, d_ff=2048, drop=0.1, resume=True)
 
 model = Transformer(config.d_model, config.num_heads, config.num_layers, config.vocab_size, config.max_seq_len, config.d_ff, config.drop).to(device)
 
@@ -36,13 +36,20 @@ for param in model.parameters():
 n_params = sum(p.numel() for p in model.parameters() if p.requires_grad)
 print(f'Number of trainable parameters: {n_params/1e6:.2f}M')
 
-optimizer = torch.optim.Adam(model.parameters(), lr=config.lr, weight_decay=config.wd)
-scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=5, gamma=0.5)
+optimizer = torch.optim.Adam(model.parameters(), lr=config.lr, weight_decay=config.wd, eps=1e-9)
+scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=5, gamma=0.85)
 
 criterion = nn.CrossEntropyLoss(ignore_index=tokenizer.token_to_id('[PAD]'), label_smoothing=0.1)
 
-epochs=50
-iterator = tqdm(range(epochs), desc='Masek fill training')
+if hasattr(config, 'loaded_checkpoint'):
+    model.load_state_dict(config.loaded_checkpoint['model_state_dict'])
+    optimizer.load_state_dict(config.loaded_checkpoint['optimizer_state_dict'])
+    scheduler.load_state_dict(config.loaded_checkpoint['scheduler_state_dict'])
+
+past_epochs = config.epoch
+epochs = 30
+epochs -= past_epochs
+iterator = tqdm(range(epochs), desc='Masked fill training')
 
 for epoch in iterator:
     torch.cuda.empty_cache()
@@ -68,5 +75,10 @@ for epoch in iterator:
 
         iterator.set_postfix({"loss": f"{loss.item():6.3f}"})
     
+    config.checkpoint(model, optimizer, scheduler, epoch + past_epochs)    
     scheduler.step()
+    model.eval()
     show_valid(data_val, model, tokenizer, iterator, config.max_seq_len)
+    
+torch.save(model,'/home/anthonyp57/VSCode_projects/Radovid/Transformer_from_scratch/checkpointss/model.pth')
+torch.save(model.state_dict(), '/home/anthonyp57/VSCode_projects/Radovid/Transformer_from_scratch/checkpoints/model_state_dict.pth')

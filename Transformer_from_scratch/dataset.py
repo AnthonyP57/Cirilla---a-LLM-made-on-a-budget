@@ -2,7 +2,6 @@ from tokenizers import Tokenizer
 from tokenizers.models import WordPiece, WordLevel
 from tokenizers.pre_tokenizers import Digits, Whitespace, Sequence
 from tokenizers.trainers import WordPieceTrainer, WordLevelTrainer
-import torch.nn as nn
 from torch.utils.data import Dataset, DataLoader, random_split
 import numpy as np
 import torch
@@ -15,11 +14,11 @@ def get_all_sentences(ds):
 
 def get_or_build_tokenizer(ds):
     if not os.path.exists('tokenizer.json'):
-        tokenizer = Tokenizer(WordPiece(unk_token='[UNK]'))
-        # tokenizer = Tokenizer(WordLevel(unk_token='[UNK]'))
+        # tokenizer = Tokenizer(WordPiece(unk_token='[UNK]'))
+        tokenizer = Tokenizer(WordLevel(unk_token='[UNK]'))
         tokenizer.pre_tokenizer = Sequence([Whitespace(), Digits(individual_digits=True)])
-        trainer = WordPieceTrainer(special_tokens=['[UNK]', '[PAD]', '[SOS]', '[EOS]', '[MASK]'], min_frequency=2)
-        # trainer = WordLevelTrainer(special_tokens=['[UNK]', '[PAD]', '[SOS]', '[EOS]', '[MASK]'], min_frequency=2)
+        # trainer = WordPieceTrainer(special_tokens=['[UNK]', '[PAD]', '[SOS]', '[EOS]', '[MASK]'], min_frequency=2)
+        trainer = WordLevelTrainer(special_tokens=['[UNK]', '[PAD]', '[SOS]', '[EOS]', '[MASK]'], min_frequency=2)
         tokenizer.train_from_iterator(get_all_sentences(ds), trainer=trainer)
         tokenizer.save(str('tokenizer.json'))
     else:
@@ -68,11 +67,11 @@ class FillBlankDataset(Dataset):
         return len(self.data)
     
     def __getitem__(self, idx):
-        sentence = self.data[idx]['translation']['en']
-        masked = self._make_blank(sentence)
+        sentence_text = self.data[idx]['translation']['en']
+        masked_text = self._make_blank(sentence_text)
 
-        sentence = self.tokenizer.encode(sentence).ids
-        masked = self.tokenizer.encode(masked).ids
+        sentence = self.tokenizer.encode(sentence_text).ids
+        masked = self.tokenizer.encode(masked_text).ids
 
         enc_num_padding_tokens = self.seq_len - len(masked) - 2
         dec_num_padding_tokens = self.seq_len - len(sentence) - 1
@@ -106,9 +105,10 @@ class FillBlankDataset(Dataset):
             "enc_in": enc_in,
             "dec_in": dec_in,
             "dec_out": dec_out,
-            "enc_mask": mask(enc_in, enc_in, self.pad_token),
+            "enc_mask": mask(enc_in, enc_in, self.pad_token, self.mask_token),
             "dec_self_att_mask": mask(dec_in, dec_in, self.pad_token, causal=True),
-            "dec_cross_att_mask": mask(dec_in, enc_in, self.pad_token)
+            "dec_cross_att_mask": mask(dec_in, enc_in, self.pad_token, self.mask_token),
+            "masked": masked_text
         }
 
     def _make_blank(self, text):
@@ -143,15 +143,21 @@ class FillBlankDataset(Dataset):
         return masked
         
 
-def mask(sentence1, sentence2, pad_token, seq_len=320, dec_len=320, causal=False):
+def mask(sentence1, sentence2, pad_token, mask_token=None, seq_len=320, dec_len=320, causal=False):
     non_pad1 = (sentence1 != pad_token).sum().item()
     non_pad2 = (sentence2 != pad_token).sum().item()
 
     mask=torch.zeros(dec_len, seq_len, dtype=torch.int64)
 
-    mask[:non_pad1, :non_pad2] = 1
+    if not causal:
+        mask[:non_pad1, :non_pad2] = 1
+    else:
+        mask[:non_pad1, :non_pad2] = torch.tril(torch.ones(non_pad1, non_pad2), diagonal=0)
 
-    if causal:
-        mask = mask & torch.tril(torch.ones(seq_len, seq_len, dtype=torch.int64), diagonal=1)
+    if mask_token is not None:
+        mask_idx1 = (sentence1 == mask_token).nonzero(as_tuple=True)[0]
+        mask_idx2 = (sentence2 == mask_token).nonzero(as_tuple=True)[0]
+        mask[mask_idx1, :] = 0
+        mask[:, mask_idx2] = 0
 
     return mask.unsqueeze(0)
