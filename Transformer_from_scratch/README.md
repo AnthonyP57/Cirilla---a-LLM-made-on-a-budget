@@ -62,18 +62,66 @@ The model so far — while good at finding important dependencies through attent
 ## Tweaks for numerical stability
 Some parts of the model in the implementation may differ to what has been originally presented. Namely it is the positional encodings and the order of normalization, both of those changes have been made to speed up convergence of the model
 
+### Different embeddings
+#### Original formula
+```
+pe = torch.zeros(max_seq_len, d_model)
+position = torch.arange(0, max_seq_len, dtype=torch.float).unsqueeze(1)
+div_term = torch.arange(0, d_model, 2).float()
+div_term = torch.pow(10000, -div_term / d_model)
+
+pe[:, 0::2] = torch.sin(position * div_term)
+pe[:, 1::2] = torch.cos(position * div_term)
+```
+<p align="center">
+  <img src="./img/embeddings.png" alt="positional-encodings-original", width="700"/>
+</p>
+
+<div align='center'>
+<em>fig.4 Original Positional Encodings visualization (flipped axis)</em>
+</div>
+
+#### Tweaked formula
+
+```
+pe = torch.zeros(max_seq_len, d_model)
+position = torch.arange(0, max_seq_len, dtype=torch.float).unsqueeze(1)
+iv_term = torch.exp(torch.arange(0, d_model, 2).float() * (-math.log(10000.0) / d_model))
+
+pe[:, 0::2] = torch.sin(position * div_term)
+pe[:, 1::2] = torch.cos(position * div_term)
+```
+<p align="center">
+  <img src="./img/embeddings_new.png" alt="positional-encodings-original", width="700"/>
+</p>
+
+<div align='center'>
+<em>fig.5 Tweaked Positional Encodings visualization (flipped axis)</em>
+</div>
+</br>
+The difference in the embedding values is minimal but the loss decreases much faster.
+
+## Task - masked language modelling
+
+The task is simeple, fill in the masked sentence e.g.
+```
+INPUT: Well, [MASK] course!                                                                                          
+EXPECTED: Well, of course! 
+```
+Fill-in-the-mask is a task used to help LLMs understand context, sentence structure, and word relationships. It works by hiding certain words in a sentence and asking the model to predict the missing words based on the surrounding text.
+
+
 ## Results
-First making sense results appeared at around epoch 7
+First decent results appeared at around epoch 7
 ```
 INPUT: Levin felt so strong and calm that he thought the answer, whatever it might be, could not agitate him, but he did [MASK] at all expect the reply Oblonsky gave him.    
 
 EXPECTED: Levin felt so strong and calm that he thought the answer , whatever it might be , could not agitate him , but he did not at all expect the reply Oblonsky gave him .   
-                                                   
+
 PREDICTED: Levin felt so strong and calm that he thought to answer . John , whatever , could be , could not arrange the answer to - door , to the reply Oblonsky gave him .    
 ```
 
 ## Citations
-
 
 [^1]: Vaswani, A., Shazeer, N., Parmar, N., Uszkoreit, J., Jones, L., Gomez, A. N., Kaiser, L., & Polosukhin, I. (2017). Attention is All you Need. arXiv (Cornell University), 30, 5998–6008. https://arxiv.org/pdf/1706.03762v5
 
@@ -81,7 +129,7 @@ PREDICTED: Levin felt so strong and calm that he thought to answer . John , what
 [^2]: Kim, Y., Denton, C., Hoang, L., & Rush, A. M. (2017). Structured attention networks. arXiv (Cornell University). https://arxiv.org/pdf/1702.00887
 
 
-[^3]: https://dongkwan-kim.github.io/blogs/a-short-history-of-positional-encoding/
+[^3]: Donkwan Kim. https://dongkwan-kim.github.io/blogs/a-short-history-of-positional-encoding/
 
 
 > [!CAUTION]

@@ -16,7 +16,8 @@ def get_or_build_tokenizer(ds):
     if not os.path.exists('tokenizer.json'):
         # tokenizer = Tokenizer(WordPiece(unk_token='[UNK]'))
         tokenizer = Tokenizer(WordLevel(unk_token='[UNK]'))
-        tokenizer.pre_tokenizer = Sequence([Whitespace(), Digits(individual_digits=True)])
+        # tokenizer.pre_tokenizer = Sequence([Whitespace(), Digits(individual_digits=True)])
+        tokenizer.pre_tokenizer = Whitespace()
         # trainer = WordPieceTrainer(special_tokens=['[UNK]', '[PAD]', '[SOS]', '[EOS]', '[MASK]'], min_frequency=2)
         trainer = WordLevelTrainer(special_tokens=['[UNK]', '[PAD]', '[SOS]', '[EOS]', '[MASK]'], min_frequency=2)
         tokenizer.train_from_iterator(get_all_sentences(ds), trainer=trainer)
@@ -27,7 +28,7 @@ def get_or_build_tokenizer(ds):
     return tokenizer
 
 def get_dataset(config):
-    ds_raw = load_dataset('opus_books', 'en-it', split='train') #en-hu has the most sentences
+    ds_raw = load_dataset('opus_books', 'en-it', split='train')
 
     tokenizer = get_or_build_tokenizer(ds_raw)
 
@@ -68,7 +69,7 @@ class FillBlankDataset(Dataset):
     
     def __getitem__(self, idx):
         sentence_text = self.data[idx]['translation']['en']
-        masked_text = self._make_blank(sentence_text)
+        masked_text, sentence_text = self._make_blank(sentence_text)
 
         sentence = self.tokenizer.encode(sentence_text).ids
         masked = self.tokenizer.encode(masked_text).ids
@@ -107,7 +108,7 @@ class FillBlankDataset(Dataset):
             "dec_out": dec_out,
             "enc_mask": mask(enc_in, enc_in, self.pad_token, self.mask_token),
             "dec_self_att_mask": mask(dec_in, dec_in, self.pad_token, causal=True),
-            "dec_cross_att_mask": mask(dec_in, enc_in, self.pad_token, self.mask_token),
+            "dec_cross_att_mask": mask(dec_in, enc_in, self.pad_token),#, self.mask_token),
             "masked": masked_text
         }
 
@@ -123,11 +124,13 @@ class FillBlankDataset(Dataset):
         n_blank.sort()
 
         masked=[]
+        mask_key=[]
         for i, l in enumerate(text):
             if i not in n_blank:
                 masked.append(l)
             else:
                 masked.append("[MASK]")
+                mask_key.append(l)
 
         f = [masked[0]]
 
@@ -139,8 +142,9 @@ class FillBlankDataset(Dataset):
                 f.append(l)
 
         masked = " ".join(f)
+        mask_key = " ".join(mask_key)
 
-        return masked
+        return masked, mask_key
         
 
 def mask(sentence1, sentence2, pad_token, mask_token=None, seq_len=320, dec_len=320, causal=False):

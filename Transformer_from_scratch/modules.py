@@ -1,6 +1,57 @@
 import torch
 import os
 from dataset import mask
+import math
+
+def beam_search_decode(model, enc_in, enc_mask, tokenizer, seq_len, beam_size=3, temperature=1, device = torch.device('cuda')):
+    sos_token = tokenizer.token_to_id('[SOS]')
+    eos_token = tokenizer.token_to_id('[EOS]')
+    mask_token = tokenizer.token_to_id('[MASK]')
+    pad_token = tokenizer.token_to_id('[PAD]')
+
+    encoder_output = model.encode(enc_in, enc_mask)
+
+    decoder_input = torch.tensor([[sos_token]]).type_as(enc_in).to(device)
+    candidates = [(decoder_input, 1)] #log(1) = 0
+
+    while True:
+
+        if any([cand.size(1) == seq_len for cand, _ in candidates]):
+            break
+        new_candidates = []
+
+        for candidate, score in candidates:
+
+            if candidate[0][-1].item() == eos_token:
+                continue
+
+            out = model.decode(candidate, encoder_output,
+                        mask(candidate, candidate, pad_token=pad_token, seq_len=candidate.size(1),dec_len=candidate.size(1), causal=True).to(device),
+                        mask(candidate, encoder_output, pad_token=pad_token,  dec_len=candidate.size(1)).to(device))
+        
+            out = model.project(out[:, -1])
+
+            if temperature != 1:
+                out = out / temperature
+            
+            out = torch.softmax(out, dim=-1) #log for stability
+
+            topk_prob, topk_idx = torch.topk(out, beam_size, dim=1)
+
+            for i in range(beam_size):
+                token = topk_idx[0][i].unsqueeze(0).unsqueeze(0)
+                token_prob = topk_prob[0][i].item()
+                new_candidate = torch.cat([candidate, token], dim=1)
+                new_candidates.append((new_candidate, score * token_prob))
+
+        candidates = sorted(new_candidates, key=lambda x: x[1], reverse=True)
+        candidates = candidates[:beam_size]
+
+        if all([cand[0][-1].item() == sos_token for cand, _ in candidates]):
+            break
+
+    # Return the best candidate
+    return candidates[0][0].squeeze()
 
 def greedy_decode(model, enc_in, enc_mask, tokenizer, seq_len, device = torch.device('cuda')):
     sos_idx = tokenizer.token_to_id('[SOS]')
@@ -18,7 +69,7 @@ def greedy_decode(model, enc_in, enc_mask, tokenizer, seq_len, device = torch.de
 
         out = model.decode(decoder_input, encoder_output,
                            mask(decoder_input, decoder_input, pad_token=pad_token, seq_len=decoder_input.size(1),dec_len=decoder_input.size(1), causal=True).to(device),
-                           mask(decoder_input, encoder_output, pad_token=pad_token, mask_token=mask_token, dec_len=decoder_input.size(1)).to(device))
+                           mask(decoder_input, encoder_output, pad_token=pad_token, dec_len=decoder_input.size(1)).to(device))
         
         out = model.project(out[:, -1])
 
@@ -43,6 +94,11 @@ def show_valid(data_valid, model, tokenizer, writer, seq_len, device=torch.devic
             masked_text = data['masked']
 
             dec_out = greedy_decode(model, enc_in, enc_mask, tokenizer, seq_len, device)
+            try:
+                dec_out_beam = beam_search_decode(model, enc_in, enc_mask, tokenizer, seq_len, device=device)
+            except:
+                writer.write('Beam search failed')
+                dec_out_beam = None
 
             dec_out = tokenizer.decode(dec_out.detach().cpu().numpy())
             enc_in = tokenizer.decode(enc_in[0].detach().cpu().numpy())
@@ -50,7 +106,10 @@ def show_valid(data_valid, model, tokenizer, writer, seq_len, device=torch.devic
 
             writer.write(f'INPUT: {masked_text[0]}')
             writer.write(f'EXPECTED: {expected}')
-            writer.write(f'PREDICTED: {dec_out}')
+            if dec_out_beam is not None:
+                dec_out_beam = tokenizer.decode(dec_out_beam.detach().cpu().numpy())
+                writer.write(f'PREDICTED BEAM SEARCH: {dec_out_beam}')
+            writer.write(f'PREDICTED GREEDY SEARCH: {dec_out}')
             writer.write('\n')
 
             if sample >= n_samples:
