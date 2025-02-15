@@ -135,7 +135,9 @@ Epoch 4+ yield similar and better results, so there is no point in continuing
 - too big batch may cause either not enough parameter updates or may create a model that is too good at generalizing, meaning it may only return the most frequent tokens (speculation)
 - hiding the mask token in attention may cause the model to disregard the need to fill the mask completely (also speculation)
 
-## Citations
+## Disclaimer
+> [!CAUTION]
+> This repo does not serve to amazingly describe and explain model architectures, it was made to give a broad simplified overview of the models and implement them.
 
 [^1]: Vaswani, A., Shazeer, N., Parmar, N., Uszkoreit, J., Jones, L., Gomez, A. N., Kaiser, L., & Polosukhin, I. (2017). Attention is All you Need. arXiv (Cornell University), 30, 5998–6008. https://arxiv.org/pdf/1706.03762v5
 
@@ -144,7 +146,3 @@ Epoch 4+ yield similar and better results, so there is no point in continuing
 
 
 [^3]: Donkwan Kim. https://dongkwan-kim.github.io/blogs/a-short-history-of-positional-encoding/
-
-## Disclaimer
-> [!CAUTION]
-> This repo does not serve to amazingly describe and explain model architectures, it was made to give a broad simplified overview of the models and implement them.
