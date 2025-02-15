@@ -112,14 +112,28 @@ Fill-in-the-mask is a task used to help LLMs understand context, sentence struct
 
 
 ## Results
-First decent results appeared at around epoch 7
+First decent results appeared at around epoch 2
 ```
-INPUT: Levin felt so strong and calm that he thought the answer, whatever it might be, could not agitate him, but he did [MASK] at all expect the reply Oblonsky gave him.    
+INPUT: He evidently found it hard to decide what [MASK] say [MASK] to [MASK] 'Do you see...' he pointed to a bundle of iron rods tied together with string, in a corner of the room.
 
-EXPECTED: Levin felt so strong and calm that he thought the answer , whatever it might be , could not agitate him , but he did not at all expect the reply Oblonsky gave him .   
+EXPECTED: He evidently found it hard to decide what to say and to do . ' Do you see ...' he pointed to a bundle of iron rods tied together with string , in a corner of the room .
 
-PREDICTED: Levin felt so strong and calm that he thought to answer . John , whatever , could be , could not arrange the answer to - door , to the reply Oblonsky gave him .    
+PREDICTED GREEDY SEARCH: He evidently found it hard to decide what he say to be to a ' Do you see ...' he pointed to a physician of iron tied together with string , in a corner of the room . 
 ```
+At epoch 3 we can clearly see that the model learnt sentence context
+```
+INPUT: "I never see [MASK] doing any work there," [MASK] Harris, "whenever [MASK] go in.  
+
+EXPECTED: " I never see him doing any work there ," continued Harris , " whenever I go in .
+
+PREDICTED GREEDY SEARCH: " I never see you doing any work there ," said Harris , " whenever you go .    
+```
+Epoch 4+ yield similar and better results, so there is no point in continuing
+
+## Mistakes to learn from
+- it is better to not overwrite the forward function, instead call the respective things in the model
+- too big batch may cause either not enough parameter updates or may create a model that is too good at generalizing, meaning it may only return the most frequent tokens (speculation)
+- hiding the mask token in attention may cause the model to disregard the need to fill the mask completely (also speculation)
 
 ## Citations
 
@@ -131,6 +145,6 @@ PREDICTED: Levin felt so strong and calm that he thought to answer . John , what
 
 [^3]: Donkwan Kim. https://dongkwan-kim.github.io/blogs/a-short-history-of-positional-encoding/
 
-
+## Disclaimer
 > [!CAUTION]
 > This repo does not serve to amazingly describe and explain model architectures, it was made to give a broad simplified overview of the models and implement them.

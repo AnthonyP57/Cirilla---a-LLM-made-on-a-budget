@@ -12,7 +12,7 @@ def beam_search_decode(model, enc_in, enc_mask, tokenizer, seq_len, beam_size=3,
     encoder_output = model.encode(enc_in, enc_mask)
 
     decoder_input = torch.tensor([[sos_token]]).type_as(enc_in).to(device)
-    candidates = [(decoder_input, 1)] #log(1) = 0
+    candidates = [(decoder_input, 0)] #log(1) = 0
 
     while True:
 
@@ -34,7 +34,7 @@ def beam_search_decode(model, enc_in, enc_mask, tokenizer, seq_len, beam_size=3,
             if temperature != 1:
                 out = out / temperature
             
-            out = torch.softmax(out, dim=-1) #log for stability
+            out = torch.log_softmax(out, dim=-1)*100 #log for stability, *100 for it not to be too small
 
             topk_prob, topk_idx = torch.topk(out, beam_size, dim=1)
 
@@ -42,7 +42,7 @@ def beam_search_decode(model, enc_in, enc_mask, tokenizer, seq_len, beam_size=3,
                 token = topk_idx[0][i].unsqueeze(0).unsqueeze(0)
                 token_prob = topk_prob[0][i].item()
                 new_candidate = torch.cat([candidate, token], dim=1)
-                new_candidates.append((new_candidate, score * token_prob))
+                new_candidates.append((new_candidate, score + token_prob))
 
         candidates = sorted(new_candidates, key=lambda x: x[1], reverse=True)
         candidates = candidates[:beam_size]

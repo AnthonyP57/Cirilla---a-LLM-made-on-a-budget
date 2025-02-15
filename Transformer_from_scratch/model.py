@@ -30,8 +30,10 @@ class PositionalEncodings(nn.Module):
         self.drop = nn.Dropout(drop)
 
     def forward(self, x):
-        x = x + self.pe[:, :x.size(1), :].requires_grad_(False)
+        x = x + (self.pe[:, :x.shape[1], :]).requires_grad_(False)
         return self.drop(x) #dropout same as in paper
+
+# TO VISUALIZE POSITIONAL ENCODINGS
 
 # import matplotlib.pyplot as plt
 # import seaborn as sns
@@ -47,7 +49,7 @@ class PositionalEncodings(nn.Module):
 # plt.savefig('embeddings.png')
 
 class MultiHeadAttention(nn.Module):
-    def __init__(self, d_model, num_heads):
+    def __init__(self, d_model, num_heads, drop=0.1):
         super().__init__()
         self.d_model = d_model
         self.num_heads = num_heads
@@ -57,15 +59,19 @@ class MultiHeadAttention(nn.Module):
         self.wk = nn.Linear(d_model, d_model, bias=False)
         self.wv = nn.Linear(d_model, d_model, bias=False)
         self.wout = nn.Linear(d_model, d_model, bias=False)
+        self.drop = nn.Dropout(drop)
 
     @staticmethod
-    def attention(q, k, v, mask=None):
+    def attention(q, k, v, mask=None, drop=None):
         attention = (q @ k.transpose(-2, -1)) / math.sqrt(q.shape[-1])
 
         if mask is not None:
-            attention = attention.masked_fill(mask == 0, -1e-9)
+            attention.masked_fill_(mask == 0, float('-inf'))
 
-        attention = torch.softmax(attention, dim=-1)
+        attention = attention.softmax(dim=-1)
+
+        if drop is not None:
+            attention = drop(attention)
 
         return (attention @ v), attention
 
@@ -79,7 +85,7 @@ class MultiHeadAttention(nn.Module):
         k = k.view(batch, -1, self.num_heads, self.head_dim).transpose(1, 2)
         v = v.view(batch, -1, self.num_heads, self.head_dim).transpose(1, 2)
 
-        out = self.attention(q, k, v, mask=mask)[0]
+        out = MultiHeadAttention.attention(q, k, v, mask=mask, drop=self.drop)[0]
 
         out = out.transpose(1, 2).contiguous().view(batch, -1, d_model)
 
@@ -108,13 +114,14 @@ class AddAndNorm(nn.Module):
         return x + self.dropout(sublayer(self.norm(x)))
     
 class FeedForward(nn.Module):
-    def __init__(self, d_model, d_ff=2048):
+    def __init__(self, d_model, d_ff=2048, drop=0.1):
         super().__init__()
         self.w1 = nn.Linear(d_model, d_ff)
+        self.drop = nn.Dropout(drop)
         self.w2 = nn.Linear(d_ff, d_model)
 
     def forward(self, x):
-        return self.w2(torch.relu(self.w1(x)))
+        return self.w2(self.drop(torch.relu(self.w1(x))))
     
 class Projection(nn.Module):
     def __init__(self, d_model, vocab_size):
@@ -129,7 +136,7 @@ class EncoderBlock(nn.Module):
         super().__init__()
         self.self_attention = MultiHeadAttention(d_model, num_heads)
         self.add_and_norm1 = AddAndNorm(d_model, drop)
-        self.feed_forward = FeedForward(d_model, d_ff)
+        self.feed_forward = FeedForward(d_model, d_ff, drop)
         self.add_and_norm2 = AddAndNorm(d_model, drop)
 
     def forward(self, x, mask=None):
@@ -144,7 +151,7 @@ class DecoderBlock(nn.Module):
         self.add_and_norm1 = AddAndNorm(d_model, drop)
         self.cross_attention = MultiHeadAttention(d_model, num_heads)
         self.add_and_norm2 = AddAndNorm(d_model, drop)
-        self.feed_forward = FeedForward(d_model, d_ff)
+        self.feed_forward = FeedForward(d_model, d_ff, drop)
         self.add_and_norm3 = AddAndNorm(d_model, drop)
     
     def forward(self, x, enc_out, self_att_mask=None, cross_att_mask=None):
@@ -156,7 +163,8 @@ class DecoderBlock(nn.Module):
 class Transformer(nn.Module):
     def __init__(self, d_model, num_heads, num_layers, vocab_size, max_seq_len, d_ff=2048, drop=0.1):
         super().__init__()
-        self.input_emb = InputEmbeddings(vocab_size, d_model)
+        self.input_emb_enc = InputEmbeddings(vocab_size, d_model)
+        self.input_emb_dec = InputEmbeddings(vocab_size, d_model)
         self.pos_enc_enc = PositionalEncodings(max_seq_len, d_model, drop)
         self.pos_enc_dec = PositionalEncodings(max_seq_len, d_model, drop)
         self.encoder_blocks = nn.ModuleList([EncoderBlock(d_model, num_heads, d_ff, drop) for _ in range(num_layers)])
@@ -164,26 +172,9 @@ class Transformer(nn.Module):
         self.linear = Projection(d_model, vocab_size)
         self.enc_norm = LayerNorm(d_model)
         self.dec_norm = LayerNorm(d_model)
-
-    def forward(self, enc_in, dec_in, enc_mask, dec_self_att_mask, dec_cross_att_mask):
-        enc_in = self.input_emb(enc_in)
-        enc_in = self.pos_enc_enc(enc_in)
-        for encoder_block in self.encoder_blocks:
-            enc_in = encoder_block(enc_in, enc_mask)
-
-        enc_in = self.enc_norm(enc_in)
-
-        dec_in = self.input_emb(dec_in)
-        dec_in = self.pos_enc_dec(dec_in)
-        for decoder_block in self.decoder_blocks:
-            dec_in = decoder_block(dec_in, enc_in, dec_self_att_mask, dec_cross_att_mask)
-
-        dec_in = self.dec_norm(dec_in)
-
-        return self.linear(dec_in)
     
     def encode(self, enc_in, enc_mask):
-        enc_in = self.input_emb(enc_in)
+        enc_in = self.input_emb_enc(enc_in)
         enc_in = self.pos_enc_enc(enc_in)
         for encoder_block in self.encoder_blocks:
             enc_in = encoder_block(enc_in, enc_mask)
@@ -191,7 +182,7 @@ class Transformer(nn.Module):
         return enc_in
     
     def decode(self, dec_in, enc_out, dec_self_att_mask, dec_cross_att_mask):
-        dec_in = self.input_emb(dec_in)
+        dec_in = self.input_emb_dec(dec_in)
         dec_in = self.pos_enc_dec(dec_in)
         for decoder_block in self.decoder_blocks:
             dec_in = decoder_block(dec_in, enc_out, dec_self_att_mask, dec_cross_att_mask)

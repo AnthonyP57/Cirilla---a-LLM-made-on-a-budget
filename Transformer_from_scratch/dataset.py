@@ -28,11 +28,11 @@ def get_or_build_tokenizer(ds):
     return tokenizer
 
 def get_dataset(config):
-    ds_raw = load_dataset('opus_books', 'en-it', split='train')
+    ds_raw = load_dataset('opus_books', 'en-it', split='train') #alternatively: ('Helsinki-NLP/opus_paracrawl', 'en-tl', split='train')
 
     tokenizer = get_or_build_tokenizer(ds_raw)
 
-    train_ds_size = int(0.9*len(ds_raw))
+    train_ds_size = int(0.95*len(ds_raw))
     val_ds_size = len(ds_raw) - train_ds_size
 
     train_ds_raw, val_sd_raw = random_split(ds_raw, [train_ds_size, val_ds_size])
@@ -66,10 +66,10 @@ class FillBlankDataset(Dataset):
 
     def __len__(self):
         return len(self.data)
-    
+       
     def __getitem__(self, idx):
         sentence_text = self.data[idx]['translation']['en']
-        masked_text, sentence_text = self._make_blank(sentence_text)
+        masked_text = self._make_blank(sentence_text)
 
         sentence = self.tokenizer.encode(sentence_text).ids
         masked = self.tokenizer.encode(masked_text).ids
@@ -106,7 +106,7 @@ class FillBlankDataset(Dataset):
             "enc_in": enc_in,
             "dec_in": dec_in,
             "dec_out": dec_out,
-            "enc_mask": mask(enc_in, enc_in, self.pad_token, self.mask_token),
+            "enc_mask": mask(enc_in, enc_in, self.pad_token),#, self.mask_token),
             "dec_self_att_mask": mask(dec_in, dec_in, self.pad_token, causal=True),
             "dec_cross_att_mask": mask(dec_in, enc_in, self.pad_token),#, self.mask_token),
             "masked": masked_text
@@ -124,13 +124,11 @@ class FillBlankDataset(Dataset):
         n_blank.sort()
 
         masked=[]
-        mask_key=[]
         for i, l in enumerate(text):
             if i not in n_blank:
                 masked.append(l)
             else:
                 masked.append("[MASK]")
-                mask_key.append(l)
 
         f = [masked[0]]
 
@@ -142,9 +140,8 @@ class FillBlankDataset(Dataset):
                 f.append(l)
 
         masked = " ".join(f)
-        mask_key = " ".join(mask_key)
 
-        return masked, mask_key
+        return masked
         
 
 def mask(sentence1, sentence2, pad_token, mask_token=None, seq_len=320, dec_len=320, causal=False):
@@ -154,9 +151,9 @@ def mask(sentence1, sentence2, pad_token, mask_token=None, seq_len=320, dec_len=
     mask=torch.zeros(dec_len, seq_len, dtype=torch.int64)
 
     if not causal:
-        mask[:non_pad1, :non_pad2] = 1
+        mask[:, :non_pad2] = 1
     else:
-        mask[:non_pad1, :non_pad2] = torch.tril(torch.ones(non_pad1, non_pad2), diagonal=0)
+        mask = torch.tril(torch.ones(dec_len, seq_len), diagonal=0)
 
     if mask_token is not None:
         mask_idx1 = (sentence1 == mask_token).nonzero(as_tuple=True)[0]
