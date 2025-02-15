@@ -43,7 +43,7 @@ Reffered to later as attention / self-attention / cross-attention. The idea of a
 </div>
 
 ## How to encode seqential information without sequential processing
-The model so far — while good at finding important dependencies through attention — doesn't retain any information about the order of the sentence, this information is "injected" with _positional encodings_. In the original paper [^1] sine and cosine functions are used:
+The model so far — while good at finding important dependencies through attention — doesn't retain any information about the order of the sentence, this information is "injected" with _positional encodings_. In the original paper [^1] sine and cosine functions are used [^3]:
 <div align='center'>
 <em>even positions: PE<sub>(pos, 2i)</sub> = sin(pos/1000<sup>2i / d<sub>model</sub></sup>)</em>
 </br>
@@ -56,7 +56,7 @@ The model so far — while good at finding important dependencies through attent
 </p>
 
 <div align='center'>
-<em>fig.3 Positional Encodings visualization [^3]</em>
+<em>fig.3 Positional Encodings visualization</em>
 </div>
 
 ## Tweaks for numerical stability
