@@ -1,0 +1,21 @@
+The Nekker Contract
+The Nekker Contract is one of two contract quests in Chapter I of The Witcher 2: Assassins of Kings. You can receive this quest by reading the Notice board in front of Flotsam inn, in Chapter I.
+Nekker Contract
+It is hereby announced that Commandant Bernard Loredo has posted a generous bounty for the extermination of the nekkers in the vicinity of the trading post. These monsters must be eliminated once and for all. The one to accept this job – and successfully complete it – will be rewarded with a bulging pouch of orens, and a priest will be paid to conduct prayers in our hero's name for twenty eight days.
+Louis Merse, Town Chancellor
+Associated quest
+The Endrega Contract (see Notes)
+Walkthrough
+ 
+The contract can be found on the notice board outside the inn in Flotsam. The first step is to find additional information about the beasts. That information can be obtained from the book Nekkers in the Mist (can be purchased from Einar Gausel in Flotsam, or looted during the Prologue) or simply by killing a certain number of nekkers. These can be found near a couple of nests in the forest, and cave systems just west of Flotsam and behind the waterfall to the south/west of town. To complete the contract, purchase and/or craft four grapeshot bombs, place them in a quickslot, and use them to destroy the creatures' access to the surface. Purchase the formula (or the bombs themselves) from Cedric.
+Three of the nests are relatively close together, with the last being farther south, northeast of the waterfall. Use the witcher's medallion to highlight them on the ground if you have trouble identifying them. To destroy them, simply move close and click when prompted (NOTE: you cannot do this in combat or by throwing bombs by pressing , it will not destroy the nests) but do not remain near the tunnel when the bomb explodes or Geralt will take damage. It should also be noted that when you get near the tunnels, many nekkers will surface and you'll have to fight them in order to plant the bomb if you missed the small window before they arrived.
+When all four nests have been dealt with, report to Louis Merse for a 150 reward.
+Journal entry
+In spite of events, Geralt had not forgotten his profession. Witchering was the prime source of income, so when he learned that the Flotsam authorities had posted a bounty for exterminating nekkers, he accepted the job immediately. Before he began, he decided to learn more about the vicious creatures. He began looking for books about nekkers and searching for the creatures to observe their behavior.
+Geralt learned that the local nekkers used a system of underground tunnels to move about. He thought that if he could find a way to destroy all of the entrances to these tunnels, most of the nekkers would be buried alive. Those remaining would likely then scatter, making it all the easier to exterminate them.
+The witcher acted on his idea. The nekkers were thus buried in their underground dens, and Geralt went to see Louis Merse about his well earned reward.
+Louis Merse nodded approvingly, filled in the THX-114 form and, having paid the witcher, wished him much luck. Then our hero left, thinking about what to spend his hard earned orens on.
+Notes
+You can find a copy of Nekkers in the Mist in a chest in the basement of the Monastery, during the "Blood of His Blood" quest, in the Prologue.
+Once this contract and The Endrega Contract are completed, a schematic to craft the Superb witchers' silver sword is an additional reward.
+If Geralt hasn't completed The Kayran: Ostmurk and goes hunting nekkers in the waterfall caves, be sure to delve all the way back for your Ostmurk (it can be harvested even if you have not reached that sub-quest of The Kayran yet).

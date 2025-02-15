@@ -1,0 +1,22 @@
+Bełt
+Bełt was supposed to appear in The Witcher 3: Wild Hunt during its development in 2013 - 2014 but was removed during this time.
+Information from leaked materials
+Creature resembling subhuman toad. It controls people's mind and make them act violently and unpredictable. The creature is very fast and in order to hit any vital point, it must be stopped for a while (eg. using Yrden) first.
+Role in the group: Individual
+Preferred behavior: hit and run - often dodges and jumps to attack
+Special attacks and actions:
+Fast attack - fast, furious attacks
+Mind control -- creature has an impact on Geralt's mind and changes the controls for a short time (inverts axis of the mouse / gamepad. Player can cast Heliotrop as a defence from this attack. The attack has a tell animation.
+Defence:
+Dodge - jumps backwards and aside
+Vital points:
+Instant kill:
+Piercing the brain through an eye (cost 4 points)
+Protection: none.
+Critical effect / disable ability:
+Cutting the tumor on the forehead - disables the Mind control ability (cost 1 point).
+Massive damage: none
+Immune to: Steel, Axii
+Vulnerable to: Silver, Fire spells, Aard
+References
+↑ Leaked CD PROJEKT RED materials from 2014

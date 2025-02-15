@@ -1,0 +1,135 @@
+The Witcher (game)
+The Witcher (Polish: Wiedźmin) is a role-playing video game for the PC, developed by CD PROJEKT RED and published by Atari. Based on The Witcher series of the same name by Polish author Andrzej Sapkowski, the game utilizes BioWare's proprietary Aurora Engine and was released in October 2007. An enhanced edition of the game, containing among other things the editor and two new adventures: The Price of Neutrality premium module and Side Effects premium module, was released in September 2008. In the first 10 months following its release, the game sold 800,000 copies worldwide. A console version using an entirely new engine and combat system, titled The Witcher: Rise of the White Wolf, was planned for release in Fall 2009, but development was suspended indefinitely on May 6, 2009.
+The Witcher follows the story of Geralt of Rivia, a witcher: a traveling monster hunter for hire, gifted with unnatural powers. Taking place in a fictional medieval world, the game implements detailed visuals. The natural light during various phases of the day is realistically altered, and the day and night transitions serve to enrich the game's ambiance. The weather can dynamically change from a light drizzle to a dark, stormy downpour accompanied by thunder and lightning, and the NPCs react to the rain by hiding under roofs trying to get out of the rain.
+Storyline
+For the main article, see The Witcher storyline.
+The game is centred on Geralt the witcher, also known as "the White Wolf", who at the beginning of the game suffers from amnesia. He gradually learns that he was a very renowned witcher, and that he had friends and enemies almost everywhere, who remember him but whom he does not remember. Through the player's actions, he will redefine those relationships and choose his path in the political intrigue that surrounds him.
+Story Motivations
+The developers have often said that their main goal with the game's storyline was to give choices to the player where there was no clear good or evil, and where the player would have to choose the lesser of two (or more) evils.
+Also, the story was designed so that the consequences of the player's choices are often not immediately visible, and may only become apparent a few chapters later. This was done to prevent the "save, choose, reload" type of gameplay that is often used in similar computer role-playing games.
+Inconsistencies with Andrzej Sapkowski's Works
+According to the "Temerian Dynasty", additional material written by Andrzej Sapkowski and published on his official website, Adda the White, the daughter of Foltest, after her striga curse was lifted by Geralt, was white-haired and intellectually disabled. However, in the English translation of the short story "The Witcher", Adda's hair is described as "flaxen red", and her hair is also shown as red in the game. There is also no explanation for the change of her mental state.
+In the game's intro, the date given is 1270, but according to the book it should be set in 1273 (five years after the end of Northern War II, which ended in 1268 and during the second Catriona outbreak, which started in 1272).
+The inclusion of the books Fairy Tales and Stories and Encyclopaedia Maxima Mundi is an anachronism, since these books were written hundreds of years after the times depicted in the game.
+Geralt calls himself "not a human, but a mutant" on some occasions. On the other hand, Geralt never claimed he wasn't a human in the saga (at the very most, stating, "Not quite " in A Grain of Truth), and being a witcher was typically referenced as more than a caste or a profession than anything else - mutation does not imply no longer being a human.
+Ori Reuven should still be in prison at the time of the game - after the Nilfgaard Wars, he was imprisoned and spent six years in various prisons. The game is set five years after the Nilfgaard Wars. Furthermore, he died from sickness less than a year after being let out from jail.
+In the Enhanced Edition, the Bonus DVD contains an interview that reveals that Andrzej Sapowski himself had built a relationship with the development team and revealed to them that Geralt did survive the events depicted in the end of the series of books. Despite this, the events depicted in all the games remain non-canon.
+Gameplay
+For the main article, see The Witcher gameplay.
+ 
+There are three camera styles available when playing The Witcher. The game can be played from one of two top-down perspectives, in which case the mouse is used to control everything, or it can be played from an over-the-shoulder (OTS) view, which brings the player closer to the in-game combat, but limits visibility. In all three views the keyboard and mouse controls can be changed to be primarily mouse focused, or a combined keyboard-and-mouse approach.
+The combat system in The Witcher represents a departure from most RPGs. Players choose one of three fighting styles. The quick style allows for faster, less-damaging attacks with a greater chance of hitting faster enemies; the heavy style deals more damage in exchange for a slow attack speed, and a lower chance to hit faster enemies; and the group style, which features sweeping attacks best used if the player is surrounded. The player can switch between the styles at any point.
+Each of these stances has its own unique combat style. Both of Geralt's main swords, steel and silver, have distinctively different combat styles from the rest of his weaponry, and serve very distinct purposes: where the steel blade is used to fight humans and other flesh-and-blood beings, the silver is more effective against supernatural monsters and beasts (some of which may be completely unaffected by steel).
+Alchemy is a major part of gameplay. The player can create potions that increase health or endurance regeneration, allow Geralt to see in the dark, or provide other beneficial effects. The recipes for these potions can be learned through scrolls, or by experimentation. Once the player creates an unknown potion he can choose to drink it, but if the potion is a failure it will poison the character. Each time Geralt drinks potions they increase the toxicity level of his body. This can be reduced by drinking a special potion or by meditating at an inn or fireplace.
+In addition to potions, the player can also create oils and bombs, respectively used to augment the damage done by weapons, or as weapons in combat. Neither can be created until talent points have been allocated into the corresponding skills.
+System Requirements
+
+Minimum Requirements
+CPU: Intel Pentium 4 2.4 GHz or Athlon 64 +2800
+RAM: 1 GB
+OS: Windows XP/Vista
+Video Card: NVIDIA GeForce 6600 or ATI Radeon 9800 or better
+Sound Card: Yes
+Free Disk Space: 8.5 GB
+Recommended Requirements
+CPU: Intel Pentium 4 3.0 GHz or AMD Athlon 64 +3000
+RAM: 2 GB
+OS: Windows XP/Vista
+Video Card: NVIDIA GeForce 7800 GTX or ATI Radeon X1950 XT or better recommended
+Sound Card: Yes
+Free Disk Space: 8.5 GB
+Soundtrack
+For the main article, see The Witcher soundtrack.
+The soundtrack for The Witcher was composed by Adam Skorupa and Paweł Błaszczak. In some editions of the game (see: list of editions) the soundtrack CD is included with the game. It consists of 29 tracks with the total length of 73 minutes 13 seconds.
+An additional CD, Inspired by The Witcher, featuring e.g. Vader is sold separately in some countries and also included with the game in some editions.
+Both soundtracks are included in the Enhanced Edition.
+Add-Ons
+
+Enhanced Edition
+For the main article, see The Witcher: Enhanced Edition.
+At the 2008 Game Developers Conference in San Francisco, CD PROJEKT RED announced an enhanced edition of The Witcher, which contained a great number of technical upgrades, as well as a lot of new features, including two premium models: The Price of Neutrality premium module and Side Effects premium module.
+Adventures
+Adventures are self-contained modules created by those outside of CD PROJEKT RED. However, the ones listed below were later officially included into the main game with Patch 1.5:
+Blight of the Bogs also known as Damn Those Swamps!
+Deceits
+Merry Witchmas
+The Wedding
+Wraiths of Quiet Hamlet
+Canceled Add-Ons
+The Witcher: Scars of Betrayal
+The Witcher: Scars of Betrayal is a canceled add-on for The Witcher. It was in development by Ossian Studios for some time in 2008 but was canceled.
+The Witcher: Outcast
+The Witcher: Outcast was a planned add-on for The Witcher that was in development by roXidy but was canceled.
+Technical Information
+For the main article, see The Witcher technical information.
+The Witcher is powered by a new version of the BioWare Aurora Engine, modified for a single-player experience. A number of changes have been introduced to the original BioWare Aurora Engine, as well as troubleshooting and modding information, also described in the The Witcher technical information article.
+Localization Variations
+ 
+All the female portrait cards shown after Geralt's "conquests" were retouched to a more modest standard for the US release version. The in-game Dryad was also reskinned so her hair covered more of her body in this release.
+Colorful dialogue between characters was cut in all English releases, especially through shortening of dialogue. Lead Designer Michał Madej has disputed claims by fans that this was due to the sometimes crude language, but that the decision to edit down dialogue occurred because of production-related concerns in game development. Proof reader Martin Pagan noticed this shortened version during his work and writer Sande Chen confirmed that it was not due to censorship. Fans have theorized that it may have been done for voice acting cost savings, especially since much of the vulgar language has been retained. Such cost savings would normally occur during any shortening of dialogue, even in cases where no major crudity was involved.
+The Enhanced Edition, however, contains the originally cut dialog with full voice acting.
+Editions
+The following table lists the contents of each of the various editions in addition to the game DVD itself. Help us by adding information about missing editions!
+Legend:
+Original Edition (OE)
+Collector's Edition (CE)
+Limited Edition (LE)
+Enhanced Edition (EE)
+Special Edition (SE)
+Platinum Edition (PE)
+Edition
+Printed manual
+Map
+Music CD
+Bonus DVD
+Guidebook
+"The Witcher" Short story
+Artbook
+The Witcher bestiary
+Medallion
+T-shirt
+Bonus music
+Stickers
+Unique item
+International EE
+International PE
+International OE
+European LE
+German CE
+Polish OE
+Polish CE
+Polish SE
+Czech OE
+Czech CE
+Hungarian OE
+Hungarian CE
+Russian OE
+Russian LE
+Russian CE
+Australian LE
+UK LE
+Console Version
+The Witcher: Rise of the White Wolf was to be a console role-playing game to be released in Fall 2009 but the project has since been suspended. While it would feature the same story as The Witcher PC game, based on The Witcher series of the same name by Polish author Andrzej Sapkowski, it would also use a new engine, created in cooperation with Widescreen Games, and a new action-based combat system.
+Spin-Offs
+For the main article, see CD PROJEKT RED's The Witcher franchise.
+Several spin-off games have been created either by CD PROJEKT RED or on the license from CDP.
+Mobile Phone Game
+The Witcher: Crimson Trail (Polish: Wiedźmin: Krwawy Szlak), also known as The Witcher Mobile is a mobile phone action game created developed by Breakpoint on the license from CD PROJEKT RED. It features Geralt in his youth as a promising young student, has just completed his training to become an elite monster slayer, a witcher.
+Card Games
+Two card games based on CD PROJEKT RED's The Witcher computer game have been designed by Kuźnia Gier. One, Wiedźmin: Przygodowa Gra Karciana (The Witcher: Adventure Cardgame) has been published by Kuźnia Gier and is being sold in Polish gaming stores, while the other, Wiedźmin: Promocyjna Gra Karciana (The Witcher Promo Card Game) is a simpler game added to the collector's edition of The Witcher in some countries.
+Browser Game
+The Witcher: Versus is a Flash-based multiplayer fighting browser game, developed for CD PROJEKT RED by one2tribe and launched in 2008. The game has you create a character from one of three classes and challenge other players to deadly battles. When you first sign up for Versus, which is tied into your thewitcher.com forum account if you have one, you choose from one of three character classes: Witcher, Sorceress and Frightener.
+Notes
+A playable demo was released in English on December 14, 2007. The demo contained the first part of the Prologue and most of Chapter I of the full game.
+References
+↑ From the game's feature list, see for example here.
+↑ The Polish Collector's Edition came with the card game.
+↑ The Polish Special Edition came with a Geralt action figure.
+↑ The Czech Collector's Edition came with posters.
+↑ The Russian Collector's Edition came with a leather bag.
+External links
+Official Site
+Developer interviews:
+The Witcher Interview, Part 1 at IGN
+The Witcher Interview, Part 2 at IGN
+The Witcher Interview, Part 3 at IGN

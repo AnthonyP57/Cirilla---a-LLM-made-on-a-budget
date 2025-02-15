@@ -1,0 +1,109 @@
+Scenes From a Marriage
+Scenes From a Marriage is a main quest in the Hearts of Stone expansion.
+After completing Olgierd von Everec's first two difficult tasks, he gives Geralt his third and final one: find and bring him the violet rose he gave to his wife, Iris, the last time he saw her.
+Walkthrough
+It's a very good idea to get a few weapon repair kits, then head for the von Everec Estate. Once there, you'll find a scared thief looking for his partner, who's gone missing while they were trying to "explore" the manor. After seeing a hulking figure in the distance, the thief runs off and it's time for Geralt to start his search.
+You can examine quite a few spots in the front area, but they will only lead to comments about the surprisingly well-maintained garden and Geralt will conclude that, of course, he won't just find the flower laying there. What you need to do is go to the front door, and when you interact with it a cutscene will trigger, drawing your attention to trails of a dragged body, and then some footsteps, both leading to the back area. Open the gate to it for another small cutscene, and shortly ahead you may examine the missing thief's lockpick. Regardless though, simply following the dragged body trail will lead you to the dead thief and his murderer - an eyeless monster, only known as The Caretaker.
+The Caretaker
+The horrifying looks alone should be warning enough to not underestimate him, so prepare for a tough fight. His attacks are fairly slow and predictable, but it takes time to notice the patterns. Most importantly, he heals large amounts with every hit, so you have to avoid getting hit even once if possible, although Quen can absorb a hit without him healing.
+If that's not bad enough, he will also summon large groups of dark spirits, for the sole purpose of healing himself, so you have to be very aggressive and kill them before he gets the chance. Northern Wind is very effective to immobilize The Caretaker in that situation, but it might be better to target the spirits themselves with other bombs. However, don't use your best consumables right away, lest you run out of them, as it's almost inevitable that he'll heal from half health to full at least twice before you get the hang of it.
+In addition to his regular swings, he has an easily dodgeable charge (it looks scary, but you can safely attack him after just a single sidestep) and two area of effect attacks, which will be noticeably outlined on the ground. They aren't interruptable and will knock you back, so move away when he starts them, but then quickly attack once his spade is in the ground - that's when he's most vulnerable. Using dodge instead of rolling prevents delays of landing hits on him. Get your Relict oil on, but forget most signs - Aard just staggers him a bit, and he's not susceptible to Yrden, Igni or Axii. Quen is the only sign that is very useful in this fight. The Quen Discharge and Exploding Shield are pretty amazing if used wisely.
+When he's finally dead (200), the mysterious black cat and dog will speak to Geralt, curious as to why he's there. He asks to see Iris for the violet rose and the animals inform him that he can find the mistress inside the house, in her bedchamber. They tell you to take the key to the back door from the Caretaker's body so you can enter the house. Geralt will grab the key automatically, but before you go inside you can loot The Caretaker's spade (doesn't glow with Witcher Senses), as well as an ornamented brush under the remains of a gazebo in the southeast corner of the garden.
+The Haunted House
+Enter the house and you'll feel what awaits ahead, as Iris' voice echoes. There will be a lot of doors, but only the intended ones will be open, so don't worry about getting lost. As you make your way through it, Geralt will see a wraith that appears briefly in paintings. Iris' sketchbook can be picked up from a table in the room where she first appears. On the second floor, you'll have to go through a balcony walkway and back inside into a small bedroom, where the doors in front ominously open.
+Note: Before you proceed further, this is the ideal moment to meditate and a Reliever's decoction will be your best choice ahead.
+As you enter the hallway, all the lights go out briefly before The Wraith from the Painting appears and attacks. Like any wraith, she is susceptible to Yrden and Specter oil. However, she has one tactic that can drag out the fight. She'll float up, making it impossible to hit her, then let out a type of scream that emits as green and a random painting in the room will then echo this color. Quickly hit the green painting to close it as it will start to heal her as she draws near it, and once she's close enough, she'll enter the painting and re-emerge from another painting at full health. It can be particularly frustrating when Geralt auto-targets the wraith instead of the painting, so try to be as close to the wall as possible.
+When she is defeated (200), enter the bedchamber right ahead to find Iris' long dead body on the bed. Examining her body will trigger a cutscene and you'll be moved downstairs after, so before doing that you can pick up a Portrait of Iris and Olgierd from a nearby table, as well get any loot. After another brief conversation with the strange animals, Geralt has to properly bury Iris' remains before he can summon her ghost. (100)
+The cat and dog now give you the front door key too, so you can exit easily and look for a good spot for a grave. The only one that works is by the easel near a tree in the farthest corner to the left. You can say a few words, as well as choose one of the ornamental brush, the sketchbook, or the painting to put on Iris' grave. Only one item can be placed on and the others will become worthless junk after the quest is over. There will be a comment later by Iris about the choice you made but any of the items will work.
+When the funeral is complete, Geralt summons Iris' spirit, who creates a magic painting of the manor and enters it, then Geralt follows her.
+The Painted World
+Geralt finds himself in the surreal painted world reminiscent of the estate. The dog and cat, who apparently exist simultaneously in both worlds, informing him that in order to truly awaken Iris, Geralt has to complete the memories she has been denying, and destroy the fears and nightmares that bind her.
+Note: Inside the painted world, you can't "truly" meditate, but merely accessing the meditation panel will apply all of the practical effects, such as health regeneration and replenishing potions and bombs.
+To awaken Iris, there are a total of seven memories that must be unlocked by solving a puzzle of missing elements in a frozen scene, though there's an eighth one that, while not needed, helps give more insight and is needed to unlock the Curator of Nightmares achievement. Most of them require finding and placing items in particular spots, but not all items found will be useful.
+As you reenact the memories, Geralt will see how the couple's marriage began to deteriorate over time, how Iris' family didn't approve of Olgierd as her husband, and how Olgierd tried to use magic to summon Gaunter O'Dimm to try and break the pact he forged, but it ultimately failed and set fire to the manor. Eventually, it leads to a scene where, having grown indifferent to Iris and only remembering that he was supposed to love her, Olgierd gave her the strange cat and dog for company and the Caretaker for protection.
+After all of these, there will be an additional final memory, but the puzzles are the following:
+Courtyard gazebo (optional)
+To compete this, find and place the painter's palette on the table, and the book in Olgier's hand. The teapot is useless. However, beware of hostile swarms attacking Geralt just after you complete this. (100) They are similar to the black clouds during A Towerful of Mice and can be burned down with Igni. A few more can be encountered on the way to the next memory.
+The fountain
+As you approach, you will be attacked by arachnomorph specters and there will be more of them to the left, but those are best ignored as they will respawn right after the memory is restored, and none of them yield . To restore the memory, you only have to find a wooden cup and place it in Iris' hand, even though there's also a wedding veil and two bouquets of flowers nearby. When the cutscene ends (100), a giant arachnomorph specter will attack together with a few of the smaller ones. Then a few more will be immediately around, and optionally two on each side of the house entrance.
+The dinner table
+There are no items to pick up here, although a couple can be examined. Instead, the painting will show flames that are supposed to be lit in the memory but currently aren't. Light the fireplace and the two candlesticks closest to it and the diners, only the one furthest away should be unlit. (100) After this memory, a weak specter of Olgierd will attack you on the way to the next one.
+The bedroom
+You can examine the washing bowl, to which Geralt will comment that there's blood, hinting that the bloody towel is the correct thing to place next to Olgierd. (100) The night lamp and night gown serve no purpose.
+The painting studio
+Here you need to observe Iris' painting, then pick up the goblet and fruit bowl, and interact with the table. These are only two objects, but you'll be taking two kinds of fruit out of the bowl to arrange a total of three items on the table. The correct placement is grapes on the left, goblet in the middle, and apples on the right. (100)
+Olgierd's study
+Easily the most challenging of the eight memories. On the way here, in a hallway similar to the one where you fought The Wraith from the Painting, five of Olgierd's specters will attack you. They are stronger than the previous lone one, not overwhelmingly so, but be on your guard.
+As you enter the study, you'll immediately notice the encircled pentagram here, but first you need to pick up items. There are two books around, one of which (Between Worlds) is only an extra read, but the other, Blood Pacts, or On Foreign Presences, describes the ritual that you have to recreate in the memory. That is, find the piece of chalk with which to redraw the circle, then put beeswax candles on its border and not anywhere inside (these two items can be hard to spot).
+During this memory a fire ensues and you have to escape. To do that, interact with the winter painting on the wall. (200) As you are in a painted world, after entering the winter painting you find yourself in a blizzard and have to run for cover. Your escape are the cellar doors to the right of the main stairs - very hard to miss, an Olgierd specter will even be standing above it.
+The cellar
+Two out of four objects are necessary here. The Marriage contract quite obviously goes into Iris' father's hands, while the mug goes into Olgierd's. If you find the pipe, Geralt will make a comment about it, but it's only a decoy and the knife does nothing at all. As the father is killed in this memory, three ghoul specters will attack once it completes. (100)
+The dining room
+For this final puzzle, the cat and dog will take their places to give you a hint. Find and place the large bowl beside the dog, the small bowl beside the cat, and the food tray in the Caretaker's hands. (100)
+Ethereal
+Prepare for a fight, as in the next room you will find the final memory in a letter by Olgierd left for Iris, stating that he was leaving her with only a letter and a rose to remember him by, as he didn't want to hurt her further. As you read the letter, Iris' greatest fear in the ethereal form of her husband, appears and attacks Geralt.
+When the battle begins, there are six ethereals that surround you, but only one is active and the rest will remain dormant unless attacked. Once you defeat the active ethereal, one of the dormant ones will awaken and attack, each stronger than the previous. Try to avoid hitting the inactive ones or you will quickly get swarmed and easily die even with Severance-enhanced Whirl. At the start of the battle, you can go to the far end of the room and wait for the ethereals to approach individually — this helps to avoid activating more than one at once.
+The final two ethereals are almost pound for pound match for the real life version of Olgierd, so you know what to expect if you fought him during Evil's Soft First Touches. You will need to use the dodge-hit-dodge-hit fighting style and extensive use of Quen (preferably with the Active Shield upgrade) to win. Regular strikes can be parried but not the charging strike. The powered up strikes can be parried, but it is very challenging timing to do so. If you manage it, you can get in up to three strong attacks. Counter-attack is the most effective way to beat the ethereals, as their attacks can be sidestepped, allowing Geralt to hit from the flanks.
+Note: If you're up for a challenge, defeating all six ethereals simultaneously awards the When It's Many Against One... achievement, but obviously the above-described tactics are for one-on-one combat. To fight them all together, note that they can be continuously stunned by the fire from a Dancing Star bomb, and you want them all bunched up together for maximum hits with whirl.
+Iris
+ 
+After defeating the ethereals (300), Geralt finally meets Iris, who holds the violet rose. While the original violet rose had withered in the real world, the rose in the painted world still exists. Geralt needs the rose, but also explains that Iris' bond with it is such that, should it be taken, she may cease to exist. You now have a choice:
+Leave the rose
+If Geralt decides to let Iris keep the rose, the dog and cat will be resigned to their fate to watch over her, hoping another in the future will free them. Iris will go back into her slumber, and Geralt leaves through the portal back into the real world. It is there where he finds a Painting of Iris holding a violet rose, which he will take to Olgierd.
+Take the rose
+If Geralt decides to take the rose, Iris gives it up willingly. The dog and cat are now freed from their service and, in gratitude, they give Geralt some advice. They warn him to beware of O'Dimm and, should he stand in his way, the witcher should "seek salvation in glass that can't be broken." Iris gives Geralt the rose and the entire painted world begins to crumble, as Geralt leaves the world before it completely vanishes.
+Whatever your choice was, the quest completes and you receive 500. As you end still inside the estate, note that none of the gates to the outside will open and you have to leave through the broken wall section where you met the thief, just to the right (east) of the main (north) gate.
+Journal entry
+With two wishes down and one more to go, Geralt reported back to Olgierd. There he received his third and final task, which, following in the vein of the its predecessors, seemed nigh unto impossible to complete. Olgierd wanted Geralt to find and bring him the violet rose he had given his wife the last time he saw her. As this was many years ago, and flowers are not noted for their longevity, the rose had certainly disintegrated by now. Yet since Geralt had grown used to finding the unfindable and doing the undoable, he nevertheless set out to try to recover this flower of yesteryear.
+Olgierd's abandoned residence was haunted by the ghost of his wife, Iris von Everec – or more accurately, by deadly spectral emanations coming from her dormant spirit. Geralt had to overcome many obstacles before finally awakening Iris' ghost from her tortured sleep so he could talk to her about the violet rose. After he did so, he traveled to the world of the ghost's imagination to revive memories repressed within it and defeat the embodiments of Iris' fears.
+If Geralt takes the rose:
+In short, it was one of Geralt's more unusual adventures. At its end, our hero emerged from the imagined world with a very tangible rose in hand, ready to deliver to Olgierd in completion of his wish. The price of obtaining this rose? The ultimate end of Iris von Everec.
+If Geralt refuses to take the rose:
+At its end, our hero emerged from the imagined world not with the rose itself, but with a very faithful likeness of it painted by Iris von Everec herself. In this way he fulfilled the letter of Olgierd's wish – the rose has been delivered, though in painted form, and with the eyes of Iris von Everec staring out of its canvas.
+Objectives
+Note: The order in which these objectives appear may differ depending on the order on what's interacted with first.
+Go to the von Everec Manor.
+Search for the partner of the thief you met.
+Use your Witcher Senses to search the grounds of the von Everec estate for a violet rose.
+Find a way to get inside the manor.
+Follow the tracks on the ground.
+Open the gate.
+Examine the back garden.
+Search the estate's back garden using your Witcher Senses.
+Defeat the estate's caretaker.
+Search for Iris von Everec on the upper floor of the manor.
+Examine the remains on the bed.
+Find a fitting spot to bury Iris.
+Look for Iris von Everec's memories and find a way to restore them.
+Use your Witcher Senses to find a way to restore the memory.
+Place the items that fit the scene where they belong.
+Search the area around the memory using your Witcher Senses.
+Place the item that belongs there in Iris von Everec's hand.
+Defeat the wraiths.
+Use your Witcher Senses to find a way to restore the memory.
+Carefully examine the painting in the dining room.
+Go to the painting studio.
+Use your Witcher Senses to find a way to restore the memory.
+Arrange the elements of the tableau vivant as they are in Olgierd's portrait.
+Go to Olgierd's study.
+Use your Witcher Senses to find a way to restore the memory.
+Look around for candles and chalk.
+Complete the partially erased pentagram.
+Find a way to escape the fire.
+Escape from the blizzard and find a way back into the house.
+Use your Witcher Senses to find a way to restore the memory.
+Defeat the wraiths.
+Use your Witcher Senses to find a way to restore the memory.
+Go to the parlor.
+Face Iris von Everec's greatest fear.
+Defeat Iris von Everec's nightmares.
+Notes
+In the room where Iris' sketchbook is found, you can also find the second copy of Ofieri kilij.
+In the container next to where Iris' body is found is the relic form of both the Ornate robe and Ornate boots.
+The Portrait of Iris and Olgierd, if not used during the funeral, can be later used in the Blood and Wine expansion to decorate Corvo Bianco. Every other unused item will only be useless junk that sells for only a single crown or dismantled into ashes.
+Trivia
+Geralt says "All happy families are alike; each unhappy family is unhappy in its own way." when viewing a painting of the family in this house. This is the very first line in the novel 'Anna Karenina' by Leo Tolstoy.
+In one of the memories, Olgierd von Everec mentions the practice of greeting the newlyweds in their new home with bread and salt, which is a traditional practice in Eastern Europe.
+The title is in reference to a 1973 Swedish TV mini-series of the same name.
+In the Polish (Original) version the title for this quest is "Żyli długo i szczęśliwie" which translates to "Lived happily ever after". The title obviously comes from the commonly used ending words from fairy tales i.e. "And they all lived happily ever after".
+The Painted World may also be a reference to a quest in The Elder Scrolls: Oblivion. In a quest titled "A Brush with Death", you enter a dreamlike realm with the same name.

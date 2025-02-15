@@ -1,0 +1,47 @@
+Tesham Mutna
+Tesham Mutna is a main quest in the Blood and Wine expansion.
+Walkthrough
+What happens next depends on a number of previous choices:
+If you went to see the Unseen Elder, Dettlaff will show up and will give you no choice but to fight him.
+If you brought Syanna, Dettlaff will show up and try to kill her:
+If you got her back the ribbon from the Little Flint Girl, she'll be teleported away to safety and, enraged, Dettlaff will force you to fight him.
+If she doesn't have the ribbon, she'll die and you can choose:
+to fight Dettlaff
+to let Dettlaff go
+Regardless of whether you fight Dettlaff, if Syanna is dead Anna Henrietta will have Geralt thrown into jail, starting the quest Burlap is the New Stripe.
+Note: Defeating Dettlaff will count as "Proof of Valor" for There Can Be Only One.
+If you do fight him, prepare for 3 different stages. Luckily, while Regis keeps him busy, you can prepare yourself with any necessary decoctions, oils, weapon repairs, and so forth. Important: use this break to save your game before jumping into the fray. The game will not create automated progress saves and so if you die during any of them, you must re-do all the stages. Other important things to keep in mind:
+At the start, all your alchemy items are replenished, but any decoctions and toxicity from before are still in effect - use White Honey to reset them if you want to. You're also allowed to swap out skills.
+Dettlaff is immune to any bomb that purely give a status effect, such as Northern Wind, but Grapeshot or Dancing Star will work.
+Dettlaff is unaffected by Axii, and Yrden won't be that useful.
+A crossbow bolt, Aard or Igni is useful during Stage 2, Yrden's alternate form Magic Trap will work too (see below)
+Always put on Quen.
+On higher difficulties, forget about Black Blood; avoid getting hit as much as possible as Dettlaff can kill you very quickly.
+Unfortunately due to a bug or intentionally Vampire Oil, or any other for that matter, has no effect on Detlaff, so skills like Protective Coating will also not work. So a much better option is to use Griffin decoction and/or Arachas decoction if you need more damage reduction.
+Consider equipping White Raffard's Decoction.
+Stage 1, Humanoid Form
+This is the same form that you faced Dettlaff in when you first tracked him down to the warehouse. He has ranged dash attacks and will usually dodge away after he's taken one hit. Similar to facing Olgierd von Everec in the Hearts of Stone expansion, a short-dodge-fast-attack pattern dodging behind him and doing a quick strike usually works best. Once you've done enough damage he will transform into his next state.
+Stage 2, Flying Form
+In this form you have to be patient; there is only one point during his attack patterns where he's truly vulnerable. While he's in the air, as mentioned before he's immune to everything you could use to knock him down. His dashing slashes are easy to dodge with a roll, however his bat wave attack can be tricky but not impossible, as soon as he starts gathering bats, run away in the opposite direction. Try to get as much distance from him as you can. This leaves you more time to see the bats coming and dodge or roll away easily. When he dives down onto the ground and stays there for a bit, this is when you have a precious few seconds to hit him as hard as you can before he flies back up and sends out a short ranged shockwave. You can also wait until he dives at you and perform a well timed Aard, Igni, or crossbow bolt. He will crash to the ground and will be vulnerable for a few seconds. If you unlocked Magic Trap it will also work if he swoops down near it. Take advantage of this with 3-4 fast attacks, 2 strong attacks, or even a Dancing Star bomb. Rinse and repeat until he goes to the third stage.
+Stage 3, Body Illusion
+In this stage when you're in the illusion of the inside of a fictional version of Dettlaff's chest, there are several pulsing hearts around the walls of the chamber. You have to destroy these hearts while fending off the Dettlaff blood clones. The clones can hit VERY hard and destroying them doesn't do any actual damage to the "true" Dettlaff himself, but destroying one can give a few precious seconds of time to focus on one of the hearts until another is spawned. If you're skilled enough, you can also try counter-attacking the clones the same way it was done in Stage 1, but note this is far riskier. Once you've destroyed 3 hearts, Dettlaff is finally defeated.
+After the 3 stages are over, he'll be down to sliver of health, but so weak that you get to execute him however you wish, after which you get a cutscene and the quest completes.
+Journal entry
+Geralt had done what was required. He could now go to the infamous Tesham Mutna, where he would once again face Dettlaff.
+If Geralt chose to force Dettlaff to meet:
+Though higher vampires seem to differ entirely from us, upon closer examination their passions, emotions, prove human to the extreme. Thus Geralt and Regis quite rightly did not expect the Beast of Beauclair to be pleased as they headed towards Tesham Mutna to meet him. When, unaccompanied by Syanna, they finally faced Dettlaff, the vampire flew into a rage. He lunged at Regis and Geralt, intent on tearing them to shreds. Yet the duel ended with his defeat and, at the last, his demise.
+If Geralt chose to bring Syanna:
+Higher vampires bear an uncanny resemblance to humans. Yet the similarities are only skin deep. We mere mortals have a dastardly time trying to understand their emotional makeup and morals. So Geralt could never have foreseen what happened - that Dettlaff would try to take Syanna's life.
+...and got the ribbon:
+Luckily, Syanna had her protective amulet. Crafted long before by Artorius Vigo, it did exactly what it was created to do. At the crucial moment, the duchess' sister disappeared, transported to a spot both safe and secure. Dettlaff flew into a rage. He lunged at Regis and Geralt, intent on tearing them to shreds. Yet the duel ended with his defeat and, at the last, his demise.
+...and didn't get the ribbon and let Dettlaff go:
+Surprised, the witcher failed to protect the young woman.
+With the deed done, Geralt nonetheless let Dettlaff go. There was no question he was guilty, but it was equally clear he had been both predator and victim in the grand scheme of things. For his part Dettlaff vowed to avoid humans forever more. In his heart of hearts, the witcher knew the vampire would keep his word.
+...and didn't get the ribbon and attacked Dettlaff:
+Surprised, the witcher failed to protect the young woman.
+He could, however, avenge her. He did so swiftly, though not without difficulty and with Regis' help.
+Objectives
+Unless Syanna is dead and you choose to let Dettlaff go:
+ Prepare for the fight.
+Help Regis fight Dettlaff.
+Defeat Dettlaff.

@@ -1,0 +1,12 @@
+Invigoration
+Invigoration is a level 3 runeword in the Hearts of Stone expansion that can be crafted by the Runewright.
+Crafting Requirements 
+Greater Devana runestone× 1 Greater Devana runestone × 1
+Greater Zoria runestone× 1 Greater Zoria runestone × 1
+Greater Perun runestone× 1 Greater Perun runestone × 1
+Tips
+The effect works very well with Gourmet as any food consumed will provide 20 min of health regeneration. Thus providing the effect nearly constantly as long as Geralt remains at full health.
+It also works well with water hag decoction as both require Geralt to remain at full health.
+The effect will not trigger if Geralt is suffering from damage due to toxicity, even if he has enough regeneration applied to out-heal it. This happens because his HP must be at maximum for the effect to work and due to the damage his HP will always be 1 point below maximum no matter how high the regeneration is. However, this can be avoided by unlocking Heightened Tolerance.
+Unlike other effects that raise damage this effect is calculated based on overall damage rather than on base damage. In other words if overall damage of your weapon is 1000 Invigoration will increase it up to 1500.
+The rate of Geralt's health regeneration does influence how fast the damage boost increases. In other words the higher his health regeneration during combat is the faster it will build up.

@@ -1,0 +1,36 @@
+Force Recon
+Force Recon is a Chapter II quest which culminates in a battle (at the Golem burial ground) between Scoia'tael and Flaming Rose forces. Each side wants the other exterminated and Geralt must decide if and with who he wants to get involved.
+Walkthrough
+There are essentially three choices here, and the third will leave the quest unfinished. Either:
+Speak with Siegfried near the Druids' grove and side with him - four Order scouts will join you for the mission or
+Speak with Yaevinn in the Scoia'tael camp and side with him - three elves and two dwarves will join you for the mission or
+Refuse one or both requests / avoid both conversations - you won't get combat XP, but maintain a neutral path.
+If you chose the first or second options, proceed to the Golem burial ground and be ready for a fight.
+Consequences
+Order path: If you choose to side with The Order without first delivering Golan Vivaldi's response to Yaevinn (for the quest Worth its Weight in Gold), that quest will fail.
+Scoia'tael path: Whether or not you have the response from Vivaldi, you can get Force Recon from Yaevinn.
+If this quest is avoided, the Order will win the battle by default.
+This quest is a trigger for both the Armorer of the Order and the dwarven blacksmith. Choosing one side will cause that side to start accepting business from Geralt and the other to refuse to do business with Geralt until another trigger condition is met. If you ignored this quest, both conditions should be reset and you can trade with either of them again.
+Phases
+
+The Guide
+I agreed to help Yaevinn fight the Order of the Flaming Rose. I'm supposed to lead his scouts to the golem's burial ground. I am supposed to lead the elves to the golem's burial ground.
+I agreed to help Siegfried fight the nonhumans. I'm supposed to lead his scouts to the golems' burial ground. I am supposed to escort the knights of the order to the golem's burial ground.
+Reconnaisance
+Success
+Yaevinn was fully satisfied with the reconnaissance and he expressed his gratitude accordingly. I've gained Yaevinn's trust. (200 + 3500 XP)
+Failure
+Yaevinn was not happy with the reconnaissance. No payment this time. (2000 XP)
+There was a skirmish with the Scoia'tael at the golem cemetery.
+All non-humans are dead - time to get back to Siegfried.
+All Scoia'tael are dead - time to get back to Siegfried.
+Success
+Siegfried was fully satisfied with the reconnaissance and he expressed his gratitude accordingly. I've gained Siegfried's gratitude. (200 + 3500 XP)
+Failure
+Siegfried was not happy with the reconnaissance. No payment this time. (2000 XP)
+Siegfried was not happy with the rec There was a skirmish with the Order of the Flaming Rose at the golem cemetery.
+All attackers are dead - time to get back to the camp.
+Videos
+The Witcher Force Recon (Hard) HD
+Gallery
+Geralt with his Order posseGeralt with his Scoia'tael posse

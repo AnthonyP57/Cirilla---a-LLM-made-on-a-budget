@@ -1,0 +1,102 @@
+Crossbow
+A crossbow is a mechanically assisted bow which is used when more power is required, either to launch heavier projectiles or to launch a more conventional one a longer distance. The bows are usually cocked with the assistance of a windlass or crank, but some use levers.
+Gameplay
+In The Witcher 3: Wild Hunt, the crossbow has its own slot in the inventory and combat wheel but it only allows one type of ammunition to be equipped at a time; switching ammunition can be done on the inventory screen or the weapon wheel. The normal crossbow bolt is the weapon's default ammo when none is equipped, and while it lacks special properties it has an unlimited amount. Crossbows can be used during regular combat, underwater, on a horse, or at the helm of a boat. Note that while underwater, only the default bolt is available. However, crossbows are particularly effective underwater so this shouldn't be much of a hindrance.
+While a crossbow item can be found before that point, Geralt will receive a basic one from Vesemir during the prologue in White Orchard, and will always have some default ammunition for it.
+Crossbow's damage is dependent on three major factors: Geralt's ability build, the crossbow's damage attribute, and the equipped munition. The crossbow's base damage is the most detrimental factor since the other two variable would multiply on its value. Unlike other equipment, crossbows do not have slots for runestones.
+Also unlike other equipment, crossbows are not scaled normally in New Game +. Any crossbow and bolts found or crafted in the bonus playthrough will have similar attributes found in normal ones, their effectiveness remains as if played in a normal playthrough however. This "shadow scaling" also applies to crossbows brought from a normal playthrough to a New Game +.
+One can fire crossbow in two ways.
+Quick shot, done by tapping the action button, will have Geralt automatically fire at targeted enemy for an almost guaranteed hit.
+Manual aim, done by holding the action button and have players aim the crossbows manually from shoulder-view. This way, players have the opportunity to aim for certain body part and yield Deadly Precision (ex. shooting humans in the head), which deal extra damage, but also leave players to rely entirely on their aiming skill. Aiming manually will slow in-game time.
+Geralt will have to complete a reload animation after each one shot (two, with the Trick Shot ability) before being able to fire again. Using crossbows cost no Stamina.
+Crossbows are mostly useful for hitting flying beasts, like ekhidnae or griffins, to bring them down to earth; and it's the only usable weapon underwater. However, their potential as combat tools can be expanded and applied into different strategies.
+Blood and Wine expansion introduces the Cat Eyes mutation that increases crossbows's damage by a considerable amount, boosting their capacity to function as secondary or even primary weapons.
+List of Crossbows
+In addition to a number of homonymously named "Crossbow" items in the game, there are a many other crossbows in The Witcher 3: Wild Hunt and its expansions.
+Image
+Name
+Tier
+Crossbow
+Common
+0.77
+No
+Crossbow
+Master
+1.31
+No
+Crossbow
+Master
+1.12
+No
+Crossbow
+Master
+1.97
+No
+Crossbow
+Magic
+0.98
+No
+Crossbow
+Magic
+0.63
+No
+Crossbow
+Relic
+1.08
+No
+Death From Above
+Relic
+1.08
+No
+Elven crossbow
+Master
+4.01
+No
+Feline crossbow
+Witcher gear
+1.68
+Yes
+Geralt of Rivia's crossbow 
+Magic
+0.77
+No
+Nilfgaardian crossbow
+Master
+4.01
+No
+Ofieri crossbow 
+Master
+1.33
+No
+Ofieri crossbow 
+Relic
+1.33
+No
+Ravix of Fourhorn's crossbow 
+Magic
+0.77
+No
+Skellige crossbow
+Master
+4.01
+No
+Toussaint crossbow 
+Master
+0.77
+No
+Toussaint crossbow 
+Magic
+0.77
+No
+Ursine crossbow
+Witcher gear
+1.81
+Yes
+Ammunition
+Main article: Bolts
+A crossbow would be a useless weapon without ammunition or bolts in The Witcher 3: Wild Hunt. There are several types of bolts available to use with the crossbow.
+See also
+Gabriel
+Ballista
+Gallery
+the Witcher 3 crossbow concept artsthe Witcher (PC) crossbow concept artsCrossbow as seen from aboveUsing it against sirenaCrossbow from VesemirElite Crossbow set promo screenshot

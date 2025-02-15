@@ -1,0 +1,25 @@
+Manticore School Gear
+Manticore School Gear is a set of armor typically worn by witchers from the School of the Manticore and is introduced in the Blood and Wine expansion. Bonuses have been implemented for wearing 3 and 6 matching pieces of Witcher gear.
+Bonus for 3 pieces: Critical hit chance and critical hit damage also apply to bombs. Bombs are thrown without any delay.
+Bonus for 6 pieces: The maximum number of charges for each alchemy item is increased by 1.
+Note: all legendary gear are stronger versions of base game gear in New Game +.
+Manticore armor
+Manticore boots
+Manticore gauntlets
+Manticore trousers
+Manticore silver sword
+Manticore steel sword
+Legendary Manticore armor
+Legendary Manticore boots
+Legendary Manticore gauntlets
+Legendary Manticore trousers
+Legendary Manticore silver sword
+Legendary Manticore steel sword
+Associated quest
+Scavenger Hunt: Grandmaster Manticore Gear
+Notes
+A different "Legendary" set version exists in the game files (2s instead of 1s in the corresponding item IDs), with slightly weaker level 73 swords and level 70 armor pieces adding Addrenaline Point gain, Attack Power and Sign intensity bonuses instead of increased Maximum Toxicity. This version does NOT appear during normal gameplay and in fact even with console commands can only be obtained in a regular game and not in a New Game +. It is likely an early iteration for a different Legendary items concept not tied to New Game +.
+Gallery
+Regular armor
+References
+↑ Prior to Patch 4.0, "Bombs are thrown without any delay." was not part of the bonus stats.

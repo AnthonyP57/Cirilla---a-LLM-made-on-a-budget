@@ -1,0 +1,124 @@
+Alcoholic beverages
+In The Witcher, alcoholic beverages are a subset of alcohol that varies between weak and medium strength and can not be used as potion bases; they are strictly for Geralt's drinking pleasure, to be used as gifts, or are quest requirements.
+Beer
+Beer is the weakest and also the least expensive of the alcoholic beverages available in The Witcher. It comes in five varieties.
+Image
+Name
+Description
+Rating
+Buy
+Sell
+ 
+Cintrian Faro
+"Syrup-sweetened beer, favored by Cintrian seamen."
+Weak
+5 
+1 
+ 
+Kaedwenian Stout
+"Dark beer from Kaedwen."
+Weak
+5 
+1 
+ 
+Redanian Lager
+"An excellent beer brewed from Redanian barley."
+Weak
+5 
+1 
+ 
+Rivian Kriek
+"Cherry beer brewed in Rivia."
+Weak
+5 
+1 
+ 
+Viziman Champion
+"Vile beer brewed in the capital city of Temeria."
+Weak
+5 
+1 
+Mead
+Mead, as a medium-strength alcoholic beverage, is slightly stronger and more valuable than beer. It comes in two varieties.
+Image
+Name
+Description
+Rating
+Buy
+Sell
+ 
+Mahakaman mead
+"Considered to be the dwarves' greatest contribution to world culture." The gravedigger is partial to this drink.
+Medium
+10 
+2 
+ 
+Sodden mead
+"Mead produced by the beekeepers of Sodden." Also one of the drinks that Erkin von Blunt enjoys.
+Medium
+10 
+2 
+Wine
+Wine, another medium-strength alcohol, is often used as a gift or means of persuasion. It comes in four varieties.
+Image
+Name
+Description
+Rating
+Buy
+Sell
+ 
+Beauclair White
+"Thought by many to be the most exquisite white wine in the world."
+Medium
+10 
+2 
+ 
+Mettina Rosé
+"Marvelous wine with a rich bouquet."
+Medium
+10 
+2 
+ 
+Toussaint Red
+"This wine from the princedom of Toussaint is thought by many to be the most exquisite red wine in the world."
+Medium
+10 
+2 
+ 
+Very Old Wine
+"This wine has matured for a very long time and connoisseurs will certainly find it enjoyable. Can be used as a potion ingredient during meditation.
+n /a
+400 
+80 
+Quest alcohol
+Some quests require Geralt to find alcohol for someone or bring alcohol somewhere, like to Shani's party.
+Image
+Name
+Description
+Rating
+Buy
+Sell
+ 
+Grandma's cordial
+"Probably kicks like a mule." Quest item for Shani's party (only required if Geralt invites Siegfried).
+n /a
+n /a
+n /a
+ 
+Mettina Rosé
+"Marvelous wine with a rich bouquet." Quest item for Shani's party.
+Medium
+10 
+2 
+ 
+Medium strength alcohol
+Any medium strength alcohol to use for a drinking contest with Erkin von Blunt. This is an unofficial quest item.
+Medium
+10 
+2 
+ 
+Very Old Wine
+"This wine has matured for a very long time and connoisseurs will certainly find it enjoyable." Quest item for Conrad, which can be sold. It can also be incorporated into potions: use uncertain.
+n /a
+400 
+80 

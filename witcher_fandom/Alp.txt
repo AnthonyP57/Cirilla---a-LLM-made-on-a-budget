@@ -1,0 +1,68 @@
+Alp
+Alps or alpors are members of a vampiric race which inhabits the lands of the Northern Kingdoms since the Conjunction of the Spheres which occurred around 230s BR.
+Quick Answers
+What are the similarities between Alps, Mulas, and Bruxae?
+						Alps, Mulas, and Bruxae are intelligent vampire species sharing similar physiology, including pointed ears like elves. They resist sunlight, but overexposure darkens their skin. Silver is harmful to them. Despite their strong resemblance to Bruxae, Alps are deemed less potent and have a preference for preying on sleep.
+					
+						Provided by: Fandom
+					
+What is the origin of the Alp monster in the Northern Kingdoms?
+						Originating from Germanic folklore, the Alp monster is a vampiric entity known for attacking sleeping women and causing mischief on farms. Traditionally, alps were male, with 'mara' being the female equivalent. In The Witcher, however, alps are exclusively female. 'Alp' translates to 'elf' in German.
+					
+						Provided by: Fandom
+					
+What are the weaknesses of the Alp monster?
+						The Alp, a vampire species, has several weaknesses. It is susceptible to silver and Vampire Oil, and can be caught off guard by surprise attacks. Additionally, a blade coated in acrid oil, which is acidic, can enhance the likelihood of overcoming an Alp. The Alp's saliva has the ability to cause sleep and nightmares.
+					
+						Provided by: Fandom
+					
+How does the Alp monster react to silver?
+						The Alp, a vampire class monster, is susceptible to silver. This creature, often confused with others due to numerous myths, attacks unexpectedly, trying to daze victims before consuming their blood. Despite its boldness and stun resistance, its sensitivity to silver makes it vulnerable to those wielding this metal.
+					
+						Provided by: Fandom
+					
+{"@context":"https:\/\/schema.org","@type":"FAQPage","name":"Alp","mainEntity":}
+Physiology
+In many ways, alps are similar to two other species of intelligent vampires, mulas and bruxae, although seemingly less powerful than the latter. Silver used in form of weapons or chains, on the other hand, can hurt them and so they tend to avoid it. While resistant to sun along with mulas, bruxae, and Higher Vampires, they tan to almost black if affected by it too much. They have pointed ears, similar to elves.
+They prefer to prey on sleeping people and creatures. They put targets to sleep by injecting a somniferous substance causing nightmares.
+The Witcher
+
+Journal Bestiary entry
+No other monster inspires so many myths and fallacies as the alp. People believe that this vampire is able to turn into a black dog or a venomous toad. They mistake alps for succubi, believing them to be lecherous and inclined to seduce handsome young men. Folk tales describe their charm and their beautiful, seductive voices, as well as their loathing of virgins. What is true beyond any doubt is that they move noiselessly and attack by surprise, rarely giving their victims as much as a chance to scream in terror.
+Locations
+Elven ruins
+House of the Queen of the Night
+Various crypts
+Swamp cemetery
+Source
+One of many "Old peasant women" in Murky Waters will give Geralt journal entries for alps and their alchemical components in exchange for "something to eat".
+Vampires: Facts and Myths
+Notes
+Though alp remains always have a chance to contain Naezan salts, they will not contain Alp fangs without an Alp entry in the journal's bestiary.
+Zahin Schmartz states that Alps inject their victims with some kind of anesthetic.
+It appears that the Alps you can kill inside the House of the Queen of the Night during the quest Blue Eyes in Chapter III, might not drop any Alp fangs, despite having the alp's bestiary entry.
+Blood and Wine expansion
+An Alp bestairy entry can be obtained by reading the book Alps – Bruxae's Dangerous Cousins.
+Bestiary entry
+Looked like a bruxa, but that was no bruxa...– fragment of a conversation between the ealdorman of Falkoane and a witcher.
+Alps are vampires that resemble bruxae in appearance. They are called phantoms by some, a name which fits well enough, for like phantoms they haunt and torment men. They usually take on the form of a woman, though they can also appear as animals. They are most often found prowling near villages. They attack at night and are most active when the moon is full. Alp saliva can make one fall asleep, and when applied to a sleeping man, can invoke horrible nightmares. Some suggest they are the cause of legends about men who go to sleep healthy and are found in the morning white as snow, not a drop of blood in their veins.
+In combat alps display supernatural speed and incredible (even by vampire standards) stamina. One must aim one's sword with great precision, for alps are unequaled in the art of evading blows. The Yrden Sign is recommended, for it weakens an alp's defenses. Another strategy is to drink the Black Blood potion, for alps suck the blood of their victims to deprive them of strength and regenerate their own powers.
+Unlike bruxae, alps cannot turn invisible, yet like bruxae, they emit a shrieking noise whose shock wave can incapacitate. Their greatest asset is their agility and they can leap with uncanny lightness that appears to border on the power of flight. When in human form, they easily blend in with the surrounding community, which makes them very dangerous indeed.
+Combat tactics
+Similar to bruxae, knocking an Alp down with Aard sign may allow you to finish it in one strike if you're fast enough. Otherwise, coat your sword with Vampire Oil and maybe drink some Black Blood. Alps are extremely fast and prefer dodging to blocking, unlike bruxae. They also often jump out of sight to either drop down on you or prepare their shriek.
+It is advisable not to waste too much time trying to chase down or go toe-to-toe with an Alp. Avoid the shriek, otherwise try to stay in place and block, preferably with a Yrden sign down.
+Associated quests
+The Night of Long Fangs
+The Toussaint Prison Experiment
+Trivia
+Loosely inspired by Germanic folklore, alps are a race of vampiric monsters whom, according to real-world mythology, attack sleeping females and partake in devilish pranks around a farm. Portrayed conversely in The Witcher as purely female, whilst in traditional mythology alps were entirely male and the female version of the creature is instead known as a "mara".
+The German word for nightmare "Albtraum" is the connection of "Alb" and "dream", referring to a dream induced by an Alp.
+Gallery
+model in The Witchercensored AlpAlp in Blood and Wine expansion
+References
+↑ Blood and Wine expansion
+↑ Blood and Wine expansion: Alps – Bruxae's Dangerous Cousins
+↑ The Last Wish
+↑ Baptism of Fire
+↑ The Tower of Fools
+↑ Wiedźmin: Gra Wyobraźni

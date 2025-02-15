@@ -1,0 +1,102 @@
+Wandering in the Dark
+Wandering in the Dark is a main quest in The Witcher 3: Wild Hunt. In the search for Ciri, Keira Metz tells Geralt of an elven mage who visited her. The mage had clues to Ciri's whereabouts, and told the sorceress that he was staying in some elven ruins. When Geralt and Keira begin to explore the ruins, they discover that the Wild Hunt is on the same trail.
+Walkthrough
+If you didn't head out immediately with Keira, make your way to the elven ruins, otherwise you'll arrive at them with Keira. There's a chest above the entrance that you may want to loot for random diagrams before going in. Follow her into the ruins where, just after you pass the second archway, Geralt will see members of the Wild Hunt on the other side of the cavern. Needing to catch up to them quickly, he asked Keira to open a portal to the other side, but it goes wrong and the two are separated.
+Note: If Geralt ignores the portal he will remain in the main chamber and will begin his search for Keira from there. This may be preferable to going through the portal as you will otherwise be teleported to a cavern far from the main chamber and you will have to fight drowners and foglets to get back to it to find Keira.
+Find Keira
+If you did go through the portal, take out the drowners then make your way through the underwater tunnel (a chest here has a random diagram). The path will eventually split: the left will take you out to the main chamber where some drowners are and the right will as well, but you'll have to fight a foglet prior to the main chamber.
+ 
+Once back at the area before you took the portal, head to the right, then right again to find Keira calling for help while casting spells. Apparently she's not a big fan of rats. Destroy the rat nests with either bombs or Igni to receive 100 for each destroyed nest. Keira will explain that there is something distorting her teleportation and demand that they leave the caverns. Use any dialogue option to convince her to stay and pursue the Wild Hunt.
+Explore the Elven Ruins
+Continue the search to find a morphotic projection from the elf. Geralt's knowledge of Ciri's sword name, Zireael (elven for "Swallow") allows him to figure out they need to follow images of a swallow. Continue onwards to enter a cavern that appears to have once been a port, where you'll have to fight 4 wraiths among poisonous clouds.
+Note: You can disperse the toxic clouds made by the mushrooms native to this cave using either Aard or Igni, the latter causing a large explosion of fire. However, before the wraiths are dead, it is safer to stay near the stairs and let Keira attract them there.
+If you're looking for diagrams, go into the underwater tunnel to the left of where you entered (marked with an octopus/kayran). There are 2 separate chests in the tunnel that each spawn a random diagram, and the chest on the other side of the tunnel spawns 2 more (just beware 4 wraiths will spawn once you interact with this one). There is also a chest in the dead end tunnel across from where you entered the cavern with a random diagram.
+Once you've explored and looted everything, head to the right tunnel to find a swallow painting and follow the path to eventually find another projection. (100) This projection makes a reference to Kelpie, a sea monster and the name of Ciri's horse. There are two symbols nearby, one of a dog and the other of a kayran. The dog symbol will cause an explosion when activated that will damage Geralt and the kayran symbol will summon a pair of wraiths disguised as clones of Geralt and Keira. The kelpie symbol is below, in the octagonal pool, so Geralt will have to jump down into the pool to investigate. Bug: Sometimes the player will not be able to dive in, requiring a reload. Follow the clue and find another horse symbol after passing through a flooded passageway. The second symbol activates a door in the main chamber where Geralt left Keira.
+Rejoin the sorceress and head through the new passage to find an inactive portal that was the reason Keira's portal didn't work. Activate the swallow painting and head through the portal to a new area where a golem awaits.
+Keira does a decent job of stunning the golem, keeping him at bay if Geralt needs time to heal or regenerate stamina. Elementa oil or dimeritium bombs are most effective against the beast. Once the golem is defeated, continue up the stairs and the down the passage. Once done, be sure to loot the chest to the left of where you entered and the chest right after you climb up the scaffolding.
+Eventually the path will split: the first doorway on the left will lead to another portal which will teleport Geralt and Keira to the other side of the bridge, while the right will eventually lead to a cavern with a gargoyle. Note that just before this room is a chest that will have an oil recipe, that is often for elementa oil and up to 2 other random diagrams. If Geralt goes here, the door will close behind him and a gargoyle will appear that must be defeated to escape the room. There is some loot in this room, so it might be worth fighting it, even though it is optional.
+Note: The gargoyle is weak to the same things as other elementa, like elementa oil and dimeritium bombs, as well as Quen sign.
+Follow the Wild Hunt
+ 
+Rush to catch up to the Wild Hunt to find the cave guardians frozen by the riders. The duo catch up to the Wild Hunt, only to have their navigator open three portals to the White Frost, causing a blizzard.
+Keira will shield Geralt as the two walk through the room. Geralt must protect Keira from Wild Hunt Hounds as she closes the portals. Up to 15 hounds (depending on difficulty setting) in groups of two to five will spawn from each portal as the pair work through the room closing them. Stay close to Keira, as the white frost is very damaging and Keira can easily be swarmed with hounds if left alone for too long. To close the portals, another solution is to throw dimeritium bombs, or cast Yrden close enough to the spots as you walk - doing either will prevent the hounds from spawning and the portals will be closed directly after Keira Metz' spell. Once the last of the portals is closed, Keira lowers the shield and nearly faints in Geralt's arms. You receive 100 at the completion of this objective. Geralt will then have two timed dialogue choices:
+Just don't faint on me - will increase Keira's romance level with Geralt
+If you can't go on - will not increase Keira's romance level with Geralt
+The way ahead is blocked, but Keira will open the way into the next room. Head through, where you can find a partially blocked side passage ahead. Use Aard, then go inside to find a couple of loot chests and a foglet (the second chest tends to have a random diagram). Now go back to the main tunnel where ahead waits a single Wild Hunt warrior, Nithral.
+Note: You may wish to meditate and prepare potions and oils before jumping down on the platform with the enemy warrior. Swallow and Thunderbolt (+30 % attack) potions may come particularly handy. Once this battle is joined there is no escaping until Nithral is defeated.
+Fight Nithral
+ 
+Nithral is a rather slow attacker, using a two handed weapon, so attack him quickly and as often as possible before ducking out of the way of his much more damaging swings.
+He appears to be relatively resistant to staggering from attacks and he parries frequently, plus he is highly resistant to Axii, Aard, and Yrden. Quen is your best Sign option against him; turn it on, let rip through his first attack then roll away when he starts winding up a follow-up. An effective strategy is, when his first Freeze Bubble expires, quickly use Thunderbolt potion (+30 % attack), and then pummel him only with strong attacks, using Swallow potion when his (or your) health reaches one third. With bit of a luck he will go down before your health gets entirely depleted, and before he can deploy 2nd wave of hounds.
+At around three-quarters and half Nithral will summon a rift that brings hounds to his aid and will attempt to heal inside of a magic bubble, do not attack him directly, instead kill his summoned minions as fast as you can. When all of his minions are gone he will stop healing and again be susceptible to damage. If attacked while healing, Geralt will be dealt a large amount of damage. Nithral heals about 3% every two seconds while in his magic bubble so be quick about defeating his summoned creatures. Attacks that pierce his armor are most effective.
+Note: You will receive 250 for defeating Nithral as well as a Wild Hunt warrior's sword, Diagram: Angrenian cuirass, and some crafting components off his body.
+Look for Information
+After Nithral is defeated, Geralt will find yet another projection for Ciri, saying that the place isn't safe and that she should avoid the witches of Crookback Bog. Keira tells Geralt of the legend of the witches, and Geralt realizes if he is to find Ciri's path, he will need to find these powerful witches. Searching this area will find the following clues about the mysterious elven mage:
+Herbs - Mysterious mage herbalist
+Empty Potion Bottle - Potion that Keira gave him, must have drank it
+Half burned notes - Must have burned these notes himself, must have known the Hunt was looking for him
+After the White Frost - Book of interest to the Hunt
+Geralt notices a wall blocking a doorway that makes his amulet vibrate and Keira remarks it's an illusion before giving Geralt an item called The Eye of Nehaleni, which can be used to dispel illusions.
+Note: At the end of the chamber where you fight Nithral, opposite the side where the elven laboratory is set up, is a chest containing a random diagram, and to the left, a blocked up doorway which can be cleared with Aard. Inside is an illusion that can be dispersed with The Eye of Nehaleni. Beyond the illusion is a flooded area with loot and a chest with Maugrim guarded by a foglet appearing after you open it.
+At the first junction past the illusion, Keira asks Geralt to continue in the opposite direction so she can find the Magic Lamp the elf promised her. Geralt can either choose to leave or go with her, ending the quest (350) and starting the new quest, Magic Lamp. Even if you said you're leaving though, you can still just follow her to start the quest.
+Journal entry
+Finding Ciri in Velen had proven harder than tracking a swallow on a rainy day. According to Keira, an elven mage had been tracking this particular swallow as well. Had he found her? Did he know more about her fate? Geralt knew he had to find out, and Keira, well, she had unfinished business of her own with the mage. And so the witcher and sorceress set out together on a journey into darkness to find the mysterious elf's underground hideout.
+Barely had our heroes entered the underground chambers when they encountered the enemy. The Wild Hunt had reached the spot before them - and they, too, were searching for Ciri.
+The Hunt had in its ranks a navigator, a powerful mage able to teleport its warriors from place to place in the blink of an eye. Geralt and Keira, on the other hand, made their way slowly on foot, encountering obstacle after obstacle. All might have been lost had our heroes not happened across a morphotic projection the elven mage had left for Ciri. The mage's illusion guided her towards his lair and called her "Zireael" - meaning "swallow" in Elder Speech. Hearing this, Geralt gained two vital clues: the mage clearly knew Ciri well, and he must have painted the swallows on the walls to direct her.
+The road through the underground was not an easy one to travel. The mage had set a great many traps that Ciri could easily evade but which would trip up any who chased after her.
+In the end Geralt and Keira eliminated the Wild Hunt's lead and began nipping at its heels.
+Ciri's pursuers did not find what they were looking for. They departed empty handed, leaving one warrior behind to tend to Geralt and Keira. He proved a weak match for the witcher and the sorceress, but their victory was bittersweet, as in the underground passageways Geralt found neither Ciri nor the elven mage. All he could now do was to follow the hints provided by yet another morphotic projection the mage had left behind.
+Geralt finally learned the truth about Ciri and the witch from the mouth of an illusion. The mage's projection corrected and supplemented the information left behind by Hendrik - Ciri's opponent had not been one ordinary witch but the three Crones, mysterious and powerful beings dwelling in Crookback Bog. Who they truly were and what had happened to Ciri at their swampy home - that, dear reader, you will learn in the pages that follow.
+Objectives
+Meet Keira at the entrance to the mage's hideout.
+Follow Keira.
+Go through Keira's portal.
+Use your Witcher Senses to find Keira.
+Destroy the rat nests with Signs or bombs. 0/2
+Explore the elven ruins and look for information about the mage.
+Explore the ruins and follow the swallow symbols. (100)
+Search the chamber using your Witcher Senses.
+Use your Witcher Senses to find something associated with Ciri's horse Kelpie.
+Rejoin Keira.
+Explore new chambers with Keira.
+Enter the portal.
+Examine the next room using your Witcher Senses.
+Fight the guardian.
+Continue exploring the ruins and follow the swallow symbols.
+Find a way to activate the portal using your Witcher Senses.
+Enter the portal.
+Follow the Wild Hunt's warriors.
+Keep close to Keira and stay under her magic shield.
+Kill the creatures emerging from the rift.
+Kill the creatures emerging from the rift.
+Kill the creatures emerging from the rift. (100)
+Follow Keira.
+Chase the Wild Hunt's warriors.
+Fight the Wild Hunt warrior. (250)
+Look for information about Ciri using your Witcher Senses.
+Use the Eye of Nehaleni to dispel the illusion.
+Follow Keira. (350)
+ Experience table
+Action/Objective
+ at Suggested Level
+Destroy the rat nests (x2)
+200
+Find the second morphotic projection
+100
+Close the portals
+100
+Defeat Nithral
+250
+Complete quest
+350
+Total
+1,000
+Bugs
+If Keira dies to the Wild Hunt's hounds while casting Demetia Crest's Surge spell, the frost effect will continue after she is dead and the spell depleted, even if you manage to close the three portals with Yrden before dying. However, occasionally the frost effect will disapate and Keira will be revived, moving to her place of death and being stuck in an infinite bugged animation. The only known fix is to reload a previous save before her death.
+Notes
+There is an ignitable torch in the room where Geralt and Keira fight to close the three frost portals. This can be lit without regard to the portals spewing the White Frost into the cavern, against common sense.
+For a player just starting out and trying to collect as many oil, potion, decoction, and bomb diagrams as possible early on, this location can spawn around 17 different ones, not counting the diagram found on Nithral's body.
+Due to the length of this mission and the fact it has a few "point of no return" locations, players (particularly low-level) should be sure to stock up on armor and weapon repair kits, bombs, oils, weapon upgrades, health potions etc. before approaching Kiera at the entrance to the cave.
+Videos
+The Witcher 3 Doppelganger Wraith (Hard Mode)The Witcher 3 Golem Boss Fight (Hard Mode)The Witcher 3 Nithral Boss Fight (Hard Mode)
+Gallery

@@ -1,0 +1,62 @@
+Fringilla Vigo
+Sub-Pages:
+Main
+Netflix series
+"Do you really wish to know?" — Spoilers from the books and/or adaptations to follow!
+"This is my story, not yours. You must let me finish telling it." — This article/section is a stub. You can help Witcher Wiki by expanding it.
+Fringilla Vigo was a Nilfgaardian sorceress and a member of the Lodge of Sorceresses along with her fellow countrywoman, Assire var Anahid. She was also the second cousin of Anna Henrietta of Toussaint. She was a woman with natural grace, green eyes and close-cropped black hair. During the First Northern War Fringilla fought for Nilfgaard at the Battle of Sodden Hill where she blinded Yennefer who was fighting on the opposing side.
+When Geralt and his team reached Toussaint, Fringilla embarked on a romantic relationship with Geralt and did everything in her power to keep him from leaving the castle. While the witcher did develop some feelings for her, he never quite was able to put Yennefer out of his mind, even going so far as to use Yennefer's name instead of Fringilla's in the throes of passion.
+Quick Answers
+What role did Fringilla Vigo play in the First Northern War?
+						In the First Northern War, Fringilla Vigo, a Nilfgaardian sorceress, fought for Nilfgaard at the Battle of Sodden Hill. She blinded Yennefer, a sorceress on the opposing side. Fringilla was a member of the Lodge of Sorceresses and the second cousin of Anna Henrietta of Toussaint.
+					
+						Provided by: Fandom
+					
+How is Fringilla Vigo related to Anna Henrietta of Toussaint?
+						Fringilla Vigo, a Nilfgaardian sorceress from the Lodge of Sorceresses, is the second cousin of Anna Henrietta of Toussaint. She fought for Nilfgaard in the Battle of Sodden Hill. Geralt first encountered Fringilla at the ducal palace in Beauclair, the residence of Anna Henrietta.
+					
+						Provided by: Fandom
+					
+What significant event happened between Fringilla Vigo and Yennefer at the Battle of Sodden Hill?
+						At the Battle of Sodden Hill, Fringilla Vigo caused Yennefer's blindness. This marked a turning point in their relationship, as Yennefer was once allied with Vilgefortz, Fringilla's associate. After the battle, Fringilla and the Nilfgaard forces retreated, suggesting a win for the Northern forces. Yet, Fringilla cautioned that this was merely the first of many upcoming battles.
+					
+						Provided by: Fandom
+					
+Who are the members of the Lodge of Sorceresses that Fringilla Vigo is associated with?
+						Fringilla Vigo, a sorceress from Nilfgaard, is a member of the Lodge of Sorceresses. She joined this organization to oppose the commands of rulers. Her fellow Lodge member is Assire var Anahid, also from Nilfgaard. Additionally, she is related to Anna Henrietta of Toussaint, being her second cousin.
+					
+						Provided by: Fandom
+					
+What happens when Geralt and his team reach Toussaint in relation to Fringilla Vigo?
+						In Toussaint, Geralt's team encounters Fringilla Vigo, a sorceress tasked by the Lodge of Sorceresses to detain Geralt until May. However, Geralt discovers Vilgefortz's hideout in January and plans to leave. Before his departure, Fringilla extracts the hideout's location from him, leading the Lodge to dispatch Sabrina, Keira, and mercenaries to infiltrate the hideout.
+					
+						Provided by: Fandom
+					
+{"@context":"https:\/\/schema.org","@type":"FAQPage","name":"Fringilla Vigo","mainEntity":}
+Biography
+In Nilfgaard, Fringilla was approached by Assire var Anahid who offered her the chance to become a member of the Lodge of Sorceresses. While initially surprised by Assire's appearance, since Assire never really put effort into her appearance before, Assire pointed out that Fringilla had always been one to put effort into her own looks, noting that among Nilfgaardian mages Fringilla didn't care about their stereotypes (as Nilfgaard believed mages that focused on their looks were superficial). The two southern sorceresses then discussed events at Nilfgaard's court before preparing to meet the Lodge.
+The two teleported to Montecalvo, where they met the other members of the Lodge. However, when a reluctant Yennefer appeared with Francesca and Ida, Yennefer immediately recognized Fringilla, as the two fought on opposite sides in the Battle of Sodden Hill. Using this to her advantage, Fringilla was able to talk to Yennefer alone during a break in the meeting and, knowing Yennefer was trying to escape to get to Ciri, gave her hints on how to get around Montecalvo's impenetrable barrier.
+The Witcher 3: Wild Hunt
+Imprisoned by Emperor Emhyr var Emreis himself, due to her treasonous connections with the Lodge, Fringilla was sought after by her former associates, along with Geralt, in their bid to defy and defeat the Wild Hunt near Undvik on Skellige Islands.
+Journal entry
+Emperor Emhyr had once presented the mages of Nilfgaard with a simple choice: either serve their country unquestioningly or die in prison.
+Fringilla Vigo, a mistress of magic holding office in the vassal duchy of Toussaint, refused both options and instead joined the infamous Lodge of Sorceresses, whose aim was to stand up to the dictates of kings and emperors. These bold ambitions were never fulfilled, however, and Fringilla Vigo lived in fear that her ties to this subversive organization would be discovered and she would meet a quick end at the hands of the emperor's executioners.
+One must mention here that Geralt first met Fringilla at the ducal palace in Beauclair many years ago, when we were there enjoying the hospitality of my one-time love, Duchess Anna Henrietta. The witcher, always a sucker for sorceresses, conjoined with Madame Vigo during this time in a quite lively relationship that surely was no cause of joy for Triss or Yennefer.
+All indications were that Fringilla had been arrested and remained in a Nilfgaardian prison, undoubtedly awaiting execution for acts of high treason.
+She was later released, however, thanks to a bargain Yennefer had struck with Emhyr.
+Associated quests
+Battle Preparations
+Veni Vidi Vigo
+On Thin Ice
+Bugs
+In The Witcher 3: Wild Hunt, completing High Stakes while having at least heard Sasha's proposal is supposed to unlock an additional conversation with Fringilla Vigo if you talk to her after Veni Vidi Vigo. However, an internal event doesn't register and prevents that from happening. With console commands enabled, you can do this manually with the following: addfact(sq306_completed).
+Gallery
+Fringilla's gwent card artGwent standalone card artWith Anna HenriettaWith Anna HenriettaIn Netflix's The Witcher
+Footnotes
+↑ Fringilla is described as "ghastly pale" when confronted by Yen at Lodge meeting; this is due to Fringilla's embarrassment at her failure in obtaining the location of Vilgefortz's hideout from Geralt.
+References
+↑ The Lady of the Lake
+↑ In Polish version Fringilla Vigo is called Artorius' "bratanica", which means "brother's daughter".
+↑ Blood and Wine expansion
+External links
+ See the GWENT standalone game version card: Fringilla Vigo

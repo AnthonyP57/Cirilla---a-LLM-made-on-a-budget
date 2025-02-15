@@ -1,0 +1,155 @@
+Hearts of Stone quests
+This page is a finding aid which lists all quests in the Hearts of Stone expansion in a sortable table format. To see a quest walkthrough, click on the quest name.
+Note that, either due to a bug or oversight, despite all the expansion's quests happening in Novigrad, the quest logs all show the Velen icon.
+For more information on the various quests in The Witcher 3: Wild Hunt, see the following:
+Main quests
+Secondary quests
+Contracts
+Treasure hunts
+Blood and Wine quests
+ Main quests
+Quest
+Level
+Location
+Evil's Soft First Touches
+32
+Seven Cats Inn, Garin Estate, Oxenfurt sewers
+Dead Man's Party
+33
+Brunwich, von Everec Estate, Upper Mill
+Open Sesame!
+34
+Borsodi Brothers' Auction House
+Open Sesame: Witcher Seasonings
+34
+Oxenfurt
+Open Sesame: Breaking and Entering
+34
+Oxenfurt
+Open Sesame: The Safecracker
+34
+Oxenfurt
+Scenes From a Marriage
+35
+Von Everec Estate, Painted world
+Whatsoever a Man Soweth...
+36
+The Alchemy,
+Temple of Lilvani,
+Puzzle world
+ Secondary quests
+Quest Name
+Unmarked
+Cutoff Point
+Level
+Location(s)
+Enemies
+A Midnight Clear
+No
+Dead Man's Party
+33
+BrunwichMiller's Lake
+n/a
+Avid Collector
+No
+Open Sesame!
+34
+The Borsodi Brothers' Auction HouseMarcus T.K. Hodgson's bookshop
+n/a
+Enchanting: Quality Has Its Price
+No
+n/a
+32
+Upper MillBloodrot Pit
+Arachnomorphs (dependent)
+Enchanting: Start-up Costs
+No
+n/a
+32
+Upper Mill
+n/a
+Races: Swift as the Western Winds
+No
+n/a
+32
+Upper Mill
+n/a
+Rose on a Red Field
+No
+n/a
+33
+Garin EstateBowdon
+GhoulsDrowned dead (optional)Fallen KnightsUlrich
+The Taxman Cometh
+No
+n/a
+32
+Oxenfurt
+n/a
+Without a Trace
+No
+n/a
+32
+Herbalist's HutDeadwight WoodErde
+Peasants (optional)
+ Treasure hunts
+Quest Name
+Unmarked
+Cutoff Point
+Level
+Location(s)
+Enemies
+A Dark Legacy
+No
+Open Sesame!
+n/a
+Arnskrone Castle Ruins
+WraithsAncient leshen (dependent)Wolves (dependent)
+A Surprise Inheritance
+No
+n/a
+38
+Stacheier
+Ghouls (optional)Archgriffin
+From Ofier's Distant Shores
+No
+n/a
+33
+Upper MillKilkerinn RuinsHunter's Cottage
+Fallen Knights
+The Cursed Chapel
+No
+n/a
+36
+Old Chapel north of Upper Mill
+WraithsCursed Mother
+The Drakenborg Redemption
+No
+n/a
+38
+Bloodrot Pit
+Arachnomorphs
+The Royal Air Force
+No
+n/a
+36
+Vikk Watchtower
+EryniaHarpies
+The Secret Life of Count Romilly
+No
+n/a
+38
+Arnskrone Castle Ruins
+Ancient leshenWolvesWraiths (proximity)
+The Sword, Famine and Perfidy
+No
+n/a
+36
+Far east of Crane Cape
+Drowners
+Tinker, Hunter, Soldier, Spy
+No
+n/a
+33
+Mohrin Village
+Fallen Knights

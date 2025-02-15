@@ -1,0 +1,37 @@
+Contract: The Merry Widow
+Contract: The Merry Widow is a contract quest in The Witcher 3: Wild Hunt.
+Contract: Monster in the Cemetery
+People of Lindenvale and thereabouts!
+If you've got any notion of wandering over to the graveyard, rid yourself of it at once, for some evil's taken it over, digging up graves and doing other such damage. Lately it's begun preying on any who enter, and has even kidnapped the miller's lad.
+So if you've an ounce of sense, stay far from it, and if you've the courage and skill, slay the monster for us, and your efforts will surely be rewarded.
+Walkthrough
+You can start this quest by either the notice on Lindenvale's notice board or by finding the hut.
+If you got the contract, talk to the gravedigger who'll note something's digging up bodies and now a young child has disappeared. With that, make your way up to the church, where several rabid dogs will be. Kill them and then investigate the area. Examine the dug up skeletons to note no tools were used then head around to the back of the graveyard where, on the southwest side, another pile is, this time of an overripe cadaver.
+Follow the scent over a broken bridge to a hut and enter. Examine the bowl just inside the hut, then the cauldron, and finally the skeleton heads in the corner. Geralt will then conclude it's a grave hag (10 ) and he'll need to take the skulls to lure her out at night, so pick them up and head back to the graveyard.
+Once you interact with the pedestal inside the church, time will pass until its night and a short cutscene plays with Mourntart appearing. Once she's dead, collect the grave hag trophy, then head back to the gravedigger. If you had talked to him earlier, he'll ask about the child and you can choose whichever option. Regardless, you'll earn 240 and 180 , completing the quest.
+Journal entry
+If Geralt found the hut before taking the contract:
+In an old cottage Geralt came across living arrangements that clearly indicated the occupant was no humanoid. He decided to investigate what manner of being had made the building its home.
+If Geralt talked to the gravedigger first:
+Geralt took a contract the gravedigger of Lindenvale had hung on the village's notice board. It seemed the village cemetery was full of monsters who seized children as their victims.
+Geralt investigated the matter and discovered a grave hag hunted nearby. With the investigation part of his task complete, it was on to the luring-out-and-slicing-to-ribbons phase.
+After ridding the village of the monster, Geralt collected a trophy from its body and went to the gravedigger for the promised bounty.
+Objectives
+Start quest from notice:
+Talk to the gravedigger.
+Go the cemetery.
+Defeat all enemies in the cemetery.
+Explore the cemetery using your Witcher Senses.
+Follow the scent of cadaverine using your Witcher Senses.
+Investigate the lair using your Witcher Senses. (10)
+Take the skulls.
+Put the skulls in the cemetery and wait for the grave hag to come.
+Kill the grave hag.
+Take a trophy.
+If quest is started from the hut:
+Check the Lindenvale notice board.
+Collect your reward from the gravedigger. (240)
+Bugs
+Even if one starts the quest from the hut, the objectives to explore the cemetery and follow the scent still show up as completed even if one didn't visit it beforehand.
+Videos
+The Witcher 3 Grave Hag Mourntart (Hard Mode)

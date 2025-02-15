@@ -1,0 +1,45 @@
+Axii
+Axii is a simple magical sign comprised of a hypnotic effect and is used by witchers. It can calm down people and creatures, manipulate their minds or be used to hex enemies, causing them to fight alongside the caster. The effect wears off over time or can be prematurely broken if they take damage from the caster.
+The Witcher
+In the game, the Axii sign can be used to lessen the number of hostile creatures or humanoids Geralt is fighting, a way of evening the odds. The witcher's skill with the sign is developed through the allocation of talents. Note that while hexed creatures will fight alongside the witcher, their kills will not grant experience.
+Mechanics
+To use the Axii sign, right-click on the desired target
+Endurance is used whenever the sign is cast, if the overall level is too low, Geralt will not be able to cast the sign
+Later on, visiting the Circles of Elements attributed to Axii grants Geralt the Blessing of Water.
+Circles of Elements
+Circles of Elements dedicated to the Axii sign include:
+Gate of Water in the Swamp
+Circle of the Last Drop in the Black Tern Island
+Opponents with immunity
+Archespores
+Drowned dead
+Drowners
+Echinopsae
+Frighteners
+Golems
+Greater brothers (resistance)
+Hellhounds
+Mutant assassins
+Opponents with susceptibility
+Zeugls (presumably)
+The Witcher 2: Assassins of Kings
+Axii is a charm placed on an opponent. If the charm attempt is successful, the enemy will become your ally for a short while, fighting at your side.
+The process of charming an enemy will take several seconds of Geralt channeling the spell (during which he is open to being attacked), however the "target" itself is unable to act during the channeling and given enough time will ultimately submit.
+When Enhanced, the Axii Sign increases damage and vitality of charmed enemies by 20/50%, depending on level. Increased levels possibly also increases the duration that enemies stay charmed - this is yet to be confirmed.
+With the Fatal attraction upgrade, the sign can charm up to three foes at once.
+Trivia
+Axii can be used during dialogs and conversations with NPCs, in order to obtain more information or special benefits. Often it is an alternative to either "Persuasion" or "Intimidation".
+The Witcher 3: Wild Hunt
+ 
+Axii charms an opponent's mind to stun, temporarily eliminating him from combat. However, the stun effect disappears after seven seconds or when the target is harmed. Geralt can choose to upgrade this sign to increase its effectiveness.
+This is the only sign that can be used on a mount to calm its fear level. Axii can also be used during conversations with NPCs in order to obtain more information or special benefits. Note that, where more than two targets are talking with Geralt, at least one will not be affected by Axii and the others may become alarmed by the spell's effects on their fellows. This usually forces combat or some other violent consequence. Higher levels of the sign will not affect this.
+Trivia
+In The Witcher 3, the three hand signs Geralt uses to cast Axii in dialogue are actually the letters "A", "X", and "I" in American Sign Language.
+Notes
+In the translation by Danusia Stok, Axii Sign is called Axia. In the Polish novels, the Sign is known as Aksji.
+The icon for Axii Sign is based on the alchemical symbol for water.
+Gallery
+Axii's casting gesture.In A Grain of Truth
+References
+↑ The Last Wish
+↑ CD PROJEKT RED's The Witcher franchise

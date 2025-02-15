@@ -1,0 +1,45 @@
+Paperchase
+Paperchase is a secondary quest in the Blood and Wine expansion.
+Walkthrough
+To start the quest, you should find a vineyard owner near Trentin's workshop (to the west of Lazare Lafargue's workshop) who calls out to Geralt. Talk to him to learn he meant to repay you from years ago but you left before he could, so he opened an account in Geralt's name at the Cianfanelli Bank for the day the witcher would re-appear. So, head over to the bank to collect your money, with interest.
+If it's too late in the day (or too early) the bank is closed. The earliest it opens is at 8am, so you'll have to wait until then or, if in the middle of the day, head straight in. Talk to the teller but after a moment she'll inform you there's an error that states you're dead and to fix it you'll need to get a particular form, Permit A38. So, head over to Window 1, which is behind the door near the main bank doors and ask for the permit. Answer however you wish and she'll direct you to two possible locations: the records or archives. The correct one is records, which is upstairs, though you can go check out the archives (who'll be insulted if you try to bribe him). As you may notice, there's a line outside the records room, but nobody is going in so just cut in front, much to the others' displeasure.
+Talk with the man, but he asks if you have Form 202 to get permit A38. Choose whichever response suits you, before going back to Window 1. However, right outside the room, the man you cut in front of confronts you. No matter the answer, you'll be told to take the fight outside. Fistfight him (100 if you win), then head back into the bank to talk to the woman at Window 1 except, she's not there. Examine it to pick up a scent that trails off to where the main tellers are. Approach the middle window and try to talk only to be told to go away and wait. So, go sit down beside the bank customer on the bench, who'll talk to you for a bit and offer to play some gwent, which you can choose to partake in or not (50 if you play and win). Either way, he gives you a pretty simple tip: be nice and, if you really want to make her day, give her flowers or perfume. However, all the options give 50 and move you forward to accessing your account (200).
+Talk to her again and, after your choice, she'll bring out Giacomo Cianfanelli, who tries to get out of showing you to your deposit until Geralt shows him Anna Henrietta's summons. He'll then lead you down to where all the safe deposits are and instructs you which one yours is. However, on opening it you realize the problem and Giacomo locks the door before you can get to him with the guards in the way. You can either give him a week or try to get your money back now.
+If you try to take back your coin now, you must fight the guards and once knocked out, loot the massive key off them to open the vault and confront Giacomo upstairs, who hands over 200 . However, you're no longer allowed to convert coins at the bank. The outcome is the same as well if you get knocked out, though an extra scene is shown with the witcher being thrown out of the bank.
+If you decide to wait a week, come back after the time is up and he'll give you 500 along with a sword, The Reckoner.
+Journal entry
+One day, an old acquaintance ran into Geralt and pulled him aside for a chat. He was a vineyard owner for whom Geralt had completed a contract some time ago. The man had been bereft of adequate coin at the time, but, determined to compensate Geralt fairly one day, he had set up a savings account in the witcher's name at the local bank. Now that years' worth of interest had accrued and Geralt had returned to the duchy, he needed only go to the bank and collect his due.
+If you decided to wait a week:
+After a long bout of trench warfare against the bank's bureaucracy, Geralt finally reached the bank's owner, Giacomo Cianfanelli. Unfortunately, Giacomo was suffering a small liquidity crisis in regards to Geralt's funds. Geralt decided to take a risk and wait a week, but only oncondition that he would not have to procure any additional documents.
+Cianfanelli kept his word and not only gave the witcher his coin, but threw in a present as a bonus -- an old family heirloom. It seems the banker meant what his employees were forced to repeat ad nauseam: with him, the customer is always right and he looks after others' coin as if it were his own.
+If you decided to get your coin right away and beat the guards:
+The witcher's visit to Cianfanelli Bank ended in a very witcher-like fashion. Geralt pummeled the guards who tried to restrain him, fought his way to the owner and in clear, concise terms made it clear he would not tolerate any more delays. He collected as much coin as he could and ended up with the dubious honor of finding himself on the list of clients no longer welcome in the bank.
+If you decided to get your coin right away and were beaten:
+In the end, Geralt let his temper boil over and spew forth on Giacomo Cianfanelli, the bank's owner. With fury evident on his knitted brow and waving fists, Geralt went to work on the bank's guards and thus became a persona very much non grata in that establishment.
+Objectives
+Go to the Cianfanelli Bank.
+Talk to the bank clerk about your account.
+Obtain an A38 Permit from Window 1.
+Ask in the archives about an A38 Permit.
+Ask in records about an A38 Permit.
+Defeat angry bank customer. (100 )
+Return to Window 1 to get Form 202.
+Using your Witcher Senses, find the clerk from Window 1.
+Sit and wait until the break ends.
+Return to Window 1 to get Form 202. (50 + 200)
+Convince Cianfanelli to pay you your coin.
+Follow Cianfanelli into the vault.
+Give them a week:
+Wait a week and talk to Cianfanelli.
+Talk to Cianfanelli about your coin. (500 + The Reckoner)
+Threaten them:
+Defeat the guards.
+Get out of the vault.
+Talk to Cianfanelli. (200 )
+Trivia
+This quest refers to an animated film The Twelve Tasks of Asterix, where the 8th task was to find Permit A38 in "The Place That Sends You Mad".
+It heavily references the bank puzzle in Douglas Adams' Infocom text adventure 'Bureaucracy', which Geralt references mid-quest.
+In the Polish (Original) version the quest is called "Klient ma zawsze rację" which is the Polish version of the famous motto "The customer is always right"
+The teller at the second window can be heard snoring and saying "Catch-22" between snores, in a fourth-wall breaking joke, likely referencing Joseph Heller's book Catch-22, where the main character is left with no choices.
+Notes
+Despite if you enter the bank just as it opens or shortly before it closes, the tellers will always be on a break.

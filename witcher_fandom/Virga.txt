@@ -1,0 +1,7 @@
+Virga
+The formula for this potion must be acquired before it can be brewed.
+Journal entry
+Virga is favored by witchers who assign greater importance to safety than to mounting bold attacks. The brew increases the witcher's resistances, rendering him less vulnerable to the special attacks of monsters, including Poisoning, Incineration and Bleeding. Virga is stronger than Golden Oriole, but it has some side effects.
+When focusing on defense, the witcher is limited in his ability to execute subtle attacks. The witcher thus cannot employ tactics to which he himself has become more resistant, be it Poisoning, Incineration or oils that increase Bleeding. The Wolf potion can be used to limit this unwanted side effect.
+Potion moderately increases Toxicity when consumed.
+The potion is recommended before fights against monsters that employ powerful special attacks. It is effective against creatures which cause Bleeding, are venomous or breath fire.

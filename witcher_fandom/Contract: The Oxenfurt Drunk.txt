@@ -1,0 +1,44 @@
+Contract: The Oxenfurt Drunk
+Contract: The Oxenfurt Drunk is a contract quest in The Witcher 3: Wild Hunt.
+Contract: Monster in Oxenfurt
+By orders of our most magnanimous rule, King Radovid V, any itinerant monster slayer reading this notice is obliged to abandon any currently-unresolved contracts immediately and devote himself to tracking and slaying this monster. The beast in question has befouled the cradle of human intellect, the city within whose territory lies the oldest of academies of learning, namely: Oxenfurt. The swordsman who puts an end to its criminal doings will be rewarded with the King's full generosity.
+-Commander of the Oxenfurt City Regiment
+Walkthrough
+To start the quest, pick up the contract from Oxenfurt's notice board and read it, which will then point you to a guardsman, Nikolas Friedman, standing around the docks to the west. He keeps things to the point and once you've exhausted all parts of the conversation, will point you to two people: a medic and a witness.
+It doesn't matter who you talk to first, but you will need to talk to both and examine the other areas they give.
+The witness is busy trying to get drunk and you'll need to either pay 30 (gives 3 ) for her drink or use Axii (requires Delusion level 2 for a minimum of 35 ). However, she doesn't have much to say other than she'd been drinking and has a gut feeling it wasn't human, whatever attacked her. While mostly unhelpful, she is able to give you another area to look for clues: the nearby alley. Going here, you'll find an object just inside the archway.
+The medic is in the southwest part of Oxenfurt, and apparently doesn't think much of the victims, having been vagrants stinking of alcohol, but thankfully hasn't burned the bodies yet. He'll eventually give you the key so you can check the bodies out yourself. You just need to examine the two inside to learn it's a vampire.
+Once both are talked to and the alley and bodies examined, Geralt will conclude it's a katakan, Gael, who has a penchant for blood mixed with alcohol, earning 25 .
+With this, head to The Alchemy and talk to Stjepan. Select "need a drink" and pay him 50 , earning 5 .
+Note: If you have enough toxicity from decoctions or potions to go over your overdose threshold before paying to get drunk in the tavern, the quest will automatically fail immediately after being brought outside. This can be avoided by using Heightened Tolerance to increase the threshold, or by using White Honey or meditating to clear Toxicity prior to speaking with Stjepan.
+Note: Even if you have more than enough alcohol in your inventory, there's no way to use it to get yourself drunk; you'll have to pay the innkeep to do so.
+Time will skip to night with a now drunk Geralt who'll start singing rather amusing verses. Note: you won't be able to move any faster during this part of the quest nor save and this part is proximity sensitive: if you wander too far from the objective area, then the quest will fail. While the initial area is to walk around, it'll require you to walk south along the road just west of the inn, so head in that direction as Geralt sings and townspeople comment on this. Eventually your path will take you back up north and this time Gael has noticed you before coming out to fight. However, after getting his health down a fourth, he'll run off.
+Continue northwards where, with your Witcher Senses, you can pinpoint him as he moves, eventually hiding in the hut to the north of Oxenfurt. Head around to find a ladder up to the attic to get in, then drop down to finish him off. Once he's dead, loot his body for a number of items, notably the katakan trophy, Deargdeith sword, a key (to get out), and the katakan mutagen.
+Head back to Nikolas who'll be glad you killed off the monster and will give you 300 and 204 , completing the quest.
+Journal entry
+Oxenfurt the academy may be my alma mater, but Oxenfurt the town - that is where I received my true education. The experiences I had in its inns and alleyways often left me a trembling wreck, overwhelmed by the majesty of the world opening up before me. Sadly, during the Third Nilfgaardian War the town became a shadow of its former self, and the few who remained in its inns and alleyways risked not enlightenment but death at the hands of a mysterious murderer. Geralt, bless his heart, decided to investigate the matter, suspecting that the responsible party might be a monster...
+Geralt had dealt with a great variety of beasts over the course of his career as a witcher, but an alcoholic vampire...? That was a first (well, except for maybe that one - but that was long ago). This katakan (as witchers call this manner of beast) had taken a liking to the blood of drunk men. Once Geralt figured this out, he knew exactly how to lure it out of hiding.
+Objectives
+Talk to the Redanian officer.
+Talk to the witness.
+Examine the site where the monster was seen using your Witcher Senses.
+Talk to the medic.
+Look over the victim's bodies using your Witcher Senses.
+Talk to the innkeep and get drunk in order to bait the katakan.
+Walk around near the tavern in order to provoke the katakan.
+Kill the katakan.
+Track down the katakan using your Witcher Senses.
+Get inside the katakan's hideout.
+Kill the katakan.
+Take a trophy.
+Collect your reward from the Redanian officer. (300)
+Notes
+Prior to Patch 4.0, this was one of only two quests (the other one being In the Heart of the Woods) in the game that couldn't be completed without a single failed objective. No matter what, the first "Kill the katakan" objective would always be marked as failed as Gael is scripted to run off, and there would be a second objective to kill him.
+This is one of few contracts in the game that requires paying with your own money to progress. However, it is possible though rare to haggle 350 , thus if you use Axii on the witness you will still earn 300 overall.
+The song that Geralt sings on the street is evidently called "The Three Maids of Vicovaro". Zoltan Chivay mentions the title in front of Caesar Bilzen's house during A Dangerous Game.
+It appears that once Gael is followed to his hideout hut, he will stay there indefinitely and that part of the quest is no longer proximity sensitive (tested by meditating over 15 days in White Orchard). Thus, if one can survive the first encounter, this should allow completion of the Rough Neighborhood quest near its intended level 10 without having to kill Gael first.
+If the Hearts of Stone expansion is installed, the side quest The Taxman Cometh may trigger while Geralt is chasing Gael and needs to be completed before resuming the contract. However, this will not negatively affect the chase in any way.
+Bugs
+During the "Walk around near the tavern in order to provoke the katakan" part of the quest, it's possible that Geal can only be heard but doesn't show up. If this happens you have to get your health low. You can do this by drowning in the nearby water body. After you get your health low enough, the cutscene will play and you can continue as normal.
+Videos
+The Oxenfurt Drunk - The Witcher 3 DEATH MARCH! Part 94 - Let's Play HardThe Witcher 3 Gael the Katakan Vampire (Hard Mode)

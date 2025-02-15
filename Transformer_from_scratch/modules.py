@@ -16,13 +16,13 @@ def beam_search_decode(model, enc_in, enc_mask, tokenizer, seq_len, beam_size=3,
 
     while True:
 
-        if any([cand.size(1) == seq_len for cand, _ in candidates]):
+        if any([cand.size(1) == seq_len for cand, _ in candidates]) or all([cand[0][-1].item() == eos_token for cand, _ in candidates]):
             break
         new_candidates = []
 
         for candidate, score in candidates:
 
-            if candidate[0][-1].item() == eos_token:
+            if candidate[0][-1].item() == eos_token or candidate.size(1) == seq_len:
                 continue
 
             out = model.decode(candidate, encoder_output,
@@ -34,9 +34,10 @@ def beam_search_decode(model, enc_in, enc_mask, tokenizer, seq_len, beam_size=3,
             if temperature != 1:
                 out = out / temperature
             
-            out = torch.log_softmax(out, dim=-1)*100 #log for stability, *100 for it not to be too small
+            out = torch.log_softmax(out, dim=-1) #log for stability, *100 for it not to be too small
 
             topk_prob, topk_idx = torch.topk(out, beam_size, dim=1)
+            topk_prob = torch.clamp(torch.exp(topk_prob), min=-10)
 
             for i in range(beam_size):
                 token = topk_idx[0][i].unsqueeze(0).unsqueeze(0)
@@ -44,8 +45,9 @@ def beam_search_decode(model, enc_in, enc_mask, tokenizer, seq_len, beam_size=3,
                 new_candidate = torch.cat([candidate, token], dim=1)
                 new_candidates.append((new_candidate, score + token_prob))
 
-        candidates = sorted(new_candidates, key=lambda x: x[1], reverse=True)
-        candidates = candidates[:beam_size]
+        new_candidates = sorted(new_candidates, key=lambda x: x[1], reverse=True)
+        if  not len(new_candidates) == 0:
+            candidates = new_candidates[:beam_size]
 
         if all([cand[0][-1].item() == sos_token for cand, _ in candidates]):
             break

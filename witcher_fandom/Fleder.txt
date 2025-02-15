@@ -1,0 +1,55 @@
+Fleder
+Fleders are lesser vampires, but this description can be deceiving, for lesser does not mean weak and stupid. True, they are primitive and bear a closer relation to animals than to humans; but when they drop on their prey from above, they can be just as dangerous as their noble cousins, even to a witcher.
+They are known by other names as well: kites and fliers to name only two.
+The Witcher
+
+Journal Bestiary entry
+Common people believe that fleders are dead heathens who turned into vampires and rose from their graves. Being vampires, they attack sleeping people and drink their blood. According to peasants, a man bitten by a fleder becomes a fleder himself. This is nonsense, obviously.
+Location
+Slums, next to the campfire
+Little Mahakam, west of the blacksmith
+Crypts, in general
+South in the garden of St. Lebioda's Hospital
+Vizima cemetery
+Warehouse adjacent to the town hall
+Old manor catacombs
+Trade Quarter Vizima sewers
+Source
+Vampires: Facts and Myths
+In Chapter II, Shani will give Geralt this bestiary entry if he asks her for a monster anatomy lesson after delivering five Celandine during the Old Friend of Mine quest. Depending on the circumstances, Shani will either give this entry, Bloedzuiger or a drowned dead entry, but these seem to be mutually exclusive.
+Side Effects premium module: The Book of Fleders
+Associated quests
+Medic in Distress
+The Fleder Contract
+Notes
+In the Prologue, Lambert claims the Strong Style is best to use against fleders, but the conversation does not result in a bestiary entry.
+In Chapter I, an "Old townswoman" will talk to Geralt about Fleders in exchange for food, but the conversation does not result in any bestiary entry.
+In Chapter II, you can ask Shani for an anatomy lesson as a reward for giving her the five celandine she needs. This results in either: entries for fleders or drowned dead and their alchemies. In order to get the entry for free you must get it from Shani.
+In Chapter III, Geralt can speak with a neutral (blue) "Armored Guardsman" in the Trade Quarter who describes and warns him about Fleders. However, the conversation does not result in a Fleder bestiary entry. At other times, Armored Guardsmen will tell him of kikimore warriors and kikimore workers; both conversations do give bestiary entries for those insectoids.
+Geralt can loot Fleder fangs from Fleder remains without having the Fleder bestiary entry.
+Blood and Wine expansion
+The bestiary entry can be obtained by reading Van Grott's Amazing Anti-Fleder Strategem.
+Bestiary entry
+The deceased's corpse was completely mutilated. All that remained of the nose was a hole clotted with blood. One eye socket had been torn off. Seeing this, Sergeant Dovate vomited profusely and the administration of smelling salts was required. The investigation has been discontinued and the deed attributed to a supernatural being.– fragment of a Toussaint Ducal Guard report
+Fleders are classified as lesser vampires. Though weaker than the rest of their ilk in every aspect from the physiomagic to they physiognomic, they should not be underestimated – for they are very, very dangerous. Fleders cannot be mistaken for any other creature, with their wide, toothy jaws, flat, unpleasant faces and completely hairless, often warty bodies. These vampires mainly fight with their teeth and claws, flailing them blindly and not stopping even when their victim is already dead. Even a solitary fleder is strong enough to take down a trained soldier.
+Compared to other vampires, fleders display meager intelligence, seen most clearly in the mindless rage which causes them to try with all their might to attack and tear to shreds any weaker being.
+When fighting fleders, it is best to take advantage of their particular method of movement. These creatures do not run, but they do try to catch their prey and knock it over by leaping. Knowing this behavior, one can plan the fight appropriately and not let oneself be caught by surprise.
+They are vulnerable to vampire oil as well as Black Blood.
+Combat tactics
+As said in entry from bestiary above, when Fleder attacks you, use a combination of dodges, Igni Sign and quick attacks on it and it will not be much of a problem. All you need to keep in mind is that it can leap.
+Fleders as ekimmaras are especially dangerous foes due to their ability to regenerate. They can even outlast a witcher using the finest potions. Black Blood potions are an effective way to weaken any lower vampire, fleder included.
+Associated quests
+La Cage au Fou
+Scavenger Hunt: Grandmaster Griffin Gear (proximity)
+The Night of Long Fangs
+See also
+Vampire: Fleder (gwent card)
+Monsterbook
+Developer CD PROJEKT RED's characterization of the fleder taken from the monsterbook, which was enclosed with the Collectors Edition of the computer game "The Witcher"​​ for Poland, Hungary and the Czech Republic:
+The fleder is a lesser vampire. Its appetite for blood is the only thing it shares with the noble princes of the night. A creature with animal instincts, deprived of any human, it seemed inappropriate to make him a stereotypical vampire with flat, black hair and dressed in a long black coat. These obvious attributes eliminated, we had to devise features less typical of a bloodsucker. Its head – triangular, with a flat face and horn-like protrusions – renders it similar to a vampire. The concept art and model depicted certain bat-like features, including the monster's face and ears (which became horns). With its glowing red eyes the fleder also resembles a demon, while fans of Coppola's movie may note a similarity with the aged Dracula.
+The fleder is not a good flier, the membranes under its arms allowing only short jumps and attacks from above. Though not particularly smart, it knows that it gains an advantage and increases its chance of victory by suddenly attacking unsuspecting victims. Since the fleder's arms are also wings, its hands have thin extensions that enable it to pin down its prey. The long, prehensile toes on the beast's feet allow it to hang head down from the ceiling as shown in the rendered image.
+Trivia
+In Slavic folklore, the katawiec ("kites") are black winged creatures that originated from the souls of aborted childs, and are often associated with whirlwinds and storms.
+The name likely derives from german "Fledermaus" meaning bat.
+Gallery
+Model in The Witcher 1Fleder concept artFleder (cutout)Fleders can soar into the air and attack from aboveA concept drawing presenting all the vital features of the fleder's anatomyGwent card artGwent standalone card art

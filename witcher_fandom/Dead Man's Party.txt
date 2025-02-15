@@ -1,0 +1,96 @@
+Dead Man's Party
+Dead Man's Party is a main quest in the Hearts of Stone expansion.
+As part of Olgierd von Everec's three difficult tasks, he asks Geralt to show his brother, Vlodimir, the time of his life. The problem is, Vlodimir has been dead for quite some time.
+Walkthrough
+Meet Shani at her clinic, who will be talking to some Redanian soldiers about an antidote she's making. They will remark on how much she "likes" Geralt while she leaves for a moment to prepare the antidote. Once they leave, ask her for help to find Olgierd's brother. As it turns out, Shani has studied Famous Redanian Dynasties and even wants to join Geralt for a trip to the Von Everec family crypt, where she'll be waiting with a censer. (150)
+When you reach the crypt, Shani will be there making a wreath for a wedding party, and will ask Geralt to come with her. You will be going regardless, but can say whatever you want. Once you reach the entrance, it's a bit creepy for Shani, so she stays out and Geralt will continue alone.
+Waking the dead
+Inside the big room in the crypt, Geralt will be attacked by wraiths. There will be only four and no more than two at a time, but you will face more specters later, so taking a Reliever's decoction right now is a good idea. Once you get rid of them, you can explore a bit if you want and you'll likely notice a breakable wall, but it's better to leave that for later.
+Important: once you begin the ritual, you will be locked into the quest until it is completed and be forced to return if you wander too far from the relevant area/paths.
+Use your Witcher Senses to inspect the coffins until you find Vlodimir's grave (it's the one with a sabre in front). When you do, you will have to use the censer that Shani gave you at all marked locations, and then light the central votive. Once done, ghosts of the entire von Everec family will awaken and attack you. After all of them are "dead," Vlodimir von Everec will appear and be amused by the spectacle. After explaining Olgierd's wish to him, he will possess Geralt, causing the witcher to lose consciousness. Now Geralt, or rather Vlodimir, will be woken up by Shani and immediately starts flirting with her. Once everything is explained, Shani offers a great way for Vlodimir to have his fun - the wedding to which she invited Geralt earlier. She then leaves to prepare for the wedding and you are left with Vlodimir. (100)
+Now, if you go through that breakable wall mentioned earlier, Vlodimir will have comments about the things you find inside. First you'll see a graverobber's corpse, which you can loot for a crypt key - it opens a locked door right next to the main entrance, where this tunnel will lead you to. There is some loot here, but you'll probably also notice spiderwebs and eventually a few arachnomorphs will attack, so be on your guard. While still at the crypt, Vlodimir will scold Geralt if you try to loot things outside of this tunnel. All of this is optional though and you can return for it later if you wish.
+Let's Party
+Note: For the duration of the wedding, the inventory will be disabled and you'll be equipped with master-quality Ornate robe, Ornate boots and the basic game starting equipment Hunting trousers. For a potential fight later, it's best to apply beast oil to your steel sword before starting the wedding, although it's not necessary.
+You're now to meet Shani at Brunwich for the wedding, and you can't fast travel there, so call Roach when you're outside of the big gate. When you reach your destination, Vlodimir will refuse to attend a wedding dressed like Geralt currently is, and regardless of your choice will "borrow" some clothes hanging nearby. He also somehow manages to get a haircut and shave too.
+Note: This will happen even if you came prepared and brought proper clothing and went to a barber, so don't bother trying to avoid it. You can go visit a barber after this quest to change things back (though the long beard will have to be grown out again).
+A bit of talk with Shani follows and the wedding begins. (100) She will first lead you to meet the newlyweds, Aldona and Johnnus. Talk to them, and don't worry if Vlodimir offends the groom, as he does this throughout the entire quest and nothing changes. Afterwards, you'll have to take part in the activities around.
+Some of the activities are mandatory while others are optional, but whenever you do something that is mandatory time will progress. When you complete two of the mandatory ones, Vlodimir will take Shani dancing during which Gaunter O'Dimm will appear and dedicate the next song to them. After the dedication, Geralt will talk a few things over with Vlodimir and propose to see why Gaunter is here, adding a new objective. When you decide to talk to him, Gaunter will introduce himself to Shani and have some "nice" words for Vlodimir after which he will excuse himself. (150)
+Note: If you participate in all activities you will earn the Let the Good Times Roll! achievement. To make it easy, just leave a mandatory activity, like fishing out Shani's shoe, for last and take part in everything else before doing it.
+Once you do all 4 mandatory quests the clock will hit midnight and "Cinderella will have to run."
+The Pig Whisperer
+Talk to the peasants near the pig pen and they will explain the challenge - you have to guide two pigs into the pen. This isn't made very clear, but only the black pigs with yellow paint on their backs work. You have to herd them like you would do with sheep (e.g. like Mia during Contract: Dragon) and don't use Axii, otherwise the peasants will consider this cheating and you won't get the prize. There's no time limit, so just be patient.
+If you do it correctly, you will receive 200 and the King of Swineherd's crown trophy. It sounds like a mere joke, but it actually gives the highest extra gold bonus in the game, so it's a great prize. Shani will also receive a stuffed pig doll, which you will later see again at her place. If you cheated and used Axii, you'll only get 50. This is also the only mandatory activity that you can refuse to do, kind of - jumping out over the fence will give you the option to give up on it and receive no at all, or return to try again.
+Regardless of what you did here, Shani will then challenge Vlodimir to woo a nearby maiden. Choices don't matter here and just as the girl about to agree to head for the barn with you, her three brothers appear and you'll have to fight them. No matter the outcome, the girl leaves upset by what happens, while Shani mocks your flirting skills. However, winning the fight awards 200, while losing it gives 50.
+What's a Celebration without Gwent?
+Talk to the Halflings sitting at a table who are playing Gwent to join in. They use a fairly strong Northern Realms Gwent deck with the Foltest: The Steel-Forged leader, a number of spies, weather cards, and a Scorch.
+If you win, you gain 200. However, if you lose you will have to give them 5% of your total coin and wear the Ass ears for the rest of the party, which you get to keep afterwards. Notably, the latter happens because Vlodimir bet "all in", but then the halflings take pity on him as he uses his own name and they think he's too drunk to have made a sober decision.
+The Fire Swallower
+Speak to the two people in the middle of the area who are talking about the dog who chased the Fire Swallower away. After agreeing to find them, Geralt will give Vlodimir hints where to start, so off you go.
+Fortunately, Geralt's witcher senses work the same as always. You can examine the dog house and nearby items if you wish, but only the tracks are important. Shani will leave you to it once you leave to follow them. Along the way you may find a broken tree branch and the Fire swallower's cap. Then further away after the small river you'll find the fire swallower up on a tree, with Demon barking at him. You can use Axii on the dog (25) or chase it away, but note that it won't return home unless you use Axii. The fire swallower will come down then, falling because he's drunk.
+You can return his hat if you found it, but eventually you'll also have the option to ask him how he does his trick. If you do that, he will then refuse to come back and you'll need to pay him 50 (5), use Axii (requires Delusion level 1 for a minimum of 25), or just let him leave.
+If you convinced him to stay, you will have to escort him back to the wedding and boar attacks when you cross the river. You have to protect the fire swallower, so you'll have your weapons and previously equipped potions and bombs available. The boar prioritizes Geralt like any other enemy, so having the fire swallower die is actually hard to do, but if that happens the rest will proceed as if he just left. With the boar dead, you automatically return to the wedding and everybody enjoys the fire swallower's show. (200) If he left instead, you will have to return to the bride's parents with the bad news (50), but you'll have the option to help as an entertainer yourself and juggle some apples from a nearby table for 150.
+Aldona's parents don't seem to care much about Demon though. They're either concerned by him being too calm if you used Axii, or almost relieved that they don't have to deal with him anymore if he was chased away and didn't return.
+Shoe Fishing
+ 
+Talk to the people near the pond and they will explain the rules - Shani will throw in her shoe and you have to find it. Pretty easy, but there are two more lost shoes in the pond and somewhat counterintuitively, you have to get only Shani's shoe for the maximum reward of 200, otherwise you only get 50. Her shoe is located to the left in a corner on a ledge. Pick it up and bring it to her.
+If you try to walk around the wedding naked, Shani will call out and force you to return and fish out her shoe.
+Optional activities
+Talk to some "girls" on two different occasions, where they both turn out to be elderly women
+Have drinks at two of the tables
+Talk to Shani inside the barn, up on the second floor through a ladder outside the small door, where you'll find a pillow to sit on (as well as the Cow gwent card if you haven't been here before and picked it up already)
+Dance in front of the stage inside the barn (you only have to get there)
+Party is Over
+After you've completed the 4 main activities and have talked to Master Mirror, go near the musicians' stage where Vlodimir will want to make a speech. Shani will try to stop him, but if you don't mind looking like an ass, you can go for it without other repercussions. After this, a long cutscene starts where the garland falls on Shani's head during the traditional capping, and Vlodimir writes a letter in blood to his brother.
+However, he also decides to break his promise and stay longer to pursue Shani. Fortunately, Gaunter O'Dimm reappears to banish him, albeit in a quite ominous way that even Shani feels. Geralt's mission is over and he says he should leave, but Shani walks away saddened and Gaunter gives you some advice about women before he leaves. (200)
+Note: This starts the secondary quest A Midnight Clear, which has to be completed now or it will fail when you leave the wedding.
+All you have to do afterwards is pay a visit to Olgierd at The Alchemy inn in Oxenfurt and give him the letter from Vlodimir for 150, completing the quest.
+Journal entry
+As Master Mirror forewarned, Olgierd von Everec asked Geralt to perform several tasks for him. One of these was to show his brother, Vlodimir, the time of his life. As I know from many pleasant personal experiences, the witcher, grim as he may sometimes seem, is more than capable of arranging a fantastic night out. Yet in this case, there was one particularly tricky catch: Vlodimir was dead. As a first step to overcoming this obstacle, Geralt decided to go see Shani, who, as a Redanian subject, an Oxenfurt resident, and a woman of great learning, might just have some information about where Vlodimir is buried.
+Shani had been a diligent student – she not only had heard of the von Everec family, but also happened to be in the possession of a tome indicating the location of their family crypt. She and Geralt decided to journey there together. Shani was to bring a censer with her, which Geralt intended to use to perform the ancient ritual of Blood Summoning to bring forth the ghost of Olgierd's dead brother.
+Thanks to the Blood Summoning (which, as is the norm during witcher adventures, did not go off without certain complications), Geralt was able to summon the ghost of Vlodimir von Everec. Vlodimir, delighted at the prospect of enjoying a "cracking good time," stated that to do so, he would need a body...and then promptly possessed the witcher's, despite the latter's heated resistance. From that moment till Vlodimir had had his fun, Vlod's ghost accompanied Geralt everywhere the witcher went. And it so happened on that day, he was going to a wedding, where he was to meet Shani. Vlodimir was thrilled at this, for he had taken quite the liking to the young medic, but, learning that she meant something special to Geralt, he promised to keep his hands off her. Yet something about his manner left room to doubt he'd keep this promise...
+Once Geralt and Vlodimir arrived at the wedding, the ghost jumped into Geralt's body and threw himself headlong into a whirlwind of merriment, mirth, and amusement.
+Hearing Geralt recount that night's festivities, I realized it was a great shame I had not been able to attend. Not only would I have graced the guests with a performance worthy of the occasion, but also I would have witnessed its wonders first-hand, the better to now convey them to you dear reader... Yet I consider my chance to craft an epic nuptial ballad merely delayed, not missed, for Shani caught the garland during the capping, meaning I will surely be a guest of honor at her wedding in the near future. Vlodimir, I hear, enjoyed himself tremendously, though he was forced off the stage and into the netherworld in a rather unpleasant manner by Master Mirror at the end. Before that happened, he wrote a letter to his brother in his own (that is to say, Geralt's) blood, thus providing proof that the witcher had fulfilled Olgierd's wish.
+As the witcher had suspected, Olgierd would not simply take Geralt's word for it that Vlodimir had not only risen from the dead (temporarily, at least), but had also had a splendid time. Yet the letter Vlod wrote in blood effectively resolved all Olgierd's doubts. The task was deemed completed.
+Objectives
+Talk to Shani about the von Everec family crypt. (150)
+Meet Shani in front of the von Everec family crypt.
+Enter the von Everec family crypt.
+Defeat the wraiths as they appear.
+Use your Witcher Senses to explore the von Everec family crypt.
+Spread the incense in every room of the crypt.
+Light the main votive to continue the ritual.
+Defeat the wraiths of dead von Everecs. (100)
+Meet Shani by the farm where the wedding will be held. (100)
+Follow Shani and meet the newlyweds.
+Talk to the newlyweds.
+Take part in the wedding activities until midnight.
+Drive the pigs into the pen. 0/2
+Defeat your opponents.
+Fish Shani's shoe out of the lake and give it to her.
+Give Shani the shoe you fished out of the lake for her.
+Use your Witcher Senses to find the fire swallower.
+If convinced the fire swallower to stay:
+Escort the fire swallower back to the wedding.
+Protect the fire swallower from the "bear". (200)
+If the fire swallower left or died:
+Inform the bride's mother about the fire swallower's fate. (50)
+If volunteered to help:
+Juggle to amuse the wedding guests. (150)
+Talk to Master Mirror at the wedding. (150)
+Go to the barn for the capping ceremony. (200)
+Inform Olgierd the task has been completed. (150)
+Bugs
+Nearly all the von Everec ghosts are incorrectly labeled during the fight, except for Alexy. This is most obvious during the cutscene: the one addressed as Honoratina (the grandmother) is then labeled as Eulalia in the fight, and the one addressed as Kestatis (the grandfather) is mislabeled as Ernest.
+During all slow walking and idle moments while playing as Vlodimir at the party, Geralt will use a unique walking stance, with his hands on his hips. If you save the game during the party and create a New Game + save over the current save, Geralt will use this walking animation throughout the game as his permanent stance.
+Prior to Patch 4.0, when Vlodimir removes Geralt's facial hair, this may disable dynamic beard growth even though the end result is a clean shaven face. You can re-enable it by visiting a barber and selecting the "Shaved head and a ponytail" option.
+Even though Vlodimir writes a letter that Geralt later gives to Olgierd, it often doesn't appear in the inventory. However, using console commands, the letter can be added and read.
+Notes
+Just inside the crypt, left of the entrance you can find one of the two copies of Ofieri kilij, a formidable steel sword.
+The book Famous Redanian Dynasties, which Shani first shows during the cutscene, can be looted afterwards from one of her bookshelves. Her Wedding invitation can also be found nearby on the bedstand. Around the wedding site itself, you can also find a Song list for the musicians, List of wedding guests and List of wedding expenses. Additionaly, but likely much earlier than that, the Need a Beau to Accompany Me to a Friend's Wedding notice, which Geralt can mention when Shani invites him to the wedding, is found on the notice board at Seven Cats Inn. All of these can be found at any time in the game, not just during the quest.
+If arrived too early for the wedding, there's an additional short cutscene for while you wait for Shani.
+After the quest completes (not just the wedding), you can find flowers at Vlodimir's grave in the crypt and Geralt will wonder if Shani misses the ghost.
+If Aldona is interacted with after the initial talk, but before the capping, she may warn you to stay away from her mother's gingerbread, because it didn't turn out well. This ties together with Gaunter O'Dimm talking about gingerbread with the mother when you approach him.
+Trivia
+When rescuing the fire swallower, Vlodimir as Geralt can comment on his inability to differentiate between a boar and a bear. The fire swallower then replies he's not a naturalist which is ironic since his name is David Artensborrow (a reference to real-life naturalist David Attenborough who frequently appears on nature documentaries and has at least 20 species of plants and animals named after him).
+In the Polish (Original) version the quest is called "Hulaj Dusza!" which is an idiom and thus cannot be translated literally, the English equivalent would be "Party Animal." However, the Polish version is much more fitting as when translated literally it would mean "Partying Soul." Hence the title change as it's a spirit or "soul" that is doing the partying and not an animal.
+The name of the quest is likely a reference to the album and title song "Dead Man's Party" by Oingo Boingo.

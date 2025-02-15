@@ -1,0 +1,246 @@
+Witcher
+A witcher (Polish: wiedźmin), also known as a wiccan, hexer, vedymin, or witchman (Elder Speech: vatt'ghern), is someone who has undergone extensive training, ruthless mental and physical conditioning, and mysterious rituals (which take place at "witcher schools" such as Kaer Morhen) in preparation for becoming an itinerant monster slayer for hire. Geralt, the central character in Andrzej Sapkowski's Witcher series and the subsequent games inspired by them, is said in the stories to be one of the greatest witchers; he is certainly legendary, but whether famous or infamous is more open to interpretation (and/or subject to gameplay, as the case may be).
+Quick Answers
+What is the training process to become a Witcher?
+						To become a Witcher, one undergoes the Trials, a series of transformative processes using secret herbs and infusions. Survivors gain superhuman reflexes, reaction speed, and night vision, among other traits. They learn swordplay and basic magic, known as Signs. Young witchers undergo mutations to enhance their strength and speed. They also develop a unique culture, specialized knowledge, an effective training system, and a code of honor.
+					
+						Provided by: Fandom
+					
+What are the mysterious rituals performed at Witcher schools?
+						Witcher schools train witchers, teaching them magic fundamentals and unique fighting styles. The schools are distinguished by their rituals, a structured form of magic that can surpass spells in power. These rituals require specific components and time to execute. Each school, including the School of the Wolf, Bear, Griffin, Viper, and Cat, has distinct rituals and training methods.
+					
+						Provided by: Fandom
+					
+Who is the central character in Andrzej Sapkowski's Witcher series?
+						In Andrzej Sapkowski's Witcher series, the main character is Geralt, a witcher who is trained from a young age to eliminate monsters. Geralt lives in a morally complex world, yet he upholds a clear ethical code. His character draws comparisons to Raymond Chandler's Philip Marlowe. Geralt is regarded as one of the most exceptional witchers, with his reputation being a matter of perspective.
+					
+						Provided by: Fandom
+					
+What is the role of a Witcher in their society?
+						In their society, a Witcher is a highly trained, enhanced individual, known for their strength, endurance, and immunity. They are not mere killers, but uphold a unique culture, specialized knowledge, a rigorous training system, and a code of honor. They are knowledgeable about the effects of various substances and understand basic magic. Their main role is to exterminate monsters, a duty they are prepared for through early-age mutations that enhance their physical abilities.
+					
+						Provided by: Fandom
+					
+What are the physical and mental conditions required to become a Witcher?
+						Becoming a Witcher involves rigorous physical and magical training, alchemical procedures, and intake of mutagenic compounds. Witchers, as a result, are mutants with enhanced speed, strength, and resilience, equipped to combat most monsters alone. They also maintain a distinct culture, comprehensive knowledge, and an honor code. They are well-versed in the impact of diverse substances and basic magic principles.
+					
+						Provided by: Fandom
+					
+{"@context":"https:\/\/schema.org","@type":"FAQPage","name":"Witcher","mainEntity":}
+History
+
+Creation
+As humans settled in the northern part of the Continent, they had to deal with a vast array of monsters that inhabited the land and which humans were poorly equipped to deal with. To fix this, the Northern rulers tasked their mages to create magic-wielding warriors to deal with the monsters for them. As a result, the mages carried out experiments at Rissberg and the first witcher was created. Unfortunately, the witchers proved to have limited magical potential and were thus deemed failures and banished from the castle.
+The First Age of Witchers
+For more information, see Order of Witchers.
+After the witchers were banished they were brought to Castle Morgraig by a handful of mages who wished to continue the experiment. Here, the first generation of witchers continued to train while the mages created more, soon establishing the Order of Witchers. As the first five original witchers set out on the path, the first age of witchers began. However, over time, the Order, after being abandoned by the original mages, had a violent fight break out among their own resulting in several deaths and a schism, and with other witchers' growing disillusionment about their Order's purpose and leaving as well, eventually led to the Order's end when the final witchers abandoned Morgraig, and thus brought the first age of witchers to an end as well.
+Second Era of Witchers
+After the Order ended and the six independent schools were built, the Second Era of Witchers began, which witchers themselves refer to as the Golden Age of Witchers. With the continent divided between the schools and each one creating their own witchers, their work became efficiently organized. Past tensions between them calmed down and when witchers from different schools crossed paths, no blood was shed as each knew they had their own territory, making them treat other schools more like estranged brothers than bitter enemies like before.
+End of the Golden Age
+By the mid 1160s, witchers had become too successful, with monsters having grown increasingly rare. This, combined with a mixture of propaganda by the churches of the North and the distrust of many of the kingdoms' rulers, led to witchers themselves being seen as monsters in most of the population's eyes. In turn, almost every known school came under attack from various groups of people. By the time the last school fell, the number of witchers had diminished greatly, compounded by both those killed defending their schools and the loss of knowledge on how to create witchers so no more could be made.
+Overview
+ 
+Genetic advantages and disadvantages to being a Witcher
+Taken in as children, witchers-to-be are subjected to intense alchemical processes, consumption of mutagenic compounds, and relentless physical and magical training to make them dangerous and highly versatile against their vast array of opponents, many of which possess superhuman speed, strength and/or other deadly powers. These procedures ultimately mean that each fully-trained witcher is a mutant built specifically to hunt and kill inhuman prey. The key permanent results of mutations shared by all witchers include:
+Sterility (which partially explains selection from the outsiders, as they cannot breed to pass on their traits).
+Over developed libido, which caused many rumors to spring up about them.
+Cat-like eyes that grant very acute nightvision - witchers can constrict their pupils to see in blinding light or open them to see in near pitch darkness. This nightvision can be further enhanced with the cat potion, but in general, it is good enough by itself to not require further enhancement. Their entire sensory system is overall enhanced, allowing them to identify the species of animal from the scent of their blood, and detect nearby beings even when out of sight.
+Tremendous resistance to disease (which functions in most cases as complete immunity) and a boosted immune system, allowing them to consume large quantities of potions that could prove easily deadly if consumed even in small amounts by a normal man.
+Exceptionally increased strength, speed, reflexes, and endurance, far beyond any normal or well-trained human, that allows them to swiftly end fights with minimal effort, and perform physical feats non-witchers couldn't hope to match. A witcher's physical abilities are sufficient to defeat most monsters single-handedly when combined with extensive training and proper weaponry, whereas regular men could only hope to accomplish this in large groups. Witchers have also been known to shrug off hits that would render normal men unconscious, and survive the strikes of powerful monsters, such as giants or other beings possessing herculean strength, that would otherwise kill humans with a single blow.
+More magical potential than the average human, which gives them the ability to perform simple yet incredibly versatile combat magic in the form of signs. They also develop a sixth sense that allows them to "feel" things around them, be it items of importance or people's immediate intentions. This explains their uncanny ability to track and hunt people and monsters. However, the amount of magic they possess is not as close to sorcerers and sorceress.
+Accelerated healing granting quick recovery from injuries.
+Incredibly long lifespan and prolonged youth (Vesemir is said to be at least a few centuries old but has the appearance of a middle-aged man).
+Equipment and skills
+Though they cover proficiency in basically any weapon that comes to hand, a witcher's training focuses on two primary tools:
+ The Steel sword
+ The Silver sword
+These swords are typically carried on the back. A steel blade is used for more mundane beings, while a silver blade is reserved for beasts of the supernatural. Witchers are also frequent mixers and users of powerful potions, having developed an advanced tolerance to their inherent toxicity, but still limited to a few at a time (even one of their weaker brews would be fatal to an ordinary human). Witchers are trained to utilize bombs and various poisons and oils with which to coat their blades, many of which were designed to harm specific monsters. The first witchers were trained by alchemists from Vicovaro. Moreover, witchers are master trackers capable of tracking virtually any creature, be it monster, animal, human or nonhuman. The original witchers were trained by hunters from Kaedwen. After the varying schools were built the first generation witchers passed their knowledge to their apprentices. Finally, their formal magical training deals with signs, a low-level yet versatile form of magic that allows witchers to cast spells and enchantments with simple hand gestures. Without extensive improvement and practice, these are mere tricks compared to what a sorceress can do, but they serve very well for someone with a sword in one hand to add a variety of improvisation to their efforts. Also, the more powerful magic used by mages often takes a lot of time to prepare while all signs are instantaneous. Additionally, witchers are trained by seasoned mages in how to use these signs to the best effect. Several witchers from different schools utilized one-handed crossbows, however, it was not very common.
+In general, a witcher is a formidable and often overwhelming opponent to more mundane races thanks to their superhuman physical prowess, regenerative capabilities, and magic. However, they are not infallible, as they can still make mistakes, take a misstep in battle against mundane men or supernatural demons, or be overwhelmed by sheer numbers and individuals who have the skill to match a witcher, though rare is the individual who managed to slay a witcher out of skill rather than dumb luck or by ambush.
+Though a witcher's eyes are one way to stick out, another standard means of identification is the witcher medallion. This device aids in the detection of monsters, and no witcher would part with one willingly. (And of course, witchers are known for being 'hard to kill' - Leo Bonhart boasts a collection of three such medallions as proof of his martial skill.) The form of an individual medallion (head of a wolf, cat, griffin, etc.) indicates the school at which its owner was trained.
+It is a common belief, even among witchers themselves, that they have no capacity for emotion. This may be debatable, and rather relative, considering the rigors of their training and the dangers they face on a day-to-day basis. Perhaps they have simply never had the time or exposure to society to develop or recognize the reactions to mundane experiences that most take for granted. It may also be explained that a combination of their hard training, genetic modifications, and seclusion from society that may encourage blunted emotional expressions, as Geralt, Lambert, and Eskel all exhibit emotional heights concerning love, joy, fear, anger, lust, and sympathy among various others.
+Occasional references to witchers as 'nonhuman' are somewhat at odds with the original stories (in which Geralt only identifies witcher as a profession, never a race). There is certainly no official classification as such, and the relevant references (in the first game at least) are usually from Geralt identifying with the mistrust and/or hostility faced by elves and dwarves in human society. Likely it is used as a slur against the mutants, likening them to elves and dwarves, though it's worth noting that an in-game text found in Wild Hunt mentions that the Cat School of witchers "are for the most part of elven stock," indicating that there are (or were at one time) indeed nonhuman witchers. Whether or not there actually are any elven witchers during the contemporary timeline of the story is unknown.
+Notable Witchers
+
+Wolf School
+For a full list of all School of the Wolf witchers, see School of the Wolf#Members.
+Adon of Carreras
+Aubry
+Berengar
+Cormac
+Deglan
+Eskel
+Geralt of Rivia
+Gweld
+Gwidon
+Lambert
+Luka
+Reinald
+Thornwald
+Vesemir
+Trained but not witchers themselves:
+Ciri
+Leo
+Griffin School
+For a full list of all School of the Griffin witchers, see School of the Griffin#Members.
+Coën
+Ealdred
+Erland of Larvik
+George of Kagen
+Jerome Moreau
+Old Keldar
+Cat School
+For a full list of all School of the Cat witchers, see School of the Cat#Members.
+Aiden
+Brehen
+Dragonfly
+Gaetan
+Gezras of Leyda
+Jad Karadin
+Kiyan
+Lexandre
+Treyse
+Pardus of Korath
+Viper School
+For a full list of all School of the Viper witchers, see School of the Viper#Members.
+Auckes
+Ivar Evil-Eye
+Kolgrim
+Letho of Gulet
+Mysterious assassin
+Serrit
+Bear School
+For a full list of all School of the Bear witchers, see School of the Bear#Members.
+Arnaghad
+Gerd
+Ivo of Belhaven
+Junod of Belhaven
+Voren of Dillingen
+Manticore School
+Iwan
+Merten
+Crane School
+Stefan
+Order of Witchers
+Madoc
+Rhys
+Unspecified School
+Adela
+Chireadan
+Olivier of Gulet
+Seamus
+The Witcher
+
+Glossary Entry
+Witchers
+Witchers came into being when the first settlers were colonizing the untamed lands of present-day Temeria. The elite caste of warrior-monks was to defend humans from the monsters which inhabited the wild. Thanks to mutagenic mushrooms, herbs, and plant stimulants, the bodies of young apprentices developed superhuman speed and endurance. As a result of the painful and dangerous Trial of the Grasses, young witchers gained cat-like eyes, which allowed them to see in the dark. With the help of sorcerers, they learned to utilize simple combat spells, called signs, as well as magic potions that augmented their fighting skills. Nowadays, when monsters have become something of a rarity, the demand for the witchers' services has declined significantly. Only a few representatives of the caste still travel the world, and no more monster slayers are being made.
+Due to their otherness, unusual abilities, and magicals skills, witchers are treated as outcasts and sometimes even met with hatred. This hatred was made manifest during the infamous attack on Kaer Morhen, which led to the destruction of the fortress and the death of most of the witchers wintering there. Those who survived are doomed to extinction since they no longer train successors.
+People need witchers, but are simultaneously afraid of them. The itinerant warriors inspire fear because they are mutants and have superhuman powers. A witcher is rarely a welcome guest and contacts with members of this profession are almost always limited to business. Witchers are invariably attacked during pogroms and social upheavals directed against those who deal in magic.
+Mutagens and magic render witchers' bodies resistant to all kinds of disease, even to the point of outright immunity.
+The Witcher 2: Assassins of Kings
+
+Journal entry
+Despite my long friendship with Geralt, I know little more about this peculiar brotherhood or guild than learned tomes provide. On top of that, I am obliged to discretion, so I shall write nothing more than necessary on the subject. Once as numerous as the beasts they fought, today the witchers are seen as a relic of times long gone. The exact character of their training remains a mystery. It is known it consists, among others, of the Trials - processes that transform the organism using a specific combination of secret herbs and infusions. Those who survive them gain superhuman reflexes, speed of reaction, the ability to see in the dark and many other traits making them lethal foes. During their training they learn swordplay and basic magic, known as signs. Armed with this set of abilities, the witchers can effectively fulfill their objective, that is protecting humans from the monsters inhabiting our world.
+Name
+The original Polish name for "witcher" is "wiedźmin". The English translation preferred by Andrzej Sapkowski was initially called a "hexer" and is the name used in the international version of the film adaptation. However, CD PROJEKT RED chose to translate it to "witcher" in the computer game, and this word was subsequently adopted by Danusia Stok (in her translation of The Last Wish) and even by Sapkowski himself (in Historia i fantastyka).
+Warlock has been used in informal English translations, although "witcher" - being a neologism in English - is arguably better at capturing the spirit of Geralt's and a witcher's profession.
+In Other Languages
+Flag
+Language
+Witcher
+ 
+English
+Witcher
+Polish (original)
+Wiedźmin
+Arabic
+الساحرas-Sāḥir
+Asturian
+Bruxu
+Brazilian Portuguese
+Bruxo
+Bulgarian
+ВещерVeshter
+Chinese (Traditional)Chinese (Mainland)
+狩魔獵人 Shòumó Lièrén巫师 Wūshī
+Croatian
+Vještac
+Czech
+Zaklínač
+Dutch
+Hekser
+Estonian
+Nõidur
+Farsi (Persian)
+ویچرWitcher
+Finnish
+Noituri
+French
+Sorceleur
+ქართული (Georgian)
+მხედვარიMkhedvari
+German
+Hexer
+Greek
+ΓητευτήςGiteftís
+Hebrew
+מכשףMechashef
+Hungarian
+Vaják
+Italian
+Strigo
+Latvian
+Raganesis
+Lithuanian
+Raganius
+Portuguese
+Bruxo
+Romanian
+Vrăjitor
+Russian
+ВедьмакVed'mak
+Serbian
+ВештацVeštac
+Slovak
+Zaklínač
+Slovenian
+Veščec
+Spanish
+Brujo
+Swedish
+Häxkarl
+Turkish
+WitcherEfsunger
+Ukrainian
+ВідьмакVid'mak
+In languages from the novel
+Vedymin
+Vatt'ghern (Elder Speech)
+In languages from the game
+Witchmolol-bool (Vodyanoi)
+Trivia
+Vědmák (Polish spelling: wiedźmak) is a male equivalent to vědma (witch) in some Slavic tales. While wiedźmin is a pure neologism made-up by Andrzej Sapkowski, he uses the traditional name as well few times.
+Notes
+A witcher is a character class in The Witcher: Versus.
+Only human witchers are known to exist, although it is believed that elven witchers may exist or have existed in the Cat school.
+The Georgian iteration of the word "Witcher" appears to be mistranslated, as the word "მხედვარი" (M'khedvari) literally means "Watcher." The Georgian community mostly sticks to the English term.
+Videos
+Fall of the Witchers Lore and Theories (The Witcher 3 Wild Hunt)Witchers and Emotions The Witcher 3 Wild Hunt - Witcher Lore
+References
+↑ 1.0 1.1 1.2 1.3 A Witcher's Journal
+↑ 2.00 2.01 2.02 2.03 2.04 2.05 2.06 2.07 2.08 2.09 2.10 The Witcher 3: Wild Hunt
+↑ 3.0 3.1 3.2 3.3 3.4 Blood and Wine expansion
+↑ 4.0 4.1 4.2 The Witcher comics
+↑ 5.0 5.1 The Witcher
+↑ 6.0 6.1 Wiedźmin: Gra Wyobraźni
+↑ 7.0 7.1 The Witcher: Nightmare of the Wolf
+↑ 8.0 8.1 8.2 8.3 The Hexer series
+↑ 9.0 9.1 Szpony i kły
+↑ 10.0 10.1 10.2 The Witcher Role-Playing Game
+↑ 11.0 11.1 Gwent: The Witcher Card Game
+↑ A Book of Tales
+↑ 13.0 13.1 13.2 13.3 The Witcher 2: Assassins of Kings
+↑ Thronebreaker: The Witcher Tales
+↑ Witcher Prostheses and Wheelchairs
+↑ Tales from the world of The Witcher
+↑ Siriol's Handbook: Wagons and Travel
+This page uses content from Wikipedia. The original article was at The Witcher. As with Witcher Wiki, the text of Wikipedia is available under the GNU Free Documentation License.

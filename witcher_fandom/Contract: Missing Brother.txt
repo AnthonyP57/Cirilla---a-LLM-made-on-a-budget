@@ -1,0 +1,36 @@
+Contract: Missing Brother
+Contract: Missing Brother is a contract quest in The Witcher 3: Wild Hunt.
+Missing: Mikel
+My true-born brother, Mikel, is missing. Anyone who finds him or at least finds out what fate has met him will be generously rewarded - and I'll slip a good word to the baron about you as well.
+You'll find me at the Inn at the Crossroads.
+-Bruno
+Walkthrough
+This quest can be picked up at the Inn at the Crossroads' notice board, which will point you to talk to Bruno inside, or by finding the mine directly.
+If you go to Bruno, he'll explain that his brother, Mikel, took it upon himself to take care of several women that were displaced when the war destroyed their village and had taken them to some old mines for shelter but hasn't returned. However, he's adamant Mikel can't possibly be dead despite everything indicating it's likely. You can haggle here if you wish, then head out to the location south of the Border Post.
+Just outside the mine you'll find some bloody body parts and nearby monster tracks that lead into the mine. Head inside and down the ladder, then go left (going right will just go a long way around in a circle to the area that going left goes to immediately and will cause a young arachas to spawn in the area below the survivor).
+You'll soon find the monster tracks again that lead to an area with a lot of blood you can examine. Note it's very easy to miss a fork here: just prior to all the blood, there's a path to the left (if you took the left route on entering the mine) that goes into an underwater tunnel. However, ignore that for now and instead go through the wooden archway area where you can examine other bodies, then head up the ladder to find a survivor. After talking to her, you can then head around to find a lever to use to drop the bridge, allowing her to escape, and where she'll make her way to the Border Post.
+With that, head back to the underwater tunnel and follow the tracks to reach another cavern. This time though you find some eggs which, after being examined, Geralt will deduce it's a venomous arachas, Harrisi, earning 25 . It's important to destroy the eggs here with Igni or Aard, or it could lead to a more difficult fight later. With that, examine the fluids nearby and follow the scent trail to another underwater tunnel where you'll see more tracks you can follow to the next set of eggs, though this time a young arachas is waiting. Once the 4 eggs and the young arachas are dealt with, head back through the tunnel and continue into the next cavern.
+Here, another young arachas is with the last 4 eggs. Dispatch all of them, then head into the final chamber where Geralt finds what's left of Mikel's body as Harrisi makes their appearance. Depending on your level, this can be a tough fight, so make sure to have insectoid oil, Tawny Owl, and Golden Oriole to counter Harrisi's venom. If you didn't deal with the eggs prior, Harrisi will let her children fight you first while she hangs back, but if they were already killed off, she'll fight you directly.
+She uses 3 main abilities: throws a web out to pull Geralt within reach, shoots several toxic projectiles and, once the venom sac on her back is full, can release a large, toxic gas cloud. It's very helpful to use quen's shield here, while also hitting her with igni when you can. If close range isn't working, you can kite her using yrden traps with other related signs along with the crossbow. Once defeated, loot her for the arachas trophy. Before you leave though, make sure to look for a Nilfgaardian soldier's body in one of the alcoves as he'll have Gwyhyr on him as well. With that, head back to Bruno. Note that if you found the mine first, the quest marker won't update correctly and you'll need to go to the notice board to get the notice there to talk to Bruno (it won't direct you to do this in the quest).
+Unlike his brother though, it appears Bruno isn't so generous, and refuses to pay you as he apparently wanted you to bring Mikel back alive. You now have 3 options:
+tell him you risked your life (earns 200 and 84 )
+use Axii (requires Delusion level 3, earns 40 for using it, and a reward of 200 and 210 )
+say you won't beg (earns 300 )
+Whatever you pick, you'll get the appropriate reward above and the quest will then complete.
+Journal entry
+Talked to Bruno first:
+Though Geralt had plenty of other worries, he had not forgotten about his trade - which is, let I remind you, slaying monsters. While striving to practice his profession he cam across a contract offering an altogether attractive sum in return for tracking down a certain missing individual. No mention of monsters, true, but Geralt had seen enough incidents of its like to suspect one might turn up - and besides, when it comes down to it, coin is coin...
+In my experience, mines either hold precious metals or (more frequently) deadly monsters. The latter, in the form of arachasae, were present in great abundance in the Velen pits. Geralt knew he had to annihilate them for good - meaning he had to kill the female and destroy all the eggs she had lain.
+Arachasae are incredibly dangerous beasts, but a witcher is not just some run-of-the-mill adventure seeker. In a bloody battle whose echoes could be heard throughout all of Velen, Geralt killed the old arachas queen and put an end to her vile line.
+Objectives
+Talk to Bruno.
+Find the missing brother in the mine near the Inn at the Crossroads.
+Explore the mine using your Witcher Senses.
+Find out where the monsters in the mine are coming from using your Witcher Senses.
+Use witcher Signs to destroy all the eggs. 0/12
+Investigate the arachas' lair using your Witcher Senses.
+Kill the arachas.
+Take a trophy from the arachas' body.
+Collect your reward.
+Videos
+The Witcher 3 Harrisi the Arachnas Boss Fight (Hard Mode)

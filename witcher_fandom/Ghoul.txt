@@ -1,0 +1,60 @@
+Ghoul
+After the Northern Wars, necrophages generally grew bolder and multiplied in the Northern Kingdoms; ghouls, a sub-species, became the most common corpse-eaters, usually found roaming around in packs, distinguishable from their cousins, alghouls, by the sickly paleness of their visage. After hunting unknowing locals, they shred their prey to pieces with fangs and claws, the corpse being then left to age. They can also hunt livestock, such as sheep and goats. While generally sensitive to silver, ghouls are also affected by light, such as the sun or fire.
+The Witcher
+A horrible, low, and nasty beast, this abomination nests in cemeteries, old burial mounds (kurgans), necropolises, and on battlefields. Disgusting in form and character, it emerges to feed usually during the full moon, and well-rotted corpses are a delicacy for it. When driven by hunger, the ghoul will not hesitate to prey on the living. Only by fire, silver, and bright light can they be harmed. For this reason, it hunts only at night.
+Journal Bestiary entry
+"Ghouls are said to have been humans who were once forced into cannibalism and, after many years spent in dark crypts, underwent a horrifying transformation. Only human flesh can satisfy their eternal evil hunger, so they kill people and store the remains in the recesses of their lairs."
+Location
+Outskirts
+Vizima cemetery
+Cemetery crypt
+Source
+In Chapter I, an "old woman" will tell Geralt about Ghouls in exchange for food. The conversation does result in a bestiary entry.
+Spending a Bronze talent on the Monster Lore option adds bestiary entries for graveirs, ghouls, drowners and barghests.
+The Tome of Fear and Loathing, volume I
+Notes
+In English, during the Prologue, Lambert claims the Fast Style is best to use against ghouls, but the conversation does not result in a bestiary entry. His suggestion contradicts the official bestiary's entry above, which claims the Strong Style is best against ghouls. Considering that originally (in Polish) he mentions barghests and ghosts as ideal victims of Addan Aenye, this is most likely just a translator's mistake.
+Monsterbook
+Developer CD PROJEKT RED's characterization of the ghoul taken from the monsterbook, which was enclosed with the Collectors Edition of The Witcher:
+Ghouls, like drowners, appear often in the game. Geralt frequently has the opportunity to practice his silver sword techniques on this monster. Since the drowner became grotesque, we made the ghoul both scary and a bit pathetic, without rendering him humorous. As a foul scavenger, he has all the necessary attributes: deadly pale, spotted skin, a nose-less head resembling a skull, and a strong jaw capable of cracking open any bone. At bit of artistic trickery and clear connotations went into creating the model for this rather dumb, hideous creature.
+The ghoul is no joke – it is stocky, and ready to attack. It loves feasting on human cadavers, but has nothing against fresh warm meat. When it grabs its prey with its apelike arms, there is no escape.
+The Witcher 3: Wild Hunt
+The bestiary entry could technically be obtained by reading Ghouls and Alghouls. However, it is automatically available at the start of the main quest, Lilac and Gooseberries, where even otherwise Geralt would be forced to obtain it by killing ghouls as the very first enemies in the game.
+Bestiary entry
+Ghouls creep and crawl at nightEating everything in sightIn a snap they'd eat you, tooChop you up for a ghoulish stew!– Children's rhyme
+Ghouls and graveirs are hard to describe. In part, they resemble humans - yet on the whole, they are the utter negation of all that is human. Though they have arms and legs like men, they walk on all fours like dogs or badgers. Though they have eerily familiar faces, one searches them in vain for any sign of sentiment, reason or even a spark of consciousness. They are driven by one thing and one thing only: an insatiable craving for human flesh.
+Ghouls and their more dangerous cousins, graveirs, usually feed in small groups, at times led by an alghoul. Since they delight most in the taste of fresh carcasses, they appear wherever newly-dug graves are to be found: cemeteries, crypts, catacombs and battlefields. Whenever the opportunity arises they hunt the living as well, especially when they have strength in numbers.
+In a one-on-one fight with a trained witcher, a ghoul poses little threat, but one must remember that wounded individuals can erupt in a mad frenzy. At such times they attack fiercely, paying no heed to their own safety and brushing off all wounds. One must likewise bear in mind that ghouls and graveirs are particular dangerous around dusk and at night.
+Combat tactics
+A key strategy to make fighting a group of ghouls easier is to keep moving around until one ghoul gets separated. When this happens circle the ghoul and try to kill it. Do small attacks now and then, but keep dancing around.
+If a ghoul is low on health and starts snarling loudly, this is a sign that the ghoul is becoming enraged. Make this ghoul your priority to kill, as otherwise it will regenerate most of its health. When enraged the ghoul's behavior grows more aggressive; the Axii sign works well for stopping the effects of enrage.
+Associated quests
+A Barnful of Trouble
+A Towerful of Mice
+Bitter Harvest
+Blood Ties
+Contract: The Mystery of the Byways Murders
+Contract: The White Lady (optional)
+For Fame and Glory
+Funeral Pyres
+Hard Times (Patch 4.0)
+Hazardous Goods
+Last Rites (optional)
+Lilac and Gooseberries
+Missing in Action
+Out of the Frying Pan, into the Fire
+The Great Escape
+The Truth is in the Stars
+Witcher Wannabe
+A Surprise Inheritance 
+Rose on a Red Field 
+Contract: Bovine Blues 
+La Cage au Fou 
+Vintner's Contract: Rivecalme Storehouse 
+Gallery
+Gwent standalone artGwent card artGwent card artGwent card artAn early concept art of the ghoulThis drawing was the basis for the model, the ghoul has evolved considerablyGhoul from The Witcher computer gameGhoul in Wiedźmin: Gra WyobraźniGwent standalone card artModelingModeling
+External links
+ See the GWENT standalone game version card: Ghoul
+References
+↑ The Witcher 3: Wild Hunt
+↑ Blood of Elves

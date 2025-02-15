@@ -1,0 +1,8 @@
+Kayran trap
+Kayran trap is specifically designed for use on a kayran. There are three glowing icons evenly spaced around the kayran, any of these can be used to place the kayran trap. Then a appears onscreen when Geralt can activate the trap. When activated, it immediately cuts off the tentacle that activates it, saving the player the trouble of cutting it manually.
+If the trap is not used effectively, it cannot later be shed from inventory. It cannot be sold nor dropped.
+Associated quests
+Indecent Proposal
+The Kayran
+Gallery
+Larger game file icon that was never used

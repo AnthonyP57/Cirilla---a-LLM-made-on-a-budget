@@ -1,0 +1,165 @@
+Family Matters
+Family Matters is the main quest in Act I of The Witcher 3: Wild Hunt. In this quest, Geralt is asked by Baron Phillip Strenger to help him find his missing wife (Anna) and daughter (Tamara) in exchange for information regarding Ciri's whereabouts. What would seem to be a rather simple quest is actually quite long and will take Geralt all over Velen and briefly into Oxenfurt.
+Alternate main quest cutoff point: Once you ask the Baron about his last Ciri story (Ciri's Story: Out of the Shadows), the small quest A Mysterious Passenger will no longer be available.
+Walkthrough
+The Baron is a tough negotiator and won't give Geralt any more information about Ciri until his wife and daughter are located. Geralt's first stop is the bedrooms as they went missing in the middle of the night. When the Baron agrees to let you search the two rooms (his own and his daughter's) follow him upstairs while listening to his joke about his daughter.
+Search the Rooms
+Use your witcher senses to find items of interest in the rooms. To progress, you just need to search the Baron's chamber, but searching Tamara's can provide more details and background story.
+Baron's room
+Wooden Candlestick
+Fresh Flowers
+Wall Off-Colored
+Picture of Baron and Wife
+Wardrobe Behind Painting
+Wooden Pillar near desk
+Return to the Candlestick
+Tamara's room (optional)
+Ugly Doll
+Letter to Tamara
+Incense and an Old Key
+Once all the clues have been found, follow the scent of the wine down to the first landing to find a talisman hidden under a floorboard.
+After locating the incense, follow the scent of saffron down to the bottom floor of the castle into a locked back room where there is a secret altar to the Eternal Fire. Examine the coals and read a small prayer that appears to be written by Tamara.
+Talk to the Baron
+Take the talisman back to the Baron and question him about all that has been found. He'll tell Geralt that he made the doll with his own hands, he was drunk the night his wife and child disappeared so he doesn't know anything about a fight, and he may have spilled the wine on the landing himself. When asked about the talisman he will respond that he doesn't know where it came from, but if there's anyone his wife would seek for something like that, it would be a Pellar living near Blackbough. (150)
+Find the Pellar
+Head to Blackbough and find the Pellar's hut nearby the village at the point marked on the map. As you near his home, some of the Baron's men will be outside, angry about a treatment gone bad that the Pellar handed out to one of their friends named Edric. There are a few options for dealing with the men:
+Use Axii (requires Delusion Level 2) gives 35 
+Geralt can inquire what they want and can choose to offer a cure to their friend's ailments (Note: If you chose to kill the Baron's men at the Inn at the Crossroads the men will ask who you are and will attack when you tell them you are a Witcher.)
+Try to bribe them, but they will not accept payment
+Fight or die
+Once Geralt has dealt with the men outside the hut, knock on the door to start a cut scene. The Pellar will claim to have known the witcher was coming to save him and he'll recognize the talisman he made for Anna Strenger. He'll claim to be able to help locate Anna but, to do it, he needs his goat back. Guess who has to go and find a goat now? That's right, Geralt. This triggers the quest, A Princess in Distress.
+Note: If you refuse to help find the goat you will be given an objective to "Agree to help find the missing goat..." There's apparently no getting around this one.
+Once Princess has been returned to the Pellar he will perform the ritual augur and informs Geralt that Anna was pregnant and had miscarried, owing to the abuse she'd suffered at the hands of the Baron. The "dead" baby was then buried and became a botchling. The Pellar tells Geralt that he has two options:
+Remove the curse from the botchling by burying it under the family's threshold and giving it a name using the ritual of Aymm Rhoin, an elven ritual of naming
+Find and kill the botchling and bring its blood back to the Pellar, who will then be able to use the blood of kin to locate the missing women
+Before heading out, read the new bestiary entry about botchlings to learn more.
+Head back to the Baron
+ 
+Head back to Crow's Perch to confront the Baron. As Geralt approaches the castle he'll notice there's a huge fire raging near it. When you get close to the area of the fire, the witcher will be told that there are horses and a stablehand (Oswin) trapped in the stables.
+Note: It is purely optional for you to rescue the stablehand. If you do choose to save him, you will be rewarded later with 20 .
+If you wish to save the stablehand, race over to the stables and climb the exterior ladder to reach the hay loft. Have Aard ready to cast in order to remove debris that blocks the path. Climb down the ladder into the barn proper to find the scared stablehand and the horses. He'll say that the roof has caved in and he can't open the stable door. Head to the main stables door and open it to save the man and his horses.
+When approaching the baron (or after a cut scene if you rescued the stablehand), Geralt will have to defend himself from the aggravated and obviously drunk lord in a fistfight. Quickly put him down (50) and afterwards you'll get the real story about his wife's miscarriage, his constant domestic abuse, and anger management issues.
+Inside the baron's chambers respond in whatever way feels right as it will only affect the baron's verbal responses. The baron will reveal how he found the stillborn and guess that it was his drunken abuse that led to his wife's miscarriage. Offer him the two choices on how to deal with the botchling and he will plead for Geralt to lift the curse instead of killing it. You can then choose to start the next portion or wait and come back here.
+Once you agree to start the next part, the two will wait for midnight, then the baron will lead Geralt out to where he buried the fetus. However, the grave is empty and the botchling appears. You have a timed reaction here to make your choice: lift the curse by making it a lubberkin or kill the botchling.
+Note: Your choice here will affect how you complete this quest but will have minimal impact on the Baron's storyline overall.
+Lift the Curse
+ 
+If Geralt chooses to lift the curse, the Baron will pick up the botchling and the witcher will be tasked with protecting him all the way back to the manor. While walking back, in two spots the botchling will start to wriggle and a collection of wraiths will attack. They're easy enough to deal with, but make sure as soon as they've been dispatched to cast Axii on the botchling, otherwise it will become enraged, thus forcing the witcher to kill it and go the opposite path.
+Upon reaching the threshold, another cutscene will play out as the Baron names the child Dea and Geralt takes him through the incantation to lift the curse. With the curse lifted Geralt may choose to continue on elsewhere until a day and night have passed, or may sit and wait until the time when the lubberkin will appear. (150) When the time has come, a lubberkin will rise as a spirit from the grave and will fly off, showing Geralt the trail of Anna and Tamara.
+Don't worry about it getting too far away as it will wait for Geralt to follow. You will have to deal with a couple of drowners before reaching its first stop - a smokehouse just outside of Crow's perch. Search the area for a few clues: clothing, a bracelet, and a horseshoe. When you're done examining, the lubberkin continues on, and you may encounter a couple of endrega workers on the way to the next location.
+It will then lead you to an eviscerated and decapitated horse carcass - Anna's horse - but it is guarded by multiple rotfiends. After getting rid of them, examine the corpse and listen to the grim conclusion about what could have done this. The clues include: bones, the saddle, ribs, head, and a missing horseshoe.
+Note: This horse corpse will be here even if you haven't started the Family Matters quest yet. You won't be able to search it though, unless you chose to lift the curse.
+The lubberkin will then lead Geralt to the final location: a fisherman's hut.
+Kill the Botchling
+This sequence of this quest is triggered by either deciding to kill the botchling outright or taking too long to pacify the creature when it begins to squirm in the Baron's hands. Geralt will have a decent amount of time to calm the botchling so it usually isn't a surprise when it becomes enraged and he is forced to kill it. Once enraged it cannot be pacified and must be killed. At some point wraiths will appear as well, take care of them before focusing on the botchling, even if it regenerates to full health in the meantime. Tip: The botchling is vulnerable to cursed oil and Axii sign. When it drops below half health the spikes on its back will protrude further and it will begin regenerating health. Hit it with Axii to stop the health regeneration and retract the spikes.
+With the botchling dead, the Baron will admonish the witcher for killing his child. Geralt will then gather a vial of blood from which he hopes the pellar can use to help find Anna and Tamara.
+See the Pellar
+Head to the pellar's hut and give him the botchling blood. Luckily, he has all the ingredients necessary to perform the ritual and you can start immediately if you wish. When ready, follow him into the woods and fight off wolves on the way to the destination. He will lead Geralt to a location known as the Wolven Glade where he will conduct the ritual. Once at the correct spot, the pellar will explain a bit about the ritual to be performed which will require a bit of work from Geralt.
+Light the three braziers when ready to begin the ordeal and time will fast forward to midnight. Ensure Geralt has full health and is ready to face several wraiths. During the ritual a wind will whip up a flock of black birds that will snuff out the fires in the braziers, thus breaking the circle of protection. When this happens wraiths will enter the circle and Geralt will have to fight them off. Relight the brazier as quickly as possible to keep more wraiths from entering the circle. You don't have to actually kill the wraiths, but if a couple break into the circle it's even harder to keep the rest out. Expect to relight the fires three times.
+Tip:​ Position yourself close to the fires so that they can be re-lit quickly. Use Igni as an interaction rather than a sign to light the fires, this will not consume any stamina thus making the fight a bit easier.
+After the ritual is complete, ask the pellar about the visions he had, some of which appear to reference Geralt's own quest to find Ciri and the destruction the Wild Hunt has wrought upon the land. He will tell the witcher of a fisherman named Voytek, who Geralt suspects may have provided shelter to the missing women. You can then choose to walk the pellar home (100) or leave him to find his own way. Now follow the objective marker to the fisherman's hut to learn what happened to Anna and Tamara.
+The fisherman's hut
+Note: this is where the two routes merge.
+Regardless of which method led you here, you just have to enter the hut and talk to the people inside. They'll tell Geralt how Anna was carried off by a beast, having been attacked on the journey, but Tamara is safe and well in Oxenfurt. (300)
+Talk to the Baron
+Return to Crow's Perch to speak with the Baron regarding what Geralt has found, or optionally go to Oxenfurt to locate Tamara.
+Note: If you talk to the Baron first before searching for Tamara, he will run after you with a doll to give to her, making for an emotional conversation when you find her. But more imporantly, he'll give you a border pass for an easier entry into Oxenfurt.
+If you've already completed A Towerful of Mice by this point, the pellar will talk to you as you near the armorers to give you the side quest, Forefathers' Eve. Then, if you saved the stable hand earlier, he will stop you to give a bit of coin as thanks right after the archway.
+You'll notice that the marker is directing you to the garden area, where the sergeant will stop to ask Geralt what happened on the night he and the baron dealt with the botchling, but Geralt won't reveal it. Now head into the garden to talk to the baron. He'll eventually lead Geralt to his office and start the next part of Ciri's story, The Race. If you haven't found Tamara yet, he will then ask you to do that before he reveals anymore information.
+Find Tamara in Oxenfurt
+Note: this objective can be skipped, in which case Geralt won't be able to learn Tamara's side of the story. If that's the case, one won't meet her unless they do Return to Crookback Bog.
+Head to Oxenfurt to speak with Tamara. Using the most straightforward route, you'll likely trigger the Thou Shalt Not Pass side quest and will need a pass to enter. If you don't have one, just swim across the river.
+ 
+Once in the city, follow the marker on the map to find the house Tamara is hiding in. She will come out and be very curt initially, but once Geralt explains he just wants to make sure she's fine, she'll open up about her life at the hands of her father. She is adamant that she won't go back to him and instead, thanks to the help of the leader of the Eternal Flame, has organized a band of witch hunters to go and find her mother and save her. Note: it has little bearing on the conversation if you found Anna already.
+A witch hunter named Graden will eventually interrupt, who you can converse with for a bit before ending the conversation. If you talked to the baron beforehand, this is when Geralt will bring up the doll, but Tamara doesn't care. Graden and Tamara will then leave, finishing this part of the quest for 150.
+Talk to the Baron
+Return to Crow's Perch yet again. The Baron will be disappointed that Tamara will not return home but he demands that Geralt find his wife in order to get more information about Ciri. This quest cannot be progressed any further until Ladies of the Wood is completed, which has several prerequisite quests of its own.
+Note: This will be the last time that Geralt will be able to obtain the Baron's gwent card. At the conclusion of the conversation below, the Baron will no longer be available to play gwent. However, as of Patch 1.20, his unique card can be retrieved from a box in his office when this quest is completed.
+Note: If you talked to Tamara and found Anna before returning to the baron, you must tell him about Tamara first, otherwise, when you tell him where Anna is, a series of conversations happen, preventing you from telling him about Tamara.
+Alternate main quest cutoff point: Once you ask the Baron about his last Ciri story (Ciri's Story: Out of the Shadows), the small quest A Mysterious Passenger will no longer be available. This happens after you tell him that you've found his wife, but (at least with recent patches) there's a separate conversation option to trigger it.
+After completing the Ladies of the Wood, Geralt must travel back to Crow's Perch to tell the baron of the news regarding his wife Anna. If inquired, the baron will tell the downward spiral of their relationship: how he was constantly away as a soldier and started to drink too much even when he was home with Anna, his wife's infidelity, how the Baron killed Anna's lover when he discovered their relationship, and Anna trying to kill him for it, which marked the point in their relationship where things turned abusive. This will give 300.
+When the witcher tells the baron of the pact that Anna made with the Crones he will immediately decide to march on the bog and retrieve his wife from the crones' clutches. At this point you can exit the conversation if you wish to put the quest on pause, but the next step is to remind the baron that he must still tell you about where Ciri went after leaving Crow's Perch. This starts the quest, Ciri's Story: Out of the Shadows, and will point Geralt where to search next.
+The Baron then makes one final request of the witcher: help him save his wife from the Crones in Crookback Bog, giving the secondary quest, Return to Crookback Bog. Before the witcher can depart however, a small and incredibly ugly creature bursts into the room babbling on in a nonsensical language. When asked, the baron explains that this creature is named Uma. Afterwards, the quest will complete. (200) Note: If Geralt has completed the main quests in Novigrad and Skellige already, the main quest Ugly Baby will begin before the baron leaves.
+Journal entry
+The baron turned out to be a tough negotiator who knew of the full value of the information he possessed. He agreed to tell Geralt about Ciri on one condition: Geralt had to find his wife and daughter first. The women had mysteriously disappeared a short time before. Though the baron had moved heaven and earth to find them, all his efforts had proved fruitless.
+Geralt's search for the baron's wife and daughter took him to the local pellar, a sort of soothsayer and folk mage whom Geralt rightly suspected would be well informed about all local goings-on.
+The pellar shared some juicy gossip with Geralt: supposedly the baron was a drunk and a terror to his family, and his wife's recent pregnancy had ended in a mysterious miscarriage.
+The pellar's augurs showed that the miscarried fetus, undoubtedly discarded without a proper burial, had transformed into a dangerous monster: a botchling. The beast was murderous and foul, but could yet do some good. If its curse could be lifted and the monster could be turned into a lubberkin, this latter being, a friendly household guardian, could lead Geralt to the baron's wife and daughter.
+Geralt's bosom boiled with wrath as he went to confront the baron. He was ready to drag the truth out of the man with a sword, force him to confess to what had truly happened that fateful night. A witcher in this state is even more effective than usual, so Geralt accomplished this in short order. The baron admitted that his wife had miscarried after one of their frequent rows, and that she and his daughter had fled Crow's Perch. He also agreed to show Geralt where he had buried the miscarried child's remains. When the clock struck midnight, both men set off to find the botchling's grave.
+If Geralt turns it into a Lubberkin:
+Once Geralt and the baron had reached the babe's place of burial, they did not have to wait long for the botchling to show up. The beast hissed and howled and threatened to assume its more monstrous and vicious form, but the two men completed the naming ritual before it could. Then following ancient custom, they buried the creature under the threshold so that in time it might be reborn as a lubberkin, a household guardian spirit. Geralt hoped this would help him find the baron's family.
+If Geralt kills the botchling:
+Once Geralt and the baron had reached the babe's place of burial, they did not have to wait long for the botchling to show up. When it did, the monster slayer slew the monster and collected some of its blood - this time not as a trophy but for use in an ancient ritual that, the witcher hoped, would provide him with more information about the fate of the baron's wife and daughter.
+The baron's wife and daughter had not fled Crow's Perch unaided - a fisherman living nearby had provided key assistance. Geralt went to the man's hut, where he learned a fiend had attacked the two women during their flight. The beast had torn Anna's horse to shreds, then carried her off into the woods.
+One detail the fisherman mentioned rankled in the witcher's mind: it seemed Anna's hands bore strange marks that had burned with fire just moments before the fiend appeared. What could have caused them? What did they mean?
+Geralt would have to endure this rankling until he found Anna, who, if still alive, had to be somewhere in Crookback Bog. Tamara, on the other hand, had made it to Oxenfurt, where the fisherman had helped her find shelter with his brother.
+Upon hearing this, the baron revealed another scrap of information about Ciri. He told Geralt of a certain afternoon when he and his retinue had decided to celebrate a successful hunt with a bit of horse racing. The race had come to an abrupt halt, however, when a basilisk attacked. Here the baron employed an old storyteller's trick, breaking his tale off at a crucial moment and announcing he would not utter another word until Geralt found his wife.
+At long last, after Geralt had fulfilled his part of the bargain and found the baron's wife and daughter, the lord of Crow's Perch relieved the suspense and finished his tale. He recounted how Ciri had been forced to use her powers to save the baron's life. This had drawn the Wild Hunt's attention, so Ciri had had no choice but to flee once more - this time to the Free City of Novigrad. Geralt's search in Velen was at an end.
+Objectives
+Follow the baron.
+Use your Witcher Senses to search the room.
+Use your Witcher Senses to locate where the scent is coming from.
+Talk to the baron about what you found. (150)
+Find the pellar's hut.
+Talk to the pellar.
+Refused to bring back the goat:
+Agree to help find the missing goat...
+Lead the goat to the pellar.
+Read the bestiary to learn more about botchlings.
+Talk to the baron.
+If agreed to save the stablehand:
+Save the stable hand and the horses trapped in the burning stable.
+Open the main gate to the stables.
+Defeat the baron in a fistfight. (50)
+If chosen to come back later:
+Tell the baron to show you where he buried his child.
+Follow the baron.
+If Geralt kills the botchling:
+Kill the botchling.
+Protect the baron from wraiths.
+Protect the baron from the wraiths.
+Talk to the pellar.
+If you didn't proceed immediately:
+Go to the pellar when you are ready to to start the ritual.
+Follow the pellar.
+Prepare for the ritual and light the fires. 0/3
+Relight the fires in the braziers if they go out during the ritual. 0/3
+Find the fisherman Voytek's hut.
+If Geralt chooses to turn it into lubberkin:
+Follow the baron to the castle's entrance. (150)
+Protect the baron from the wraiths.
+Use the Axii Sign to calm the botchling.
+Protect the baron from the wraiths.
+Use the Axii Sign to calm the botchling.
+Summon the lubberkin where the botchling is buried.
+Follow the lubberkin.
+Examine the dead horses.
+Follow the lubberkin.
+Search the area around the smokehouse using your Witcher Senses.
+Follow the lubberkin.
+Examine the dead horses.
+Follow the lubberkin.
+Look around the fisherman's hut. (300)
+Talk to the baron about his family.
+Find Tamara, the baron's daughter, in Oxenfurt. (150)
+Talk to the baron about Tamara.
+If talked to the baron before finding Anna:
+Investigate all remaining leads in Velen and find the Baron's wife.
+Tell the baron what you've learned about Anna. (300)
+If he hasn't told you his last story about Ciri yet:
+Talk to the baron. (200)
+Bugs
+ 
+Oswin, the Stablemaster, may spawn inside a wall or outside the burning barn altogether.
+If the Lubberkin option is chosen, when first encountering the wraiths on the way to the castle, if the cutscene is skipped then you will be moved back to the grave site and a fight with the Botchling will be triggered.
+Sometimes after this quest has been completed, a botchling can be found in the same location where Geralt and the baron found it in the quest. This botchling cannot be interacted with and appears to not have any reason to exist besides an accidental glitch.
+Notes
+In the courtyard of Crow's Perch you can find a few of the baron's men in line to use the outhouse, while one is locked inside. If you interact with the closet you will be told that Edric has been on this toilet for some time. This is the same Edric mentioned when you first reach the Pellar's house in this quest. If you dealt with the Baron's men there by offering a cure, Edric will later no longer be in the toilet.
+The cat seen in the Oxenfurt house Tamara is hiding in is Nibbles.
+Two additional quest items with unknown purposes, a wooden amulet and baron's dagger, have been cut from this quest but still exist in the game files.
+Trivia
+While investigating in the storage/basement area, you can hear a guard and a henchman talking about "bringing out the gimp". In game, they are of course talking about Uma, but this is a reference to Pulp Fiction.
+Videos
+The Witcher 3 Botchling Boss Fight (Hard Mode)Botchling fight (no commentary)The Botchling - The Witcher 3 DEATH MARCH! Part 16 - Let's Play HardBotchling and lubberkin (commentary)Bloody Baron Movie- Good and Bad Endings. Full Story (Witcher 3 - Geralt in Velen)Full quest (no commentary, long video)Family Matters quest (searching the rooms)first part of quest (no commentary)Family Matters quest (talk to the Pellar)second part of quest (no commentary)Family Matters quest (the unborn child)third part of quest (no commentary)The Botchlingfourth part of quest (no commentary)Family Matters quest (meeting Tamara)fifth part of quest (no commentary)
+External links
+Developer Interview of the story behind this quest

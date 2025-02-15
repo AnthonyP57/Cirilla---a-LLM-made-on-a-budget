@@ -1,0 +1,56 @@
+Ifrit
+Ifrits or afreets are genies from the Plane of Fire. When summoned, they generally do not grant wishes, unless the summoning party wishes to die or to have someone killed. These creatures are undoubtedly intelligent, but mortals can not penetrate their minds. That is just as well, because their visions of an all-encompassing inferno would most certainly drive any human mad.
+Large golems fueled by the element of Fire, that is the Fire Elementals, are sometimes dubbed ifrits, but have nothing in common with the real ones.
+The Witcher
+
+Journal Bestiary entry
+"An ifrit is a minor genie of fire, or, as some say, an elemental. It does not fulfill wishes, build palaces or make anyone rich, but it serves mages who research the element of fire if they can force the creature to be obedient.
+Ifrits can only be captured by a mage who intimately understands the nature of flames and has devoted himself completely to learning their secret. The creatures, with their connection to the element of fire, will judge their summoner and, if they find him worthy, will loyally serve him in all matters."
+Location
+in the presence of Azar Javed and Salamandra mages
+Ice Plains
+Source
+The Last Wish
+In Chapter V, among the wounded on the streets of Old Vizima, there are female human "Nurse"s and/or elven "Paramedic"s. Sometimes Geralt can speak with them and they will ask for something. In return, any one of them will tell Geralt about Ifrits.
+a Nurse asks for Naezan salts or Wine stone
+a Nurse asks for "healing brew"
+a Paramedic asks for White Raffard's Decoction
+a Paramedic asks for Honeysuckle or Hop umbels
+Notes
+In the Prologue, Lambert claims silver is best to use against "genies," but the conversation does not result in a bestiary entry for Ifrits, the only genies in the game.
+Also called Omen of Fire.
+The Witcher 3: Wild Hunt cut content
+Ifrits were supposed to appear in the third game during its development in 2013 - 2014 but was removed at some point prior to release. It's possible they were replaced with a fire elemental based on its description and the fact that its notes had a fire elemental picture attached.
+Information from leaked materials
+Special kind of golem. Usually very strong and quite intelligent, but performs only set of predefined actions.
+Elementals use their physical strength mostly, and their main goal is to stop the opponent, no matter what the cost is.
+Role in the group: Individual
+Preferred behavior: aggressive - chases the opponent and attacks.
+Special attacks and actions:
+Strong attacks - his attacks are slow paced but deal high damage.
+Throwing magical projectiles - Elemental can spawn a magical fireball of white fire and throw it at enemy. The fireball can be stopped with Heliotrop. It causes Burning effect.
+White fire - Elemental can ignite himself with white fire fo 5 seconds, it deals damage to all creatures in 3 meters radius. The ignition has a tell animation. Player can use Heliotrop to protect himself from the white fire.
+Charge - creature charges, the target is knocked down if hit. Charge can be dodged. Blocking with Quen saves from damage but not from the knockdown effect. Charge cannot be parried.
+Charged attack - Elemental charges his fist with white fire and performs a very strong attack (with a tell animation). This attack knocks his opponent back (far distance), deals high damage and can cause Burning effect.
+Defence:
+Block - Elemental can block half of incoming damage when in blocking state. After each block he tries to perform a counterattack.
+Huge creature - elemental doesn't play every hit animation. His attacks cannot be interrupted with normal strikes (player has to use amplified Aard to break incoming attack).
+Vital points:
+Instant kill:
+Crushing red crystal - available after destroying the Stone cage vital spot. The red crystal is the source of Elemental's magical energy, destroying it kills the construct (cost: 5 points).
+Protection:
+Stone cage - a shield protecting the red crystal vital spot. It has to be destroyed to make the red crystal appear (cost: 5 points).
+Critical effect/disable ability:
+Crushing white crystal - disables abilities of Elemental connected to white fire: White fire, Charged attack and Throwing magical projectiles (cost: 3 points).
+Massive damage: none
+Immune to: Silver, all basic witcher's signs
+Vulnerable to: Steel
+Notes
+In the side quest The Witchers' Forge, a fire elemental is incorrectly labeled as in ifrit.
+Gallery
+
+References
+↑ The Last Wish
+↑ The World of the Witcher
+↑ Gwent: The Witcher Card Game
+↑ Leaked CD PROJEKT RED materials from 2014

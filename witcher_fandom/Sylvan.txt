@@ -1,0 +1,80 @@
+Sylvan
+Picture a humanoid goat complete with horns on its head, hair on its legs, a tasseled tail, and above all, impeccable grammar.
+- Anonymous Oxenfurt scholar, Netflix's The Witcher
+Sylvans, called willowers or pucks, and labeled superstitiously as devils (archaic Common: deovel; Elder Speech: d'yaebl; Dwarvish: duvvel), are an exceptionally rare, intelligent race native to the woodlands of the Northern Kingdoms. They are distinguished by prominent goat-like visage and delight in pranks, feasting, and music.
+Sporadically, sylvan may also be referred to as a "faun".
+Quick Answers
+What is the origin of the name 'Sylvan'?
+						In the Witcher series, 'Sylvan' refers to a Relict creature, specifically a Yaksha subspecies. Sylvans inhabit the Northern Kingdoms and the Far North's pastures and woodlands. They are recognized by their distinctive physical characteristics: cloven-hooved legs, a tassel-ended tail, pointy ears, goat horns, and yellow eyes. Their hair can be red or grey. Sylvans are also known as Devil/Deovel, D'yaebl, Duvvel, Willower, Puck, and Faun.
+					
+						Provided by: Fandom
+					
+What are some common characteristics of Sylvans?
+						Sylvans, native to the Northern Kingdoms' woodlands, are distinguished by their goat-like features, including horns, a tasseled tail, and cloven hooves. They are known for their jovial nature, fondness for music, particularly reed pipes, and their enjoyment of tricks and riddles. Despite their mischievous behavior, they are often helpful, assisting in tasks like field fertilization and pest control. They primarily consume a herbivorous diet.
+					
+						Provided by: Fandom
+					
+What is the meaning of 'Sylvan' in the context of the Northern Kingdoms?
+						The term 'Sylvan' in the Northern Kingdoms pertains to an intelligent woodland race. They exhibit a goat-like countenance and are fond of pranks, feasts, and music. Sylvans, occasionally called 'fauns', are an uncommon species, recognized by their distinct goat-like features. They converse in Common Speech and Elder Speech.
+					
+						Provided by: Fandom
+					
+What are some of the cultural practices of Sylvans?
+						The Sylvans, an intelligent race from the Northern Kingdoms' woodlands, are recognized by their goat-like features and are often called 'fauns'. They enjoy pranks, feasting, music, and are particularly skilled at playing reed pipes. Their diet is primarily herbivorous, but they also indulge in pipe-smoking, overeating, and drinking. Some Sylvans possess magical abilities, including mental spells and fire-breathing. They are jovial creatures who love tricks and riddles, and they contribute to their environment by fertilizing fields, scaring away birds, and consuming caterpillars.
+					
+						Provided by: Fandom
+					
+How do Sylvans interact with other races in the Northern Kingdoms?
+						Sylvans, an intelligent race with a goat-like visage, are native to the Northern Kingdoms' woodlands. They are fond of pranks, feasting, and music. These beings, also known as 'faun', predate the arrival of Nordlings or Aen Seidhe on the Continent. Sylvans' interactions with other races are diverse. They typically disregard gnomes unless they threaten nature, while their relations with dwarves are notably hostile.
+					
+						Provided by: Fandom
+					
+{"@context":"https:\/\/schema.org","@type":"FAQPage","name":"Sylvan","mainEntity":}
+Characteristics
+
+Physical description
+Sylvans resemble a human with goat's horns, soft lips with yellow, horse-like teeth, and a goatee. Their lower body features a tasseled tail and hairy legs with cloven hooves. The horns earned sylvans the label of "devils", which they dislike, and occasionally cause confusion with the beastly chorts for humans who have never seen the latter. Their voice resembles goat's bleating. Their life-spans reached up to more than 100 years.
+Though miles away apart in behavior, sylvans are related to the Aen Seidhe with whom they share the blood of the Elder Race. It's therefore unsurprising that many sylvans are quite familiar with elven defenses and that the two peoples have no difficulty to cooperate. Some scholars include sylvans among the so-called sapient monsters.
+Mental traits
+ 
+Most sylvans are merry, enjoying tricks and riddles more than anything else. They also love music and are quite apt at playing reed pipes. Mischief aside, they can be helpful by fertilizing fields, scaring birds away, voluntarily watching over turnips, and eating caterpillars. Their diet is largely herbivorous. However, they can also become very comfortable and spend days in idleness, puffing on pipes, overeating, and downing stiff drinks.
+As for magical prowess, many sylvans can learn mental spells. Others, it seems, found a way to breathe fire in combat.
+Procreation
+Dryads, with whom they live in Brokilon, value sylvans as lovers guaranteeing a vigorous daughter. In theory, sylvans may procreate with elves and humans but this doesn't occur. Indeed, fauns bedding nymphs are a popular motif in art and sculpture.
+Notable sylvans
+Allgod
+Fugas
+Oberhasil
+Torque
+The Witcher 3: Wild Hunt
+A bestiary entry can be obtained by reading The Heart of the Wilds, but the book never appears during gameplay.
+Bestiary entry
+Sylvans are cruel, greedy and treacherous. Still, I prefer them to dh'oine.– Yaevinn, legendary Scoia'tael commander
+Sylvans and yakshas, a kindred species, are extremely rare woodland creatures whose appearance combines traits of goats and rotund men. These beings usually pose little danger, for they limit their contact with humans to playing harmless (though often bothersome) tricks and eating crops from their fields.
+Unobtainable without reading the book:
+Sylvans and yakshas, resemble men not just in appearance, but also in behavior – though it must be said they have adopted more of our vices and weaknesses than strengths. Lazy by nature, they would gladly spend every day in idleness, puffing on pipes, gorging on rich foods and downing strong drinks.
+Since sylvans and yakshas enjoy partaking of the fruits of others' labors without asking permission, men do not take to them kindly and at times, fooled by their awkward appearance, will try to solve this problem using force. This often ends in tragedy, for sylvans, despite their corpulent frames, are astonishingly strong and agile. They also emit a powerful and extremely unpleasant scent which can cause even a witcher, whose line of work accustoms him to foul stenches, to gag and feel faint. Watch out in particular for yakshas, which are fiercer and keener on fighting than normal sylvan.
+Combat tactics
+Melee combat against a sylvan is difficult, even for a witcher. One has to evade the physical strikes from a sylvan, not attempt to parry or counterattack. Yrden can gain time to bring a silver sword into play, but a sylvan can counter this by breathing intense flames that melt through the best armor. If close-quarters combat isn't going well, one should be prepared to make use of long-ranged options. A crossbow loaded with good bolts can keep the witcher relatively safe, whilst being effective.
+The Witcher: Monster Slayer
+There are four types of the monster in the game: Sylvan, Sylvan Dearg, Harrower, and Mulcher. They differ with strength level and appearance. Sylvan drops powdered monster tissue, while the other 3 drop relict remains. They are all vulnerable to strong attacks and steel.
+Sylvan
+It is a mid level common monster, and it is virtually the same as its The Witcher 3: Wild Hunt counterpart, when it comes to appearance.
+Sylvan Dearg
+It is a rare monster, slightly stronger than a common Sylvan.
+Harrower and Mulcher
+They are both legendary monsters, appearing only during Lammas. According to the bestiary, Harrower is said to deliver exteremly strong blows and Mulcher is know to scatter bones around fields.
+Gallery
+Corpulent sylvan with one horn broken.A Sylvan Dearg trophy in The Witcher: Monster Slayer bestiaryA Harrower trophy in The Witcher: Monster Slayer bestiaryA Mulcher trophy in The Witcher: Monster Slayer bestiary
+Footnotes
+↑ 1.0 1.1 Though "puck", 1st mentioned in Sword of Destiny, has been assumed to be another alias for a sylvan since at least 2014 (due to their parity in folklore) it was only confirmed by Fugas' entry in The Witcher 3: Wild Hunt.
+↑ 2.0 2.1 Despite the similarity, it has not yet been confirmed whether or not sylvans and fauns are the same creature. R. Talsorian Games, however, did respond on Twitter that commoners such as Rodolf Kazmer would consider the terms synonymous.
+References
+↑ 1.00 1.01 1.02 1.03 1.04 1.05 1.06 1.07 1.08 1.09 1.10 1.11 The Last Wish
+↑ 2.0 2.1 2.2 2.3 2.4 2.5 2.6 2.7 The Witcher 3: Wild Hunt
+↑ Sword of Destiny
+↑ 4.0 4.1 4.2 4.3 4.4 Wiedźmin: Gra Wyobraźni
+↑ A Witcher's Journal
+↑ Gwent: The Witcher Card Game
+↑ Sword of Destiny
+↑ Season of Storms

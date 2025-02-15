@@ -1,0 +1,44 @@
+Six Feet Under
+Siegfried gives Geralt this quest at the beginning of Chapter III. People have been disappearing in the cemetery and the Order would like to get to the bottom of it. They do not have the manpower to spare, so a witcher's help is required.
+Walkthrough
+At the very beginning of Chapter III, Geralt finds Siegfried at his new post outside the Cloister, just up the hill from his old post. They chat and while catching up, Siegfried mentions that he could use the witcher's services to investigate the mysterious disappearances of townsfolk in the cemetery. Being the obliging soul that he is, the witcher agrees and heads over to the necropolis.
+Once inside, he finds evidence of ghoul activity, but then finds more nefarious traces - the corpse of a woman has obviously been stabbed and not eaten. A few random encounters with some ghouls later and our hero comes upon a particularly unusual sight: a talking ghoul named Vetala. They chat and then our hero must then decide whether or not to allow the ghoul to live.
+Kill Vetala: Geralt believes that Vetala was behind the murders. He kills the ghoul, but not without a fight, and it seems that Vetala has some allies as several other necrophages join in. Once the gang of ghouls has been dispatched, the witcher reports back to Siegfried for his full reward and the quest ends. (2000 XP when Vetala dies, 2500 XP and 200 when reporting to Siegfried).
+Spare Vetala: In exchange for his life, Vetala tells Geralt who is really responsible for the disappearances: the Scoia'tael. There is a unit of elves and dwarves over by the cemetery crypt. The witcher goes to intercept them just as they are about to leave. They offer him a choice: stand and fight leaving the people they kidnapped to die in the crypt, or allow the Scoia'tael to leave and save the innocents inside.
+Innocents: If Geralt decides to save the innocent people, he must enter the crypt immediately. Inside he will be attacked by ghouls mostly as he heads for the farthest chamber where the hostages are cowering. They are surrounded by about five more ghouls. Once the necrophages have been dispatched, one of the women thanks the witcher for his assistance. The witcher then reports back to Siegfried, who is more pleased with him, explaining that the nobler option was taken and rewards the witcher more generously for his service. (2000 XP when the last undead dies, 4500 XP and 400 when reporting to Siegfried)
+Murderers: Geralt attacks the murderers. (2000 XP when killing any of the Scoia'tael, 3500 XP and 300 when reporting to Siegfried)
+This concludes the quest.
+Notes
+Siegfried is available only during the daytime.
+If you helped Yaevinn during the Gold Rush quest, you will not be able to complete this quest, so do this quest first if you wish to complete both quests.
+Completing this quest causes the dwarven blacksmith to stop doing business with Geralt.
+Completing this quest causes the Order armourer to resume doing business with Geralt.
+For more information on how this quest interacts with Echoes of Yesterday and Gold Rush, see the Trigger Conditions and Related Quests section of Gold Rush.
+Bug? If you kill the murderers it will also say you killed Vetala.
+If you do not begin this quest during Chapter III, then when you get to The Ashes of Vizima in the Epilogue, Vetala appears in the cellar beneath the safe house and you have the option of sparing his life or fighting him for minimal XP. He says that a "child" (presumably the Resolute Girl who resides at the safe house at this time) speaks to him all day, pestering him.
+If you wish to complete all the quests, tested paths are to do the first few quests in Chapter III in the following order:
+this quest for Siegfried and Echoes of Yesterday for Yaevinn in any order (EE), then
+you could sneak in Dandelion's Lute (or other minor "fed-ex" type quests) here
+A Posh Reception (see last note), and finally
+Gold Rush
+A Posh Reception can be delayed indefinitely, you can actually start all the other quests in Chapter III, and finish most of them except for Velerad's contracts, Lock and Key, Gold Rush, Beauty and the Beast, and All the King's Men.
+Phases
+
+The Cemetery
+People are disappearing at the cemetery. Siegfried asked me to investigate. I should have a look around. Siegfried asked me to investigate the strange disappearances in Vizima's Cemetery.
+The Commando / A Talking Ghoul
+Spare Vetala: I let the ghoul Vetala go. In exchange, he told me that an elven unit is killing people in the cemetery. I should find and annihilate them. I should find and destroy the elven unit.
+Kill Vetala: Whether talking or not, a ghoul is dangerous. I need to get rid of it before it claims more victims. I need to slay the ghoul before it claims more victims.
+A Choice / Vetala Killed
+Spare Vetala: I found the murderers, but they have given me a terrible choice. I can fight them or try to rescue the people they left at the mercy of the ghouls in the crypt. I doubt I can do both... I can either fight the elves or rescue the people from the ghouls.
+Kill Vetala: I killed the monster named Vetala. It was probably responsible for the disappearances at the cemetery. I should tell Siegfried what I saw. I should tell Siegfried what I saw here.
+Job Done
+The talking ghoul is dead. Job done. The cemetery should be safe now. (Quest ends: 200 + 2500 XP)
+The Fight with the Elves / The Rescue
+Fight the elves: I decided to eliminate the elves. The people in the crypt - I probably can't save them, but there will be no more murders. I need to report to Siegfried. (2000 XP)
+Save the innocents: I found the people in the crypt. I should speak to Siegfried. I saved those trapped in the crypt. I should speak to Siegfried. (2000 XP)
+Siegfried Dissatisfied / Siegfried Satisfied
+Killed the elves: I found out why people were disappearing, but Siegfried was unhappy with my decision. He doesn't understand that killing the murderers instead of rescuing a few people will save more lives in the end. I figured out the disappearances, but Siegfried was unhappy with my choice. (100 + 3500 XP)
+Saved the innocents: I figured out the disappearances, and Siegfried was happy with my choice. He said human lives are most important, and his troops will hunt down the murderers. He was so happy he upped my reward. I figured out the disappearances and Siegfried was happy with my choice. (400 + 4500 XP)
+Videos
+Six Feet Under

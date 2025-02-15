@@ -1,0 +1,64 @@
+Golem
+
+The Witcher
+Frustrating jobs happen in every profession. Golem contracts are just such a job for witchers, as they involve slashing through solid rock animated by magic. Luckily, what is brought to life by a lightning bolt can very well be destroyed by one. This is something we all truly wish the golem, from the very bottom of our hearts.
+In the game, Geralt finds an old golem cemetery in the swamp with four or five of the beasts "frozen" in place. As it happens, he must re-animate and then kill one of them to complete the main quest in Chapter II.
+Journal Bestiary entry
+"Once an absent-minded mage created a golem, animated it by casting Alzur's Thunder, and ordered his new servant to fetch water, before burying himself in his scholarly books. The golem kept carrying water day and night, without pause, and ultimately flooded not only the mage's house, but the whole city. As you can see, my young students of the Art, improper use of tools and a lack of elementary training may cause a tragedy.
+Anabelle Radfind, Lectures on Security and Hygiene in Magic"
+Location
+Golem burial ground
+Source
+Animating the Inanimate
+Kalkstein
+Physiologus
+Notes
+This monster is encountered during The Sentry quest. Tips for beating it are found there.
+The in-game journal entry could be a reference to the story The Sorcerer's Apprentice; Disney's version with Mickey Mouse and Yensid (as part of Fantasia), is likely the best known retelling of the story.
+You can either do your best to defeat the Golem by using Signs (Aard is useless, it does no harm to Golem, Igni is better, despite the fact that its fire against stone) and swords and Potions, or you can try to dodge the Golem's blows, touch each one of the three pylons so that they light up and a lightning strikes the beast. Third time the lightning strikes, the Golem shatters.
+The Tower Mage's Book refers to the research the mage Alzur had made towards the construction of a Golem, specifically the importance that the Thunder and Shield spells have in animating inanimate matter.
+Kalkstein's research (and resulting treatise) on alchemical methods of creating a Golem fell short of an actual successful theory; the treatise mentions the solution could possibly lie in performing "reverse transmutation", but the alchemist admitted that since no-one knew how to perform this, the problem of animating the inanimate remained unsolved.
+Monsterbook
+ 
+Developer CD PROJEKT RED's characterization of the golem taken from the monsterbook, which was enclosed with the Collectors Edition of the computer game The Witcher for Poland, Hungary, the Czech Republic and Slovakia:
+The golem is often portrayed as a clumsy, faceless figure made of clay or as a perfect effigy of a man. Neither of these ideas was suitable to the world of The Witcher. Ultimately, our golem became a piece of roughly hewn rock animated by a magical obsidian heart placed inside the beast's chest by its maker. The mage who created it was no sculptor; he cared little for aesthetics and focused on functionality. This creature was meant to work and defend its master's property. And the golem performs these tasks (especially the latter) perfectly, with ruthless efficiency.
+The hero encounters the golem in the swamp forest, near the Golem Burial Ground. The creatures stands still, frozen in mid-step, having expended all the power which animated it. Geralt's task is to bring the creature to life, which he does by summoning a storm with the help of friendly druids. We obviously drew the concept of a thunderbolt giving life to inanimate matter from the story of Doctor Frankenstein's monster. Having Geralt yell "It's alive!" was too tempting to pass up. The golem is thus inspired both by the legend of a rabbi from Prague who created an artificial human being and by Mary Shelley's novel. This combination fits our world of grim and gritty fantasy.
+The Witcher 2: Assassins of Kings
+There are two types of golem in The Witcher 2: Assassins of Kings referred to in the journal as Earth elemental and Fire elemental.
+There is also a sentient Talking Golem in Dearhenna's laboratory beneath Loc Muinne.
+The Witcher Battle Arena
+ 
+Golem was one of the playable heroes in the now defunct MOBA.
+We don't know much about this ancient creature. Where did he come from? What's the purpose of his existence? The only thing known for certain is that he is a ruthless killing machine, who can mix physical and magical attacks. His passive skill, Stone Armor, allows him to get into the fray, and he gets more armor and magic resistance the longer he stays in battle.
+Summon Gargoyles - Golem's first skill, as the name suggests, summons a gargoyle which lands on the ground causing damage to all within its radius and slows them down. Then the creature starts to follow the closest enemy, only to explode when it reaches him (or after a few seconds), dealing even more damage.
+Stone Pillar - this skill is perfect for controlling opponent's moves. The Golem strikes the ground with all his might, causing a small tectonic rift, that travels in the pointed direction, pushing enemies to the sides. At the end of the rift a stone pillar erects from the ground, dealing extra damage and further moving enemies to the sides.
+Contravention - Golem's special skill needs to be used carefully. It's very easy to perform (you just have to tap the button), but choosing the right moment is the greatest challenge. When used, The Golem explodes into pieces which start to rotate really fast, drawing all enemies in the vicinity to the centre. After a short moment, Golem explodes again just to reconstruct himself, damaging the enemies caught, and regaining 40% of his total life.
+The Witcher 3: Wild Hunt
+The bestiary entry can be obtained by reading Golem, or Man's Most Faithful Servant.
+Bestiary entry
+If want us to break through this wall, we're gonna need twenty sappers, seven mules and a hundredweight of saltpeter. Or one golem.– Vilmir Brass, foreman at Mount Carbon
+Golems are mindless matter brought to life by a spell. They obey their creator's orders without question. Their boundless strength, ability to withstand pain, endless patience and the fact that they need not one jot of food or drink makes them the best servants or guards anyone could ask for. Once provoked, they will not tire of battle until they have either crushed their opponent or themselves crumbled to dust.
+Defeating a golem is extraordinarily difficult: for obvious reasons it does not bleed, it feels no fear or mercy and it is invulnerable to fire and poison. What's more, a golem's body is as hard as the rock it is sometimes heft out of, so even a silver blade will barely wound it. The monster's only weakness is acid – a blade covered in acrid oil can thus increase one's chances for victory.
+Golems use no weapons, for they have no need – their fists, weighing over a hundred pounds each, can crush solid granite with one hit. A blow from a golem should thus be avoided at all costs – there is no shield that can stop it, nor sword that can parry it. That is no easy task, for these creatures are able to move with surprising speed. Luckily, their enormous mass means they are not very agile – once a golem begins a charge, it cannot stop quickly, a fact experienced witchers use to their advantage.
+Combat tactics
+Do not attempt to parry the punches delivered by a golem. The sheer weight and power behind them renders such thinking suicidal at best. A charging golem cannot be easily stopped, but a clever witcher can use this to their advantage. Roll out of the golem's path, then strike.
+Yrden is useful when going toe-to-toe with a golem, but remember that the golem is merely slowed, not helpless. They can still fight despite Yrden's effects, and can still interrupt a witcher's swordplay with a single crushing blow.
+Like other elementals, a golem can pound the ground with such ferocity, anyone standing near it is knocked prone. Also similarly, when golems feel vulnerable, they may crouch and protect themselves with their arms, becoming invulnerable to frontal blows. However, that also exposes their back, allowing a witcher to freely strike at it with great effect.
+Surprisingly enough, a fully developed Whirl attack combined with the effect of Thunderbolt potion and elementa oil can in fact devastate a golem, as the creature's size prevents it from evading Geralt's attack, and its vulnerability to the knock-back effect mean that once caught inside the whirling storm of silver blade, it cannot back out or retaliate as long as Geralt has the stamina to spare.
+Associated quests
+Child of the Elder Blood
+The Sunstone
+The Tower Outta Nowheres
+Wandering in the Dark
+Magic Lamp
+Scavenger Hunt: Cat School Gear
+Notes
+The one golem encountered in the Hearts of Stone expansion, at Olevald Clearing, is a unique stronger version that also drops elemental essence, infused shard and greater Stribog runestone (instead of monster essence, infused dust and lesser Stribog runestone respectively).
+Videos
+The Witcher 3 Golem Boss Fight (Hard Mode)Golem (The Witcher 2) Full HDFire Elemental (The Witcher 2) Full HDFight with Golem, "The Sentry" Quest (The Witcher) HDWhat are Elementa? The Witcher 3 Lore - Elementa
+Gallery
+Earth elemental in The Witcher 2: Assassins of KingsFire elemental in The Witcher 2: Assassins of KingsGwent standalone art
+References
+↑ The Golem – hero presentation
+External links
+ See the GWENT standalone game version card: Golem

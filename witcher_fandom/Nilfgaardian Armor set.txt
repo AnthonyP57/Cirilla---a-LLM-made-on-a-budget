@@ -1,0 +1,100 @@
+Nilfgaardian Armor set
+Nilfgaardian Armor set is one of the 16 free DLCs for The Witcher 3: Wild Hunt that was released on June 3, 2015. The DLC adds four Nilfgaardian-themed armor items, as well as three pieces of horse equipment, all of which can be bought from the quartermaster at Crow's Perch. The most basic version of the armor set is equippable at level 10 or above, while the second version becomes available at level 35.
+Wearing part of the Nilfgaardian armor set grants one access into the House of Respite.
+Basic set
+Image
+Name
+Base stats
+Purchase Price
+Nilfgaardian Armor
+Armor Rating: 80
++25% Resistance to piercing damage
++25% Resistance to bludgeoning damage
++30% Resistance to slashing damage
++10% Resistance to damage from monsters
++5% Resistance to elemental damage
+6.01
+255 
+Nilfgaardian Trousers
+Armor Rating: 27
++10% Resistance to piercing damage
++10% Resistance to bludgeoning damage
++10% Resistance to slashing damage
++3% Resistance to damage from monsters
++3% Resistance to elemental damage
+2.51
+97 
+Nilfgaardian Boots
+Armor Rating: 27
++3% Resistance to piercing damage
++3% Resistance to bludgeoning damage
++3% Resistance to slashing damage
++1% Resistance to damage from monsters
++1% Resistance to elemental damage
+2.51
+46 
+Nilfgaardian Gauntlets
+Armor Rating: 23
++2% Resistance to piercing damage
++2% Resistance to bludgeoning damage
++2% Resistance to slashing damage
++1% Resistance to damage from monsters
++1% Resistance to elemental damage
+2.51
+54 
+Nilfgaardian Horse Blinders
+Fear level: 40
+0.01
+229 
+Nilfgaardian Saddle
+Stamina: 50
+6.01
+457 
+Nilfgaardian Saddlebags
+Inventory weight: 70
+0.51
+320 
+New Game +
+While this armor is marked as the New Game + version, it can be purchased on any game save once the character level reaches 35.
+Image
+Name
+Base stats
+Purchase Price
+Nilfgaardian Armor
+Armor Rating: 205
++30% Resistance to piercing damage
++30% Resistance to bludgeoning damage
++35% Resistance to slashing damage
++15% Resistance to damage from monsters
++10% Resistance to elemental damage
+6.01
+623 
+Nilfgaardian Trousers
+Armor Rating: 77
++13% Resistance to piercing damage
++15% Resistance to bludgeoning damage
++15% Resistance to slashing damage
++8% Resistance to damage from monsters
++8% Resistance to elemental damage
+2.51
+134 
+Nilfgaardian Boots
+Armor Rating: 77
++8% Resistance to piercing damage
++8% Resistance to bludgeoning damage
++8% Resistance to slashing damage
++6% Resistance to damage from monsters
++6% Resistance to elemental damage
+2.51
+233 
+Nilfgaardian Gauntlets
+Armor Rating: 73
++7% Resistance to piercing damage
++7% Resistance to bludgeoning damage
++7% Resistance to slashing damage
++6% Resistance to damage from monsters
++6% Resistance to elemental damage
+2.51
+183 
+Gallery
+armor in gameConcept art

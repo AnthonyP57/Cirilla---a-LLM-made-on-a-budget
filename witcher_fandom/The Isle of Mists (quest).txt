@@ -1,0 +1,80 @@
+The Isle of Mists (quest)
+The Isle of Mists is a main quest in The Witcher 3: Wild Hunt.
+Important: numerous quests, some of which involve major sub plot content, will be failed or rendered unavailable after the warning given at the beginning of the quest. See cutoff point below for more.
+Walkthrough
+While the thick of it doesn't start until you travel to the Isle of Mists, this quest actually begins immediately after Uma's curse is lifted, and it has four subquests that also start at that point:
+Brothers In Arms: Nilfgaard
+Brothers In Arms: Novigrad
+Brothers In Arms: Skellige
+Brothers In Arms: Velen (may auto-complete if finished Keira Metz' questline)
+Before sailing to the island, make sure to gather as many allies as possible through those, but now is also the time to complete any remaining secondary quests below your current level (see Cutoff Point section). Recruiting all possible allies (except Letho) will award 50 as part of this quest, but later an extra 1,000 is given at the start of The Battle of Kaer Morhen as well (because of all the cutscenes, this can be mistaken as part of this quest, but it isn't). In addition, travelling to the island will lock you into an uninterruptible sequence of main quests that will award a total of 10,000. Thus, you may want to complete a few more quests above level 22 as well, as you may only get 5% from them afterwards.
+Packing slightly higher level equipment and a few weapon, armor repair kits (whether on you or in the stash) is also a good idea, as gear maintenance will become limited for a while.
+When certain that you are ready to go, travel to Skellige and take one of the three marked boats on your minimap (others won't work). Once you do you can fast travel with your boat to Undvik to make the trip shorter (there are a number of smuggler caches and other treasure locations en route if you take the long way, but this increases the chances of the boat being destroyed and at this point you might not want to be weighed down with discovered weapons).
+When near your destination, the game will ask if you wish to save it as this is a vital moment in the story. Do so if you wish, and right after it will ask you if you are certain you wish to go (with the recommendation of being no lower than Level 22). After you agree, Geralt will release the Magic firefly and you are moved to the Isle of Mists.
+Follow the firefly
+The firefly's movement can be a bit erratic and take you very close to rocks, so just make sure you don't crash your boat, but keep following it. Eventually you will encounter a couple of Ekhidnae, so use the Hornwall horn or your crossbow to get rid of them (you can do so while still moving the boat), though you could ignore them and just take some damage to the boat. Shortly after, you will reach the shore and now you have to follow the firefly on foot. Along the way you may encounter some tangalores (strong foglets), so deal with them however you like. Soon you will reach a hut and the firefly will stop there. Knock on the door.
+Ciri and the 7 dwarves
+ 
+Inside the hut are a few scared dwarves, who won't let Geralt in before he finds their friends Ivo, Gaspard and Ferenc. Off you go to search for them, but feel free to explore the island as well - you're only here for the duration of this quest and there are some treasures sprinkled around, mostly around the landing and northeastern shores, though a lot of them only contain runestones.
+Ferenc you can find on the southwestern peninsula, already dead. A Fiend will have its lair there, so you have to avenge him before examining his body to complete the objective. It's possible to avoid the monster, either if you're really quick in examining the body or if you lure the fiend away, but that isn't easy to do and requires very precise timings.
+Ivo is sitting high on a rock arch north of the hut, with a couple of Bilge hags below him. There are also harpies on the pathway between him and the hut, though they can be avoided if you went to explore and approach from the north. He will yell out to you once you're close enough and a short cutscene will start, with him falling to his death while talking to Geralt.
+Gaspard is the only one you save. He's at the lighthouse northwest from Ivo. Climb the ladders to the top to find him sleeping there. Wake him up and converse a bit, and you can choose to explore some more before coming back for him if you want. When you agree to escort him to the hut, you will have to kill a few more tangalores on the way, as well as wake him up from his narcolepsy attacks a couple of times. If you haven't found the other two dwarves yet, he'll wait by the hut once you reach it.
+Note: If you wish to explore the island, then it's best to do it either before escorting Gaspard, or to leave one to find after him. You won't get another chance when you're in front of the hut and all three are found.
+After you're all done and in front of the door, the dwarves will come out. However, they tell Geralt that Ciri is laying cold inside and the spirit has left her. A cutscene starts as they head for the boat and Geralt goes in to find her lifeless body. Devastated, he hugs her one last time, but as he does this, the firefly comes in and into Ciri, waking her and she embraces him back. You can then have a long conversation with her, recapping most of her story so far plus some tales of her travels between worlds. Feel free to talk about everything, despite being pushed for time by the Wild Hunt, everything is scripted.
+When done, the two head to join the dwarves at the beach, only to see them sailing away in your boat. The Wild Hunt then appears and Geralt urges Ciri to teleport them home. Another long cutscene follows with Ciri and Geralt appearing at Kaer Morhen. First Vesemir, then Yennefer and finally Triss come to greet you and after all dialogues are over the quest ends. (4,000)
+Journal entry
+After a long search Geralt was at last a step from his goal. Avallac'h had hid Ciri from the Hunt on the magical Isle of Mists, which could only be reached if fate deemed one worthy - or by following a magic firefly, which was decidedly the easier option. Geralt thus readied himself to sail to the isle and bring back Ciri.
+Finally. After years of separation, weeks of searching, dozens of false trails and endless worry, Geralt had found Ciri. They were not given long to celebrate their reunion, however. As soon as Ciri awoke from her magic slumber the Wild Hunt picked up her trail and began to attack. Geralt and his adopted daughter thus had no choice but to use Ciri's special abilities to flee to Kaer Morhen and face their attackers there.
+Objectives
+Talk to friends who could help defeat the Hunt and ask them to join your fight. (50)
+Go to Skellige.
+Get on a boat.
+Travel to the Isle of Mists.
+Follow the firefly.
+Check what's in the hut.
+Look for Ferenc along the coast.
+Look for Ivo in the cave.
+Look for Gaspard near the lighthouse.
+Bring Gaspard to the hut.
+Wake Gaspard up.
+Return to the hut. (4,000)
+Cutoff point
+The following quests fail or become unavailable if they are not completed before entering the Isle of Mists:
+A Dangerous Game
+A Deadly Plot
+A Favor for a Friend
+A Matter of Life and Death
+A Towerful of Mice
+An Eye for an Eye
+Berengar's Blade
+Brothers In Arms: Nilfgaard
+Brothers In Arms: Novigrad
+Brothers In Arms: Skellige
+Brothers In Arms: Velen
+Cabaret
+Carnal Sins
+Ciri's Room
+Coronation
+Fencing Lessons
+For the Advancement of Learning
+Ghosts of the Past (only if Letho is alive)
+King's Gambit
+Now or Never
+Possession
+Redania's Most Wanted
+Return to Crookback Bog
+The Fall of the House of Reardon
+The Lord of Undvik
+Notes
+During the scene at Kaer Morhen, Yennefer will kiss Geralt regardless if you romanced her or not. If you romanced Triss, Yen will ask if Geralt and her need a moment or vice-versa. If however Geralt was two-timing, things will turn awkward!
+You can encounter the dwarves of "Rabenick and Company" during Something Ends, Something Begins, in the woods directly west over the bridge from the Mill in White Orchard.
+Regardless of the condition of the boat players use to get past the cut-off point, it will always be in perfect shape when the game loads into the misty region.
+If you crash and sink your boat, Geralt will still tell the dwarves and Ciri that he has a boat. The boat will also magically return in the cutscene for the dwarves to sail away in.
+Although the three missing dwarves can be found in any order, the narrative is set up for Gaspard to be the last. They can also all be found before talking to the dwarves at the hut, but you won't be allowed to bring Gaspard back before they've asked you to, and there's only one unique comment when Ferenc's body is found, as Geralt doesn't yet know who he is and wonders how he ended up there.
+You will find the body of a dwarf in a cave near the northeast corner of the island, along with a chest.
+A number of chests are scattered throughout the region (both on land and in the sea) that can be accessed for treasure. This includes a number of hollow tree stumps that contain stashed coin; these do not glow when Geralt is using his witcher senses - nor are they referenced on chest maps for the region - and are only discovered when Geralt is next to them. This is the only time in the game that this location is accessed, so finding these chests and stashes should be done before returning Gaspard to the hut.
+After passing the "point of no return" warning, the ability to travel freely between regions will be disabled until the completion of Bald Mountain.
+Trivia
+This quest references Snow White and the Seven Dwarfs. In particular, Gaspard is based upon Sleepy, and another is based upon Sneezy. Ciri being trapped in coma and believed to be dead by the dwarves who have been looking after her also references the movie.
+Gallery
+Finally reunitedChests locations on the island

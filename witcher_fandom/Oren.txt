@@ -1,0 +1,35 @@
+Oren
+Oren (alternatively Temerian oren) is the official unit of currency in Temeria and the kingdom's vassal states and territories.
+ Temeria
+ Maribor
+ Ellander
+ Sodden
+ Garramone
+ Velen
+ White Orchard
+ Mahakam
+In 1252, the exchange rate was 6 orens to every Novigradian crown, and in August 1267, 100 orens exchanged to 9 Nilfgaardian florens.
+The following is considered game canon only and may contradict Andrzej Sapkowski's works.
+By 1272, the value of the floren had plummeted to one oren to a crown, and one floren to three orens.
+End of game canon content.
+The Witcher
+It is variously referred to as money, gold or orens and is the only currency used in The Witcher, unless you count gifts and alcohol. You can also check out our price lists!
+Making the most of your orens
+The Witcher Cheapskate's Guide
+Uses for orens
+ Payment
+ Bribe
+The Witcher 2: Assassins of Kings
+The oren is still the currency in The Witcher 2: Assassins of Kings, which is rather strange given the fact that a good deal of the game takes place in Aedirn, which uses the mark. The Collector's Edition of the game includes a metal replica of a Temerian Oren.
+The Witcher 3: Wild Hunt
+The oren is no longer the main currency in The Witcher 3. Instead, the crown takes its place. May sometimes be referred to as gold or money or coin. During Geralt's journey throughout Temeria he may sometimes acquire a few orens from looting various containers or corpses. These will be kept in his inventory like an ordinary item and may be exchanged for crowns at the Vivaldi Bank in Novigrad for a one-to-one conversion. In the Blood and Wine expansion, orens may be exchanged for crowns at the Cianfanelli Bank in Beauclair.
+Bugs
+Orens may not appear in quantities larger than 100 on the Velen/Novigrad map, or 103 on the Skellige map, due to a leftover artificial limitation from a game mechanic that was never fully developed, but also never cleaned up. The intended logic was likely meant to simply reduce larger quantities to the mentioned numbers, but instead whenever the limit is reached they get outright removed. This is actually a global mechanic, but luckily in the case of orens it only happens to affect a couple of quests, while the only other item affected globally is balisse fruit, although in a different way.
+Gallery
+In Witch's Lament
+Footnotes
+↑ The plummet in value of the floren and rise of the oren, contrary to expectations with Nilfgaard annexing Temeria, was almost definitely implemented into The Witcher 3: Wild Hunt to prevent the oren from becoming obsolete.
+References
+↑ The Last Wish
+↑ Baptism of Fire
+↑ The Witcher 3: Wild Hunt

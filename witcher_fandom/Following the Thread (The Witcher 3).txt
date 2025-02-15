@@ -1,0 +1,62 @@
+Following the Thread (The Witcher 3)
+Following the Thread is a secondary quest in The Witcher 3: Wild Hunt. It involves Lambert and his quest to avenge a witcher friend of his, Aiden.
+Contract: Monster in the Bits
+By order of the City Council number 1408/DZ/185, a reward has been set aside for the killing of the monster which torments and murders residents of the Bits after dark.
+The only acceptable proof of having performed this deed shall be a trophy taken from the monster's body.
+Yes, this means your mother's or cousin's or aunt's eyewitness testimony will not suffice, nor will the sworn word of any other person, regardless of his or her claimed relationship to you, the Hierarch or anyone else, and also without caring one whit for his or her alleged trustworthiness, which supposedly can be attested to by anyone at your favorite drinking hall.
+For more information and/or to collect the reward, see the District Superintendent for the Bits.
+-LundBy writ of the City CouncilSuperintendent of the Bits
+Important: the events at the Seven Cats Inn during this quest are a cutoff point for the secondary quest Flesh for Sale on Skellige. A part of this quest takes place at the same location and thus completing Destination: Skellige is a requirement to complete this quest anyway.
+Note: this quest will fail if not completed before retrieving Uma from Crow's Perch during Ugly Baby.
+Walkthrough
+This quest can be started by finding the notice Contract: Monster in the Bits on Hierarch Square's notice board. With it, go talk to the supervisor, and it turns out that some "brave fool" is already after the beast. However, you'll still learn the location of the incident and can investigate.
+After examining the crime scene, follow the track of claw marks until you reach the river, here you have to swim to the other side, were you'll find the rest of the tracks. Upon entering the building you'll find Lambert fighting an ekimmara. After the fight you have a short chat with him and at the end you'll have the option to immediately collect the reward together or meet up later. Choosing the latter is better, so you can loot an ekimmara hide from the vampire's remains.
+Either way, when you go to collect the reward with Lambert, he starts a fight and goes after the supervisor, leaving you behind to deal with three guards. When done with them, head inside the building, where no matter what Lambert will finish off the supervisor and ask you to join him at the Seven Cats. Important: This is the cutoff point for Flesh for Sale. After the next talk with Lambert starts, that quest will no longer be available.
+When you talk to him next, Lambert will explain that he's after an assassin named Jad Karadin in order to avenge for Aiden, his witcher friend from the School of the Cat, who Jad and his gang murdered. One of the gang members, Vienne, frequents the inn, so that's why you're here and you head inside.
+When you talk to her, she will claim she doesn't know where Jad Karadin is. However, she will provide you with the information of the other two members, Selyse and Hammond. A fight may or may not break out depending on which conversational option is chosen at the end. Choosing the option "Do what you think is right" will cause Vienne to call for help and combat with Vienne and three other elfs will start, while the other option is peaceful. In either case, Lambert will suggest splitting up, and Geralt will have to search for Hammond on Faroe. Note: Prior to finding Hammond, you may optionally speak with Crach to learn what he knows about Hammond.
+Go to Faroe and speak to the pirates at the entrance of Trottheim. Note: If you have already completed Flesh for Sale, do not fast-travel to Trottheim, because you will be transported to the middle of the village, and the conversation with the pirates will not trigger. As they've met Geralt before, they'll turn hostile in this case anyway, but it's also possible that even with an outside approach they don't drop Orders from Hammond, which is supposed to reveal his location.
+Regardless of how they're dealt with, Hammond can be found at a shrine near the easternmost end of the island, although the location marker may be wrong if you have completed Flesh for Sale. After a brief dialogue with Hammond, he and his men will attack you. Once all of them are killed, searching his body will give you a letter from Jad Karadin.
+Note: Prior to Patch 4.01, while Crach states that he will offer a reward for killing Hammond, upon completing this task and returning to him, there are no additional dialogue options to receive the reward. However, with the patch, Crach now has a dialogue option to receive the promised reward, earning 50 and 200 .
+Return to Novigrad and meet Lambert at The Nowhere Inn. Lambert will tell you that Karadin is now living as a successful merchant and trader in Novigrad under an alias. Geralt and Lambert will decide to visit Karadin at his home. As the duo approaches Karadin's residence, guards approach them and take them to Karadin, who turns out to be a retired witcher. Geralt converses with Karadin, who says that his band was forced to kill Aiden when he turned on them. You can choose either to spare Karadin or help kill him. Lambert will be angry with Geralt if you insist on leaving Karadin, but there will be no consequences beyond the dialogue of this quest. Regardless of the choice, the two will go on their separate ways as the quest ends.
+Note: If you have started Gwent: Old Pals, this is an opportunity to challenge him to a game of gwent, while he is still visible walking away.
+Journal entry
+While wallowing in the Bits, Novigrad's worst and most notorious slum, the witcher took a contract on a monster committing horrendous murders under the cover of darkness. At the time, he never suspected that a story starting in the gutter would end in a luxurious manor.
+Near the Novigrad docks Geralt ran into his old brother at arms, Lambert. Geralt's surprise grew when he realized the ekimmara they both were hunting was not the chief reason for Lambert's presence in the city, But before they could sit down for a heartfelt chat, the two witchers had to deal with their dishonest contractor. How many times will men try to cheat witchers out of honest pay for honest work before they learn...? That taken care of, Geralt could now talk to Lambert. It turned out that he was hunting the people responsible for the death of his friend, Aiden, a witcher from the Cat School. Lambert had learned Aiden had been murdered by a gang of hired thugs led by a man named Jad Karadin. Geralt decided to help Lambert and the two set off on a path to revenge.
+It turned out the monster was an ekimmara, but that was of minor importance. What was truly interesting was that Lambert was hunting the creature as well. And most interesting of all was that he was doing so in order to get to the leader of a group of assassins who had killed his friend. One by one our heroes hunted down the members of the group until they had finally found their boss – Jad Karadin.
+If Geralt lets Jad live:
+In the end, Lambert and Geralt found this Jad Karadin. When they did, they were in for some serious surprises. The man was in fact a retired witcher, now living in the lap of luxury, surrounded by his beautiful... family? But how? While there was nothing surprising about his wife, Leticia, the last thing Geralt expected to find the home of a sterile witcher were two bright-eyed children. It turned out the kids were adopted, and Karadin swore he loved them as if they were his own. Karadin convinced the witchers he had changed for the better and set aside his killing ways. Hearing this, Geralt told Lambert to abandon his plans for vengeance. Did he do right? That, dear reader, is not something a chronicler scribbling the tale down in a comfortable alcove with the benefit of hindsight is in a position to judge.
+If Geralt kills Jad:
+In the end, Lambert and Geralt found this Jad Karadin. The man was living in the lap of luxury and would have blended in perfectly amongst the cream of Novigrad's crop – had he not been a witcher from the Cat School. Quite unexpectedly, Karadin welcomed them into his home and introduced them to his wife, Leticia, and his two adopted children.
+Over the course of their conversation, Karadin tried to do the impossible: convince two trained killers bent on his death to let him live. He said he was a changed man and had sworn off his assassin ways. Yet his repentance had come too late, and he paid for his past crimes with his own blood.
+Objectives
+Talk to the supervisor.
+Examine the crime scene using your Witcher Senses.
+Find the monster that is prowling the area by using your Witcher Senses.
+Find the place where the monster emerged from the water by using your Witcher Senses.
+Find the ekimmara's lair by following its tracks using your Witcher Senses.
+Look for the ekimmara in its lair using your Witcher Senses.
+Kill the ekimmara. (50)
+Talk to Lambert.
+Defeat the guardsmen.
+Talk to Lambert.
+Meet Lambert at the Seven Cats Inn.
+Decide Vienne's fate. (80 if spared, 50 if killed)
+Kill Vienne. (If not spared)
+Go to Faroe and look for Hammond.
+Ask Crach what he knows about Hammond.
+Find Hammond.
+Find the shrine where Hammond prays.
+Kill Hammond. (80 )
+Search Hammond's body.
+Meet Lambert at the Nowhere Inn.
+Meet Lambert on Hierarch Square, near Karadin's residence.
+Decide Jad Karadin's fate. (90 if spared, 70 if killed)
+Kill Jad Karadin. (If not spared)
+Bugs
+While speaking to Vienne, the shot glass she holds may float due to incorrect clipping with her model.
+During the fight with Vienne one of the combatants could get himself stuck outside the inn, and Geralt cannot reach him due to him being in battle stance, forcing you to reload a previous checkpoint.
+The location marker can sometimes incorrectly show Hammond in the center of Trottheim, depending on whether or not you have completed Flesh For Sale. This is because the pirates don't drop the quest item revealing his whereabouts.
+Notes
+You can go directly to the watermill and skip the first few objectives. Geralt can actually detect the sounds from the ekimmara with witcher senses by accident if passing by, though he won't hear the fight happening before the contract is picked up.
+Where Lambert kills the supervisor, a chest in the corner of the room has a random relic sword. You can return at any point to get it.
+After the mission Lambert returns to the Nowhere Inn, where Geralt can engage him in friendly conversation regardless of the outcome of this quest.

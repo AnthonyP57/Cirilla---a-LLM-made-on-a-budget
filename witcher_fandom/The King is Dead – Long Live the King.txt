@@ -1,0 +1,56 @@
+The King is Dead – Long Live the King
+The King is Dead – Long Live the King is a main quest in The Witcher 3: Wild Hunt.
+Walkthrough
+Go to Yennefer's room in Kaer Trolde Harbor, pick up the clothes from a chest and put them on (150). Now go meet Yennefer who is speaking with Birna; after a short conversation Birna leaves and Yennefer will now praise Geralt's appearance or berate him if he is not wearing proper clothes.
+Note: unfortunately Yennefer may berate Geralt even if he is wearing the clothes you find in the chest, this happens if they are removed and then put back on, or if he is wearing gloves. However, if Geralt is wearing other clothes, you can wear the formal courtier's clothes, which he gets during the Imperial Audience, and then he will always be praised even if the optional objective is not completed.
+Walk with Yennefer to Kaer Trolde, if you decide to do some "exploring" along the way Yennefer will berate Geralt, then say she'll be waiting at the entrance (note that this fails an objective). Once you reach the party, you will be sharing a table with Cerys an Craite and other the Jarl's sons. She will propose a foot race, you can agree or refuse, if you agree you will race her to the top of the mountain, first to pull out Hjalmar's axe out of the tree stump wins (150).
+Now back at the wake you can have a toast or not, regardless Yennefer will pull Geralt away from the table to speak in private, along the way they will meet two quarreling Jarls. After a short conversation, Madman Lugos will insult Yennefer and Geralt can beat him up for it. Warning: Lugos is level 30, so be sure you know what you are doing before you decide to challenge him as this can be a tough fight but still doable (150 ).
+You may speak with other named guests, gaining character entries and information about Skellige and its people. The guests will invite you to toast to King Bran; if you do Yennefer will warn you she needs you sober but there is no effect other than dialogue changes. After the initial interactions you may speak with some of these guests again for further information. Geralt and Yennefer also overhear a pair of widows speaking. After interacting with them Yennefer mentions Lytta Neyd (Coral).
+After the whole ordeal, keep following Yennefer and she will tell you her plan - break into Ermion's laboratory to steal the Mask of Uroboros, agree or not it's irrelevant as Yennefer never listens to Geralt. Keep going and eventually you will reach a door, Yennefer will propose going through a window as the door is guarded by Ermion's ravens.
+Through the window, you will reach a trophy room with life-like stuffed animals and use your witcher senses to search the place. When you interact with the door Geralt will cut himself causing him to hallucinate, and the animals will come to life and attack so you have to kill all them all. When they're all killed, Yennefer will bring Geralt back to his senses and laugh at him. Note: while the animals are level 99 and have a skull item, they deal very low damage and die quickly. However, if they "kill" Geralt, the death will be very much real and result in a game over, so there is no way to avoid this, like by choosing not to fight.
+The door to the laboratory is now open, enter and search it with your witcher senses where you will find a statue holding it's hand out. There are 3 items you can find in the room which you can try to put into the hand: a skull, giant pinecone, and cup of mead. The cup is the correct one, however there is no punishment for picking the wrong item, so you can try all 3 if you like. Once you pick the right item, a secret door will open, so your path forward is set. The mask is at the end of the path, but it's guarded by an earth elemental, which must be defeated. Note: Yennefer is capable of taking care of it on her own with her lightning strikes, so you can just stand idle and watch, but this will take significantly longer.
+After the elemental is dead, poisonous gas will fill the room and your only means of escape is teleporting out of there. Yennefer will ask you to think about something real quick. If you choose the first option, Geralt and Yennefer make a crash landing back at the wake, however no one seems to mind. If you choose the second option they end up in Yennefer's room where she has ripped her dress and goes to repair it before returning to the wake. If you choose the "watch" option, Geralt and Yennefer have sex on the stuffed unicorn in her room.
+After the celebration, you will be talking to Crach an Craite, who will agree to help you with Ermion and ask for help concerning his children. After agreeing to help the quest concludes (600 ) and you also get the Possession and The Lord of Undvik quests.
+While the quest has ended at this point, the feast is still going on until you leave the area. If not spoken to previously, you talk to all the jarls around (Crach, Lugos, Donar and Holger Blackhand) while still there, you get an extra 100 .
+Journal entry
+Crach an Craite, an old friend, invited Geralt and Yennefer to a farewell feast for the recently-departed King Bran. One does not refuse such invitations in Skellige, and so, willing or not, Geralt had no choice but to meet Yennefer at the castle gates and attend the wake at her side.
+Bran's wake was in full swing, with mead flowing plentifully and Geralt making quite a splash with the jarls, when suddenly Yennefer announced she needed to meet with the witcher in a more private setting. Yet she did not have in mind what you do, dear reader. Instead, she wanted Geralt to accompany her as she broke into the druid Ermion's laboratory. Her goal? To steal an artifact known as the Mask of Uroboros. As you can see, life with Yennefer was full of surprises, a fact Geralt had grown used to and even, one dares say, quite fond of.
+'We're gonna choke and die' outcome when trapped in Ermion's secret chamber:
+After much wandering Yennefer finally acquired the mask she sought. As Ermion's laboratory had grown rather dangerous, she teleported Geralt and herself back to the wake, where they landed with a thud in the middle of the ongoing party. Luckily all the festivalgoers were already too inebriated to notice anything out of the usual.
+'Damn, I wanna kiss you, Yen' outcome when trapped in Ermion's secret chamber:
+After much wandering, Yennefer finally found the mask she had been seeking. When Ermion's laboratory grew dangerous, she teleported herself and Geralt back to her quarters. Once there, they... well. what they did is not really any of your concern, dear reader.
+Afterwards, they returned to the wake.
+Decisions converge...
+Crach an Craite only arrived as the wake was drawing to a close – he and the other jarls had locked themselves away in a proverbial smoke-filled room to scheme plans for Skellige's future. That business finished, he now pulled Geralt and Yennefer aside for a talk. When he heard they were searching for Ciri, he agreed at once to provide them with everything they needed.
+Luckily for Crach's treasury, Yennefer did not need everything, just Ermion's permission to examine a mysteriously deformed forest - the result of a magic explosion that might have involved Ciri.
+Crach promised to convince Ermion, and as his word was as reliable as his beard was red, Geralt and Yennefer set off at once towards the magic-damaged woods.
+Objectives
+Go to Yennefer's rooms and put on formal attire.
+Put on new clothes for your meeting with Yennefer. (150)
+Meet Yennefer at the entrance to Kaer Trolde citadel.
+Go with Yennefer to the wake inside Kaer Trolde.
+If you didn't follow Yennefer:
+Meet Yennefer inside Kaer Trolde.
+Talk to Yennefer in private.
+If you accepted the challenge:
+Beat Cerys to the top of the mountain.
+Pull Hjalmar's axe out of the stump. (150)
+Go to Ermion's workshop.
+Explore the mysterious room using your Witcher Senses.
+Defeat the aggressive beasts.
+Find the Mask of Uroboros in Ermion's workshop.
+Explore the secret chamber using your Witcher Senses.
+Kill the earth elemental.
+Look around for a way to escape from the trap.
+Notes
+In order to get Yennefer to approve of Geralt's attire, two specific articles of clothing must be worn. The Elegant Skellige shirt (black/gold colors), Skellige breeches (the pair that looks to have a strap wrapped around the legs). Both can be found in Yennefer's room at the inn. Weapons, boots and gauntlets don't seem to make any difference.
+If you kept them, Yennefer will also approve of the Nilfgaardian outfit gained upon meeting Emperor Emhyr during Imperial Audience.
+Yennefer will disapprove of: the ornate robe from the Hearts of Stone expansion and the Elegant Beauclair doublet from the Blood and Wine expansion.
+The first choice when Yennefer asks Geralt to think of the first thing that comes into mind i.e. "We're gonna choke and die" is a very odd translation. In the Polish (original) version the choice reads "Mogliśmy zostać na uczcie" which translates to "We could have stayed at the feast." This clearly explains why picking this option teleports them back to the celebration, while the English version lacks coherence.
+The other option is also slightly different, as in the Polish version it says "hug" instead of "kiss", however unlike the former, it doesn't change anything.
+If you decide to race Cerys to the top, and are having trouble winning, drinking a werewolf decoction before meeting the guests will help, as it causes unlimited stamina outside of combat.
+As of Patch 4.0 running outside of combat no longer drains stamina.
+After meeting Yennefer before entering the feast, Yennefer makes a remark about Geralt's beard, even if Geralt is clean shaven. This is a bug, because Yennefer was supposed to tell Geralt that he hadn't changed a bit if Geralt was clear shaven. This conversation option can thus only be triggered using mods
+This is corrected with Patch 4.0.
+Videos
+The Witcher 3 Earth Elemental Boss Fight (Hard Mode)

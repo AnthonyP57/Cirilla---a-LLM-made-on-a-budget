@@ -1,0 +1,40 @@
+Igni
+Igni is a simple magical sign used by witchers. It is comprised of a pyrokinetic burst that can repel and ignite opponents, as well as start fires.
+The Witcher
+Igni is most likely the second Sign Geralt "learns" (or re-learns!) over the course of the game. Its icon is based on the alchemical symbol for Fire. The witcher's skill with the sign is developed through the allocation of talents.
+Mechanics
+To use the Igni sign, right-click on the desired target.
+Endurance is used whenever the sign is cast, if the overall level is too low, Geralt will not be able to cast the sign.
+Later on, visiting the Circles of Elements attributed to Igni grants Geralt the Blessing of Fire.
+Circles of Elements
+Circles of Elements dedicated to the Igni sign include:
+Circle of Inner Fire in the Outskirts.
+Circle of Inner Fire in the Lionhead Spider cultists' lair in the Sewers.
+Circle of the Vengeful Flame in the elven ruins in the Sewers.
+Circle of the Walking Fire in the Fields.
+Circle of Inner Fire in the Raven's crypt.
+Strategy
+Info from Damar's Definitive Guide to Witcher Signs (the original post has now been removed from the forum):
+Ah, Igni. This is arguably your greatest tool of mass destruction, and when upgraded, it gets so powerful that using it almost feels like cheating. There is a grand total of one enemy type in the whole game that is immune to Igni. Everyone else burns just fine.
+Unlike Aard, Igni starts out rather mediocre. It consumes a good amount of Endurance, but without upgrades, the damage it inflicts is downright pathetic. Once you buy into it, however, it quickly becomes Geralt's most devastating attack. It pushes enemies back; it sets them on fire for a nice Damage over Time effect; and it even has a built-in crowd control mechanism that sometimes makes humanoids stop, scream and try to beat out the flames. This is different from the Pain effect, but it does stop your enemies from trying to bash your skull in, if only briefly.
+Igni often can damage enemies behind penetrable walls. Since monsters tend to approach such walls when Geralt comes nearby, you can finish them in a lazy way instead of supposed breaking the wall with Aard.
+The Price of Neutrality premium module
+There are only two circles of elements in "The Price of Neutrality" and only one of them is for Igni. It has no special name.
+Circle of Elements southeast of the Camp, across the river.
+The Witcher 2: Assassins of Kings
+Igni - in its basic form - releases a gush of flames that wounds opponents with fire. It can also be used to detonate flammable gases emitted by the Dragon's Dream bomb and dead rotfiends.
+To activate the sign, press and select Igni; then press key to cast it.
+Upgrading the Igni Sign with "Enhanced Igni Sign" (in the Magic tree) will increase its damage output, its effective range, grants a chance to set enemies on fire with Incineration, and grants it area of effect damage.
+The Witcher 3: Wild Hunt
+ 
+The Igni sign is one of five simple magical signs used by witchers and causes a burst of fire that can repel and ignite opponents, as well as start fires. Geralt can choose to upgrade this sign to increase its effectiveness.
+Igni is incredibly effective against foes that are weak to fire. There is also an alternative form of Igni that allows players to release a steady flow of fire instead of one quick burst, which can be particularly useful for continuously burning enemies even after they've been ignited.
+It can light enemies on fire and do damage over time. In some cases, this effect causes the enemy to panic. Additionally, any flammable gases in the air can be ignited to cause powerful explosions that can hurt and stun your enemies.
+Trivia
+Igni is probably derived from the Latin word ignis, fire.
+Notes
+In the novels, Geralt does not only use Igni during battles, but also in daily life, like fixing a pot to be able to prepare pike soup.
+Gallery
+Igni's casting gestureIn Reasons of StateIn Matters of ConscienceGwent: The Witcher Card Game card artIn Of Flesh and FlameIn Witch's LamentIn The Ballad of Two WolvesIn Wild Animals
+External links
+ See the GWENT standalone game version card: Geralt: Igni

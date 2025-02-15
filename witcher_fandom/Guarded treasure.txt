@@ -1,0 +1,96 @@
+Guarded treasure
+There are a number of guarded treasures scattered about the various regions in The Witcher 3: Wild Hunt, and its expansions, Hearts of Stone expansion and Blood and Wine expansion. In general, they consist of a single powerful or few weaker monsters that must be killed before a treasure can be looted, with a few exceptions where the enemy appears only after the treasure is looted.
+In that regard, they aren't much different from bandit camps, but guarded treasures typically contain higher-quality loot and relic equipment in particular. Some have at least partially fixed loot (including all Blood and Wine expansion locations), but a lot are randomized.
+Map description
+A particularly powerful monster guards a valuable cache here.
+White Orchard
+5 locations:
+East of the Nilfgaardian Garrison, on the swampy patch of road leading south (Wolves)
+Southwest of the Nilfgaardian Garrison, deep in the swamps (Water hag)
+Inside the White Orchard cemetery chapel, north of the Mill (Wraith during Scavenger Hunt: Viper School Gear)
+South of the Ransacked Village, on the riverbank just below the village (Drowners)
+Southeast of Woesong Bridge, on the west riverbank (Drowners)
+Velen
+22 locations south of the Pontar:
+Southeast of the Devil's Pit, by the road (Alghoul)
+Southwest of the Ferry Station, end of the road by the Ponter (Drowners)
+In the middle between Ursten and Inn at the Crossroads, by the river (Bilge hag)
+In the middle between Lindenvale and Boatmakers' Hut, near a big tree by the river (Forktail)
+Northeast of Heatherton, top of the hill (Cyclops, appears only after Contract: The Griffin from the Highlands)
+East of the Harpy Feeding Ground (Basilisk)
+Northeast of Hangman's Alley, on the shore (Drowners)
+South of Hangman's Alley, north of Forest Hut, by a burned down hut (Endrega warrior and workers)
+Shipwreck on isle west of Coast of Wrecks (Nightwraith or Noonwraith)
+Whale carcass west of the Coast of Wrecks signpost (Drowners)
+South of Midcopse, in the riverbank swamp (Water hag)
+Northeast of Dragonslayer's Grotto, by the road towards Lindenvale (Bear)
+East of the Ruined Tower, in the swamps (Water hag)
+East of Kimbolt Way, stone circle near hut on end of the road (Earth Elemental)
+Stone circle southwest of Ancient Oak and northwest of Crossroads (Earth Elemental)
+West of Crossroads and south of the stone circle, in the mountains (Bilge Hag)
+North of the Destroyed Bastion, ruins by the road (Wyvern)
+Destroyed Bastion (Cyclops)
+West of Olena's Grove, camp by the road (Alghoul)
+South of Frischlow, just below the village (Nightwraith or Noonwraith, also a location for Scavenger Hunt: Griffin School Gear/Part 2)
+Far south of Frischlow, at a small shrine (Gargoyle)
+Elven ruins southeast of Byways (Wraiths, also a location for Scavenger Hunt: Wolf School Gear/Part 5)
+Novigrad
+7 locations north of the Pontar:
+Roadside swamp northwest of Hindhold (Wyvern)
+Tower above Widows' Grotto, east of the signpost (Noonwraith or Nightwraith, but the monster and the marker itself doesn't appear before completing From a Land Far, Far Away)
+Isle southwest of the Lighthouse, where the Flying Stag shipwreck is (Basilisk)
+East of Arette, in a small swamp next to a tree (Water hag)
+Southwest of Yantra, on the small isle in the lake (Bilge hag)
+Above the Cavern, north of the signpost (Armored arachas)
+Northweast of Aeramas' Abandoned Manor, deep in the forest (Leshen)
+Skellige
+22 locations:
+Hill west of Crossroads on Ard Skellig (Wyvern)
+Shoreside peak southwest of Kaer Trolde Harbor (Wraiths, appearing after the treasure is looted)
+Hilltop lake northeast of Fornhala (Ekhidna)
+Northwest of Wild Shore signpost (Cyclops)
+Inside Elverum Lighthouse (Ekhidna and Sirens)
+Inlet under the road between Elverum Lighthouse and Fyresdal (Ekhidna and Sirens)
+Blandare cemetery, north of the village (Wraiths, appearing after the treasure is looted)
+Henge, the stone circle east of Gedyneith (Earth Elemental)
+Fort Etnir, far north of Rogne (Gargoyles and Earth Elemental, also a location for Scavenger Hunt: Bear School Gear)
+South of Freya's Garden (Wraith)
+Isle far north of Hindarsfjall (Bear)
+Shore northwest of Marlin Coast (Sirens)
+Large isle southwest of Undvik (Cyclops)
+Fisherman's hut northwest of Harviken (Cyclops)
+Small isle in the middle between Elverum Lighthouse and Faroe (Sirens)
+Small isle far east of Elverum Lighthouse and north of Faroe's western side (Drowners)
+Isle west of An Skellig (Basilisk)
+East side of the northernmost isle further west of An Skellig (Ekhidna)
+West side of the northernmost isle further west of An Skellig (Drowners)
+Smaller isle to the south of the last one (Ekhidna)
+Tiny islet in the middle between An Skellig and Spikeroog (Drowners)
+Small isle in the middle between the larger ones northeast of Spikeroog (Drowners)
+Kaer Morhen
+2 locations:
+Far south of the Ruined Watchtower, by the road (Leshen)
+Far up in the mountains east of the lakeside entrance to Old Speartip's cave (Wyvern)
+Hearts of Stone expansion
+4 locations:
+Hut east of Garin Estate (Wild boars)
+Olevald Clearing, between Garin Estate and Bowdon (Golem)
+Hut at the Hunter's Cottage (Bear)
+Heddel cemetery, east of the village (Ghouls spawning from the ground)
+Toussaint
+Note: Almost all bandit camps in Toussaint are under the influence of hanse bases controlling their regions and, if discovered after the respective hanse leader is eliminated, these bandit camps may turn into guarded treasures as well. Unless cleared before the hanse base, monsters will replace the bandits in any such camps either way, but the map icon is only set to that of a guarded treasure if they were previously undiscovered.
+13 locations:
+Southeast of The Cockatrice Inn, at a hangman's tree near the road (Barghests)
+Northeast of Sansretour Valley signpost (Archespores, part of Wine Wars: Vermentino)
+Northeast of Coronata Vineyard and south of Trading Post (Archespores, part of Wine Wars: Coronata)
+East of the Trading Post (Panther)
+Olive Grove, southeast of Dun Tynne Crossroads (Bruxa)
+Under the collapsed house at northern Flovive (Wraiths, also a location for Scavenger Hunt: Grandmaster Ursine Gear, but further inside)
+Southeast of Mont Crane Castle, near the road towards Fort Ussar Ruins (Slyzard)
+Elven Sanctuary Ruins, southeast of Termes Palace Ruins (Garkain and Fleders)
+West of Gélenser Farm (Giant centipedes, part of Wine Wars: Belgaard)
+North of Trastamara Hunting Cottage signpost (Foglets)
+Northwest of Hortense Vineyard, on the shore of Seidhe Llygad (Bandits, oddly)
+Southwest of Fox Hollow, in the woods (Rabid rock troll aka the She-troll)
+Footnotes
+↑ During The Night of Long Fangs, while most guarded treasures and bandits camps are unreachable, all enemies at those locations are replaced by fleders and garkains.

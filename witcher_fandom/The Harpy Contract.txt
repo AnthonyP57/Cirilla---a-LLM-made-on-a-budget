@@ -1,0 +1,23 @@
+The Harpy Contract
+The Harpy Contract is one of three possible contract quests in Chapter II of The Witcher 2: Assassins of Kings.
+Harpy Contract
+Hear ye, hear ye - good folk of Vergen and all visitors! Since so many intrepid swords and champions of so many causes have gathered in Vergen, perhaps one would perform a public service by going to the harpy lair and exterminating the creatures once and for all? I promise a hefty reward and eternal glory as a monster slayer.
+Regards,Cecil Burdon, Alderman
+Walkthrough
+You can get this quest from the notice on the bulletin board next to the The Cauldron inn. It is helpful, but not necessary, to have read the book Harpies - Daughters of the Gale, which can be obtained in Chapter II from Felicia Cori at the market, after the gates are opened. Note that you may have this book already, as it can be obtained in Chapter I. After that, you will need harpy traps which you can get from Haggard, the blacksmith's apprentice, Earso, Thorak, or ask any crafter to craft them for you. You will need seven traps in total.
+Arm one near a harpy and let the harpy grab it and bring it to a nest, which will destroy it. A message will appear onscreen if the nest is successfully destroyed. Don't arm two traps at the same time, wait until you've received credit for destroying a nest or you will risk wasting a trap. Be careful where you place the traps; they can be lost due to them being wedged against rocks, impeding the harpies from picking them up. Place them in an open area.
+You can find four of the nests in the old quarry area. After finding those, you will need to continue the Hunting Magic quest in order to reach the other three nests which are behind the locked door at the south end of the old quarry. The locations of last three nests are as follows:
+Just before the first Kaedweni soldier corpse
+In front of you when you have to jump down
+Near the second Kaedweni soldier corpse (where the dream crystals are)
+Journal entry
+While in Upper Aedirn, Geralt was on the lookout for witcher's work. When he learned that Vergen's authorities had posted a bounty for thinning the local harpy population, he applied for the job. First he decided to learn more about the winged creatures' habits, either by exterminating them one by one or by reading professional literature about them.
+The harpies nested on inaccessible rocky ledges. Geralt could not climb to their abodes, so he reasoned that some witcher technology might prove useful. He decided to use harpy traps, and so he did.
+Most of the harpy nests were destroyed. Many years passed before the creatures' population rose anew. Geralt, proud as a peacock, went to see Cecil Burdon about his reward.
+Cecil Burdon was not one a miserly sort of dwarf. The witcher got his reward for the harpy extermination and left pleased.
+Associated quest
+Hunting Magic
+Notes
+You need Cecil Burdon's runic key to open the gate in the old quarry and enter the harpy lair.
+When you have destroyed all the nests, you obtain the Birdman skill, adding +10% damage toward harpies.
+Since you must buy or craft seven harpy traps, you will lose money on this contract no matter what you do.

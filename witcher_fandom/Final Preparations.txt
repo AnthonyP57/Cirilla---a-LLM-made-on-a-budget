@@ -1,0 +1,30 @@
+Final Preparations
+Final Preparations is a main quest in The Witcher 3: Wild Hunt. It starts immediately after returning from Bald Mountain.
+The rewarded in this quest will decrease after reaching level 34.
+This is an "umbrella" quest, incorporating the following sub-quests, all of which must be completed:
+Payback
+Blindingly Obvious
+Through Time and Space
+The Great Escape
+They can be completed in any order. However, completing Payback, Blindingly Obvious and The Great Escape will add another, unavoidable quest objective in front of Avallac'h's room, to whom you have to speak to start Through Time and Space. Important: triggering this quest objective is the cutoff point for the secondary quests The Nobleman Statuette and The Soldier Statuette.
+Walkthrough
+Before anything else, just go and talk to Avallac'h to start Through Time and Space, even if just to arrange a meeting with him elsewhere if you don't wish to go immediately. However, this is also the lowest level quest of the four, so when you're ready to start - just go for it and meet Ge'els.
+When you're done with that, Ciri will prompt you to help finish her business next, but you can delay if you wish. The only difference that makes is that you would later have to meet her during daytime. In case you haven't completed The Nobleman Statuette and/or The Soldier Statuette, you should go see Triss next and complete Blindingly Obvious, so that you can unlock her for free conversations again. However, it's more important to just not leave her quest for last.
+If Keira's questline wasn't completed in full, or if Geralt allowed her to leave and parley with Radovid at the end of For the Advancement of Learning, a fifth main quest will be added as well - A Final Kindness. Though technically not a subquest, it will also be a requirement to complete before proceeding forward.
+With that in mind, proceed however you wish and once you're done helping the three women, a new mission objective will appear: "Meet Yennefer and the Lodge of Sorceresses at Dandelion's inn." Go to the third floor to see Ciri anxious about a meeting that Philippa Eilhart and Margarita Laux-Antille want to have with her. After your initial response, you'll have 2 choices:
+"Going with you."
+"You'll do fine on your own."
+Important: This decision will count towards deciding Ciri's fate at the end of the game. The first option contributes towards a negative ending, while the second contributes towards a positive ending. If you wish to have a positive ending, pick the second option and let her go alone.
+If you let Ciri go in alone, Geralt encourages her beforehand, and you are shortly joined by Yennefer who starts snooping and sees Ciri give Philippa a piece of her mind. If you instead join the meeting, Geralt practically takes over the talking for Ciri, and among other things you will hear Philippa and Margarita offer her partnership in the reconvened Lodge. Whatever your decision was, after the meeting Ciri will need some time to think, while you receive 1,000.
+At this point, it is possible that another "subquest" is added. If you have romanced both Triss and Yennefer simultaneously, when the meeting ends another cutscene will begin. Your two love interests wake you up on the next morning with a suspicious, but irresistible proposition, starting the main quest It Takes Three to Tango that you also must complete before this one ends.
+When you're done with everything, this quest will complete and Battle Preparations will start.
+Journal entry
+Ciri's spirits were high after killing Imlerith, but Geralt knew this fight had been but an appetizer before the full course of battle still to come. As part of their preparations, Geralt and Ciri rode to Novigrad, where Triss and Yennefer were trying to reconvene the Lodge of Sorceresses. Avallac'h was waiting there as well, and had his own ideas how to tip the scales of victory in our allies' favor during their final confrontation with Eredin...
+Geralt and the sorceresses successfully gathered their allies and reconvened Lodge of Sorceress. Though many obstacles had threatened to block their progress, they had surmounted them all and emerged relatively unscathed. All the preliminaries were now finished - and the last battle against the Wild Hunt could commence.
+Objectives
+Talk to Avallac'h.
+Talk to Triss.
+Talk to Yennefer.
+Help Ciri take care of her business in Novigrad.
+Wait for daylight.
+Meet Yennefer and the Lodge of Sorceresses at Dandelion's inn. (1,000)

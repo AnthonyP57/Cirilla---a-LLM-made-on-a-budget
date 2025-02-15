@@ -1,0 +1,21 @@
+The Hunger Game
+The Hunger Game is a secondary quest in the Blood and Wine expansion.
+Walkthrough
+The quest begins automatically, 48 hours after bringing Marlene to safety at Corvo Bianco. However, you may have to leave the estate grounds first if you decided to simply meditate there.
+Once at Corvo Bianco, speak with Marlene. She's feeling better now, but all of her family has long since passed away and she's got nowhere to go. This will then give two options, allowing you to decide where she goes. You can either suggest that she return to the city and start a new life, which would end the quest here, or tell her that she can stay at Corvo Bianco.
+Important: allowing Marlene to stay with you counts as "Proof of Compassion" for There Can Be Only One.
+If Geralt allowed Marlene to stay, she will be delighted and says that he will always have a hot meal whenever he returns home, but more importantly, also tells him of a dowry her father had once collected for her. Since she never married, she no longer has a use for it and suggests Geralt should take it for himself. The quest will then take you back to Trastamara Estate Ruins to collect the Dowry. On your way there, you can just fast-travel to Trastamara Estate Ruins signpost, where you shouldn't encounter any enemies on your walk up to the estate.
+Marlene's dowry is in the lower room, the one with the entire floor covered in spoons and barrels lining the walls. The dowry can be found in 2nd barrel from the right-most barrel (as you enter the room). Inside you will find (at least) 400 and the trophy Gold Stick of Joy.
+Journal entry
+The witcher had decided not to kill the wight. A fortunate decision, as the monster had proved to be a woman named Marlene, afflicted some time past by a terrible curse. The witcher had lifted the curse and learned Marlene's story. She had suffered unimaginable pain while cursed, fated forever to hunger and waste away. Geralt, big-hearted as he was, could not leave the woman to fend for herself. He invited her to stay at Corvo Bianco, the estate the duchess had granted him in recognition of his service. The estate's majordomo took Marlene under his wing. The witcher decided he would visit the cured woman several days later.
+Geralt encourages Marlene to live a new life in town:
+Geralt had proven a generous soul when he let Marlene recover at Corvo Bianco. After a time, they had a candid conversation, and the woman revealed her concerns. With the curse having held her for centuries, she had outlived her loved ones and was now left with no one to turn to. Time had passed, the world had progressed, and Marlene felt like a stranger within it. The witcher believed only living among other folk could restore the balance Marlene had lost. Marlene agreed and a few days later their paths diverged as she set off to make a new life for herself.
+Geralt offers Marlene to stay at the estate:
+Marlene turned out to be an open and honest woman. She and Geralt had a friendly, candid conversation and decided she would remain at Corvo Bianco for the foreseeable future. She would tend to the kitchen there. Thus, in addition to Marlene's gratitude, Geralt gained an able cook (the majordomo was thought to have no culinary talents whatever, having burned several pots of water in his time). Marlene also told the witcher that a long time past her father had amassed for her a dowry that was likely to be lying undisturbed in the cellars of the Trastamara Estate.
+Objectives
+Visit Corvo Bianco and see how Marlene is doing.
+If Geralt allowed Marlene to stay:
+Search for Marlene's dowry at the Trastamara estate.
+Notes
+The coin reward is exactly 400 , but can be raised with the "bonus gold" effect given by trophies and other gear.
+All barghests at the estate despawn once you take Marlene to Corvo Bianco, so the area is completely safe.

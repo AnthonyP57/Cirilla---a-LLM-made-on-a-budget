@@ -1,0 +1,19 @@
+Specters of the Past
+Specters of the Past is a battle in Thronebreaker: The Witcher Tales.
+Entry
+While the human kingdoms are mere hundreds of years old, the chronichles of Mahakam stretch back millenia. Over its long history, the mountainous reign has been home to many great discoveries, heroic deeds... And terrible crimes. The dwarves, howeve, preferred to keep silent about past conflicts - instead emphazising brotherhood above all else. Yet, the stain of shed blood on alabaster snow is difficult to truly forgive and forget... And its continued memory attracts beasts that thrive on injustice and suffering.
+Player's deck
+Rivian Sapper
+Rivian Onager
+2x Alchemist
+2x Epidemic (Thronebreaker card)
+Enemy's deck
+Beast (on board)
+4x Barghest (on board)
+Solution
+Place a Rivian Sapper on the melee row and kill all the barghests
+Place a Rivian Onager on the right of the Rivian Sapper and end your turn without using its ability
+Place an Alchemist on the left of the Rivian Sapper and use its ability on the Onager
+Place another Alchemist on the left of the other one and use its ability on the Sapper
+Use a Epidemic
+Destroy the Beast by using the Onager's ability

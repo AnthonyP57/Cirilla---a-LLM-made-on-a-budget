@@ -1,0 +1,83 @@
+Nekker
+Nekkers or nekkras are monsters encountered in The Witcher 2: Assassins of Kings and The Witcher 3: Wild Hunt.
+Quick Answers
+What is a Nekker in the context of The Witcher series?
+						A Nekker in The Witcher series is a monster seen in The Witcher 2: Assassins of Kings and The Witcher 3: Wild Hunt. They inhabit wooded areas. Nekker warriors, a larger variant, are recognized by red-painted faces. In The Witcher 3: Wild Hunt's Gwent card game, Nekkers are featured as close combat cards in the Monsters deck.
+					
+						Provided by: Fandom
+					
+How does the Nekker in The Witcher series differ from a Drowner?
+						Nekkers and Drowners in The Witcher series exhibit distinct characteristics. Nekkers, found in wooded areas, are known for their viciousness, ability to burrow tunnels, and tree-climbing skills. They attack in groups and are vulnerable to silver swords. Drowners, necrophages found near water bodies, are susceptible to necrophage oil and Igni. The loot dropped by these creatures upon defeat also varies.
+					
+						Provided by: Fandom
+					
+What role does a Nekker play in the opening sequence of The Witcher game?
+						A Nekker features in The Witcher game's opening sequence as bait for an arachas, set by Iorveth. These monsters, encountered in The Witcher 2: Assassins of Kings and The Witcher 3: Wild Hunt, inhabit wooded areas, attack in groups, and are vulnerable to silver swords.
+					
+						Provided by: Fandom
+					
+At what level does Geralt stop gaining XP from killing Nekkers?
+						Upon reaching Level 14, Geralt no longer earns XP from defeating Nekker Warriors. The XP acquired from combat is influenced by factors such as the difficulty level, Geralt's level, and the enemy's level and type. Kills yield minimal XP when Geralt's level exceeds the enemy's by six or more.
+					
+						Provided by: Fandom
+					
+What is the behavior pattern of a Nekker when it ambushes its prey?
+						Nekkers, feared by both humans and animals, are social creatures that use their numbers to ambush prey. They burrow tunnels and climb trees, surrounding and overwhelming their targets. They pummel and claw their victims to death. A moment of hesitation in their attack can be exploited to eliminate the braver ones before dealing with the rest.
+					
+						Provided by: Fandom
+					
+{"@context":"https:\/\/schema.org","@type":"FAQPage","name":"Nekker","mainEntity":}
+The Witcher 2: Assassins of Kings
+One less fortunate nekker appears in the opening sequence of the game when it is used as bait for an arachas by Iorveth.
+Nekkers cease to give XP when killed once Geralt reaches Level 11.
+Bestiary entry
+Imagine a drowner that burrows tunnels, climbs trees, is more vicious than usual, and when ambushing its prey, it does so with many of its kin. Now you have a good idea of what a nekker is. These primitive creatures are the bane of the wilderness - the inhabitants of forest villages fear them, and animals give their nests a wide berth. Nekkers are social creatures, gathering in something akin to tribes, for they can only repel the attacks of stronger assailants en masse.
+When nekkers venture out as a war or hunting party, they are led by chieftains. These are larger and mark their faces with red clay. Chieftains give orders, turning a wild band into an organized unit, thus they should be eliminated first.
+The nekkers' basic tactic is to strike en masse. They burrow from beneath the ground and swarm upon their prey. Though primitive, the tactic is surprisingly effective. One must be ready to repel many foes at once - the fast style is best suited to this. As with other agile creatures, running from nekkers is not the best idea, for the monsters will catch up to their prey and swiftly kill it with multiple hits of their claws.
+Witchers can use their full range of skills and techniques when fighting nekkers. Signs, bombs, poisons and oils that augment bleeding are all extremely effective against the beasts. Nekker nests are best destroyed with Grapeshot bombs.
+Associated quests
+The Nekker Contract
+Malena
+In the Claws of Madness
+The Witcher 3: Wild Hunt
+Nekkers rarely attack alone, they tend to be found in groups near a nest. If the nest is not destroyed using either samum or grapeshot, they continue to spawn.
+A bestiary entry can be obtained by reading The World Underground.
+Bestiary entry
+Take heed, gents, there's nekkers under this here bridge. If you all cross at once, without slowing or stopping, there's nothing to fear. But if your cart throws an axle and you get stuck out there... Well, close your eyes and pray to Melitele.– Kurt Hammerbach, city guardsman in Vengerberg
+A lone nekker is harmless. Five are dangerous. Ten can kill even a veteran monster slayer. Particularly troublesome are the larger, stronger individuals known as warriors, as well as the rare breed of nekkers known as phoocas.
+Nekkers and phoocas live in the dark woods that grow in damp, mist-filled valleys, in colonies of one to several dozen individuals. They dig deep burrows for lairs and connect them with a network of narrow tunnels. Using these passageways they are able to move at great speed within and around their colonies.
+Nekkers always attack in groups and by surprise. They try to surround their prey as quickly as possible, cutting off all escape routes. Luckily their attack is for the most part disorganized, for nekkers are not gifted with great courage and individual nekkers will often hesitate before overcoming their fear and striking. When fighting them one can use this moment of hesitation to kill the braver individuals before finishing off those who remain in the back.
+Combat tactics
+Individual nekkers are weak, easy marks compared to other monsters; nekkers do not tend to fight as individuals. If you see one, expect anywhere from 2-10 more. Nekkers overwhelm their targets through sheer numbers, surrounding them, then pummeling and clawing victims to death. Even veteran witchers can fall prey to this.
+Also, unlike fellow ogroids, nekkers are considerably agile and acrobatic, even more so than the likes of drowners and rotfiends. One could easily leap at Geralt from barrel roll distance and roll back even further to avoid counterattacks. When combined with sheer numbers, nekkers are rather challenging, if not dangerous to engage without sabotaging their mobility.
+When facing large groups of nekkers, take advantage of bombs such as Northern Wind or Dancing Star. Sufficiently powerful explosives can help thin out a nekker swarm with ease.
+Aard can knock a nekker to its back, allowing for swift execution. Aard can also knock over several nekkers at once, a good way to break through large groups of attackers.
+If players are heavily invested in swordplay light attacks, the Whirlwind ability could work nicely as both offensive and defensive means against nekkers, especially when the sword bears the Severance runeword enchantment.
+Associated quests
+Contract: Lord of the Wood (optional)
+Contract: Patrol Gone Missing (optional)
+Contract: Skellige's Most Wanted
+Contract: Strange Beast
+Fools' Gold
+Harassing a Troll
+Hard Times (pre-Patch 4.0)
+Hunting a Witch (optional)
+Scavenger Hunt: Bear School Gear Upgrade Diagrams - Part 4
+Scavenger Hunt: Cat School Gear Upgrade Diagrams - Part 3
+The Things Men Do For Coin...
+Warehouse of Woe
+A Portrait of the Witcher as an Old Man 
+Notes
+According to Blueboy Lugos, Skelligers call nekkers "Nilfgaardbarne" ("Children of Nilfgaard"). Lugos states so in the middle of the fight against a group of nekkers during The Cave of Dreams and proceeds to explain that the reason is nekkers are "black, cowardly and bloodthirsty."
+During the Blood and Wine expansion quest A Portrait of the Witcher as an Old Man, Geralt comes across a painting that a group of nekkers did, along with a few wearing decor, like skulls. This suggests they could be growing more aware if not sapient.
+Trivia
+In parts of Flanders and The Netherlands the Nekker is a waterdevil, an evil fairy of rivers and ponds. Similarly, in the Nordic countries, the "neck" or "näcken" is a male water nymph-like creature similar to a siren, luring unwary women and children to water only to drag them under and drown them.
+Although phoocas do not appear in the Witcher games, the origin may be from the Irish folklore creature or spirit, Púca.
+According to the Witcher 2 Artbook, Nekkers were inspired by Geralt's battle against bridge-dwelling monsters in "Something More".
+Gallery
+In The Witcher 2: Assassins of KingsIn The Witcher 2: Assassins of KingsNekker warrior in The Witcher 2: Assassins of KingsThe Witcher 3: Wild Hunt gwent card artThe Witcher 3: Wild Hunt gwent card artThe Witcher 3: Wild Hunt gwent card artGwent: The Witcher Card Game card artGwent: The Witcher Card Game artGwent: The Witcher Card Game} card art of packIn Matters of ConscienceIn Once Upon a Time in the WoodsIn The Ballad of Two Wolves
+References
+↑ In troll dialect of Common Speech (The Witcher 3: Wild Hunt)
+↑ In Nordic languages (Danish, Faroese, Icelandic, Norwegian, Swedish), "barn" means "child." The plural form, however, is never "barne," yet, given that Skelliger culture is famously based on medieval Scandinavian culture, the inspiration is apparent.
+External links
+ See the GWENT standalone game version card: Nekker

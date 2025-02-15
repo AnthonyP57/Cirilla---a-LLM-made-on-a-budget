@@ -1,0 +1,8 @@
+Cake
+Cake is an easter egg item introduced in the Blood and Wine expansion. It is in reference to the game Portal and found, appropriately, in an area where Geralt must go through several portals in the right order to continue the quest.
+Despite its caption (a mere default for food items, which should probably be considered a bug here), it doesn't regenerate vitality when consumed. Instead, it adds a permanent 100 Vitality to the character stats.
+Walkthrough
+To get the item, start the quest Turn and Face the Strange. Eventually you'll reach a spot where several gargoyle statues line the room and one will attack. After it's been disposed of, loot it and drop the item on the pedestal near the statue, causing portals to open up.
+Enter the portal that the statue is facing on the first level, taking you to the second level. Now you want to enter the portal that's across from you on the second level (again, the statue is facing it). Drop down to the first level, climb up the ledge, and enter this portal.
+ 
+Now you'll be on the third level. If you look closely, you can see a portal one level below you that is blue, but is glowing orange as well. That's the one you want to enter. Run along to the left, passing one portal. Before you get to the second, you'll notice a break in the railing. Drop down here to the second level and the portal you want will be right here. Enter to find a room with a white crate with bloody hearts on it and a small chest to the side. The cake is inside the chest.

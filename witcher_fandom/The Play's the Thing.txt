@@ -1,0 +1,76 @@
+The Play's the Thing
+The Play's The Thing is a main quest in The Witcher 3: Wild Hunt.
+The quest starts after either Count Reuven's Treasure or Get Junior, but both must complete to progress it as Geralt has to learn of both Dandelion and Dudu's predicaments.
+Walkthrough
+Go to the Kingfisher Inn and talk to Priscilla. Note: if Now or Never is in progress, the front door will be locked, but you can still get in through the back.
+After different dialogues depending on how much you've talked with her already, the two of you come up with the idea to stage an entirely new play in order to lure Dudu out of hiding. Priscilla is ecstatic and starts writing the script right away, while Geralt's creative input only goes as far as the name and genre. Choose whichever name you like, but the genre predetermines outcomes later.
+If you pick drama, a riot will break out after the play and you'll have to kill people, while comedy will keep the crowd happy and will earn you extra 30 . After the decisions are made, Priscilla instructs Geralt to take the script to Irina Renarde at the nearby theatre and the conversation ends. (300)
+The door to the theatre is locked though and an annoying ticket seller leaves you no choice but to buy a ticket for 50 (5), even though there's no play to attend. (You can still find your way in without paying, climbing through the roofs near the entrance located almost exactly in the opposite side). Proceed inside and speak with Irina who is happy to help, but needs ushers and preferably getting The Puffins to advertise the play.
+Hire Ushers
+Make your way to the docks, where you'll find a street fighting ring of sorts and talk to Sofus the Bull. You will have two options:
+Pay him 70 (7)
+Bet 140 (14) that you can beat him and Hal in a 2-on-1 fistfight
+The two strongmen will agree to usher regardless, but if you pick the challenge and win, you get your coin back.
+Recruit the Puffins
+Head to the Puffins' place at The Bits where you'll get treated to a cutscene as you enter. After clearing up a misunderstanding, they inform Geralt that they can't currently work because Fatso's gang has been troubling them. If you solve the problem for them, they'll be happy to publicize the play.
+To find Fatso, follow the marker just a tiny distance nearby and you'll see three bandits bothering someone. Talk to them and after they trash talk Geralt, you'll have 3 options aside from backing out:
+Fight them
+Pay 50 (5)
+Use Axii (requires Delusion level 2 for a minimum of 35)
+No matter what you choose though, the issue won't be resolved unless you fight them, as they'll swindle Geralt if paid and Axii doesn't work on the whole group. Note: to earn more you can pay them first, then back out and talk to them a second time using Axii to start the fight.
+Once the fight starts, you only have to knock one out (it's a sword fight, but they don't die) before the other two are scared off. The Puffins then appear, praising Geralt and happy to do the job for free. At this point, 150 is earned and there are further 25 and 30 awarded when the quest completes.
+Note: You can also deal with Fatso's gang before meeting the Puffins and they'll agree to help then too.
+The Cast
+Go back and talk to Irina Renarde, with whom you will now choose the cast members. Geralt will play the witcher regardless of what you say, but the choices you make for the princess and doppler can affect the play itself and the rewards at the end of the quest:
+Princess
+Priscilla (25 / 20 )
+Irina Renarde (25 / 10 )
+Doppler
+Abelard Rizza (110 / 30 )
+Maxim Boliere (no rewards; will be drunk for the performance)
+Once you've made your choices, you can start the play immediately or delay so you can learn your lines.
+The Play
+ 
+Talk to Irina again to start the play and you'll now be on stage with timed dialogue choices for your lines in between multiple cutscenes. The more lines you get right, the bigger the reward you get later; here are the correct picks:
+To slay beasts most foul...
+Perhaps 'midst the guests...
+Seems men's hearts...
+But a base heart...
+No monster is he...
+Note: Getting all the lines correct awards a hidden bonus - 10% discount on prices from all merchants in Novigrad.
+During the play, Geralt recognizes Dudu in the crowd and pulls him on stage without blowing his cover, so even if you performed misarably for the play, the mission is a success.
+However, if you chose to write a drama script, there's one more obstacle before you can talk to Dudu, as one of Fatso's thugs screams "Dopplers to the stake!" at the end and starts a riot. You then have to help Zoltan and the ushers in defeating the bandits and other outraged patrons. Unlike the fight to recruit the Puffins, the deaths here are very real. If you chose comedy instead, the thug's mate will calm him down instead.
+Regardless of how it played out, you get 500 here and go backstage to finally reunite with Dudu. During the dialogue, you have the option to make the doppler transform into Ciri for a moment, then Geralt reveals the plan to rescue Dandelion and with some convincing from Zoltan, Dudu reluctantly agrees to impresonate the late Caleb Menge. If you helped Dijkstra recover his treasure, you can then directly agree to meet at the ambush spot or say that you'll ask him for support, but you'll have that option later anyway.
+Afterwards, Irina Renarde will have varying commentary depending on your acting performance and other choices during the quest, then pay you accordingly as well. In addition to all previously mentioned choice rewards, you get 50 (technically for having ushers) and:
+All correct lines: 150 / 50 
+3+ correct lines: 125 / 20 
+At least 1 correct line: 110
+If you did everything right (comedy, recruit the Puffins, cast Priscilla and Abelard, all correct lines), the sum of all extra rewards here will be 360 / 160 , whereas the least possible is 75 / 10 . The quest then completes, starting A Poet Under Pressure.
+Journal entry
+As you surely recall, Geralt knew Ciri had been in Novigrad, that she had contacted Dudu and me and that afterwards all three of us had plummeted straight into a writhing snake pit of trouble. The last person to have seen Ciri was yours truly, but I, too, had disappeared without a trace. Geralt accurately surmised that Dudu would be the easiest of our ill-fated trio to find. He went to the one person who could help him do this - Priscilla.
+It should be noted that Priscilla counted an incomparable ingenuity amongst her many virtues. Barely had Geralt explained the problem when she hit upon a solution. Dudu had taken on some unknown form and gone into hiding. Their only hope of luring him out - a clear sign from his old friends in Madame Irina's mummers' troupe.
+Priscilla thus decided to put on a play - one Dudu would be sure to attend and that would clearly convey it was safe for him to reveal himself. Geralt agreed to the plan and the two got down to work.
+The play was a success. Although not the finest spectacle to ever grace the Butchers' Yard, it more than sufficed for Priscilla's purposes - Dudu attended the play and revealed himself at its end. Geralt quickly pulled him behind the curtain and began questioning him about me and Ciri. This is how the witcher learned that I was a prisoner of the Church of the Eternal Fire.
+Objectives
+Tell Priscilla what you've learned about Dudu.
+If exited conversation:
+Write the play's script with Priscilla. (300)
+Take the script to Irina Renarde.
+Head to the docks and hire ushers for the play.
+If challenged Sofus and Hal:
+Defeat the strongmen from Metinna.
+(Optional) Recruit jugglers from the performing troupe called the Puffins.
+Get rid of the thugs lurking outside the Puffins' house. (150)
+Talk to Irina Renarde and start the play.
+If drama was chosen:
+Help Zoltan calm the angry mob.
+Talk to Dudu in Irina Renarde's room.
+Notes
+The back door into the theatre is also locked, but it's possible to climb in over walls to avoid buying a ticket. See external images for visual hints.
+When Geralt bows at the end of the play, he bows the way he was taught in Vizima.
+The title choice only changes the script document's title itself - The Doppler's Salvation or A Changeling Rescued.
+The 10% discount is in fact a 0.9 multiplier on all prices, meaning that merchants will also offer less coin for Geralt's items. The word "merchant" is also used loosely here, as it doesn't matter what kind - literally any person who can buy and sell.
+Trivia
+The name of the quest comes from a line in William Shakespeare's "Hamlet".
+Bugs
+As soon as the script is written, citizens in Novigrad already recognize Geralt as having seen him perform on stage, even if he and Priscilla are still the only two people who know about the play. This happens particularly with "The Doppler's Salvation" title and comedy genre; it's unclear if random NPCs have lines for other variations, though it may be assumed that, since drama results in a failure, nobody would randomly praise Geralt for that.

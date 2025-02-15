@@ -1,0 +1,49 @@
+Botchling
+Botchling (Polish: poroniec) is a small creature, resembling a highly deformed fetus - created from the improper burial of unwanted, stillborn infants - that preys on pregnant women. While hiding beneath beds, botchlings sap the expectant mother of strength and once she is completely defenseless it will latch on and directly feed off blood, killing both her and the unborn child.
+As botchlings are born from improper burial rites and were unwanted, one can transform them into a lubberkin by performing the elven naming ritual, Aymm Rhoin, and giving them a proper burial beneath the family's threshold.
+A bestiary entry can be obtained by reading The Bear Legend.
+Quick Answers
+What is a Botchling in Polish folklore?
+						A Botchling, referred to as poroniec in Polish folklore, is a grotesque creature resembling a malformed fetus. It arises from the incorrect burial of unwanted, stillborn infants. When given a proper burial under a house's threshold, the poroniec can transform into a benevolent spirit, the kłobuk. Notoriously, Botchlings are known to feed on the blood of expectant mothers, propelled by an insatiable hunger.
+					
+						Provided by: Fandom
+					
+How does a Botchling prey on its victims?
+						Botchlings prey on victims by feeding on pregnant women's blood. They emerge at night, lurking by the expectant mother's bedside, draining her and her unborn child's strength. The woman initially experiences troubling dreams, fever, delirium, and overall weakness. Once she's defenseless, the botchling directly attacks, using its sharp fangs to drink her blood, leading to the death of both mother and fetus.
+					
+						Provided by: Fandom
+					
+What can a Botchling be transformed into?
+						A Botchling, a creature resembling a deformed fetus, can be transformed into a lubberkin, a guardian spirit, by lifting its curse through the elven naming ritual, Aymm Rhoin. The lubberkin then watches over the family it never knew.
+					
+						Provided by: Fandom
+					
+What is the origin of a Botchling?
+						Originating from improperly buried, unwanted stillborn infants, Botchlings are small, deformed creatures. They prey on expectant mothers, draining their strength and feeding on their blood. Through the elven naming ritual, Aymm Rhoin, Botchlings can be transformed into a lubberkin.
+					
+						Provided by: Fandom
+					
+How can one defend against a Botchling?
+						A Botchling can be defended against by transforming it into a lubberkin using the Aymm Rhoin elven naming ritual. In combat, cursed oil and the Axii sign are effective. The Axii sign is particularly useful when the Botchling's health drops below half, as it stops health regeneration and retracts the creature's spikes.
+					
+						Provided by: Fandom
+					
+{"@context":"https:\/\/schema.org","@type":"FAQPage","name":"Botchling","mainEntity":}
+Bestiary entry
+Saying a botchling's ugly is like saying shit's not particularly tasty: can't say it's a lie, but it doesn't exactly convey the whole truth, either.– Lambert, witcher of the Wolf School
+Botchlings are perhaps the most repulsive creatures a witcher will ever have the displeasure of meeting. Born of dead, unwanted babies discarded without a proper burial, their appearance is that of a partially-decayed fetus, their unformed flesh twisted with hate, fear and malice. These hideous creatures feed on the blood of pregnant women, driven by a mad hunger that most often leads to their victim's death.
+A botchling will emerge from its lair at night to lurk by the bedside of an expectant mother, draining her strength and that of her unborn progeny as she sleeps. A woman thus beleaguered first suffers from troubling dreams, then fever, delirium and a general weakening of the flesh. After a few such nights she is enfeebled and unable to defend herself - it is then the botchling attacks directly, sinking its long, sharp fangs into her body and drinking her blood until mother and fetus perish together.
+A botchling stands around a foot and a half in height, but, when threatened and if gorged with blood, it can change form. At such times it grows into a deformed man, hunched over and striding, ape-like, on its forearms. Stronger and fiercer after this alteration, it hurls itself into direct, physical combat, gnashing at its opponent or attacking him with sharp claws.
+A botchling's curse can be lifted by transforming it into a lubberkin - a guardian spirit of the hearth that watches over the family it never knew in the house it never could call home.
+Combat tactics
+When threatened, a botchling turns into a bigger monster substantially rising in size and resembling a ghoul or alghoul when they grow spikes on their back. Using Axii though will make them retract the spikes for a short time, allowing one to safely strike them.
+Associated quest
+Family Matters
+Trivia
+The poroniec is heavily inspired by the Slavonic mythological creature of the same name. In Slavic folk beliefs, the poroniec was an evil and malicious spirit that arose from the improper burial of a stillborn child. The game is relatively faithful in portraying this old belief, as in Polish folklore the poroniec also turned into the friendly kłobuk spirit when buried properly under the threshold of the house.
+Videos
+The Witcher 3 Botchling Boss Fight (Hard Mode)
+Gallery
+Concept art of the botchling for The Witcher 3Gwent card art in The Witcher 3Gwent: The Witcher Card Game card artClose-upBotchling transforming into an aggressive botchlingFully transformed botchlingAs depicted in A Witcher's Journal
+External links
+ See the GWENT standalone game version card: Botchling

@@ -1,0 +1,104 @@
+La Cage au Fou
+La Cage au Fou is a main quest in the Blood and Wine expansion.
+Although the suggested level for this quest is level 39, the rewarded for three separate sections of it decreases at levels different than what normal game rules would dictate:
+For all objectives that can be completed at the first visit to the cemetery, including reading the bestiary entry for Spotted Wights, will decrease after reaching level 47 (43 before Patch 4.0).
+For all objectives completed at the Trastamara Estate Ruins, will decrease after reaching level 49 (45 before Patch 4.0).
+For everything else afterwards, will decrease after reaching level 51 (47 before Patch 4.0).
+Walkthrough
+Head to Mère-Lachaiselongue Cemetery and try the only door to the crypt, but Regis isn't answering so you must find another way in. There will be an archespore and a ghoul around if you haven't cleared them previously. Nearby is an open tomb so drop down and kill the kikimores here. Note that if you destroy all the eggs here using Igni, you get 100 but then a kikimore warrior will appear that you must also kill.
+Head further in where you can go left or right. The supposedly dead end on the left though is actually an illusion: using The Eye of Nehaleni on it will reveal a sarcophagus, on which you can find the Casus Foederis sword and a note. Turn around and you can enter the crypt from immediately to your left, or backtrack to the other path, where Aard can be used to remove some debris before entering from there. However you got in, a cutscene will follow. (450)
+After reintroductions, Geralt shows the severed hand to Regis, who comes up with a plan to brew a Resonance potion, which would aid your mission to find Dettlaff. However, the potion requires a rare type of ingredient, which Geralt names three options for, and Regis will send some helper ravens to search for them. While waiting, you can choose to talk or not, with as many options as you wish until you've exhausted them all. Eventually Regis gets word that a spotted wight is actually in the area, despite Geralt saying that specific subspecies of wights were extinct. Read the bestiary entry for 100 if you wish and it's time to go find it.
+Trastamara Estate Ruins
+Head out to the Trastamara Estate Ruins, all the way west of the cemetery. Note: chances are, the path will take you right by Doren Alma Estate, where the secondary quest Extreme Cosplay will trigger, if not done already. This quest can be difficult at low levels, so consider taking another route to not trigger this yet if you want to do it later, as it must be taken care of immediately or will disappear once passed by.
+There are spoons everywhere at the ruins, and several barghests to deal with on the way to the main house. Once you approach the doorway, a small cutscene starts where Geralt reads the curse that's scratched all over the walls. Enter the place and search it thoroughly if you wish to lift the curse. While not necessary, there are also multiple documents related to the curse, starting with a soiled letter on a bench outside the house (to the left when facing the entrance), a stained diary in the oven left of the entrance, a decaying letter near the table with the skeletons, and a book in the cellar (to the left, before dropping into the spoon-covered area).
+There are examinable spoons everywhere inside, but only one is worth noting: a spoon key (starts the Spoontaneous Profits! treasure hunt) in a corner at the room to the far right, where Geralt will start reading more curse writings from the walls. There's also an easily missable vial containing a greater green mutagen, in the room with the cauldron. Once you examine the cauldron, Geralt will decide to hide and you can go in the nearby cupboard.
+Important: If you want to lift the curse, you need to have examined enough objects around the house before hiding. It doesn't matter which ones, but some will have more "weight" than others. The shortest way to achieve this seems to be examining just the two tables, but either way you will get 300 when enough is done.
+Hiding in the cupboard triggers a cutscene and, if Geralt has learned enough to lift the curse, you will have a timed choice:
+Attack the monster
+Try to lift the curse
+Either one will get you the ingredient you need, but lifting the curse will give you access to a secondary quest, The Hunger Game, as well as potentially more .
+Attack the monster
+This is also the default if Geralt doesn't know how to lift the curse. The "Spoon Collector" will run into the cellar with the spoon-covered floor and Geralt must kill it (650), then loot the body for a wight saliva gland. (1,000) It will also have the Wight trophy and a key opening the nearby locked tunnel.
+Try to lift the curse
+Geralt will first get some wight brew (1,000) and then you're given 3 choices, but only the option to eat without spoons is correct. If you choose any other option, it'll fail to lift and the wight runs off. You don't need to chase and kill it as you already got the wight brew. If you do chase after it, it'll have run into the room with all the spoons like if you straight out attacked it instead. If you do kill it here, you will get 650 and all loot items that you would've gotten by outright attacking it.
+If the curse is lifted, it still runs away, but in this case it leaves a stench trail leading outside, which again is optional to follow. If you choose to follow, you may have to deal with a couple of barghests before finding out that the wight was a cursed woman, Marlene. A small cutscene then happens where Geralt takes her to Corvo Bianco for her to recover. If you've yet to visit your home, the initial conversation with Barnabas-Basil Foulty is a bit different, but either way at the end of the conversation you will receive 1,000 for finding Marlene. 48 hours later, The Hunger Game will automatically start (it doesn't matter if you tell BB her story or not).
+Tesham Mutna
+Head back to the cemetery and talk to Regis, who needs one last ingredient and Geralt must help him get it at Tesham Mutna Ruins. You can choose to go immediately or prepare first, but you're actually allowed to just leave him there once you head out. Either way, when the conversation or cutscene ends you will receive 400. When you decide to go, Regis will put himself in a state to ensure you'll get the last ingredient and you'll be at Tesham Mutna, where he reveals a secret entrance and you can examine a body by the door, but much more interesting things await inside.
+Note: You will only be here this one time, so anything you miss will be gone forever.
+Head in where you can find a few interesting things in the first room, but most notably 3 pieces of the Tesham Mutna armor set in the chest Regis initially leans against: the sword, armor, and trousers. Follow Regis down the stairs to another room where you can examine the signs on the walls and pickup a few more interesting objects. In the chest next to Regis are 2 more pieces of armor: the mask and boots. In the next section is the third tribe symbol you can examine to learn more about vampires if you wish, as well as miscellaneous loot in the cells. However, the most important is in the last shelving/hole on the left as you follow Regis. In the chest beside the skeleton is the final piece of armor, the gauntlets. Continue down the hall and it'll cut to a small cutscene before Regis gives you some bait to place around to lure monsters there.
+You'll have to blast away some debris to place two of the lures and once all are set you have to talk to Regis to begin. Prepare for a big fight, during which you'll be surrounded by many necrophages and an odd fleder or katakan. Try to keep your Quen up at all times (tip: meditate until night if you have to, and drink a Superior Tawny Owl), as multiple scurvers and rotfiends will be able to one-shot Geralt as they explode. Especially with Protective Coating, it's best to use Necrophage Oil and simply avoid the vampires. You must keep killing monsters until Regis' bloodlust builds up, but don't worry about more than your immediate safety - 10 kills are enough, then shortly a cutscene will trigger and all the rest will run away.
+When Regis reaches his transformation, Geralt gets the last ingredient and heads back to the cemetery to finish the concoction. You can then talk for a bit before you once more go through a cutscene showing Dettlaff and how he met Count de la Croix and then the latter's death. Then after a short conversation with Regis, your next lead to follow will be the bootblack near Beauclair Port.
+This quest completes here (1,000) and Where Children Toil, Toys Waste Away will begin. However, note that there's another, secondary quest - Amidst the Mill's Grist - only available until you finish the next main one. You may have recognized its location from the vision.
+Journal entry
+The Beast's and Geralt's clash had been violent albeit brief. Now With it done, Geralt could have a chat with his long lost friend Regis. A higher vampire, Regis revealed that the creature terrorizing Beauclair was none other than his dear friend Dettlaff. Geralt now understood he was pursuing a truly dangerous foe – a higher vampire, one of Regis' ilk. Then the witcher and the vampire heard a clamor. A posse was drawing near. So Geralt and Regis cut their conversation short. Preferring not to draw any attention, the vampire disappeared, but not before inviting the witcher to pay him a visit at temporary quarters he'd established at the local cemetery (you had better believe it!), Mère-Lachaiselongue.
+Geralt paid Regis a visit at his cemetery hideout. After a long debate, the two old friends concluded their first order of business was to find Dettlaff. Regis was to prepare a concoction to aid them in this endeavor. Called Resonance, said brew required an array of ingredients, many of them hard to find. One such component was the saliva, or salivary glands, of a spotted wight, a species thought to be long extinct. Yet it seemed that one specimen remained alive, having made its lair near Beauclair. Geralt set out to find it.
+If Geralt kills the spotted wight:
+Geralt found the spotted wight at an old, abandoned estate. The witcher slew the monster and, its salivary glands in hand, made for the cemetery.
+If Geralt lifts the curse from the spotted wight (or tries to, but fails):
+Geralt found the spotted wight at an old, abandoned estate. The witcher chose not to fight it, opting instead to hide in a wardrobe and await his chance, though how it would come, he could only guess. Once the wight had come and gone, Geralt collected its saliva, which the monster had added to the brew it was making in a large cauldron.
+If Geralt lifts the curse from the spotted wight:
+Intrigued, Geralt set off in pursuit of the fleeing wight. To the witcher's surprise, the creature proved to be a woman who had been cursed centuries ago. Geralt set about lifting the curse that held her, and through his efforts the wight transformed back into someone of yore named Marlene.
+Once Regis received the penultimate ingredient required to brew Resonance, he said the time had come to tackle the most difficult challenge. For apart from all else, Resonance had to include the blood of a higher vampire. At first, Geralt saw this as no challenge at all, as standing before him was a representative of said species. Yet Regis revealed that the blood he needed had to have a specific chemical composition. His blood would change only under conditions of great suffering. Regis offered to endure this without hesitation.
+It proved quite the ordeal for Regis, a sacrifice one might say. But they obtained the last ingredient required for Resonance, and the vampire could prepare the concoction. Geralt drank a dose, and visions ensued. He saw Dettlaff, where he had recently been, what he had done. It was enough for Geralt to know he now needed to find a local bootblack. He hoped the boy would help him locate his foe.
+Objectives
+Meet Regis at Mère-Lachaiselongue Cemetery.
+Find a way into the crypt. (450 )
+ Read the bestiary entry to learn more about spotted wights. (100)
+Look for the wight's lair.
+Use your Witcher Senses to search the wight's lair.
+Find the wight's cauldron.
+Look into the cauldron.
+Hide in a place with a good view of the cauldron.
+If Geralt attacks it:
+Follow the wight.
+Kill the wight. (650 )
+Collect the wight's saliva glands. (1,000)
+If Geralt fails to lift curse: (1,000)
+ Follow the wight.
+Kill the wight. (650 )
+If Geralt successfully lifts curse: (1,000 )
+ Follow the stench of the wight's brew. (1,000 )
+Report back to Regis. (400)
+Talk to Regis when you're ready to go.
+Follow Regis.
+Place the bait in each of the four tunnels. 4/4
+Tell Regis when you're ready to fight.
+Kill monsters until bloodlust transforms Regis into a monster. (1,000 )
+ Experience table
+Action / Objective
+Destroy kikimore eggs
+100
+Find a way into the crypt
+450
+Read bestiary for Spotted Wights
+100
+Examine enough clues
+300
+Acquire wight brew or saliva gland
+1,000
+Kill the wight
+650
+Find Marlene
+1,000
+Return to Regis
+400
+Build Regis' bloodlust
+1,000
+Total (minimim)
+2,150
+Total (maximum)
+4,350
+Bugs
+No matter where you are in the main story line, when Regis asks, Geralt says he found Ciri and they defeated the Wild Hunt together.
+You can lift the curse from Marlene, but not bring her to Corvo Bianco. In that case, she can be looted, but her body will still be alive and she cannot be interacted with.
+Notes
+Possibly to accommodate the cutscenes and conversation outside of the crypt, if the archespore and ghoul outside the crypt are avoided before finding Regis, they will simply despawn afterwards.
+It's very likely the mysterious vagrant that cursed Marlene is Gaunter O'Dimm for reasons explained on his page.
+Inside the cemetery crypt, three interesting documents can be found: Regis' biography near the bookshelves, his journal next to the bed, and a regeneration potion formula on the worktable.
+During the part at Tesham Mutna, five interesting books and notes can be found: Human Husbandry and Care and Champion of Tesham Mutna in the first chamber, Battery-Cage vs. Free-Range Humans in the second, and notes and a transcript in the cells corridor.
+The "Resonance" potion was once intended to be an obtainable item that would manually be consumed from the inventory. The game files still contain even a custom item description for it: "Potion which invokes visions showing Dettlaff's memories." It was likely removed to avoid complications such as players deciding to consume it at points intentionally outside of the quest.
+Trivia
+The name of this quest is likely a reference to the French play-turned-musical La Cage aux Folles.
+The quest name means "the madman's cage" in French.
+Videos
+Dinner with a Wight - The Witcher 3 DEATH MARCH! Part 141 - Let's Play Hard

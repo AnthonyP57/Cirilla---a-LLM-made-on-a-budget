@@ -1,0 +1,28 @@
+Hung Over
+Hung Over is a quest in Chapter I of The Witcher 2: Assassins of Kings.
+Walkthrough
+Upon entering the Blue Stripes headquarters in Flotsam, some Blue Stripes are celebrating the soldiers' defacing a statuette of a local god. They ask Geralt to compete with Ves in a knife-throwing competition in which the soldiers call out various objects (oar, ham and map (may not be in this order) as targets.
+Locals barge into the quarters demanding retribution for the sacrilegious actions of the troops. An argument ensues between Vernon Roche and the locals and Geralt is given the choice to break up the confrontation or walk away. If Geralt choses to calm Roche down, he can try persuading him, but if that fails, he is forced into a fistfight with the commander.
+After some drinks, Ves challenges Geralt to arm wrestle two soldiers, Thirteen and Fenn. The Sword of Creyden is won upon defeating the second soldier. After the arm wrestling, the drinking continues until Geralt blacks out.
+The following morning, Geralt finds himself hungover and naked by Flotsam Harbor with a tattoo on his neck. He is approached by a local who, after a bribe or successful intimidation check, will direct him to the Madame of Flotsam brothel. She will then, after another bribe, tell Geralt to see 'the girl in the Blue Stripes' (Ves)
+Ves is found in the Blue Stripes lodging next to the tavern. After discussing the events of the night before, including the several attempts at crossing the river atop prostitutes and story behind the tattoo, Ves directs Geralt to a chest where his possessions are held.
+50 xp are awarded after speaking with Ves.
+If Triss is consulted about the tattoo, she will laugh at the witcher's expense and tell him that she can remove it with the following:
+White myrtle petals
+Green mold
+Wolf's aloe leaves
+All of the ingredients can be purchased from Anezka in Lobinden, Myron in the Kaedweni camp, or Marcus and The Incredible Lockhart in Loc Muinne. White myrtle is one of the more common herbs growing in gardens and the wild, so need not necessarily be purchased; however, unlike in the prior and subsequent Witcher games, the leaves and mold are not part of the alchemy system and are only found for sale by the four merchants mentioned.
+There is no new line of dialogue to remove the tattoo after the ingredients are collected, but by repeating "Do you know how to remove a tattoo?", Geralt will say that he has the items needed. The option will then be given to remove it or keep it. Removal will be instantaneous (sorry - no bonus footage of Triss working on Geralt's neck).
+The collection is a hidden quest and will not be displayed in the journal. The tattoo removal may also completed with the same ingredients in Chapter 2 by consulting Philippa (Iorveth's path) or Síle (Roche's path).
+Journal entry
+You may remember that Geralt decided to have a friendly drink with Roche's men. He awoke later on with a monstrous hangover and a nagging feeling that he had done something he should not have. He decided to learn the truth and questioned the madame.
+Well, the get-together had gone so well that virtually all its participants had lost touch with reality. Only Ves had remained lucid and tried to rein in her friends and the witcher. To no avail. Geralt went to speak to the young woman.
+So, what had happened? Believe it or not, in a drunken stupor, the witcher had his neck tattooed. From that raucous evening onward, he was forever to wear the brand of the Blue Stripes.
+Notes
+This quest is only available from the time Indecent Proposal starts until The Rose of Remembrance ends.
+Bugs
+Sometimes players will experience black screens when failing to persuade Roche. In that case, they might hear Roche beating up Geralt in the black ground until he dies and get prompted to the reload save scene. To fix this, players can try setting the game to windowed mode in the settings before launching the game, and choose to intimidate Roche to persuade him successfully and skipping the brawl.
+Videos
+Hung Over (The Witcher 2) Full HD
+Gallery
+Geralt with his new tattoo

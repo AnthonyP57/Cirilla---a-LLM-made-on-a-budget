@@ -1,0 +1,204 @@
+Character attributes
+The Character attributes panel provides information on Geralt's current state within The Witcher 2: Assassins of Kings, and is accessed by choosing the Attributes menu from the Character Skills screen.
+The information given includes Geralt's level, current stats, knowledge, and acquired abilities.
+Level – Displays Geralt's current level (up to a maximum of 35), as well as the number of currently available talents and his progress in the current range of experience points to the next level.
+ Character abilities
+
+ Damage
+How much damage Geralt can inflict with his currently equipped weapon, given as a range.
+ Armor
+The armor statistic describes how much protection Geralt's current armor and/or weapons provide. This statistic can also be boosted with the use of potions, trophies, and enhancements.
+It's calculated as follows:
+I
+n
+c
+o
+m
+i
+n
+g
+D
+a
+m
+a
+g
+e
+−
+A
+r
+m
+o
+r
+=
+R
+e
+c
+e
+i
+v
+e
+d
+D
+a
+m
+a
+g
+e
+{\displaystyle IncomingDamage - Armor = ReceivedDamage}
+So if a nekker hits at 35 and Geralt's current armor is 12, then it'd be:
+35 - 12 = 23 damage to Geralt
+ Vitality
+Geralt's maximum level of vitality, with additional information about vitality regeneration during combat and outside of it. Geralt gains 5 vitality with each level.
+ Vigor
+Geralt's maximum level of vigor, with additional information about vigor regeneration during combat and outside of it, as well as with raised toxicity. The maximum level of Vigor is 9, with all the related skills suitably upgraded, and wearing the Armor of Ysgith, having used a Maribor Forest potion, and wielding the Forgotten Vran Sword together.
+Resistance
+List of active resistances and level of damage reduction.
+Critical effects
+List of active critical effects.
+Bonus
+List of active bonuses.
+ Knowledge
+Geralt's current knowledge about various monsters. The entries here are obtained via defeating a certain number of monsters or via reading a book on the monster.
+ Abilities
+Geralt can acquire certain permanent bonuses and other advantages by performing specific actions in specific locations or circumstances and interacting with various NPCs in specific ways.
+Axii Sign Hex, Intimidate, and Persuasion all have three levels; all other Abilities have only one.
+It isn't possible to acquire all of these abilities in a single play-through – mostly due to the branching paths in Chapter I, but also because four of them were coded for but never actually incorporated into the game.
+No ability carries over to any subsequent play-through, nor to The Witcher 3: Wild Hunt.
+These abilities and how to acquire them are listed below:
+Ability
+Effect
+Source
+Chapter
+Anatomy lesson
+Damage against humans: +10%.
+Examine the body in the catacombs during With Flickering Heart quest in Chapter II (Iorveth's path).
+2 (Iorveth)
+Arcane Knowledge
+Intensity of all Signs: +0.5.
+Earned by completing The Gargoyle Contract in Chapter III.
+3
+Assassin
+Damage dealt by attacking from behind: +25%
+Find the dead Altaïr (from Assassin's Creed) look-alike next to some hay in the courtyard near the ballista during the Prologue.
+0
+Axii sign hex
+Allows the use of the Axii sign during conversations to obtain information or other benefits.
+Use the Axii sign option during specific conversations
+You can earn this Ability at any time in the game.
+Batter
+Chance of instant kill with a redirected arrow: 20%.
+Requires ability to redirect arrows toward the shooter. Earned by redirecting approximately 10 arrows back at NPCs.
+1
+Battle seasoned
+Vigor regeneration when fighting +5%
+Not in the game, nor mentioned in the guide. It was supposed to be obtained after finishing the defense of Vergen in chapter II (Iorveth) or by winning all the fights during Ave Henselt! (Roche), but is unobtainable due to buggy scripts.
+Not in game
+Birdman
+Damage against harpies: +10%.
+Complete The Harpy Contract quest during Chapter II (Iorveth's path).
+2 (Iorveth)
+Child of the night
+Vitality regeneration at night: +2.
+Sneak through the camp undetected during the Where is Triss Merigold? quest (Iorveth's path) near the end of Chapter II.
+2 (Iorveth)
+Conjuror
+Signs damage: +3.
+Automatically given for using the Axii Sign Hex during a conversation.
+You can earn this Ability at any time in the game.
+Cover
+Damage reduction: +10%.
+Stay under Triss' protective umbrella without exiting during the beginning of Chapter I, or sneak up on the first two guards in Loredo's compound while looking for the Kayran trap, and knock them out.
+1
+David
+Damage dealt to opponents much bigger than Geralt: +10%
+Kill the golem in the kingslayer's hideout in Chapter II (Roche's path).
+2 (Roche)
+Executioner
++1% to Instant Kill Chance
+Kill Aryan La Valette, Adam Pangratt and let Roche kill Henselt at the end of Chapter II. (Technically, Stennis can be substituted for Henselt in Iorveth's path, but a substitute for Pangratt is not known, so until further notice this ablility can only be won on Roche's path.)
+0 (Roche)
+Exorcist
+Damage against all spectres and wraiths: +10%.
+Remove the curse from the king in Chapter II (Roche's path).
+2 (Roche)
+Experienced
++10% Bonus to Experience Earned
+Destroy 10 training dummies.
+0 
+Haggling
+-20% to price of items in shops.
+Convince the merchant to double the fee by using the Axii sign during The Kayran: A Matter of Price quest in Chapter I. You get the ability after defeating the kayran and picking up payment from the merchant.
+1
+Half-Pirouette
+Resistance to all critical effects +10%
+Defeat Letho during the main story quest in Chapter I. To get the ability, you need to fight him until the cutscene kicks in, in which Geralt knocks the sword out of his hands. 
+1
+Healthy diet
+Regeneration of vitality when not fighting +20%
+Not in the game, nor mentioned in the guide. It was supposed to be obtained after beating the Mighty Numa, but is unobtainable due to buggy scripts.
+Not in game
+Intimidate
+Allows the use of intimidation during conversations in order to obtain information or other benefits.
+Use the intimidate option during specific conversations like Geralt's interactions.
+You can earn this Ability at any time in the game.
+Tough
+Vitality +20
+Not in the game, nor mentioned in the guide. It was supposed to be obtained after winning all the fistfights in chapter II (both paths), but is unobtainable due to buggy scripts.
+Not in game
+Parry
+Chance of automatic riposte after blocking a blow: 10%.
+Requires the Riposte ability from the Swordsmanship tree. Earned by using Riposte a certain number of times. (Approximately 30-50 times, both silver and steel count towards the threshold)
+1
+Persuasion
+Allows the use of persuasion during conversations in order to obtain information or other benefits.
+Use the persuasion option during specific conversations.
+You can earn this Ability at any time in the game.
+Precision
+Chance of all critical effects +5%.
+Not in the game, nor mentioned in the guide. 
+Not in game
+Pyromaniac
+Critical effect chance: incineration +20%. (It adds 20% of your actual incineration percentage, i.e. if you are wielding a sword with 2 fire runes which give you a 20% chance of incineration, with this ability you will make that 24% in total)
+Receive a certain amount of damage by being set on fire. Set Geralt ablaze by walking into a campfire and repeat approximately 5 times.
+You can earn this Ability at any time in the game.
+Resistance to Magic
+Damage reduction in case of magical attacks: +20% (It adds 20% of your actual magic resistance, i.e. if you are wearing a set of armor that give you a 15% reduction of damage from magic, with this ability you will receive 18% in total)
+Reject Triss in the Elven Bath and cast Aard to open the way out during The Rose of Remembrance in Chapter I. 
+1
+Sapper
+Chance of avoiding damage dealt by traps and bombs 50%
+Interrupt Geralt (by interacting with another object, using his medallion, or possibly using other methods) five times while he is in the process of disarming a trap.
+0 
+Strong Back
+Geralt can carry more items. Total Capacity: +50.
+Spare Aryan La Valette and help him escape the La Valette's dungeon during the Prologue. It will be awarded upon exiting the dungeon.
+0
+Strong Stomach
+Resistance to critical effect: poisoning: +10%.
+Drink Mongoose potion during Chapter I.
+1
+Swordsman
+Damage caused during sword fights: +4.
+Awarded after defending King Henselt from the two assassins in Chapter II (Roche's path).
+2 (Roche)
+Summer's Crown
+Quen Sign: +10% chance to Incinerate enemies who strike while Quen is in effect.
+Awarded when visiting a shrine in Chapter I in the swamp outside Lobinden. (after patch 3.3)
+1 (PC Only)
+Thrower
+Damage dealt by throwing knives: +5.
+Defeat Ves in a knife throwing contest during the party at the Blue Stripes hangout in Chapter I.
+1
+Toxic Blood
+Opponents that damage Geralt may be poisoned if Geralt is using potions. Chance of poisoning 30%.
+Poison Geralt using several Devil's Puffball bombs.
+You can earn this Ability at any time in the game.
+Winter's Shroud
+Changes Aard Sign into the freezing Ice Aard, which adds a 20% chance of freezing opponents hit with the Sign.
+Awarded when visiting a shrine in Chapter III outside of Loc Muinne. (after patch 3.3)
+3 (PC Only)
+Notes
+↑ Note, however, that the game will display only 8 bars representing the 9 Vigor levels, and the circle will be empty rather than showing a #9 character (nonagon). Still, you can cast Quen and see that now the circle will show the octagon square with all bars filled, meaning, you have 9 Vigor levels (one used for the Quen.)
+↑ One of the best ways is in Foltest's camp during the Prologue. There is a Circle of Power which grants +2 Vitality regeneration and near it is a camp fire. Use the Circle of Power, set yourself ablaze and regenerate very fast. Repeat.
+↑ This can be done in the Camp at game start. Set a trap, then interrupt with Medallion.
+↑ This can also be awarded by losing a fistfight (needs clarification). (See note on talk page)

@@ -1,0 +1,13 @@
+Mutagenerator
+Mutagenerator is a quest item in the Blood and Wine expansion.
+Given to Geralt by Regis as a token of appreciation after parting ways in Toussaint during the main quest Be It Ever So Humble..., it is a powerful item capable of storing the life essence of dead beings killed by its wearer and then - when it is sufficiently charged - transmutating this energy into a random greater mutagen.
+This ability makes the mutagenerator a very useful item with regards to the mutation procedure discovered by Professor Moreau and applied by Geralt.
+Associated quest
+Be It Ever So Humble...
+Notes
+100 kills will charge it enough to generate one random greater mutagen. However, you must manually go into your inventory and generate it once it reaches 100, otherwise it'll sit at fully charged indefinitely until you do.
+Upon reaching 100 charges, the mutagenerator icon will glow blue, making it easy to identify when it's charged without having to select it.
+The mutagenerator can store more than 100 charges--for example, it can read 149/100, and upon using it, the new charge will be 49/100. The maximum amount of charge it can store is unclear.
+This item is impossible to transfer to New Game +, thus it's best to collect all the mutagens you need for the mutations you want BEFORE you start New Game +.
+Trivia
+It bears a strong resemblance to the flux capacitor from the Back to the Future franchise.

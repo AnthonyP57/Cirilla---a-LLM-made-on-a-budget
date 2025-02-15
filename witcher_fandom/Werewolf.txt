@@ -1,0 +1,94 @@
+Werewolf
+Werewolves are therianthropes who transform into wolves or half-wolves. As other such creatures, they are hardly hurt by steel but very vulnerable to silver.
+There are two most common ways to aquire lycanthropy: the first one through a curse and the second is to simply have a werewolf parent. Being bitten by another werewolf, while popular in folk tales, gives only a very small chance of becoming one in reality, though it is still recommended to get magical treatment. Those who are born as werewolves are able to fully control their shapeshifting abilities, while those cursed or bitten change into their werewolf form only during the full moon. Those who became werewolves during their lives however are the only ones who can be cured. The wolfsbane is said to mitigate the illness' symptoms.
+Therianthropy diseases, including lycanthropy, appeared in the world after the Conjunction of the Spheres, affecting nonhuman and early human populations alike. According to Herbolth, lands in the Toina valley, also called the Dogbane, were plagued by werewolves before the Nordling colonization.
+Werewolves have a legendary sense of smell, exceptional even amongst real wolves. Lycanthropes are usually on good terms with other canines, but hate werecats.
+Quick Answers
+What are the two most common ways to acquire lycanthropy in Witcher 3?
+						The two prevalent methods of acquiring lycanthropy in Witcher 3 are through a curse or by inheritance from a werewolf parent. Werewolves born of this condition have full control over their shapeshifting abilities, whereas those cursed or bitten transform only during a full moon.
+					
+						Provided by: Fandom
+					
+What is the vulnerability of werewolves in Witcher 3?
+						Werewolves in Witcher 3, known as lycanthropes, are humans who transform due to curses. They exhibit a strong resistance to steel and most effects, but are vulnerable to silver. These creatures attack aggressively, relying on their resistance to conventional weapons.
+					
+						Provided by: Fandom
+					
+What is the chance of becoming a werewolf after being bitten by one in Witcher 3?
+						In the Witcher 3 universe, the likelihood of acquiring lycanthropy, or becoming a werewolf, after a werewolf bite is minimal. Typically, lycanthropy is obtained either through a curse or heredity. Werewolves by birth have full control over their transformation, whereas those cursed or bitten transform solely during a full moon. Post-bite, seeking magical treatment is advised.
+					
+						Provided by: Fandom
+					
+What is the recommended treatment after being bitten by a werewolf in Witcher 3?
+						In Witcher 3, if bitten by a werewolf, three treatments are suggested: wearing a fool's parsley woven shirt, taking an alchemical potion, or using the Wolf potion. The Wolf potion is advised before battles with monsters with potent special attacks. It works against creatures causing bleeding, venomous creatures, or those breathing fire. Fire, bleeding, and poison effects can also slow down a werewolf's regeneration.
+					
+						Provided by: Fandom
+					
+What is the weakness of a werewolf in Witcher 3?
+						To overcome a werewolf in Witcher 3, exploit its vulnerability to certain elements. Use a blade coated in cursed oil and Devil's Puffballs. Slow down its rapid regeneration with fire, bleeding, and poison effects. However, be prepared for a challenging fight due to the werewolf's speed and its ability to heal faster than it can be damaged.
+					
+						Provided by: Fandom
+					
+{"@context":"https:\/\/schema.org","@type":"FAQPage","name":"Werewolf","mainEntity":}
+Notable werewolves
+Otto Dussart
+Vincent Meis
+Morkvarg
+Eberhartt of Rivia
+King of the Wolves
+The Witcher
+In the game, the werewolf is not only a boss monster, but also the subject of a quest. It is up to our hero to determine the werewolf's true identity.
+Journal Bestiary entry
+Baron Wolfstein buried his face in his hands. His heart was throbbing. Suddenly the scent of his wife's blood and the blood of his children intensified. The baron's body swelled as his muscles grew, his noble attire fell in tatters on the marble floor. 'My beloved, you... you are so hairy. You are a werewolf!' Bianca went pale. 'What about our love?' In reply she heard a terrifying roar.
+Danielle Stone, The Curse of Baron Wolfstein and Other Love Stories
+Location
+Trade Quarter
+Source
+Curses and the Cursed
+Physiologus
+Notes
+In the Prologue, Lambert claims silver is best to use against werewolves, but the conversation does not result in a bestiary entry.
+In Chapter I, an "Old townswoman" will tell Geralt about werewolves in exchange for food. This results in a journal entry about Werewolf fur but no bestiary entry for the Werewolf monster.
+Monsterbook
+Developer CD PROJEKT RED's characterization of the werewolf taken from the Monsterbook, which was enclosed with the Collectors Edition of the computer game ​"The Witcher" for Poland, Hungary and the Czech Republic:
+At first, lycanthropes, including werewolves, were supposed to be ordinary, frequently encountered opponents in the game. When we realized that the curse of lycanthropy could be the basis for a fascinating story in the spirit of Sapkowski's tales, we decided to make the werewolf an unusual creature.
+We were inspired by early drawings that depicted a lycanthrope with a large "gut". We immediately linked the creature to Vincent Meis, the tough commander of the City Guard, a middle-aged man with a well-developed "beer-muscle". New motifs were added to the story until it became a tale of a righteous law enforcer who uses the lycantrophy to fight crime more effectively. The werewolf must ultimately choose between being a masked (and fury) avenger or devoting himself to true love. Geralt can help him resolve this dilemma while proving that in addition to killing monsters, witchers are also good at lifting curses.
+The Witcher 2: Assassins of Kings
+Werewolves are among the opponents Geralt faces in the arena introduced in version 2.0 of The Witcher 2, beginning with the seventh fight.
+In the Enhanced edition, one werewolf can be encountered in the forest cave during the quest Crown Witness. Players need to pick up Dorian's Diary in order to trigger the encounter.
+The Witcher 3: Wild Hunt
+A bestiary entry can be obtained by reading In Beast's Clothing.
+Monster introduction by CDPR:
+Neither animal, nor man, the Werewolf takes the worst from both species: the bloodlust and primal nature of a wolf, and the ruthlessness and cruelty of a human. One becomes a Werewolf as a result of a curse thrown by a witch -- the change itself is uncontrollable and unwilling. A man who transforms back to his human form can't usually remember the atrocious acts committed as a werewolf.
+Werewolves are creatures of the night and they are especially active during the full moon. They usually go hunting alone, as there rarely is an opponent that can match their strength, agility and fast health regeneration. If a Werewolf actually encounters an enemy that has equivalent strength and can fight a fair fight, the creature can call for wolven reinforcements that will come to its aid. A good way of dealing with werewolves is a sword covered with oil to combat cursed creatures, or a Silver Bomb that will temporarily block the creature's regenerative power.
+Bestiary entry
+Wolves aren't as bad as they're made out to be. Werewolves, though – they're every bit as bad and worse.– Elsa Vilge, archer
+Werewolves are creatures with both men and wolves inside them. When in beastly form, they take the worst traits of each: the wolf's drive to kill and hunger for raw flesh and the man's cruel and calculating intelligence. A werewolf's condition comes about through a curse, and the transformations happen outside his conscious control. When he reverts to human form, he has no memory of his deeds – otherwise he would surely go mad and take his own life.
+Werewolves are active at night, particularly when the moon is full. Though they hunt alone, when threatened they will summon wolves to aid them. Werewolves rarely feel the need to flee, for few adversaries put up much of a fight against them. They strike as swiftly as lightning with claws sharp as razors and regenerate any damage received in mere moments. When fighting werewolves a witcher should wield a blade covered in oil harmful to the cursed and have a large supply of Devil's Puffballs handy.
+A werewolf's curse can at times be lifted, yet there is no universal, surefire method for doing this. A witcher seeking to undertake such a task must there equip himself with a great deal of patience – and sturdy armor.
+Combat tactics
+These breeds of cursed creatures are quite fast and very lethal. They can jump great distances and at such high speeds that defending yourself against one can be challenging at best. Utilising the sign Yrden can be a useful way to slow them down, making close quarter combat safer. Igni and Axii can also be used to stop the werewolf on its tracks momentarily, leaving enough windows for one or two heavy attacks.
+Werewolves have an intriguingly powerful health regeneration ability, even more potent than ghouls'. Players who are unable to give enough damage output within short time will have to be prepared for an exhausting fight, if not at all impossible; as long as the werewolf can regenerate health faster than he takes damage, it can outlast Geralt no matter how good he is in defense and evasive tactic.
+Fire, bleeding and poison effects can be used to slow their regeneration down, although inflicting these statuses upon the werewolf are quite a challenge in itself, considering their speed.
+Associated quests
+Ciri's Story: The King of the Wolves
+Contract: Skellige's Most Wanted
+Knight for Hire 
+In Wolf's Clothing
+Little Red
+Wild at Heart
+The Whispering Hillock
+Notes
+Utilizing Roach's rear kick is the only known way of knocking over a werewolf and being able to finish them off with your sword in one move like harpies and bruxae. It is unknown if this is a bug or intentional as they are such unlikely circumstances.
+Videos
+What are Werewolves? The Witcher 3 Lore - WerewolvesThe Witcher 3 Morkvarg the Werewolf Boss Fight (Hard Mode)
+Gallery
+In The WitcherConcept art for The WitcherConcept art for The WitcherFinal concept art for The WitcherIn The Witcher 2: Assassins of KingsIn The Witcher 3: Wild Hunt: Prima Official Game GuideIn The Witcher 3: Wild Hunt: Prima Official Game GuideE3 2014 screenshot of The Witcher 3: Wild HuntThe Witcher 3: Wild Hunt modelsThe Witcher 3: Wild Hunt modelsThe Witcher 3: Wild Hunt modelsThe Witcher 3: Wild Hunt gwent card artGwent: The Witcher Card Game card artUlfhedinn in Gwent: The Witcher Card GameAlpha werewolf in Gwent: The Witcher Card GameMoonlight transformation in Gwent: The Witcher Card GameIn The Witcher: Nightmare of the WolfIn The Ballad of Two Wolves
+References
+↑ 1.0 1.1 1.2 1.3 1.4 Season of Storms
+↑ 2.0 2.1 2.2 2.3 2.4 2.5 Wiedźmin: Gra Wyobraźni
+↑ 3.0 3.1 3.2 Reasons of State
+↑ Blood of Elves
+↑ Sword of Destiny
+↑ The Witcher
+↑ 7.0 7.1 The Witcher 3: Wild Hunt

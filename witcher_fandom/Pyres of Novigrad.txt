@@ -1,0 +1,62 @@
+Pyres of Novigrad
+Pyres of Novigrad is a main quest in The Witcher 3: Wild Hunt.
+Walkthrough
+Head to Hierarch Square where you'll be treated to a cutscene that introduces Caleb Menge, the commander of the Temple Guard and leader of the witch hunters, as he proceeds to burn Felicia Cori and the doppler Chappelle at the stake.
+Afterwards, head south from the square and through the wooden doors into a courtyard to find a couple looters at what was once Triss' home. As no matter what you say will just lead to a small conversation, just ask to talk (telling them to leave will cause a fistfight but nothing is gained from it by doing so). They'll reveal that if Triss escaped, she likely went to Putrid Grove to get help from the King of Beggars, but neither knows where the grove is. You're then interrupted by Caleb, who has the looters arrested for trying to take confiscated Temple Guard property. Respond how ever you like here but Caleb makes it clear: witchers aren't welcome in his "righteous" city and he can't wait for Geralt to slip up so he can have the witcher arrested and executed like the mages.
+Once he's gone, if you want to look around some first, head inside the home where you can examine some herbs and a hairbrush on the first floor, then head up to the second to examine some amulets on the counter. On the third and final floor, you'll find some of Triss' clothes that can be examined. Note on the bedside table you can also loot the Rose of Remembrance. Also, one of the chests outside can contain random diagrams. Once done, leave and head back into the square for a small cutscene.
+Finding the Grove
+There are several ways to find Putrid Grove, some more time consuming than others.
+Find a thief in one of the 3 radius search areas and follow them
+Find a beggar to ask for the location
+Find the sewer entrance near Glory Gate
+Thief
+You'll need to look out for a pickpocket in one of the search areas, then keep a safe distance and follow him as he makes his way to The Butcher's Yard theater. A beggar will try to get money from you here, but any option will get him to leave. Continue following and as he nears the bridge, he'll pass the coin pouch off to another thief.
+If you continue to follow the same guy, he'll lead you to a group of thugs and you'll have to have a fistfight with them, but they'll just surrender if you draw your sword, and eventually tell you the location and password to get through.
+Following the new guy, he'll eventually lead you to the entrance. If you interact with the door but don't know the password, you'll eventually have 2 choices:
+Pay 50 (earns 5 but will have to hand over your weapons before you can enter)
+Use Axii (requires Delusion level 2, earns 35 and get to keep your weapons)
+Regardless of which one is chosen, you'll earn 100 for entering the grove.
+Beggar
+Don't bother with any of the others except the one on the wooden scaffolding near Vimme Vivaldi, as even if the others are given money, they'll refuse to tell you where the grove is. The one on the scaffolding will want to converse but even if you push early about the grove, you can re-enter a conversation with him and he'll eventually reveal it and the password. Head to the entrance and use the correct one ("Old sow...") and the guard will let you in, earning 100 .
+Sewers
+Head to the archway into the city from Glory Gate and jump into the water, then turn to face back towards the city. The entrance area will be the furthest right archway under the bridge, just under the gate itself. Follow this path until you find a couple drowners around a body. Once the threats are killed, loot the body for a key and use it to unlock the nearby grate and head in and climb up the ladder. The thieves aren't too thrilled about you finding the backdoor though and will attack. For this, you just need to weaken the lead thief near death and he'll call for mercy, letting you into the grove to continue as normal. However, you won't earn any for using this way into the grove.
+Note: Even though the looters mention it, in recent versions of the game this option doesn't seem to appear as an objective unless you go through with it and reach the thieves.
+Help Triss
+However you got into the grove, make your way to where the King of Beggars, Francis Bedlam, is to find none other than Triss discussing business with him. Francis will go into a bit of a political discussion, mentioning how he has grand plans for the city, before eventually letting you and Triss head off. Follow her and Geralt will eventually reveal he's looking for Ciri. Triss will agree to help, but first needs you to help her with an errand and takes you to Kluhg, a smuggler.
+Unfortunately, Kluhg reveals he got scared by approaching guards and dropped Triss' package into the canal so you'll have to fish it out yourselves but, with Temple Guards just outside, you'll have to take the cellar. Head down and kill the lone drowner here, then use your Witcher Senses on the central pillar to find a brick to open the secret passage. Follow Triss along the canal and eventually you'll reach a spot you have to jump into to get the leather sack. Swim all the way to the last bridge before the harbor area and you should be able to spot the sack below, near the bridge's support column. Head back to Triss and follow her a short ways to her contract: a warehouse just off of the Fish Market.
+It's soon revealed the man, Brandon, knows Triss is a sorceress, as with job competition so high, it was the only way to secure the job. When the price is asked about, you can choose to go ahead with the job without anything upfront, demand all of it upfront, or half of it. No matter what is chosen Brandon will relent, including giving the full amount beforehand.
+Whatever you chose, follow Triss inside to set the incense at the 3 locations along the walls (easily found using your Witcher Senses). Once all 3 are placed, Triss will activate the incense. After the spell has been cast, approach and talk to her to have a conversation, answering however you like. Eventually after asking about Yennefer, the rats will flee and Brandon will appear, but with witch hunters in tow. The dialogue is slightly different depending on how much money you demanded in advance, but ultimately he'll leave the warehouse for the witch hunters to kill you and Triss. Kill them off, then confront Brandon outside.
+Afterwards, Triss will point you to an oneiromancer, Corinne Tilly, who is working a job a few houses away along the canal and might be of some aid in finding Ciri. The quest will then conclude for 200 with Triss heading off to take care of other jobs.
+Journal entry
+Ciri's trail took Geralt to Novigrad, the largest city in the North. It would take seas of ink to describe the city accurately, so suffice it to say it is the seat of the Church of the Eternal Fire, a bustling port city and a haven for artists... and all sorts of other shady characters.
+Yet Novigrad at this time was not the city Geralt knew from his earlier travels. War raged throughout the known world, and rich cities often prove tempting morsels to armies on the march. It was clear at this time that this particular morsel had both Radovid and Emhyr greedily licking their chops. Within the city, the Temple Guard acted with impunity under the command of a cankerous snot named Caleb Menge and with the support of that terror-spreading band of zealots, the witch hunters. Meanwhile, the kingpins of the city's underworld still held much of it in their sleazy grasp.
+Finding Ciri here would be like searching for a needle in a burning haystack - Geralt would clearly need some assistance. Luckily, an old acquaintance of his now lived in Novigrad. Her name was Triss Merigold.
+Ever since Radovid had given the witch hunters a free hand, the persecution of mages had ascended to new heights everywhere in the North - and Novigrad was no exception. The smell of burning flesh filled the air as the witch hunters set fire to freaks and mages of all kinds during gruesome public spectacles. Triss had been forced into hiding, and Geralt was forced to go to great lengths to find her. When he finally did, she was glad to see a friendly face, even one that brought back some still-painful memories.
+Triss had no knowledge where Ciri might have gone, but she did know an individual who could be of help - a dreamer named Corinne Tilly.
+Objectives
+Visit Triss in her house.
+Talk with beggars about the King of Beggars.
+Find an entrance into the sewers outside Novigrad.
+Fight the bandits guarding the back entrance.
+Look for thieves on the main square and carefully follow them.
+Follow the thief to the King of Beggars' hideout.
+Follow the thief to the King of Beggars' hideout.
+If continued to follow the first thief:
+Defeat the bandits.
+Find the King of Beggars' hideout.
+Meet with the King of Beggars.
+Follow Triss.
+Enter the basement.
+Find the secret passage using your Witcher Senses, then open it.
+Find the lost parcel using your Witcher Senses.
+Give Triss the parcel.
+Place rat traps around the warehouse - use your Witcher Senses to guide you. 3/3
+Tell Triss you've completed your task.
+Talk to Triss after she activates the spell.
+Fight the thugs.
+Leave the warehouse.
+Notes
+As the options for finding Putrid Grove are mutually exclusive, doing one objective marks the other(s) as failed, but this is only temporary - they'll all get marked as green as soon as you're let in.
+Bugs
+After the mission, lots of rats may spawn near storage and flee. To avoid this, don't skip the cutscene where the rats are escaping from storage.
+If the player visits Triss' house, but then doesn't immediately proceed with finding Putrid Grove (e.g. to do a side-quest), it is very likely that a thief will spawn (while Geralt is in the square) and go on his route, and won't be reset without Geralt crossing paths with him. Thus, when the quest is resumed, it will look like there are no thieves at all. To fix this, walk the thief's route "blindly" until you reach him - he should be near the canal, where the exchange cutscene triggers.

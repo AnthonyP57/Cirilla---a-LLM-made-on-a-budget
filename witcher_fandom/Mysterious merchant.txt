@@ -1,0 +1,302 @@
+Mysterious merchant
+The mysterious merchant seems to appear anywhere that Geralt goes, usually nonchalantly seated or leaning against a wall, smoking his pipe. He is conveniently available when other merchants have closed their shops for the day, and sells his merchandise for approximately 30% less than any of them.
+This character was originally available as pre-order bonus DLC, but has since been included with the installation of the Patch 1.2.
+Locations
+
+ Chapter I
+In Flotsam, he can be found by the harbour.
+ Chapter II
+Iorveth's path: In Vergen, he is leaning against the wall just north of The Cauldron.
+Roche's path: In the camp followers' encampment, by the old tower.
+Known bugs and hints
+Note: This bug is fixed in version 1.35.
+The Mysterious Merchant is one of the few NPCs in the game who can actually be killed. It seems that the developers forgot to make him invincible for Geralt. If you kill the Mysterious Merchant, he will respawn instantly and will keep respawning if you kill him again. After the killing he is available for shopping again, and he doesn't say anything.
+You can also fistfight with the Mysterious Merchant. You need to put your swords back into the inventory and strike him with your bare hands, and the fistfight will begin. The Mysterious Merchant can be knocked down with a single punch. However, after he recovers, he will start a fistfight with you again, and he'll keep attacking you whenever you come near him. He can't be calmed down, and he can even charge you when you are far from him, so it's not recommended to keep on playing the game after testing this bug.
+The guards don't react to fistfights or the death of the Mysterious Merchant.
+Xbox 360: In some 360 EE installations, the mysterious merchant's items are actually priced 30% HIGHER than all the other merchants and there is no known fix for this yet.
+Shop inventory: Chapter I
+Item
+Chance
+Max quantity
+Min quantity
+Respawn
+Diagram: Solid cloth
+100
+1
+1
+3600
+Diagram: Hardened leather
+100
+1
+1
+3600
+Diagram: Studded leather
+100
+1
+1
+3600
+Diagram: Leather
+100
+1
+1
+3600
+Diagram: Elemental stone
+100
+1
+1
+3600
+Diagram: Oil
+100
+1
+1
+3600
+Diagram: Essence of water
+100
+1
+1
+3600
+Diagram: Amethyst dust
+100
+1
+1
+3600
+Diagram: Diamond dust
+100
+1
+1
+3600
+Robust cutlass
+100
+1
+1
+3600
+Robust witchers' silver sword
+100
+1
+1
+3600
+Shiadhal's armor
+100
+1
+1
+3600
+Sun rune
+100
+3
+3
+3600
+Ysgith rune
+100
+3
+3
+3600
+Earth rune
+100
+3
+3
+3600
+Moon rune
+100
+3
+3
+3600
+Fire rune
+100
+3
+3
+3600
+Shop inventory: Chapter II
+Item
+Chance
+Max quantity
+Min quantity
+Respawn
+Diagram: Solid cloth
+100
+1
+1
+3600
+Diagram: Hardened leather
+100
+1
+1
+3600
+Diagram: Studded leather
+100
+1
+1
+3600
+Diagram: Elemental stone
+100
+1
+1
+3600
+Diagram: Oil
+100
+1
+1
+3600
+Diagram: Leather
+100
+1
+1
+3600
+Diagram: Essence of water
+100
+1
+1
+3600
+Diagram: Amethyst dust
+100
+1
+1
+3600
+Diagram: Diamond dust
+100
+1
+1
+3600
+Armor of Ban Ard
+100
+1
+1
+3600
+Robust blue meteorite sword
+100
+1
+1
+3600
+Robust yellow meteorite sword
+100
+1
+1
+3600
+Poisoned Zerrikanian saberra
+100
+1
+1
+3600
+Sun rune
+100
+3
+3
+3600
+Ysgith rune
+100
+3
+3
+3600
+Earth rune
+100
+3
+3
+3600
+Moon rune
+100
+3
+3
+3600
+Fire rune
+100
+3
+3
+3600
+Shop inventory: Chapter III
+Note: No one so far has found the Mysterious merchant in Chapter III
+Item
+Chance
+Max quantity
+Min quantity
+Respawn
+Diagram: Solid cloth
+100
+1
+1
+3600
+Diagram: Hardened leather
+100
+1
+1
+3600
+Diagram: Studded leather
+100
+1
+1
+3600
+Diagram: Elemental stone
+100
+1
+1
+3600
+Diagram: Oil
+100
+1
+1
+3600
+Diagram: Leather
+100
+1
+1
+3600
+Diagram: Essence of water
+100
+1
+1
+3600
+Diagram: Amethyst dust
+100
+1
+1
+3600
+Diagram: Diamond dust
+100
+1
+1
+3600
+Diagram: Armor of Tir na Lia
+100
+1
+1
+3600
+Superb blue meteorite sword
+100
+1
+1
+3600
+Superb yellow meteorite sword
+100
+1
+1
+3600
+Ceremonial sword of Deithwen
+100
+1
+1
+3600
+Sun rune
+100
+3
+3
+3600
+Ysgith rune
+100
+3
+3
+3600
+Earth rune
+100
+3
+3
+3600
+Moon rune
+100
+3
+3
+3600
+Fire rune
+100
+3
+3
+3600
+Gallery
+in Flotsamby the old towerin VergenFistfighting MMMM's body pile

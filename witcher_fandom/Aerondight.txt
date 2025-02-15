@@ -1,0 +1,50 @@
+Aerondight
+
+The Witcher
+Aerondight is a silver sword used in fighting monsters, and is relatively ineffective against humans. It can be received only in Chapter IV and can neither be bought nor sold.
+In The Paths of Destiny, according to a quest phase titled "The Sword", the blade is exceptional: "light, sharp as a razor, and fits the hand neatly". In the same entry, it is said that the blade "has a destiny of its own. Time will tell what that destiny is". 
+Lady of the Lake knights Geralt after he fulfills her wishes, and gives him this blade along with the words: "Take this sword as a sign of my favor. Once the blade of a great warrior, it lay in the depths for ages, awaiting your arrival."
+Bugs
+The damage bonus apparently doesn't work or is much weaker than it should be.
+Thus if you are aiming at maximum damage but are unable to obtain the Moonblade the best alternative is a Three Earth Rune sword.
+According to JonthanHK on reddit, the damage bonus on the Three Earth Rune Sword is the one that's bugged, it gives a much higher damage boost than shown because it mistakenly multiplies each rune used to craft the sword. Confirmation needed.
+The Witcher 2: Assassins of Kings
+Aerondight returns and can be imported into The Witcher 2: Assassins of Kings.
+Geralt loses the sword while stabbing the Dragon with it during the prologue of the game.
+Bugs
+In some cases it stays in the player's inventory
+Blood and Wine expansion
+Aerondight is a silver sword that can be regained by completing the quest There Can Be Only One.
+The secondary quest can only be started if you have completed quests which encompass all five of the chivalric virtues. If you have not completed a quest covering that value, you will be told which chivalric value you are missing.
+After Geralt completes the Hermit's tasks and defeats him in a trial of combat, he'll disappear into the lake and reappear as the Lady of the Lake, who will then give Geralt Aerondight.
+This is one of the only known pieces of equipment whose strength grows with use, and therefore can remain useful throughout a vast number of levels and possibly even a New Game +. It starts out with no slots but can have up to 3 added to it, therefore allowing Runewords to be set into it. When you kill an enemy when it is fully charged its damage increases by 2.
+If you can keep the bonus damage boost at or at least close to the maximum allowed for your current level as you level up, this sword's damage will usually surpass that of any silver sword you find or can buy at your current level up to and including relic and witcher gear quality, even through a New Game +, and that isn't including its damage boosting charges.
+Tips
+When leveling this sword up, note the following:
+The sword requires 10 charges to reach full power, at which point it will emit a pulsing golden glow.
+Each time a fast attack lands on an enemy, the charge count increases by one.
+Each time a strong attack lands on an enemy, the charge count increases by two.
+Killing an enemy with 10 accumulated charges will expend all charges in a small golden flash, visually similar to the breaking of a Quen sign. This permanently increases the weapon's damage by 2.
+This effect may occur up to 5 times per character level since obtaining the sword.
+Failing to trigger the effect 5 times before levelling up will not result in lost potential damage as the total potential damage simply increases by 10.
+A running total of both the currently accumulated damage and maximum potential damage at the player's current level is recorded in the weapon's description.
+If the current level's threshold has already been reached, the 10 charges will remain after a kill and will result in a 100% increased damage bonus and a 100% critical hit rate while maximum charge is maintained.
+Every time an enemy damages Geralt, charges will be lost. This includes ranged/special attacks from enemies such as archers, the poison spit of an Archespore. or the shockwaves from Elementa. Attacks which cause no damage, such as the hypnosis from a Fiend, will not cause the loss of charges.
+Quen can be used to block incoming damage and prevent the loss of accumulated charges.
+The best way to increase the weapon's damage is, counterintuitively, to seek out human enemies. As Aerondight is a silver sword, it deals significantly reduced damage to humans and non-humans, allowing for an easy accumulation of charges without worry of prematurely striking the killing blow. As a result, this allows the use of far lower leveled humans than monsters. When the sword has built up 10 charges, a stun from a fully charged basic Axii will often allow for an instant kill/dismemberment if quickly followed up with a strong attack. Alternatively, successive counterattacks (bolstered by the Counterattack combat skill) or striking an opponent frozen by a Northern Wind can result in a knockdown which can then be followed by a finisher. This method makes it possible for all damage increases per player level to be obtained with a single bandit camp. It is best employed against lower leveled enemies as enemies of equal or greater level than Geralt can be quite resistant to falling into these vulnerable states.
+The false duplicates of a Fogler will trigger the permanent damage increase when killed with 10 charges.
+Associated quest
+There Can Be Only One
+Notes
+The description mentions a simplified average. The up to 10 per level damage increase is in fact 9 to minimum damage and 11 to maximum damage, with fractions involved per single charge upgrade.
+Bugs
+Sometimes the Maugrim sword's name will revert to its debug name "Aerondight" when given as a reward during Contract: Deadly Delights but this is not the same Aerondight sword that's given here in the Blood and Wine expansion. This bug was addressed in Patch 4.0.
+Trivia
+In the Matter of Britain, Aerondight is the sword given by the Lady of the Lake to the hero Lancelot du Lac.
+The namesake of the most expensive car in Cyberpunk 2077, the Rayfield Aerondight "Guinevere", is an Easter egg that references Aerondight.
+Videos
+Sword of Destiny Aerondight - The Witcher Lore
+Gallery
+appearance in The Witcher 3The Lady of the Lake holding Aerondight
+References
+↑ Geralt indeed loses Aerondight...

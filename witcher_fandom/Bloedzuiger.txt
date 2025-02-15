@@ -1,0 +1,32 @@
+Bloedzuiger
+Travellers crossing swamps can be sure to encounter both leeches and bloedzuigers. The latter also feed on blood, but their gullets are particularly large and their stomachs are filled with acid, so they suck and digest both their victims' blood and intestines. Unlike leeches, bloedzuigers are rarely used in medicine.
+The Witcher
+
+Journal Bestiary entry
+"The bloedzuiger, a grotesque monster from the swamps, causes terror among peasants because it pours digestive juices over the wounds of those who are still alive and then dines on their half-digested intestines."
+Location
+Swamp
+Lakeside
+Swamp cemetery
+Source
+Swamp Monsters
+In Chapter II, Shani may give Geralt this bestiary entry if he asks her for a monster anatomy lesson after delivering five Celandine during the Old Friend of Mine quest.
+Notes
+Geralt can loot Bloedzuiger remains for Albar's crystals and Abomination lymph without having journal entries for either of the two. However, the remains will not contain Bloedzuiger blood without the entry.
+In Chapter II, the Old Brickmaker will speak to Geralt about mosquitoes, and a Raftsman at the Dike will speak to Geralt about a monster that sucked the life out of a man. Neither conversation updates the journal with Bloedzuiger entries, although both conversations seem to refer to these monsters.
+It is ill-advised to use finishers against bloedzuigers, as the player can not move before the finisher has been completely performed.
+It is wise to use a combination of the potions "Bindweed" and "Swallow" beforehand if the player plans to take on a group of bloedzuigers
+The acid spray of a dying bloedzuiger not only also harms Geralt, but also any other monsters nearby - one dying bloedzuiger is enough to wipe out a whole pack of nearby drowners and drowned dead. Note that monsters killed by acid spray yield no experience, however they can still be looted for ingredients.
+In Chapter IV, a single Bloedzuiger might spawn with some drowners at night, right before the Fisher king's hut (tested after killing Dagon, but before finding out Noonwraith Alina)
+Monsterbook
+Developer CD PROJEKT RED's characterization of the Bloedzuiger taken from the monsterbook, which was enclosed with the Collectors Edition of the computer game The Witcher for Poland, Hungary and the Czech Reuplic.
+Bloedzuiger lurk in muddy waters and surface only when attracted by the presence of warm-blooded creatures. They are slow and may seem grotesque, until a swarm of them surrounds its prey.
+The Bloedzuiger was inspired by the leech, thus its segmented body and characteristic head, or rather, its bloodthirsty maw spiked with teeth. The bloedzuiger consumes both the blood and intestines of its victims. A strong and malicious beast, it can easily kill a human.
+Bloedzuigers do not usually need to chase their victims, hence their thick, elephant-like legs. The spikes on their forelimbs prevent their victims from escaping. The insides of their barrel-shaped bodies are a dangerous weapon in themselves, as their digestive fluids are a mixture of strong acids. Woe to those who decide to gut the monster.
+The Witcher: Monster Slayer
+Bloeadzuiger is a necrophage class common monster. It has a stronger variation - the leecher. Both monsters are vurnerable to steel and fire. They dwell in wetlands and have the same strategy. They do not differ much in appearance - the leecher has additional spikes on its body.
+According to the bestiary, the bloedzuiger and the leech have almost the same DNA, while the leecher's teeth are strong enough to pierce through the chain mail.
+Trivia
+Bloedzuiger is the Dutch word for leech, deriving from bloed (blood) and zuiger (sucker), so a blood sucker. Its appearance and description also hints to the origin of the word.
+Gallery
+The first sketches of the bloedzuiger emphasized its characteristic featuresConcept artA concept art drawing of the bloedzuiger. The detail depicts its tooth-filled gulletConcept artA bestiary image of the bloedzuiger from The Witcher: Monster Slayer

@@ -1,0 +1,78 @@
+Mutations (Blood and Wine)
+Mutations are a character development feature introduced in the Blood and Wine expansion. It allows the player to develop 12 new skills using mutagens and ability points.
+Unlocking
+ 
+To first unlock mutations, the secondary quest Turn and Face the Strange must be completed, which will then alter the character panel to include a central circular icon between the active abilities. Click on it to open the mutations panel.
+Like Geralt's abilities, to unlock mutations you'll need to use ability points but, unlike abilities, they'll also require greater red, blue, and/or green mutagens. Furthermore, you'll notice they're set up in a 3 tier style. This means you'll have to unlock certain mutations to unlock a connected one. For example, if you want Mutated Skin, you'll need to unlock Toxic Blood and Euphoria first. Likewise, for mutations not directly connected to the 3 central ones (like Cat Eyes) you'll need to unlock the connecting ones (Bloodbath and Euphoria) to access it.
+If you wish to reclaim the ability points used here, you can do so with a Potion of Restoration. However, it will not return any mutagens you used.
+Usage
+While 12 mutations are available, you can only have one active at a time. To do so, after you've researched it, you can then select the one you want to activate and hit enter to make it active. It will then have a solid white border around it, signifying it's active. To deactivate it, simply select it and hit enter again.
+It's important to note that mutations are color coded to a particular skill: green for alchemy, blue for magic, and red for combat. This will determine what abilities you can place in the 4 middle slots. There's an additional color, yellow (orange), which is a combination of allowed skills as listed below:
+Mutated Skin and Cat Eyes will let you place combat and alchemy.
+Conductors of Magic and Adrenaline Rush will let you place combat and signs.
+Second Life and Metamorphosis will let you place all three.
+Some mutations will display a special icon when they take effect. For example Second Life will display an icon which will indicate the cooldown before it can be used again, Mutated skin will display the amount of damage reduction, While Euphoria will display the % of increased damage and sign intensity.
+Strengthened Synapses
+This is a unique mutation that will allow the player to unlock additional ability slots on the character panel. It requires a certain number of unlocked mutations before it can be upgraded itself.
+Unlock 2 mutations to unlock the first slot.
+Unlock 4 mutations to unlock the second slot.
+Unlock 8 mutations to unlock the 3rd slot.
+Unlock 12 mutations to unlock the 4th (and final) slot.
+Unlike the base ability slots, which can increase a connected mutagen's bonus, the middle slots unlocked here are not linked in any way and thus don't provide any additional mutagen bonuses.
+Mutations
+Icon
+Name
+Requirements
+Slot Type
+Description
+Toxic Blood
+2 × Ability Points2 × Greater green mutagens
+Alchemy
+Each time you are injured in melee combat, the attacking opponent receives damage in the amount of 1.5% of damage dealt for every point of your Toxicity level (currently 1.5%, to a maximum of 150%).
+Euphoria
+prerequisite: Toxic Blood3 × Ability Points3 × Greater green mutagens
+Alchemy
+Each point of Toxicity increases damage dealt by swords and Sign Intensity by 0.75% (to a maximum of 75%).
+Mutated Skin
+prerequisite: Euphoria5 × Ability Points3 × Greater green mutagens2 × Greater red mutagens
+AlchemyCombat
+Each Adrenaline Point decreases damage received by 15% (to a maximum of 45%).
+Cat Eyes
+prerequisite: Bloodbath and Euphoria
+5 × Ability Points3 × Greater green mutagens2 × Greater red mutagens
+AlchemyCombat
+Crossbow damage is now increased from 107 to 992 (values depend on crossbow used), and crossbow critical hit chance is increased by 50%. Crossbow bolts pierce and knock down or stun opponents. Opponents struck when they have full Vitality lose 15% of Vitality.
+Metamorphosis
+prerequisite: Cat Eyes7 × Ability Points3 × Greater green mutagens2 × Greater red mutagens2 × Greater blue mutagens
+AlchemyCombatSigns
+Applying critical effects to opponents activates a random decoction for 120s with no Toxicity cost. The maximum number of decoctions that can be activated simultaneously by the mutation is 3. Witcher Senses help you see better in dark places.
+Deadly Counter
+2 × Ability Points2 × Greater red mutagens
+Combat
+Sword attacks deal 25% more damage to human opponents immune to counterattacks and monsters. In all other cases, if the attacker's Vitality is less than 25%, a counterattack immediately triggers a finisher.
+Bloodbath
+prerequisite: Deadly Counter3 × Ability Points3 × Greater red mutagens
+Combat
+Each fatal blow dealt by a sword dismembers the enemy or activates a finisher. Each blow dealt by a weapon in melee combat increases Attack Power by 5% until combat ends (to a maximum of 250%). The bonus is lost if you take damage (not including damage from Toxicity).
+Adrenaline Rush
+prerequisites: Piercing Cold and Bloodbath
+5 × Ability Points3 × Greater blue mutagens2 × Greater red mutagens
+CombatSigns
+At start of combat, sword Attack Power and Sign Intensity increase for 30s by 30% for each foe (after first). So, when fighting 11 foes, the bonus is 300%. Once it wears off, sword Attack Power and Sign Intensity drop by 10% for each participating foe after first (modifier cannot exceed 70%). Duration: 30s.
+Second Life
+prerequisites: Adrenaline Rush
+7 × Ability Points2 × Greater blue mutagens3 × Greater red mutagens2 × Greater green mutagens
+AlchemyCombatSigns
+When Vitality reaches 0, you become temporarily invulnerable and regenerate 100% Vitality. The effect can only be triggered once every 180s.
+Magic Sensibilities
+2 × Ability Points2 × Greater blue mutagens
+Signs
+Signs can deal critical hits. Their critical hit chance and damage increase with Sign Intensity (currently 40% chance to deal an additional 198% damage). Opponents killed by critical hits from Signs explode.
+Piercing Cold
+prerequisite: Magic Sensibilities3 × Ability Points3 × Greater blue mutagens
+Signs
+When the Aard Sign is cast, it additionally has a 25% chance of freezing opponents. Opponents knocked down and frozen simultaneously die immediately. Opponents who are not frozen are dealt an additional 2972 damage.
+Conductors of Magic
+prerequisite: Piercing Cold5 × Ability Points3 × Greater blue mutagens2 × Greater red mutagens
+CombatSigns
+When drawn, magic, unique and witcher swords increase Sign damage dealt by 50% of their own damage dealt.

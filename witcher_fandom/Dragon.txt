@@ -1,0 +1,91 @@
+Dragon
+Dragons are flying monsters classified as draconids, which are said to represent the forces of Chaos. Apart from cats, they are the only creatures known to absorb magical energy, and are drawn to hoarding gold.
+"True" dragons (or, rather, those known to science) include the black, green, red, white, and the often-considered mythical golden dragon. Their close relatives are classified as draconids.
+Quick Answers
+What are the different types of dragons in Witcher 3?
+						Dragons in Witcher 3 are a unique family of draconids, known for their size, strength, intelligence, and affinity for collecting gold and gemstones. Notable dragons include Myrgtabrakke, Ocvist, Ostreverg, Saesenthessis, Villentretenmerth, and Zerrikanterment. Other draconids feature Basilisks, Cockatrices, Forktails, Royal wyverns, Shrieker, Silver Basilisk, Slyzard, Slyzard Matriarch, and The Dragon of Fyresdal. Dragons are commonly classified into green, red, and black types, with a fourth, rarer type speculated.
+					
+						Provided by: Fandom
+					
+What is unique about the golden dragon in the Witcher universe?
+						In the Witcher universe, the Golden Dragon, or Draconis Aurum nobilis, is a mythical creature. Its unique characteristics include the ability to shape-shift into any living being, breathe fire or steam, and communicate via telepathy. The existence of these golden-skinned dragons as a separate race or rare mutations is still a subject of debate among experts.
+					
+						Provided by: Fandom
+					
+How are dragons related to the forces of Chaos in Witcher 3?
+						Dragons in Witcher 3 symbolize the forces of Chaos. They belong to a distinct draconid family, noted for their large size, two pairs of robust legs, and expansive wings and tail. These creatures are superior to their smaller counterparts in terms of strength, intelligence, and cunning. Dragons have the unique ability to absorb magical energy and have a penchant for accumulating gold. Their threat to cities and early settlers led to the emergence of witchers, who were specifically trained to combat them.
+					
+						Provided by: Fandom
+					
+What is the significance of dragons absorbing magical energy in the Witcher series?
+						Dragons in the Witcher series possess the unique ability to draw and absorb magical energy, a trait shared only with cats. They are instinctively drawn to magic intersections, often choosing them as resting spots. It's theorized that dragons utilize the absorbed Power for flight, given their large size and mass. However, the precise explanation for this behavior is yet to be conclusively determined.
+					
+						Provided by: Fandom
+					
+Why are dragons drawn to hoarding gold in the Witcher universe?
+						Dragons in the Witcher universe exhibit a universal trait of hoarding gold, gemstones, and other treasures, a characteristic deeply embedded in numerous legends. The exact cause of this behavior is yet to be determined. Dragon hunts, often monitored by the Jewelers' Guild, hint at a correlation between the dragons' treasure accumulation and human greed.
+					
+						Provided by: Fandom
+					
+{"@context":"https:\/\/schema.org","@type":"FAQPage","name":"Dragon","mainEntity":}
+History
+
+Early History
+According to legend, dragons were among the first creatures bestowed with intelligence. They ruled the Continent for centuries but did not establish kingdoms as humans and non-humans later would. Instead, dragons preferred solitary lives or companionship with a lifelong partner. Though spread across the Continent, dragons lived in specific regions based on their type.
+Contact with Non-Humans
+Dragons eventually shared the land with other intelligent races. The earliest civilizations they encountered included the Dryads, Bobolaks, Vrans, and later Gnomes. No recorded conflicts exist between these races and dragons, possibly due to the isolationist nature of the Dryads and Gnomes, as well as the downfall of the Bobolak and Vran civilizations. However, it is known that the Vrans possessed dragon scales.
+The first recorded conflict between dragons and another race occurred with the arrival of the Dwarves. Dragons, known for their love of treasure, clashed with Dwarves who mined rare and valuable minerals. To protect their resources, the Dwarves began hunting dragons within their territories. When the Elves arrived, there is no record of conflict with dragons, similar to the earlier races.
+Contact with Humans
+Contact with humans was far more contentious. As humans rapidly expanded across the Continent, they mined precious minerals and gems, leading to inevitable conflict. Although dragons and humans are not natural enemies, humans mercilessly hunted dragons, which had burned cities, devoured livestock, or attacked merchant caravans in pursuit of riches. To counter this, and at the behest of jeweler's guilds, humans created witchers—monster slayers tasked with hunting dragons across the Continent. Some dragons found sanctuary in Zerrikania after a golden dragon isolated it from the rest of the world, while those in the Dragon Mountains and beyond were relatively spared from the hunts.
+However, not all witchers killed dragons. Some refused, recognizing dragons as sentient creatures. After the Zerrikanian Faithel met with them, this number increased.
+Decline
+Due to widespread dragon hunts, their numbers declined sharply, with Rock dragons possibly extinct and Red dragons facing a similar fate. The efforts of the Faithel paid off, and many dragons were brought to Zerrikania for protection. The most recent dragon encounters include a famous dragon hunt near Barefield, Queen Meve's encounter with the last Red dragon on the Continent, and the appearance of a green-gold dragon hybrid in Temeria and Aedirn.
+Appearances and Abilities
+Dragons are four-legged reptiles with bat-like wings, forked tongues, and narrow, triangular heads on long, slender necks. They are divided into different types, loosely based on their color. Depending on their type, they are capable of breathing various dangerous substances in combat. The Crinfrid Reavers, who have hunted several of these beasts, have mentioned fire, acid, and steam. The remaining breath ability is a poisonous gas. Although all dragons have wings, not all types are capable of flight; the Rock dragon, for instance, is known to prefer burrowing underground rather than flying.
+Dragons do not seem to have a standardized build, as both slender and more heavyset dragons have been sighted. While they come in a wide range of colors and variations, not all dragon types are yet known to society.
+Notable dragons
+Albastra
+Evren
+Fetanahuir
+Galvalesteith
+Germinus
+Keltullis
+Myrgtabrakke
+Ocvist
+Ostreverg
+Saesenthessis
+Villentretenmerth
+Zerrikanterment
+The World of the Witcher
+Dragons are a separate family of draconids, characterized by their large size, two pairs of well-developed legs, and huge winges and tail. They are also much more advanced than their smaller cousins, possessing not only greater strength, but also cunning and intelligence. Though reasons for this behavior remain unknown, dragons universally love to collect gold, gemstones and other treasures -- a trait which has already made its way into countless legends. Despite what tales of noble dragon slayers rescuing innocent maidens might have you believe, the people organizing expeditions to hunt down dragons are invariably motivated not by the desire to put an end to the local threat, or even to win fame, but by simple greed.
+In the same way, tales painting dragons as terrible foes of the human race, which are used to justify half of all hunts, are just fables. If dragons had no treasure hoards, nobody would even give a damn, except maybe the serfs whose sheep they devour. It is worth noting that almost every dragon hunt is closely scrutinized by someone connected to the Jewelers' Guild. Not coincidentally, despite the fantastic size of some dragon hoards, no hunt has ever led to the market being suddenly flooded with gemstones, with the corresponding drop in prices.The World of the Witcher
+The Witcher 2: Assassins of Kings
+In the Prologue of the game, you will have to guide King Foltest across a bridge while being pursued by a dragon, in Trial by Fire quest. Later in Chapter II (Iorveth's path), Geralt finds a magic stone that can help him know more about who summoned the dragon and the possible mandant of the kings' murders. Later on in Chapter 3, there will be a battle with the dragon.
+Journal entry
+Once dragons were commonplace and ruled the continent absolutely. Dragon fire was the bane of cities, and dragon appetite was a constant threat to the first colonizers. Sorcerers stood against these creatures, witchers were created to fight them. Today dragons are nearly extinct. Sometimes forktails and slyzards can be seen, but compared to dragons, they are like stray cats to tigers. The beasts were exterminated by professional hunters, such as the famed Crinfrid Reavers. Alchemical components found in a dragon's body are among the most expensive on the market, and are in high demand among sorcerers. The beast's roasted tail is a real delicacy.
+The legends are true: dragons like to gather hoards and have a voracious appetite that they satiate by eating all living creatures with no exceptions. Like cats, they like to lounge in places of power - they nap there, drawing energy, yet nobody knows what they use that energy for. There are five species of these great wyrms: white, black, red, green and rock. Golden dragons, extremely intelligent, gifted with the ability to assume the shape of any creature, are of course a fairy-tale for little children. Dragons are smart indeed, but they cannot speak, much less polymorph.
+The best tactic when meeting a dragon is to pray to all the gods with no exceptions. Atheists should run - they can thus extend their lives for a few heartbeats. It must be stressed that any of these choices would end in death when made by an amateur. One fighting a dragon should watch out for it's fire above all else - the breath is lethal, momentarily ending the fight. The wyrms can also fly, and are excellent at maneuvering, so they use the advantage of altitude in combat. A witcher should climb high buildings to surprise the reptile flying by, and to use walls as protection. The beast's jaws are even worse than its paws - they bring instant death. Dragons, like cats, like to toy with their prey, so they sometimes lift it to the air, and drop from height when they are bored.
+Dragons are immune to poisons, unworried by oils which increase bleeding, and unaffected by traps or bombs. One would be hard pressed to find a soul brave enough to drop a dragon, unless it had been hacked to pieces with an axe first. And I wish such an outcome of the battle to all dragonslayers with all my heart.
+Notes
+When two different species of dragon crossbreed, the resulting dragon receives some of the traits of both of its dragon parents. The only known crossbreed dragon is Saesenthessis.
+Trivia
+It's possible the dragons (and their characteristics) were inspired by those in the role-playing game, Dungeons & Dragons, though the author has never stated outright if so. Furthermore, it may only be a loose inspiration, as there are a number of differences between the Witcher dragons, and those depicted in Dungeons & Dragons.
+Videos
+Trial by Fire (The Witcher 2) HDFirst Meeting with dragonDragon (The Witcher 2) HDRunning from a dragonThe Witcher 2 - How to kill Dragon Final Boss (HARD)Killing the dragon
+Gallery
+
+References
+↑ 1.0 1.1 The Witcher 3: Wild Hunt
+↑ 2.0 2.1 2.2 2.3 2.4 Sword of Destiny
+↑ 3.0 3.1 3.2 3.3 The Witcher 2: Assassins of Kings
+↑ 4.0 4.1 4.2 Wiedźmin: Gra Wyobraźni
+↑ 5.0 5.1 The Last Wish
+↑ 6.0 6.1 Thronebreaker: The Witcher Tales
+↑ In Gwent: The Witcher Card Game, some artwork depicts them as two-legged.
+↑ The Tower of the Swallow
+↑ 9.0 9.1 9.2 Wiedźmin: Gra Wyobraźni
+↑ Bogusław Polch's comics
+↑ Oko Yrrhedesa
+↑ GWENT: Rogue Mage
+↑ A Witcher's Journal
+↑ A Tome of Chaos

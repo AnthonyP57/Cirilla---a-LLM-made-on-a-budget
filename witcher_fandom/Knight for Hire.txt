@@ -1,0 +1,49 @@
+Knight for Hire
+Knight for Hire is a secondary quest in the Blood and Wine expansion.
+Notice from the Ducal Camerlengo
+Calling all knights errant and other strongmen!
+The duchy needs you! Your aid is required! Bounteous rewards are in offering! More details available at the ducal camerlengo's offices on Knights Dormant Square.
+Note: The rewards in this quest will decrease after reaching level 57 (53 before Patch 4.0).
+Walkthrough
+To start the quest, you may pick up the notice from any notice board in Toussaint.
+After you find the note go to the The Ducal Camerlengo he will give you directions on where to go, so you can easily find the right locations using quest markers. The quest can be done while exploring as you need to clear 15 Undiscovered locations, which are Persons in Distress, Knight Errants in Distress, Abandoned Sites and Hanse Bases. You probably already know how some of them work, however Hanse Base and Knight Errant in Distress are new.
+Knight Errant in Distress works much like Person in Distress only the Knight will be fighting the bandits and can die, however they are very capable of handling things on their own, so it's unlikely they will die even if you just stand and watch.
+Hanse Base works much like an Abandoned Site, i.e. after you clear it allied NPC's will inhabit it, however they are much more dangerous. The bandits form pretty much a small army and there is always a weak bandit who will attempt to light a signal fire calling additional reinforcements for aid unless you kill him before he does. There is also a leader who you must kill as a final boss.
+Here are all locations that are quest related, at many of which you can find diagrams for relic equipment:
+Hanse Base
+Arthach Palace Ruins lead by Antoine Straggen(Toussaint knight's steel sword and Toussaint Ducal Guard Captain's gauntlets diagrams are found here)
+Mont Crane Castle lead by Filibert von Wittan(Toussaint knight's tourney trousers and Toussaint knight's tourney boots diagrams are found here)
+Tulasens Caves lead by Loth(Viroledan blade, Toussaint Ducal Guard Officer's boots and Toussaint Color Guardsman's trousers diagrams are found here)
+Person in Distress
+Villa Vedette, east of Arthach Palace Ruins
+Delenfer Pass, east of Casteldaccia
+Knight Errant in Distress
+North-northeast of Fox Hollow(Toussaint knight's armor and Toussaint knight's trousers diagrams are found here)
+South of Seidhe Llygad Amphitheater(Faramond's blade diagram is found here)
+West of Mont Crane Castle(Faithful Friend diagram and Beauclair saddlebags are found here)
+Abandoned Site
+Fox Hollow overrun by bandits
+Cutterin Manor infested by a spriggan and wraiths
+Coopers' Slope infested by a cyclops
+Hortense Vineyard infested by giant centipedes
+Freinte Docks overrun by bandits
+Basane Farm infested by a werewolf
+The Silver Salamander Inn overrun by bandits
+Each time you clear a location you can go back to The Ducal Camerlengo who will pay you 100 for the job. After you complete all of them he will award you the Trophy (Knight for Hire) which you can equip on Roach.
+Easy Money Hint
+The Hanse Bases can be used as a way to earn a lot of in a short time. However, this can only be done by players who have no trouble in handling the hanse who heavily outnumber Geralt. As long as their leader is not killed all other members will continue to respawn, simply fast traveling or walking far away will cause the bases to be repopulated by all the bandits. When killed the bandits will often drop common and master quality weapons which are level 40+, as a result each will sell on average between 100-200 depending on who you sell them to.
+This method can be used to regain all the money spent on crafting Grandmaster witcher gear from Lazare Lafargue.
+Journal entry
+Geralt came across an altogether typical looking notice – someone was looking for the help of knights or other "strongmen." He concluded he met the above-stated requirements and set off for Knights Dormant Square to meet with the ducal camerlengo.
+Geralt completed all the contracts the camerlengo had to offer him. The reward he received was not quite what he had expected, true, but valuable all the same.
+Objectives
+Go to the ducal camerlengo to learn the details of the contract.
+Complete the contracts you took on from the camerlengo. 0/15
+ Go see the ducal camerlengo to collect your pay.
+Go see the ducal camerlengo about your reward for fulfilling the contracts. (300)
+Bugs
+If when first talking to the camerlengo you choose to play gwent against him, the quest will not update. To fix this, talk to him again and exit the conversation by choosing "Farewell".
+When clearing Mont Crane Castle, if you have already completed the Scavenger Hunt: Grandmaster Griffin Gear quest, there is a chance - even though it has been completed - that it becomes reactivated, and cannot be completed in any way any longer. There's no known work-around aside from loading a previous save and clearing the hanse base before completing the Scavenger Hunt quest.
+Notes
+Abandoned sites during this quest don't give for liberating them.
+One doesn't necessarily have to clear the entire hanse bases, technically only the leader is required.

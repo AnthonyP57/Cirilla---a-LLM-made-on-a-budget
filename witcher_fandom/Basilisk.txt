@@ -1,0 +1,62 @@
+Basilisk
+Basilisks are a species of draconid descending originally from Zerrikania and bred in the North during the 13th century.
+Later becoming a pest and sometimes terrorizing communities, they have birdlike beaks, webbed wings, razor-sharp teeth, hooked talons, and crimson dewlaps. Their poisonous breath is deadly when touched, and has often led to many exaggerated folk stories, such as basilisks being natural prey to the marten and their breath turning those afflicted to stone. They are often found in arid, rocky environments, such as deserts or badlands, and are territorial creatures, willing to aggressively defend their domain against intruders.
+Quick Answers
+What is the origin of the Basilisk species in the Witcher universe?
+						Originating from Zerrikania, Basilisks were introduced to the North in the 13th century. These draconid species, with bird-like characteristics, became a menace, often terrorizing communities. They thrive in arid, rocky terrains like deserts or badlands, and are known for their territorial nature. They typically inhabit dark, damp places such as caves and abandoned canal branches.
+					
+						Provided by: Fandom
+					
+What are the physical characteristics of a Basilisk in the Witcher series?
+						In the Witcher series, Basilisks are draconids from Zerrikania, bred in the North in the 13th century. They inhabit dark, damp areas like caves and abandoned canals. Immune to most poisons and resistant to stuns, they are vulnerable to silver and Ornithosaur Oil. Their venom is their most potent weapon, and they are territorial, defending their domains aggressively.
+					
+						Provided by: Fandom
+					
+What are some of the exaggerated folk stories about Basilisks in the Witcher lore?
+						Within Witcher lore, a beast tamer once deceived Redanian soldiers by claiming to possess a basilisk, which was in reality an undernourished wyvern. Geralt, the witcher, exposed this falsehood, leading to the wyvern's escape and ensuing pandemonium. In another tale, Geralt eradicated a basilisk in a Barefield village in 1253, earning 200 lintars for his deed.
+					
+						Provided by: Fandom
+					
+How does the Basilisk's poisonous breath affect its victims in the Witcher series?
+						The Basilisk's venom in the Witcher series is a potent toxin, causing continuous vitality loss in victims. If unchecked, this can lead to death. Witchers can counteract the venom with the Golden Oriole potion, which provides immunity to poison and neutralizes existing toxins in their system.
+					
+						Provided by: Fandom
+					
+{"@context":"https:\/\/schema.org","@type":"FAQPage","name":"Basilisk","mainEntity":}
+The Witcher
+In The Witcher, basilisks do not appear until Chapter IV. The first encounter with them is usually on Black Tern Island, but possibly in the crypt in the fields, and they are an excellent source of XP.
+Journal Bestiary entry
+Simple people call the basilisk the king of the Zerrikanian deserts and often mistake it for a cockatrice. They claim that the beast is filled with such hatred towards all living things that even its breath is venomous and its glance turns the unwary to stone. The fact that witchers often encounter basilisks in dungeons and cellars contradicts the legend and suggests these creatures can reproduce under any conditions like many of their nasty monster brethren. In fairy tales, the only certain way to kill a basilisk is by holding a mirror in front of its eyes to divert its deadly gaze. Witchers reply that it is far better to smash the mirror on the creature's head.
+Locations
+Black Tern Island
+Raven's crypt
+Kaer Morhen valley (The Price of Neutrality premium module)
+Sources
+In Chapter III, you can talk with a townswoman sitting at The New Narakort. She is blonde, wearing a green dress with a yellow shirt, and will tell you when in the mood to spin a tale but she is thirsty. Depending on her mood, she will ask for "a mug of beer" or milk, and when this provided will provide bestiary entries for basilisks, wyverns and eventually archespores.
+You must exit and then re-enter the inn (or meditate) after each tale to speak to her again. After you have acquired all the entries she knows about, she will still ask for milk and beer but will not give any new entries.
+Ornithosaurs
+The Witcher 3: Wild Hunt
+A bestiary entry can be obtained by reading A Few Remarks on Basilisks and Cockatrices.
+Bestiary entry
+In memory of the noble knight Roderick, slain during a valiant struggle against a basilisk. Let's hope the beast choked on his bones.– Gravestone inscription, Vizima cemetery.
+Contrary to popular belief, basilisks cannot turn anything to stone with their gaze. That is small comfort, however, given that their acid, venom, claws and teeth provide them many other ways to kill.
+Basilisks love dark, damp places such as cellars, caves and city sewers. They hunt by day, waiting patiently in hiding for their prey to come, then jump out in a flash to unleash a deadly attack.
+When preparing to fight such a creature one should drink Golden Oriole, which will provide resistance to its venom, and also prepare Dancing Star or shrapnel bombs, which work particularly well against basilisks.
+Basilisk leather is a highly-valued material used to make fashionable shoes and women's handbags. For this reason many men, their courage girded by goldlust, take to hunting them. Most of these hunts end in disaster, but some do manage to bag their prey, which has led to a drastic decline in this creature's numbers in recent years. Some mages and druids are of the opinion that basilisks should be included in programs meant to safeguard dying species. Everyone else thinks those mages and druids have gone completely mad.
+Combat tactics
+Despite their appearance, basilisks are vulnerable to Igni and other means of using fire against them such as Dancing Star. A well timed bomb or burst of Igni can not only bring down a flying basilisk to ground level, but distract the beast from being able to properly defend itself. They are skilled at using their wings and the talons on their feet in a similar fashion to that of the cockatrice.
+They can parry sword strikes with their wings and then leap up in to the air to land near devastating overhead blows with their claws. They can also leap up in to the air, hover momentarily, and then spit acid at their opponent from above.
+Associated quests
+Ciri's Story: Out of the Shadows
+Dowry
+Notes
+In 1253, Geralt of Rivia killed a basilisk in a village in Barefield for 200 lintars.
+The fourth episode of The Hexer TV series, "Smok", is based on this story and also features a basilisk.
+Videos
+The Witcher 3 Basilisk Boss Fight (Hard Mode)
+Gallery
+The Witcher modelNetflix's The Witcher concept artNetflix's The Witcher concept art
+References
+↑ 1.0 1.1 Time of Contempt
+↑ 2.0 2.1 Sword of Destiny
+↑ The Witcher 3: Wild Hunt

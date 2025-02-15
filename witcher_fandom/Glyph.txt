@@ -1,0 +1,106 @@
+Glyph
+
+The Witcher 2: Assassins of Kings
+Magic glyphs appears as a type of Runestone (the Witcher 2).
+The Witcher 3: Wild Hunt
+Similar to runestones, glyphs are applied to empty upgrade slots on armor to permanently upgrade the Witcher's abilities.
+Glyphs give a percentage bonus to specific sign intensity.
+Can be looted from monster nests and many treasures, crafted, or purchased from armorers, alchemists and occasionaly some other merchants.
+Glyphs can be crafted with crafting diagrams in 4 stages:
+'Empty' Lesser Glyph -> Lesser Glyph -> Glyph -> Greater Glyph.
+The Witcher 3 List
+Lesser Glyph
+Image
+Glyph
+Image
+Greater Glyph
+Image
+Lesser Glyph of Aard
+2% Aard Sign intensity
+ 
+Glyph of Aard
+5% Aard Sign intensity
+ 
+Greater Glyph of Aard
+10% Aard Sign intensity
+ 
+Lesser Glyph of Axii
+2% Axii Sign intensity
+ 
+Glyph of Axii
+5% Axii Sign intensity
+ 
+Greater Glyph of Axii
+10% Axii Sign intensity
+ 
+Lesser Glyph of Igni
+2% Igni Sign intensity
+ 
+Glyph of Igni
+5% Igni Sign intensity
+ 
+Greater Glyph of Igni
+10% Igni Sign intensity
+ 
+Lesser Glyph of Quen
+2% Quen Sign intensity
+ 
+Glyph of Quen
+5% Quen Sign intensity
+ 
+Greater Glyph of Quen
+10% Quen Sign intensity
+ 
+Lesser Glyph of Yrden
+2% Yrden Sign intensity
+ 
+Glyph of Yrden
+5% Yrden Sign intensity
+ 
+Greater Glyph of Yrden
+10% Yrden Sign intensity
+ 
+Hearts of Stone expansion List
+With the Hearts of Stone expansion, 4 new types of glyphs were added to the game. Unlike base game glyphs, they can only be purchased from the runewright (also the only source for the diagrams) or crafted.
+Lesser Glyph
+Image
+Glyph
+Image
+Greater Glyph
+Image
+Lesser Glyph of Binding
++2% Resistance to Bleeding
+ 
+Glyph of Binding
++3% Resistance to Bleeding
+ 
+Greater Glyph of Binding
++5% Resistance to Bleeding
+ 
+Lesser Glyph of Mending
++1 Vitality regeneration
+ 
+Glyph of Mending
++2 Vitality regeneration
+ 
+Greater Glyph of Mending
++3 Vitality regeneration
+ 
+Lesser Glyph of Reinforcement
++33% reduction in item durability loss
+ 
+Glyph of Reinforcement
++50% reduction in item durability loss
+ 
+Greater Glyph of Reinforcement
++100% reduction in item durability loss
+ 
+Lesser Glyph of Warding
++1% Resistance to elemental damage
+ 
+Glyph of Warding
++2% Resistance to elemental damage
+ 
+Greater Glyph of Warding
++3% Resistance to elemental damage
+ 

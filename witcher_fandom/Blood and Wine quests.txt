@@ -1,0 +1,486 @@
+Blood and Wine quests
+This page is a finding aid which lists all quests in the Blood and Wine expansion in a sortable table format. To see a quest walkthrough, click on the quest name.
+For more information on the various quests in The Witcher 3: Wild Hunt, see the following:
+Main quests
+Secondary quests
+Contracts
+Treasure hunts
+Hearts of Stone quests
+ Main quests
+Quest
+Level
+Location
+Enemies
+Envoys, Wineboys
+34
+Stonecutters' Settlement
+Bandits, Zorg
+The Beast of Toussaint
+35
+The Cockatrice Inn, Corvo Bianco, Tourney Grounds, Palace Gardens
+Golyat, The Bruxa of Corvo Bianco, Shaelmaar from the Emperor of Nilfgaard
+Blood Run
+36
+Palace Gardens, Beauclair
+The Beast of Beauclair
+La Cage au Fou
+39
+Mère-Lachaiselongue Cemetery, Trastamara Estate, Tesham Mutna Ruins
+Kikimore, Scurver, rotfiend, ghoul, fleder
+Where Children Toil, Toys Waste Away
+42
+Mère-Lachaiselongue Cemetery, Beauclair Port
+Workers (fistfight)
+Wine is Sacred
+42
+Beauclair Palace, Castel Ravello, Fort Astre Ruins
+Panther
+The Man from Cintra
+43
+Beauclair
+Capture the Castle
+47
+Count de la Croix's Mill
+Roderick, Soldiers
+The Night of Long Fangs
+47
+Beauclair
+Bruxa, Alp, Fleder, Katakan, Garkain
+Beyond Hill and Dale...
+47
+Land of a Thousand Fables
+Wicked Witch, pixies, wolves, Longlocks, Three Little Pigs, Big Bad Wolf, Cloud Giant
+Blood Simple
+47
+La Compassion Orphanage
+Alpha Garkain
+What Lies Unseen
+47
+Cave southwest from Beauclair
+Protofleders
+Tesham Mutna
+49
+Tesham Mutna Ruins
+Dettlaff van der Eretein (optional)
+Pomp and Strange Circumstance
+49
+Beauclair, Mère-Lachaiselongue Cemetery
+Bruxa, Attackers (fistfight)
+Burlap is the New Stripe
+49
+Beauclair
+Be It Ever So Humble...
+49
+Corvo Bianco
+ Secondary quests
+Quest Name
+Unmarked
+Cutoff Point
+Level
+Location(s)
+Enemies
+A Knight's Tales
+No
+n/a
+40
+Patrice Glade, west of Castel Ravello VineyardLynx Crag
+n/a
+A Portrait of the Witcher as an Old Man
+No
+n/a
+43
+The Gran'placeBeauclair PalaceRosetree HillDuchaton Crest
+NekkersNekker warriorsGriffin
+Amidst the Mill's Grist
+No
+Wine is Sacred
+n/a*
+Count de la Croix's Mill
+Peasants
+Big Feet to Fill
+No
+n/a
+40
+Ardaiso QuarryProphet Lebioda Statue
+n/a
+Big Feet to Fill: The Fifth Group
+No
+n/a
+n/a
+North of Prophet Lebioda Statue
+Bandits
+Big Feet to Fill: The First Group
+No
+n/a
+n/a
+Northeast of Fox Hollow
+n/a
+Big Feet to Fill: The Fourth Group
+No
+n/a
+n/a
+Southeast from Silver Salamander Inn
+n/a
+Big Feet to Fill: The Second Group
+No
+n/a
+n/a
+Southern end of Plegmund's Bridge
+Workers (dependent)
+Big Feet to Fill: The Third Group
+No
+n/a
+n/a
+Northeast of Castel Ravello Vineyard
+n/a
+Duck, Duck, Goosed!
+No
+Tesham Mutna
+47
+Land of a Thousand Fables
+PixiesRedbeardBandits
+Extreme Cosplay
+No
+n/a
+40
+Doren Alma Estate
+Living Statues
+Father Knows Worst
+No
+n/a
+37
+Albertus Grotto
+Kikimore workersKikimore warriorAuguste Monnart (optional)Lucien Monnart (optional)Hunters (optional)
+Fists of Fury: Toussaint
+No
+n/a
+36
+Epona SquareHenris Gras SquareSan Sebastian
+Still WatersMancomb (dependent)Colossus (dependent)
+Goodness, Gracious, Great Balls of Granite!
+No
+n/a
+36
+Beauclair
+Knight errant (optional)
+Gwent: Never Fear, Skellige's Here
+No
+n/a
+n/a
+Toussaint
+n/a
+Gwent: To Everything - Turn, Turn, Tournament!
+No
+n/a
+38
+The Pheasantry in Hauteville
+Yaki RafibergArgoinGromm
+Knight for Hire
+No
+n/a
+n/a*
+n/a
+Master Master Master Master!
+No
+n/a
+40
+Lazare Lafargue's workshop
+n/a
+Mutual of Beauclair's Wild Kingdom
+No
+n/a
+46
+Trading PostVenin Rocks
+Silver Basilisk (optional)
+No Place Like Home
+No
+n/a
+n/a*
+Corvo Bianco
+n/a
+Of Sheers and a Witcher I Sing
+No
+n/a
+43
+Beauclair
+ArchesporeBeau DuvallSquires (optional)
+Paperchase
+No
+n/a
+36
+Cianfanelli Bank at The Gran'place
+Bank customerGuards (optional)
+Raging Wolf
+No
+n/a
+40
+Beauclair Port
+n/a
+The Hunger Game
+No
+n/a
+42
+Corvo BiancoTrastamara Hunting Cottage
+n/a
+The Perks of Being a Jailbird
+No
+Be It Ever So Humble...
+n/a
+Toussaint Prison
+n/a
+The Warble of a Smitten Knight
+No
+Capture the Castle
+35
+Tourney GroundsRosetree Hill
+PanthersWight (optional)Barghest (optional)Anséis (dependent)Arthur Tailles (dependent)Tailles' Bodyguards (dependent)Palmerin de Launfal (optional)Guy de Bois-Fresnes (optional)Delwyn of Creigiau (optional)Horm Akerspaark (optional)Llinos of Metinna (optional)Gregoire de Gorgon (dependent)
+The Words of the Prophets Are Written on Sarcophagi
+No
+n/a
+40
+Lebioda's temple
+Great Beggar's Ghost
+There Can Be Only One
+No
+n/a
+43*
+Lac Célavy
+Hermit
+Till Death Do You Part
+No
+n/a
+36
+The Clever Clogs TavernTemple CemeteryOrlémurs Cemetery (dependent)The de Corentin Nursery (dependent)
+Grave robbers (dependent)Archespore (dependent)
+Turn and Face the Strange
+No
+n/a
+35
+Orlémurs CemeteryValley of the nine
+DrownersGuardiansGargoylePale Widows
+Vintner's Contract: Chuchote Cave
+No
+n/a
+40*
+Chuchote Cave
+Arachnomorphs
+Vintner's Contract: Cleaning Those Hard-to-Reach Places
+No
+n/a
+43*
+Gray Grotto
+Gargoyles
+Vintner's Contract: Duchaton Crest
+No
+n/a
+43*
+Duchaton Crest
+Shaelmaar
+Vintner's Contract: Dun Tynne Hillside
+No
+n/a
+40*
+Cave west of Dun Tynne Crossroads
+Giant centipedes
+Vintner's Contract: Rivecalme Storehouse
+No
+n/a
+37*
+Rivecalme Storehouse (west of Dulcinea Windmill)
+Ghouls
+Alghoul
+Wine Wars: Belgaard
+No
+n/a
+37 (first part)39 (second part)
+Plegmund's BridgeBelgaard Vineyard
+Endrega workersEndrega droneEndrega warriorGiant centipedesSlyzardBandits
+Wine Wars: Consorting
+No
+n/a
+40*
+Plegmund's Bridge
+n/a
+Wine Wars: Coronata
+No
+n/a
+37
+Forest HerbariumPittapatte River CrossingCoronata Vineyard
+ArchesporesRabid Rock trollsBandits
+Wine Wars: The Deus in the Machina
+No
+n/a
+42
+Abandoned Storehouse
+Archespores
+Wine Wars: Vermentino
+No
+n/a
+37
+Dantan GladeHerbalist's HutPavone SlopeVermentino Vineyard
+RotfiendsArchesporesBandits
+ Contracts
+Quest Name
+Unmarked
+Cutoff Point
+Level
+Location(s)
+Enemies
+Big Game Hunter
+No
+n/a
+37
+Chuchote CaveFrancollarts
+Bear (optional)Panthers (optional)Giant centipedes
+Contract: Bovine Blues
+No
+n/a
+38
+Ardaiso QuarryFort Ussar RuinsProphet Lebioda Statue
+GhoulsAlghoulRotfiendsSlyzardSlyzard Matriarch
+Contract: The Tufo Monster
+No
+n/a
+48
+TufoOwl Eye Grottos
+Kikimore workersKikimore warriorGiant centipedes (optional)The Monster of Tufo
+Equine Phantoms
+No
+n/a
+44
+Pinastri's HermitageMont Crane Cemetery
+ApparitionsUmbra (optional)
+Feet as Cold as Ice
+No
+n/a
+45
+Near Nilfgaardian Embassy in BeauclairCave north of Palace Gardens
+ArchesporesGrottore
+ Treasure hunts
+Quest Name
+Unmarked
+Cutoff Point
+Level
+Location(s)
+Enemies
+Applied Escapology
+No
+n/a
+40
+Toussaint PrisonValley of the nine
+Drowners
+Around the World in... Eight Days
+No
+n/a
+40
+East of Coronata Vineyard
+n/a
+But Other Than That, How Did You Enjoy the Play?
+No
+n/a
+43
+Seidhe Llygad Amphitheater
+Phantom of the Amphitheater
+Coin Doesn't Stink
+No
+n/a
+37
+Pittapatte River CrossingCoronata Vineyard
+n/a
+Don't Take Candy from a Stranger
+No
+n/a
+37
+Southwest of Prophet Lebioda StatueVermentino Vineyard
+Rotfiends
+Filibert Always Pays His Debts
+No
+n/a
+48
+Casteldaccia Abandoned Estate
+Ghostly Knight
+Scavenger Hunt: Grandmaster Feline Gear
+No
+n/a
+40
+Villa VedetteArthach Palace RuinsPits of Brume
+BanditsHanse dogsArchespores
+Scavenger Hunt: Grandmaster Griffin Gear
+No
+n/a
+40
+Fort Ussar RuinsMont Crane Castle
+Slyzard (dependent)Slyzard Matriarch (dependent)Bandits (dependent)Moreau's Golem
+Scavenger Hunt: Grandmaster Manticore Gear
+No
+n/a
+40
+Bastoy Prison RuinsCave southeast of Gélenser FarmLebioda's templeMurky DelveLake of Cleansing
+Alp (proximity)PantherGreat Beggar's GhostBruxae (optional)Archespore (optional)Kikimore workersBandits (optional)
+Scavenger Hunt: Grandmaster Ursine Gear
+No
+n/a
+40
+TufoOwl Eye Grottos
+Giant centipedes
+Scavenger Hunt: Grandmaster Wolven Gear
+No
+n/a
+40
+Termes Palace Ruins
+n/a
+Spoontaneous Profits!
+No
+n/a
+42
+Trastamara Estate RuinsThe PheasantryDanamebi Temple Ruins
+Beann'shie
+The Black Widow
+No
+n/a
+37
+West of Flovive
+Drowners
+The Curse of Carnarvon
+No
+n/a
+46
+North of Castel Ravello VineyardCrevan Carn, northeast of Fox Hollow
+BarghestsArchespores
+The Inconstant Gardener
+No
+n/a
+37
+Abandoned Coopers' Workshop
+n/a
+The Last Exploits of Selina's Gang
+No
+n/a
+37
+Temple CemeteryOrlémurs Cemetery
+Drowners
+Grave Robbers 
+The Suffering of Young Francois
+No
+n/a
+47
+South of Fort Astre RuinsCutterin Manor
+Wraiths
+The Toussaint Prison Experiment
+No
+n/a
+47
+Bastoy Prison Ruins
+Alp
+Waiting for Goe and Doh
+No
+n/a
+40
+Northeast of Termes Palace Ruins, across the river
+n/a
+What Was This About Again?
+No
+n/a
+43
+Riverbank between Plegmund's Bridge and The Silver Salamander Inn
+DrownersShaelmaar
