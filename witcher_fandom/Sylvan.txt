@@ -3,34 +3,6 @@ Picture a humanoid goat complete with horns on its head, hair on its legs, a tas
 - Anonymous Oxenfurt scholar, Netflix's The Witcher
 Sylvans, called willowers or pucks, and labeled superstitiously as devils (archaic Common: deovel; Elder Speech: d'yaebl; Dwarvish: duvvel), are an exceptionally rare, intelligent race native to the woodlands of the Northern Kingdoms. They are distinguished by prominent goat-like visage and delight in pranks, feasting, and music.
 Sporadically, sylvan may also be referred to as a "faun".
-Quick Answers
-What is the origin of the name 'Sylvan'?
-						In the Witcher series, 'Sylvan' refers to a Relict creature, specifically a Yaksha subspecies. Sylvans inhabit the Northern Kingdoms and the Far North's pastures and woodlands. They are recognized by their distinctive physical characteristics: cloven-hooved legs, a tassel-ended tail, pointy ears, goat horns, and yellow eyes. Their hair can be red or grey. Sylvans are also known as Devil/Deovel, D'yaebl, Duvvel, Willower, Puck, and Faun.
-					
-						Provided by: Fandom
-					
-What are some common characteristics of Sylvans?
-						Sylvans, native to the Northern Kingdoms' woodlands, are distinguished by their goat-like features, including horns, a tasseled tail, and cloven hooves. They are known for their jovial nature, fondness for music, particularly reed pipes, and their enjoyment of tricks and riddles. Despite their mischievous behavior, they are often helpful, assisting in tasks like field fertilization and pest control. They primarily consume a herbivorous diet.
-					
-						Provided by: Fandom
-					
-What is the meaning of 'Sylvan' in the context of the Northern Kingdoms?
-						The term 'Sylvan' in the Northern Kingdoms pertains to an intelligent woodland race. They exhibit a goat-like countenance and are fond of pranks, feasts, and music. Sylvans, occasionally called 'fauns', are an uncommon species, recognized by their distinct goat-like features. They converse in Common Speech and Elder Speech.
-					
-						Provided by: Fandom
-					
-What are some of the cultural practices of Sylvans?
-						The Sylvans, an intelligent race from the Northern Kingdoms' woodlands, are recognized by their goat-like features and are often called 'fauns'. They enjoy pranks, feasting, music, and are particularly skilled at playing reed pipes. Their diet is primarily herbivorous, but they also indulge in pipe-smoking, overeating, and drinking. Some Sylvans possess magical abilities, including mental spells and fire-breathing. They are jovial creatures who love tricks and riddles, and they contribute to their environment by fertilizing fields, scaring away birds, and consuming caterpillars.
-					
-						Provided by: Fandom
-					
-How do Sylvans interact with other races in the Northern Kingdoms?
-						Sylvans, an intelligent race with a goat-like visage, are native to the Northern Kingdoms' woodlands. They are fond of pranks, feasting, and music. These beings, also known as 'faun', predate the arrival of Nordlings or Aen Seidhe on the Continent. Sylvans' interactions with other races are diverse. They typically disregard gnomes unless they threaten nature, while their relations with dwarves are notably hostile.
-					
-						Provided by: Fandom
-					
-{"@context":"https:\/\/schema.org","@type":"FAQPage","name":"Sylvan","mainEntity":}
-Characteristics
 
 Physical description
 Sylvans resemble a human with goat's horns, soft lips with yellow, horse-like teeth, and a goatee. Their lower body features a tasseled tail and hairy legs with cloven hooves. The horns earned sylvans the label of "devils", which they dislike, and occasionally cause confusion with the beastly chorts for humans who have never seen the latter. Their voice resembles goat's bleating. Their life-spans reached up to more than 100 years.
@@ -66,15 +38,3 @@ Harrower and Mulcher
 They are both legendary monsters, appearing only during Lammas. According to the bestiary, Harrower is said to deliver exteremly strong blows and Mulcher is know to scatter bones around fields.
 Gallery
 Corpulent sylvan with one horn broken.A Sylvan Dearg trophy in The Witcher: Monster Slayer bestiaryA Harrower trophy in The Witcher: Monster Slayer bestiaryA Mulcher trophy in The Witcher: Monster Slayer bestiary
-Footnotes
-↑ 1.0 1.1 Though "puck", 1st mentioned in Sword of Destiny, has been assumed to be another alias for a sylvan since at least 2014 (due to their parity in folklore) it was only confirmed by Fugas' entry in The Witcher 3: Wild Hunt.
-↑ 2.0 2.1 Despite the similarity, it has not yet been confirmed whether or not sylvans and fauns are the same creature. R. Talsorian Games, however, did respond on Twitter that commoners such as Rodolf Kazmer would consider the terms synonymous.
-References
-↑ 1.00 1.01 1.02 1.03 1.04 1.05 1.06 1.07 1.08 1.09 1.10 1.11 The Last Wish
-↑ 2.0 2.1 2.2 2.3 2.4 2.5 2.6 2.7 The Witcher 3: Wild Hunt
-↑ Sword of Destiny
-↑ 4.0 4.1 4.2 4.3 4.4 Wiedźmin: Gra Wyobraźni
-↑ A Witcher's Journal
-↑ Gwent: The Witcher Card Game
-↑ Sword of Destiny
-↑ Season of Storms

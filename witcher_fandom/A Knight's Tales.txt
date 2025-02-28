@@ -55,14 +55,14 @@ Light the eastern fire.
 Light the northern fire.
 Light the western fire.
 If you didn't bring Sir Gareth's bone and/or didn't ask about his fate:
-Defeat the wraith from the bleeding tree. (150)
+Defeat the wraith from the bleeding tree.
 Geralt threatens the witch into helping:
 Defeat the witch of Lynx Crag.
 Return to the bleeding tree.
 Use your Witcher Senses to find Jacob the woodcutter's tracks.
 Follow the tracks to find Jacob the woodcutter.
 Kill Morholt.
-Examine the woodcutter's body. (150)
+Examine the woodcutter's body.
 Notes
 Three unique books/notes are found inside the witch's hut: Liber Ivonis, On the Transmutation of Bodies and Remarks on the Proper Administration of Yarrow. Lootable containers there also contain a greater mutagen transmutator formula, a dye armor formula, and a couple of alchemy ingredients normally only dropped by monsters.
 During Geralt's initial conversation with Jacob, the woodcutter mentions characters from the Noble Alondra and Gottfried and the Chessboard Knight in-game books.

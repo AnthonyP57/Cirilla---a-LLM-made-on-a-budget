@@ -73,5 +73,3 @@ Wine Wars- Fixed an issue where the quest couldn't be completed if the player de
 Fixed an issue where the Grandmaster Wolven Set wouldn't require Mastercrafted items.
 Various small fixes to quests and cutscenes.
 Please note: these are only the most notable changes and additions to the game. The patch contains other fixes that didn't make it into this list.
-References
-↑ Patch 4.04 is live on all platforms, including Nintendo Switch!

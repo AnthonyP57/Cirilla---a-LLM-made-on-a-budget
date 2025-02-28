@@ -1,33 +1,5 @@
 Witcher
 A witcher (Polish: wiedźmin), also known as a wiccan, hexer, vedymin, or witchman (Elder Speech: vatt'ghern), is someone who has undergone extensive training, ruthless mental and physical conditioning, and mysterious rituals (which take place at "witcher schools" such as Kaer Morhen) in preparation for becoming an itinerant monster slayer for hire. Geralt, the central character in Andrzej Sapkowski's Witcher series and the subsequent games inspired by them, is said in the stories to be one of the greatest witchers; he is certainly legendary, but whether famous or infamous is more open to interpretation (and/or subject to gameplay, as the case may be).
-Quick Answers
-What is the training process to become a Witcher?
-						To become a Witcher, one undergoes the Trials, a series of transformative processes using secret herbs and infusions. Survivors gain superhuman reflexes, reaction speed, and night vision, among other traits. They learn swordplay and basic magic, known as Signs. Young witchers undergo mutations to enhance their strength and speed. They also develop a unique culture, specialized knowledge, an effective training system, and a code of honor.
-					
-						Provided by: Fandom
-					
-What are the mysterious rituals performed at Witcher schools?
-						Witcher schools train witchers, teaching them magic fundamentals and unique fighting styles. The schools are distinguished by their rituals, a structured form of magic that can surpass spells in power. These rituals require specific components and time to execute. Each school, including the School of the Wolf, Bear, Griffin, Viper, and Cat, has distinct rituals and training methods.
-					
-						Provided by: Fandom
-					
-Who is the central character in Andrzej Sapkowski's Witcher series?
-						In Andrzej Sapkowski's Witcher series, the main character is Geralt, a witcher who is trained from a young age to eliminate monsters. Geralt lives in a morally complex world, yet he upholds a clear ethical code. His character draws comparisons to Raymond Chandler's Philip Marlowe. Geralt is regarded as one of the most exceptional witchers, with his reputation being a matter of perspective.
-					
-						Provided by: Fandom
-					
-What is the role of a Witcher in their society?
-						In their society, a Witcher is a highly trained, enhanced individual, known for their strength, endurance, and immunity. They are not mere killers, but uphold a unique culture, specialized knowledge, a rigorous training system, and a code of honor. They are knowledgeable about the effects of various substances and understand basic magic. Their main role is to exterminate monsters, a duty they are prepared for through early-age mutations that enhance their physical abilities.
-					
-						Provided by: Fandom
-					
-What are the physical and mental conditions required to become a Witcher?
-						Becoming a Witcher involves rigorous physical and magical training, alchemical procedures, and intake of mutagenic compounds. Witchers, as a result, are mutants with enhanced speed, strength, and resilience, equipped to combat most monsters alone. They also maintain a distinct culture, comprehensive knowledge, and an honor code. They are well-versed in the impact of diverse substances and basic magic principles.
-					
-						Provided by: Fandom
-					
-{"@context":"https:\/\/schema.org","@type":"FAQPage","name":"Witcher","mainEntity":}
-History
 
 Creation
 As humans settled in the northern part of the Continent, they had to deal with a vast array of monsters that inhabited the land and which humans were poorly equipped to deal with. To fix this, the Northern rulers tasked their mages to create magic-wielding warriors to deal with the monsters for them. As a result, the mages carried out experiments at Rissberg and the first witcher was created. Unfortunately, the witchers proved to have limited magical potential and were thus deemed failures and banished from the castle.
@@ -225,22 +197,3 @@ Only human witchers are known to exist, although it is believed that elven witch
 The Georgian iteration of the word "Witcher" appears to be mistranslated, as the word "მხედვარი" (M'khedvari) literally means "Watcher." The Georgian community mostly sticks to the English term.
 Videos
 Fall of the Witchers Lore and Theories (The Witcher 3 Wild Hunt)Witchers and Emotions The Witcher 3 Wild Hunt - Witcher Lore
-References
-↑ 1.0 1.1 1.2 1.3 A Witcher's Journal
-↑ 2.00 2.01 2.02 2.03 2.04 2.05 2.06 2.07 2.08 2.09 2.10 The Witcher 3: Wild Hunt
-↑ 3.0 3.1 3.2 3.3 3.4 Blood and Wine expansion
-↑ 4.0 4.1 4.2 The Witcher comics
-↑ 5.0 5.1 The Witcher
-↑ 6.0 6.1 Wiedźmin: Gra Wyobraźni
-↑ 7.0 7.1 The Witcher: Nightmare of the Wolf
-↑ 8.0 8.1 8.2 8.3 The Hexer series
-↑ 9.0 9.1 Szpony i kły
-↑ 10.0 10.1 10.2 The Witcher Role-Playing Game
-↑ 11.0 11.1 Gwent: The Witcher Card Game
-↑ A Book of Tales
-↑ 13.0 13.1 13.2 13.3 The Witcher 2: Assassins of Kings
-↑ Thronebreaker: The Witcher Tales
-↑ Witcher Prostheses and Wheelchairs
-↑ Tales from the world of The Witcher
-↑ Siriol's Handbook: Wagons and Travel
-This page uses content from Wikipedia. The original article was at The Witcher. As with Witcher Wiki, the text of Wikipedia is available under the GNU Free Documentation License.

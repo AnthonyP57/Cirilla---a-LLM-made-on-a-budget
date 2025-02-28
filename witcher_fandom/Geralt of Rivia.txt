@@ -1,7 +1,5 @@
 Geralt of Rivia
-Sub-Pages:
-Main
-Netflix seriesRoninQuotes
+
 "Do you really wish to know?" — Spoilers from the books and/or adaptations to follow!
 Spoilers from the newest book, Rozdroże kruków to follow!
 "I shall organize, see to everything and whip the house into order."This article is currently under construction for major revisions. We ask that edits to this article are only minor or grammatical in nature until this warning is removed in order to not disrupt the major revamp. Should you have any questions regarding the revamp, consult the talk page for more info.
@@ -10,33 +8,6 @@ Spoilers from the newest book, Rozdroże kruków to follow!
 Geralt of Rivia was a legendary witcher of the School of the Wolf active throughout the 13th century. He loved the sorceress Yennefer, considered the love of his life despite their tumultuous relationship, and became Ciri's adoptive father.
 During the Trial of the Grasses, Geralt exhibited unusual tolerance for the mutagens that grant witchers their abilities. Accordingly, Geralt was subjected to further experimental mutagens which rendered his hair white and may have given him greater speed, strength, and stamina than his fellow witchers.
 Despite his title, Geralt did not hail from the city of Rivia. After being left with the witchers by his mother, Visenna, he grew up in their keep of Kaer Morhen in the realm of Kaedwen. In the interest of appearing more trustworthy to potential clients, young witchers were encouraged to make up surnames for themselves by master Vesemir. As his first choice, Geralt chose "Geralt Roger Eric du Haute-Bellegarde", but this choice was dismissed by Vesemir as silly and pretentious, so "Geralt" was all that remained of his chosen name. "Of Rivia" was a more practical alternative and Geralt even went so far as to adopt a Rivian accent to appear more authentic. Later, Queen Meve of Lyria knighted him for his valor in the Battle for the Bridge on the Yaruga conferring on him the formal title "of Rivia", which amused him. He, therefore, became a true knight.
-Quick Answers
-Who is Geralt of Rivia?
-						Geralt of Rivia is a witcher and the protagonist from The Witcher series. He was born as the son of the sorceress Visenna and the warrior Korin. He was trained to become a Witcher and underwent experimental mutations that granted him enhanced abilities.
-					
-						Provided by: Community
-					
-What is Geralt's nickname?
-						Geralt has a number of nicknames, with the more well known ones being "White Wolf" (also called "Gwynbleidd" in Elder Speech) and Butch of Blaviken.
-					
-						Provided by: Community
-					
-Who trained Geralt to become a Witcher?
-						Geralt was trained by his mentor Vesemir, who he regarded as a father figure.
-					
-						Provided by: Fandom
-					
-What is Geralt's profession?
-						Geralt is a monster slayer for hire. He travels the world on his horse named Roach, taking contracts to slay monsters and protect the innocent.
-					
-						Provided by: Fandom
-					
-What is the Trial of The Grasses?
-						The Trial of The Grasses was a painful process that used a mysterious mixture of plants, elixirs, and other unknown ingredients to modify the physiology of young witcher adepts to make them fully fledged witchers in terms of reflexes and heightened senses. However, this process caused so much strain on an adept's body, only about 3 to 4 out of every 10 adepts survived, with the rest dying in agony.
-					
-						Provided by: Community
-					
-{"@context":"https:\/\/schema.org","@type":"FAQPage","name":"Geralt of Rivia","mainEntity":}
 Biography
 Geralt was born as the son of the sorceress Visenna and presumably, the warrior Korin. Shortly after his birth, his mother left him with the School of the Wolf at the stronghold of Kaer Morhen. There, Geralt was made and trained to become a Witcher.
 As a child, he was subjected to the Trial of The Grasses. He managed to survive the many blistering mutations required to grant Witchers their abilities. After displaying unusual tolerance, Geralt was selected for further experimental mutations which granted him considerably greater strength, speed, endurance, resilience, healing, senses, complete immunity to diseases and conventional poisons, and extreme resistance to pain. This resulted in his hair turning white, and he received the nickname "White Wolf".
@@ -392,23 +363,3 @@ Other
 Most of The Witcher 2 promotional screenshots or artwork featuring Geralt display a fairly different model, an early design, even the cover of the game doesn't use the in-game model for Geralt. A different model was planned to replace Geralt's face from The Witcher, but due to protests in Poland, CDP edited the old model and placed it into the game.
 Gallery
 Illustration in book by Jana KomárkováIn The Hexer film and TV showThe Witcher alternate journal imageThe Witcher concept artIn The Witcher 2: Assassins of KingsConcept art for The Witcher 2: Assassins of KingsFull model in The Witcher 2: Assassins of KingsThe Witcher 3: Wild Hunt gwent card artThe Witcher 3: Wild Hunt alternative gwent card cardGeralt and Triss ending in The Witcher 3: Wild HuntGeralt and Yennefer ending in The Witcher 3: Wild HuntIn the Hearts of Stone expansionIn the Blood and Wine expansionGwent: The Witcher Card Game card artIn the Polish The Witcher comicsIn Reasons of StateIn House of GlassIn Fox ChildrenIn Killing MonstersIn Matters of ConscienceIn Curse of CrowsIn Of Flesh and FlameIn Fading MemoriesIn Witch's LamentIn Once Upon a Time in the WoodsIn RoninIn A Grain of TruthIn The Ballad of Two WolvesIn Frog KissIn Wild AnimalsIn The Lesser EvilCharacter sketches for The Lesser EvilGwent: The Witcher Card Game avatar (based on the first game)Gwent: The Witcher Card Game avatar (based on the third game)Gwent: The Witcher Card Game avatar (Skelligan clothes)Gwent: The Witcher Card Game avatar (intoxicated from potions)
-Footnotes
-↑ In some promotional materials for The Witcher video game, Geralt's eyes were silver instead.
-References
-↑ 1.0 1.1 1.2 Rozdroże kruków
-↑ 2.0 2.1 Baptism of Fire
-↑ 3.0 3.1 3.2 3.3 3.4 3.5 3.6 3.7 3.8 The Last Wish
-↑ Season of Storms
-↑ The Price of Neutrality premium module
-↑ 6.0 6.1 Sword of Destiny
-↑ 7.0 7.1 7.2 7.3 7.4 Blood of Elves
-↑ 8.0 8.1 8.2 8.3 Time of Contempt
-↑ 9.0 9.1 9.2 The Witcher 2: Assassins of Kings
-↑ 10.0 10.1 10.2 The Witcher 3: Wild Hunt
-↑ The Witcher: Of Flesh and Flame
-↑ http://thewitcher.com/en/adventuregame
-↑ http://www.gamespot.com/articles/the-witchers-geralt-will-be-on-a-stamp-in-poland/1100-6443626/
-↑ https://www.kotaku.com.au/2018/03/geralt-is-coming-to-soulcalibur-6/
-↑ Geralt takes on a new contract in Monster Hunter: World!
-External links
- See the GWENT standalone game version card: Geralt of Rivia

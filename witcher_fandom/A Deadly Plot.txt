@@ -2,7 +2,6 @@ A Deadly Plot
 A Deadly Plot is a secondary quest in The Witcher 3: Wild Hunt. It will automatically start through a conversation with Sigismund Dijkstra at the end of Now or Never.
 Prerequisite: This quest must be completed (along with a peaceful solution with Dijkstra at the end of Blindingly Obvious) to unlock Reason of State. Note also you'll need to have at least obtained (and completed or failed) the other two Assassins' quests, An Eye for an Eye and Redania's Most Wanted.
 Note: this quest will fail if not completed before starting The Isle of Mists.
-Walkthrough
 
 Meet Dijkstra at the Passiflora
 Follow your map to the Passiflora. It is just east of St. Gregory's Bridge. When you go inside, speak to Marquise Serenity and she will open a secret room for you. Head up the stairs and then speak to Dijkstra. Shortly after, Vernon Roche joins the two and Geralt can agree to help with tracking down the spies' missing contact.
@@ -33,8 +32,8 @@ Find the trolls' cave.
 Find the shoemaker in the trolls' cave.
 If you threaten the trolls:
 Kill the trolls.
-Escort Thaler (25).
-Notes
+Escort Thaler.
+
 In the Official Prime Guide, it was noted that to unlock Reason of State, all three Assassins' quests (this one, An Eye for an Eye, and Redania's Most Wanted) had to be completed/couldn't be failed. However, it was later shown the latter two could be failed as long as one completed A Deadly Plot and bribed Dijkstra (as opposed to breaking his leg) at the end of Blindingly Obvious.
 The optional fight with the trolls can be a good way to stock up on cave troll livers if you are short on this important but rare ingredient, since you can get one from each troll.
 If for some reason you have missed the option to play gwent with Thaler immediately after the quest or need to unlock the option to play him first, he will be found at the Seven Cats Inn later.

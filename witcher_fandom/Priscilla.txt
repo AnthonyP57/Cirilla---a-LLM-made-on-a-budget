@@ -2,28 +2,6 @@ Priscilla
 Let's show 'em what real art is.
 - Priscilla in The Witcher 3: Wild HuntAudio version: Media:Priscilla voice line .ogg
 Priscilla was a romantic poet, who went by the stage name "Callonetta". She was a very close friend of Dandelion and her triumphal tour of concerts had taken her from Pont Vanis and Lan Exeter in Kovir and Poviss, through Tretogor (capital of Redania), and Caelf to Novigrad, the biggest city in the Northern Kingdoms. She also played gwent with a Scoia'tael deck in her free time, but only for fun, not crowns.
-Quick Answers
-What is Priscilla's stage name in her career as a romantic poet?
-						In her career as a romantic poet, Priscilla is recognized by the stage name Callonetta. This name marked her artistic rise, leading to a triumphant concert tour across cities like Lan Exeter, Pont Vanis, Tretogor, Caelf, and finally Novigrad.
-					
-						Provided by: Fandom
-					
-What cities did Priscilla's triumphal tour of concerts take her to?
-						Known as Callonetta on stage, Priscilla's concert tour led her to perform in multiple cities. She graced the courts of Lan Exeter and Pont Vanis, then proceeded to Tretogor and Caelf, concluding her tour in Novigrad.
-					
-						Provided by: Fandom
-					
-Who is Priscilla's close friend in the Witcher 3?
-						In The Witcher 3, Priscilla, a romantic poet known as 'Callonetta', shares a close friendship with Dandelion. Her successful concert tour has led her to various locations including Pont Vanis, Lan Exeter, Tretogor, Caelf, and Novigrad, the largest city in the Northern Kingdoms.
-					
-						Provided by: Fandom
-					
-What is the significance of Priscilla's song in Witcher 3?
-						In The Witcher 3, Priscilla's song is a testament to her artistic talent and beauty. Known by the stage name Callonetta, she embarks on a successful tour of concerts, traveling from Pont Vanis and Lan Exeter, through Tretogor and Caelf, to Novigrad, the largest city in the Northern Kingdoms.
-					
-						Provided by: Fandom
-					
-{"@context":"https:\/\/schema.org","@type":"FAQPage","name":"Priscilla","mainEntity":}
 The Witcher 3: Wild Hunt
 Through the main quest missions, it becomes quite clear that Priscilla and Dandelion share considerable affection for each other; so much so that Dandelion, the notorious ladies man, hopes to settle down with her in Novigrad.
 If Geralt assists Dandelion in establishing and renovating his business (completing the Cabaret quest after the Novigrad "lockdown"), Priscilla is attacked, has formaldehyde forced in her throat, and an incision made into her voice box, starting the Carnal Sins quest. She fortunately escapes the fate of the killer's other victims, and remains alive in the care of Joachim von Gratz at the Novigrad hospital.
@@ -56,6 +34,3 @@ Videos
 The Witcher 3 Soundtrack OST - Priscilla's SongThe Witcher 3 Wild Hunt - The Wolven Storm Priscilla's Song multi-language
 Gallery
 Gwent cardart.
-External links
- See the GWENT standalone game version card: Priscilla
-↑ Of Flesh and Flame

@@ -78,7 +78,3 @@ Gallery
 Wolven armorEnhanced Wolven armorSuperior Wolven armorMastercrafted Wolven armorGrandmaster Wolven armor
 Notes
 With the exception of grandmaster-level gear, unlike other witcher school sets, the legendary versions of Wolven equipment have distinct global item IDs. Thus, while only obtainable via console commands or mods, they aren't aren't technically exclusive to New Game +.
-References
-↑ Prior to Patch 4.0, the bonuses for this set was:
-Bonus for 3 pieces: Up to three different oils can be applied to a sword at a time.
-Bonus for 6 pieces: Bombs are thrown without any delay.

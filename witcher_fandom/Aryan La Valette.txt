@@ -4,28 +4,6 @@ Aryan initially appeared during the castle assault part of the Prologue, where G
 Should Geralt choose to kill him, that is the end of their interaction.
 If he surrenders during his encounter with Geralt, he appears in the quest The Dungeons of the La Valettes where he is a fellow prisoner in the castle dungeon, and later still, in Chapter III, Geralt encounters him again in Loc Muinne.
 He would later return to La Valette Castle and when Nilfgaard started the Third Northern War by attacking Sodden and Brugge turned his lands into a safe haven in the north.
-Quick Answers
-What is the significance of Aryan La Valette in the siege of La Valette castle?
-						During the siege of La Valette castle, Aryan La Valette allied with the witcher, guiding him through a secret passage to escape the fortress. His intimate knowledge of the castle was crucial to their evasion. In the game, Geralt has the option to either kill or spare Aryan.
-					
-						Provided by: Fandom
-					
-What are the consequences of killing or sparing Aryan in Witcher 3?
-						In Witcher 3, the choice to kill or spare Aryan La Valette impacts the main storyline and character interactions. If Aryan is killed, some events that would have involved him are altered. This decision also affects Geralt's rapport with characters like Vernon Roche or Iorveth. For example, if Geralt sided with Roche, he is warmly welcomed when they meet in Witcher 3. However, in the PC version and possibly The Enhanced Edition, Aryan's survival or death does not alter the game endings.
-					
-						Provided by: Fandom
-					
-What role does Aryan play if he is spared during his encounter with Geralt?
-						When Geralt spares Aryan La Valette, they later reunite in Loc Muinne. Aryan, attending the mages' summit, discusses his half-sister Anaïs' kidnapping. However, if Geralt had earlier sided with Iorveth, he remains unaware of Aryan's situation and cannot assist.
-					
-						Provided by: Fandom
-					
-What happens if Geralt kills Aryan during the siege of La Valette castle?
-						Should Geralt kill Aryan in the siege of La Valette castle, the specific consequences are not detailed. However, Aryan and Mary Louisa do not aid Geralt in the quest Of His Blood and Bone to save Anaïs. If Aryan is spared, Geralt must save him, and no deal is made with Nilfgaard.
-					
-						Provided by: Fandom
-					
-{"@context":"https:\/\/schema.org","@type":"FAQPage","name":"Aryan La Valette","mainEntity":}
 Associated quests
 The Dungeons of the La Valettes
 At the Fore
@@ -48,5 +26,3 @@ Videos
 Aryan La Valette (The Witcher 2) Full HDAryan La Valette in Loc Muinne (The Witcher 2) Full HD
 Gallery
 Defending La Valette CastleGeralt kills AryanGeralt saves AryanIn the Dungeons.Burning the Castle
-References
-↑ The Witcher Role-Playing Game

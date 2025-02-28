@@ -3,33 +3,6 @@ Werewolves are therianthropes who transform into wolves or half-wolves. As other
 There are two most common ways to aquire lycanthropy: the first one through a curse and the second is to simply have a werewolf parent. Being bitten by another werewolf, while popular in folk tales, gives only a very small chance of becoming one in reality, though it is still recommended to get magical treatment. Those who are born as werewolves are able to fully control their shapeshifting abilities, while those cursed or bitten change into their werewolf form only during the full moon. Those who became werewolves during their lives however are the only ones who can be cured. The wolfsbane is said to mitigate the illness' symptoms.
 Therianthropy diseases, including lycanthropy, appeared in the world after the Conjunction of the Spheres, affecting nonhuman and early human populations alike. According to Herbolth, lands in the Toina valley, also called the Dogbane, were plagued by werewolves before the Nordling colonization.
 Werewolves have a legendary sense of smell, exceptional even amongst real wolves. Lycanthropes are usually on good terms with other canines, but hate werecats.
-Quick Answers
-What are the two most common ways to acquire lycanthropy in Witcher 3?
-						The two prevalent methods of acquiring lycanthropy in Witcher 3 are through a curse or by inheritance from a werewolf parent. Werewolves born of this condition have full control over their shapeshifting abilities, whereas those cursed or bitten transform only during a full moon.
-					
-						Provided by: Fandom
-					
-What is the vulnerability of werewolves in Witcher 3?
-						Werewolves in Witcher 3, known as lycanthropes, are humans who transform due to curses. They exhibit a strong resistance to steel and most effects, but are vulnerable to silver. These creatures attack aggressively, relying on their resistance to conventional weapons.
-					
-						Provided by: Fandom
-					
-What is the chance of becoming a werewolf after being bitten by one in Witcher 3?
-						In the Witcher 3 universe, the likelihood of acquiring lycanthropy, or becoming a werewolf, after a werewolf bite is minimal. Typically, lycanthropy is obtained either through a curse or heredity. Werewolves by birth have full control over their transformation, whereas those cursed or bitten transform solely during a full moon. Post-bite, seeking magical treatment is advised.
-					
-						Provided by: Fandom
-					
-What is the recommended treatment after being bitten by a werewolf in Witcher 3?
-						In Witcher 3, if bitten by a werewolf, three treatments are suggested: wearing a fool's parsley woven shirt, taking an alchemical potion, or using the Wolf potion. The Wolf potion is advised before battles with monsters with potent special attacks. It works against creatures causing bleeding, venomous creatures, or those breathing fire. Fire, bleeding, and poison effects can also slow down a werewolf's regeneration.
-					
-						Provided by: Fandom
-					
-What is the weakness of a werewolf in Witcher 3?
-						To overcome a werewolf in Witcher 3, exploit its vulnerability to certain elements. Use a blade coated in cursed oil and Devil's Puffballs. Slow down its rapid regeneration with fire, bleeding, and poison effects. However, be prepared for a challenging fight due to the werewolf's speed and its ability to heal faster than it can be damaged.
-					
-						Provided by: Fandom
-					
-{"@context":"https:\/\/schema.org","@type":"FAQPage","name":"Werewolf","mainEntity":}
 Notable werewolves
 Otto Dussart
 Vincent Meis
@@ -84,11 +57,3 @@ Videos
 What are Werewolves? The Witcher 3 Lore - WerewolvesThe Witcher 3 Morkvarg the Werewolf Boss Fight (Hard Mode)
 Gallery
 In The WitcherConcept art for The WitcherConcept art for The WitcherFinal concept art for The WitcherIn The Witcher 2: Assassins of KingsIn The Witcher 3: Wild Hunt: Prima Official Game GuideIn The Witcher 3: Wild Hunt: Prima Official Game GuideE3 2014 screenshot of The Witcher 3: Wild HuntThe Witcher 3: Wild Hunt modelsThe Witcher 3: Wild Hunt modelsThe Witcher 3: Wild Hunt modelsThe Witcher 3: Wild Hunt gwent card artGwent: The Witcher Card Game card artUlfhedinn in Gwent: The Witcher Card GameAlpha werewolf in Gwent: The Witcher Card GameMoonlight transformation in Gwent: The Witcher Card GameIn The Witcher: Nightmare of the WolfIn The Ballad of Two Wolves
-References
-↑ 1.0 1.1 1.2 1.3 1.4 Season of Storms
-↑ 2.0 2.1 2.2 2.3 2.4 2.5 Wiedźmin: Gra Wyobraźni
-↑ 3.0 3.1 3.2 Reasons of State
-↑ Blood of Elves
-↑ Sword of Destiny
-↑ The Witcher
-↑ 7.0 7.1 The Witcher 3: Wild Hunt

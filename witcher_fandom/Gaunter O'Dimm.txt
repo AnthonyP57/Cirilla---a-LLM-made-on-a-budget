@@ -2,29 +2,7 @@ Gaunter O'Dimm
 In brief, I give folk what they ask for. You might say I simply grant their wishes.
 - Gaunter to Geralt Hearts of Stone expansion
 Gaunter O'Dimm, sometimes called Master Mirror or Man of Glass, was a powerful individual, creating pacts with people in exchange for their souls and being able to control time with a mere clap of his hands.
-Quick Answers
-What is the significance of Gaunter O'Dimm's nickname, Master Mirror?
-						Gaunter O'Dimm, alias Master Mirror, is a potent figure who forms contracts with individuals, trading their souls for granted wishes. The moniker 'Master Mirror' reflects his role in fulfilling desires, often with unforeseen outcomes. He possesses the power to manipulate time, signified by a mere clap. His transactions are typically ambiguous, leading to significant repercussions, such as claiming Olgierd von Everec's soul.
-					
-						Provided by: Fandom
-					
-What powers does Gaunter O'Dimm possess?
-						Gaunter O'Dimm, often referred to as Mr. Mirror, wields numerous supernatural powers. He can control time, fulfill wishes, and perceive the true essence of things. His abilities extend to inflicting pain on ghosts and claiming souls. He can teleport and has a penchant for striking deals, which is his known weakness. His combat skills are augmented by his power to apparate short distances and his ability to summon lesser demons.
-					
-						Provided by: Fandom
-					
-What is the history of Gaunter O'Dimm before he met Geralt?
-						Gaunter O'Dimm, prior to his encounter with Geralt, was a mirror merchant who became a vagrant due to the war. He visited White Orchard's inn in May 1272. O'Dimm had multiple interactions with Geralt, presenting himself in diverse roles including a beggar, peasant, aristocrat, and crossbowman.
-					
-						Provided by: Fandom
-					
-What kind of rewards does Gaunter O'Dimm offer in exchange for souls?
-						Gaunter O'Dimm, also known as Mr. Mirror, is renowned for making deals where he grants wishes, reveals truths, inflicts pain on ghosts, and manipulates time, all in exchange for souls. These deals are often laced with conditions and loopholes that O'Dimm exploits to claim the soul. He once freed Geralt in return for a minor favor, marking Geralt's face as a token of their agreement.
-					
-						Provided by: Fandom
-					
-{"@context":"https:\/\/schema.org","@type":"FAQPage","name":"Gaunter O'Dimm","mainEntity":}
-Biography
+
 Not much is known about Gaunter before his meeting with Geralt, but he stated that he was a former mirror merchant-turned-mangy vagrant because of the war.
 Meeting in the White Orchard inn
 In May 1272, Gaunter O'Dimm visited the inn of White Orchard, and was approached by the witcher Geralt, who was searching for Yennefer. O'Dimm asked to buy the witcher a drink, and that he knew about Geralt and Yennefer based off Dandelion's ballads.
@@ -99,13 +77,3 @@ In Thronebreaker: The Witcher Tales, you can come across a written contract that
 While Gaunter can use magic and create magical effects, it's implied that unlike most of the powerful beings in the witcher universe, his power is an act of will alone needing no components, incantations, or rituals as he exclaims to Geralt that he can't stand spells and calls normal magic wielded by spellcasters as "mere hocus-pocus". He also seems to have no inherent weakness to his power (like how iron or silver can be effective against types of magic or creatures) and only seems bound by whatever limits he agrees to (terms of contract or his word) while being unable to peer between dimension though being able to find out anything within the realm he is currently located.
 Gallery
 O'Dimm as a beggarO'Dimm as a peasantO'Dimm as a soldierO'Dimm as an aristocratGaunter O'Dimm in the background.O'Dimm talking to a young Usurper.O'Dimm's legs in the backgroundGaunter O'Dimm to the right of the figure.Gaunter to the left of the figure.Gaunter to the right of the figure.
-References
-↑ 1.0 1.1 1.2 The Witcher 3: Wild Hunt
-↑ 2.0 2.1 In sequence:Antillean Creole French: Ouw se on coq é coq lá sé rwa an lé pil firmié ay., meaning You're a cock and the cock is king only atop his pile of manure.
-Georgian: Shen ggonia momige, ara sts'debi. (შენ გგონია მომიგე, არა სცდები), meaning You think you've beaten me? You're mistaken.
-Ossetian: Man amaran nai. Asauznan fala fashtama azdahznan. (Мӕн амарӕн нӕй. Ацӕудзынӕн, фӕлӕ фӕстӕмӕ аздӕхдзынӕн), meaning I can't be killed. I'm going now but I'll be back.
-↑ Eurogamer: The making of The Witcher 3's greatest villain
-↑ Kotaku: Riddle That Players Couldn't Quite Solve
-↑ The Witcher 3: Wild Hunt - Blood and Wine expansion
-External links
- See the GWENT standalone game version card: Gaunter O'Dimm

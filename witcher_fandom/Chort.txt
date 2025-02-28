@@ -1,33 +1,6 @@
 Chort
 Chort (Polish: Czart) is a relict monster that appears in The Witcher 3: Wild Hunt.
 A bestiary entry can be obtained by reading Beasts of the Tukaj Foothills.
-Quick Answers
-What is the significance of the Chort in The Witcher 3: Wild Hunt?
-						In The Witcher 3: Wild Hunt, Chort is a formidable relict monster, smaller yet as lethal as its kin, fiends and bumbakvetches. Vulnerable to Devil's Puffball and Relict oil, its significance is underscored in the 'Berengar's Blade' quest. The Chort's character draws from Slavic folklore, embodying a malevolent demon akin to the Christian devil.
-					
-						Provided by: Fandom
-					
-How does the size of a Chort compare to other monsters in The Witcher universe?
-						In The Witcher 3: Wild Hunt, Chorts are relict monsters that are smaller in size compared to fiends and bumbakvetches. However, their smaller stature does not diminish their danger. Residing in ancient, dark woods, Chorts are recognized as some of the most perilous monsters.
-					
-						Provided by: Fandom
-					
-What dangers does a Chort present to a Witcher?
-						Chorts pose a significant threat to witchers with their speed, brute strength, and rapid healing abilities. They attack their prey by pummeling, clawing, and smashing with their arms, and charge with uncontrollable speed. Direct combat is not recommended for a witcher, as chorts are not weak to fire but highly vulnerable to burns.
-					
-						Provided by: Fandom
-					
-How can one obtain a bestiary entry for the Chort in The Witcher 3?
-						To gain a bestiary entry for the Chort in The Witcher 3: Wild Hunt, players need to read 'Beasts of the Tukaj Foothills'. This provides insights into the Chort's traits and battle strategies.
-					
-						Provided by: Fandom
-					
-What are the stats for a Chort in Witcher 3 and how do they translate to DND?
-						In The Witcher 3: Wild Hunt, Chorts are relict monsters characterized by their speed, brute strength, and rapid healing. Despite being smaller than fiends, they are dangerous adversaries. They employ their arms for pummeling, clawing, and smashing prey, and can charge with remarkable speed. Translating this to DND, Chorts would have high strength, dexterity, and constitution stats, along with abilities for rapid healing and potent melee attacks.
-					
-						Provided by: Fandom
-					
-{"@context":"https:\/\/schema.org","@type":"FAQPage","name":"Chort","mainEntity":}
 Bestiary entry
 Chorts are smaller than fiends, true. But still big enough to kill.– Agnes Thistle, herbalist from the Black Forest.
 Chorts are the somewhat smaller kin of fiends and bumbakvetches. Yet any witcher who thinks their diminutive stature means they present no danger commits a grave error – the kind that can end his career permanently. These denizens of dark and ancient woods are some of the most dangerous monsters known to man.

@@ -7,34 +7,6 @@ Don't you fret about me, can take care of myself.
 - Milva, Gwent: The Witcher Card GameAudio version: Media:Milva voice line.ogg
 Maria Barring (d. 1268), better known as Milva (Elder Speech: red kite) by the dryads and Sor'ca (little sister) by the elves, was an archer from Upper Sodden and one of the few non-dryads tolerated in Brokilon; Queen Eithné herself being said to have been rather fond of her. She led four fictional crusades against the dryads in the hope of reducing the number of volunteers for their expeditions, but when her true part in this was discovered, she vanished.
 She later joined Geralt's company in the witcher's search for Ciri.
-Quick Answers
-What is the significance of Milva's nickname 'red kite' in the Witcher?
-						In the Witcher series, Milva's nickname 'Red Kite' is a testament to her exceptional skills as a bowman and her affiliation with the forest. The Red Kite is a bird of prey known for its keen sight and hunting prowess, much like Milva herself. This nickname reflects her sharp instincts, precision, and her ability to survive in the wild, making her a formidable member of Geralt's company.
-					
-						Provided by: Fandom
-					
-Why was Milva tolerated in Brokilon despite being a non-dryad?
-						Milva, a renowned human archer and guide, was one of the rare exceptions allowed into the dryad-protected forest of Brokilon. This was due to her unique role in aiding the dryads. She was often hired by enemies of Brokilon, who were unaware of her true loyalties, to lead expeditions against the dryads. However, Milva would cunningly lead these patrons into ambushes set by the dryads. This strategic deception made her a valuable ally to the dryads, earning her their trust and the privilege to enter their forest.
-					
-						Provided by: Fandom
-					
-What role does Milva play in Geralt's search for C in the Witcher series?
-						Milva, a skilled hunter and unparalleled archer, plays a crucial role in Geralt's search for Ciri in the Witcher series. Despite her initial indifference towards Geralt, she decides to join him and Dandelion on their journey towards Nilfgaard. Along the way, they encounter numerous challenges, including the encroaching war and burning cities. Milva's loyalty to the group is evident when she defends Cahir, a knight who saved her life, insisting that if Geralt sends him away, she would also leave the group. Her expertise and loyalty make her an invaluable member of Geralt's company.
-					
-						Provided by: Fandom
-					
-What are the fictional crusades led by Milva against the dryads in the Witcher series?
-						In the Witcher series, Milva, a renowned human archer and guide, led four fictional crusades against the dryads. However, these were not genuine attacks. Unbeknownst to those who hired her, Milva was actually allied with the dryads. She would lead her patrons into ambushes set up by the dryads, effectively reducing the number of volunteers for their expeditions. This clever strategy showcases Milva's cunning and loyalty to the dryads.
-					
-						Provided by: Fandom
-					
-Why did Milva vanish after her true part in the crusades was discovered in the Witcher series?
-						In the Witcher series, Milva vanished after her true part in the crusades was discovered because she was trying to reduce the number of volunteers for the expeditions. When her actions were found out, she chose to disappear to avoid any potential consequences. Later on, she joined Geralt's company in his search for Ciri.
-					
-						Provided by: Fandom
-					
-{"@context":"https:\/\/schema.org","@type":"FAQPage","name":"Milva","mainEntity":}
-Biography
 
 Early life
 Milva came from a long line of hunters that lived in Upper Sodden, though she wasn't initially trained by her father until her brother died in an accident, despite taking down her first roe deer at only 11. After her father passed away, her mother re-married but Milva didn't get along with her stepfather, who would make advances on Milva when her mother wasn't looking. Finally fed up with his unwanted advances and refusal to back off, she one day took a rake to him, knocking him out, and then kicked him several times. A couple days later, he was still lying and spitting blood, so Milva, at 16 years old, ran off, not daring to see if he survived. She later heard rumors he had in fact died, and her mother too shortly after.
@@ -73,10 +45,3 @@ In The Witcher, she's mentioned by Dandelion.
 In The Witcher 3: Wild Hunt, she appears as a gwent card.
 Gallery
 1st Polish edition cover2nd Polish edition coverWiedźmin: Gra WyobraźniIllustration by Denis Gordeev for Russian edition of Baptism of FireIllustration by Denis Gordeev for Russian edition of Baptism of FireIllustration by Denis Gordeev for Russian edition of Baptism of FireThe Witcher 3: Wild Hunt gwent card artGwent: The Witcher Card Game card artIn Netflix's The Witcher
-References
-↑ 1.0 1.1 1.2 1.3 1.4 1.5 1.6 1.7 Baptism of Fire
-↑ The Tower of the Swallow
-↑ The book states "5 score". In English, a score is defined as "20", and in Time of Contempt, Geralt refers to the "5 score crowns" from a group of merchants as 100 crowns proving that the definition holds up in the universe of the witcher.
-↑ The Lady of the Lake
-External links
- See the GWENT standalone game version card: Milva

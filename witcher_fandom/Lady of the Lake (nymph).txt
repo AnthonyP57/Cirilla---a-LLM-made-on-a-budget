@@ -2,34 +2,7 @@ Lady of the Lake (nymph)
 The righteous shall be recompensed.
 - Gwent: The Witcher Card GameAudio version: Media:Lady of the Lake voice line.mp3
 The Lady of the Lake is a powerful being, considered by some to be a vila or nymph, worshipped by both vodyanoi and humans in places of chilvalry like the surroundings of Vizima in Temeria and the whole duchy of Toussaint.
-Quick Answers
-What is the significance of the Lady of the Lake in the Witcher series?
-						In the Witcher series, the Lady of the Lake is a key character in both the novels by Andrzej Sapkowski and the video game franchise by CD PROJEKT RED. She is the central character of the fifth novel in the saga. As a nymph, her character may have influenced others in the series. She is also mentioned in The Witcher 3: Wild Hunt.
-					
-						Provided by: Fandom
-					
-Where can the Lady of the Lake be found in the Witcher universe?
-						In the Witcher universe, the Lady of the Lake resides near Murky Waters in Temeria. Her presence is marked by an altar on the Lakeside, where local vodyans worship. Geralt, the protagonist, receives vital clues from this monument to gather appropriate offerings for the Lady of the Lake.
-					
-						Provided by: Fandom
-					
-How is the Lady of the Lake worshipped by the inhabitants of Murky Waters?
-						Inhabitants of Murky Waters, including local vodyans and lake monsters, worship the Lady of the Lake, a revered nymph. They express their esteem through a monument erected in her honor on the Lakeside. The Lady of the Lake, previously served by many knights, appointed Geralt as her champion and presented him with a silver sword.
-					
-						Provided by: Fandom
-					
-What is the relationship between the Lady of the Lake and the Vodyanoi?
-						The Vodyanoi, inhabitants of the Underwater City, revere the Lady of the Lake in the Witcher series. She plays a significant role in resolving a dispute between the Vodyanoi and Murky Waters villagers. The Lady of the Lake requests the Witcher to promote peace between the factions and secure a symbolic gift from each as a token of their goodwill. The Vodyanoi also worship Dagon, a creature residing at the lake's bottom.
-					
-						Provided by: Fandom
-					
-What role does the Lady of the Lake play in the duchy of Toussaint?
-						In the duchy of Toussaint, the Lady of the Lake is a revered figure. Recognized as a vila or nymph, she possesses magical abilities and is worshipped by both vodyanoi and humans. Her time is spent in a shallow, lily-pad adorned body of water.
-					
-						Provided by: Fandom
-					
-{"@context":"https:\/\/schema.org","@type":"FAQPage","name":"Lady of the Lake (nymph)","mainEntity":}
-The Witcher
+
 The Lady of the Lake is worshipped by both the inhabitants of Murky Waters and the Vodyanoi with whom they grudgingly co-exist. She spends her time in a shallow, lily-pad filled covered inlet on Black Tern Island and can be consulted there on various matters relating to Destiny, her servants, quests for the Holy Grail and the relations between the locals.
 Even goddesses get lonely. It is tough being the object of adulation and reverence. While most locals will tell you that they love the Lady, they would never dream of actual physical contact with her. In this regard, Geralt has no such qualms and can generously provide companionship of the more mundane kind.
 To obtain the dialog option to romance her, Geralt must first speak to the Hermit after speaking to her and ask him about the grail. Failing to do so makes the romance option unavailable. To get the romance card, Geralt must first tell the Lady of the Lake that he had "a revelation and to embark on a mission". This will cause the Lady's hackles to go up and she'll stop him then and there (having only just told him that she takes a dim view of grail quests), but then the witcher says claims it was only "A jest..." and they continue their conversation.

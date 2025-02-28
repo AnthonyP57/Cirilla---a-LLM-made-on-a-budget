@@ -23,7 +23,3 @@ Magical defense:
 Yes (if targeted at a living being)
 Effect:
 Shots a lightning ball that explode at the nearest obstacle; the explosion sets flammable materials aflame and deals base 4d6 damage + 1d6 for each 5 additional Power Points spent (max. 20 more). The base radius at 10 PP is 5 meters (Dodge difficulty: 2), the maximum radius at 30 PP is 10 meters (Dodge difficulty: 6). Only a person within the explosion radius can perform a Dodge, they cannot if they were targeted (are at the explosion's centre).
-References
-↑ 1.0 1.1 Season of Storms
-↑ Wiedźmin: Gra Wyobraźni
-↑ 3.0 3.1 Oko Yrrhedesa

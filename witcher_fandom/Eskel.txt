@@ -1,40 +1,10 @@
 Eskel
-Sub-Pages:
-Main
-Netflix series
+
 Spoilers from the newest book, Rozdroże kruków to follow!
 And the lord barons and village elders have their heads full of the war and don't have the time to defend their subjects. They have to hire us. It's true. But from what Triss has been telling us all these evenings, it seems the conflict with Nilfgaard is more serious than that, not just some local little war.
 - pg. 57, Blood of Elves (U.K. edition)
 Eskel, born as Esau Kelly Kaminski, was a witcher of the School of the Wolf, trained by Master Vesemir at Kaer Morhen, and active during the 13th century. As the sorceress Triss Merigold noted, Eskel emitted a strong magic aura. Though not as famous as his peer Geralt of Rivia, Eskel earned a solid reputation as a professional, reliable witcher, known for his kind and easygoing nature.
 Eskel and Geralt, the White Wolf, were like brothers. They grew up together, shared in the Trials, and enjoyed countless moments of camaraderie. A close friend to the younger Lambert and Coën of Poviss, Eskel viewed Vesemir not only as a mentor but also as a father figure. Every winter, he returned to Kaer Morhen to exchange stories and rejuvenate before heading back out on The Path.
-Quick Answers
-Who trained Eskel in the School of the Wolf?
-						Eskel, a character from the Witcher series, was trained at the School of the Wolf by Vesemir. He was a close friend of Geralt of Rivia and was known for his strong magic aura and his reliability as a witcher.
-					
-						Provided by: Fandom
-					
-What kind of aura does Eskel emanate according to Triss Merigold?
-						Triss Merigold, a sorceress, observed that Eskel, a witcher from the School of the Wolf, radiates a potent magic aura. His hands, in particular, emit a powerful magic, surpassing even Geralt of Rivia, his close companion. This magic aura induces a pleasing, intense vibration in mages.
-					
-						Provided by: Fandom
-					
-How is Eskel's relationship with Geralt of Rivia described?
-						Eskel and Geralt of Rivia share a brotherly bond, having grown up and faced the Trials together. Eskel, though less renowned than Geralt, is respected as a dependable witcher with a kind and easygoing nature. He maintains a polite demeanor even in disagreements, often avoiding eye contact in such situations.
-					
-						Provided by: Fandom
-					
-What is Eskel's reputation as a witcher?
-						Eskel, a witcher from the School of the Wolf, is recognized for his potent magic aura, professional conduct, and dependability. Despite being less renowned than Geralt of Rivia, his skill and experience are on par with Geralt's. Known for his kind and calm demeanor, Eskel shares a brotherly bond with Geralt and is a close friend to Lambert and Coën of Poviss. Vesemir is both a mentor and father figure to him. His heroics include saving a child from a basilisk, demonstrating his efficiency and expertise as a witcher.
-					
-						Provided by: Fandom
-					
-Who plays the character of Eskel in the Witcher Netflix series?
-						In the Witcher Netflix series, actor Basil Eidenbenz plays Eskel, a witcher from the School of the Wolf and a close ally of Geralt of Rivia. His training took place at Kaer Morhen under Vesemir's guidance.
-					
-						Provided by: Fandom
-					
-{"@context":"https:\/\/schema.org","@type":"FAQPage","name":"Eskel","mainEntity":}
-Biography
 
 Early life
 "This is my story, not yours. You must let me finish telling it." — This article/section is a stub. You can help Witcher Wiki by expanding it.
@@ -120,21 +90,3 @@ Trivia
 While in Rozdroże kruków it's revealed that Eskel coined his name himself by combining first syllables of his real names, in real world name "Eskel" derives from Old Norse "Áskell", formed from áss ("god") and ketill ("cauldron" or "helmet"). This may be linked to Andrzej Sapkowski's penchant for foreign-sounding names.
 Gallery
 Concept artEskel, before his "accident"Eskel with his scarEskel, the fencerEskel in 1232Eskel in Netflix's The Witcher
-Footnotes
-↑ Assuming that Eskel graduated Kaer Morhen in the same year as Geralt.
-↑ As with other dates in the first game, 1232 provided in the Price of Neutrality doesn't align with other sources. By the time of that story, the Wolf School was already inactive, with only a few witchers still alive. This contrasts with the information in Blood of Elves, according to which the last witchers were trained in Kaer Morhen about 25 years before the action of the novel, and Rozdroże kruków, which had Geralt, Eskel's childhood friend of similar age, leave the Keep for the first time in 1229, which means that Deidre could not be born before that date; any earlier date of the Curse of the Black Sun would also make Syanna way older than she appears in Blood and Wine expansion. Taking all of this into consideration, 1232 as the date of the adventure has to be excluded.
-References
-↑ 1.0 1.1 Rozdroże kruków
-↑ 2.0 2.1 2.2 2.3 2.4 2.5 2.6 2.7 Blood of Elves
-↑ 3.0 3.1 3.2 3.3 3.4 The Witcher 3: Wild Hunt
-↑ The Last Wish
-↑ 5.0 5.1 The Lady of the Lake
-↑ The Price of Neutrality premium module
-↑ Szpony i kły
-↑ A Fractured Land: Tales of the Northern Realms
-↑ The Witcher
-↑ The Witcher 3: Wild Hunt - The Sword Of Destiny trailer
-↑ Gwent: The Witcher Card Game
-↑ "KUL 1998" – 1998 Interview with Andrzej Sapkowski
-External links
- See the GWENT standalone game version card: Eskel

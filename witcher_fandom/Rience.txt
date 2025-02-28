@@ -6,24 +6,6 @@ Netflix series
 When I finish with 'em, there'll be nothin' left to bury.
 - Rience, Gwent: The Witcher Card GameAudio version: Media:Rience voice line.ogg
 Rience (d. November 1267) was a mage who was instructed to find Ciri after she disappeared during the slaughter of Cintra. While powerful, he wasn't nearly as powerful as his master, Vilgefortz.
-Quick Answers
-Why does Rience want to find Ciri in The Witcher series?
-						In The Witcher series, Rience is on a mission to find Ciri because he is serving a more powerful mage who remains unknown. The Northern Kingdoms believe that Rience's search for Ciri indicates that Emhyr var Emreis of Nilfgaard has plans for her, possibly even marriage. Furthermore, it's revealed that Ciri is of Elder Blood, the last offspring of Falka's bloodline, which makes her a person of significant interest in the world of The Witcher.
-					
-						Provided by: Fandom
-					
-What led to Rience's expulsion from Ban Ard Academy?
-						Rience was expelled from Ban Ard Academy due to his involvement in forbidden arts. The academy has strict boundaries and does not tolerate students who delve too deep into prohibited practices, as exemplified by Rience's case.
-					
-						Provided by: Fandom
-					
-How did Rience become involved with the Kaedwenian Secret Service?
-						Rience became involved with the Kaedwenian Secret Service after being approached by their recruiters outside of his school. He accepted their offer and was likely trained as an assassin. This marked the beginning of his journey into the world of espionage and intrigue, setting the stage for his later involvement in the events of 'The Witcher'.
-					
-						Provided by: Fandom
-					
-{"@context":"https:\/\/schema.org","@type":"FAQPage","name":"Rience","mainEntity":}
-Biography
 
 Early life
 As a young student of magic, he attended Ban Ard Academy for two years but was expelled for petty theft. Outside the school, he was greeted by recruiters of the Kaedwenian Secret Service and accepted their offer, likely being trained as an assassin.
@@ -47,8 +29,3 @@ Notes
 In the early version of The Witcher story, Rience was going to be one of the main villains, but after the decision to set the game story after the book saga, he was no longer feasible for that role as he was dead by that time.
 Gallery
 Rience interrogating DandelionGeralt fighting RienceCiri kills Rience on Tarn MiraRience's model from 2003 build of The WitcherIn Netflix's The Witcher
-References
-↑ 1.0 1.1 1.2 1.3 Blood of Elves
-↑ 2.0 2.1 2.2 2.3 2.4 Time of Contempt
-↑ The Tower of the Swallow
-↑ The Witcher's video game history | The Witcher 1 Documentary

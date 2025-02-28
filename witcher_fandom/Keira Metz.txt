@@ -6,34 +6,7 @@ Netflix seriesStore
 There are times when a woman should simply not explain her decision. That goes doubly for sorceresses.
 - Keira Metz in The Witcher 3: Wild Hunt
 Keira Metz of Carreras was a sorceress and former advisor to King Foltest of Temeria, a role that had also been held by Triss Merigold and Fercart.
-Quick Answers
-What role did Keira Metz play in the court of King Foltest?
-						Keira Metz, a sorceress hailing from Carreras, functioned as a key advisor to King Foltest of Temeria. Her role paralleled that of Triss Merigold and Fercart, who also served as advisors. Keira's position placed her at the heart of Temerian politics, marking her as a prominent figure.
-					
-						Provided by: Fandom
-					
-What is known about Keira Metz's early life and education?
-						Born in Carreras, Keira Metz began studying magic at the Academy of Aretuza from a young age, eventually becoming a sorceress. She served as an advisor to King Foltest in 1267 and was deeply involved in politics, being a founding member of the Lodge of Sorceresses.
-					
-						Provided by: Fandom
-					
-What major events in The Witcher series involve Keira Metz?
-						Keira Metz, a sorceress of Carreras, served as an advisor to King Foltest of Temeria. She was present at the Thanedd banquet and participated in the Thanedd Coup. Subsequently, she became a member of the Lodge of Sorceresses. In The Witcher 3: Wild Hunt, she played a crucial role by aiding Geralt in his quest for Ciri and pursued a magic lamp from an elven mage. She also had an association with Lambert, a fellow witcher.
-					
-						Provided by: Fandom
-					
-What choices involving Keira Metz can players make in The Witcher 3: Wild Hunt?
-						In The Witcher 3: Wild Hunt, players interact with Keira Metz through various quests. Post 'Hunting a Witch' and 'Wandering in the Dark', Geralt can accept Keira's invite to her home, leading to 'A Towerful of Mice' quest where he assists her in lifting an island curse. Subsequent choices can influence her relationship with Lambert and her bargaining plans with Radovid.
-					
-						Provided by: Fandom
-					
-How is Keira Metz portrayed in the Witcher Netflix series?
-						In the Witcher Netflix series, Keira Metz, portrayed by Safiyya Ingar, is a sorceress with straw blonde hair and hazel eyes. She serves as an advisor and mage, affiliated with King Foltest of Temeria, the Lodge of Sorceresses, and the Temerian Royal Council. She also has a connection with Lambert, though the specifics of their relationship are not clearly defined.
-					
-						Provided by: Fandom
-					
-{"@context":"https:\/\/schema.org","@type":"FAQPage","name":"Keira Metz","mainEntity":}
-Biography
+
 Keira was born in the city of Carreras, although little is known about her early life. From a young age, Keira studied at the Academy of Aretuza where she was trained in the arts of magic and eventually became a sorceress.
 Thanedd banquet
 In early 1267, Keira was serving as King Foltest's advisor when she and other mages in the North learned some of their fellow mages were planning to betray the Brotherhood of Sorcerers for Nilfgaard. Armed with this information, a conclave was called on Thanedd Island under the pretense of figuring out what they should do in regards to their positions as advisors to various rulers. In reality, Keira along with several others, including Philippa Eilhart and Sabrina Glevissig, planned a coup of their own to try and prevent the Nilfgaard supporters from putting their coup into play first.
@@ -98,10 +71,3 @@ Videos
 The Witcher 3 Wild Hunt - Conclusion 3 - Fate of Keira Metz - A New FriendThe Witcher 3 Wild Hunt - Conclusion 3 - Fate of Keira Metz - A Savage EndThe Witcher 3 - Keira Metz Romance and Sex (Romance and Sex Scene)
 Gallery
 Keira executed by RadovidKeira and Lambert traveling togetherKeira's gwent card artGwent standalone card artIn Netflix's The Witcher
-References
-↑ 1.0 1.1 1.2 1.3 Time of Contempt
-↑ 2.0 2.1 Baptism of Fire
-↑ The Lady of the Lake
-↑ The Witcher 3: Wild Hunt
-External links
- See the GWENT standalone game version card: Keira Metz

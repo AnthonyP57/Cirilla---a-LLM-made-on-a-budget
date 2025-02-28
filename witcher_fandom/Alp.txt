@@ -1,27 +1,6 @@
 Alp
 Alps or alpors are members of a vampiric race which inhabits the lands of the Northern Kingdoms since the Conjunction of the Spheres which occurred around 230s BR.
-Quick Answers
-What are the similarities between Alps, Mulas, and Bruxae?
-						Alps, Mulas, and Bruxae are intelligent vampire species sharing similar physiology, including pointed ears like elves. They resist sunlight, but overexposure darkens their skin. Silver is harmful to them. Despite their strong resemblance to Bruxae, Alps are deemed less potent and have a preference for preying on sleep.
-					
-						Provided by: Fandom
-					
-What is the origin of the Alp monster in the Northern Kingdoms?
-						Originating from Germanic folklore, the Alp monster is a vampiric entity known for attacking sleeping women and causing mischief on farms. Traditionally, alps were male, with 'mara' being the female equivalent. In The Witcher, however, alps are exclusively female. 'Alp' translates to 'elf' in German.
-					
-						Provided by: Fandom
-					
-What are the weaknesses of the Alp monster?
-						The Alp, a vampire species, has several weaknesses. It is susceptible to silver and Vampire Oil, and can be caught off guard by surprise attacks. Additionally, a blade coated in acrid oil, which is acidic, can enhance the likelihood of overcoming an Alp. The Alp's saliva has the ability to cause sleep and nightmares.
-					
-						Provided by: Fandom
-					
-How does the Alp monster react to silver?
-						The Alp, a vampire class monster, is susceptible to silver. This creature, often confused with others due to numerous myths, attacks unexpectedly, trying to daze victims before consuming their blood. Despite its boldness and stun resistance, its sensitivity to silver makes it vulnerable to those wielding this metal.
-					
-						Provided by: Fandom
-					
-{"@context":"https:\/\/schema.org","@type":"FAQPage","name":"Alp","mainEntity":}
+
 Physiology
 In many ways, alps are similar to two other species of intelligent vampires, mulas and bruxae, although seemingly less powerful than the latter. Silver used in form of weapons or chains, on the other hand, can hurt them and so they tend to avoid it. While resistant to sun along with mulas, bruxae, and Higher Vampires, they tan to almost black if affected by it too much. They have pointed ears, similar to elves.
 They prefer to prey on sleeping people and creatures. They put targets to sleep by injecting a somniferous substance causing nightmares.
@@ -59,10 +38,3 @@ Loosely inspired by Germanic folklore, alps are a race of vampiric monsters whom
 The German word for nightmare "Albtraum" is the connection of "Alb" and "dream", referring to a dream induced by an Alp.
 Gallery
 model in The Witchercensored AlpAlp in Blood and Wine expansion
-References
-↑ Blood and Wine expansion
-↑ Blood and Wine expansion: Alps – Bruxae's Dangerous Cousins
-↑ The Last Wish
-↑ Baptism of Fire
-↑ The Tower of Fools
-↑ Wiedźmin: Gra Wyobraźni

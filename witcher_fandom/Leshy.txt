@@ -1,33 +1,7 @@
 Leshy
 A leshy (Polish: Leszy, in English sometimes spelled Leshii, Leszi, or Lessun), also known as a leshen or spriggan in CD PROJEKT RED's The Witcher franchise, is a forest monster that is described as something that "lives only to kill". When they kill something or someone, they do not leave much for any carrion eaters.
 If a human spied a leshy in the forest, it was most likely that he had lost his way. Folk tales told that to find his path again, he had to turn all his clothing inside-out.
-Quick Answers
-What is the significance of a Leshy in The Witcher franchise?
-						A Leshy, also known as Leshen or Spriggan, is a lethal forest monster in The Witcher franchise. Originating from the Slavic term for 'forest', a leshy encounter usually signifies a lost human. They are rare, unable to reproduce, and have existed since the Conjunction of the Spheres. Geralt of Rivia's adventure in The Witcher 2: Assassins of Kings starts with a contract on an ancient leshy.
-					
-						Provided by: Fandom
-					
-How does one find their path again after encountering a Leshy?
-						Upon encountering a Leshy and losing one's way, folk tales advise turning all clothing inside-out to regain the path. If marked by the Leshy, the individual must leave its territory or face death to break the Leshy's curse of immortality. If lost on a mountain path, one should ascend to the ruins at the end to reconnect with the path, disregarding distractions or confrontations with creatures like harpies.
-					
-						Provided by: Fandom
-					
-What is the behavior of a Leshy towards carrion eaters?
-						The Leshy, a creature from folklore, is associated with aiding hunters and guiding travelers. Although no direct interaction with carrion eaters is mentioned, its role in hunting suggests a potential beneficial relationship with these creatures, possibly aiding in the disposal of hunted prey's remains.
-					
-						Provided by: Fandom
-					
-What is the difference between a Leshy and a Leshen in mythology?
-						The Leshy, known as Leshen or Spriggan in The Witcher, is a forest monster that kills ruthlessly. Some perceive the Leshen as a protector against overharvesting of nature, while others view it as a post-Conjunction creature. In Slavic mythology, the Leshy is a forest deity, humanoid and capable of changing size and height. It's often depicted with horns, accompanied by wolves and bears, and is known to mislead travelers and kidnap children.
-					
-						Provided by: Fandom
-					
-What is the connection between a Leshy and a Wendigo in Witcher 3?
-						In The Witcher 3: Wild Hunt, a Leshy, also referred to as a Leshen or Spriggan, is depicted as an ancient, powerful forest spirit that 'lives only to kill'. It has a deer skull for a head and tree-like limbs, and can summon crows or wolves for assistance. There is no established link between a Leshy and a Wendigo within the game.
-					
-						Provided by: Fandom
-					
-{"@context":"https:\/\/schema.org","@type":"FAQPage","name":"Leshy","mainEntity":}
+
 Wiedźmin: Gra Wyobraźni
 In Wiedźmin: Gra Wyobraźni, leshy is described as a forest-dwelling, iron-resistant, highly intelligent monster. For unknown reasons, many peasants consider him to be a spirit that protects the forest. In reality, it is a very dangerous creature that hunts woodland creatures and lone wanderers. It has the ability to polymorph.
 In its natural form, it is a wildcat-sized creature that looks like a cross between a wildcat and a bear, with mighty fangs and sharp claws. It mostly lurks among the tree branches, from which it quickly jumps on its victims. It usually devours the whole prey. Its mightiest weapon is the ability to shift shape. It can morph into a humanoid being that looks like a harmless, old man or into a tree branch that is practically identical to real ones.

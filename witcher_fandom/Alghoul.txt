@@ -1,28 +1,5 @@
 Alghoul
 Alghouls are a sub-species of necrophage, and the biological cousins of ghouls, distinguished by their darker visage, larger size and strength, colourings, and intelligence. After the Northern Wars, their numbers spread rapidly through the Northern Kingdoms, due to lack of control and widespread famine which attracted the corpse-eaters.
-Quick Answers
-What distinguishes an Alghoul from a regular ghoul in terms of physical characteristics?
-						Alghouls, a sub-species of necrophage, are biologically related to ghouls. They are identifiable by their darker color, larger size, and greater strength. The key distinction lies in their intelligence, as alghouls, unlike ghouls and graveirs, can plan and strategize, making them a greater threat. They typically lead ghoul packs, posing a danger to lone travelers, caravans, and farmsteads.
-					
-						Provided by: Fandom
-					
-What caused the rapid spread of Alghouls through the Northern Kingdoms?
-						The swift proliferation of Alghouls in the Northern Kingdoms resulted from the aftermath of the Northern Wars. The ensuing famine and lack of control attracted these necrophages, leading to their rapid spread.
-					
-						Provided by: Fandom
-					
-What makes human flesh irresistible to Alghouls?
-						Alghouls develop an insatiable craving for human flesh after years of consuming corpses. This makes human flesh irresistible to them, leading them to prey on the living. They are often found in areas with fresh bodies like cemeteries and battlefields. Alghouls also exhibit greater intelligence than ghouls, capable of planning and leading ghoul packs.
-					
-						Provided by: Fandom
-					
-How does an Alghoul's diet evolve over time?
-						As a sub-species of necrophage, Alghouls are primarily corpse-eaters. Their diet evolves in response to the availability of corpses in their environment. For instance, their population surged after the Northern Wars, when widespread famine led to an increase in available corpses.
-					
-						Provided by: Fandom
-					
-{"@context":"https:\/\/schema.org","@type":"FAQPage","name":"Alghoul","mainEntity":}
-The Witcher
 
 Journal Bestiary entry
 Alghouls are ghouls which had been devouring corpses for so many years that human flesh becomes irresistible and they begin to prey on the living. They are seen in crypts and on battlefields, frequently surrounded by ghouls. Simple folk do not notice the differences between these two types of scavengers - unlike witchers, who know that the alghoul is a more aggressive and challenging opponent.
@@ -64,5 +41,3 @@ The name of the alghoul could be a reference of the star Algol in the Perseus co
 According to John of Brugge, alghouls are compared to the "panthera tigris that in Zerrikania dwells". Panthera tigris is the binomial nomenclature for the tiger.
 Gallery
 The Witcher 3: Wild Hunt concept artRender of angry alghoul (Witcher (PC))Alternate bestiary imageOzzrel the Alghoul
-References
-↑ 1.0 1.1 The Witcher 3: Wild Hunt

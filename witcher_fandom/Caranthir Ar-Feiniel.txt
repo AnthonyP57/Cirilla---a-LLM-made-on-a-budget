@@ -2,28 +2,6 @@ Caranthir Ar-Feiniel
 Cáemm Aen Elle!
 - Caranthir, Gwent: The Witcher Card GameAudio version: Media:Caranthir voice line.ogg
 Caranthir Ar-Feiniel, also once known as the Golden Child, was a navigator of the Wild Hunt, and was one of Eredin Bréacc Glas' most trusted men.
-Quick Answers
-What was Caranthir Ar-Feiniel's original name before joining the Wild Hunt?
-						Caranthir Ar-Feiniel, a key figure in the Wild Hunt and trusted ally of Eredin Bréacc Glas, was originally known as the Golden Child.
-					
-						Provided by: Fandom
-					
-How did Caranthir Ar-Feiniel become a navigator of the Wild Hunt?
-						Born from a project involving powerful elves, Caranthir Ar-Feiniel developed exceptional time and space manipulation abilities. These skills led him to become the primary navigator of the Wild Hunt, facilitating their travel beyond their home world. Caranthir was recruited into the Hunt after successfully passing Eredin's trials, despite Eredin's initial indifference.
-					
-						Provided by: Fandom
-					
-Why was Caranthir Ar-Feiniel recruited into the Wild Hunt despite Eredin's indifference?
-						Caranthir Ar-Feiniel joined the Wild Hunt due to his unique power to manipulate time and space, a product of Avallac'h's selective breeding. He passed Eredin's trials, leading to his recruitment despite Eredin's initial indifference. His pragmatic and secretive traits, as noted by Ciri, may have contributed to his acceptance.
-					
-						Provided by: Fandom
-					
-What abilities did Caranthir Ar-Feiniel possess due to his unique elven heritage?
-						Born from a project of powerful elves, Caranthir Ar-Feiniel showcases exceptional abilities in time and space manipulation. He serves as the primary navigator for the Wild Hunt, transporting them beyond their home world. As a potent mage, he relies on his spells and supernatural powers during combat, wielding a steel staff with lethal speed and agility.
-					
-						Provided by: Fandom
-					
-{"@context":"https:\/\/schema.org","@type":"FAQPage","name":"Caranthir Ar-Feiniel","mainEntity":}
 The Witcher 3: Wild Hunt
 He was a product of Avallac'h's attempt of selective breeding between elven couples gifted with the ability to manipulate time and space. While he was talented, he became a criminal and joined Eredin in the Wild Hunt. According to Avallac'h, despite Eredin's indifference towards Caranthir, he was eventually recruited into the Hunt for having passed the trials Eredin had set up for him. Described by Ciri to be "secretive and pragmatic", one of the notes found in Avallac'h's laboratory suggested he also had a "rash temper", a "tendency to take foolish risks" before he was enlisted into the Hunt, as well as having some pride in his capabilities. During the hunt for Ciri, Caranthir explored the hideout of Avallac'h. He later participated in the battle at Kaer Morhen. He dueled against Eskel, exploiting his teleportation magic to nearly kill the witcher, until Ciri stopped him, and he was called away before he could finish the duel. After Imlerith killed Vesemir, Ciri used a magical scream that caused all those in the affected area to suffer and eventually die. Caranthir opened a portal away from Kaer Morhen and dragged his king through it.
 When the Wild Hunt was lured to Undvik, Caranthir used his magic to freeze Geralt. Ciri confronted the general and was able to break his staff, allowing Geralt to break free from the ice. Caranthir tried to abduct the seemingly unconscious Ciri, but she teleported away, and Caranthir fought against Geralt. Geralt impaled the Navigator, but before he could die, he grabbed Geralt and teleported them deep underwater, where Caranthir continued to bleed out and sank into the depths. Geralt swam to the surface and survived.
@@ -47,8 +25,3 @@ Videos
 The Witcher 3 Caranthir Boss Fight (Hard Mode)
 Gallery
 Caranthir wallpaperEarly sketches by Jan MarekFinal concept art of Ar-FeinielConcept thumbnails for Caranthir's gear.Caranthir battling Eskel at Kaer Morhen.Caranthir proving to be too much for Eskel.Gwent: The Witcher Card Game card art
-References
-↑ Gwent: The Witcher Card Game
-↑ The official Prima game guide
-External links
- See the GWENT standalone game version card: Caranthir

@@ -3,34 +3,6 @@ I'm a medic. I tend to know what I'm doing when I prescribe something.
 - Shani, Hearts of Stone expansionAudio version: Media:Shani voice line.ogg
 Shani (d. 1340) was a medic, having studied at Oxenfurt Academy. She participated in the Battle of Brenna as part of the staff of Milo "Rusty" Vanderbeck's field hospital and, many years later, she became the Dean of the Department of Medicine of her alma mater.
 She died in 1340, 72 years after the Battle of Brenna, at 90 years old.
-Quick Answers
-What role did Shani play in the Battle of Brenna?
-						Shani played a vital role in the Battle of Brenna in March 1268, serving in a field hospital under Milo 'Rusty' Vanderbeck. Despite her youth, she effectively managed the demanding and gruesome conditions, providing essential medical aid to the wounded, contributing to the victory of the Northern Kingdoms.
-					
-						Provided by: Fandom
-					
-How did Shani become the Dean of the Department of Medicine at Oxenfurt Academy?
-						Shani, initially a medical student at Oxenfurt Academy, demonstrated her medical proficiency at a young age. She served in Milo 'Rusty' Vanderbeck's field hospital at the Battle of Brenna. Her exceptional skills and commitment to the field led to her appointment as the Dean of the Department of Medicine at Oxenfurt Academy.
-					
-						Provided by: Fandom
-					
-What is the relationship between Shani and Dandelion in the Witcher series?
-						In the Witcher series, Shani and Dandelion are old friends. Shani, a medical student, organizes a gathering to honor Dandelion, a renowned bard. Their interactions significantly influence the progression of various quests. Dandelion also visits Shani's house, further highlighting their close relationship.
-					
-						Provided by: Fandom
-					
-What age was Shani when she died and what year was it?
-						Born around 1250, Shani from The Witcher series was approximately 17 years old in 1267, as stated by Philippa Eilhart in Blood of Elves. Her death is recorded in the year 1340 in The Lady of the Lake.
-					
-						Provided by: Fandom
-					
-What was Shani studying as a third year medical student at Oxenfurt Academy?
-						Shani, a character from the Witcher series, was studying medicine at Oxenfurt Academy in 1267. Her education paved the way for her future roles as a medic in the Battle of Brenna and eventually as the Dean of the Department of Medicine.
-					
-						Provided by: Fandom
-					
-{"@context":"https:\/\/schema.org","@type":"FAQPage","name":"Shani","mainEntity":}
-Biography
 
 Studying at the Academy
 In 1267, Shani was a 17 year old, third year medical student attending Oxenfurt Academy. It's unclear how she and Dandelion met, but the two were friendly enough that when the bard came by to visit that year, he called her over from where she was sitting and the two pretended to flirt as Dandelion was being followed by some of Sigismund Dijkstra's spies. He then asked her to go and deliver a message to the witcher Geralt, who was hiding in Oxenfurt in his hunt to find the mage, Rience, and the two split off.
@@ -115,11 +87,3 @@ Videos
 Shani and Carmen Catfight over Geralt's Favor Party and Sex with MedicThe Source Shani's Lover (1st sex with Shani)
 Gallery
 Concept art of Shani for The Witcher 2Render of Shani for The Witcher 3Promotional image for Hearts of StoneShani in The Witcher 3Gwent standalone card art: ShaniShani's journal portrait in The WitcherShani standing by the fire inside the Outskirts Inn in The WitcherCensored romance cardSecond censored romance cardShani's journal portrait (romance) in The WitcherShani in her nightie
-References
-↑ 1.0 1.1 The Witcher 3: Wild Hunt - Hearts of Stone expansion
-↑ In The Lady of the Lake she dies in 1340
-↑ According to Philippa Eilhart in Blood of Elves, Shani was about 17 years old in 1267, making her born around 1250.
-↑ 4.0 4.1 The Lady of the Lake
-↑ Blood of Elves
-External links
- See the GWENT standalone game version card: Shani

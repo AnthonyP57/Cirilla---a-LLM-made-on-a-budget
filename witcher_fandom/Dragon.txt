@@ -1,34 +1,6 @@
 Dragon
 Dragons are flying monsters classified as draconids, which are said to represent the forces of Chaos. Apart from cats, they are the only creatures known to absorb magical energy, and are drawn to hoarding gold.
 "True" dragons (or, rather, those known to science) include the black, green, red, white, and the often-considered mythical golden dragon. Their close relatives are classified as draconids.
-Quick Answers
-What are the different types of dragons in Witcher 3?
-						Dragons in Witcher 3 are a unique family of draconids, known for their size, strength, intelligence, and affinity for collecting gold and gemstones. Notable dragons include Myrgtabrakke, Ocvist, Ostreverg, Saesenthessis, Villentretenmerth, and Zerrikanterment. Other draconids feature Basilisks, Cockatrices, Forktails, Royal wyverns, Shrieker, Silver Basilisk, Slyzard, Slyzard Matriarch, and The Dragon of Fyresdal. Dragons are commonly classified into green, red, and black types, with a fourth, rarer type speculated.
-					
-						Provided by: Fandom
-					
-What is unique about the golden dragon in the Witcher universe?
-						In the Witcher universe, the Golden Dragon, or Draconis Aurum nobilis, is a mythical creature. Its unique characteristics include the ability to shape-shift into any living being, breathe fire or steam, and communicate via telepathy. The existence of these golden-skinned dragons as a separate race or rare mutations is still a subject of debate among experts.
-					
-						Provided by: Fandom
-					
-How are dragons related to the forces of Chaos in Witcher 3?
-						Dragons in Witcher 3 symbolize the forces of Chaos. They belong to a distinct draconid family, noted for their large size, two pairs of robust legs, and expansive wings and tail. These creatures are superior to their smaller counterparts in terms of strength, intelligence, and cunning. Dragons have the unique ability to absorb magical energy and have a penchant for accumulating gold. Their threat to cities and early settlers led to the emergence of witchers, who were specifically trained to combat them.
-					
-						Provided by: Fandom
-					
-What is the significance of dragons absorbing magical energy in the Witcher series?
-						Dragons in the Witcher series possess the unique ability to draw and absorb magical energy, a trait shared only with cats. They are instinctively drawn to magic intersections, often choosing them as resting spots. It's theorized that dragons utilize the absorbed Power for flight, given their large size and mass. However, the precise explanation for this behavior is yet to be conclusively determined.
-					
-						Provided by: Fandom
-					
-Why are dragons drawn to hoarding gold in the Witcher universe?
-						Dragons in the Witcher universe exhibit a universal trait of hoarding gold, gemstones, and other treasures, a characteristic deeply embedded in numerous legends. The exact cause of this behavior is yet to be determined. Dragon hunts, often monitored by the Jewelers' Guild, hint at a correlation between the dragons' treasure accumulation and human greed.
-					
-						Provided by: Fandom
-					
-{"@context":"https:\/\/schema.org","@type":"FAQPage","name":"Dragon","mainEntity":}
-History
 
 Early History
 According to legend, dragons were among the first creatures bestowed with intelligence. They ruled the Continent for centuries but did not establish kingdoms as humans and non-humans later would. Instead, dragons preferred solitary lives or companionship with a lifelong partner. Though spread across the Continent, dragons lived in specific regions based on their type.
@@ -72,20 +44,3 @@ Trivia
 It's possible the dragons (and their characteristics) were inspired by those in the role-playing game, Dungeons & Dragons, though the author has never stated outright if so. Furthermore, it may only be a loose inspiration, as there are a number of differences between the Witcher dragons, and those depicted in Dungeons & Dragons.
 Videos
 Trial by Fire (The Witcher 2) HDFirst Meeting with dragonDragon (The Witcher 2) HDRunning from a dragonThe Witcher 2 - How to kill Dragon Final Boss (HARD)Killing the dragon
-Gallery
-
-References
-↑ 1.0 1.1 The Witcher 3: Wild Hunt
-↑ 2.0 2.1 2.2 2.3 2.4 Sword of Destiny
-↑ 3.0 3.1 3.2 3.3 The Witcher 2: Assassins of Kings
-↑ 4.0 4.1 4.2 Wiedźmin: Gra Wyobraźni
-↑ 5.0 5.1 The Last Wish
-↑ 6.0 6.1 Thronebreaker: The Witcher Tales
-↑ In Gwent: The Witcher Card Game, some artwork depicts them as two-legged.
-↑ The Tower of the Swallow
-↑ 9.0 9.1 9.2 Wiedźmin: Gra Wyobraźni
-↑ Bogusław Polch's comics
-↑ Oko Yrrhedesa
-↑ GWENT: Rogue Mage
-↑ A Witcher's Journal
-↑ A Tome of Chaos

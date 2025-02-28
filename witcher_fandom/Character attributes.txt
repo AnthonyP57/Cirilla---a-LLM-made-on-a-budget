@@ -8,43 +8,6 @@ Level – Displays Geralt's current level (up to a maximum of 35), as well as th
 How much damage Geralt can inflict with his currently equipped weapon, given as a range.
  Armor
 The armor statistic describes how much protection Geralt's current armor and/or weapons provide. This statistic can also be boosted with the use of potions, trophies, and enhancements.
-It's calculated as follows:
-I
-n
-c
-o
-m
-i
-n
-g
-D
-a
-m
-a
-g
-e
-−
-A
-r
-m
-o
-r
-=
-R
-e
-c
-e
-i
-v
-e
-d
-D
-a
-m
-a
-g
-e
-{\displaystyle IncomingDamage - Armor = ReceivedDamage}
 So if a nekker hits at 35 and Geralt's current armor is 12, then it'd be:
 35 - 12 = 23 damage to Geralt
  Vitality
@@ -197,8 +160,3 @@ Winter's Shroud
 Changes Aard Sign into the freezing Ice Aard, which adds a 20% chance of freezing opponents hit with the Sign.
 Awarded when visiting a shrine in Chapter III outside of Loc Muinne. (after patch 3.3)
 3 (PC Only)
-Notes
-↑ Note, however, that the game will display only 8 bars representing the 9 Vigor levels, and the circle will be empty rather than showing a #9 character (nonagon). Still, you can cast Quen and see that now the circle will show the octagon square with all bars filled, meaning, you have 9 Vigor levels (one used for the Quen.)
-↑ One of the best ways is in Foltest's camp during the Prologue. There is a Circle of Power which grants +2 Vitality regeneration and near it is a camp fire. Use the Circle of Power, set yourself ablaze and regenerate very fast. Repeat.
-↑ This can be done in the Camp at game start. Set a trap, then interrupt with Medallion.
-↑ This can also be awarded by losing a fistfight (needs clarification). (See note on talk page)

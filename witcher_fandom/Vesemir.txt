@@ -7,33 +7,6 @@ When they're about to hang you, ask for a glass of water. You never know what mi
 - Vesemir, pg. 160, The Lady of the Lake (U.K. edition)
 Vesemir was the oldest and most experienced witcher at Kaer Morhen during the 13th century. He acted as a father figure to Geralt of Rivia and the other witchers. Like many of his fellow witchers, he spent each winter at the fortress and set out on the Path when spring arrived.
 Vesemir was one of the few members of the School of the Wolf to survive the assault on Kaer Morhen. By the 1260s, he was the last remaining elder witcher. However, as he was primarily a fencing instructor, he lacked the knowledge needed to create new mutagens and thus could not mutate more disciples into witchers.
-Quick Answers
-What is the role of Vesemir in Geralt of Rivia's life?
-						Vesemir, the oldest living witcher, served as a mentor and father figure to Geralt of Rivia. He trained Geralt at Kaer Morhen, the Wolf School's keep, after Geralt's mother, Visenna, left him in Vesemir's care. Known for his harsh affection, Vesemir played a key role in the school's life and survived a pogrom that devastated the Wolf School witchers. His exact age remains unknown, but he is speculated to be older than Kaer Morhen.
-					
-						Provided by: Fandom
-					
-How did Vesemir survive the assault on Kaer Morhen?
-						Vesemir, considered among the oldest witchers, endured the attack on Kaer Morhen, orchestrated by a furious mob of mages and priests. His survival is attributed to either his absence from the keep during the assault or his successful evasion. Post-attack, Vesemir located the escaped witcher children, including Geralt, and assumed the role of their mentor.
-					
-						Provided by: Fandom
-					
-What is Vesemir's role in 'Witcher: Nightmare of the Wolf'?
-						Vesemir, in 'Witcher: Nightmare of the Wolf', is a witcher from the School of the Wolf, likely older than Kaer Morhen, the witcher training keep. Although he is Geralt of Rivia's mentor, it is revealed that Vesemir was not responsible for bringing Geralt to Kaer Morhen, as he was at taverns while this task was carried out by another witcher, Sven.
-					
-						Provided by: Fandom
-					
-Is it possible to save Vesemir in the Witcher game series?
-						Vesemir, the oldest living witcher and Geralt's mentor, cannot be saved in the Witcher game series. Despite surviving a pogrom that wiped out the Wolf School witchers, he is the sole survivor of an assault in the game.
-					
-						Provided by: Fandom
-					
-What is Vesemir's age in the Witcher 3 game?
-						The precise age of Vesemir, the oldest living witcher, remains unknown. His longevity surpasses the stones of Kaer Morhen, the training ground for the Wolf School witchers. He is a survivor of a pogrom that wiped out the Wolf School witchers and was a fencing instructor at Kaer Morhen.
-					
-						Provided by: Fandom
-					
-{"@context":"https:\/\/schema.org","@type":"FAQPage","name":"Vesemir","mainEntity":}
 Biography
 Considered one of the oldest remaining witchers, Vesemir was born early enough to witness the construction of Kaer Morhen in the 11th century. His mentor and tutor was Barmin.
 In the second half of the 12th century, Kaer Morhen was attacked by an enraged mob led by a group of Mages and priests. Vesemir survived the attack, either by being absent from the keep during the pogrom or by being mistaken for dead as he lay unconscious among the corpses of his fellow witchers. Although the pogrom was condemned, the school never fully recovered and never regained its former strength.
@@ -136,22 +109,3 @@ Videos
 The Witcher Vesemir - Who is Vesemir? - The Oldest Witcher
 Gallery
 Slightly younger Vesemir in the graphic novelIn The Hexer movieJournal image in The WitcherVesemir full render as in The WitcherClose-upVesemir fighting monsters in TW3Vesemir character profile image for TW3The Witcher 3: Wild Hunt - Concept artVesemir character profile cut outVesemir's gwent card artVesemir's alternative gwent card artGwent cardYoung Vesemir in The Witcher: Monster SlayerYoung Vesemir by Kacper MadejakYoung Vesemir by Kacper MadejakIn Netflix's The WitcherVesemir's young animated version in The Witcher: Nightmare of the Wolf
-Footnotes
-↑ Note that in Blood of Elves, Triss Merigold states that only witchers who were outside the keep during the pogrom survived. Information presented in The Witcher may thus be either clearly incorrect, or the game's writers decided that Triss was mistaken.
-↑ As with other dates mentioned in the first game, the 1232 date provided in The Price of Neutrality premium module does not align with other sources. By the time the module begins, the Wolf School is already inactive, with only a few witchers remaining at the keep, which rules out 1232. Additionally, Vesemir's model in the module is the same as in the base game, which places the adventure after his romance with Mignole, rather than two years earlier, as 1232 would suggest.
-References
-↑ 1.0 1.1 1.2 Gwent: The Witcher Card Game
-↑ 2.0 2.1 2.2 2.3 Zdrada
-↑ 3.0 3.1 Hearts of Stone expansion
-↑ 4.0 4.1 4.2 4.3 4.4 4.5 Blood of Elves
-↑ The World of the Witcher
-↑ 6.0 6.1 6.2 6.3 6.4 6.5 The Witcher 3: Wild Hunt
-↑ The Witcher
-↑ Sword of Destiny
-↑ The Last Wish
-↑ Season of Storms
-↑ The Price of Neutrality premium module
-↑ Characterprofile on the game's homepage
-↑ https://pl.wikipedia.org/wiki/Wyszomir
-External links
- See the GWENT standalone game version card: Vesemir

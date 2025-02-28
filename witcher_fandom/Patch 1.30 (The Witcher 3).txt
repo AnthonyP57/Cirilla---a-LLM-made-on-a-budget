@@ -51,6 +51,3 @@ Fixes issue whereby the statues in the "Extreme Cosplay" quest occasionally woul
 Fixes issue whereby the bruxa in the "The Beast of Toussaint" quest would display pacifist tendencies, whereas the progression of the story needed her to turn hostile.
 Fixes issue whereby it was not possible to interact with the footsteps during the crime scene investigation in the "The Beast of Toussaint" quest.
 Fixes issue whereby it could be impossible to talk to the quest giver in the quest titled "Knight for Hire."
-References
-↑ Patch 1.30 now available on all platforms!
-↑ Patch 1.30 - Changelog

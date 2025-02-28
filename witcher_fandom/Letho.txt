@@ -2,34 +2,7 @@ Letho
 Kill as many rulers as we could. Lay the blame on the sorceresses. Breed chaos. Prepare the North, soften it before the invasion. And you know what's incredible? We could not have imagined more fertile soil. No matter what the war's outcome, the Northern Monarchs'll accuse one another, pursue their god-given rights and be at each other's throats for years to come.
 - Letho explaining his motives to Geralt, The Witcher 2: Assassins of Kings
 Letho of Gulet, also known as The Kingslayer, was a witcher from the School of the Viper. His closest associates were Auckes, Serrit, and a fourth Viper—fellow kingslayers and witchers from the School of the Viper. Letho struck a deal with the Nilfgaardian Emperor Emhyr var Emreis to assassinate the monarchs of the Northern Realms in exchange for the restoration of their School.
-Quick Answers
-What is the significance of Letho's title, 'The Kingslayer'?
-						Letho, known as 'The Kingslayer', led the Kingslayers, a group of witchers from the School of the Viper. Their mission was to create disorder in the Northern Kingdoms through the assassination of kings. Letho, with associates Auckes and Serrit, sought the assistance of Iorveth and the Scoia'tael to execute their plan.
-					
-						Provided by: Fandom
-					
-Who were Letho's closest associates in the School of the Viper?
-						Letho, a witcher from the School of the Viper and known as The Kingslayer, had close ties with Auckes and Serrit. These two were also kingslayers and fellow witchers from the same school. In his plot to assassinate the kings of the Northern Kingdoms, Letho sought assistance from Iorveth and the Scoia'tael.
-					
-						Provided by: Fandom
-					
-What role did Iorveth and the Scoia'tael play in Letho's plan?
-						Letho formed an alliance with Iorveth and the Scoia'tael, enlisting their help in his plan to assassinate the Northern Kingdoms' kings. He validated his claim by presenting the head of the slain King Demavend III of Aedirn. However, Letho later attempted to betray Iorveth, leading to the death of his entire unit and the capture of one elf, Ciaran, by Flotsam's guards.
-					
-						Provided by: Fandom
-					
-Which king did Letho kill to convince Iorveth to join his cause?
-						To persuade Iorveth to join his cause, Letho assassinated King Demavend III of Aedirn. He presented Iorveth with the king's head as evidence of his commitment to eliminating the Northern Kingdoms' monarchs.
-					
-						Provided by: Fandom
-					
-What is known about Letho's origins?
-						Letho, possibly from Gulet, was trained at the School of the Viper, becoming a witcher after the Trial of the Grasses. He learned about the Wild Hunt at the school, which later fell into ruin. Known for saving Yennefer's life, he has a complex relationship with Geralt. His Greek-derived name means 'hidden' or 'forgotten'.
-					
-						Provided by: Fandom
-					
-{"@context":"https:\/\/schema.org","@type":"FAQPage","name":"Letho","mainEntity":}
-Biography
+
 Letho's origins are not well-documented, and it is unknown if he actually hailed from Gulet. As a child, he ended up at the School of the Viper, where he was trained, underwent the Trial of the Grasses, and became a witcher. Here, he was also educated in the school's repository of knowledge on the Wild Hunt.
 After becoming a witcher, the Viper School eventually fell into ruin. The Usurper demanded the school's submission, and when they refused, the Nilfgaardian Army laid siege to and destroyed Gorthur Gvaed after a costly battle. The remaining witchers were scattered across the Empire, becoming internal exiles forbidden from entering most cities, forcing Letho and his brothers into hiding.
 Letho once pursued a bounty on a wanted man named Louis in Aedirn. Struggling to find simple contracts, Letho decided to hunt Louis for the reward. He tracked him to the Golden Hanged Man inn in Hagge and successfully captured him. However, the guard post was closed until dawn, the two spent time talking and eventually became friends, prompting Letho to release him. After that, they occasionally worked together on various jobs.
@@ -130,10 +103,3 @@ Videos
 Iorveth meets KingslayerDeath of King Foltest (The Witcher 2)
 Gallery
 KingslayerIorveth and the KingslayerStill from a cutsceneLetho conceptKingslayer concept art cutoutLetho presenting crowned head to AuckesLetho's gwent card artLetho in Gwent: The Witcher Card GameLetho as a monk murdering FoltestLetho's character model in TWBA
-References
-↑ The Witcher 2: Assassins of Kings
-↑ The Witcher 3: Wild Hunt
-↑ Letho of Gulet – hero presentation
-↑ https://www.behindthename.com/name/leto
-External links
- See the GWENT standalone game version card: Letho of Gulet

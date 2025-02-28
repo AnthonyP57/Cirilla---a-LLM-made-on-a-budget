@@ -21,5 +21,3 @@ Notes
 A different "Legendary" set version exists in the game files (2s instead of 1s in the corresponding item IDs), with slightly weaker level 73 swords and level 70 armor pieces adding Addrenaline Point gain, Attack Power and Sign intensity bonuses instead of increased Maximum Toxicity. This version does NOT appear during normal gameplay and in fact even with console commands can only be obtained in a regular game and not in a New Game +. It is likely an early iteration for a different Legendary items concept not tied to New Game +.
 Gallery
 Regular armor
-References
-↑ Prior to Patch 4.0, "Bombs are thrown without any delay." was not part of the bonus stats.

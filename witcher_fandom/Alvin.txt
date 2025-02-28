@@ -4,28 +4,7 @@ I shall be a Witcher-Knight, when I grow up!
 Alvin was a boy who managed to escape the barghest attack which cost his foster mother her life. As a result of the shock, he started to divine the future and uttered the Prophecy of Ithlinne. It is supposed that Alvin was a Source, having magical powers he couldn't control.
 Alvin lived with Abigail until the Reverend snatched him while collecting water for Abigail. The preacher gave the orphan to a group of Salamandra lackeys, who demanded that the dwellers of the Outskirts surrender their children.
 In Chapter III, Geralt finds Alvin a second time. This time the boy is being held at St. Lebioda's Hospital, until he is kidnapped by Salamandra once again. In Chapter IV, Geralt finds the boy a third time, in the village of Murky Waters.
-Quick Answers
-What is the Prophecy of Ithlinne that Alvin uttered?
-						Alvin, a character with magical abilities, uttered the Prophecy of Ithlinne or Aen Ithlinnespeath. This prophecy, made by the elven prophetess Ithlinne, predicts a global cooling leading to world's end. Signs of this prophecy started appearing in the 15th or 16th century, with Kovir and Poviss harbours freezing in winter.
-					
-						Provided by: Fandom
-					
-Who was Alvin's foster mother and how did she die?
-						Caroline served as the foster mother to Alvin. She was tragically killed by barghests during a night journey to the Inn with Alvin, as revealed in the first chapter.
-					
-						Provided by: Fandom
-					
-Who did the Reverend give Alvin to after snatching him from Abigail?
-						The Reverend handed Alvin over to Salamandra lackeys after taking him from Abigail. These lackeys were pressuring the Outskirts' inhabitants to give up their children. Alvin was subsequently discovered at St. Lebioda's Hospital and later in Murky Waters village.
-					
-						Provided by: Fandom
-					
-What is a Source and how does it relate to Alvin's character?
-						A Source, in relation to Alvin, signifies a person with untamed magical abilities. Alvin, having these powers, can predict the future, a skill he uncovered post trauma. His journey includes living with Abigail, a witch, and a preacher, and confrontations with Salamandra thugs. Alvin is eventually located in Old Vizima if left under Triss's care.
-					
-						Provided by: Fandom
-					
-{"@context":"https:\/\/schema.org","@type":"FAQPage","name":"Alvin","mainEntity":}
+
 Associated quests
 Alvin
 Berengar's Secret

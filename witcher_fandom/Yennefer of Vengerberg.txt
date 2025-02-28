@@ -7,23 +7,6 @@ When I created Yennefer's character I wanted Geralt to fully grow, but then I de
 - Andrzej Sapkowski
 Yennefer of Vengerberg, born as Janka on Belleteyn in 1173, was a sorceress who lived in Vengerberg, the capital city of Aedirn. She was Geralt of Rivia's true love and a mother figure to Ciri, whom she viewed like a daughter to the point that she did everything she could to rescue the girl and keep her from harm.
 She helped advise King Demavend of Aedirn (though was never a formal royal advisor), was a close friend of Triss Merigold, and the youngest member of the Council of Wizards within the Brotherhood of Sorcerers. After its fall, the Lodge of Sorceresses attempted to recruit her, but they didn't see eye to eye as the Lodge wanted to advance their own political agenda by using Ciri.
-Quick Answers
-What is the relationship between Geralt and Yennefer?
-						Geralt and Yennefer share a complex, yet deeply intertwined relationship. Their bond was initially formed during a shared adventure involving a genie, where a wish granted to Geralt inextricably linked their fates. Despite being opposites in many ways, their love story is a testament to the adage that 'opposites attract'. Their relationship has been marked by numerous ups and downs, break-ups, and reunions. They have lived together, separated, and reunited, each time adding another layer to their rich, shared history. Yennefer's last name is of Vengerberg, and she is a powerful sorceress in the Witcher series.
-					
-						Provided by: Fandom
-					
-Does Yennefer appear in The Witcher 2?
-						Yes, Yennefer of Vengerberg does appear in The Witcher 2. However, her presence is limited to flashbacks in the game. In one optional encounter at the beginning of the game, Geralt, who is still without his memory, meets the Crinfrid Reavers who mention Yennefer.
-					
-						Provided by: Fandom
-					
-Why is Yennefer referred to as a hunchback?
-						Yennefer of Vengerberg, a key character in the Witcher series, is referred to as a hunchback due to her congenital condition. She was born with a hunchback, which led to a difficult childhood. However, her physical appearance drastically changed during her training to become a sorceress, where she used magic to acquire attractive looks. Despite these changes, some subtle signs of her past, like her slightly lopsided shoulders, remained.
-					
-						Provided by: Fandom
-					
-{"@context":"https:\/\/schema.org","@type":"FAQPage","name":"Yennefer of Vengerberg","mainEntity":}
 Biography
 "This is my story, not yours. You must let me finish telling it." — This article/section is a stub. You can help Witcher Wiki by expanding it.
 Early life and studying at Aretuza
@@ -194,22 +177,3 @@ Both Ciri and Yennefer were born on Belleteyn - In The Voice of Reason Geralt th
 In The Hexer TV series, she appears in 2 episodes, "Smok" and "Okruch lodu".
 Gallery
 Concept art for The Witcher 3Concept art for The Witcher 3Concept art for The Witcher 3Concept art for The Witcher 3Promotional artwork for The Witcher 3Work in progress model of Yennefer's face for TW3, based on Klaudia WróbelWork in progress model of Yennefer's face for TW3, based on Klaudia WróbelWork in progress model of Yennefer's face for TW3Work in progress model of Yennefer's face for TW3Promotional poster for The Witcher 3Render for The Witcher 3Concept art in her alternative outfit DLC for The Witcher 3Alternative look for Yennefer in The Witcher 3Yennefer during The Last WishGwent card art in The Witcher 3 and Gwent: The Witcher Card Game as Yennefer: DivinationGwent card art in The Witcher 3 and Gwent: The Witcher Card Game as Yennefer: ConjurerCard art in Gwent: The Witcher Card Game as: YenneferCard art in Gwent: The Witcher Card Game as: Yennefer: EnchantressCard art in Gwent: The Witcher Card Game as: Yennefer: IllusionCard art in Gwent: The Witcher Card Game as: Yennefer: IllusionistYennefer in Curse of Crows comicsYennefer in Killing Monsters comicsYennefer trying to heal Geralt during the Rivian Pogrom, from a flashback cutscene in The Witcher 2Yennefer captured by Eredin, from a flashback cutscene in The Witcher 2Gwent: The Witcher Card Game avatarGwent: The Witcher Card Game avatar (conjuring)Yennefer in the old graphic novelsIllustration in book by Jana KomárkováYennefer in The HexerYennefer in The Hexer movie and TV showYennefer in Of Flesh and FlameYennefer in Netflix's The Witcher
-Footnotes
-↑ English translation of "Janka" in The World of the Witcher
-↑ In 1267, she states she's 94 years old (The Tower of the Swallow)
-↑ Noted specifically in Something Ends, Something Begins as being quarter-elf, though unspecified how much in the saga.
-References
-↑ 1.0 1.1 The Tower of the Swallow
-↑ 2.0 2.1 2.2 Baptism of Fire
-↑ The Lady of the Lake
-↑ 4.0 4.1 4.2 4.3 4.4 4.5 4.6 4.7 Time of Contempt
-↑ 5.0 5.1 5.2 5.3 5.4 Blood of Elves
-↑ 6.0 6.1 6.2 The Last Wish
-↑ 7.0 7.1 7.2 Sword of Destiny
-↑ 8.0 8.1 8.2 8.3 8.4 8.5 8.6 The Witcher 2: Assassins of Kings
-↑ The Witcher
-↑ 10.0 10.1 10.2 10.3 10.4 10.5 The Witcher 3: Wild Hunt
-↑ Twarzy Yennefer w grze Wiedźmin 3 użyczyła polska modelka, Klaudia Wróbel
-↑ Yennefer face and hair concept by Paweł Mielniczuk
-External links
- See the GWENT standalone game version card: Yennefer

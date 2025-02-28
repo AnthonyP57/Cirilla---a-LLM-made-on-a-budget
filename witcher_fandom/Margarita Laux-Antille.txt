@@ -6,34 +6,6 @@ An enchantress always takes action. Wrongly or rightly; that is revealed later. 
 - Margarita to Ciri, Time of Contempt (U.S. edition)
 Margarita Laux-Antille was a sorceress and a rector of Aretuza. She was also the granddaughter of the famous Ilona Laux-Antille and a founding member of the Lodge of Sorceresses. She had no interest in politics, but she cared deeply for her school and students.
 She had a figure outshining statues, fair-haired, tall, and often wore a green dress with a plunging neckline.
-Quick Answers
-What role did Margarita Laux-Antille play in the Lodge of Sorceresses?
-						Margarita Laux-Antille, a sorceress and rector of Aretuza, was a founding member of the Lodge of Sorceresses. Her involvement in the Lodge was driven by her dedication to her school rather than political interest. She co-authored 'Masters of Magic on Curses – Selected Writings' with Tissaia de Vries. Following a conspiracy that resulted in the deaths of King Demavend and Foltest, she was sentenced to death with other Lodge members.
-					
-						Provided by: Fandom
-					
-Who was Margarita Laux-Antille's famous grandmother?
-						The renowned grandmother of Margarita Laux-Antille was Ilona Laux-Antille, a significant ancestor in the Laux-Antille lineage.
-					
-						Provided by: Fandom
-					
-What was Margarita Laux-Antille's relationship with Lars?
-						Margarita Laux-Antille, known as Rita, had a passionate four-year affair with Lars, despite his marital status. As their connection dissolved, Margarita found herself unable to return his affections and ended the relationship. This event may have influenced her decision to skip the Aretuza banquet.
-					
-						Provided by: Fandom
-					
-What was Margarita Laux-Antille's position at Aretuza?
-						Margarita Laux-Antille, a sorceress, served as the Rectoress of Aretuza. Her dedication was primarily towards the well-being of her school and students, rather than political affairs. Additionally, she was a founding member of the Lodge of Sorceresses.
-					
-						Provided by: Fandom
-					
-How is Margarita Laux-Antille typically described in terms of physical appearance?
-						Margarita Laux-Antille, often referred to as Rita, is a human female characterized by her blonde hair and green eyes. She holds the position of Rectoress at Aretuza and is a proficient mage. Her beauty is renowned, often compared to the exquisite marble statues of goddesses and nymphs crafted by eminent sculptors. She is affiliated with the Lodge of Sorceresses and was formerly part of the Brotherhood of Sorcerers.
-					
-						Provided by: Fandom
-					
-{"@context":"https:\/\/schema.org","@type":"FAQPage","name":"Margarita Laux-Antille","mainEntity":}
-Biography
 
 Relationship with Lars
 In 1263, Margarita met Lars, and the two quickly developed a passionate relationship. For four years, their connection slowly dissolved and Margarita felt isolated in her thoughts. This, and his ongoing marriage to another woman, led Margarita to finally end things. Later, Tissaia assumed that this humiliating break up may have been the reason why Margarita would chose not to attend the banquet at Aretuza.
@@ -62,8 +34,3 @@ Gallery
 Gwent card artIn Netflix's The Witcher
 External links
  See the GWENT standalone game version card: Margarita of Aretuza
-References
-↑ 1.0 1.1 1.2 1.3 1.4 1.5 Time of Contempt
-↑ 2.0 2.1 2.2 Baptism of Fire
-↑ List of prisoners
-↑ The Witcher 3: Wild Hunt

@@ -3,33 +3,6 @@ The gate must be secure.
 - The Unseen Elder to Geralt, Blood and Wine expansionAudio version: Media:Unseen Elder voice line.ogg
 The Unseen Elder, whose true name is never revealed, is one of the unseen elders, very old higher vampires that have inconceivable powers and serve as a sort of leader figure for their brethren.
 The Unseen Elder of Toussaint is guarding the gate between the world of the vampires and the human world, where he ended up during the Conjunction of the Spheres. He is extremely aggressive towards everything that enters his domain, and even other higher vampires must have a very good reason to disturb him.
-Quick Answers
-What is the true name of The Unseen Elder?
-						The Unseen Elder's true name remains undisclosed. He is a higher vampire of great age and power, serving as a leader among his kind. His primary role is to guard the gate between the vampire and human worlds, a duty he undertook following the Conjunction of the Spheres. His notable traits include immense power and a highly aggressive disposition.
-					
-						Provided by: Fandom
-					
-What is the role of The Unseen Elder in the world of vampires?
-						The Unseen Elder is a figure of authority among vampires, possessing powers beyond normal higher vampires. This ancient vampire is rarely disturbed, even by other higher vampires, unless in dire situations. They can summon and command obedience from all vampires. They serve as a leader for their kin and protect the gateway between the vampire and human worlds.
-					
-						Provided by: Fandom
-					
-Why is The Unseen Elder so aggressive towards intruders?
-						The Unseen Elder's aggression towards intruders stems from his desire for solitude and silence. He resides in a cave, accessible only to higher vampires with unique crystals. As a guardian of the gate between the vampire and human realms, he exhibits hostility to all who approach. Interacting with him demands precise language, as any error can lead to fatal consequences.
-					
-						Provided by: Fandom
-					
-What is the Conjunction of the Spheres where The Unseen Elder ended up?
-						The Conjunction of the Spheres, a cataclysm from around 1,500 years ago, resulted in the intersection of multiple dimensions, leading to the introduction of new beings to the world. One such being is the Unseen Elder, who has been in exile in our world since then. He ardently desires to return to his original world and is known to guard the now-closed inter-world gate.
-					
-						Provided by: Fandom
-					
-What is the significance of the gate that The Unseen Elder is guarding?
-						The Unseen Elder, an ancient higher vampire, protects a gate bridging the vampire and human realms. Trapped in the human world after the Conjunction of the Spheres, his only wish is to return home. The gate's importance is its potential to enable vampires' return to their native world.
-					
-						Provided by: Fandom
-					
-{"@context":"https:\/\/schema.org","@type":"FAQPage","name":"The Unseen Elder","mainEntity":}
 Appearance and personality
 Isolating himself from the rest of the world, he lives in a cave that can only be opened by crystals that are owned by higher vampires. Inside said cave, it is totally and completely silent as noted by Geralt and Regis, due to the Elder despising guests. The Unseen Elder speaks slowly with a rough voice as if every word brought suffering. Every word must be carefully measured when talking to him, or it can lead to a death sentence.
 When visiting his cave, Geralt had to be careful not to irritate the Unseen Elder as any unrelated side questions could annoy him and put Geralt one step closer to death. That said, he could be asked one side question which he would answer, but asking a second resulted in him instantly killing the witcher. Similarly, should Geralt attempt to approach the Elder without Regis, he will just kill him the moment he enters his chamber.
@@ -64,7 +37,3 @@ Trivia
 The Unseen Elder resembles Count Orlok, a vampire and main antagonist in F. W. Murnau's movie, Nosferatu.
 Gallery
 Model made by Sebastian BąkałaConcept arts, middle one is the final versionWall paintingGwent standalone cardartGwent skin frontGwent skin backYounger Unseen Elder wearing Hen Gaidth armorGwent: The Witcher Card Game avatar
-References
-↑ Gwent: The Witcher Card Game
-External links
- See the GWENT standalone game version card: Unseen Elder

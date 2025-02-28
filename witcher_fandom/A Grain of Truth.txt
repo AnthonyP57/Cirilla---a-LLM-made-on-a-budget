@@ -1,6 +1,6 @@
 A Grain of Truth
 "A Grain of Truth" (Polish: Ziarno prawdy) is a short story written by Andrzej Sapkowski and is the third story in The Last Wish, having been originally published in the now obsolete book, Wiedźmin. This short story describes how Geralt the witcher met a man in a monster's mask, Nivellen.
-Summary
+
 The story begins with Geralt's attention being drawn by circling birds, causing him to investigate an area in the nearby forest. There he finds the corpses of a merchant and a young woman, and follows the path from which they had presumably come to a rundown manor surrounded by a high wall and gate. Geralt's horse, Roach, gets anxious and must be calmed with a sign. In the yard, the witcher notices a fountain with a dolphin statue made of white stone, and a remarkable rosebush with indigo flowers.
 His attention is soon distracted by the sound of a rushing beast. Shortly thereafter, Geralt comes face to face with the mansion's current owner, Nivellen. More beast than man at first glance, but fully capable of speech. At first Nivellen tries to rush the witcher, stamping and snorting, assuming that his unexpected guest will be frightened away, like the others before him. Geralt, however, is no ordinary guest and is not the least bit frightened by Nivellen's display.
 After a moment of awkwardness, Nivellen decides to invite the witcher inside, where they proceed to dine and chat. Nivellen tells Geralt about himself, his father, his grandfather, and the last twelve years that he's spent, cursed. He reveals how it was through his own misdeeds that he came to be cursed (he was coerced into raping a priestess of Coram Agh Tera by his squadmates) and how he came to even enjoy his state as it does seem permanent. Meanwhile, Geralt listens and slowly draws his own conclusions about his host.
@@ -14,11 +14,11 @@ Geralt of Rivia
 Roach
 Nivellen
 Rulle Asper
-Lenka (mentioned)
-Fenne (mentioned)
-Primula (mentioned)
-Ilka (mentioned)
-Venimira (mentioned)
+Lenka
+Fenne
+Primula
+Ilka
+Venimira
 Vereena
 Notes
 This story is remarkably similar to the tale of Beauty and the Beast, right down to the roses' significance.

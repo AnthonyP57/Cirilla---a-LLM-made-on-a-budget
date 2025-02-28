@@ -1,39 +1,10 @@
 Lambert
-Sub-Pages:
-Main
-Netflix series
+
 Love questions like that. Am I holding up? What? My dick? This is shit, Geralt, and you know it.
 - Lambert to Geralt
 Lambert was a witcher from the School of the Wolf, active in the 13th century. He was one of the last witchers to be trained within the walls of Kaer Morhen.
 Trained by Vesemir, he was known for his biting tongue, and was often rude in conversation, particularly towards Triss Merigold, addressing her only by her last name, which irritated the sorceress greatly. He did not have much use for politics.
-Quick Answers
-What is the significance of Lambert's attitude towards Triss Merigold in Witcher 3?
-						In Witcher 3, Lambert displays a complex attitude towards Triss Merigold. He nurses her back to health after a wizard's fight, despite his apparent dislike for her, possibly driven by guilt. He often argues with her, using 'Merigold' to address her, causing her annoyance. These interactions contribute to his character arc and storyline in the game.
-					
-						Provided by: Fandom
-					
-What is the origin of Lambert's last name in the Witcher series?
-						In the Witcher series, Lambert's name originates from the Law of Surprise. After a witcher saved his alcoholic father from a Nekker's nest, the witcher invoked this law, resulting in Lambert being given to him. It's unclear if there's a link between Lambert and King Lambert of Temeria.
-					
-						Provided by: Fandom
-					
-What is the story behind Lambert's training at the School of the Wolf?
-						Lambert, a witcher of the School of the Wolf, was mentored by Vesemir at Kaer Morhen. He joined the school as a child, concurrently with Geralt, Eskel, and Remus. Lambert is recognized for his cynical demeanor and sharp tongue, often appearing discourteous, especially to non-witchers. Despite his dissatisfaction with his destiny, Lambert persists on the witcher's path, having no other known way of life.
-					
-						Provided by: Fandom
-					
-Who trained Lambert to become a witcher?
-						Lambert, a member of the School of the Wolf, received his witcher training from Vesemir at Kaer Morhen, alongside Geralt and Eskel. Known for his cynicism, Lambert was often unwelcoming to those outside the witcher community.
-					
-						Provided by: Fandom
-					
-What is the role of Lambert in the Witcher 3 Lambert quest?
-						Lambert is a key character in the Witcher 3 Lambert quest. He is involved in the main campaign and The Price of Neutrality module. He cares for Triss after her fight with a wizard and is often found in Kaer Morhen. Lambert also assists in training Ciri in sword combat. In one possible scenario, Lambert is killed during the Battle of Kaer Morhen.
-					
-						Provided by: Fandom
-					
-{"@context":"https:\/\/schema.org","@type":"FAQPage","name":"Lambert","mainEntity":}
-Biography
+
 The following is considered game canon only and may contradict Andrzej Sapkowski's works.
 Lambert was born to an alcoholic father who constantly beat him and his mother. Every night, they prayed for his death. One day, his father lost his way returning home from the tavern and stumbled into a Nekker's nest. Unfortunately, a witcher saved him and expecting payment, invoked the Law of Surprise which resulted in Lambert being given to him and was brought to Kaer Morhen.
 His final test was the Trial of the Medallion, Lambert was accompanied by a group of young recruits. Together they sailed across the pond which ended in one drowning to death. They navigated through the caverns when they ran into a cyclops named Old Speartip who slew several of them including Voltehre. After climbing Troll's Head, they encountered a trio of rock trolls whom they managed to avoid. Upon reaching the Circle of Elements, Lambert retrieved his Witcher Medallion and proved himself worthy to set out on The Path.
@@ -92,9 +63,3 @@ If Geralt convinces Keira Metz to go to Kaer Morhen, she and Lambert will become
 In a potential outcome, Geralt can arrive too late to save Lambert who dies when overcome by a group of enemies during the Battle of Kaer Morhen.
 Gallery
 Lambert's journal picture (Witcher 1)Lambert in Kaer MorhenLambert and (likely) Berengar in second game.Lambert full modelKeira traveling with LambertConcept art for Lambert in the Witcher 3Lambert on very early screenshot killing fiendGwent card Lambert: SwordmasterGwent card 1Lambert in Netflix's The Witcher
-References
-↑ 1.0 1.1 Blood of Elves
-↑ 2.0 2.1 The Witcher 3: Wild Hunt
-↑ The Price of Neutrality premium module
-External links
- See the GWENT standalone game version card: Lambert

@@ -13,31 +13,7 @@ Sign Trees
 Click on a sign or upgrade in the tree below to go to the description.
 Sign
 Upgrades
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
- 
+
 Aard
  
 The Aard sign is a simple magical sign used by witchers. A directed blast of telekinetic energy that staggers opponents, leaving them open for a subsequent attack. "This sign casts a directed wave of telekinetic energy that can stagger or knock down opponents, leaving them open for attack. Aard can also blow out any existing fires, blast open poorly secured doors, or punch through cracked or damaged walls or floors.

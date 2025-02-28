@@ -2,29 +2,7 @@ Thaler (spy)
 "But chief, we hid invisible-like.""Your balls will be invisible-like when I shove them up your arse."
 - conversation between Thaler and one of his inept spies
 Bernard Ducat, better known as Thaler, was a master spy and the former head of Temeria's Intelligence Service during the 1270s.
-Quick Answers
-What was Thaler's role in the Temerian Intelligence Service?
-						During the 1270s, Thaler held the position of head of the Temerian Intelligence Service, overseeing various espionage activities. He also undertook unconventional tasks and used disguises, such as posing as a fence, to gather information. Despite losing his position as the intelligence chief, Thaler was unwilling to accept his dismissal.
-					
-						Provided by: Fandom
-					
-What unusual task did Thaler assign his men for Adda the White?
-						In his capacity as a spy, Thaler tasked his men with hunting catoblepas for their meat, given that it was a favored dish of Adda the White.
-					
-						Provided by: Fandom
-					
-What is Thaler's real name?
-						In the Witcher series, the character Thaler is actually named Bernard, also known as Bernard Ducat. He operates as a spymaster and has assumed the roles of a fence and a cobbler for cover.
-					
-						Provided by: Fandom
-					
-How did Thaler contribute to the spy activities in Temeria?
-						Thaler, a master spy, led Temeria's Intelligence Service in the 1270s. His activities included espionage tasks and gathering intel by posing as a city fence. He was part of a plot to assassinate Radovid to regain Temerian sovereignty. Thaler also undertook unique tasks, like hunting for catoblepas meat, a delicacy for Adda the White.
-					
-						Provided by: Fandom
-					
-{"@context":"https:\/\/schema.org","@type":"FAQPage","name":"Thaler (spy)","mainEntity":}
-Biography
+
 Sometime prior to 1270, Thaler was already the head of Temerian Intelligence, where he helped with various spy activities as well as more unusual tasks, such as sending some of his men out to hunt down catoblepas for their meat, as it was Adda the White's favorite dish.
 During this time a young Shani happened to be in Vizima and, taking a liking to her, Thaler asked her out, but hid who he really was. However, one night while they wandered the city, Shani noticed two spies following them and eventually the inept men accidentally revealed that Thaler was, in fact, the head of Temerian Intelligence, ending their short relationship.
 Meeting Geralt
@@ -103,9 +81,3 @@ In the third game, it's implied that he's the stranger that borrowed the pan dur
 In the third game, he has a gwent card that's part of the Northern Realms deck.
 Gallery
 Thaler's journal imageThaler's placeGwent card artGwent: The Witcher Card Game card art
-References
-↑ 1.0 1.1 1.2 The Witcher
-↑ 2.0 2.1 The Witcher 3: Wild Hunt
-↑ Gra-legenda. Wiedźmin 1 dziesięć lat później
-External links
- See the GWENT standalone game version card: Thaler

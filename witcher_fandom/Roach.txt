@@ -3,29 +3,7 @@ Sub-Pages:
 Main
 Netflix series
 Roach (Polish: Płotka) is the name that Geralt of Rivia, the witcher, gives to all of his horses. His preference is for mares.
-Quick Answers
-What is the significance of the name 'Roach' in the Witcher series?
-						The name 'Roach' in the Witcher series is used by Geralt of Rivia for all his horses, particularly mares. The rationale behind this choice remains unclear, as Geralt often sidesteps the question. It's suggested that 'Roach' could have been a spontaneous choice. Nonetheless, the horses appear to readily accept this name.
-					
-						Provided by: Fandom
-					
-Does the name 'Roach' have any connection to the character Vernon Roche in the Witcher?
-						In the Witcher series, 'Roach' is not directly connected to Vernon Roche. 'Roach' is a term for a European freshwater fish and is the moniker Geralt uses for his horses. The resemblance between 'Roach' and 'Roche' is incidental, with no evidence of a relationship.
-					
-						Provided by: Fandom
-					
-What is the origin of the term 'roach' as it is used in the Witcher series?
-						The term 'Roach' in the Witcher series originates from the French word for 'rock'. In Polish, the horse is called 'Płotka', a smaller version of 'Płoć' which translates to 'roach'. This term is feminine, reflecting Geralt's preference for female horses. It's unrelated to the insect cockroach, the French name 'Roche', or the character Vernon Roche.
-					
-						Provided by: Fandom
-					
-Does Roach, the horse, die in the Witcher series?
-						In the Witcher series, Roach does indeed meet her end. She sustains severe injuries in a battle with a chernobog, leading Geralt to euthanize her. Later, Geralt acquires a new horse from Yarpen Zigrin, which he continues the tradition of naming Roach.
-					
-						Provided by: Fandom
-					
-{"@context":"https:\/\/schema.org","@type":"FAQPage","name":"Roach","mainEntity":}
-Name
+
 The name refers to the roach (Rutilus rutilus), a common European fresh water fish. It has nothing to do with the cockroach, and nothing directly to do with the either the French given name "Roche" or the character Vernon Roche. Though the English term for the fish ("roach") does in fact share its origin with "Roche": both terms come from the French word for "rock".
 It's worth noting that the original name for the horse in Polish is "Płotka", a diminutive form of the word "Płoć" (meaning "roach"). Diminutives are endearing in Polish, so a more direct translation would have been something along the lines of "Roachy" or "Roachie".
 Moreover, the Polish word is female gendered which corresponds with Geralt's preference for mares - it would be odd for a stallion to be called "Płotka". The tender tone as well as the gender of the name is lost in the translation.
@@ -58,6 +36,3 @@ Gallery
 In The Witcher illustrationIn The Witcher 2: Assassins of Kings cutsceneIn The Witcher 3: Wild HuntIn Roach Revealed comic stripIn The Hexer filmGwent: The Witcher Card Game card artIn Of Flesh and FlameIn Witch's LamentIn A Grain of TruthIn The Ballad of Two WolvesIn The Lesser EvilIn Netflix's The Witcher
 External links
  See the GWENT standalone game version card: Roach
-References
-↑ Baptism of Fire
-↑ CD PROJEKT RED Instagram Boat concept

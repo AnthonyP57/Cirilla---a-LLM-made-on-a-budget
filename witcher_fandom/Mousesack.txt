@@ -9,29 +9,6 @@ To meet Witcher Wiki's quality standards, this article or section may require cl
 "Only ignorant fools belittle their significance."
 - Geralt and Ermion, The Witcher 3: Wild Hunt
 Mousesack (Polish: Myszowór), also known as Ermion, was a skilled and intelligent druid, and also a good friend and advisor to King Bran Tuirseach of Skellige, as well as Queen Calanthe of Cintra. He had a thickset and robust appearance and wore a bushy beard.
-Quick Answers
-Who were Mousesack's parents in the Witcher series?
-						In the Witcher series, Mousesack's parents were an unidentified man from Skellige and a witch named Manissa. Manissa served Fregenal and was killed in self-defense by Korin, Geralt's future father. Mousesack's father departed from Manissa during Mousesack's early childhood.
-					
-						Provided by: Fandom
-					
-How is Mousesack connected to the character Geralt?
-						Mousesack, also known as Ermion, is a skilled druid with a robust friendship with Geralt. He assisted Geralt during a Witcher Tournament massacre. As an advisor to King Bran Tuirseach of Skellige and Queen Calanthe of Cintra, his ties also extend to Ciri, with him participating in the search for her in Brokilon.
-					
-						Provided by: Fandom
-					
-What is the significance of Mousesack's alternate name, Ermion?
-						Mousesack, alternatively Ermion, is a proficient druid and counselor to Skellige's King Bran Tuirseach and Cintra's Queen Calanthe. The name Ermion was devised for non-Polish translations of the game. In the game, Mousesack adopts the name Ermion, serving as the hierophant of Ard Skellig's druid circle.
-					
-						Provided by: Fandom
-					
-What was Mousesack's relationship with Queen Calanthe of Cintra?
-						Mousesack served as the court druid of Cintra, maintaining a close relationship with Queen Calanthe. After Eist Tuirseach and Calanthe's marriage, Mousesack remained in Cintra, aiding the injured and assisting Pavetta in managing her power. He was frequently seen with Pavetta's daughter, Cirilla. In 1263, he revealed to Geralt that Calanthe had called off Ciri's engagement to Prince Kistrin of Verden. During an attack on Cintra, Mousesack conjured a magical barrier to safeguard the queen and the city.
-					
-						Provided by: Fandom
-					
-{"@context":"https:\/\/schema.org","@type":"FAQPage","name":"Mousesack","mainEntity":}
-Biography
 
 Early life
 The following is considered comics canon only and may contradict Andrzej Sapkowski's works.
@@ -86,12 +63,3 @@ He appears in the non-canon short story Something Ends, Something Begins.
 The word "myszowór" is actually the Polish name of phascogale or wambenger, an Australian mouse-like marsupial; the "wór" (sack) part refers to the animal's pouch.
 Gallery
 Mousesack in the TV series, played by Aleksander Bednarz.Mousesack as a young druid in "Zdrada".Mousesack as a young boy in "Droga bez powrotu".Mousesack in Netflix's The Witcher
-References
-↑ In The Witcher 3: Wild Hunt his name is translated as "Ermion". The difference between English game and book translation wouldn't be so strange if the druid wasn't already mentioned in The Witcher - as Mousesack
-↑ Andrzej Sapkowski's alphabet calls him "druid from Skellige", so its more likely than not that one of his parents was from the islands
-↑ Droga bez powrotu
-↑ Zdrada
-↑ Mniejsze zło
-↑ The Witcher 3: Wild Hunt
-External links
- See the GWENT standalone game version card: Ermion

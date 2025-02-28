@@ -1,32 +1,6 @@
 Nekker
 Nekkers or nekkras are monsters encountered in The Witcher 2: Assassins of Kings and The Witcher 3: Wild Hunt.
-Quick Answers
-What is a Nekker in the context of The Witcher series?
-						A Nekker in The Witcher series is a monster seen in The Witcher 2: Assassins of Kings and The Witcher 3: Wild Hunt. They inhabit wooded areas. Nekker warriors, a larger variant, are recognized by red-painted faces. In The Witcher 3: Wild Hunt's Gwent card game, Nekkers are featured as close combat cards in the Monsters deck.
-					
-						Provided by: Fandom
-					
-How does the Nekker in The Witcher series differ from a Drowner?
-						Nekkers and Drowners in The Witcher series exhibit distinct characteristics. Nekkers, found in wooded areas, are known for their viciousness, ability to burrow tunnels, and tree-climbing skills. They attack in groups and are vulnerable to silver swords. Drowners, necrophages found near water bodies, are susceptible to necrophage oil and Igni. The loot dropped by these creatures upon defeat also varies.
-					
-						Provided by: Fandom
-					
-What role does a Nekker play in the opening sequence of The Witcher game?
-						A Nekker features in The Witcher game's opening sequence as bait for an arachas, set by Iorveth. These monsters, encountered in The Witcher 2: Assassins of Kings and The Witcher 3: Wild Hunt, inhabit wooded areas, attack in groups, and are vulnerable to silver swords.
-					
-						Provided by: Fandom
-					
-At what level does Geralt stop gaining XP from killing Nekkers?
-						Upon reaching Level 14, Geralt no longer earns XP from defeating Nekker Warriors. The XP acquired from combat is influenced by factors such as the difficulty level, Geralt's level, and the enemy's level and type. Kills yield minimal XP when Geralt's level exceeds the enemy's by six or more.
-					
-						Provided by: Fandom
-					
-What is the behavior pattern of a Nekker when it ambushes its prey?
-						Nekkers, feared by both humans and animals, are social creatures that use their numbers to ambush prey. They burrow tunnels and climb trees, surrounding and overwhelming their targets. They pummel and claw their victims to death. A moment of hesitation in their attack can be exploited to eliminate the braver ones before dealing with the rest.
-					
-						Provided by: Fandom
-					
-{"@context":"https:\/\/schema.org","@type":"FAQPage","name":"Nekker","mainEntity":}
+
 The Witcher 2: Assassins of Kings
 One less fortunate nekker appears in the opening sequence of the game when it is used as bait for an arachas by Iorveth.
 Nekkers cease to give XP when killed once Geralt reaches Level 11.
@@ -76,8 +50,3 @@ Although phoocas do not appear in the Witcher games, the origin may be from the 
 According to the Witcher 2 Artbook, Nekkers were inspired by Geralt's battle against bridge-dwelling monsters in "Something More".
 Gallery
 In The Witcher 2: Assassins of KingsIn The Witcher 2: Assassins of KingsNekker warrior in The Witcher 2: Assassins of KingsThe Witcher 3: Wild Hunt gwent card artThe Witcher 3: Wild Hunt gwent card artThe Witcher 3: Wild Hunt gwent card artGwent: The Witcher Card Game card artGwent: The Witcher Card Game artGwent: The Witcher Card Game} card art of packIn Matters of ConscienceIn Once Upon a Time in the WoodsIn The Ballad of Two Wolves
-References
-↑ In troll dialect of Common Speech (The Witcher 3: Wild Hunt)
-↑ In Nordic languages (Danish, Faroese, Icelandic, Norwegian, Swedish), "barn" means "child." The plural form, however, is never "barne," yet, given that Skelliger culture is famously based on medieval Scandinavian culture, the inspiration is apparent.
-External links
- See the GWENT standalone game version card: Nekker

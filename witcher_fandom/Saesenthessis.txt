@@ -3,24 +3,6 @@ I kneel before no one.
 - Gwent: The Witcher Card GameAudio version: Media:Saskia Commander voice line.mp3
 Saesenthessis, commonly known as Saskia the Dragonslayer or the Virgin of Aedirn, was a dragon with the ability to take on a human form. She played a crucial role in the Battle of Vergen and, depending on the outcome, became the queen of the independent realm of Upper Aedirn.
 Saesenthessis was the daughter of the famous golden dragon Villentretenmerth and the green dragon Myrgtabrakke.
-Quick Answers
-Who were Saesenthessis' dragon parents?
-						Saesenthessis, also known as Saskia, is the dragon offspring of Myrgtabrakke, a Green dragon, and Villentretenmerth, a Golden dragon. She inherited her mother's flying abilities and her father's polymorphism skill.
-					
-						Provided by: Fandom
-					
-How did Saesenthessis acquire the name Saskia the Dragonslayer?
-						Saesenthessis, a dragon capable of assuming human form, encountered Iorveth, an Elven commander, during her travels. Iorveth proposed her human alias and they fabricated a history for her, stating she hailed from Aedirn and had defeated a dragon, earning her the title Saskia the Dragonslayer.
-					
-						Provided by: Fandom
-					
-What is the significance of the Dragon Hunt in Saesenthessis' life?
-						The Dragon Hunt marks a pivotal moment in Saesenthessis' life. After a fierce battle with Geralt, she is impaled on a tree. Geralt's decision to either end her life or spare her determines her fate. As a dragon cross-breed, Saesenthessis, also known as Saskia the Dragonslayer, can transform into a human warrior. She was raised by her golden dragon father, who instilled in her values of justice, honor, and equality.
-					
-						Provided by: Fandom
-					
-{"@context":"https:\/\/schema.org","@type":"FAQPage","name":"Saesenthessis","mainEntity":}
-Biography
 
 Early life
 Saesenthessis was born during the infamous Dragon Hunt, in which a group of individuals sought to kill her mother, the green dragon Myrgtabrakke. The young hatchling was in grave danger after the group poisoned Myrgtabrakke, but a golden dragon, Villentretenmerth, intervened. With a little help, he defeated the attackers. It was revealed that the hatchling was Villentretenmerth's child. After expressing his gratitude to those who aided him, he departed with his newborn daughter.
@@ -107,13 +89,3 @@ Saskia is featured in Matters of Conscience comic released with the Hearts of St
 If Geralt choose Iorveth's path in the 2nd game, he will have a chance to ask Philippa about Saskia.
 Gallery
 Journal entry imageSaskia wounded by HenseltSaessenthesis and SíleSaskia concept artArtworkSaskia's character model in The Witcher Battle ArenaSaskia's gwent card artSaskia card artAlternative card artSaskia in Matters of Conscience
-References
-↑ Sword of Destiny
-↑ The Witcher 2: Assassins of Kings
-↑ Matters of Conscience
-↑ Marcin Momot: "They are live and well !"
-↑ The Witcher Role-Playing Game
-↑ Saskia – hero presentation
-External links
- See the GWENT standalone game version card: Saesenthessis
- See the GWENT standalone game version card: Saskia

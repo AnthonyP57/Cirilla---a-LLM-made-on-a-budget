@@ -3,28 +3,6 @@ Impertinence is the one thing I cannot abide.
 - Anna Henrietta, Gwent: The Witcher Card GameAudio version: Media:Anna Henrietta voice line.ogg
 Anna Henrietta was the ruling duchess of Toussaint, and beloved by all her people. She ruled the country with her husband Raymund until he died in 1265, two years before Geralt and his friends arrived in Toussaint, after which she ruled as the sole monarch.
 Her official, protocol title is "Her Enlightened Ladyship", unofficially "Her Grace" and in more casual matters outside the court she is to be referred to as "Lady Duchess." However, the Chamberlain and Marshal of the Court Sebastian Le Goff strongly advised Geralt to address her as "Your Grace" at all times. She is known to a select few by the shorter name, Anarietta.
-Quick Answers
-Who was Anna Henrietta's husband before he died in 1265?
-						Duke Raymund, known for his rule of Toussaint from 1258 to 1265, was the husband of Anna Henrietta. His reputation was marred by his despicable character and womanizing habits, but he remained Anna's spouse until his death.
-					
-						Provided by: Fandom
-					
-What is Anna Henrietta's casual title outside of the court?
-						In casual settings outside the court, Anna Henrietta is known as 'Lady Duchess'. Despite this, Sebastian Le Goff, the Chamberlain and Marshal of the Court, recommends addressing her as 'Your Grace' consistently.
-					
-						Provided by: Fandom
-					
-How did Anna Henrietta rule Toussaint after her husband's death?
-						Anna Henrietta assumed sole rule of Toussaint following her husband's demise. In 1267, she reconnected with Geralt and Dandelion during their mission to rescue Ciri. When her courtiers were threatened by a Beast, she demonstrated her leadership by promptly summoning help. Her reign, though tragically ended by her sister's betrayal, was characterized by her subjects' affection due to her compassionate and loyal nature.
-					
-						Provided by: Fandom
-					
-What are the different endings involving Anna Henrietta in The Witcher 3?
-						Anna Henrietta's ending in The Witcher 3 depends on the player's choices. A majority of positive decisions can lead to a favorable outcome for Anna, though the specifics may vary. Conversely, predominantly negative choices suggest her death or departure from Geralt. The game offers multiple endings, shaped by pivotal decisions made by the player.
-					
-						Provided by: Fandom
-					
-{"@context":"https:\/\/schema.org","@type":"FAQPage","name":"Anna Henrietta","mainEntity":}
 Biography
 In 1261, about six years before Geralt and his company arrived, while Raymund was in Cintra and staying with a lover there, Dandelion and the duchess met and fell in love, carrying on their affair for two months. However, this wasn't well hidden from the population and when rumors started, Dandelion prudently left. Shortly after Raymund returned and was informed. Despite himself constantly cheating around, the duke raged, destroying furniture, punching people in the face, and killing the informer, before imprisoning Anarietta in her chambers and threatening to torture her if she didn't tell him everything.
 With that, she revealed the bard's name and Raymund ordered people to find and kill Dandelion with the hopes of tearing out his heart, cooking it, and making Anarietta eat it in front of the entire court. Luckily, the bard had long left the duchy and, as most disliked the duke as much as they adored the duchess, Dandelion was safe from being pursued. Roughly 4 years later, in 1265, Anarietta's husband died from apoplexy and subsequently she took over as the sole ruler of Toussaint.
@@ -69,8 +47,3 @@ In the Blood and Wine expansion, one can learn that she admires the artist Doria
 The English voice actor for Anna Henrietta, MyAnna Buring, returned to the franchise to play as Tissaia de Vries in Netflix's The Witcher.
 Gallery
 Concept art by Andrzej DybowskiDuches Anarietta and her court, Blood and Wine promoDuchess Anarietta with Regis, Blood and Wine promoCaptured render shot of all her possible outfitsStatue of her should she be killedWith Fringilla Vigo
-References
-↑ Dandelion's nickname for her
-↑ 2.0 2.1 CD PROJEKT RED's The Witcher franchise
-↑ 3.0 3.1 The Tower of the Swallow
-↑ 4.0 4.1 The Lady of the Lake

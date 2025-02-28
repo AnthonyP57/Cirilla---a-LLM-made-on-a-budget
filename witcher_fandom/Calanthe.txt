@@ -1,38 +1,9 @@
 Calanthe
-Sub-Pages:
-Main
-Netflix series
+
 "Do you really wish to know?" — Spoilers from the books and/or adaptations to follow!
 The fate is cruel. We are not in a fairytale anymore, we are discussing the matters of life, life that is evil, bad, and unforgiving, the life that does not spare anyone, neither the witchers nor kings or queens.
 - Calanthe of Cintra in Sword of Destiny (U.S. edition)
 Calanthe Fiona Riannon of Cintra, known also as the "Lioness of Cintra" and "Ard Rhena" ("High Queen" in Elder Speech), was a queen of Cintra, the mother of Pavetta, and grandmother of Ciri. Her nephew, Crach an Craite, called her "Modron". She was known for her bravery and beauty.
-Quick Answers
-Who was Calanthe's first major battle against when she was 15 years old?
-						At the age of 15, Calanthe, the Lioness of Cintra, achieved her first significant military victory in Hochebuz, defeating Nazair. This triumph came shortly after she ascended to the throne, succeeding her father, King Dagorad of Cintra.
-					
-						Provided by: Fandom
-					
-What is the meaning of 'Ard Rhena', one of Calanthe's titles?
-						Calanthe Fiona Riannon of Cintra, Ciri's grandmother, held the title 'Ard Rhena', which translates to 'High Queen' in Elder Speech. Known for her bravery and beauty, she was also referred to as the 'Lioness of Cintra'.
-					
-						Provided by: Fandom
-					
-Who were Calanthe's parents and how did she ascend to the throne?
-						Calanthe, the only child of King Dagorad and Queen Adalia of Cintra, became queen at 14 after her father's demise. Her victory in a significant battle against Nazair in Hochebuz at 15, earned her the moniker 'Lioness of Cintra'.
-					
-						Provided by: Fandom
-					
-What is the relationship between Calanthe and Ciri in The Witcher series?
-						Calanthe, in the Witcher series, is Ciri's grandmother. She attempted to arrange a match for Ciri with Prince Kistrin, but Ciri fled. Despite the death of Ciri's parents, Calanthe was a key figure in her life.
-					
-						Provided by: Fandom
-					
-Why was Calanthe also known as the 'Lioness of Cintra'?
-						Calanthe, the 'Lioness of Cintra', gained this moniker for her courage and fierceness on the battlefield, notably leading the Cintran forces at the Battle of Cottbus against Nazair. As the queen of Cintra, she was Pavetta's mother and Ciri's grandmother.
-					
-						Provided by: Fandom
-					
-{"@context":"https:\/\/schema.org","@type":"FAQPage","name":"Calanthe","mainEntity":}
 Biography
 Calanthe was the only child of King Dagorad of Cintra and Queen Adalia and took to the throne after her father's death when she was 14 years old. When she was 15, she won her first major battle in Hochebuz against Nazair, earning her the nickname "Lioness of Cintra".
 First marriage
@@ -58,7 +29,3 @@ Calanthe appears in The Hexer TV series in episode 6 "Calanthe", and episode 8 "
 In the series, she's portrayed as being 59 though in the books she was 34 at the time.
 Gallery
 Gwent: The Witcher Card Game artIn The Hexer TV seriesIn Netflix's The Witcher
-References
-↑ 1.0 1.1 Genealogy of Ciri - Calanthe
-↑ The Tower of the Swallow
-↑ Sword of Destiny

@@ -9,34 +9,6 @@ We wish to rule, yes. Where is the fault in that? Everyone wants to rule, and I 
 Philippa Eilhart (Polish: Filippa Eilhart) was a sorceress and King Vizimir II's advisor, who remained a powerful figure at Redania's court even after his death, for which she was likely responsible. She was one of the few mages with the rare ability to polymorph, and was able to turn at will into a large grey owl.
 She led the Thanedd coup against the Brotherhood of Sorcerers, intending to neutralize suspected traitors allied with Nilfgaard. Later, she initiated the founding of the Lodge of Sorceresses and was considered its leader. The all female organization secretly met at Montecalvo, Philippa's home base.
 She was one of the victims of the Witch Hunts in the 1270s, having been tortured and killed by Archpriest Willemer's men. Many years later, she was exonerated and canonized as Martyr Saint.
-Quick Answers
-What rare magical ability did Philippa Eilhart possess?
-						Philippa Eilhart, an influential sorceress, possessed the rare magical ability of polymorphism, enabling her to transform into a large grey owl at will. She notably used this ability in Oxenfurt in early 1267.
-					
-						Provided by: Fandom
-					
-Who was Philippa Eilhart's royal advisor to?
-						Philippa Eilhart, a sorceress with the ability to polymorph into a grey owl, was the royal advisor to King Vizimir II. Despite his death, she retained significant influence at Redania's court. Notably, she orchestrated the Thanedd coup to counter suspected Nilfgaardian allies within the Brotherhood of Sorcerers.
-					
-						Provided by: Fandom
-					
-What was Philippa Eilhart's role in the Thanedd coup?
-						In the Thanedd coup, an attack between mages at the Aretuza academy on Thanedd Island, Philippa Eilhart was a key figure. The coup, which started on July 1, 1267, saw mages covertly divided between Nilfgaard and the North. Philippa, one of the leaders, aimed to neutralize suspected Nilfgaardian allies. She notably paralyzed Geralt during the coup, enabling Rience's escape via a portal.
-					
-						Provided by: Fandom
-					
-What is Philippa Eilhart's connection to the Lodge?
-						Philippa Eilhart, a powerful sorceress, founded the Lodge, a secret society dedicated to preserving magic. The Lodge, meeting in Philippa's home, Castle Montecalvo, seeks to exert influence by placing members on thrones or swaying kings. They were instrumental in achieving peace in the war with the Nilfgaardian Empire.
-					
-						Provided by: Fandom
-					
-Who played Philippa Eilhart in the Witcher Netflix series?
-						In the Netflix series 'The Witcher', the character Philippa Eilhart, a sorceress and advisor to the Redanian monarchy, is played by Cassie Clare. She is known for her unique ability to transform into an owl and her close association with Sigismund Dijkstra, the kingdom's spymaster.
-					
-						Provided by: Fandom
-					
-{"@context":"https:\/\/schema.org","@type":"FAQPage","name":"Philippa Eilhart","mainEntity":}
-Biography
 
 Early life
 Philippa studied magic under the auspices of Tissaia de Vries, probably at Aretuza, the magical school for sorceresses on Thanedd Island. She would later claim the position of a royal advisor at the court of Vizimir II, King of Redania, as well as a seat on the Council of Wizards, one of the two ruling bodies of the Brotherhood of Sorcerers, which governed and guided magical use and practice in the Northern Kingdoms.
@@ -134,13 +106,3 @@ Videos
 Philippa Eilhart escapes aloneThe Witcher 3 Philippa Eilhart Boss Fight (Hard Mode)
 Gallery
 Playing with her leashed sorceress - CynthiaPhilippa blindedPhilippa's early concept artConcept art of Philippa's eyes for The Witcher 3Philippa's projection summoned by Sabrina GlevissigPhilippa as an owlPhilippa after killing RadovidPhilippa's gwent card artGwent standalone card artOwl form transformationPhilippa's character model for TWBAIllustration by Denis GordeevPhilippa in Netflix's The WitcherPhilippa's form owl in Netflix's The Witcher
-References
-↑ 1.0 1.1 The Lady of the Lake
-↑ The Witcher 2: Assassins of Kings
-↑ The Witcher 3: Wild Hunt
-↑ 4.0 4.1 4.2 4.3 4.4 Blood of Elves
-↑ 5.0 5.1 5.2 5.3 5.4 5.5 Time of Contempt
-↑ 6.0 6.1 6.2 6.3 Baptism of Fire
-↑ Philippa Eilhart – hero presentation
-External links
- See the GWENT standalone game version card: Philippa Eilhart

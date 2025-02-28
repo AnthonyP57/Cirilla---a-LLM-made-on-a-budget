@@ -1,34 +1,8 @@
 Adda the White
-Sub-Pages:
-Main
-Netflix series
-"Do you really wish to know?" — Spoilers from the books and/or adaptations to follow!
 Adda the White was princess of Temeria and the result of the incestuous relationship between King Foltest and his sister Adda, whom her daughter was named after.
 She was stillborn, dying along with her mother who died during childbirth, as a result of a curse. It's unclear if this was cast by Ostrit, a local magnate who was in love with Adda and attempted to put a curse on the king and it rebounded to the sister and their unborn child, or Foltest and Adda's mother, Sancia, who was also furious at the incestuous relationship between her children and may also have cursed their child. Seven years after her funeral, however, she was reborn as a striga.
 Her nickname "the White", which came from the color of her hair after the curse was removed by Geralt, served to distinguish her from her mother, Adda of Temeria, and Adda of Cidaris, the wife of King Goidemar. She was also left mentally impaired, so while she remained the logical heir to the Temerian throne, the continuation of the royal line begun by Geddes was possibly at its end.
-Quick Answers
-Who was responsible for the curse that led to Adda the White's death?
-						It's believed it was either Ostrit, a local magnate who was in love with Adda and attempted to put a curse on the king but it rebounded to the sister, or Foltest and Adda's mother, Sancia, who was also furious at the incestuous relationship between her children and may also have cursed their child.
-					
-						Provided by: Community
-					
-What was the relationship between King Foltest and Adda the White?
-						Adda the White is King Foltest's daughter via his incestuous relationship with his sister, Adda of Temeria.
-					
-						Provided by: Community
-					
-Who was Adda the White named after?
-						Adda the White was named after her mother, Adda of Temeria, with "the White" coming from the color of her hair after the striga curse was removed by Geralt.
-					
-						Provided by: Community
-					
-Was Adda the White's death a result of a curse or natural causes?
-						Adda the White was stillborn due to a curse. This curse resulted in Adda coming back to life 7 years later as a striga.
-					
-						Provided by: Community
-					
-{"@context":"https:\/\/schema.org","@type":"FAQPage","name":"Adda the White","mainEntity":}
-Biography
+
 While Adda's human form was fully restored, her mind was left terribly degraded by trauma, and she is still in danger of relapse. To ward off the curse, Geralt instructed the princess to wear an amulet necklace and told her keeper to have her participate in rituals designed to ward off the curse.
 Unfortunately, even though Adda's curse was lifted, she remained intellectually impaired. It was also then that her hair became white, which earned her the name "Adda the White".
 In the non-canon short story Coś się kończy, coś się zaczyna, Adda seems to have recovered sufficiently from her curse to have become the queen of Temeria.
@@ -91,7 +65,3 @@ Videos
 A Posh Reception and Princess AddaHer Highness The StrigaLegends of The Witcher Who is Princess Adda?
 Gallery
 Gwent card artStriga formPrincess AddaAdda in her nightieAdda's journal pictureCensored romance cardAs striga in Curse of Crows comicsAdda as a striga in the TV seriesAdda in the TV seriesIn Netflix's The WitcherStriga form
-References
-↑ 1.0 1.1 1.2 The Last Wish
-↑ for more information about the forgery, see: Mysterious note
-↑ Mateusz Tomaszkiewicz: "Adda in the third game"

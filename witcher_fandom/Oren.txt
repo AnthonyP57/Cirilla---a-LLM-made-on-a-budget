@@ -27,9 +27,3 @@ Bugs
 Orens may not appear in quantities larger than 100 on the Velen/Novigrad map, or 103 on the Skellige map, due to a leftover artificial limitation from a game mechanic that was never fully developed, but also never cleaned up. The intended logic was likely meant to simply reduce larger quantities to the mentioned numbers, but instead whenever the limit is reached they get outright removed. This is actually a global mechanic, but luckily in the case of orens it only happens to affect a couple of quests, while the only other item affected globally is balisse fruit, although in a different way.
 Gallery
 In Witch's Lament
-Footnotes
-↑ The plummet in value of the floren and rise of the oren, contrary to expectations with Nilfgaard annexing Temeria, was almost definitely implemented into The Witcher 3: Wild Hunt to prevent the oren from becoming obsolete.
-References
-↑ The Last Wish
-↑ Baptism of Fire
-↑ The Witcher 3: Wild Hunt

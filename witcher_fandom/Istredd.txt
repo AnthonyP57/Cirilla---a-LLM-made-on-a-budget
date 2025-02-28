@@ -6,25 +6,6 @@ Netflix series
 Go to hell, I asked you politely.
 - Gwent: The Witcher Card GameAudio version: Media:Istredd voice line.mp3
 Istredd of Aedd Gynvael, born as Val, was a well-respected sorcerer who had a keen interest in archaeology, ecology, and history.
-Quick Answers
-What was Istredd's original name before he became a sorcerer?
-						No evidence suggests that Istredd had a different name prior to his sorcery training. His magical abilities were honed under the guidance of the mage Roedskilde.
-					
-						Provided by: Fandom
-					
-What was the name of Istredd's mentor at Ban Ard Academy?
-						Stregobor served as Istredd's mentor at Ban Ard Academy. He utilized Istredd's revelation about Yennefer's quarter-elf lineage to sway the Brotherhood's decision on her role upon graduation in 1210.
-					
-						Provided by: Fandom
-					
-What were Istredd's main areas of interest as a sorcerer?
-						Istredd, an esteemed sorcerer from Aedd Gynvael, was deeply interested in archaeology. He honed his skills under the guidance of the mage Roedskilde and conducted significant studies in the ruins of Aretuza. His notable works include an archaeological excavation in Nazair.
-					
-						Provided by: Fandom
-					
-{"@context":"https:\/\/schema.org","@type":"FAQPage","name":"Istredd","mainEntity":}
-Biography
-
 Early life
 While still a mere stripling, when my peers were running around fields with bows, fishing or playing odds and evens, I was poring over manuscripts. My bones and joints ached from the stone floor in the tower – in the summer, of course, because in the winter the enamel on my teeth cracked. I would cough from the dust on old scrolls and books until my eyes bulged from their sockets, and my master, old Roedskilde, never passed up an opportunity to flog me with a knout, clearly believing that without it I would not achieve satisfactory progress in my studies. I didn't enjoy soldiering or wenching or drinking during the years when all those pleasures taste the best.- Istredd, Sword of Destiny
 Named Val by his parents, the boy who would become Istredd joined Ban Ard Academy at very young age. As an apprentice, Istredd studied under Roedskilde – a strict teacher who considered lashing an appropriate method of encouraging his student to learn. After finishing his education, Istredd moved into a small village where he started to publish papers concerning magical research; the papers slowly made their way to meetings and conclaves, but were considered so specific and filled with rarefield jargon that even his peers rarely read them. As decades passed, Istredd's research began to focus on history and ecology.
@@ -47,9 +28,3 @@ He possesses a sword from Tergano.
 His authorship of "Monumenta Elforum" is also mentioned in the text "The Aen Seidhe and the Aen Elle".
 Gallery
 Illustration by Jarosław Musiał in Nowa Fantastyka 07/1992In The Hexer TV seriesIstredd in Netflix's The WitcherIstredd in Season 3
-References
-↑ 1.0 1.1 1.2 1.3 1.4 Sword of Destiny
-↑ 2.0 2.1 A Tome of Chaos
-↑ Netflix's The Witcher
-↑ 4.0 4.1 Baptism of Fire
-↑ The Witcher 3: Wild Hunt

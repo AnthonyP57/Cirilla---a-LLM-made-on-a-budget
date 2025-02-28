@@ -9,29 +9,6 @@ It's a dog's life Geralt, I'll tell you that much.
 Zoltan Chivay was a veteran of the Second Nilfgaard War and a friend of the witcher Geralt of Rivia. They first met when Geralt and Zoltan's company were going towards the Yaruga river from Brokilon, but the dwarf advised them to join his company and go eastwards. It is from Zoltan that Geralt got his sword - a sihil.
 After the Battle of Brenna, where him and his mates killed Field-Marshal Menno Coehoorn, Zoltan got engaged to Eudora Breckenriggs.
 He also had a talking parrot, Field Marshal Windbag, which he sold to the gnome Percival Schuttenbach when he started a jeweler's workshop in Novigrad following the war.
-Quick Answers
-What role did Zoltan Chivay play in the Second Nilfgaard War?
-						In the Second Nilfgaard War, Zoltan Chivay, a friend of Geralt of Rivia, played a significant role. They first encountered each other en route to the Yaruga river from Brokilon. Zoltan suggested they join his company and travel east. His role in the Battle of Kaer Morhen was dependent on various factors. Additionally, he held positions as a Merchant in Stacheier, a Runewright at Upper Mill, and a Ducal Camerlengo in Beauclair.
-					
-						Provided by: Fandom
-					
-How did Zoltan Chivay and Geralt of Rivia first meet?
-						Zoltan Chivay, a seasoned warrior from the Second Nilfgaard War, encountered Geralt of Rivia while both were en route to the Yaruga river from Brokilon. Zoltan suggested Geralt and his company divert their course eastwards. Their initial encounter occurred in the wilds of Brugge and Sodden, amidst a war.
-					
-						Provided by: Fandom
-					
-What is the significance of Geralt's sword - a sihil?
-						The Sihil, a dwarven sword gifted to Geralt by Zoltan Chivay in the Witcher novels, is renowned for its superior metallurgy and dwarven runic magic. Crafted in Mahakam by Rhundurin, the blade cuts through targets with minimal resistance. The Dwarven runes inscribed on it translate to a sentiment of doom for its enemies.
-					
-						Provided by: Fandom
-					
-What is unique about Zoltan Chivay's parrot?
-						The distinctiveness of Zoltan Chivay's parrot lies in its foul-mouthed nature. Zoltan, a multifaceted dwarf who is an adventurer and amateur bird trainer, harbors a desire to contribute positively to his immediate environment. His parrot's unique language mirrors his individualistic character.
-					
-						Provided by: Fandom
-					
-{"@context":"https:\/\/schema.org","@type":"FAQPage","name":"Zoltan Chivay","mainEntity":}
-Biography
 
 Forming a company
 When the Second Northern War erupted in July 1267, the dwarves, Chivay, Munro Bruys, Caleb Stratton, Yazon Varda and Figgis Merluzzo, along with a gnome named Percival Schuttenbach and a green parrot named Field Marshal Windbag, formed a company to escape from the enemy front and reach Sodden, passing through the Turlough Hills, the river Chotla and the Ina.
@@ -135,9 +112,3 @@ Videos
 TW2 Characters 3 - Zoltan
 Gallery
 Zoltan's journal image in The Witcher.Zoltan's concept art.Zoltan's The Witcher 2: Assassins of Kings concept art.Zoltan on the Scaffold.Zoltan during a cutscene with Geralt.Zoltan's Gwent card artalternative Zoltan Gwent card artZoltan in Gwent: The Witcher Card GameZoltan: Scoundrel in Gwent: The Witcher Card GameZoltan fighting during the Battle of Brenna
-References
-↑ 1.0 1.1 1.2 Baptism of Fire
-↑ 2.0 2.1 The Lady of the Lake
-↑ Zoltan Chivay – hero presentation
-External links
- See the GWENT standalone game version card: Zoltan

@@ -1,34 +1,6 @@
 Cockatrice
 Cockatrice, also known as a skoffin and kurolishek, is an ornithosaur. It's also the only creature to belong to the order of ornithoreptile according to scholars, but why exactly they decided on this is not revealed. Its central tail feathers are also valuable as they're more durable and sharpen better than regular goose feathers for quills. Cockatrices are often found in remote, rocky areas such as canyons or cliffs. They are aggressive and territorial, attacking anything that ventures into their domain.
 Superstitions surrounding the creature suggest that they are born of eggs laid by roosters consorting with other roosters. The egg must be incubated for forty-four days by a toad, which is devoured by the little beast as soon as it hatches. Another superstition states their glance turns the living to stone; neither are true.
-Quick Answers
-What is the Cockatrice also known as?
-						Also known as skoffin and kurolishek, the Cockatrice is an ornithosaur, the sole member of the ornithoreptile order. Its tail feathers are sought after for their durability and sharpness, superior to regular goose feathers for quill-making. Habitats include remote, rocky areas like canyons or cliffs. A larger version, the 'beast of the sewers', is a notable variant.
-					
-						Provided by: Fandom
-					
-Why are the Cockatrice's central tail feathers valuable?
-						Cockatrice's central tail feathers, also referred to as skoffin or kurolishek, are highly prized for their durability and sharpness, making them superior to regular goose feathers for crafting quills. These aggressive creatures inhabit remote, rocky terrains like canyons or cliffs, and the prized feathers are harvested from their carcasses.
-					
-						Provided by: Fandom
-					
-Where are Cockatrices often found?
-						Cockatrices, also referred to as skoffin and kurolishek, typically inhabit remote, rocky regions like canyons and cliffs. They also thrive in dark caves, deserted ruins, cobweb-filled dungeons, and old basements. In the Witcher 3 game, they are seldom seen, with specific locations including north of Arette, between the small lake west of Yantra and the coast Northeast of Fornhala on Ard Skellig, right above the large lake next to Kaer Dhu, and between Arinbjorn and Eldberg Lighthouse.
-					
-						Provided by: Fandom
-					
-What is the behavior of a Cockatrice like?
-						The Cockatrice, also referred to as a skoffin and kurolishek, is a venomous ornithosaur known for its aggressive, territorial nature. It inhabits remote, rocky terrains like canyons or cliffs. The creature is known to ambush its opponents, delivering sudden strikes and poisoning them with its venom. In direct combat, it fights furiously with its wings and tail, aiming its beak with lethal precision at exposed flesh and vital organs, inflicting severe, potentially fatal wounds.
-					
-						Provided by: Fandom
-					
-Why is the Cockatrice the only creature to belong to the order of ornithoreptile?
-						The Cockatrice, alternatively known as skoffin or kurolishek, is uniquely classified in the ornithoreptile order due to its distinctive bird and reptile traits. The precise rationale behind this exclusive classification remains undisclosed by scholars. Habitually, Cockatrices inhabit remote, rocky terrains like canyons or cliffs and are recognized for their aggressive nature.
-					
-						Provided by: Fandom
-					
-{"@context":"https:\/\/schema.org","@type":"FAQPage","name":"Cockatrice","mainEntity":}
-The Witcher
 
 Journal Bestiary entry
 "Cockatrices are born of eggs laid by roosters consorting with other roosters. The egg must be incubated for forty-four days by a toad, which is devoured by the little beast as soon as it hatches. A cockatrice hates everything that lives so fiercely that its glance turns the living to stone. Only a bold adventurer with a mirror can deflect its deadly gaze and defeat the cockatrice."
@@ -64,7 +36,3 @@ Videos
 The Witcher 3 Shrieker Boss Fight (Hard Mode)
 Gallery
 The Witcher modelIn The Witcher 3: Wild HuntThe Witcher 3: Wild Hunt gwent card artGwent: The Witcher Card Game card art
-References
-↑ 1.0 1.1 The Lady of the Lake
-↑ The Witcher 3: Wild Hunt
-↑ The Witcher

@@ -2,33 +2,6 @@ Hym
 Hym is a type of specter that appears in The Witcher 3: Wild Hunt.
 It's particularly formidable in that it doesn't outright attack its target but instead feeds on the target's guilt, tormenting them to the point the person goes completely mad or they commit suicide.
 According to scholars who wrote Behind the Great Veil, hyms are one of the most dangerous demons and cannot be exorcised traditionally. They inhabit several spheres, including the real world and Gaunter O'Dimm's dark plane.
-Quick Answers
-What is the unique method by which the Hym in Witcher 3 torments its victims?
-						The Hym, a specter in Witcher 3, torments victims by amplifying their guilt. It doesn't physically assault, but mentally manipulates them into madness or suicide. The torment continues until the victim loses their sanity or life. A silver sword with specter oil, as per Witcher's exorcism method, can combat a Hym.
-					
-						Provided by: Fandom
-					
-Why are Hym considered one of the most dangerous demons in The Witcher 3?
-						In The Witcher 3, Hym is a specter deemed as one of the deadliest demons. It torments its victims by feeding on their guilt and fear, driving them to madness or suicide. Traditional exorcism methods are ineffective against Hym, which can exist in various spheres, such as the real world and Gaunter O'Dimm's dark plane. It remains invisible to everyone except its chosen victim.
-					
-						Provided by: Fandom
-					
-What spheres does the Hym inhabit in The Witcher 3?
-						In The Witcher 3, the Hym, a type of specter, inhabits Spikeroog and Gaunter's world. It torments its victims by feeding on their guilt, driving them to madness or suicide. The Hym doesn't physically attack but uses psychological torment. It can briefly be seen on the walls of an old home's basement during the looting of the sword Brokvar.
-					
-						Provided by: Fandom
-					
-How does the Hym differ from other specters in The Witcher 3?
-						In The Witcher 3: Wild Hunt, the Hym distinguishes itself from other specters by feeding off a person's guilt rather than haunting locations or individuals due to unresolved matters. This specter torments its victims to madness or suicide without direct attacks. It can be defeated either through direct combat or trickery, and is vulnerable to Moon Dust, Specter oil, and the Igni sign.
-					
-						Provided by: Fandom
-					
-Why can't Hym be exorcised traditionally in The Witcher 3?
-						In The Witcher 3, Hym is a unique creature that feeds off a person's guilt, causing self-harm. Traditional exorcism fails as the Hym only departs after driving its host to insanity or suicide. The Witcher's exorcism method involves confronting the Hym with a silver sword and specter oil or deceiving it. The Hym was once expelled when it found no guilt to feed upon.
-					
-						Provided by: Fandom
-					
-{"@context":"https:\/\/schema.org","@type":"FAQPage","name":"Hym","mainEntity":}
 Bestiary entry
 Some men have got good reason to fear their own shadows.– Svargmitt, An Skellig druid
 Monsters most commonly claim innocents as their victims: tardy merchants, reckless children and travelers who wander into dark woodlands out of misplaced curiosity. None of the above need fear hyms, however. These wraiths only latch onto particularly despicable individuals who have committed some unspeakable crime. To all others, they remain completely invisible. When they do show themselves to the one they torment, they appear as a tall, shadow-clad, humanoid silhouette with long, sharp claws.
