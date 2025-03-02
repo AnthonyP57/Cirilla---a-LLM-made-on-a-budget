@@ -1,7 +1,6 @@
 import torch
 import os
 from dataset import mask
-import math
 
 def beam_search_decode(model, enc_in, enc_mask, tokenizer, seq_len, beam_size=3, temperature=1, device = torch.device('cuda')):
     sos_token = tokenizer.token_to_id('[SOS]')
