@@ -92,7 +92,7 @@ pe[:, 0::2] = torch.sin(position * div_term)
 pe[:, 1::2] = torch.cos(position * div_term)
 ```
 <p align="center">
-  <img src="./img/embeddings_new.png" alt="positional-encodings-original", width="700"/>
+  <img src="./img/embeddings_new.png" alt="positional-encodings-new", width="700"/>
 </p>
 
 <div align='center'>
@@ -148,7 +148,7 @@ To handle very long sequences we would need to use RNNs, however they are sequen
 
 </br>
 <p align="center">
-  <img src="./img/example_sparse_attention.png" alt="positional-encodings-original", width="600"/>
+  <img src="./img/example_sparse_attention.png" alt="sparse-attention", width="600"/>
 </p>
 
 <div align='center'>
@@ -158,7 +158,7 @@ To handle very long sequences we would need to use RNNs, however they are sequen
 </br>
 
 <p align="center">
-  <img src="./img/example_dilated_attention.png" alt="positional-encodings-original", width="600"/>
+  <img src="./img/example_dilated_attention.png" alt="dilated-attention", width="600"/>
 </p>
 
 <div align='center'>
