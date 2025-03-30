@@ -10,7 +10,7 @@
 </p>
 
 <div align='center'>
-<em>Fig.1 Transformer architecture overview [^1]</em>
+<em>Fig.1 Transformer architecture overview [1]</em>
 </div>
 
 ## Previous SOTA

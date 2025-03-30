@@ -46,7 +46,7 @@ Radovid - a LLM made on a budget/
     │   ├── model.py                # transformer model
     │   ├── dataset.py              # dataset for MLM - masked language modelling
     │   ├── train.py                # main transformer training loop
-    │   └── dataset.py              # LongNet - dilated attention implementation
+    │   └── LongNet.py              # LongNet - crude dilated attention implementation
     │
     │── witcher_fandom/
     │   ├── scraped data from https://witcher.fandom.com/wiki/Witcher_Wiki
