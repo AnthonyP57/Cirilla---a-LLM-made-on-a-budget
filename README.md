@@ -9,7 +9,7 @@
 
 # Radovid
 Radovid is an open source learning project aiming at implmenting various LLMs.
-It is focused mainly on showing how to make, train, infer and deploy a LLM from scratch using Pytorch (and CUDA in the future) and a budget friendly GPU (RTX 4060Ti 16GiB ~500$).
+It is focused mainly on showing how to make, train, infer and deploy a LLM from scratch using Pytorch (and Triton in the future) and a budget friendly GPU (RTX 4060Ti 16GiB ~500$).
 ## Who is Radovid
 Radovid V is a fictional character in The Witcher franchise, appearing in both the books by Andrzej Sapkowski and their adaptations, including The Witcher video games by CD Projekt Red. He was the King of Redania, a powerful and wealthy kingdom in the Witcher universe. Radovid was an ambitious ruler who often showed no mercy to those he deemed enemies. His reign was marked mainly by warfare and relentless crusade against magic, particularly the mages and sorceresses whom he viewed as a threat to his rule. Over time, his paranoia and obsession with power led to increasingly brutal and oppressive measures, earning him both fear and infamy across the Northern Kingdoms.
 
