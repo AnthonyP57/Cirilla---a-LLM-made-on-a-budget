@@ -64,7 +64,7 @@ Some parts of the model in the implementation may differ to what has been origin
 
 ### Different embeddings
 #### Original formula
-```
+```python
 pe = torch.zeros(max_seq_len, d_model)
 position = torch.arange(0, max_seq_len, dtype=torch.float).unsqueeze(1)
 div_term = torch.arange(0, d_model, 2).float()
@@ -83,7 +83,7 @@ pe[:, 1::2] = torch.cos(position * div_term)
 
 #### Tweaked formula
 
-```
+```python
 pe = torch.zeros(max_seq_len, d_model)
 position = torch.arange(0, max_seq_len, dtype=torch.float).unsqueeze(1)
 iv_term = torch.exp(torch.arange(0, d_model, 2).float() * (-math.log(10000.0) / d_model))

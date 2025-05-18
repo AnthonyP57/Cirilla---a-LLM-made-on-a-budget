@@ -193,7 +193,7 @@ doc_prefix_lm_causal_mask = generate_doc_mask_mod(prefix_lm_causal, document_id)
 We get a block-prefixLM-diagonal shaped mask
 ![](./img/prefixcausal.avif)
 
-## FlexAttention for inference
+## [FlexAttention for inference](https://pytorch.org/blog/flexattention-for-inference/)
 ```torch.compile``` lowers ```flex_attention``` to a fused kernel. There is a dedicated FlexDecoding backend optimiez for long-context LLM inference incorporating decoder-specific techniques. ```flex_attention``` automatically switches to the FlexDecoding backend for JIT compilation when given a short query and a long KV cache.
 
 ```python
@@ -214,7 +214,7 @@ flex_attention(q_last_token  , k_cache, v_cache, ...) # Recompiles with the Flex
 flex_attention(q_last_2_tokens, k_cache, v_cache, ...) # No recompilation needed! Runs the decoding kernel again.
 ```
 
-## KV Cache
+### KV Cache
 FlexDecoding takes a user-defined ```mask_mod``` and ```score_mod``` functions. In the decoding phas previously calculated tokens are cached and only the latest generated token is used as the query.
 ```python
 # a naive way
@@ -254,6 +254,55 @@ def get_mask_mod_w_offset(mask_mod: _mask_mod_signature, _offset: tensor):
 causal_w_offset = get_score_mod_w_offset(causal, offset)
 ```
 
+### BlockMask for inference
+The idea is to precompute the BlockMask once during model setup and use slices of it during decoding.
+```python
+from torch.nn.attention.flex_attention import create_block_mask
+
+def causal_mask(b, h, q_idx, kv_idx):
+    return q_idx >= kv_idx
+
+block_mask = create_block_mask(causal_mask, B=None, H=None, Q_LEN=MAX_SEQ_LEN,KV_LEN=MAX_SEQ_LEN)
+```
+For the i-th token
+```python
+block_offset = i // block_mask.BLOCK_SIZE[0]
+block_mask_slice = block_mask[:, :, block_offset]
+
+# don't forget to use the mask_mod with offset! 
+block_mask_slice.mask_mod = get_mask_mod_w_offset(causal_mask)
+```
+
+### Paged attention
+PagedAttention scatters KV cache to reduce memory fragmentation and support higher batch sizes, with PagedAttention we can chunk each request into multiple pages of the same size page_size and scatter into a physical KV cache. This avoids padding requests to the same length and saves memory.
+
+One question is how to reqrite user-specified ```mask_mod``` and ```score_mod``` for PagedAttention. The following code shows an automated conversion at runtime. The ```new_mask_mod``` would take the physical_kv_idx and convert it back into the logical_kv_idx and apply user-specified ```mask_mod``` on the logical_kv_idx, the out-of-boundary blocks are masked with ```torch.where```. After batching logical KV caches into the same physical KV cache there are much more physical blocks then the number of logical blocks. By masking with ```torch.where``` we are ensuring that data from different requests does not interfere with each other.
+
+[Code](https://github.com/pytorch-labs/attention-gym/blob/main/attn_gym/paged_attention/paged_attention.py)
+```python
+def get_mask_mod(mask_mod: Optional[_mask_mod_signature]) -> _mask_mod_signature:
+    if mask_mod is None:
+        mask_mod = noop_mask
+
+    def new_mask_mod(
+        b: torch.Tensor,
+        h: torch.Tensor,
+        q_idx: torch.Tensor,
+        physical_kv_idx: torch.Tensor,
+    ):
+        physical_kv_block = physical_kv_idx // page_size
+        physical_kv_offset = physical_kv_idx % page_size
+        logical_block_idx = physical_to_logical[b, physical_kv_block]
+        logical_kv_idx = logical_block_idx * page_size + physical_kv_offset
+        return torch.where(
+            logical_block_idx >= 0, mask_mod(b, h, q_idx, logical_kv_idx), False
+        )
+
+    return new_mask_mod
+```
+
+PagedAttention shows 5% less overhead from FlexAttention.
+
 ## FAQ
 ### When flexattention needs to recompile
 It does not need ot recompile even if the caputed tensor changes values e.g.
@@ -281,3 +330,10 @@ Whenever the block-sparsity changes, but recomputing is much cheaper than recomp
 
 ### Performance
 Generally speaking FlexAttention is nearly as performant as a handwritten Triton kernel
+
+### Performance tuning for FlexAttention
+For optimal performance, compile FlexAttention using max-autotune, especially when dealing with complex score_mods and mask_mods.
+```python
+flex_attention = torch.compile(flex_attention, dynamic=True, mode=’max-autotune’)
+```
+While compilation takes longer, the optimal configuration is cached for future kernel execution.
