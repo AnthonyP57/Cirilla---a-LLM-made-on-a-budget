@@ -31,7 +31,7 @@ LLaMa 1 came in Febuary 2023 with sizes between ~7B to ~63B parameters, and was 
 [^3]The context length was around 4k with model sizes varying from ~7B to 70B and introduced GQA (grouped query attention).
 
 ## Normalization and RMS Norm
-Why we do normalization? - we do this to somehow keep the data from the previous layer passed to the next layer in the same range, so that the layers do not need to change drastically (the phenomenon of drasticly changing the model weights is called the Internal Covariance Shift).
+[^2]Why we do normalization? - we do this to somehow keep the data from the previous layer passed to the next layer in the same range, so that the layers do not need to change drastically (the phenomenon of drasticly changing the model weights is called the Internal Covariance Shift).
 ### Layer normalization
 $x' = \frac{(x-\mathbb{E}[x])}{\sqrt{\mathbb{Var}([x]) + \epsilon}} \cdot \gamma + \beta$
 
@@ -71,7 +71,7 @@ Absolute positional encodings are what is used originally and they encode the ab
 We are interested as how two words relate to each other, they deal with 2 tokens at the time. So given two vectors we create a vector that represents their distance.
 
 ### Rotary positional embeddings RoPE
-RoPE is supposed to encode the relative distance between $Q$ and $K$ that only depends on the two vectors and the relative distance they represent. It is done as
+[^5]RoPE is supposed to encode the relative distance between $Q$ and $K$ that only depends on the two vectors and the relative distance they represent. It is done as
 
 <!-- $v' = R_{\theta} \cdot v \text{ where } R_{\theta} = \begin{bmatrix} \cos\theta & -\sin\theta \\ \sin\theta & \cos\theta \\ \end{bmatrix} \text{ is a rotation matrix}$ -->
 ![](./img/rotary1.png)
