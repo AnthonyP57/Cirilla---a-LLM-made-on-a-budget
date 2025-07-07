@@ -73,12 +73,16 @@ We are interested as how two words relate to each other, they deal with 2 tokens
 ### Rotary positional embeddings RoPE
 RoPE is supposed to encode the relative distance between $Q$ and $K$ that only depends on the two vectors and the relative distance they represent. It is done as
 
-$v' = R_{\theta} \cdot v \text{ where } R_{\theta} = \begin{bmatrix} \cos\theta & -\sin\theta \\\ \sin\theta & \cos\theta \\\ \end{bmatrix} \text{ is a rotation matrix}$
+<!-- $v' = R_{\theta} \cdot v \text{ where } R_{\theta} = \begin{bmatrix} \cos\theta & -\sin\theta \\ \sin\theta & \cos\theta \\ \end{bmatrix} \text{ is a rotation matrix}$ -->
+![](./img/rotary1.png)
 
 when the vector is not 2-dimentional we need to use a different $R_{\theta}$ but it is very spars. We will do this in a more computatioanlly efficient way:
 
 $m\text{ - position of embedding}$
-$v \cdot R_{theta} = \begin{pmatrix} v_1 \\\ v_2 \\\ v_3 \\\ v_4 \\\ \vdots \\\ v_{d-1} \\\ v_d\\\\end{pmatrix} \times \begin{pmatrix} \cos m\theta_1 \\\ \cos m\theta_1 \\\ \cos m\theta_2 \\\ \cos m\theta_2 \\\ \vdots \\\ \cos m\theta_{d/2} \\\ \cos m\theta_{d/2}\end{pmatrix} \times \begin{pmatrix} -v_2 \\\ v_1 \\\ -v_4 \\\ v_3 \\\ \vdots \\\ -v_d \\\ v_{d-1}\end{pmatrix} \times \begin{pmatrix} \sin m\theta_1 \\\ \sin m\theta_1 \\\ \sin m\theta_2 \\\ \sin m\theta_2 \\\ \vdots \\\ \sin m\theta_{d/2} \\\ \sin m\theta_{d/2}\end{pmatrix}$
+
+![](./img/rotary2.png)
+
+<!-- $v \cdot R_{theta} = \begin{pmatrix} v_1 \\ v_2 \\ v_3 \\ v_4 \\ \vdots \\ v_{d-1} \\ v_d\\\end{pmatrix} \times \begin{pmatrix} \cos m\theta_1 \\ \cos m\theta_1 \\ \cos m\theta_2 \\ \cos m\theta_2 \\ \vdots \\ \cos m\theta_{d/2} \\ \cos m\theta_{d/2}\end{pmatrix} \times \begin{pmatrix} -v_2 \\ v_1 \\ -v_4 \\ v_3 \\ \vdots \\ -v_d \\ v_{d-1}\end{pmatrix} \times \begin{pmatrix} \sin m\theta_1 \\ \sin m\theta_1 \\ \sin m\theta_2 \\ \sin m\theta_2 \\ \vdots \\ \sin m\theta_{d/2} \\ \sin m\theta_{d/2}\end{pmatrix}$ -->
 
 They are computed once and then we can reuse them. And the relation between two tokens decays as the distance grows (what we want). we do not add anything - we multiply the token embedding by the rotation matrix. The RoPE are applied onlt to the $Q$ and $K$ matrices and after they have been multiplied by $W$, in the vanilla transformer they are applied before.
 
