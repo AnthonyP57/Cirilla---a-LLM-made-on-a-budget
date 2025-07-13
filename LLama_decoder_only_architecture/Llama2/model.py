@@ -70,7 +70,7 @@ class RMSNorm(nn.Module):
         # (dim) * (b, seq_len, dim) -> (b, seq_len, dim)
         return self.weight * self._norm(x.float()).type_as(x)
     
-class EncoerBlock(nn.Module):
+class EncoderBlock(nn.Module):
     def __init__(self, args: ModelArgs):
         super().__init__()
 
@@ -165,7 +165,7 @@ class FeedForward(nn.Module):
         hidden_dim = int(2 * hidden_dim / 3)
         if args.ffn_dim_multiplier is not None:
             hidden_dim = int(args.ffn_dim_multiplier * hidden_dim)
-        hidden = args.multiple_of * ((hidden_dim + args.multiple_of - 1) // args.multiple_of)
+        hidden_dim = args.multiple_of * ((hidden_dim + args.multiple_of - 1) // args.multiple_of)
 
         # what happened above is e.g hidden is 7 but multiple_of is 5 so we want to get a multiple of 5 so 10
         # e.g. (7+4) // 5 = 2

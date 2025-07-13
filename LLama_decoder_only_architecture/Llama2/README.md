@@ -9,7 +9,8 @@ Then (in vanilla transformer) we add positional embeddings (they are called abso
 
 In Llama we use RoPE, we also compute them before the calculation of the attention and they are calculated for Q and K only. RoPE are something between absolute and relative embeddings - RoPE were introduced as a way to find an inner product between Q and K that only depends on their relative distance, this is done through Euler's formula (the one when we take the power of e^[x] to get a rotation), so the tokens that are in a similar position are kinda similar.
 
->[!NOTE] inner product is a "generalization" of the dot product
+>[!NOTE]
+>inner product is a "generalization" of the dot product
 
 The vanilla rotational metrix is very sparse, so we calculate it as below instead
 ![](../img/rotary2.png)
