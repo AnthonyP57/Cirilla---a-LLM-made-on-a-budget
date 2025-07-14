@@ -43,7 +43,8 @@ On a lower level: an LLM is a neural network trained on so-called big data to re
 ```bash
 Radovid - a LLM made on a budget/
     │
-    ├── BERT/                       # overview of BERT    
+    ├── BERT/                       # overview of BERT
+    │   └── RAG/                    # overview of RAG
     │
     ├── Decoder_only_architecture/  # overview of decoder only transformer architecture
     │   └── Llama2/                 # implementation of Llama 2 inference loop
