@@ -64,3 +64,27 @@ $\text{(Row-wise)} \\ X'_{i,:} = \frac{X_{i,:}}{RMS(X_{i,:})}$
 
 ![](../img/attn_mechanisms.png)
 
+## Inference strategies
+### Greedy decode
+At each time step we select the token with the highest probability.
+    + easy to implement
+    - performs poorly in practice
+
+### Beam Search
+We always keep top k answers and for them we search top k best tokens (k*k in total) and we choose k best etc. based on the cumulative probability.
+    + works good in practice
+    - is somewhat expensive
+
+### Random Sampling
+As token probabilites can be thought to be a probability distribution we can sample from it at each time step.
+    - may return complete garbage
+ 
+### Top K
+We sort the logits and just keep the highest k and apply softmax only to them. Then we can choose the tokens with e.g. random sampling.
+    + not considering "bad" tokens
+    - "bad" tokens can still get into the top K logits and be selected
+
+### Top P
+Top P solves the problem of Top K - we keep the tokens with highest probability such that the cumulative probability is $\geq$ P (after softmax).
+
+In Llama 2 they used Top P
