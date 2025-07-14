@@ -40,8 +40,19 @@ On a high level: imagine a toddler with an huge amount of knowledge but still po
 On a lower level: an LLM is a neural network trained on so-called big data to recognize patterns, generate human-like responses, and predict the most likely next word in a given context. While it can process and recall information efficiently, it lacks true understanding, reasoning, or consciousness, relying only on statistical correlations rather than genuine comprehension. the reasoning of LLMs is being impoved in projects (most notably) like DeepSeek, which focus on enhancing the ability to understand context and simulating human-like reasoning.
 
 ## Repo organization:
-```
+```bash
 Radovid - a LLM made on a budget/
+    │
+    ├── BERT/                       # overview of BERT    
+    │
+    ├── Decoder_only_architecture/  # overview of decoder only transformer architecture
+    │   └── Llama2/                 # implementation of Llama 2 inference loop
+    │
+    ├── FlexAttention/              # overview of Pytorch's FlexAttention
+    │
+    ├── HF_kernels/                 # overview of HF's kernel hub
+    │   └── examples/
+    │
     ├── Transformer_from_scratch/   # transformer implementation
     │   ├── model.py                # transformer model
     │   ├── dataset.py              # dataset for MLM - masked language modelling
@@ -53,13 +64,21 @@ Radovid - a LLM made on a budget/
     │   ...
     │
     │── witcher_instruct/
-    │   ├── so-called instructions for the model to follow regarding the Witcher
+    │   ├── so-called instructions regarding the Witcher, gathered from fandom
     │   ...
     │
     │── witcher_json/
     │   ├── json of what data to scrape from fandom
     │   ...
     │
-    │── fandom_create_instruct.py   # create the so-called instructions
-    └── fandom_scraper.py           # scrape the data based on the witcher_json/
+    │── witcher_synthetic_instruct/
+    │   ├── clean.jsonl             # Witcher instructions created with LLMs
+    │   ├── reason_gym_synth.jsonl  # Reasoning dataset created with reasoning_gym
+    │   ...
+    │
+    │── fandom_create_instruct.py   # create the so-called instructions from fandom data
+    │── fandom_scraper.py           # scrape the data based on the witcher_json/
+    │── Ollama_create_instruct.py   # based on the fandom data create instructions with LLMs
+    │── reason_gym_synthetic.py     # with reasoning gym create synthetic data
+    └── rm_duplicate_instruct.py    # remove duplicate instructions from Ollama
 ```
