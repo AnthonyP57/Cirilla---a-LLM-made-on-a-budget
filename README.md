@@ -48,6 +48,7 @@ Radovid - a LLM made on a budget/
     │
     ├── Decoder_only_architecture/  # overview of decoder only transformer architecture
     │   └── Llama2/                 # implementation of Llama 2 inference loop
+    │   └── Mistral/                # overview of the Mistral 7B architecture and inference tricks
     │
     ├── FlexAttention/              # overview of Pytorch's FlexAttention
     │

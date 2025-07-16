@@ -1,5 +1,9 @@
 # Mistral
-Mistral is a French startup, founded in 2023 that specializes in making LLMs. The first paper that Mistal released is Mistral 7B, describing the model they released of the same name.
+
+> [!IMPORTANT]
+> A lot of these notes were made with the meritorical help of [Umar Jamil](https://www.youtube.com/@umarjamilai) - through his content and comments to Mistral source code. So special thanks to him !!!
+
+[^1]Mistral is a French startup, founded in 2023 that specializes in making LLMs. The first paper that Mistal released is Mistral 7B, describing the model they released of the same name.
 ## Architecture overview
 Mistral has multiple key elements in its architecture, with context length of 8k
 ### Attention
@@ -9,7 +13,7 @@ Uses just SiLU function, but also uses MoE - Misture of Experts.
 
 ## Architecture details
 ### Sliding window attention
-Obviously as Mistral is a decoder only model we need the attention to be causal, what is new is that we apply additionally a mask thats cuts off some of the values below the diagonal with a given offset - in effect words are just related to only few of their predecessors, thus less dot product calculations. Obviously this shriks the local context (smaller receptive field) for each word, but e.g. if you watch the whole Lord of the Rings series you do not necessarily care about the relation of the first 15 minutes of the first movie with the last 15 minutes of the movie, as they are around 12h apart.
+[^1] [^2]Obviously as Mistral is a decoder only model we need the attention to be causal, what is new is that we apply additionally a mask thats cuts off some of the values below the diagonal with a given offset - in effect words are just related to only few of their predecessors, thus less dot product calculations. Obviously this shriks the local context (smaller receptive field) for each word, but e.g. if you watch the whole Lord of the Rings series you do not necessarily care about the relation of the first 15 minutes of the first movie with the last 15 minutes of the movie, as they are around 12h apart.
 
 ![](./img/sliding_window.png)
 
@@ -90,3 +94,11 @@ Instead we can combine all the tokens into one big sequence and in the attention
 ![](./img/xformer1.png)
 ![](./img/xformer2.png)
 Block Diagonal Causal Mask
+
+## Disclaimer
+> [!CAUTION]
+> This repo does not serve to amazingly describe and explain model architectures, it was made to give a broad simplified overview of the models and implement them.
+
+[^1]: Jiang, A. Q., Sablayrolles, A., Mensch, A., Bamford, C., Chaplot, D. S., De Las Casas, D., Bressand, F., Lengyel, G., Lample, G., Saulnier, L., Lavaud, L. R., Lachaux, M., Stock, P., Scao, T. L., Lavril, T., Wang, T., Lacroix, T., & Sayed, W. E. (2023). Mistral 7B. arXiv (Cornell University). https://doi.org/10.48550/arxiv.2310.06825
+
+[^2]: Umar J. (2023). Mistral / Mixtral Explained: Sliding Window Attention, Sparse Mixture of Experts, Rolling Buffer https://www.youtube.com/watch?v=UiX8K-xBUpE&ab_channel=UmarJamil
