@@ -34,8 +34,8 @@ if __name__=='__main__':
 
     out = flex_attention(query, key, value, block_mask=block_mask)
     print(out[0,0,:8,:8])
-    compiled = torch.compile(flex_attention, dynamic=False, mode='max-autotune') # for bigger q k v sizes this will throw an error - out of resource: shared memory, Required: 335872, Hardware limit: 101376.
-    out = compiled(query, key, value, block_mask=block_mask) # after compilation the block_mask may change and this won't trigger recompilation
+    flex_attention = torch.compile(flex_attention, dynamic=False, mode='max-autotune') # for bigger q k v sizes this will throw an error - out of resource: shared memory, Required: 335872, Hardware limit: 101376.
+    out = flex_attention(query, key, value, block_mask=block_mask) # after compilation the block_mask may change and this won't trigger recompilation
     
     query_ = torch.rand((1,1,512,128), device='cuda', dtype=torch.bfloat16)
     key_ = torch.rand((1,1,512,128), device='cuda', dtype=torch.bfloat16)
