@@ -56,3 +56,37 @@ But what is the users prompt is bigger then the sliding window e.g. sliding wind
 ![](./img/kvcache_step3.png)
 
 4. After that when we generate we come back to vanilla KV cache with rolling buffer.
+
+### Sparse Mixture of Experts
+MoE - Mixture of Experts is an ensemble technique, where we have multiple experts that sepcialize in different things and their outputs are combined, usualyy theirs logits are combined as a weighted sum.
+
+In SMoE - Sparse MoE we utilize only a few of the experts e.g. 2 out of 8, we choose the experts with a gating mechanism, and then the weight of each expert is calculated as softmax of the top k chosen experts (for each token).
+![](./img/smoe.png)
+
+![](./img/smoe_over.png)
+
+![](./img/smoe_mistral.png)
+
+During training we can have many expert models, but during inference we may use just 2, in vanilla MoE we would use all the experts both during training and inference. For instance if we train the model for multiple languages each Expert may learn one of the langauges.
+
+![](./img/smoe_code.png)
+
+### Model Sharding
+When we have a model that cannot fit on a single GPU, we can divide the model into groups/chunks/**shards** and place them on different GPUs. But this method in a naive approach is not very efficient as we wait for each subsequent GPU to finsh calculation
+![](./img/shard_problem.png)
+a better approach is to shift them an the time scale so that alll the GPUs are utilized all the time (Pipeline Paralellizm). From a bigger batch we create micro batches e.g. we have a macro batch of 8, so we divide it into 4 micro batches of 2 items, we still have bubbles when the GPUs aren't working but this is still a getter utilization of GPUs.
+![](./img/shard_solution.png)
+
+At inference we just don't have the backward pass.
+
+### Block attention - xformers library
+xformers is a library for optimizing inference. When we have multiple API requests a naive way would be to just pad the requests up the the longest one and pass it through the model, however this is not very efficient as we will calculate a lot of meaningless dot products.
+![](./img/naive_1.png)
+![](./img/naive_2.png)
+![](./img/naive_3.png)
+
+Instead we can combine all the tokens into one big sequence and in the attention mask be can mask out any connections between themso they do not have any impact on each other.
+
+![](./img/xformer1.png)
+![](./img/xformer2.png)
+Block Diagonal Causal Mask
