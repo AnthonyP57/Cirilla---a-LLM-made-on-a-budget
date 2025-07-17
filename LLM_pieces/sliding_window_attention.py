@@ -4,10 +4,10 @@ from attn_gym.mods import generate_tanh_softcap
 from RoPE import RoPE
 import torch.nn as nn
 from dataclasses import dataclass
-from typing import Union, Callable
+from typing import Union, Callable, Optional
 import torch
 
-SLIDING_WINDOW = 1024
+SLIDING_WINDOW = 512
 SOFT_CAP = 20
 
 def sliding_window_causal(b, h, q_idx, kv_idx):
@@ -30,10 +30,16 @@ class AttentionArgs:
     n_kv_heads:int = 4
     dim:int = 128*16
     static_mask:bool = True
+    window_size:int = 512
+    soft_cap:Optional[int] = 20
 
 class SlidingWindowAttention(nn.Module):
     def __init__(self, args: AttentionArgs, rope:RoPE, mask:Union[BlockMask, create_dynamic_block_mask]=None, score_mod:Callable=None):
         super().__init__()
+
+        global SLIDING_WINDOW, SOFT_CAP
+        SLIDING_WINDOW = args.window_size
+        SOFT_CAP = args.soft_cap
 
         self.n_kv_heads = args.n_heads if args.n_kv_heads is None else args.n_kv_heads
         self.n_heads_q = args.n_heads
@@ -138,7 +144,7 @@ if __name__=='__main__':
     rope = RoPE(128, 2048)
 
     attention_layer = SlidingWindowAttention(AttentionArgs(), rope, mask=static_mask, score_mod=softcap).to('cuda', dtype=torch.bfloat16)
-    # attention_layer = torch.compile(attention_layer, mode='max-autotune')
+    attention_layer = torch.compile(attention_layer, mode='max-autotune')
     out = attention_layer(x)
     print(out.shape)#, out)
 
