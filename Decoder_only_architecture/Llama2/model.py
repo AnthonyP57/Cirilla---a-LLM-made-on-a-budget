@@ -155,7 +155,7 @@ class SelfAttention(nn.Module):
         scores = F.softmax(scores.float(), dim=-1).type_as(xq)
         # (b, h_q, 1, head_dim)
         out = torch.matmul(scores, values)
-        out = torch.transpose(1,2).contiguous().view(batch_size, seq_len, -1)
+        out = out.transpose(1,2).contiguous().view(batch_size, seq_len, -1)
         return self.wo(out) #(b, 1, dim)
 
 class FeedForward(nn.Module):
