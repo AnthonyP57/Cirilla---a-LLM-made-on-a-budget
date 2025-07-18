@@ -5,32 +5,36 @@ from tokenizers import SentencePieceBPETokenizer
 from transformers import PreTrainedTokenizerFast, AutoTokenizer
 from huggingface_hub import HfApi, PyTorchModelHubMixin
 from huggingface_hub.repocard import metadata_eval_result, metadata_save
-from pathlib import Path
 import json
 import tempfile
+from typing import Iterator
+from pathlib import Path
+import os
 
-# Device setup
-device = torch.device("cuda:0" if torch.cuda.is_available() else "cpu")
-torch.set_float32_matmul_precision('high')
+SPECIAL_TOKENS = {'unk_token':'[UNK]', 'pad_token':'[PAD]', 'mask_token':'[MASK]',
+                  'bos_token':'[SOS]', 'eos_token':'[EOS]'}
 
-def prepare_tokenizer(save_dir: Path) -> PreTrainedTokenizerFast:
-    save_dir.mkdir(parents=True, exist_ok=True)
-    sample = ["hello world! this is a tiny corpus.", "demo sentence."]
-    corpus = save_dir / "corpus.txt"
-    with open(corpus, "w") as f:
-        f.write("\n".join(sample))
+def sentence_iterator(dataset):
+   for item in dataset:
+      yield item
 
-    spm = SentencePieceBPETokenizer()
-    spm.train(files=[str(corpus)], vocab_size=10, min_frequency=1)
+def prepare_tokenizer(save_dir, data:Iterator) -> PreTrainedTokenizerFast:
+    tokenizer_json = os.path.join(save_dir, 'tokenizer.json')
 
-    tokenizer_json = save_dir / "tokenizer.json"
-    spm._tokenizer.save(str(tokenizer_json))
+    if not os.path.exists(tokenizer_json):
+        spm = SentencePieceBPETokenizer()
+        spm.train_from_iterator(sentence_iterator(data),
+                                special_tokens=list(SPECIAL_TOKENS.values()),
+                                min_frequency=4,
+                                limit_alphabet=1_000,)
+                                # vocab_size=50_000,)
+        spm.save(tokenizer_json)
 
+    return into_pretrained(tokenizer_json)
+
+def into_pretrained(tokenizer_json):
     return PreTrainedTokenizerFast(
-        tokenizer_file=str(tokenizer_json),
-        unk_token="<unk>", pad_token="<pad>",
-        cls_token="<s>", sep_token="</s>", mask_token="<mask>"
-    )
+        tokenizer_file=str(tokenizer_json), **SPECIAL_TOKENS)
 
 class NN(
     nn.Module,
@@ -53,47 +57,44 @@ class NN(
 
 hypers = {
     "in_size": 64,
-    "out_size": 64,
+    "out_size": 1,
     "hidden_size": 16,
     "epochs": 3,
     "batch_size": 16,
-    'lr': 1e-3
+    "lr": 1e-3
 }
 
-data = torch.randn(512, hypers['in_size'], device=device)
-labels = torch.randint(0, hypers['out_size'], (512,), device=device)
-loader = torch.utils.data.DataLoader(
-    torch.utils.data.TensorDataset(data, labels),
-    batch_size=hypers['batch_size'], shuffle=True
-)
+dataset = torch.utils.data.TensorDataset(torch.rand(1024, hypers['in_size']), torch.rand(1024, hypers['out_size']))
+dataloader = torch.utils.data.DataLoader(dataset, shuffle=True, batch_size=hypers['batch_size'])
 
-model = NN(hypers['in_size'], hypers['hidden_size'], hypers['out_size']).to(device)
-optimizer = optim.Adam(model.parameters(), lr=hypers['lr'])
-criterion = nn.CrossEntropyLoss()
-total_loss = 0.0
-for epoch in range(1, hypers['epochs'] + 1):
-    epoch_loss = 0.0
-    for x, y in loader:
-        x = x.to(device).to(torch.bfloat16)
-        y = y.to(device)
-        logits = model(x)
-        loss = criterion(logits.view(-1, hypers['out_size']), y)
-        optimizer.zero_grad()
-        loss.backward()
-        optimizer.step()
-        epoch_loss += loss.item() * x.size(0)
-    avg_loss = epoch_loss / len(loader.dataset)
-    total_loss = avg_loss
-    print(f"Epoch {epoch}/{hypers['epochs']} loss: {avg_loss:.3f}")
+model = NN(hypers['in_size'], hypers['hidden_size'], hypers['out_size'])
+optimizer = optim.SGD(model.parameters(), lr=hypers['lr'])
+criterion = nn.MSELoss()
+
+for epoch in range(hypers['epochs']):
+   for x, y in dataloader:
+      x, y = x.to(dtype=torch.bfloat16), y.to(dtype=torch.bfloat16)
+      pred = model(x)
+      loss = criterion(pred, y)
+
+      optimizer.zero_grad()
+      loss.backward()
+      optimizer.step()
 
 def get_core_metadata(m: nn.Module) -> dict:
     return {
-        "model_size": f"{sum(p.numel() for p in m.parameters()):,}",
-        "tensor_type": str(next(m.parameters()).dtype).split('.')[-1],
+        "model_size": f"{int(sum(p.numel() / 1000 for p in m.parameters()))} K",
+        "tensor_type": 'BF16',
     }
+
+tokenizer_data = ["hello world!",
+                  "I am vengeance"]
+
+tokenizer = prepare_tokenizer('./Radovid_model', tokenizer_data)
 
 def push_to_hub(repo_id,
                 model,
+                tokenizer,
                 hyperparameters,
                 ):
 
@@ -119,8 +120,7 @@ def push_to_hub(repo_id,
     metadata["tags"] = [
           "pytorch",
           "text-generation",
-          "custom-implementation",
-          "Mixture of Experts"
+          "mixture of experts"
       ]
     metadata['library'] = 'pytorch'
     metadata['license'] = 'mit'
@@ -131,9 +131,9 @@ def push_to_hub(repo_id,
         task_id="text-generation",
         metrics_pretty_name="mse",
         metrics_id="mse",
-        metrics_value=f"{total_loss:.3f}",
+        metrics_value=f"amazing loss",
         dataset_pretty_name='random',
-        dataset_id='random123',
+        dataset_id='random',
       )
 
     metadata = {**metadata, **eval}
@@ -157,12 +157,10 @@ def push_to_hub(repo_id,
       f.write(readme)
 
     model.push_to_hub(repo_id)
-    # cartpole_policy.save_pretrained("AnthonyPa57/HF-torch-demo") #save locally
+    # model.save_pretrained("./") # save locally
 
-    tok = prepare_tokenizer(local_directory)
-    tok.push_to_hub(repo_id)
+    tokenizer.push_to_hub(repo_id)
     metadata_save(readme_path, metadata)
-
 
     api.upload_folder(
           repo_id=repo_id,
@@ -173,16 +171,18 @@ def push_to_hub(repo_id,
     print(f"Your model is pushed to the Hub. You can view your model here: {repo_url}")
 
 
-# ===== Example Usage =====
-if __name__ == "__main__":
-    push_to_hub("AnthonyPa57/HF-torch-demo", model, hypers)
-    # Later, to load:
-    config = {
-        "in_size": hypers['in_size'], "out_size": hypers['out_size'], "h_size": hypers['hidden_size'],}
-    model_hf = NN(**config)
-    model_hf.from_pretrained("AnthonyPa57/HF-torch-demo")
-    tokenizer_hf = AutoTokenizer.from_pretrained("AnthonyPa57/HF-torch-demo")
+push_to_hub("AnthonyPa57/HF-torch-demo", model, tokenizer, hypers)
 
-    # print(model, tokenizer_hf)
+# Later, to load:
+config = {
+    "in_size": hypers['in_size'], "out_size": hypers['out_size'], "h_size": hypers['hidden_size']
+    }
 
-    print(tokenizer_hf.decode(tokenizer_hf.encode("hello world")))
+model_hf = NN(**config)
+model_hf.from_pretrained("AnthonyPa57/HF-torch-demo")
+
+tokenizer_hf = AutoTokenizer.from_pretrained("AnthonyPa57/HF-torch-demo")
+
+# print(model, tokenizer_hf)
+
+print(tokenizer_hf.decode(tokenizer_hf.encode("hello world")))
