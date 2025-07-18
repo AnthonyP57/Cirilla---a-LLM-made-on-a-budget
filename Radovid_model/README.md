@@ -24,7 +24,7 @@ class NN(
         return x
 ```
 2. define hyperparameters (optional)
-```json
+```python
 hypers = {
     "in_size": 64,
     "out_size": 1,
@@ -86,6 +86,7 @@ tokenizer = prepare_tokenizer('./Radovid_model', tokenizer_data)
 ```python
 tokenizer.push_to_hub("AnthonyPa57/HF-torch-demo")
 ```
+you can see an example repo [here](https://huggingface.co/AnthonyPa57/HF-torch-demo)
 
 ## Pulling custom Pytorch models from Huggingface Hub
 After you have pushed the model you can pull it as
