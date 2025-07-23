@@ -1,0 +1,3 @@
+[submodule "attention-gym"]
+	path = attention-gym
+	url = https://github.com/pytorch-labs/attention-gym
