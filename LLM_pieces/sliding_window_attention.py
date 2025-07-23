@@ -1,7 +1,7 @@
 from torch.nn.attention.flex_attention import create_block_mask, flex_attention, BlockMask
 from functools import lru_cache, partial
 from attn_gym.mods import generate_tanh_softcap
-from RoPE import RoPE
+from .RoPE import RoPE
 import torch.nn as nn
 from dataclasses import dataclass
 from typing import Union, Callable, Optional

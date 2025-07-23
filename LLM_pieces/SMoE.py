@@ -2,7 +2,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 from dataclasses import dataclass
 import torch
-from activations import get_activation
+from .activations import get_activation
 
 activation = get_activation("kernels-community/activation")
 
