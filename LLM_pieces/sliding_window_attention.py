@@ -58,7 +58,7 @@ class SlidingWindowAttention(nn.Module):
 
         self.attn = partial(flex_attention, block_mask=mask if mask is not None and isinstance(mask, BlockMask) else None,
                             score_mod=score_mod if score_mod is not None else None)\
-                        if static_mask else None
+                        if self.static_mask else None
     
     @staticmethod
     def _repeat_kv(x:torch.Tensor, n_rep:int):
@@ -140,6 +140,7 @@ if __name__=='__main__':
 
     static_mask = create_static_block_mask(sliding_window_causal, 2048, 2048)
     softcap = generate_tanh_softcap(SOFT_CAP, approx=False)
+    # softcap = None
 
     rope = RoPE(128, 2048)
 
