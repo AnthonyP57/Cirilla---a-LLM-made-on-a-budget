@@ -6,6 +6,7 @@ readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
     "attn-gym>=0.0.4",
+    "bitsandbytes>=0.46.1",
     "datasets>=4.0.0",
     "fuzzywuzzy>=0.18.0",
     "huggingface-hub>=0.33.4",

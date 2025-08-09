@@ -47,10 +47,18 @@ class SlidingWindowAttention(nn.Module):
         self.head_dim = args.dim // args.n_heads
         self.static_mask = args.static_mask
 
-        self.wq = nn.Linear(args.dim, args.n_heads * self.head_dim, bias=False)
-        self.wk = nn.Linear(args.dim, args.n_kv_heads * self.head_dim, bias=False)
-        self.wv = nn.Linear(args.dim, args.n_kv_heads * self.head_dim, bias=False)
+        # self.wq = nn.Linear(args.dim, args.n_heads * self.head_dim, bias=False)
+        # self.wk = nn.Linear(args.dim, args.n_kv_heads * self.head_dim, bias=False)
+        # self.wv = nn.Linear(args.dim, args.n_kv_heads * self.head_dim, bias=False)
         self.wo = nn.Linear(args.n_heads * self.head_dim, args.dim, bias=False)
+
+        # fused projection
+        self.wqkv = nn.Linear(args.dim,
+                              (self.n_heads_q + 2 * self.n_kv_heads) * self.head_dim,
+                              bias=False)
+        
+        self.hq_dim = self.n_heads_q * self.head_dim
+        self.hkv_dim = self.n_kv_heads * self.head_dim
 
         self.rope = rope
         self.mask = mask if not isinstance(mask, BlockMask) else None
@@ -73,9 +81,13 @@ class SlidingWindowAttention(nn.Module):
 
     def forward(self, x: torch.Tensor):
         batch_size, seq_len, dim = x.shape
-        xq = self.wq(x)
-        xk = self.wk(x)
-        xv = self.wv(x)
+
+        qkv = self.wqkv(x)
+
+        # split last dim into q / k / v
+        xq = qkv[:, :, :self.hq_dim]
+        xk = qkv[:, :, self.hq_dim: self.hq_dim + self.hkv_dim]
+        xv = qkv[:, :, self.hq_dim + self.hkv_dim:]
 
         xq = xq.view(batch_size, seq_len, self.n_heads_q, self.head_dim)
         xk = xk.view(batch_size, seq_len, self.n_kv_heads, self.head_dim)

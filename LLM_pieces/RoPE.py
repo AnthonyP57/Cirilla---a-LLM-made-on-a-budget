@@ -1,37 +1,47 @@
 import torch.nn as nn
 import torch
 
+import torch
+import torch.nn as nn
+
 class RoPE(nn.Module):
-    def __init__(self, head_dim:int, seq_len:int, device:str='cuda', theta:float = 10000.0):
+    def __init__(self, head_dim: int, seq_len: int, device="cuda", theta: float = 10000.0, dtype=torch.bfloat16):
         super().__init__()
-        self.register_buffer('freqs_complex',
-                             self._precompute_theta_pos_frequencies(head_dim, seq_len, device, theta))
+        assert head_dim % 2 == 0, "head_dim must be even"
+        self.dtype = dtype
 
-    @staticmethod
-    def _precompute_theta_pos_frequencies(head_dim:int, seq_len:int, device:str, theta:float):
-        assert head_dim % 2 == 0, 'embedding cannot be applied to odd number of head (dimentions)'
-        theta_numerator = torch.arange(0, head_dim, 2, device=device).float()
-        theta = 1.0 / (theta ** (theta_numerator / head_dim))
-        m = torch.arange(seq_len, device=device)
-        freqs = torch.outer(m, theta).float()
-        freqs_complex = torch.polar(torch.ones_like(freqs), freqs)
-        return freqs_complex.unsqueeze(0).unsqueeze(2)
-    
+        theta_numerator = torch.arange(0, head_dim, 2, device=device, dtype=torch.float32)
+        inv_freq = 1.0 / (theta ** (theta_numerator / head_dim))  # (head_dim/2)
+        t = torch.arange(seq_len, device=device, dtype=torch.float32)  # (seq_len)
+        freqs = torch.outer(t, inv_freq)  # (seq_len, head_dim/2)
+
+        # (1, seq_len, 1, head_dim/2)
+        cos = torch.cos(freqs)[None, :, None, :].to(dtype)
+        sin = torch.sin(freqs)[None, :, None, :].to(dtype)
+
+        self.register_buffer("cos", cos, persistent=False)
+        self.register_buffer("sin", sin, persistent=False)
+
     def apply_rotary_embeddings(self, xq: torch.Tensor, xk: torch.Tensor):
-        xq_complex = torch.view_as_complex(xq.float().reshape(*xq.shape[:-1], -1, 2))
-        xk_complex = torch.view_as_complex(xk.float().reshape(*xk.shape[:-1], -1, 2))
+        seq_len = xq.size(1)
 
-        xq_rotated = xq_complex * self.freqs_complex[:, :xq.shape[1], :, :]
-        xk_rotated = xk_complex * self.freqs_complex[:, :xk.shape[1], :, :]
+        cos = self.cos[:, :seq_len, :, :]  # [1, seq_len, 1, head_dim/2]
+        sin = self.sin[:, :seq_len, :, :]  # same
 
-        xq_out = torch.view_as_real(xq_rotated)
-        xk_out = torch.view_as_real(xk_rotated)
+        # Split last dim into even/odd
+        xq_even, xq_odd = xq[..., ::2], xq[..., 1::2]
+        xk_even, xk_odd = xk[..., ::2], xk[..., 1::2]
 
-        xq_out = xq_out.reshape(*xq.shape)
-        xk_out = xk_out.reshape(*xk.shape)
+        xq_rot = torch.stack([xq_even * cos - xq_odd * sin,
+                              xq_even * sin + xq_odd * cos], dim=-1)
+        xk_rot = torch.stack([xk_even * cos - xk_odd * sin,
+                              xk_even * sin + xk_odd * cos], dim=-1)
 
-        return xq_out.type_as(xq), xk_out.type_as(xk)
-    
+        xq_out = xq_rot.flatten(-2)
+        xk_out = xk_rot.flatten(-2)
+
+        return xq_out, xk_out
+
 
 if __name__ == '__main__':
     rope = RoPE(128, 512)
@@ -40,4 +50,3 @@ if __name__ == '__main__':
     xq_out, xk_out = rope.apply_rotary_embeddings(xq, xk)
     print(xq.shape, xq_out.shape, xq_out.dtype, xq_out.device)
     print(xk.shape, xk_out.shape, xk_out.dtype, xk_out.device)
-    print(rope.freqs_complex.device)

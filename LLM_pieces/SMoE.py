@@ -48,18 +48,18 @@ class SMoE(nn.Module):
         self.gating = nn.Linear(args.dim, args.num_experts)
         self.experts = nn.ModuleList(experts)
 
-    def forward(self, x:torch.Tensor) -> torch.Tensor:
-        gate_logits = self.gating(x) # (b, seq_len, n_experts)
-        weights, selected_experts_ids = torch.topk(gate_logits, self.k) # (b, seq_len, k) ; (b, seq_len, k)
-        weights = F.softmax(weights, dim=-1, dtype=x.dtype) # (b, seq_len, k)
-        out = torch.zeros_like(x)
+    def forward(self, x: torch.Tensor) -> torch.Tensor:
+        B, S, D = x.shape
+        logits = self.gating(x)                       # (B,S,E)
+        topk_vals, topk_idx = torch.topk(logits, self.k, dim=-1)
+        topk_w = F.softmax(topk_vals, dim=-1)        # (B,S,k)
+        one_hot = F.one_hot(topk_idx, num_classes=self.n_experts).to(x.dtype)
+        weights_per_expert = (one_hot * topk_w.unsqueeze(-1)).sum(dim=2)  # (B,S,E)
 
+        out = torch.zeros_like(x)
         for ex_idx, expert in enumerate(self.experts):
-            if ex_idx in selected_experts_ids:
-                batch_idx, token_idx, expert_idx = torch.where(selected_experts_ids == ex_idx) # (n_true) ; (n_true) ; (n_true)
-                out[batch_idx, token_idx] += weights[batch_idx, token_idx, expert_idx].unsqueeze(-1) * expert(
-                    x[batch_idx, token_idx]
-                )
+            w = weights_per_expert[..., ex_idx].unsqueeze(-1)  # (B,S,1)
+            out = out + w * expert(x)                         # expert(x) -> (B,S,D)
         return out
     
 if __name__=='__main__':
