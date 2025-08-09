@@ -42,45 +42,37 @@ On a lower level: an LLM is a neural network trained on so-called big data to re
 ## Repo organization:
 ```bash
 Radovid - a LLM made on a budget/
-    │
-    ├── BERT/                       # overview of BERT
-    │   └── RAG/                    # overview of RAG
-    │
-    ├── Decoder_only_architecture/  # overview of decoder only transformer architecture
-    │   └── Llama2/                 # implementation of Llama 2 inference loop
-    │   └── Mistral/                # overview of the Mistral 7B architecture and inference tricks
-    │
-    ├── FlexAttention/              # overview of Pytorch's FlexAttention
-    │
-    ├── HF_kernels/                 # overview of HF's kernel hub
-    │   └── examples/
-    │
-    ├── Transformer_from_scratch/   # transformer implementation
-    │   ├── model.py                # transformer model
-    │   ├── dataset.py              # dataset for MLM - masked language modelling
-    │   ├── train.py                # main transformer training loop
-    │   └── LongNet.py              # LongNet - crude dilated attention implementation
-    │
-    │── witcher_fandom/
-    │   ├── scraped data from https://witcher.fandom.com/wiki/Witcher_Wiki
-    │   ...
-    │
-    │── witcher_instruct/
-    │   ├── so-called instructions regarding the Witcher, gathered from fandom
-    │   ...
-    │
-    │── witcher_json/
-    │   ├── json of what data to scrape from fandom
-    │   ...
-    │
-    │── witcher_synthetic_instruct/
-    │   ├── clean.jsonl             # Witcher instructions created with LLMs
-    │   ├── reason_gym_synth.jsonl  # Reasoning dataset created with reasoning_gym
-    │   ...
-    │
-    │── fandom_create_instruct.py   # create the so-called instructions from fandom data
-    │── fandom_scraper.py           # scrape the data based on the witcher_json/
-    │── Ollama_create_instruct.py   # based on the fandom data create instructions with LLMs
-    │── reason_gym_synthetic.py     # with reasoning gym create synthetic data
-    └── rm_duplicate_instruct.py    # remove duplicate instructions from Ollama
+  │
+  ├── BERT/                           # overview of BERT
+  │   └── RAG/                        # overview of RAG
+  │
+  ├── Decoder_only_architecture/      # overview of decoder only transformer architecture
+  │   └── Llama2/                     # implementation of Llama 2 inference loop
+  │   └── Mistral/                    # overview of the Mistral 7B architecture and inference tricks
+  │
+  ├── LLM_pieces/                     # elements of decoder-only model you can use
+  │   ├── SMoE.py                     # Sparse mixture of Experts
+  │   ...
+  │
+  ├── Radovid_model/                  # implementation of Radovid LLM
+  │   ├── model.py
+  │   ...
+  │
+  ├── Synth_data/
+  │   ├── fandom_create_instruct.py   # create the so-called instructions from fandom data
+  │   ├── fandom_scraper.py           # scrape the data based on the witcher_json/
+  │   ├── Ollama_create_instruct.py   # based on the fandom data create instructions with LLMs
+  │   ├── reason_gym_synthetic.py     # with reasoning gym create synthetic data
+  │   └── rm_duplicate_instruct.py    # remove duplicate instructions from Ollama
+  │
+  ├── Training_optimizations/
+  │   ├──FlexAttention/               # overview of Pytorch's FlexAttention
+  │   └── HF_kernels/                 # overview of HF's kernel hub
+  │     └── examples/
+  │
+  └── Transformer_from_scratch/       # transformer implementation
+      ├── model.py                    # transformer model
+      ├── dataset.py                  # dataset for MLM - masked language modelling
+      ├── train.py                    # main transformer training loop
+      └── LongNet.py                  # LongNet - crude dilated attention implementation
 ```
