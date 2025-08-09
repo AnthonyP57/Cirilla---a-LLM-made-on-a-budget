@@ -4,8 +4,8 @@ import re
 import json
 import numpy as np
 
-main_dir = './witcher_synthetic_instruct'
-save_to = './witcher_synthetic_instruct/clean.jsonl'
+main_dir = './training_datasets/raw/witcher_synthetic_instruct'
+save_to = './training_datasets/mid_training/witcher_synthetic_instruct.jsonl'
 
 files = []
 for model in os.listdir(main_dir):

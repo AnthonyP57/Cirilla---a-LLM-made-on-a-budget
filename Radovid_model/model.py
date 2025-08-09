@@ -17,17 +17,17 @@ import torch
 
 @dataclass
 class Args:
-    device:str = select_torch_device()
-    vocab_size:int = 10_000
+    device:torch.device = select_torch_device()
+    vocab_size:int = 30_000
     context_window:int = 2048 # seq len
-    dim:int = 128
-    d_ff:int = 256
+    dim:int = 1024
+    d_ff:int = 2048
     window_size:int = 1024
     n_heads:int = 8
     n_kv_heads:int = 4
     static_mask:bool = True
     soft_cap:Optional[int] = 20
-    n_layers:int = 4
+    n_layers:int = 16
     theta:float = 10_000.0
     num_experts:int = 8
     k:int = 4
@@ -87,8 +87,30 @@ class Radovid(nn.Module):
         return x
     
 if __name__ == '__main__':
-    x = torch.randint(0, 10_000, (1, 2048), dtype=torch.long, device='cuda')
+    from torchao.optim import _AdamW
+
+    x = torch.randint(0, 30_000, (4, 2048), dtype=torch.long, device='cuda')
     model = Radovid(Args())
-    out = model.pred(x)
-    print(out.shape)
+    # out = model.pred(x)
+    # print(out.shape)
+    # print(model.n_params/1e6, 'M')
+
+    model = torch.compile(model, mode='reduce-overhead')
+
+    # run inference
+    # out = model.pred(x)
+    # print(out.shape)
     print(model.n_params/1e6, 'M')
+
+    # optim = AdamFp8(model.parameters(), lr=1e-3)
+    # optim = torch.optim.Adam(model.parameters(), lr=1e-3)
+    optim = _AdamW(model.parameters(), bf16_stochastic_round=True, lr=1e-3)
+    criterion = torch.nn.CrossEntropyLoss()
+
+    for i in range(100):
+        out = model.pred(x)
+        loss = criterion(out.view(-1, 30_000), x.view(-1))
+
+        optim.zero_grad(set_to_none=True)
+        loss.backward()
+        optim.step()

@@ -55,6 +55,8 @@ class OllamaInstructCurate:
 
         start = time.time()
         n_skipped = 0
+        n_failed = 0
+        not_failed = 0
         
         os.makedirs(save_to, exist_ok=True)
 
@@ -108,8 +110,10 @@ class OllamaInstructCurate:
                 response = self.response_template.model_validate_json(response.message.content)
                 response = response.model_dump()
                 self.convo[p] = response
+                not_failed += 1
             except:
-                print(f'failed on {p}')
+                n_failed += 1
+                print(f'failed on {p} failed:not failed {n_failed}:{not_failed}')
             
             print(f' ETA: {((time.time() - start) / (i+1 - n_skipped) * (len(paths) - i))/60:3.1f} min ', end='\r')
 
@@ -147,14 +151,14 @@ Guidelines:
 - If user specifies already created question and answer pair, find a different question and answer pair that is different from the one provided. If this is impossible use different words then the ones provided.
 - Return the output strictly as a JSON with two fields: "question" and "answer".
 """
-    folder = './witcher_fandom'
+    folder = './training_datasets/raw/witcher_fandom'
     paths = os.listdir(folder)
     paths = [os.path.join(folder, p) for p in paths]
     print(f"{len(paths)} paths found")
 
     for _ in range(3):
 
-        dual = OllamaInstructCurate('llama3.1:8b',
+        dual = OllamaInstructCurate('qwen3:8b',
                         sys_prompt,
                         Response)
-        dual(paths, save_to='./witcher_synthetic_instruct/llama3.1:8b', skip=False, seed=random.randint(0, 1000))
+        dual(paths, save_to='./training_datasets/raw/witcher_synthetic_instruct/qwen3:8b', skip=False, seed=random.randint(0, 1000))

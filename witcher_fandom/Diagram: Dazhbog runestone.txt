@@ -1,9 +1,0 @@
-Diagram: Dazhbog runestone
-Diagram: Dazhbog runestone is a crafting diagram in The Witcher 3: Wild Hunt that is needed to craft Dazhbog runestones.
-It can be purchased from the following merchants:
-All blacksmiths in Novigrad, Oxenfurt, Skellige and Toussaint, except the one at Ardaiso Quarry
-All alchemists except Jonna in Rannvaig and the Freya Priestess on Hindarsfjall
-Merchant at the Isolated Hut on Hindarsfjall
-Scoia'tael merchant in the forest south of Novigrad
-Runewright at Upper Mill 
-Ducal Camerlengo in Beauclair 
