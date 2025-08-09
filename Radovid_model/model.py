@@ -18,7 +18,7 @@ import torch
 @dataclass
 class Args:
     device:torch.device = select_torch_device()
-    vocab_size:int = 30_000
+    vocab_size:int = 50_000
     context_window:int = 2048 # seq len
     dim:int = 1024
     d_ff:int = 2048
@@ -89,7 +89,7 @@ class Radovid(nn.Module):
 if __name__ == '__main__':
     from torchao.optim import _AdamW
 
-    x = torch.randint(0, 30_000, (4, 2048), dtype=torch.long, device='cuda')
+    x = torch.randint(0, 50_000, (4, 2048), dtype=torch.long, device='cuda')
     model = Radovid(Args())
     # out = model.pred(x)
     # print(out.shape)
@@ -104,13 +104,23 @@ if __name__ == '__main__':
 
     # optim = AdamFp8(model.parameters(), lr=1e-3)
     # optim = torch.optim.Adam(model.parameters(), lr=1e-3)
-    optim = _AdamW(model.parameters(), bf16_stochastic_round=True, lr=1e-3)
+    # optim = _AdamW(model.parameters(), bf16_stochastic_round=True, lr=1e-3)
+    # optim = torch.optim.AdamW(model.parameters(), lr=1e-3, fused=True, foreach=False)
     criterion = torch.nn.CrossEntropyLoss()
+
+    optimizer_dict = {p: torch.optim.AdamW([p]) for p in model.parameters()}
+
+    def optimizer_hook(parameter) -> None:
+        optimizer_dict[parameter].step()
+        optimizer_dict[parameter].zero_grad()
+
+    for p in model.parameters():
+        p.register_post_accumulate_grad_hook(optimizer_hook)
 
     for i in range(100):
         out = model.pred(x)
-        loss = criterion(out.view(-1, 30_000), x.view(-1))
+        loss = criterion(out.view(-1, 50_000), x.view(-1))
 
-        optim.zero_grad(set_to_none=True)
+        # optim.zero_grad(set_to_none=True)
         loss.backward()
-        optim.step()
+        # optim.step()
