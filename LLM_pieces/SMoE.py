@@ -49,7 +49,6 @@ class SMoE(nn.Module):
         self.experts = nn.ModuleList(experts)
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
-        B, S, D = x.shape
         logits = self.gating(x)                       # (B,S,E)
         topk_vals, topk_idx = torch.topk(logits, self.k, dim=-1)
         topk_w = F.softmax(topk_vals, dim=-1)        # (B,S,k)

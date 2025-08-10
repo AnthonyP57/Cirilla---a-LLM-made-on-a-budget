@@ -8,19 +8,22 @@ from typing import Union, Callable, Optional
 import torch
 
 SLIDING_WINDOW = 512
-SOFT_CAP = 20
 
 def sliding_window_causal(b, h, q_idx, kv_idx):
     causal_mask = q_idx >= kv_idx
-    window_mask = q_idx - kv_idx <= SLIDING_WINDOW 
+    window_mask = q_idx - kv_idx <= SLIDING_WINDOW
     return causal_mask & window_mask
 
-def create_static_block_mask(sliding_window_causal, q_len, kv_len, device='cuda'):
+def create_static_block_mask(sliding_window_causal, q_len, kv_len, device='cuda', window_size=512):
+    global SLIDING_WINDOW
+    SLIDING_WINDOW = window_size
     # B,H set to None means that the mask is broadcasted for those dimentions as it doesn't require any calculation anyway
     return create_block_mask(sliding_window_causal, B=None, H=None, Q_LEN=q_len, KV_LEN=kv_len, _compile=True, device=device)
 
 @lru_cache(maxsize=32)
-def create_dynamic_block_mask(sliding_window_causal, q_len=2048, kv_len=2048, device='cuda'):
+def create_dynamic_block_mask(sliding_window_causal, q_len=2048, kv_len=2048, device='cuda', window_size=512):
+    global SLIDING_WINDOW
+    SLIDING_WINDOW = window_size
     # B,H set to None means that the mask is broadcasted for those dimentions as it doesn't require any calculation anyway
     return create_block_mask(sliding_window_causal, B=None, H=None, Q_LEN=q_len, KV_LEN=kv_len, device=device)
 
@@ -37,19 +40,12 @@ class SlidingWindowAttention(nn.Module):
     def __init__(self, args: AttentionArgs, rope:RoPE, mask:Union[BlockMask, create_dynamic_block_mask]=None, score_mod:Callable=None):
         super().__init__()
 
-        global SLIDING_WINDOW, SOFT_CAP
-        SLIDING_WINDOW = args.window_size
-        SOFT_CAP = args.soft_cap
-
         self.n_kv_heads = args.n_heads if args.n_kv_heads is None else args.n_kv_heads
         self.n_heads_q = args.n_heads
         self.n_rep = self.n_heads_q // self.n_kv_heads
         self.head_dim = args.dim // args.n_heads
         self.static_mask = args.static_mask
 
-        # self.wq = nn.Linear(args.dim, args.n_heads * self.head_dim, bias=False)
-        # self.wk = nn.Linear(args.dim, args.n_kv_heads * self.head_dim, bias=False)
-        # self.wv = nn.Linear(args.dim, args.n_kv_heads * self.head_dim, bias=False)
         self.wo = nn.Linear(args.n_heads * self.head_dim, args.dim, bias=False)
 
         # fused projection
@@ -63,6 +59,7 @@ class SlidingWindowAttention(nn.Module):
         self.rope = rope
         self.mask = mask if not isinstance(mask, BlockMask) else None
         self.score_mode = score_mod
+        self.window_size = args.window_size
 
         self.attn = partial(flex_attention, block_mask=mask if mask is not None and isinstance(mask, BlockMask) else None,
                             score_mod=score_mod if score_mod is not None else None)\
@@ -106,7 +103,7 @@ class SlidingWindowAttention(nn.Module):
         if self.static_mask:
             out = self.attn(xq, xk, xv)
         else:
-            mask = self.mask(sliding_window_causal, xq.shape[2], xk.shape[2], device=xq.device)
+            mask = self.mask(sliding_window_causal, xq.shape[2], xk.shape[2], device=xq.device, window_size=self.window_size)
             out = flex_attention(xq, xk, xv, block_mask=mask, score_mod=self.score_mode)
         
         out = out.transpose(1,2).contiguous().view(batch_size, seq_len, dim) # (b, seq, dim)
@@ -147,6 +144,8 @@ if __name__=='__main__':
     # causal_attention = partial(flex_attention, block_mask=static_mask, score_mod=softcap)
     # out = causal_attention(query, key, value)
     # print(out[0,0,:8,:8])
+
+    SOFT_CAP = 20
 
     x = torch.rand((1,2048,128*16), device='cuda', dtype=torch.bfloat16) # (b, seq, head_dim*h)
 

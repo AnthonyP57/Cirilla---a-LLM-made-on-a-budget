@@ -4,6 +4,7 @@ from LLM_pieces import (
     SlidingWindowAttention,
     get_activation,
     create_static_block_mask,
+    create_dynamic_block_mask,
     sliding_window_causal,
     Expert
 )
@@ -14,7 +15,7 @@ from modules import select_torch_device
 from typing import Optional
 import warnings
 import torch
-import copy
+from attn_gym.mods import generate_tanh_softcap
 
 @dataclass
 class Args:
@@ -59,24 +60,24 @@ class Radovid(nn.Module):
         self.rope = RoPE(args.dim // args.n_heads, args.context_window, args.device, args.theta, args.device)
         activation = get_activation('Motif-Technologies/activation')
         self.rmsnorm = activation.layers.RMSNorm(dim=args.dim) if args.device == torch.cuda.is_available() else nn.RMSNorm(args.dim)
-        self.mask = create_static_block_mask(sliding_window_causal,args.context_window,
-                                             args.context_window, args.device)
         
         if args.static_mask:
-            compiled_attn = torch.compile(
-                SlidingWindowAttention(args, self.rope, self.mask),
-                mode='max-autotune'
-            )
+            self.mask = create_static_block_mask(sliding_window_causal,args.context_window,
+                                             args.context_window, args.device, args.window_size)
+
             self.attentions = nn.ModuleList([
-                copy.deepcopy(compiled_attn) for _ in range(args.n_layers)
+                torch.compile(
+                SlidingWindowAttention(args, self.rope, self.mask, generate_tanh_softcap(args.soft_cap, approx=False) if args.soft_cap is not None else None),
+                mode='max-autotune') for _ in range(args.n_layers)
             ])
 
         else:
-            raise NotImplementedError
-            # self.attentions = nn.ModuleList([
-            #     torch.compile(SlidingWindowAttention(args, self.rope, self.mask), mode='max-autotune')
-            #     for _ in range(args.n_layers)
-            # ])
+            self.attentions = nn.ModuleList([
+                torch.compile(SlidingWindowAttention(args, self.rope,
+                create_dynamic_block_mask,
+                generate_tanh_softcap(args.soft_cap, approx=False) if args.soft_cap is not None else None),
+                mode='max-autotune') for _ in range(args.n_layers)
+            ])
 
         self.smoes = nn.ModuleList([
             torch.compile(SMoE(args, [Expert(args) for _ in range(args.num_experts)]), mode='max-autotune')
@@ -103,10 +104,8 @@ class Radovid(nn.Module):
         return x
     
 if __name__ == '__main__':
-    # from torchao.optim import _AdamW, AdamW8bit
     import time
     import numpy as np
-    # from bitsandbytes.optim import Adam8bit
 
     torch.set_float32_matmul_precision('high')
     torch.backends.cudnn.benchmark = True
@@ -119,27 +118,13 @@ if __name__ == '__main__':
     for param in model.parameters():
         if param.dim() > 1:
             nn.init.xavier_uniform_(param)
-    # out = model.pred(x)
-    # print(out.shape)
-    # print(model.n_params/1e6, 'M')
 
-    # model = torch.compile(model, mode='max-autotune')
-
-    # run inference
-    # out = model.pred(x)
-    # print(out.shape)
     print(model)
     print(model.n_params/1e6, 'M')
 
-    # optim = AdamFp8(model.parameters(), lr=1e-3)
-    # optim = torch.optim.Adam(model.parameters(), lr=1e-3)
-    # optim = _AdamW(model.parameters(), bf16_stochastic_round=True, lr=1e-3)
-    # optim = torch.optim.AdamW(model.parameters(), lr=1e-3, fused=True, foreach=False)
     criterion = torch.nn.CrossEntropyLoss()
 
     optimizer_dict = {p: torch.optim.AdamW([p], fused=True, foreach=False, lr=5e-5) for p in model.parameters()}
-    # optimizer_dict = {p: AdamW32bit([p], lr=1e-3) for p in model.parameters()}
-    # optim = Adam8bit(model.parameters(), lr=1e-3)
 
     def optimizer_hook(parameter) -> None:
         optimizer_dict[parameter].step()
@@ -151,7 +136,6 @@ if __name__ == '__main__':
     times = []
 
     torch._inductor.config.triton.cudagraph_skip_dynamic_graphs = True
-    # optionally silence the warning:
     torch._inductor.config.triton.cudagraph_dynamic_shape_warn_limit = None
 
     for i in range(5): #warm up for benchmark
@@ -159,9 +143,7 @@ if __name__ == '__main__':
         out = model.pred(x)
         loss = criterion(out.view(-1, 50_000), x.view(-1))
 
-        # optim.zero_grad(set_to_none=True)
         loss.backward()
-        # optim.step()
 
     torch.cuda.synchronize()
 
@@ -171,9 +153,7 @@ if __name__ == '__main__':
         loss = criterion(out.view(-1, 50_000), y.view(-1))
         loss_item = loss.item()
 
-        # optim.zero_grad(set_to_none=True)
         loss.backward()
-        # optim.step()
         
         times.append(time.time())
         print(f'average time: {np.mean(np.diff(times))} loss: {loss_item}', end='\r')
