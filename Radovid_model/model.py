@@ -10,7 +10,6 @@ from LLM_pieces import (
 )
 from dataclasses import dataclass
 import torch.nn as nn
-import torch.nn.functional as F
 from modules import select_torch_device
 from typing import Optional
 import warnings

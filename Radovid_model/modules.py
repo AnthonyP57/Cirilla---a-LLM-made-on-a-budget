@@ -1,4 +1,6 @@
 import torch
+import configparser
+import os
 
 def select_torch_device():
     if torch.cuda.is_available():
@@ -16,3 +18,40 @@ def select_torch_device():
         print("NOTE: If you have a GPU, consider using it for training.")
 
     return device
+
+def find_cache(start_dir='./'):
+    for main_path, subfolders, files in os.walk(start_dir):
+        if '.radovid' in files:
+            path_to_cache = os.path.join(main_path, '.radovid')
+            return path_to_cache
+
+CACHE_PATH = None
+
+def cache_or_fetch(category, variable, value=None):
+    global CACHE_PATH
+    if CACHE_PATH is None:
+        CACHE_PATH = find_cache()
+        if CACHE_PATH is None:
+            CACHE_PATH = '.radovid'
+
+    config = configparser.ConfigParser()
+    if os.path.exists(CACHE_PATH):
+        config.read(CACHE_PATH)
+
+    try:
+        val = config[category][variable]
+        if value is not None:
+            config[category][variable] = str(value)
+            with open(CACHE_PATH, 'w') as c:
+                config.write(c)
+        return val
+    except (KeyError, configparser.NoSectionError):
+        if value is not None:
+            if category not in config:
+                config[category] = {}
+            config[category][variable] = str(value)
+            with open(CACHE_PATH, 'w') as c:
+                config.write(c)
+            return value
+        else:
+            return None

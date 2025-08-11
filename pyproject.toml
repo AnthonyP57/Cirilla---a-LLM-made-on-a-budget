@@ -14,6 +14,7 @@ dependencies = [
     "ollama>=0.5.3",
     "pydantic>=2.11.7",
     "python-levenshtein>=0.27.1",
+    "reasoning-gym>=0.1.23",
     "sentencepiece>=0.2.0",
     "tokenizers>=0.21.2",
     "torch>=2.7.0",
