@@ -27,16 +27,16 @@ class RadovidTokenizer:
         return self.tokenizer
 
     @staticmethod
-    def _turn_to_fast(path: Path) -> PreTrainedTokenizerFast:
+    def _turn_to_fast(path: Path, special_tokens: dict[str, str] = SPECIAL_TOKENS) -> PreTrainedTokenizerFast:
         tokenizer = PreTrainedTokenizerFast(tokenizer_file=str(path))
 
         tok_to_add = []
-        for s in SPECIAL_TOKENS.values():
+        for s in special_tokens.values():
             if tokenizer.convert_tokens_to_ids(s) == tokenizer.unk_token_id:
                 tok_to_add.append(s)
         if tok_to_add:
             tokenizer.add_tokens(tok_to_add)
-            tokenizer.add_special_tokens({k: v for k, v in SPECIAL_TOKENS.items() if v in tok_to_add})
+            tokenizer.add_special_tokens({k: v for k, v in special_tokens.items() if v in tok_to_add})
 
         return tokenizer
 
