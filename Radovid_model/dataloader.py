@@ -11,11 +11,9 @@ class JSONLDataset(IterableDataset):
         self.shuffle_path = shuffle_path
 
         if cache_or_fetch('DATA_LEN', path) is None:
-            with open(path, 'r') as f:
-                data = [1 for line in f]
-
-            cache_or_fetch('DATA_LEN', path, len(data))
-            del data
+            with open(self.path, 'r', encoding='utf-8') as f:
+                count = sum(1 for _ in f)
+            cache_or_fetch('DATA_LEN', self.path, count)
 
         if cache_or_fetch('SHUFFLED', path) is None and shuffle_path:
             with open(path, 'r') as f:
@@ -47,5 +45,6 @@ class JSONLDataset(IterableDataset):
 
 dl = JSONLDataset('./example.jsonl', shuffle_path=True)
 dl = DataLoader(dl, batch_size=2)
-for i in dl:
-    print(i)
+for _ in range(2):
+    for i in dl:
+        print(i)
