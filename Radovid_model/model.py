@@ -15,10 +15,11 @@ from typing import Optional
 import warnings
 import torch
 from attn_gym.mods import generate_tanh_softcap
+from huggingface_hub import PyTorchModelHubMixin
 
 @dataclass
 class Args:
-    device:torch.device = select_torch_device()
+    device:str = select_torch_device()
     vocab_size:int = 50_000
     context_window:int = 2048 # seq len
     dim:int = 1024
@@ -28,11 +29,16 @@ class Args:
     n_kv_heads:int = 4
     static_mask:bool = True
     soft_cap:Optional[int] = 20
-    n_layers:int = 16
+    # n_layers:int = 16
+    n_layers:int = 8
     theta:float = 10_000.0
     num_experts:int = 8
     k:int = 4
-    dtype:torch.dtype = torch.bfloat16
+    dtype_str:str = 'bfloat16'
+
+    @property
+    def dtype(self):
+        return getattr(torch, self.dtype_str)
 
     def __post_init__(self):
         if not torch.cuda.is_available():
@@ -51,9 +57,21 @@ class InputEmbeddings(nn.Module):
         return self.embeddings(x)
 
 
-class Radovid(nn.Module):
-    def __init__(self, args:Args=Args):
+class Radovid(
+            nn.Module,
+            PyTorchModelHubMixin,
+            pipeline_tag="text-generation",
+            library_name="pytorch",
+            license="mit"
+    ):
+    def __init__(self, args:Args=None):
         super().__init__()
+
+        if isinstance(args, dict):
+               args = Args(**args)
+        if args is None:
+            args = Args()
+
         self.args = args
         self.emb = InputEmbeddings(args)
         self.rope = RoPE(args.dim // args.n_heads, args.context_window, args.device, args.theta, args.device)
@@ -105,6 +123,8 @@ class Radovid(nn.Module):
 if __name__ == '__main__':
     import time
     import numpy as np
+    from hf_hub import push_model_to_hub, hf_hub_download
+    import json
 
     torch.set_float32_matmul_precision('high')
     torch.backends.cudnn.benchmark = True
@@ -123,11 +143,23 @@ if __name__ == '__main__':
 
     criterion = torch.nn.CrossEntropyLoss()
 
-    optimizer_dict = {p: torch.optim.AdamW([p], fused=True, foreach=False, lr=5e-5) for p in model.parameters()}
+    # # optimizer_dict = {p: torch.optim.AdamW([p], fused=True, foreach=False, lr=5e-5) for p in model.parameters()}
+
+    optim_kwargs = dict(fused=True, foreach=False, lr=5e-5)
+
+    # 1) CREATE per-parameter optimizers (keyed by parameter NAME)
+    optimizer_by_name = {}
+    for name, p in model.named_parameters():
+        optimizer_by_name[name] = torch.optim.AdamW([p], **optim_kwargs)
+
+    # 2) register hooks using a param->optimizer lookup for fast access in the hook
+    # build param object -> optimizer mapping
+    params_by_name = dict(model.named_parameters())
+    optimizer_by_param = {params_by_name[name]: opt for name, opt in optimizer_by_name.items()}
 
     def optimizer_hook(parameter) -> None:
-        optimizer_dict[parameter].step()
-        optimizer_dict[parameter].zero_grad(set_to_none=True)
+        optimizer_by_param[parameter].step()
+        optimizer_by_param[parameter].zero_grad(set_to_none=True)
 
     for p in model.parameters():
         p.register_post_accumulate_grad_hook(optimizer_hook)
@@ -146,7 +178,83 @@ if __name__ == '__main__':
 
     torch.cuda.synchronize()
 
-    for i in range(100):
+    for i in range(20):
+        torch.compiler.cudagraph_mark_step_begin()
+        out = model.pred(x)
+        loss = criterion(out.view(-1, 50_000), y.view(-1))
+        loss_item = loss.item()
+
+        loss.backward()
+        
+        times.append(time.time())
+        print(f'average time: {np.mean(np.diff(times))} loss: {loss_item}', end='\r')
+
+    print(f'average time: {np.mean(np.diff(times))} loss: {loss_item}')
+    
+
+    # push_model_to_hub("AnthonyPa57/HF-torch-demo-R", model, loss, 'pretraining', save_locally='./test_model')
+
+    # repo_id = "AnthonyPa57/HF-torch-demo-R"
+    # filename = "config.json"
+
+    # file_path = hf_hub_download(
+    #     repo_id=repo_id,
+    #     filename=filename,
+    # )
+
+    # with open(file_path, "r") as f:
+    #     config = json.load(f)
+
+    # args = Args(**config[list(config.keys())[0]])
+
+    torch.save(model.state_dict(), './test_model/model.pt')
+    optim_states = {name: opt.state_dict() for name, opt in optimizer_by_name.items()}
+    torch.save(optim_states, './test_model/optimizer.pt')
+    print("Saved model + optimizers")
+
+    # --- loading ---
+
+    model = Radovid(Args())
+    model.load_state_dict(torch.load('./test_model/model.pt', map_location=model.args.device))
+    print("Loaded model weights")
+
+    # Load optimizer states
+    loaded_states = torch.load('./test_model/optimizer.pt', map_location='cpu')
+
+    # Recreate optimizers for *new* parameter objects
+    params_by_name = dict(model.named_parameters())
+    optimizer_by_name = {}
+    for name, state in loaded_states.items():
+        if name not in params_by_name:
+            print(f"Skipping unknown param: {name}")
+            continue
+        p = params_by_name[name]
+        opt = torch.optim.AdamW([p], fused=True, foreach=False, lr=5e-5)
+        # Move saved state tensors to param's device
+        for s in state["state"].values():
+            for k, v in s.items():
+                if isinstance(v, torch.Tensor):
+                    s[k] = v.to(p.device)
+        opt.load_state_dict(state)
+        optimizer_by_name[name] = opt
+
+    # Build param->optimizer mapping
+    optimizer_by_param = {params_by_name[n]: o for n, o in optimizer_by_name.items()}
+
+    # Register hooks again
+    def optimizer_hook(parameter):
+        optimizer_by_param[parameter].step()
+        optimizer_by_param[parameter].zero_grad(set_to_none=True)
+
+    for p in model.parameters():
+        if p in optimizer_by_param:
+            p.register_post_accumulate_grad_hook(optimizer_hook)
+
+    print("Restored optimizer states + hooks — training can resume")
+
+    times = []
+
+    for i in range(20):
         torch.compiler.cudagraph_mark_step_begin()
         out = model.pred(x)
         loss = criterion(out.view(-1, 50_000), y.view(-1))

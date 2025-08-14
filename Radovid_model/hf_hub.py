@@ -5,6 +5,7 @@ import tempfile
 from pathlib import Path
 from model import Radovid
 from dataclasses import dataclass
+import torch
 
 def push_model_to_hub(repo_id,
                 model:Radovid,
@@ -54,7 +55,7 @@ def push_model_to_hub(repo_id,
 # Random Pytorch model used as a demo to show how to push custom models to HF hub
 | parameters | precision |
 | :--------: | :-------: |
-|{((model.n_params/1e6) if hasattr(model, 'n_params') else int(sum(p.numel() / 1e6 for p in model.parameters()))):.2f} M|{'BF16' if args.dtype == torch.bfloat16 else 'FP32'}|
+|{((model.n_params/1e6) if hasattr(model, 'n_params') else int(sum(p.numel() / 1e6 for p in model.parameters()))):.2f} M|{'BF16' if model.args.dtype == torch.bfloat16 else 'FP32'}|
 """
 
     readme_path = local_directory / "README.md"
