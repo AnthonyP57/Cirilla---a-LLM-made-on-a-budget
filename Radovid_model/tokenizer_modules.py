@@ -1,34 +1,35 @@
 from tokenizers import SentencePieceBPETokenizer
 from transformers import PreTrainedTokenizerFast, AutoTokenizer
-from typing import Iterator
+from typing import Iterator, Union
 import os
 from pathlib import Path
 from typing import Iterator
 
-SPECIAL_TOKENS = {'unk_token':'<unk>', 'pad_token':'[PAD]', 'mask_token':'[MASK]',
-                  'bos_token':'[SOS]', 'eos_token':'[EOS]'}
+SPECIAL_TOKENS = {'unk_token':'<unk>', 'pad_token':'<pad>', 'mask_token':'<mask>',
+                  'bos_token':'<sos>', 'eos_token':'<eos>'}
 
 class RadovidTokenizer:
-    def __init__(self, path:Path='./tokenizer.json', hub_url=None):
+    def __init__(self, path:Path=None, hub_url=None):
         self.path = path
         self.hub_url = hub_url
 
-        if os.path.exists(path):
-            self.tokenizer = self._turn_to_fast(path)
+        if path is not None:
+            if os.path.exists(path):
+                self.tokenizer = self._turn_to_fast(path)
         
         elif hub_url is not None:
             self.tokenizer = AutoTokenizer.from_pretrained(hub_url)
 
-    def train(self, dataset: Iterator, special_tokens: dict[str, str] = SPECIAL_TOKENS, **kwargs) -> PreTrainedTokenizerFast:
+    def train(self, dataset: Union[Iterator[str], Iterator[Iterator[str]]], special_tokens: dict[str, str]=SPECIAL_TOKENS, save_to_path:Path='./tokenizer.json', **kwargs) -> PreTrainedTokenizerFast:
         spm = SentencePieceBPETokenizer()
         spm.train_from_iterator(dataset, special_tokens=list(special_tokens.values()), **kwargs)
-        spm.save(str(self.path))
-        self.tokenizer = self._turn_to_fast(self.path)
+        spm.save(str(save_to_path))
+        self.tokenizer = self._turn_to_fast(save_to_path)
         return self.tokenizer
 
     @staticmethod
     def _turn_to_fast(path: Path, special_tokens: dict[str, str] = SPECIAL_TOKENS) -> PreTrainedTokenizerFast:
-        tokenizer = PreTrainedTokenizerFast(tokenizer_file=str(path))
+        tokenizer = PreTrainedTokenizerFast(tokenizer_file=str(path), **special_tokens)
 
         tok_to_add = []
         for s in special_tokens.values():
@@ -43,6 +44,9 @@ class RadovidTokenizer:
 
     def pull_from_hub(self, hub_url):
         self.tokenizer = AutoTokenizer.from_pretrained(hub_url)
+
+    def push_to_hub(self, hub_url):
+        self.tokenizer.push_to_hub(hub_url)
     
     def decode(self, tokens):
         return self.tokenizer.decode(tokens)
@@ -53,7 +57,9 @@ class RadovidTokenizer:
 if __name__ == '__main__':
     tokenizer = RadovidTokenizer()
 
-    tokenizer.pull_from_hub('AnthonyPa57/HF-torch-demo')
+    tokenizer.pull_from_hub('AnthonyPa57/HF-torch-demo2')
+    tokenizer.push_to_hub('AnthonyPa57/HF-torch-demo2')
+    tokenizer.pull_from_hub('AnthonyPa57/HF-torch-demo2')
 
     print(tokenizer.decode(tokenizer.encode('hello world')))
     print(tokenizer.encode('hello world'))
@@ -63,7 +69,10 @@ if __name__ == '__main__':
     dl = JSONLDataset('./example.jsonl', shuffle_path=True)
     dl = DataLoader(dl, batch_size=2)
 
+    tokenizer = RadovidTokenizer()
     tokenizer.train(dl, special_tokens=SPECIAL_TOKENS, min_frequency=1)
+
+    tokenizer.push_to_hub('AnthonyPa57/HF-torch-demo2')
 
     print(tokenizer.decode(tokenizer.encode('hello world')))
     print(tokenizer.encode('[SOS] What is the capital of France?'))

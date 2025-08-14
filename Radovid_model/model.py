@@ -52,7 +52,7 @@ class InputEmbeddings(nn.Module):
 
 
 class Radovid(nn.Module):
-    def __init__(self, args:Args):
+    def __init__(self, args:Args=Args):
         super().__init__()
         self.args = args
         self.emb = InputEmbeddings(args)

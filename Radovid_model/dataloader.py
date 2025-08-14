@@ -42,9 +42,9 @@ class JSONLDataset(IterableDataset):
                     yield line['question'] + ' ' + line['answer']
 
 
-
-dl = JSONLDataset('./example.jsonl', shuffle_path=True)
-dl = DataLoader(dl, batch_size=2)
-for _ in range(2):
-    for i in dl:
-        print(i)
+if __name__ == '__main__':
+    dl = JSONLDataset('./example.jsonl', shuffle_path=True)
+    dl = DataLoader(dl, batch_size=2)
+    for _ in range(2):
+        for i in dl:
+            print(i)
