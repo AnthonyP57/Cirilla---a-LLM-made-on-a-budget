@@ -10,12 +10,15 @@ from LLM_pieces import (
 )
 from dataclasses import dataclass
 import torch.nn as nn
-from modules import select_torch_device
+from modules import select_torch_device, get_args_from_hub
 from typing import Optional
 import warnings
 import torch
 from attn_gym.mods import generate_tanh_softcap
-from huggingface_hub import PyTorchModelHubMixin
+from huggingface_hub import PyTorchModelHubMixin, hf_hub_download
+from safetensors.torch import load_file
+import os
+from pathlib import Path
 
 @dataclass
 class Args:
@@ -73,40 +76,44 @@ class Radovid(
             args = Args()
 
         self.args = args
-        self.emb = InputEmbeddings(args)
-        self.rope = RoPE(args.dim // args.n_heads, args.context_window, args.device, args.theta, args.device)
+        self._prepare_model()
+
+    def _prepare_model(self):
+
+        self.emb = InputEmbeddings(self.args)
+        self.rope = RoPE(self.args.dim // self.args.n_heads, self.args.context_window, self.args.device, self.args.theta, self.args.device)
         activation = get_activation('Motif-Technologies/activation')
-        self.rmsnorm = activation.layers.RMSNorm(dim=args.dim) if args.device == torch.cuda.is_available() else nn.RMSNorm(args.dim)
+        self.rmsnorm = activation.layers.RMSNorm(dim=self.args.dim) if self.args.device == torch.cuda.is_available() else nn.RMSNorm(self.args.dim)
         
-        if args.static_mask:
-            self.mask = create_static_block_mask(sliding_window_causal,args.context_window,
-                                             args.context_window, args.device, args.window_size)
+        if self.args.static_mask:
+            self.mask = create_static_block_mask(sliding_window_causal,self.args.context_window,
+                                             self.args.context_window, self.args.device, self.args.window_size)
 
             self.attentions = nn.ModuleList([
                 torch.compile(
-                SlidingWindowAttention(args, self.rope, self.mask, generate_tanh_softcap(args.soft_cap, approx=False) if args.soft_cap is not None else None),
-                mode='max-autotune') for _ in range(args.n_layers)
+                SlidingWindowAttention(self.args, self.rope, self.mask, generate_tanh_softcap(self.args.soft_cap, approx=False) if self.args.soft_cap is not None else None),
+                mode='max-autotune') for _ in range(self.args.n_layers)
             ])
 
         else:
             self.attentions = nn.ModuleList([
-                torch.compile(SlidingWindowAttention(args, self.rope,
+                torch.compile(SlidingWindowAttention(self.args, self.rope,
                 create_dynamic_block_mask,
-                generate_tanh_softcap(args.soft_cap, approx=False) if args.soft_cap is not None else None),
-                mode='max-autotune') for _ in range(args.n_layers)
+                generate_tanh_softcap(self.args.soft_cap, approx=False) if self.args.soft_cap is not None else None),
+                mode='max-autotune') for _ in range(self.args.n_layers)
             ])
 
         self.smoes = nn.ModuleList([
-            torch.compile(SMoE(args, [Expert(args) for _ in range(args.num_experts)]), mode='max-autotune')
-            for _ in range(args.n_layers)
+            torch.compile(SMoE(self.args, [Expert(self.args) for _ in range(self.args.num_experts)]), mode='max-autotune')
+            for _ in range(self.args.n_layers)
         ])
 
-        self.output = nn.Linear(args.dim, args.vocab_size, bias=False)
+        self.output = nn.Linear(self.args.dim, self.args.vocab_size, bias=False)
         self.output.weight = self.emb.embeddings.weight # tied params
 
         self.n_params = sum(p.numel() for p in self.parameters() if p.requires_grad)
 
-        self.to(args.device, dtype=args.dtype)
+        self.to(self.args.device, dtype=self.args.dtype)
         
     def pred(self, x):
         
@@ -119,6 +126,26 @@ class Radovid(
         x = self.output(x)
 
         return x
+    
+    def pull_model_from_hub(self, hf_repo_id:str):
+        model_args = self.args
+        pulled_args = get_args_from_hub(hf_repo_id)
+
+        if model_args != pulled_args:
+            print(f"Current model args don't correspond to the HF model's args.\nCurrent args:\n{model_args}\nThe model will use the HF args:\n{pulled_args}")
+            self.args = pulled_args
+            self._prepare_model()
+
+        file_path = hf_hub_download(
+            repo_id=hf_repo_id,
+            filename="model.safetensors",
+        )
+
+        loaded = load_file(file_path)
+        if "output.weight" not in loaded:
+            loaded['output.weight'] = loaded["emb.embeddings.weight"]
+
+        self.load_state_dict(loaded)
     
 if __name__ == '__main__':
     import time

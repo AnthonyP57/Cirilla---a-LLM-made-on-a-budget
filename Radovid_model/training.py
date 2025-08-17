@@ -8,9 +8,9 @@ from torch.optim import Optimizer, AdamW
 from pathlib import Path
 from hf_hub import push_model_to_hub
 from huggingface_hub import hf_hub_download
-import json
 import os
 from safetensors.torch import load_file
+from modules import get_args_from_hub
 
 @dataclass
 class TrainingArgs:
@@ -143,7 +143,7 @@ class RadovidTrainer:
             if p in optimizer_dict:
                 p.register_post_accumulate_grad_hook(optimizer_hook)
             else:
-                print(f"Unknown param: {p.shape}")
+                print(f"Unknown param of shape: {p.shape}")
 
     def _save_local_checkpoint(self):
         if not hasattr(self, 'optimizer_by_name'):
@@ -196,17 +196,6 @@ class RadovidTrainer:
             languages = self.args.languages,
             model_card = self.args.model_card
         )
-
-    def _get_args_from_hub(self):
-        file_path = hf_hub_download(
-            repo_id=self.args.hf_repo_id,
-            filename="config.json",
-        )
-        with open(file_path, "r") as f:
-            config = json.load(f)
-        args = Args(**config[list(config.keys())[0]])
-
-        return args
     
     def _pull_optim_from_hub(self):
         file_path = hf_hub_download(
@@ -224,19 +213,15 @@ class RadovidTrainer:
 
     def _pull_model_from_hub(self):
         model_args = self.model.args
-        pulled_args = self._get_args_from_hub()
+        pulled_args = get_args_from_hub(self.args.hf_repo_id)
 
         if model_args != pulled_args:
             self.model = Radovid(pulled_args)
-            print(f"current model args don't correspond to the HF model's args.\nRight now the model uses the HF args:\n{pulled_args}")
 
         file_path = hf_hub_download(
             repo_id=self.args.hf_repo_id,
             filename="model.safetensors",
         )
-
-        if not os.path.exists(file_path):
-            print('no model file found')
 
         loaded = load_file(file_path)
         if "output.weight" not in loaded:
