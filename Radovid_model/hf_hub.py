@@ -70,12 +70,9 @@ def push_model_to_hub(repo_id,
       f.write(readme)
 
     if optmizer_states_path is not None:
-        with optmizer_states_path.open('rb') as f:
-            api.upload_file(
-                path_or_fileobj=f,
-                path_in_repo=optmizer_states_path.split('/')[-1],
-                repo_id=repo_id,
-            )
+        local_states = local_directory / "optimizer_states.pt"
+        states = torch.load(optmizer_states_path, map_location='cpu')
+        torch.save(states, local_states)
           
 
     model.push_to_hub(repo_id)

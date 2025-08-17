@@ -9,6 +9,8 @@ from pathlib import Path
 from hf_hub import push_model_to_hub
 from huggingface_hub import hf_hub_download
 import json
+import os
+from safetensors.torch import load_file
 
 @dataclass
 class TrainingArgs:
@@ -21,9 +23,9 @@ class TrainingArgs:
     
     hf_repo_id:str = None
     private_hf_repo:bool=True
-    hf_tags:list[str] = ["pytorch", "text-generation", "moe", "custom_code"]
+    hf_tags:list[str] = field(default_factory=lambda: ["pytorch", "text-generation", "moe", "custom_code"])
     hf_license:str = 'mit'
-    languages:list[str] = ['en']
+    languages:list[str] = field(default_factory=lambda: ["en"])
     model_card:str = None
 
 class RadovidTrainer:
@@ -123,10 +125,10 @@ class RadovidTrainer:
     
     def _fuse_optim(self):
         self.optimizer_by_name = {}
-        for name, p in model.named_parameters():
+        for name, p in self.model.named_parameters():
             self.optimizer_by_name[name] = self.optim([p])
 
-        params_by_name = dict(model.named_parameters())
+        params_by_name = dict(self.model.named_parameters())
         optimizer_dict = {params_by_name[name]: opt for name, opt in self.optimizer_by_name.items()}
 
         self._register_hooks(optimizer_dict)
@@ -141,20 +143,27 @@ class RadovidTrainer:
             if p in optimizer_dict:
                 p.register_post_accumulate_grad_hook(optimizer_hook)
             else:
-                raise KeyError(f"Unknown param: {p}")
+                print(f"Unknown param: {p.shape}")
 
     def _save_local_checkpoint(self):
-        torch.save(self.model.state_dict(), Path.joinpath(self.args.local_checkpoint_folder, 'model.pth'))
+        if not hasattr(self, 'optimizer_by_name'):
+            self._fuse_optim()
+            
+        torch.save(self.model.state_dict(), os.path.join(self.args.local_checkpoint_folder, 'model.pt'))
         optim_states = {name: opt.state_dict() for name, opt in self.optimizer_by_name.items()}
-        torch.save(optim_states, Path.joinpath(self.args.local_checkpoint_folder, 'optimizer_states.pth'))
+        torch.save(optim_states, os.path.join(self.args.local_checkpoint_folder, 'optimizer_states.pt'))
 
     def _load_local_checkpoint(self):
         self.model.load_state_dict(torch.load(\
-            Path.joinpath(self.args.local_checkpoint_folder,'model.pth')))
+            os.path.join(self.args.local_checkpoint_folder,'model.pt')))
 
         loaded_states = torch.load(\
-            Path.joinpath(self.args.local_checkpoint_folder, 'optimizer_states.pth'),
+            os.path.join(self.args.local_checkpoint_folder, 'optimizer_states.pt'),
             map_location=self.model.args.device)
+        
+        self._load_optim_from_checkpoint(loaded_states)
+        
+    def _load_optim_from_checkpoint(self, loaded_states):
 
         params_by_name = dict(self.model.named_parameters())
         self.optimizer_by_name = {}
@@ -166,7 +175,7 @@ class RadovidTrainer:
                 continue
 
             p = params_by_name[name]
-            opt = torch.optim.AdamW([p], fused=True, foreach=False, lr=5e-5)
+            opt = self.optim([p])
             opt.load_state_dict(state)
             self.optimizer_by_name[name] = opt
 
@@ -181,7 +190,7 @@ class RadovidTrainer:
             loss = loss,
             dataset_name = dataset_name,
             private = self.args.private_hf_repo,
-            optmizer_states_path = Path.joinpath(self.args.local_checkpoint_folder, 'optimizer_states.pth'),
+            optmizer_states_path = os.path.join(self.args.local_checkpoint_folder, 'optimizer_states.pt'),
             tags = self.args.hf_tags,
             license = self.args.hf_license,
             languages = self.args.languages,
@@ -198,16 +207,46 @@ class RadovidTrainer:
         args = Args(**config[list(config.keys())[0]])
 
         return args
+    
+    def _pull_optim_from_hub(self):
+        file_path = hf_hub_download(
+            repo_id=self.args.hf_repo_id,
+            filename="optimizer_states.pt",
+        )
 
-    def _pull_all_from_hub(self):
+        if not os.path.exists(file_path):
+            print('no optimizer states file found')
+
+        with open(file_path, "rb") as f:
+            loaded_states = torch.load(f, map_location=self.model.args.device)
+
+        self._load_optim_from_checkpoint(loaded_states)
+
+    def _pull_model_from_hub(self):
         model_args = self.model.args
         pulled_args = self._get_args_from_hub()
 
         if model_args != pulled_args:
             self.model = Radovid(pulled_args)
-            print("current model args don't correspond to the HF model's args.\nRight now the model uses the HF args")
+            print(f"current model args don't correspond to the HF model's args.\nRight now the model uses the HF args:\n{pulled_args}")
 
-        self.model.from_pretrained(self.args.hf_repo_id)
+        file_path = hf_hub_download(
+            repo_id=self.args.hf_repo_id,
+            filename="model.safetensors",
+        )
+
+        if not os.path.exists(file_path):
+            print('no model file found')
+
+        loaded = load_file(file_path)
+        if "output.weight" not in loaded:
+            loaded['output.weight'] = loaded["emb.embeddings.weight"]
+
+        self.model.load_state_dict(loaded)
+
+    def _pull_all_from_hub(self):
+        self._pull_model_from_hub()
+        self._pull_optim_from_hub()
 
 if __name__ == '__main__':
     import time
@@ -216,6 +255,16 @@ if __name__ == '__main__':
 
     model = Radovid(Args())
 
-    trainer = RadovidTrainer(model, TrainingArgs())
+    targs = TrainingArgs(hf_repo_id='AnthonyPa57/HF-torch-demo-R', local_checkpoint_folder='./test_model')
+    trainer = RadovidTrainer(model, targs)
+
+
+    # trainer._load_local_checkpoint()
+    trainer._pull_all_from_hub()
+    # trainer._pull_model_from_hub()
+
+    # trainer._fuse_optim()
+    # trainer._save_local_checkpoint()
+    # trainer._push_all_to_hub(0, 'test')
 
     trainer.benchmark()
