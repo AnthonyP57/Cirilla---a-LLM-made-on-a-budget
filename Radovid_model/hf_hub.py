@@ -12,11 +12,11 @@ def push_model_to_hub(repo_id,
                 loss:float,
                 dataset_name:str,
                 private:bool=False,
+                optmizer_states_path:Path=None,
                 tags:list[str]=["pytorch", "text-generation", "moe", "custom_code"],
                 license:str='mit',
                 languages:list[str] = ['en'],
-                model_card:str = None,
-                save_locally:Path=None
+                model_card:str = None
                 ):
 
   repo_name = repo_id
@@ -69,9 +69,16 @@ def push_model_to_hub(repo_id,
     with readme_path.open("w", encoding="utf-8") as f:
       f.write(readme)
 
+    if optmizer_states_path is not None:
+        with optmizer_states_path.open('rb') as f:
+            api.upload_file(
+                path_or_fileobj=f,
+                path_in_repo=optmizer_states_path.split('/')[-1],
+                repo_id=repo_id,
+            )
+          
+
     model.push_to_hub(repo_id)
-    if save_locally is not None:
-        model.save_pretrained(save_locally)
 
     metadata_save(readme_path, metadata)
 

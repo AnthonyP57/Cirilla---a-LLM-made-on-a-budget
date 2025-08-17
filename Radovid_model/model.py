@@ -219,7 +219,7 @@ if __name__ == '__main__':
     print("Loaded model weights")
 
     # Load optimizer states
-    loaded_states = torch.load('./test_model/optimizer.pt', map_location='cpu')
+    loaded_states = torch.load('./test_model/optimizer.pt', map_location='cuda')
 
     # Recreate optimizers for *new* parameter objects
     params_by_name = dict(model.named_parameters())
@@ -231,10 +231,10 @@ if __name__ == '__main__':
         p = params_by_name[name]
         opt = torch.optim.AdamW([p], fused=True, foreach=False, lr=5e-5)
         # Move saved state tensors to param's device
-        for s in state["state"].values():
-            for k, v in s.items():
-                if isinstance(v, torch.Tensor):
-                    s[k] = v.to(p.device)
+        # for s in state["state"].values():
+        #     for k, v in s.items():
+        #         if isinstance(v, torch.Tensor):
+        #             s[k] = v.to(p.device)
         opt.load_state_dict(state)
         optimizer_by_name[name] = opt
 

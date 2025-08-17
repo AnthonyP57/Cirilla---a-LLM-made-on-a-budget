@@ -5,6 +5,10 @@ from torch.utils.data import DataLoader
 from functools import partial
 from dataclasses import dataclass, field
 from torch.optim import Optimizer, AdamW
+from pathlib import Path
+from hf_hub import push_model_to_hub
+from huggingface_hub import hf_hub_download
+import json
 
 @dataclass
 class TrainingArgs:
@@ -12,7 +16,15 @@ class TrainingArgs:
     optim:Optimizer = AdamW
     lr:float = 5e-5
     xavier_init:bool = True
+    local_checkpoint_folder:Path = './'
     optim_kwargs:dict[str,str] = field(default_factory=lambda: {'fused':True, 'foreach':False})
+    
+    hf_repo_id:str = None
+    private_hf_repo:bool=True
+    hf_tags:list[str] = ["pytorch", "text-generation", "moe", "custom_code"]
+    hf_license:str = 'mit'
+    languages:list[str] = ['en']
+    model_card:str = None
 
 class RadovidTrainer:
     def __init__(self, model:Radovid, training_args:TrainingArgs):
@@ -110,16 +122,92 @@ class RadovidTrainer:
         return partial(self.args.optim, **optim_kwargs, lr=self.args.lr)
     
     def _fuse_optim(self):
-        optimizer_dict = {p: self.optim([p]) for p in self.model.parameters()}
+        self.optimizer_by_name = {}
+        for name, p in model.named_parameters():
+            self.optimizer_by_name[name] = self.optim([p])
 
-        def optimizer_hook(parameter) -> None:
-            # if parameter.grad is not None:
-            #     parameter.grad.data.clamp_(-1, 1)
+        params_by_name = dict(model.named_parameters())
+        optimizer_dict = {params_by_name[name]: opt for name, opt in self.optimizer_by_name.items()}
+
+        self._register_hooks(optimizer_dict)
+
+    def _register_hooks(self, optimizer_dict):
+        
+        def optimizer_hook(parameter):
             optimizer_dict[parameter].step()
             optimizer_dict[parameter].zero_grad(set_to_none=True)
 
         for p in self.model.parameters():
-            p.register_post_accumulate_grad_hook(optimizer_hook)
+            if p in optimizer_dict:
+                p.register_post_accumulate_grad_hook(optimizer_hook)
+            else:
+                raise KeyError(f"Unknown param: {p}")
+
+    def _save_local_checkpoint(self):
+        torch.save(self.model.state_dict(), Path.joinpath(self.args.local_checkpoint_folder, 'model.pth'))
+        optim_states = {name: opt.state_dict() for name, opt in self.optimizer_by_name.items()}
+        torch.save(optim_states, Path.joinpath(self.args.local_checkpoint_folder, 'optimizer_states.pth'))
+
+    def _load_local_checkpoint(self):
+        self.model.load_state_dict(torch.load(\
+            Path.joinpath(self.args.local_checkpoint_folder,'model.pth')))
+
+        loaded_states = torch.load(\
+            Path.joinpath(self.args.local_checkpoint_folder, 'optimizer_states.pth'),
+            map_location=self.model.args.device)
+
+        params_by_name = dict(self.model.named_parameters())
+        self.optimizer_by_name = {}
+
+        for name, state in loaded_states.items():
+
+            if name not in params_by_name:
+                print(f"Skipping unknown param: {name}")
+                continue
+
+            p = params_by_name[name]
+            opt = torch.optim.AdamW([p], fused=True, foreach=False, lr=5e-5)
+            opt.load_state_dict(state)
+            self.optimizer_by_name[name] = opt
+
+        optimizer_dict = {params_by_name[n]: o for n, o in self.optimizer_by_name.items()}
+
+        self._register_hooks(optimizer_dict)
+
+    def _push_all_to_hub(self, loss, dataset_name):
+        push_model_to_hub(
+            repo_id = self.args.hf_repo_id,
+            model = self.model,
+            loss = loss,
+            dataset_name = dataset_name,
+            private = self.args.private_hf_repo,
+            optmizer_states_path = Path.joinpath(self.args.local_checkpoint_folder, 'optimizer_states.pth'),
+            tags = self.args.hf_tags,
+            license = self.args.hf_license,
+            languages = self.args.languages,
+            model_card = self.args.model_card
+        )
+
+    def _get_args_from_hub(self):
+        file_path = hf_hub_download(
+            repo_id=self.args.hf_repo_id,
+            filename="config.json",
+        )
+        with open(file_path, "r") as f:
+            config = json.load(f)
+        args = Args(**config[list(config.keys())[0]])
+
+        return args
+
+    def _pull_all_from_hub(self):
+        model_args = self.model.args
+        pulled_args = self._get_args_from_hub()
+
+        if model_args != pulled_args:
+            self.model = Radovid(pulled_args)
+            print("current model args don't correspond to the HF model's args.\nRight now the model uses the HF args")
+
+        self.model.from_pretrained(self.args.hf_repo_id)
 
 if __name__ == '__main__':
     import time
