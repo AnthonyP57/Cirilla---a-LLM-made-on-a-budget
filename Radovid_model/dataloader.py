@@ -1,14 +1,16 @@
 from pathlib import Path
 from modules import cache_or_fetch
+import torch
 import json
 import random
 from torch.utils.data import IterableDataset, DataLoader
 
 class JSONLDataset(IterableDataset):
-    def __init__(self, path:Path='./training_dataset.jsonl', shuffle_path=False):
+    def __init__(self, path:Path='./training_dataset.jsonl', shuffle_path=False, device:torch.device='cuda'):
         super().__init__()
         self.path = path
         self.shuffle_path = shuffle_path
+        self.device = device
 
         if cache_or_fetch('DATA_LEN', path) is None:
             with open(self.path, 'r', encoding='utf-8') as f:

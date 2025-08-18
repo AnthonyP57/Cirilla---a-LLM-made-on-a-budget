@@ -2,24 +2,36 @@ import torch
 import torch.nn as nn
 from model import Radovid
 from torch.utils.data import DataLoader
+from dataloader import JSONLDataset
 from functools import partial
 from dataclasses import dataclass, field
-from torch.optim import Optimizer, AdamW
+from torch.optim import Optimizer, AdamW, SGD
 from pathlib import Path
 from hf_hub import push_model_to_hub
 from huggingface_hub import hf_hub_download
 import os
 from safetensors.torch import load_file
 from modules import get_args_from_hub
+import time
+from modules import cache_or_fetch
+import threading
 
 @dataclass
 class TrainingArgs:
     n_epoch:int = 100
     optim:Optimizer = AdamW
     lr:float = 5e-5
+    batch_size:int = 4
     xavier_init:bool = True
     local_checkpoint_folder:Path = './'
     optim_kwargs:dict[str,str] = field(default_factory=lambda: {'fused':True, 'foreach':False})
+
+    renew_training:bool = True
+    save_checkpoint_n_iterations:int = None
+    save_checkpoint_min:int = 15
+
+    push_checkpoint_to_hub:bool = False
+    push_checkpoint_to_hub_n_local_saves:int = 4
     
     hf_repo_id:str = None
     private_hf_repo:bool=True
@@ -28,36 +40,89 @@ class TrainingArgs:
     languages:list[str] = field(default_factory=lambda: ["en"])
     model_card:str = None
 
+    @property
+    def stateful_optim(self):
+        if self.optim == SGD:
+            return False
+        return True
+
 class RadovidTrainer:
     def __init__(self, model:Radovid, training_args:TrainingArgs):
         self.model = model
         self.args = training_args
         self.optim = self._prepare_optimizer(**training_args.optim_kwargs)
 
+        self.n_checkpoints = 0
+
         print(f'n trainable params: {(model.n_params/1e6):.2f} M')
 
-    def train(self, dataloader:DataLoader):
+    def train(self, dataset:JSONLDataset):
+
+        dataset_path = dataset.path
+
+        dataloader = DataLoader(dataset, shuffle=False, batch_size=self.args.batch_size)
+        del dataset
+
+        start_time = time.time()
 
         self._set_global_vars()
 
-        if self.args.xavier_init:
-            self._xavier_init()
+        skip_n_data_points = cache_or_fetch('N_DATA_POINTS', dataset_path)
+        if skip_n_data_points is None:
+            skip_n_data_points = 0
 
-        self._fuse_optim()
+        n_iter = 0
+
+        if self.args.renew_training:
+            if os.path.exists(os.path.join(self.args.local_checkpoint_folder, 'optimizer_states.pt')) or not self.args.stateful_optim:
+                if os.path.exists(os.path.join(self.args.local_checkpoint_folder, 'model.pt')):
+                    self._load_local_checkpoint()
+                else:
+                    if skip_n_data_points > 0:
+                        raise FileNotFoundError(f"Couldn't find model path at: {os.path.join(self.args.local_checkpoint_folder, 'model.pt')}")
+            else:
+                if skip_n_data_points > 0:
+                    raise FileNotFoundError(f"Couldn't find optimizer states path for a {'stateful' if self.args.stateful_optim else 'non-stateful'} optimizer at: {os.path.join(self.args.local_checkpoint_folder, 'optimizer_states.pt')}")
+
+        if not hasattr(self, 'optimizer_by_name'): # if didn't load from checkpoint
+            print("Training from scratch")
+
+            if self.args.xavier_init:
+                self._xavier_init()
+
+            self._fuse_optim()
 
         self._set_prior_training_vars()
 
         criterion = nn.CrossEntropyLoss()
 
-        for epoch in range(self.args.n_epoch):
+        for epoch in range(1, self.args.n_epoch + 1):
 
             for x, y in dataloader:
+
+                if n_iter * self.args.batch_size < skip_n_data_points:
+                    skip_n_data_points += self.args.batch_size
+                    continue
+
+                n_iter += 1
 
                 torch.compiler.cudagraph_mark_step_begin()
                 out = self.model.pred(x)
                 loss = criterion(out.view(-1, self.model.args.vocab_size), y.view(-1))
 
                 loss.backward()
+
+                do_checkpoint, push_hub = self._check_if_do_checkpoint(start_time, n_iter)
+                
+                if do_checkpoint:
+                    self._save_local_checkpoint()
+                    if push_hub and self.args.push_checkpoint_to_hub:
+                        try:
+                            self._push_all_to_hub_async(loss, dataset_path.split('/')[-1].split('.')[0])
+                            
+                        except Exception as e:
+                            print(f"Failed to push asynchronously to HF hub: {e}\nPushing synchronously")
+                            self._push_all_to_hub(loss, dataset_path.split('/')[-1].split('.')[0])
 
     def benchmark(self):
         
@@ -103,6 +168,17 @@ class RadovidTrainer:
             print(f'average time: {np.mean(np.diff(times)):.4f} loss: {loss_item}', end='\r')
 
         print(f'average time for epoch: {np.mean(np.diff(times)):.4f}')
+
+    def _check_if_do_checkpoint(self, time, iter_step):
+        if self.args.save_checkpoint_min is not None:
+            if time >= self.args.save_checkpoint_min * 60:
+                self.n_checkpoints += 1
+                return True, self.n_checkpoints % self.args.save_checkpoint_n_iterations == 0
+            
+        if self.args.save_checkpoint_n_iterations is not None:
+            if iter_step % self.args.save_checkpoint_n_iterations == 0:
+                self.n_checkpoints += 1
+                return True, self.n_checkpoints % self.args.save_checkpoint_n_iterations == 0
 
     def _xavier_init(self):
         for param in self.model.parameters():
@@ -150,18 +226,26 @@ class RadovidTrainer:
             self._fuse_optim()
             
         torch.save(self.model.state_dict(), os.path.join(self.args.local_checkpoint_folder, 'model.pt'))
-        optim_states = {name: opt.state_dict() for name, opt in self.optimizer_by_name.items()}
-        torch.save(optim_states, os.path.join(self.args.local_checkpoint_folder, 'optimizer_states.pt'))
+
+        if self.args.stateful_optim:
+
+            optim_states = {name: opt.state_dict() for name, opt in self.optimizer_by_name.items()}
+            torch.save(optim_states, os.path.join(self.args.local_checkpoint_folder, 'optimizer_states.pt'))
 
     def _load_local_checkpoint(self):
         self.model.load_state_dict(torch.load(\
             os.path.join(self.args.local_checkpoint_folder,'model.pt')))
-
-        loaded_states = torch.load(\
-            os.path.join(self.args.local_checkpoint_folder, 'optimizer_states.pt'),
-            map_location=self.model.args.device)
         
-        self._load_optim_from_checkpoint(loaded_states)
+        if self.args.stateful_optim:
+
+            loaded_states = torch.load(\
+                os.path.join(self.args.local_checkpoint_folder, 'optimizer_states.pt'),
+                map_location=self.model.args.device)
+
+            self._load_optim_from_checkpoint(loaded_states)
+
+        else:
+            self._fuse_optim()
         
     def _load_optim_from_checkpoint(self, loaded_states):
 
@@ -196,6 +280,15 @@ class RadovidTrainer:
             languages = self.args.languages,
             model_card = self.args.model_card
         )
+
+    def _push_all_to_hub_async(self, loss, dataset_name):
+        args = (loss, dataset_name)
+
+        def worker(loss_value, dataset_name):
+            self._push_all_to_hub(loss_value, dataset_name)
+
+        t = threading.Thread(target=worker, args=args, daemon=True)
+        t.start()
     
     def _pull_optim_from_hub(self):
         file_path = hf_hub_download(

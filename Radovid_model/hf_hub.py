@@ -85,7 +85,7 @@ def push_model_to_hub(repo_id,
           path_in_repo=".",
     )
 
-    print(f"Your model is pushed to the Hub. You can view your model here: {repo_url}")
+    # print(f"Your model is pushed to the Hub. You can view your model here: {repo_url}")
 
 if __name__ == "__main__":
 
