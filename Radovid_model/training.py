@@ -173,12 +173,12 @@ class RadovidTrainer:
         if self.args.save_checkpoint_min is not None:
             if time >= self.args.save_checkpoint_min * 60:
                 self.n_checkpoints += 1
-                return True, self.n_checkpoints % self.args.save_checkpoint_n_iterations == 0
+                return True, self.n_checkpoints % self.args.push_checkpoint_to_hub_n_local_saves == 0
             
         if self.args.save_checkpoint_n_iterations is not None:
             if iter_step % self.args.save_checkpoint_n_iterations == 0:
                 self.n_checkpoints += 1
-                return True, self.n_checkpoints % self.args.save_checkpoint_n_iterations == 0
+                return True, self.n_checkpoints % self.args.push_checkpoint_to_hub_n_local_saves == 0
 
     def _xavier_init(self):
         for param in self.model.parameters():
