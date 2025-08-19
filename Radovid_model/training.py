@@ -338,7 +338,7 @@ if __name__ == '__main__':
 
 
     # trainer._load_local_checkpoint()
-    trainer._pull_all_from_hub()
+    # trainer._pull_all_from_hub()
     # trainer._pull_model_from_hub()
 
     # trainer._fuse_optim()

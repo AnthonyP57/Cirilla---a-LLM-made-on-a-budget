@@ -1,5 +1,5 @@
 from .activations import get_activation
-from .SMoE import SMoE, Expert
+from .SMoE import SMoE, Expert, MegablockMoE, MegablockdMoE
 from .RoPE import RoPE
 from .sliding_window_attention import (
                                     SlidingWindowAttention,

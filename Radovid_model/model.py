@@ -6,7 +6,8 @@ from LLM_pieces import (
     create_static_block_mask,
     create_dynamic_block_mask,
     sliding_window_causal,
-    Expert
+    Expert,
+    MegablockMoE
 )
 from dataclasses import dataclass
 import torch.nn as nn
@@ -17,8 +18,6 @@ import torch
 from attn_gym.mods import generate_tanh_softcap
 from huggingface_hub import PyTorchModelHubMixin, hf_hub_download
 from safetensors.torch import load_file
-import os
-from pathlib import Path
 
 @dataclass
 class Args:
@@ -37,6 +36,8 @@ class Args:
     theta:float = 10_000.0
     num_experts:int = 8
     k:int = 4
+    capacity_factor: float = 1.0
+    impl: str = "grouped"   # or "sparse" Sparse MLP is not supported with triton >=3.2.0
     dtype_str:str = 'bfloat16'
 
     @property
@@ -103,8 +104,13 @@ class Radovid(
                 mode='max-autotune') for _ in range(self.args.n_layers)
             ])
 
+        # self.smoes = nn.ModuleList([
+        #     torch.compile(SMoE(self.args, [Expert(self.args) for _ in range(self.args.num_experts)]), mode='max-autotune')
+        #     for _ in range(self.args.n_layers)
+        # ])
+
         self.smoes = nn.ModuleList([
-            torch.compile(SMoE(self.args, [Expert(self.args) for _ in range(self.args.num_experts)]), mode='max-autotune')
+            MegablockMoE(self.args)
             for _ in range(self.args.n_layers)
         ])
 

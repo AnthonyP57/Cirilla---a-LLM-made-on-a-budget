@@ -1,11 +1,12 @@
 import torch
 import configparser
 import os
-from model import Args
 from huggingface_hub import hf_hub_download
 import json
 
 def get_args_from_hub(hf_repo_id):
+    from model import Args
+
     file_path = hf_hub_download(
         repo_id=hf_repo_id,
         filename="config.json",
