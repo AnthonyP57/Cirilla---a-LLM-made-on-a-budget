@@ -172,11 +172,6 @@ class MegablockdMoE(nn.Module):
         out = out.transpose(0, 1)  # back to (batch, seq, dim)
         return out
 
-from fairscale.nn import MOELayer, Top2Gate
-
-
-
-
 if __name__=='__main__':
     import time
 
