@@ -3,6 +3,53 @@ import configparser
 import os
 from huggingface_hub import hf_hub_download
 import json
+import time
+
+def benchmark_model_part(model, x, label=""):
+    model.train()
+    x = x.contiguous()
+
+    # Warmup (not measured)
+    out = model(x)
+    loss = out.sum()
+    loss.backward()
+    torch.cuda.synchronize()
+    model.zero_grad(set_to_none=True)
+
+    fwd_times, bwd_times = [], []
+    fwd_mems, bwd_mems = [], []
+
+    for _ in range(3):
+        # Forward
+        torch.cuda.synchronize()
+        start_mem = torch.cuda.memory_allocated()
+        start_time = time.time()
+
+        out = model(x)
+        loss = out.sum()
+
+        torch.cuda.synchronize()
+        fwd_times.append(time.time() - start_time)
+        fwd_mems.append(torch.cuda.memory_allocated() - start_mem)
+
+        # Backward
+        torch.cuda.synchronize()
+        start_mem = torch.cuda.memory_allocated()
+        start_time = time.time()
+
+        loss.backward()
+
+        torch.cuda.synchronize()
+        bwd_times.append(time.time() - start_time)
+        bwd_mems.append(torch.cuda.memory_allocated() - start_mem)
+
+        model.zero_grad(set_to_none=True)
+
+    print(f"\n[{label}]")
+    print(f"Forward time:   {sum(fwd_times)/len(fwd_times)*1000:.2f} ms")
+    print(f"Backward time:  {sum(bwd_times)/len(bwd_times)*1000:.2f} ms")
+    print(f"Forward memory: {sum(fwd_mems)/len(fwd_mems)/1024/1024:.2f} MB")
+    print(f"Backward memory:{sum(bwd_mems)/len(bwd_mems)/1024/1024:.2f} MB")
 
 def get_args_from_hub(hf_repo_id):
     from model import Args

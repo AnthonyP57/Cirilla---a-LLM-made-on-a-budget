@@ -1,9 +1,6 @@
 import torch.nn as nn
 import torch
 
-import torch
-import torch.nn as nn
-
 class RoPE(nn.Module):
     def __init__(self, head_dim: int, seq_len: int, device="cuda", theta: float = 10000.0, dtype=torch.bfloat16):
         super().__init__()

@@ -336,13 +336,14 @@ if __name__ == '__main__':
     targs = TrainingArgs(hf_repo_id='AnthonyPa57/HF-torch-demo-R', local_checkpoint_folder='./test_model')
     trainer = RadovidTrainer(model, targs)
 
+    # trainer._fuse_optim()
+    trainer._save_local_checkpoint()
+    trainer._push_all_to_hub_async(0, 'test')
 
-    # trainer._load_local_checkpoint()
+    trainer._load_local_checkpoint()
     # trainer._pull_all_from_hub()
     # trainer._pull_model_from_hub()
 
-    # trainer._fuse_optim()
-    # trainer._save_local_checkpoint()
-    # trainer._push_all_to_hub(0, 'test')
-
     trainer.benchmark()
+
+    time.sleep(60)
