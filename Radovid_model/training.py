@@ -337,13 +337,13 @@ if __name__ == '__main__':
     trainer = RadovidTrainer(model, targs)
 
     # trainer._fuse_optim()
-    trainer._save_local_checkpoint()
-    trainer._push_all_to_hub_async(0, 'test')
+    # trainer._save_local_checkpoint()
+    # trainer._push_all_to_hub_async(0, 'test')
 
-    trainer._load_local_checkpoint()
+    # trainer._load_local_checkpoint()
     # trainer._pull_all_from_hub()
     # trainer._pull_model_from_hub()
 
     trainer.benchmark()
 
-    time.sleep(60)
+    # time.sleep(60)

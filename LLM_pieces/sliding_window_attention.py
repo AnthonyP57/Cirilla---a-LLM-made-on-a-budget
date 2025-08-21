@@ -62,19 +62,8 @@ class SlidingWindowAttention(nn.Module):
         self.window_size = args.window_size
 
         self.attn = partial(flex_attention, block_mask=mask if mask is not None and isinstance(mask, BlockMask) else None,
-                            score_mod=score_mod if score_mod is not None else None)\
+                            score_mod=score_mod if score_mod is not None else None, enable_gqa= self.n_heads_q != self.n_kv_heads)\
                         if self.static_mask else None
-    
-    @staticmethod
-    def _repeat_kv(x:torch.Tensor, n_rep:int):
-        batch, seq, n_kv, head_dim = x.shape
-        if n_rep == 1:
-            return x
-        else:
-            return (
-                x[:, :, :, None, :].expand(batch, seq, n_kv, n_rep, head_dim)
-                .reshape(batch, seq, n_kv*n_rep, head_dim)
-            )
 
     def forward(self, x: torch.Tensor):
         batch_size, seq_len, dim = x.shape
@@ -91,9 +80,6 @@ class SlidingWindowAttention(nn.Module):
         xv = xv.view(batch_size, seq_len, self.n_kv_heads, self.head_dim)
 
         xq, xk = self.rope.apply_rotary_embeddings(xq, xk)
-
-        xk = self._repeat_kv(xk, self.n_rep)
-        xv = self._repeat_kv(xv, self.n_rep)
 
         # (b, seq, h_q, head_dim) -> (b, h_q, seq, head_dim)
         xq = xq.transpose(1,2)
@@ -145,6 +131,8 @@ if __name__=='__main__':
     # out = causal_attention(query, key, value)
     # print(out[0,0,:8,:8])
 
+    from Radovid_model.modules import benchmark_model_part
+
     SOFT_CAP = 20
 
     x = torch.rand((1,2048,128*16), device='cuda', dtype=torch.bfloat16) # (b, seq, head_dim*h)
@@ -157,29 +145,30 @@ if __name__=='__main__':
 
     attention_layer = SlidingWindowAttention(AttentionArgs(), rope, mask=static_mask, score_mod=softcap).to('cuda', dtype=torch.bfloat16)
     attention_layer = torch.compile(attention_layer, mode='max-autotune')
-    out = attention_layer(x)
-    print(out.shape)#, out)
+    benchmark_model_part(attention_layer, x, "SlidingWindowAttention")
+    # out = attention_layer(x)
+    # print(out.shape)#, out)
 
-    # dynamic mask
-    dynamic_args = AttentionArgs(static_mask=False)
-    attention_layer = SlidingWindowAttention(dynamic_args, mask=create_dynamic_block_mask, rope=rope, score_mod=softcap).to('cuda', dtype=torch.bfloat16)
-    out = attention_layer(x)
-    print(out.shape)#, out)
+    # # dynamic mask
+    # dynamic_args = AttentionArgs(static_mask=False)
+    # attention_layer = SlidingWindowAttention(dynamic_args, mask=create_dynamic_block_mask, rope=rope, score_mod=softcap).to('cuda', dtype=torch.bfloat16)
+    # out = attention_layer(x)
+    # print(out.shape)#, out)
 
-    x = torch.rand((1,512,128*16), device='cuda', dtype=torch.bfloat16) # (b, seq, head_dim*h)
+    # x = torch.rand((1,512,128*16), device='cuda', dtype=torch.bfloat16) # (b, seq, head_dim*h)
 
-    out = attention_layer(x)
-    print(out.shape)#, out)
+    # out = attention_layer(x)
+    # print(out.shape)#, out)
 
 
-    x = torch.rand((1,256,128*16), device='cuda', dtype=torch.bfloat16) # (b, seq, head_dim*h)
+    # x = torch.rand((1,256,128*16), device='cuda', dtype=torch.bfloat16) # (b, seq, head_dim*h)
 
-    out = attention_layer(x)
-    print(out.shape)#, out)
+    # out = attention_layer(x)
+    # print(out.shape)#, out)
 
     
-    x = torch.rand((1,2048,128*16), device='cuda', dtype=torch.bfloat16) # (b, seq, head_dim*h)
+    # x = torch.rand((1,2048,128*16), device='cuda', dtype=torch.bfloat16) # (b, seq, head_dim*h)
 
-    out = attention_layer(x)
-    print(out.shape)#, out)
-    print(create_dynamic_block_mask.cache_info())
+    # out = attention_layer(x)
+    # print(out.shape)#, out)
+    # print(create_dynamic_block_mask.cache_info())

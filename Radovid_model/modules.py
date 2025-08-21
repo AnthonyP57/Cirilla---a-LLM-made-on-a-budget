@@ -10,16 +10,17 @@ def benchmark_model_part(model, x, label=""):
     x = x.contiguous()
 
     # Warmup (not measured)
-    out = model(x)
-    loss = out.sum()
-    loss.backward()
-    torch.cuda.synchronize()
-    model.zero_grad(set_to_none=True)
+    for _ in range(10):
+        out = model(x)
+        loss = out.sum()
+        loss.backward()
+        torch.cuda.synchronize()
+        model.zero_grad(set_to_none=True)
 
     fwd_times, bwd_times = [], []
     fwd_mems, bwd_mems = [], []
 
-    for _ in range(3):
+    for _ in range(100):
         # Forward
         torch.cuda.synchronize()
         start_mem = torch.cuda.memory_allocated()
@@ -61,6 +62,19 @@ def get_args_from_hub(hf_repo_id):
     with open(file_path, "r") as f:
         config = json.load(f)
     args = Args(**config[list(config.keys())[0]])
+
+    return args
+
+def get_bertargs_from_hub(hf_repo_id):
+    from model import BertArgs
+
+    file_path = hf_hub_download(
+        repo_id=hf_repo_id,
+        filename="config.json",
+    )
+    with open(file_path, "r") as f:
+        config = json.load(f)
+    args = BertArgs(**config[list(config.keys())[0]])
 
     return args
 

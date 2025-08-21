@@ -7,3 +7,4 @@ from .sliding_window_attention import (
                                     create_static_block_mask,
                                     sliding_window_causal
                                       )
+from .BERT_attention import BertAttention
