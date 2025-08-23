@@ -8,6 +8,7 @@ dependencies = [
     "attn-gym>=0.0.4",
     "bitsandbytes>=0.46.1",
     "datasets>=4.0.0",
+    "fandom-py>=0.2.1",
     "fuzzywuzzy>=0.18.0",
     "huggingface-hub>=0.33.4",
     "kernels>=0.8.0",

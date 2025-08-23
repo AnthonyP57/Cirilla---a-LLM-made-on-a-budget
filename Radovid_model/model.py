@@ -41,7 +41,7 @@ class Args:
     """MoE"""
     num_experts:int = 8
     k:int = 4
-    moe_type:str = "megablocks-moe" # or "pytorch" or "megablocks-dmoe"
+    moe_type:str = "megablocks-dmoe" # or "pytorch" or "megablocks-dmoe"
     capacity_factor: float = 1.0
     impl: str = "grouped"   # or "sparse" Sparse MLP is not supported with triton >=3.2.0
     
