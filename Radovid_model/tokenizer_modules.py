@@ -48,33 +48,36 @@ class RadovidTokenizer:
     def push_to_hub(self, hub_url):
         self.tokenizer.push_to_hub(hub_url)
     
-    def decode(self, tokens):
-        return self.tokenizer.decode(tokens)
+    def decode(self, tokens, **kwargs):
+        return self.tokenizer.decode(tokens, **kwargs)
     
-    def encode(self, text):
-        return self.tokenizer.encode(text)
+    def encode(self, text, **kwargs):
+        return self.tokenizer.encode(text, **kwargs)
+    
+    def __call__(self, text, **kwargs):
+        return self.tokenizer(text, **kwargs)
         
 if __name__ == '__main__':
-    tokenizer = RadovidTokenizer()
+    # tokenizer = RadovidTokenizer(hub_url='AnthonyPa57/HF-torch-demo2')
 
-    tokenizer.pull_from_hub('AnthonyPa57/HF-torch-demo2')
-    tokenizer.push_to_hub('AnthonyPa57/HF-torch-demo2')
-    tokenizer.pull_from_hub('AnthonyPa57/HF-torch-demo2')
+    # tokenizer.pull_from_hub('AnthonyPa57/HF-torch-demo2')
+    # tokenizer.push_to_hub('AnthonyPa57/HF-torch-demo2')
+    # tokenizer.pull_from_hub('AnthonyPa57/HF-torch-demo2')
 
-    print(tokenizer.decode(tokenizer.encode('hello world')))
-    print(tokenizer.encode('hello world'))
+    # print(tokenizer.decode(tokenizer.encode('hello world')))
+    # print(tokenizer.encode('hello world'))
 
     from dataloader import JSONLDataset
-    from torch.utils.data import DataLoader
-    dl = JSONLDataset('./example.jsonl', shuffle_path=True)
-    dl = DataLoader(dl, batch_size=2)
+    # from torch.utils.data import DataLoader
+    dl = JSONLDataset('training_datasets/mid_training/witcher_instruct.jsonl', shuffle_path=True)
+    # dl = DataLoader(dl, batch_size=2)
 
     tokenizer = RadovidTokenizer()
-    tokenizer.train(dl, special_tokens=SPECIAL_TOKENS, min_frequency=1)
+    tokenizer.train(dl, special_tokens=SPECIAL_TOKENS, min_frequency=2)
 
     tokenizer.push_to_hub('AnthonyPa57/HF-torch-demo2')
 
     print(tokenizer.decode(tokenizer.encode('hello world')))
-    print(tokenizer.encode('[SOS] What is the capital of France?'))
+    print(tokenizer.encode('<sos> What is the capital of France?'))
     print(tokenizer.decode(tokenizer.encode('What is the capital of France?')))
 
