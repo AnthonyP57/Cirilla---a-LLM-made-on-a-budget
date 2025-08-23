@@ -28,8 +28,8 @@ class Args:
     dim:int = 1024
     d_ff:int = 2048
     n_layers:int = 16
-    # n_layers:int = 4
-    
+    tie_params:bool = True
+
     """attention"""
     context_window:int = 2048 # max seq len
     window_size:int = 1024
@@ -137,7 +137,8 @@ class Radovid(
             raise ValueError(f"allowed moe types: 'pytorch',  'megablocks-moe', 'megablocks-dmoe' ; got: {self.args.moe_type}")
 
         self.output = nn.Linear(self.args.dim, self.args.vocab_size, bias=False)
-        self.output.weight = self.emb.embeddings.weight # tied params
+        if self.args.tie_params:
+            self.output.weight = self.emb.embeddings.weight
 
         self.n_params = sum(p.numel() for p in self.parameters() if p.requires_grad)
 
@@ -183,6 +184,7 @@ class BertArgs:
     d_ff:int = 2048
     n_layers:int = 4
     output_meanpool:bool = False
+    tie_params:bool = False
     
     """attention"""
     context_window:int = 2048 # max seq len
@@ -266,7 +268,8 @@ class RadovidBERT(
             raise ValueError(f"allowed moe types: 'pytorch',  'megablocks-moe', 'megablocks-dmoe' ; got: {self.args.moe_type}")
 
         self.output = nn.Linear(self.args.dim, self.args.vocab_size, bias=False)
-        self.output.weight = self.emb.embeddings.weight # tied params
+        if self.args.tie_params:
+            self.output.weight = self.emb.embeddings.weight
 
         self.n_params = sum(p.numel() for p in self.parameters() if p.requires_grad)
 

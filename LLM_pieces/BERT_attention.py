@@ -4,10 +4,8 @@ from dataclasses import dataclass
 from typing import Optional
 import torch
 from .activations import get_activation
-from attn_gym.mods import generate_tanh_softcap
 
 flash_attention = get_activation("kernels-community/flash-attn")
-softcap = generate_tanh_softcap(20, approx=False)
 
 @dataclass
 class BertAttentionArgs:
