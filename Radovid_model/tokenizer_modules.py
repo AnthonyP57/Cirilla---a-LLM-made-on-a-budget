@@ -6,7 +6,7 @@ from pathlib import Path
 from typing import Iterator
 
 SPECIAL_TOKENS = {'unk_token':'<unk>', 'pad_token':'<pad>', 'mask_token':'<mask>',
-                  'bos_token':'<sos>', 'eos_token':'<eos>'}
+                  'bos_token':'<sos>', 'eos_token':'<eos>', 'user_token':'<user>', 'bot_token':'<bot>'}
 
 class RadovidTokenizer:
     def __init__(self, path:Path=None, hub_url=None):
@@ -67,17 +67,17 @@ if __name__ == '__main__':
     # print(tokenizer.decode(tokenizer.encode('hello world')))
     # print(tokenizer.encode('hello world'))
 
-    from dataloader import JSONLDataset
+    # from dataloader import JSONLDataset
     # from torch.utils.data import DataLoader
-    dl = JSONLDataset('training_datasets/mid_training/witcher_instruct.jsonl', shuffle_path=True)
+    # dl = JSONLDataset('training_datasets/mid_training/witcher_instruct.jsonl', shuffle_path=True)
     # dl = DataLoader(dl, batch_size=2)
 
-    tokenizer = RadovidTokenizer()
-    tokenizer.train(dl, special_tokens=SPECIAL_TOKENS, min_frequency=2)
+    tokenizer = RadovidTokenizer(hub_url='AnthonyPa57/HF-torch-demo2')
+    # tokenizer.train(dl, special_tokens=SPECIAL_TOKENS, min_frequency=2)
 
-    tokenizer.push_to_hub('AnthonyPa57/HF-torch-demo2')
+    # tokenizer.push_to_hub('AnthonyPa57/HF-torch-demo2')
 
     print(tokenizer.decode(tokenizer.encode('hello world')))
-    print(tokenizer.encode('<sos> What is the capital of France?'))
+    print(tokenizer.encode('<sos>What is the capital of France?<pad><eos><pad>'))
     print(tokenizer.decode(tokenizer.encode('What is the capital of France?')))
 

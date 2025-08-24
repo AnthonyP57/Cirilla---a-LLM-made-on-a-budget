@@ -6,18 +6,40 @@ from Ollama_create_instruct import OllamaInstructCurate
 import ollama
 from tqdm import tqdm
 
+def try_repair_json(text: str) -> str:
+    text = text.strip()
+
+    try:
+        json.loads(text)
+        return text
+    except:
+        pass
+
+    if text.count('{') > text.count('}'):
+        text += "}"
+    if text.count('[') > text.count(']'):
+        text += "]"
+
+    if text.count('"') % 2 != 0:
+        text += '"'
+
+    try:
+        json.loads(text)
+        return text
+    except:
+        return json.dumps({"summary": text[:1000]})  # truncated
+
 def dynamic_hierarchical_summary(
     self,
     paths: List[str],
     save_to: str = './summaries',
     chunk_lines: int = 100, # number of lines per chunk (your "100 lines")
     seed: int = 42,
-    num_predict: int = 512, # max number of tokens
-    max_words_summary: int = 250, # target maximum words per summary block
+    num_predict: int = 2048, # max number of tokens
+    max_words_summary: int = 200, # target maximum words per summary block
     use_response_template: bool = False
 ):
     os.makedirs(save_to, exist_ok=True)
-    start = time.time()
 
     def _call_model(prompt: str):
         if use_response_template and hasattr(self, 'response_template') and self.response_template is not None:
@@ -27,21 +49,24 @@ def dynamic_hierarchical_summary(
                 format=self.response_template.model_json_schema(),
                 options={'num_predict': num_predict, 'seed': seed}
             )
-            resp_valid = self.response_template.model_validate_json(resp.message.content)
+
+            raw = resp.message.content.strip()
+            raw = try_repair_json(raw)
+
+            resp_valid = self.response_template.model_validate_json(raw)
             data = resp_valid.model_dump()
-            if 'summary' in data:
-                return data['summary']
-            for v in data.values():
-                if isinstance(v, str):
-                    return v
-            return json.dumps(data)
+            return data['summary']
+
         else:
             resp = ollama.chat(
                 model=self.model,
                 messages=[self.system_prompt, {'role': 'user', 'content': prompt}],
                 options={'num_predict': num_predict, 'seed': seed}
             )
-            return resp.message.content
+            raw_text = resp.message.content.strip()
+
+            return raw_text
+
 
     def summarize_chunk(chunk_text: str, context_summary: Optional[str] = None, target_words: int = max_words_summary):
         if context_summary:
@@ -153,7 +178,7 @@ if __name__ == '__main__':
     import random
 
     class Response(BaseModel):
-        summary: str = Field(description="Summary of the text")
+        summary: str = Field(description="Summary of the text, without the thinking process")
 
     paths = os.listdir('./training_datasets/raw/witcher_fandom')
     paths = [os.path.join('./training_datasets/raw/witcher_fandom', p) for p in paths]
@@ -166,4 +191,4 @@ if __name__ == '__main__':
                                     "",
                                     Response)
         
-        model.dynamic_hierarchical_summary(paths, save_to=f'./training_datasets/raw/synth_sumarries/fandom/{m}', seed=random.randint(0, 1000), use_response_template=False)
+        model.dynamic_hierarchical_summary(paths, save_to=f'./training_datasets/raw/synth_sumarries/fandom/{m}', seed=random.randint(0, 1000), use_response_template= m=='qwen3:8b')
