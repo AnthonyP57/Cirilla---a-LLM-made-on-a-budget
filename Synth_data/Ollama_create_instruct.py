@@ -40,12 +40,6 @@ import json
 
 class OllamaInstructCurate:
     def __init__(self, model, system_prompt, response_template:BaseModel):
-        """
-        atacker (str): The name of the attacker model e.g. 'llama3.2:3b'\n
-        atacker_sys_prompt (str): The system prompt for the attacker model\n
-        defender (str): The name of the defender model e.g. 'llama3.2:3b'\n
-        defender_sys_prompt (str): The system prompt for the defender model
-        """
         self.system_prompt = {'role': 'system', 'content': system_prompt}
         self.model = model
         self.response_template = response_template

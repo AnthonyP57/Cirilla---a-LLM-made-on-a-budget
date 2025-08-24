@@ -36,7 +36,7 @@ def dynamic_hierarchical_summary(
     chunk_lines: int = 100, # number of lines per chunk (your "100 lines")
     seed: int = 42,
     num_predict: int = 2048, # max number of tokens
-    max_words_summary: int = 200, # target maximum words per summary block
+    max_words_summary: int = 500, # target maximum words per summary block
     use_response_template: bool = False
 ):
     os.makedirs(save_to, exist_ok=True)
@@ -178,17 +178,17 @@ if __name__ == '__main__':
     import random
 
     class Response(BaseModel):
-        summary: str = Field(description="Summary of the text, without the thinking process")
+        summary: str = Field(description="Summary of the text, without the thinking process and without any introduction. Provide only pure summary, be expressive but stick to the maximum number of words that were provided.")
 
-    paths = os.listdir('./training_datasets/raw/witcher_fandom')
-    paths = [os.path.join('./training_datasets/raw/witcher_fandom', p) for p in paths]
+    paths = os.listdir('./training_datasets/raw/witcher_texts')
+    paths = [os.path.join('./training_datasets/raw/witcher_texts', p) for p in paths]
 
     print(f"{len(paths)} paths found")
 
-    for m in ['llama3.1:8b', 'mistral-small3.2:24b', 'qwen3:8b']:
+    for m in ['llama3.2:3b', 'llama3.1:8b', 'qwen3:8b']:
 
         model = OllamaInstructCurate(m,
                                     "",
                                     Response)
         
-        model.dynamic_hierarchical_summary(paths, save_to=f'./training_datasets/raw/synth_sumarries/fandom/{m}', seed=random.randint(0, 1000), use_response_template= m=='qwen3:8b')
+        model.dynamic_hierarchical_summary(paths, save_to=f'./training_datasets/raw/synth_sumarries/witcher_texts/{m}', seed=random.randint(0, 1000), use_response_template=True)
