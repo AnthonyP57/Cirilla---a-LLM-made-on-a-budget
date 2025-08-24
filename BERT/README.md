@@ -107,6 +107,78 @@ We can utilize a similar logic presented [here](#masked-language-model-pretraini
 <em>Fig.6 BERT - QA finetuning overview [2]</em>
 </div>
 
+## Register tokens
+With the standard approach of using the [CLS] tokens we can visualize attention masks in order to better understand the models choices.
+
+### Attention masks
+(Images are taken from my other [repository](https://github.com/AnthonyP57/PathMNIST-exploration-and-classification) that focuses on using ViT models for colon pathology)
+
+When we use the [CLS] token, the calculated attention looks something like
+
+<p align="center">
+  <img src="https://github.com/AnthonyP57/PathMNIST-exploration-and-classification/raw/master/img/attention_d.png" alt="attn" width="500"/>
+</p>
+
+<div align='center'>
+<em>Fig.7 Calculated attention with the [CLS] token</em>
+</div></br>
+
+We can then use the first row to recreate the input image as attention values
+
+<p align="center">
+  <img src="https://github.com/AnthonyP57/PathMNIST-exploration-and-classification/raw/master/img/attention_dd.png" alt="attn" height="400"/>
+</p></br>
+
+<div align='center'>
+<em>Fig.8 How to recreate the attention map</em>
+</div></br>
+
+That's how we can obtain the attention map
+
+<p align="center">
+  <img src="https://github.com/AnthonyP57/PathMNIST-exploration-and-classification/raw/master/img/attention_overlay_7-4_head0.png" alt="attn" width="300"/>
+</p>
+
+<div align='center'>
+<em>Fig.9 Attention map visualization</em>
+</div></br>
+
+#### Problem with attention maps
+The main problem with these maps is that some their parts have artifacts - regions with high norms - these regions hold redundant, global information (with very little local information, meaning that their placement doesn't indicate that the region they appear in is important - which is something that we want to achieve).
+
+<p align="center">
+  <img src="./img/attn_artifacts.png" alt="attn" height="250"/>
+</p>
+
+<div align='center'>
+<em>Fig.10 Attention map artifacts - visible on the DINOv2 norms as dark blue spots [3]</em>
+</div></br>
+
+Adding the register tokens `[REG]` seems to improve the models ability to create a more accurate attention map and may slightly improve the models performance.
+
+<p align="center">
+  <img src="./img/register_tokens.png" alt="attn" height="300"/>
+</p>
+
+<div align='center'>
+<em>Fig.11 Visualization on how register tokens are used [3]</em>
+</div>
+
+<p align="center">
+  <img src="./img/register_tokens_performance.png" alt="attn" height="300"/>
+</p>
+
+<div align='center'>
+<em>Fig.12 Performance overview of register tokens [3]</em>
+</div>
+
+<p align="center">
+  <img src="./img/register_tokens_atten.png" alt="attn" height="200"/>
+</p>
+
+<div align='center'>
+<em>Fig.13 Influence of register tokens on the attention mask [3]</em>
+</div>
 
 ## Disclaimer
 > [!CAUTION]
@@ -115,3 +187,5 @@ We can utilize a similar logic presented [here](#masked-language-model-pretraini
 [^1]: Devlin, J., Chang, M., Lee, K., & Toutanova, K. (2018). BERT: Pre-training of Deep Bidirectional Transformers for Language Understanding. arXiv (Cornell University). https://doi.org/10.48550/arxiv.1810.04805
 
 [^2]: Umar J. (2023). BERT explained: Training, Inference, BERT vs GPT/LLamA, Fine tuning, CLS token. https://www.youtube.com/watch?v=90mGPxR2GgY&ab_channel=UmarJamil
+
+[^3]: Darcet, T., Oquab, M., Mairal, J., & Bojanowski, P. (2023). Vision transformers need registers. arXiv (Cornell University). https://doi.org/10.48550/arxiv.2309.16588
