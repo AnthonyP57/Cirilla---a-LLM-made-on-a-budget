@@ -194,7 +194,7 @@ def multi_turn(paths, save_to='./convos', batch_size=256, system_prompt=sys_prom
                                         ]
 
                 out = llm.generate(chat_template_batch, sampling_params=sampling)
-                out = [best_effort_parse(o.outputs[0].text, Response) for o in out]
+                out = [best_effort_parse(o.outputs[0].text, template) for o in out]
                 batched_output.extend(out)
 
                 # batch = model_convo_batched[i:i+batch_size]
@@ -271,9 +271,8 @@ if __name__ == "__main__":
 
     paths = [[os.path.join(p, f) for f in os.listdir(p)] for p in paths_]
 
-    # for model in ["unsloth/Llama-3.1-8B-Instruct-bnb-4bit"]:
     for model in ["unsloth/Qwen2.5-7B-Instruct-unsloth-bnb-4bit"]:
         for i, mps in enumerate(paths):
-            for _ in range(1):
+            for _ in range(6):
             
                 multi_turn(mps, save_to=f'./training_datasets/raw/synth_multi_round/{model.split("/")[1]}/{paths_[i].split("/")[-1]}', model=model)
