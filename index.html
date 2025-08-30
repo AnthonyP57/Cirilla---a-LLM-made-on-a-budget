@@ -3,56 +3,80 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 <title>Cirilla - LLM Project</title>
 <style>
+    /* Use Apple's system font stack */
     body {
-        font-family: Arial, sans-serif;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+                    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
         background-color: #0b0b0b;
         color: #fff;
         line-height: 1.6;
         margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+    }
+
+
+    .container {
+        max-width: 900px;
+        width: 100%;
         padding: 0 20px;
     }
+
     img {
         max-width: 100%;
         border-radius: 10px;
+        display: block;
+        margin: 20px auto;
     }
+
     .header-image {
         border-radius: 0;
-        width: 100vw;
-        margin-left: calc(-20px);
-        margin-right: calc(+20px);
+        width: 100%;
+        margin: 0;
     }
+
     .caption {
         font-size: 0.9em;
         color: gray;
         text-align: right;
         margin-bottom: 20px;
     }
+
     h1, h2 {
         margin-top: 40px;
+        text-align: left;
     }
+
     .flex-container {
         display: flex;
         flex-wrap: wrap;
         gap: 20px;
         margin-bottom: 40px;
     }
+
     .flex-container > div {
         flex: 1;
         min-width: 250px;
     }
+
     .text {
         padding: 10px;
     }
+
     .img-container {
         text-align: center;
     }
+
     .img-caption {
         font-size: 0.9em;
         color: gray;
         margin-top: 5px;
     }
+
     pre {
         background-color: #1a1a1a;
         padding: 15px;
@@ -63,44 +87,46 @@
 </head>
 <body>
 
-<img src="https://github.com/AnthonyP57/Radovid---a-LLM-made-on-a-budget/blob/master/img/ciri_w4_2.png?raw=true" class="header-image" alt="Ciri from The Witcher 4 trailer">
-<div class="caption"><em>Ciri from The Witcher 4 trailer</em></div>
+<div class="container">
 
-<h1>Cirilla</h1>
-<p>Cirilla is an open source learning project aiming at implementing various LLMs. It is focused mainly on showing how to make, train, infer and deploy a LLM from scratch using PyTorch and a budget-friendly GPU (RTX 4060Ti 16GiB ~500$).</p>
+    <img src="https://github.com/AnthonyP57/Radovid---a-LLM-made-on-a-budget/blob/master/img/ciri_w4_2.png?raw=true" class="header-image" alt="Ciri from The Witcher 4 trailer">
+    <div class="caption"><em>Ciri from The Witcher 4 trailer</em></div>
 
-<h2>Who is Cirilla</h2>
-<div class="flex-container">
-    <div class="img-container">
-        <img src="https://github.com/AnthonyP57/Radovid---a-LLM-made-on-a-budget/blob/master/img/fake_ciri.webp?raw=true" alt="Ciri">
-        <div class="img-caption"><em>Fig.1 Ciri Gwent card by Bogna Gawrońska</em></div>
+    <h1>Cirilla</h1>
+    <p>Cirilla is an open source learning project aiming at implementing various LLMs. It is focused mainly on showing how to make, train, infer and deploy a LLM from scratch using PyTorch and a budget-friendly GPU (RTX 4060Ti 16GiB ~500$).</p>
+
+    <h2>Who is Cirilla</h2>
+    <div class="flex-container">
+        <div class="img-container">
+            <img src="https://github.com/AnthonyP57/Radovid---a-LLM-made-on-a-budget/blob/master/img/fake_ciri.webp?raw=true" alt="Ciri">
+            <div class="img-caption"><em>Fig.1 Ciri Gwent card by Bogna Gawrońska</em></div>
+        </div>
+        <div class="text">
+            <p><strong>Cirilla Fiona Elen Riannon</strong>, known as <em>Ciri</em>, is one of the central characters in <em>The Witcher</em> saga by Andrzej Sapkowski and its adaptations. She is the princess of Cintra, granddaughter of Queen Calanthe, and the sole heir to a powerful lineage marked by the mysterious Elder Blood.</p>
+            <p>Ciri is defined by her destiny, adaptability, and potential. Unlike kings who wield authority by birthright, her strength comes from surviving chaos, learning from mentors like Geralt and Yennefer, and unlocking extraordinary powers.</p>
+            <p>Her unique abilities make her one of the most pivotal figures in the saga. Known as the <em>Lady of Space and Time</em>, the <em>Lion Cub of Cintra</em>, and the <em>Child of the Elder Blood</em>, she can manipulate space and time, travel between worlds, and influence the course of events in ways few can.</p>
+        </div>
     </div>
-    <div class="text">
-        <p><strong>Cirilla Fiona Elen Riannon</strong>, known as <em>Ciri</em>, is one of the central characters in <em>The Witcher</em> saga by Andrzej Sapkowski and its adaptations. She is the princess of Cintra, granddaughter of Queen Calanthe, and the sole heir to a powerful lineage marked by the mysterious Elder Blood.</p>
-        <p>Ciri is defined by her destiny, adaptability, and potential. Unlike kings who wield authority by birthright, her strength comes from surviving chaos, learning from mentors like Geralt and Yennefer, and unlocking extraordinary powers.</p>
-        <p>Her unique abilities make her one of the most pivotal figures in the saga. Known as the <em>Lady of Space and Time</em>, the <em>Lion Cub of Cintra</em>, and the <em>Child of the Elder Blood</em>, she can manipulate space and time, travel between worlds, and influence the course of events in ways few can.</p>
-    </div>
-</div>
 
-<h2>Why name a LLM Cirilla</h2>
-<div class="flex-container">
-    <div class="text">
-        <p>Unlike rulers who inherit authority, <em>Cirilla</em> embodies potential realized through learning, experience, and adaptability. She is resilient, capable of navigating complex and unpredictable worlds, and able to respond to challenges with skill and precision—qualities that mirror how a language model can shift between tasks, domains, and contexts.</p>
-        <p>Guided by mentors and shaped by hardships, Ciri develops her abilities quickly, mastering both strategy and instinct while remaining flexible in the face of unforeseen circumstances.</p>
-        <p>Her combination of innate talent, adaptability, and the capacity for growth makes her an fitting symbol for a language model designed to acquire knowledge, evolve over time, and connect information across domains.</p>
+    <h2>Why name a LLM Cirilla</h2>
+    <div class="flex-container">
+        <div class="text">
+            <p>Unlike rulers who inherit authority, <em>Cirilla</em> embodies potential realized through learning, experience, and adaptability. She is resilient, capable of navigating complex and unpredictable worlds, and able to respond to challenges with skill and precision—qualities that mirror how a language model can shift between tasks, domains, and contexts.</p>
+            <p>Guided by mentors and shaped by hardships, Ciri develops her abilities quickly, mastering both strategy and instinct while remaining flexible in the face of unforeseen circumstances.</p>
+            <p>Her combination of innate talent, adaptability, and the capacity for growth makes her a fitting symbol for a language model designed to acquire knowledge, evolve over time, and connect information across domains.</p>
+        </div>
+        <div class="img-container">
+            <img src="https://github.com/AnthonyP57/Radovid---a-LLM-made-on-a-budget/blob/master/img/Ciri.webp?raw=true" alt="Ciri">
+            <div class="img-caption"><em>Fig.2 Ciri Gwent card by Anna Podedworna</em></div>
+        </div>
     </div>
-    <div class="img-container">
-        <img src="https://github.com/AnthonyP57/Radovid---a-LLM-made-on-a-budget/blob/master/img/Ciri.webp?raw=true" alt="Ciri">
-        <div class="img-caption"><em>Fig.2 Ciri Gwent card by Anna Podedworna</em></div>
-    </div>
-</div>
 
-<h2>What is a LLM</h2>
-<p>On a high level: imagine a toddler with a huge amount of knowledge but still possessing a toddler-like way of reasoning and understanding.</p>
-<p>On a lower level: an LLM is a neural network trained on big data to recognize patterns, generate human-like responses, and predict the most likely next word in a given context. While it can process and recall information efficiently, it lacks true understanding, reasoning, or consciousness, relying only on statistical correlations rather than genuine comprehension. The reasoning of LLMs is being improved in projects (most notably) like DeepSeek, which focus on enhancing the ability to understand context and simulate human-like reasoning.</p>
+    <h2>What is a LLM</h2>
+    <p>On a high level: imagine a toddler with a huge amount of knowledge but still possessing a toddler-like way of reasoning and understanding.</p>
+    <p>On a lower level: an LLM is a neural network trained on big data to recognize patterns, generate human-like responses, and predict the most likely next word in a given context. While it can process and recall information efficiently, it lacks true understanding, reasoning, or consciousness, relying only on statistical correlations rather than genuine comprehension. The reasoning of LLMs is being improved in projects (most notably) like DeepSeek, which focus on enhancing the ability to understand context and simulate human-like reasoning.</p>
 
-<h2>Repo organization</h2>
-<pre>
+    <h2>Repo organization</h2>
+    <pre>
 Cirilla - a LLM made on a budget/
   │
   ├── BERT/                           # overview of BERT
@@ -135,7 +161,8 @@ Cirilla - a LLM made on a budget/
       ├── dataset.py
       ├── train.py
       └── LongNet.py
-</pre>
+    </pre>
 
+</div>
 </body>
 </html>
