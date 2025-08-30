@@ -28,6 +28,7 @@ Task:
 3. Write ONE concise, factual answer.
 
 Rules:
+- Use only the English language.
 - Stay within Witcher lore (books, games, monsters, history, characters). 
 - Never mention the Netflix series, actors, or production.
 - Each Q must be different from all "Already asked questions by the user".
@@ -142,7 +143,7 @@ def multi_turn(paths, save_to='./convos', batch_size=256, system_prompt=sys_prom
 
 
     if llm is None or llm_model_name != model:
-        llm = vllm.LLM(model=model, max_model_len=4096, gpu_memory_utilization=0.85)
+        llm = vllm.LLM(model=model, max_model_len=4096, gpu_memory_utilization=0.8)
         llm_model_name = model
 
     sampling = vllm.SamplingParams(
@@ -278,7 +279,7 @@ if __name__ == "__main__":
 
     paths = [[os.path.join(p, f) for f in os.listdir(p)] for p in paths_]
 
-    for model in ["unsloth/Qwen3-8B-unsloth-bnb-4bit", "unsloth/Qwen2.5-7B-Instruct-unsloth-bnb-4bit"]:
+    for model in ["unsloth/granite-3.2-2b-instruct-unsloth-bnb-4bit", "unsloth/Qwen2.5-7B-Instruct-unsloth-bnb-4bit"]:
         for i, mps in enumerate(paths):
             for _ in range(1):
             
