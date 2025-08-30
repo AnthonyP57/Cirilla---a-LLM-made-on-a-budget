@@ -1,5 +1,5 @@
 > [!IMPORTANT]  
-> For a much nicer README visit [Cirilla](https://anthonyp57.github.io/Radovid---a-LLM-made-on-a-budget/)
+> For a much nicer README visit [Cirilla](https://anthonyp57.github.io/Cirilla---a-LLM-made-on-a-budget/)
 
 
 
