@@ -80,7 +80,7 @@ def into_pretrained(tokenizer_json):
     return PreTrainedTokenizerFast(
         tokenizer_file=str(tokenizer_json), **SPECIAL_TOKENS)
 
-tokenizer = prepare_tokenizer('./Radovid_model', tokenizer_data)
+tokenizer = prepare_tokenizer('./Cirilla_model', tokenizer_data)
 ```
 7. You can then push to hub
 ```python

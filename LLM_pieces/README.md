@@ -36,14 +36,14 @@ We have turned text into numbers, but now what? How can a computer know the diff
 ![](./img/embeddings.png)
 
 ### Decoder blocks - now the magic happens
-#### You can learn about the RMS norm [here](https://github.com/AnthonyP57/Radovid---a-LLM-made-on-a-budget/tree/master/Decoder_only_architecture#normalization-and-rms-norm)
-#### RoPE embeddings [here](https://github.com/AnthonyP57/Radovid---a-LLM-made-on-a-budget/tree/master/Decoder_only_architecture/Llama2#rope)
-#### Grouped-Query Attention [here](https://github.com/AnthonyP57/Radovid---a-LLM-made-on-a-budget/tree/master/Decoder_only_architecture#multi-query-attention---mqa)
-#### Sliding window attention [here](https://github.com/AnthonyP57/Radovid---a-LLM-made-on-a-budget/tree/master/Decoder_only_architecture/Mistral#sliding-window-attention)
-#### Rolling buffer cache [here](https://github.com/AnthonyP57/Radovid---a-LLM-made-on-a-budget/tree/master/Decoder_only_architecture/Mistral#kv-cache-with-rolling-buffer-cache)
-#### SwiGLU [here](https://github.com/AnthonyP57/Radovid---a-LLM-made-on-a-budget/tree/master/Decoder_only_architecture#swiglu)
-#### Mixture of Experts [here](https://github.com/AnthonyP57/Radovid---a-LLM-made-on-a-budget/tree/master/Decoder_only_architecture/Mistral#sparse-mixture-of-experts)
-#### BERT models [here](https://github.com/AnthonyP57/Radovid---a-LLM-made-on-a-budget/tree/master/BERT)
+#### You can learn about the RMS norm [here](https://github.com/AnthonyP57/Cirilla---a-LLM-made-on-a-budget/tree/master/Decoder_only_architecture#normalization-and-rms-norm)
+#### RoPE embeddings [here](https://github.com/AnthonyP57/Cirilla---a-LLM-made-on-a-budget/tree/master/Decoder_only_architecture/Llama2#rope)
+#### Grouped-Query Attention [here](https://github.com/AnthonyP57/Cirilla---a-LLM-made-on-a-budget/tree/master/Decoder_only_architecture#multi-query-attention---mqa)
+#### Sliding window attention [here](https://github.com/AnthonyP57/Cirilla---a-LLM-made-on-a-budget/tree/master/Decoder_only_architecture/Mistral#sliding-window-attention)
+#### Rolling buffer cache [here](https://github.com/AnthonyP57/Cirilla---a-LLM-made-on-a-budget/tree/master/Decoder_only_architecture/Mistral#kv-cache-with-rolling-buffer-cache)
+#### SwiGLU [here](https://github.com/AnthonyP57/Cirilla---a-LLM-made-on-a-budget/tree/master/Decoder_only_architecture#swiglu)
+#### Mixture of Experts [here](https://github.com/AnthonyP57/Cirilla---a-LLM-made-on-a-budget/tree/master/Decoder_only_architecture/Mistral#sparse-mixture-of-experts)
+#### BERT models [here](https://github.com/AnthonyP57/Cirilla---a-LLM-made-on-a-budget/tree/master/BERT)
 #### dropless-MoE (dMoE) [here](https://arxiv.org/abs/2211.15841)
 What it means to drop tokens:
 

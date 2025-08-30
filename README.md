@@ -38,7 +38,7 @@ Guided by mentors and shaped by hardships, Ciri develops her abilities quickly, 
 Her combination of innate talent, adaptability, and the capacity for growth makes her an fitting symbol for a language model designed to acquire knowledge, evolve over time, and connect information across domains.
 
 <p align="center">
-  <img src="./img/Ciri.webp" alt="radovid-gwent" width="220"/>
+  <img src="./img/Ciri.webp" width="220"/>
 </p>
 
 <div align='center'>

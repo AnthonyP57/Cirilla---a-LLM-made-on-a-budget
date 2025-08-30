@@ -131,7 +131,7 @@ if __name__=='__main__':
     # out = causal_attention(query, key, value)
     # print(out[0,0,:8,:8])
 
-    from Radovid_model.modules import benchmark_model_part
+    from Cirilla_model.modules import benchmark_model_part
 
     SOFT_CAP = 20
 

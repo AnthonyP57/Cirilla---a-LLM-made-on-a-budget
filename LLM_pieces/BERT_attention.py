@@ -74,7 +74,7 @@ class BertAttention(nn.Module):
 
 if __name__=='__main__':
 
-    from Radovid_model.modules import benchmark_model_part
+    from Cirilla_model.modules import benchmark_model_part
 
     att = BertAttention(BertAttentionArgs(), RoPE(128, 512)).cuda().to(torch.bfloat16)
     # att = torch.compile(att, mode='max-autotune')

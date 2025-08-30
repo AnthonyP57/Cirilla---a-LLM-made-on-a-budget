@@ -46,7 +46,7 @@ class TrainingArgs:
             return False
         return True
 
-class RadovidTrainer:
+class CirillaTrainer:
     def __init__(self, model:Cirilla, training_args:TrainingArgs):
         self.model = model
         self.args = training_args
@@ -334,7 +334,7 @@ if __name__ == '__main__':
     model = Cirilla(Args())
 
     targs = TrainingArgs(hf_repo_id='AnthonyPa57/HF-torch-demo-R', local_checkpoint_folder='./test_model')
-    trainer = RadovidTrainer(model, targs)
+    trainer = CirillaTrainer(model, targs)
 
     # trainer._fuse_optim()
     # trainer._save_local_checkpoint()

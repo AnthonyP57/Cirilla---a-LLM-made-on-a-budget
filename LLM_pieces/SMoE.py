@@ -178,7 +178,7 @@ class MegablockdMoE(nn.Module):
 #                               gating_output=self.gating(hidden)).view(B, S, D)
 
 if __name__=='__main__':
-    from Radovid_model.modules import benchmark_model_part
+    from Cirilla_model.modules import benchmark_model_part
 
     moe = SMoE(
         SMoEArgs(num_experts=4, k=2),
