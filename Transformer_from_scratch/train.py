@@ -25,7 +25,7 @@ data_train, data_val, tokenizer = get_dataset({
     'seq_len': 320
 })
 
-config = ModelConfig('/home/anthonyp57/VSCode_projects/Radovid/Transformer_from_scratch/checkpoints/',
+config = ModelConfig('./Transformer_from_scratch/checkpoints/',
                      lr=1e-4, wd=0, d_model=512, num_heads=8, num_layers=3,
                      vocab_size=tokenizer.get_vocab_size(), max_seq_len=320, d_ff=2048, drop=0.1, resume=True)
 
@@ -87,5 +87,5 @@ for epoch in iterator:
     show_valid(data_val, model, tokenizer, iterator, config.max_seq_len)
     
     
-torch.save(model,'/home/anthonyp57/VSCode_projects/Radovid/Transformer_from_scratch/checkpoints/model.pth')
-torch.save(model.state_dict(), '/home/anthonyp57/VSCode_projects/Radovid/Transformer_from_scratch/checkpoints/model_state_dict.pth')
+torch.save(model,'./Transformer_from_scratch/checkpoints/model.pth')
+torch.save(model.state_dict(), './Transformer_from_scratch/checkpoints/model_state_dict.pth')

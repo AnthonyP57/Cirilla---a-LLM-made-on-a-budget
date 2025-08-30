@@ -12,7 +12,7 @@ The key take in this approach, is that instead of saving the gradients first and
 
 E.g. instead of
 ```python
-model = Radovid(Args())
+model = Cirilla(Args())
 model = torch.compile(model, mode='reduce-overhead')
 optim = _AdamW(model.parameters(), bf16_stochastic_round=True, lr=1e-3)
 criterion = torch.nn.CrossEntropyLoss()
@@ -27,7 +27,7 @@ for i in range(100):
 ```
 we can do
 ```python
-model = Radovid(Args())
+model = Cirilla(Args())
 model = torch.compile(model, mode='reduce-overhead')
 criterion = torch.nn.CrossEntropyLoss()
 

@@ -28,7 +28,7 @@ Hello world $\rightarrow$ [Hello ][wor][ld] $\rightarrow$ [0 1 2]
 
 This is a much better approach. However, you may ask why would we not just turn each word into a number or token? This is a good question - this is a good idea when our vocabulary is not that rich, however e.g. if we have words `listing walking working ... ` and `listed walked worked ...` it would unnecessarily create a huge list of words that may be just a few letters apart, and the only difference between them is e.g. the tense (present/past/...).
 
-In Radovid a Byte-Pair Encoding (BPE) tokenizer is used, you can take a look at the [Huggingface website](https://huggingface.co/learn/llm-course/en/chapter6/5) to learn more.
+In Cirilla a Byte-Pair Encoding (BPE) tokenizer is used, you can take a look at the [Huggingface website](https://huggingface.co/learn/llm-course/en/chapter6/5) to learn more.
 
 ### Embedding - from numbers into representations
 We have turned text into numbers, but now what? How can a computer know the difference between "dog" and "cat" given that they were turned into numbers e.g. 163 and 22391. This is what embedding is for, we turn the token numbers (indices) into floating point values that represent the idea in some abstract multi-dimentional space.

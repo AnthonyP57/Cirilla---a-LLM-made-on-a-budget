@@ -1,38 +1,52 @@
-<pre>
- ______   ______   _____    ______   __   __ __   _____    
-/\  == \ /\  __ \ /\  __-. /\  __ \ /\ \ / //\ \ /\  __-.  
-\ \  __< \ \  __ \\ \ \/\ \\ \ \/\ \\ \ \'/ \ \ \\ \ \/\ \ 
- \ \_\ \_\\ \_\ \_\\ \____- \ \_____\\ \__|  \ \_\\ \____- 
-  \/_/ /_/ \/_/\/_/ \/____/  \/_____/ \/_/    \/_/ \/____/ 
-                                                           
-</pre>
+![](./img/ciri_w4_2.png)
+<div style="font-size: 0.9em; color: gray; margin-top: 5px; text-align: right;">
+  <em>Ciri from The Witcher 4 trailer</em>
+</div>
 
-# Radovid
-Radovid is an open source learning project aiming at implmenting various LLMs.
+# Cirilla
+<p>
+Cirilla is an open source learning project aiming at implmenting various LLMs.
 It is focused mainly on showing how to make, train, infer and deploy a LLM from scratch using Pytorch and a budget friendly GPU (RTX 4060Ti 16GiB ~500$).
-## Who is Radovid
-Radovid V is a fictional character in The Witcher franchise, appearing in both the books by Andrzej Sapkowski and their adaptations, including The Witcher video games by CD Projekt Red. He was the King of Redania, a powerful and wealthy kingdom in the Witcher universe. Radovid was an ambitious ruler who often showed no mercy to those he deemed enemies. His reign was marked mainly by warfare and relentless crusade against magic, particularly the mages and sorceresses whom he viewed as a threat to his rule. Over time, his paranoia and obsession with power led to increasingly brutal and oppressive measures, earning him both fear and infamy across the Northern Kingdoms.
-
-<p align="center">
-  <img src="./img/radovid_gwent_gif.gif" alt="radovid-gwent" width="220"/>
 </p>
 
-<div align='center'>
-  <em>Fig.1 "King Radovid Tortures Philippa Eilhart" by Nemanja Stankovic - Gwent leader card</em>
+## Who is Cirilla
+<div style="display: flex; align-items: top; justify-content: space-between;">
+
+  <div style="text-align: center; margin-right: 25px;">
+    <img src="./img/fake_ciri.webp" alt="ciri" height="350" style="border-radius: 10px;"/>
+    <div style="font-size: 0.9em; color: gray; margin-top: 5px;">
+      <em>Fig.1 Ciri Gwent card by Bogna Gawrońska</em>
+    </div>
+  </div>
+
+  <div style="flex: 1; padding: 25px; text-align: left;">
+    <p>
+      <strong>Cirilla Fiona Elen Riannon</strong>, known as <em>Ciri</em>, is one of the central characters in 
+      <em>The Witcher</em> saga by Andrzej Sapkowski and its adaptations.  
+      She is the princess of Cintra, granddaughter of Queen Calanthe, and the sole heir 
+      to a powerful lineage marked by the mysterious Elder Blood.<br><br>Ciri is defined by her destiny, adaptability, and potential. Unlike kings who wield authority by birthright, her strength comes from surviving chaos, learning from mentors like Geralt and Yennefer, and unlocking extraordinary powers.<br><br>Her unique abilities make her one of the most pivotal figures in the saga. Known as the <em>Lady of Space and Time</em>, the <em>Lion Cub of Cintra</em>, and the <em>Child of the Elder Blood</em>, she can manipulate space and time, travel between worlds, and influence the course of events in ways few can.
+    </p>
+  </div>
+
 </div>
-</br>
 
-### Why name a LLM Radovid
-Despite his brutality, Radovid was an intelligent, strategic, and highly perceptive ruler. He possessed a sharp mind, allowing him to anticipate threats, manipulate alliances, and outmaneuver his enemies with great precision. His ability to gather and use information to his advantage made him one of the most prominent leaders in The Witcher universe.
+## Why name a LLM Cirilla
+<div style="display: flex; align-items: top; justify-content: space-between;">
 
-<p align="center">
-  <img src="./img/radovid_chess.png" alt="radovid-playing-chess", width="600"/>
-</p>
+  <div style="flex: 1; padding: 25px; text-align: righty;">
+    <p>
+      Unlike rulers who inherit authority, <em>Cirilla</em> embodies potential realized through learning, experience, and adaptability. She is resilient, capable of navigating complex and unpredictable worlds, and able to respond to challenges with skill and precision - qualities that mirror how an language model can shift between tasks, domains, and contexts.<br><br>Guided by mentors and shaped by hardships, Ciri develops her abilities quickly, mastering both strategy and instinct while remaining flexible in the face of unforeseen circumstances.<br><br>Her combination of innate talent, adaptability, and the capacity for growth makes her an fitting symbol for a language model designed to acquire knowledge, evolve over time, and connect information across domains.
+    </p>
+  </div>
 
-<div align='center'>
-<em>Fig.2 Radovid chess scene - The Witcher 3: Wild Hunt</em>
+  <div style="text-align: center; margin-right: 25px;">
+    <img src="./img/Ciri.webp" alt="ciri" height="350" style="border-radius: 10px;"/>
+    <div style="font-size: 0.9em; color: gray; margin-top: 5px;">
+      <em>Fig.2 Ciri Gwent card by Anna Podedworna</em>
+    </div>
+  </div>
+
 </div>
-</br>
 
 ## What is a LLM
 On a high level: imagine a toddler with an huge amount of knowledge but still possessing a toddler-like way of reasoning and understanding.
@@ -41,10 +55,14 @@ On a lower level: an LLM is a neural network trained on so-called big data to re
 
 ## Repo organization:
 ```bash
-Radovid - a LLM made on a budget/
+Cirilla - a LLM made on a budget/
   │
   ├── BERT/                           # overview of BERT
   │   └── RAG/                        # overview of RAG
+  │
+  ├── Cirilla_model/                  # implementation of Cirilla LLM
+  │   ├── model.py
+  │   ...
   │
   ├── Decoder_only_architecture/      # overview of decoder only transformer architecture
   │   └── Llama2/                     # implementation of Llama 2 inference loop
@@ -52,10 +70,6 @@ Radovid - a LLM made on a budget/
   │
   ├── LLM_pieces/                     # elements of decoder-only model you can use
   │   ├── SMoE.py                     # Sparse mixture of Experts
-  │   ...
-  │
-  ├── Radovid_model/                  # implementation of Radovid LLM
-  │   ├── model.py
   │   ...
   │
   ├── Synth_data/

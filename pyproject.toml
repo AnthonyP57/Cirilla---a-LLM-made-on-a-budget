@@ -1,5 +1,5 @@
 [project]
-name = "radovid"
+name = "Cirilla"
 version = "0.1.0"
 description = "Add your description here"
 readme = "README.md"
@@ -44,7 +44,7 @@ url = "https://download.pytorch.org/whl/cu128"
 explicit = true
 
 [tool.setuptools]
-packages = ["LLM_pieces", "Radovid_model", "attention-gym.attn_gym"]
+packages = ["LLM_pieces", "Cirilla_model", "attention-gym.attn_gym"]
 
 [build-system]
 requires = ["setuptools", "wheel"]
