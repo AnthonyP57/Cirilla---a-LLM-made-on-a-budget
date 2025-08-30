@@ -5,6 +5,7 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
+    "aiofiles>=24.1.0",
     "attn-gym>=0.0.4",
     "bitsandbytes>=0.46.1",
     "datasets>=4.0.0",
@@ -20,6 +21,7 @@ dependencies = [
     "reasoning-gym>=0.1.23",
     "rich>=14.1.0",
     "sentencepiece>=0.2.0",
+    "span-marker>=1.7.0",
     "tokenizers>=0.21.2",
     "torch>=2.7.0",
     "torchao>=0.12.0",

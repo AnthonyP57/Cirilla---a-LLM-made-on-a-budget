@@ -264,15 +264,22 @@ def multi_turn(paths, save_to='./convos', batch_size=256, system_prompt=sys_prom
 
 if __name__ == "__main__":
 
-    paths_ = ['./training_datasets/raw/synth_sumarries/fandom/qwen3:8b',
-             './training_datasets/raw/synth_sumarries/fandom/mistral-small3.2:24b',
-             './training_datasets/raw/synth_sumarries/fandom/llama3.1:8b',
-             './training_datasets/raw/synth_sumarries/fandom/llama3.2:3b']
+    # paths_ = ['./training_datasets/raw/synth_sumarries/fandom/qwen3:8b',
+    #          './training_datasets/raw/synth_sumarries/fandom/mistral-small3.2:24b',
+    #          './training_datasets/raw/synth_sumarries/fandom/llama3.1:8b',
+    #          './training_datasets/raw/synth_sumarries/fandom/llama3.2:3b']
+
+    paths_ = ['./training_datasets/raw/async_summaries/granite3.1-moe:3b',
+              './training_datasets/raw/async_summaries/llama3.1:8b',
+              './training_datasets/raw/async_summaries/llama3.2:3b',
+              './training_datasets/raw/async_summaries/qwen3:8b'
+
+    ]
 
     paths = [[os.path.join(p, f) for f in os.listdir(p)] for p in paths_]
 
-    for model in ["unsloth/Qwen2.5-7B-Instruct-unsloth-bnb-4bit"]:
+    for model in ["unsloth/Qwen3-8B-unsloth-bnb-4bit", "unsloth/Qwen2.5-7B-Instruct-unsloth-bnb-4bit"]:
         for i, mps in enumerate(paths):
-            for _ in range(6):
+            for _ in range(1):
             
-                multi_turn(mps, save_to=f'./training_datasets/raw/synth_multi_round/{model.split("/")[1]}/{paths_[i].split("/")[-1]}', model=model)
+                multi_turn(mps, save_to=f'./training_datasets/raw/synth_multi_round/async/{model.split("/")[1]}/{paths_[i].split("/")[-1]}', model=model)
