@@ -5,7 +5,7 @@ import json
 import numpy as np
 
 main_dir = './training_datasets/raw/witcher_synthetic_instruct'
-save_to = './training_datasets/mid_training/witcher_synthetic_instruct.jsonl'
+save_to = './training_datasets/domain_training/witcher_synthetic_instruct.jsonl'
 
 files = []
 for model in os.listdir(main_dir):
@@ -54,7 +54,6 @@ for name in all_names:
             valid_paths.append(same_files[i])
 
 print(f"Remaining files: {len(valid_paths)}")
-# print(valid_paths[-5:])
 
 data_to_save = []
 
@@ -69,8 +68,8 @@ for name in all_names:
         if (qa['question'] != '') and (qa['answer'] != ''):
             data_to_save.append({
                 'subject': name.split('.')[0],
-                'question': qa['question'],
-                'answer': qa['answer'],
+                'text': [{'role':'user', 'content': qa['question']}, {'role': 'assistant', 'content': qa['answer']}],
+                'data type': 'conv',
                 'model': model,
             })
 

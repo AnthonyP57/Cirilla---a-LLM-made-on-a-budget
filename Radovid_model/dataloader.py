@@ -64,7 +64,7 @@ class JSONLDataset(IterableDataset):
                         else:
                             yield line['text']
 
-                    elif line['data type'] == 'qa':
+                    elif line['data type'] == 'conv':
 
                         if self.tokenizer is not None:
                             tokenized_data =  self.tokenizer.apply_chat_template(line['text'], return_tensors='pt', padding='max_length', truncation=True, max_length=self.max_len)

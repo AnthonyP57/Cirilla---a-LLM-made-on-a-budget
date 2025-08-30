@@ -3,8 +3,8 @@ import reasoning_gym
 import json
 import random
 
-jsonl_path = './witcher_synthetic_instruct/reasoning_gym_synthetic.jsonl'
-n_samples = 200
+jsonl_path = './training_datasets/mid_training/reason_gym_synth.jsonl'
+n_samples = 400
 
 specs = [
     DatasetSpec(name='aiw', weight=2, config={"max_entities":10}),
@@ -38,6 +38,11 @@ for seed in random.sample(range(1_000_000), n_samples):
             assert data.score_answer(answer=x['answer'], entry=x) == 1.0
             assert type(x) == dict
             try:
+                x = {
+                    'subject': x['metadata']['source_dataset'],
+                    'text': [{'role': 'user', 'text': x['question']}, {'role': 'assistant', 'text': x['answer']}],
+                    'data type': 'conv'
+                }
                 f.write(json.dumps(x) + '\n')
             except Exception as e:
                 n_failed += 1
