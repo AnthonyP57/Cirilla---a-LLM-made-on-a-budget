@@ -1,52 +1,50 @@
+> [!IMPORTANT]  
+> For a much nicer README visit [Cirilla](https://anthonyp57.github.io/Radovid---a-LLM-made-on-a-budget/)
+
+
+
 ![](./img/ciri_w4_2.png)
-<div style="font-size: 0.9em; color: gray; margin-top: 5px; text-align: right;">
-  <em>Ciri from The Witcher 4 trailer</em>
-</div>
+*Ciri from The Witcher 4 trailer*
 
 # Cirilla
-<p>
 Cirilla is an open source learning project aiming at implmenting various LLMs.
 It is focused mainly on showing how to make, train, infer and deploy a LLM from scratch using Pytorch and a budget friendly GPU (RTX 4060Ti 16GiB ~500$).
-</p>
 
 ## Who is Cirilla
-<div style="display: flex; align-items: top; justify-content: space-between;">
+**Cirilla Fiona Elen Riannon**, known as *Ciri*, is one of the central characters in 
+*The Witcher* saga by Andrzej Sapkowski and its adaptations.  
+She is the princess of Cintra, granddaughter of Queen Calanthe, and the sole heir 
+to a powerful lineage marked by the mysterious Elder Blood.
 
-  <div style="text-align: center; margin-right: 25px;">
-    <img src="./img/fake_ciri.webp" alt="ciri" height="350" style="border-radius: 10px;"/>
-    <div style="font-size: 0.9em; color: gray; margin-top: 5px;">
-      <em>Fig.1 Ciri Gwent card by Bogna Gawrońska</em>
-    </div>
-  </div>
+Ciri is defined by her destiny, adaptability, and potential. Unlike kings who wield authority by birthright, her strength comes from surviving chaos, learning from mentors like Geralt and Yennefer, and unlocking extraordinary powers.
 
-  <div style="flex: 1; padding: 25px; text-align: left;">
-    <p>
-      <strong>Cirilla Fiona Elen Riannon</strong>, known as <em>Ciri</em>, is one of the central characters in 
-      <em>The Witcher</em> saga by Andrzej Sapkowski and its adaptations.  
-      She is the princess of Cintra, granddaughter of Queen Calanthe, and the sole heir 
-      to a powerful lineage marked by the mysterious Elder Blood.<br><br>Ciri is defined by her destiny, adaptability, and potential. Unlike kings who wield authority by birthright, her strength comes from surviving chaos, learning from mentors like Geralt and Yennefer, and unlocking extraordinary powers.<br><br>Her unique abilities make her one of the most pivotal figures in the saga. Known as the <em>Lady of Space and Time</em>, the <em>Lion Cub of Cintra</em>, and the <em>Child of the Elder Blood</em>, she can manipulate space and time, travel between worlds, and influence the course of events in ways few can.
-    </p>
-  </div>
+Her unique abilities make her one of the most pivotal figures in the saga. Known as the *Lady of Space and Time*, the *Lion Cub of Cintra*, and the *Child of the Elder Blood*, she can manipulate space and time, travel between worlds, and influence the course of events in ways few can.
 
+
+<p align="center">
+  <img src="./img/fake_ciri.webp" width="250"/>
+</p>
+
+<div align='center'>
+  <em>Fig.1 Ciri Gwent card by Bogna Gawrońska</em>
 </div>
+</br>
 
 ## Why name a LLM Cirilla
-<div style="display: flex; align-items: top; justify-content: space-between;">
+Unlike rulers who inherit authority, *Cirilla* embodies potential realized through learning, experience, and adaptability. She is resilient, capable of navigating complex and unpredictable worlds, and able to respond to challenges with skill and precision - qualities that mirror how an language model can shift between tasks, domains, and contexts.
 
-  <div style="flex: 1; padding: 25px; text-align: righty;">
-    <p>
-      Unlike rulers who inherit authority, <em>Cirilla</em> embodies potential realized through learning, experience, and adaptability. She is resilient, capable of navigating complex and unpredictable worlds, and able to respond to challenges with skill and precision - qualities that mirror how an language model can shift between tasks, domains, and contexts.<br><br>Guided by mentors and shaped by hardships, Ciri develops her abilities quickly, mastering both strategy and instinct while remaining flexible in the face of unforeseen circumstances.<br><br>Her combination of innate talent, adaptability, and the capacity for growth makes her an fitting symbol for a language model designed to acquire knowledge, evolve over time, and connect information across domains.
-    </p>
-  </div>
+Guided by mentors and shaped by hardships, Ciri develops her abilities quickly, mastering both strategy and instinct while remaining flexible in the face of unforeseen circumstances.
 
-  <div style="text-align: center; margin-right: 25px;">
-    <img src="./img/Ciri.webp" alt="ciri" height="350" style="border-radius: 10px;"/>
-    <div style="font-size: 0.9em; color: gray; margin-top: 5px;">
-      <em>Fig.2 Ciri Gwent card by Anna Podedworna</em>
-    </div>
-  </div>
+Her combination of innate talent, adaptability, and the capacity for growth makes her an fitting symbol for a language model designed to acquire knowledge, evolve over time, and connect information across domains.
 
+<p align="center">
+  <img src="./img/Ciri.webp" alt="radovid-gwent" width="220"/>
+</p>
+
+<div align='center'>
+  <em>Fig.2 Ciri Gwent card by Anna Podedworna</em>
 </div>
+</br>
 
 ## What is a LLM
 On a high level: imagine a toddler with an huge amount of knowledge but still possessing a toddler-like way of reasoning and understanding.
