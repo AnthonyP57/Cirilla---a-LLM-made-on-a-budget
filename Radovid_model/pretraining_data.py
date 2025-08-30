@@ -15,7 +15,7 @@ with open(pretraining_, 'a') as f:
         'num_rows':dataset.num_rows}) + '\n')
 
 for text in dataset:
-    data.append({'text': text['text'], 'metadata': {'dataset':"roneneldan/TinyStories", 'split':'train[:5%]'}})
+    data.append({'text': text['text'], 'data type': 'plain text', 'metadata': {'dataset':"roneneldan/TinyStories", 'split':'train[:5%]'}})
 
 with open(pretraining, 'a') as f:
     for d in data:
@@ -33,7 +33,7 @@ with open(pretraining_, 'a') as f:
 for text in dataset:
     text = text['text']
     if not bool(re.match(r'^(\w+:|<\|)', text)) and len(text) > 10: # if text doesn't start with some_word: or <|somw_word
-        data.append({'text': text, 'metadata': {'dataset':"roneneldan/TinyStoriesInstruct", 'split':'train[:1%]'}})
+        data.append({'text': text, 'data type': 'plain text', 'metadata': {'dataset':"roneneldan/TinyStoriesInstruct", 'split':'train[:1%]'}})
 
 with open(pretraining, 'a') as f:
     for d in data:
@@ -50,8 +50,8 @@ with open(pretraining_, 'a') as f:
 data = []
 
 for text in dataset:
-    data.append({'text': text['premise'], 'metadata': {'dataset':"nyu-mll/glue", "subset":"mnli", 'split':'train[:5%]'}})
-    data.append({'text': text['hypothesis'], 'metadata': {'dataset':"nyu-mll/glue", "subset":"mnli", 'split':'train[:5%]'}})
+    data.append({'text': text['premise'], 'data type': 'plain text', 'metadata': {'dataset':"nyu-mll/glue", "subset":"mnli", 'split':'train[:5%]'}})
+    data.append({'text': text['hypothesis'], 'data type': 'plain text', 'metadata': {'dataset':"nyu-mll/glue", "subset":"mnli", 'split':'train[:5%]'}})
 
 with open(pretraining, 'a') as f:
     for d in data:
@@ -59,16 +59,16 @@ with open(pretraining, 'a') as f:
 
 """"""
 
-dataset = load_dataset("SimpleStories/SimpleStories", split="train[:15%]")
+dataset = load_dataset("SimpleStories/SimpleStories", split="train[:10%]")
 
 data = []
 
 with open(pretraining_, 'a') as f:
-    f.write(json.dumps({'metadata': {'dataset':"SimpleStories/SimpleStories", 'split':'train[:15%]'},
+    f.write(json.dumps({'metadata': {'dataset':"SimpleStories/SimpleStories", 'split':'train[:10%]'},
         'num_rows':dataset.num_rows}) + '\n')
 
 for text in dataset:
-    data.append({'text': text['story'], 'metadata': {'dataset':"SimpleStories/SimpleStories", 'split':'train[:15%]'}})
+    data.append({'text': text['story'], 'data type': 'plain text', 'metadata': {'dataset':"SimpleStories/SimpleStories", 'split':'train[:10%]'}})
 
 with open(pretraining, 'a') as f:
     for d in data:

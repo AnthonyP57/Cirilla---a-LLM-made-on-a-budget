@@ -8,14 +8,17 @@ from typing import Union
 from tokenizer_modules import RadovidTokenizer
 
 class JSONLDataset(IterableDataset):
-    def __init__(self, path:Union[Path, tuple[Path]]='./training_dataset.jsonl', shuffle_path=False, device:torch.device='cuda', tokenizer:RadovidTokenizer=None, max_len:int=32):
+    def __init__(self, path:Union[Path, tuple[Path]]='./training_dataset.jsonl',
+                 shuffle_path=False,
+                 device:torch.device='cuda',
+                 tokenizer:RadovidTokenizer=None,
+                 max_len:int=32):
         super().__init__()
         self.path = path
         self.shuffle_path = shuffle_path
         self.device = device
         self.tokenizer = tokenizer
         self.max_len = max_len
-
 
         if isinstance(self.path, list):
             self.path = tuple(self.path)
@@ -51,23 +54,25 @@ class JSONLDataset(IterableDataset):
             with open(p, 'r') as f:
                 for line in f:
                     line = json.loads(line)
-                    data = line.get('data', None)
-                    if data is not None:
+                    if line['data type'] == 'plain text':
+
                         if self.tokenizer is not None:
-                            tokenized_data =  self.tokenizer(data['text'], return_tensors='pt', padding='max_length', truncation=True, max_length=self.max_len)
+                            tokenized_data =  self.tokenizer(line['text'], return_tensors='pt', padding='max_length', truncation=True, max_length=self.max_len)
                             tokens = tokenized_data['input_ids'].squeeze(0).to(self.device)
                             mask = tokenized_data['attention_mask'].squeeze(0).to(self.device)
                             yield tokens, mask
                         else:
-                            yield data['text']
-                    else:
+                            yield line['text']
+
+                    elif line['data type'] == 'qa':
+
                         if self.tokenizer is not None:
-                            tokenized_data =  self.tokenizer(line['question'] + ' ' + line['answer'], return_tensors='pt', padding='max_length', truncation=True, max_length=self.max_len)
+                            tokenized_data =  self.tokenizer.apply_chat_template(line['text'], return_tensors='pt', padding='max_length', truncation=True, max_length=self.max_len)
                             tokens = tokenized_data['input_ids'].squeeze(0).to(self.device)
                             mask = tokenized_data['attention_mask'].squeeze(0).to(self.device)
                             yield tokens, mask
                         else:
-                            yield line['question'] + ' ' + line['answer']
+                            yield '\n'.join([l['content'] for l in line['text']])
 
 
 if __name__ == '__main__':
