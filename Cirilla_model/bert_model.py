@@ -1,47 +1,42 @@
 from LLM_pieces import (
     RoPE,
     SMoE,
-    SlidingWindowAttention,
     get_activation,
-    create_static_block_mask,
-    create_dynamic_block_mask,
-    sliding_window_causal,
     Expert,
     MegablockMoE,
     MegablockdMoE,
+    BertAttention
 )
 from in_embeddings import InputEmbeddings
 from dataclasses import dataclass
 import torch.nn as nn
-from modules import select_torch_device, get_args_from_hub
+from modules import select_torch_device, get_bertargs_from_hub
 from typing import Optional
 import warnings
 import torch
-from attn_gym.mods import generate_tanh_softcap
 from huggingface_hub import PyTorchModelHubMixin, hf_hub_download
 from safetensors.torch import load_file
 
 @dataclass
-class Args:
+class BertArgs:
     """general"""
     vocab_size:int = 50_000
     dim:int = 1024
     d_ff:int = 2048
-    n_layers:int = 16
-    tie_params:bool = True
-
+    n_layers:int = 4
+    output_what:bool = 'meanpool' # 'meanpool' or 'tokens' or 'vocab'
+    tie_params:bool = False
+    
     """attention"""
     context_window:int = 2048 # max seq len
-    window_size:int = 1024
     n_heads:int = 8
     n_kv_heads:int = 4
-    static_mask:bool = True
     soft_cap:Optional[int] = 20
 
     """MoE"""
     num_experts:int = 8
     k:int = 4
-    moe_type:str = "megablocks-dmoe" # or "pytorch" or "megablocks-dmoe"
+    moe_type:str = "megablocks-moe" # or "pytorch" or "megablocks-dmoe"
     capacity_factor: float = 1.0
     impl: str = "grouped"   # or "sparse" Sparse MLP is not supported with triton >=3.2.0
     
@@ -60,21 +55,20 @@ class Args:
         assert self.dim % self.n_heads == 0
         assert self.n_heads % self.n_kv_heads == 0
 
-
-class Cirilla(
+class CirillaBERT(
             nn.Module,
             PyTorchModelHubMixin,
             pipeline_tag="text-generation",
             library_name="pytorch",
             license="mit"
     ):
-    def __init__(self, args:Args=None):
+    def __init__(self, args:BertArgs=None):
         super().__init__()
 
         if isinstance(args, dict):
-               args = Args(**args)
+               args = BertArgs(**args)
         if args is None:
-            args = Args()
+            args = BertArgs()
 
         self.args = args
         self._prepare_model()
@@ -85,24 +79,12 @@ class Cirilla(
         self.rope = RoPE(self.args.dim // self.args.n_heads, self.args.context_window, self.args.device, self.args.theta, self.args.device)
         activation = get_activation('Motif-Technologies/activation')
         self.rmsnorm = activation.layers.RMSNorm(dim=self.args.dim) if self.args.device == torch.cuda.is_available() else nn.RMSNorm(self.args.dim)
-        
-        if self.args.static_mask:
-            self.mask = create_static_block_mask(sliding_window_causal,self.args.context_window,
-                                             self.args.context_window, self.args.device, self.args.window_size)
 
-            self.attentions = nn.ModuleList([
-                torch.compile(
-                SlidingWindowAttention(self.args, self.rope, self.mask, generate_tanh_softcap(self.args.soft_cap, approx=False) if self.args.soft_cap is not None else None),
-                mode='max-autotune') for _ in range(self.args.n_layers)
-            ])
-
-        else:
-            self.attentions = nn.ModuleList([
-                torch.compile(SlidingWindowAttention(self.args, self.rope,
-                create_dynamic_block_mask,
-                generate_tanh_softcap(self.args.soft_cap, approx=False) if self.args.soft_cap is not None else None),
-                mode='max-autotune') for _ in range(self.args.n_layers)
-            ])
+        self.attentions = nn.ModuleList([
+            torch.compile(
+            BertAttention(self.args, self.rope),
+            mode='max-autotune') for _ in range(self.args.n_layers)
+        ])
         
         if self.args.moe_type == 'pytorch':
             self.smoes = nn.ModuleList([
@@ -126,21 +108,42 @@ class Cirilla(
             print(self.args.moe_type)
             raise ValueError(f"allowed moe types: 'pytorch',  'megablocks-moe', 'megablocks-dmoe' ; got: {self.args.moe_type}")
 
-        self.output = nn.Linear(self.args.dim, self.args.vocab_size, bias=False)
-        if self.args.tie_params:
-            self.output.weight = self.emb.embeddings.weight
+        if self.args.output_what == 'vocab':
+
+            self.output = nn.Linear(self.args.dim, self.args.vocab_size, bias=False)
+            if self.args.tie_params:
+                self.output.weight = self.emb.embeddings.weight
 
         self.n_params = sum(p.numel() for p in self.parameters() if p.requires_grad)
 
         self.to(self.args.device, dtype=self.args.dtype)
+
+    @staticmethod
+    def mean_pooling(out, attention_mask):
+        if attention_mask is None:
+            return torch.mean(out, dim=1)
         
-    def pred(self, x):
+        mask_expanded = attention_mask.unsqueeze(-1).expand(out.size())
+        
+        sum_embeddings = torch.sum(out * mask_expanded, dim=1)
+        
+        sum_mask = mask_expanded.sum(dim=1)
+        
+        return sum_embeddings / torch.clamp(sum_mask, min=1e-9)
+        
+    def pred(self, x, attention_mask=None):
         
         x = self.emb(x)
 
         for attention, moe in zip(self.attentions, self.smoes):
             x = x + attention(x) + moe(x)
 
+        if self.args.output_what == 'meanpool':
+            return self.mean_pooling(x, attention_mask)
+        
+        if self.args.output_what == 'tokens':
+            return x
+        
         x = self.rmsnorm(x)
         x = self.output(x)
 
@@ -148,7 +151,7 @@ class Cirilla(
     
     def pull_model_from_hub(self, hf_repo_id:str):
         model_args = self.args
-        pulled_args = get_args_from_hub(hf_repo_id)
+        pulled_args = get_bertargs_from_hub(hf_repo_id)
 
         if model_args != pulled_args:
             print(f"Current model args don't correspond to the HF model's args.\nCurrent args:\n{model_args}\nThe model will use the HF args:\n{pulled_args}")

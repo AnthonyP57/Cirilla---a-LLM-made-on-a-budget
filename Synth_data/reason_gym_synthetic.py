@@ -3,9 +3,6 @@ import reasoning_gym
 import json
 import random
 
-jsonl_path = './training_datasets/mid_training/reason_gym_synth.jsonl'
-n_samples = 400
-
 specs = [
     DatasetSpec(name='aiw', weight=2, config={"max_entities":10}),
     DatasetSpec(name='basic_arithmetic', weight=2, config={"whitespace":"random"}),
@@ -29,21 +26,23 @@ specs = [
     DatasetSpec(name='syllogism', weight=2, config={}),
 ]
 
-n_failed=0
-for seed in random.sample(range(1_000_000), n_samples):
-    data = reasoning_gym.create_dataset('composite', size=100, seed=seed, datasets=specs)
+def get_synth_resoning_dataset(out_path, n_samples, specs=specs):
 
-    with open(jsonl_path, 'a') as f:
-        for i, x in enumerate(data):
-            assert data.score_answer(answer=x['answer'], entry=x) == 1.0
-            assert type(x) == dict
-            try:
-                x = {
-                    'subject': x['metadata']['source_dataset'],
-                    'text': [{'role': 'user', 'text': x['question']}, {'role': 'assistant', 'text': x['answer']}],
-                    'data type': 'conv'
-                }
-                f.write(json.dumps(x) + '\n')
-            except Exception as e:
-                n_failed += 1
-                print(e, x['metadata']['source_dataset'])
+    n_failed=0
+    for seed in random.sample(range(1_000_000), n_samples):
+        data = reasoning_gym.create_dataset('composite', size=100, seed=seed, datasets=specs)
+
+        with open(out_path, 'a') as f:
+            for i, x in enumerate(data):
+                assert data.score_answer(answer=x['answer'], entry=x) == 1.0
+                assert type(x) == dict
+                try:
+                    x = {
+                        'subject': x['metadata']['source_dataset'],
+                        'text': [{'role': 'user', 'text': x['question']}, {'role': 'assistant', 'text': x['answer']}],
+                        'data type': 'conv'
+                    }
+                    f.write(json.dumps(x) + '\n')
+                except Exception as e:
+                    n_failed += 1
+                    print(f'[Fail {n_failed}# ]', e, x['metadata']['source_dataset'])

@@ -6,6 +6,7 @@ import torch.nn as nn
 from dataclasses import dataclass
 from typing import Union, Callable, Optional
 import torch
+from .activations import get_activation
 
 SLIDING_WINDOW = 512
 
@@ -45,6 +46,9 @@ class SlidingWindowAttention(nn.Module):
         self.n_rep = self.n_heads_q // self.n_kv_heads
         self.head_dim = args.dim // args.n_heads
         self.static_mask = args.static_mask
+        
+        activation = get_activation('Motif-Technologies/activation')
+        self.rmsnorm = activation.layers.RMSNorm(dim=self.args.dim) if self.args.device == torch.cuda.is_available() else nn.RMSNorm(self.args.dim)
 
         self.wo = nn.Linear(args.n_heads * self.head_dim, args.dim, bias=False)
 
@@ -67,6 +71,8 @@ class SlidingWindowAttention(nn.Module):
 
     def forward(self, x: torch.Tensor):
         batch_size, seq_len, dim = x.shape
+
+        x = self.rmsnorm(x)
 
         qkv = self.wqkv(x)
 

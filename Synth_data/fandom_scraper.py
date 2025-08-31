@@ -6,9 +6,6 @@ from pathlib import Path
 import fandom
 from span_marker import SpanMarkerModel
 
-fandom.set_wiki("Witcher")
-fandom.set_lang("en")
-
 span_model_name = "tomaarsen/span-marker-bert-base-fewnerd-fine-super"
 sm_model = SpanMarkerModel.from_pretrained(span_model_name).cuda()
 
@@ -175,10 +172,8 @@ async def classify_worker(out_path: Path, visited: set, q: asyncio.Queue, done: 
         await asyncio.sleep(5)
 
 
-async def main():
-    in_path = Path("./training_datasets/raw/witcher_json")
-    out_path = Path("./training_datasets/raw/async_fandom")
-    instruct_path = Path("./training_datasets/raw/async_fandom_instruct")
+async def _main(in_path: Path, out_path: Path, instruct_path: Path, n_workers: int = 50):
+
     out_path.mkdir(parents=True, exist_ok=True)
     instruct_path.mkdir(parents=True, exist_ok=True)
 
@@ -202,11 +197,28 @@ async def main():
             await q.put(s)
 
     search_counter = {'count': 0, 'queue_size': 0}
-    fetchers = [asyncio.create_task(fetch_worker(q, out_path, instruct_path, visited, search_counter, queued)) for _ in range(50)]
+    fetchers = [asyncio.create_task(fetch_worker(q, out_path, instruct_path, visited, search_counter, queued)) for _ in range(n_workers)]
     classifier = asyncio.create_task(classify_worker(out_path, visited, q, done, queued))
 
     await asyncio.gather(*fetchers, classifier)
 
 
+def scrape_fandom(in_path: Path,
+                  out_path: Path,
+                  instruct_path: Path,
+                  n_workers: int = 50,
+                  wiki: str = "Witcher",
+                  lang: str = "en"):
+
+    fandom.set_wiki(wiki)
+    fandom.set_lang(lang)
+
+    asyncio.run(_main(in_path, out_path, instruct_path, n_workers))
+
 if __name__ == "__main__":
-    asyncio.run(main())
+
+    in_path = Path("./training_datasets/raw/witcher_json")
+    out_path = Path("./training_datasets/raw/async_fandom")
+    instruct_path = Path("./training_datasets/raw/async_fandom_instruct")
+
+    scrape_fandom(in_path, out_path, instruct_path)
