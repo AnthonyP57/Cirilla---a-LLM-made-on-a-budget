@@ -10,7 +10,8 @@ import re
 from typing import Optional, Dict, Any
 import vllm
 from transformers import AutoTokenizer
-from rich.progress import Progress, TextColumn, BarColumn, TimeElapsedColumn, TimeRemainingColumn
+from rich.progress import Progress, TextColumn, BarColumn, TimeElapsedColumn, ProgressColumn
+from datetime import timedelta
 
 llm = None
 llm_model_name = None
@@ -75,33 +76,86 @@ NEW CONTENT:
 """
 
 random_user_prompt1 = \
-"""Great, now generate a new question and answer pair."""
-
-random_user_prompt2 = \
-"""Nice, now ask to expand on the answer."""
-
-random_user_prompt3 = \
 """Ask to elaborate."""
 
-random_user_prompt4 = \
+random_user_prompt2 = \
 """Ask to clarify."""
 
-random_user_prompt5 = \
+random_user_prompt3 = \
 """Ask to rephrase the answer."""
 
-random_user_prompt6 = \
-"""Ask to explain."""
-
-random_user_prompt7 = \
+random_user_prompt4 = \
 """Cite some of the context and ask to summarize."""
 
-random_user_prompt8 = \
+random_user_prompt5 = \
 """Cite some of the context and ask to explain."""
 
-random_user_prompt9 = \
+random_user_prompt6 = \
 """Ask for a simpler answer."""
 
-random_user_prompts = (random_user_prompt1, random_user_prompt2, random_user_prompt3, random_user_prompt4, random_user_prompt5, random_user_prompt6, random_user_prompt7, random_user_prompt8)
+random_user_prompt7 = \
+"""Ask if a a particular fact is true or false. The stated fact has to be based on the context and has to be true."""
+
+random_user_prompt8 = \
+"""Ask if a particular fact is true or false. The stated fact has to be based on the context and has to be false."""
+
+random_user_prompt9 = \
+"""Ask a very underspecific question."""
+
+random_user_prompt10 = \
+"""Ask for an example related to the answer."""
+
+random_user_prompt11 = \
+"""Ask why the answer is important."""
+
+random_user_prompt12 = \
+"""Ask how this relates to other events or characters."""
+
+random_user_prompt13 = \
+"""Ask for a comparison with another character, place, or event."""
+
+random_user_prompt14 = \
+"""Ask the assistant to list two more related facts or characters or events."""
+
+random_user_prompt15 = \
+"""Ask to put the answer into chronological context if possible."""
+
+random_user_prompt16 = \
+"""Ask to explain the political or historical significance of the answer."""
+
+
+random_user_prompts = (random_user_prompt1, random_user_prompt2,
+                       random_user_prompt3, random_user_prompt4,
+                       random_user_prompt5, random_user_prompt6,
+                       random_user_prompt7, random_user_prompt8,
+                       random_user_prompt9, random_user_prompt10,
+                       random_user_prompt11, random_user_prompt12,
+                       random_user_prompt13, random_user_prompt14,
+                       random_user_prompt15, random_user_prompt16)
+
+class StepEtaColumn(ProgressColumn):
+    """ETA updates only when task.completed changes"""
+    def __init__(self):
+        super().__init__()
+        self.last_completed = {}
+        self.cached_eta = {}
+
+    def render(self, task):
+        # Initialize per-task tracking
+        if task.id not in self.last_completed:
+            self.last_completed[task.id] = -1
+            self.cached_eta[task.id] = "ETA: --:--"
+
+        # Update ETA only if completed count changed
+        if task.completed != self.last_completed[task.id] and task.completed > 0:
+            percent = task.completed / task.total if task.total else 0
+            elapsed = task.elapsed or 0
+            if percent > 0:
+                eta_seconds = elapsed / percent - elapsed
+                self.cached_eta[task.id] = f"ETA: {str(timedelta(seconds=int(eta_seconds)))}"
+            self.last_completed[task.id] = task.completed
+
+        return TextColumn(self.cached_eta[task.id]).render(task)
 
 def best_effort_parse(text: str, schema: Optional[BaseModel] = None) -> Dict[str, Any]:
     text = text.strip()
@@ -158,12 +212,14 @@ def multi_turn(paths, save_to='./convos', batch_size=256, system_prompt=sys_prom
     os.makedirs(save_to, exist_ok=True)
 
     progress = Progress(
-                    TextColumn("{task.description}"),
-                    BarColumn(),
-                    TextColumn("{task.completed}/{task.total}"),
-                    TimeElapsedColumn(),      # shows elapsed
-                    TimeRemainingColumn(),    # shows ETA
-                )
+                        TextColumn("{task.description}"),
+                        BarColumn(),
+                        TextColumn("{task.completed}/{task.total}"),
+                        TextColumn("{task.percentage:>3.0f}%"),
+                        TimeElapsedColumn(),
+                        StepEtaColumn(),
+                        )
+    
     writer = progress.add_task(f"{model.split('/')[1]}", total=len(paths) * n_turns)
 
     qa = []
@@ -265,17 +321,17 @@ def multi_turn(paths, save_to='./convos', batch_size=256, system_prompt=sys_prom
 
 if __name__ == "__main__":
 
-    # paths_ = ['./training_datasets/raw/synth_sumarries/fandom/qwen3:8b',
-    #          './training_datasets/raw/synth_sumarries/fandom/mistral-small3.2:24b',
-    #          './training_datasets/raw/synth_sumarries/fandom/llama3.1:8b',
-    #          './training_datasets/raw/synth_sumarries/fandom/llama3.2:3b']
+    paths_ = ['./training_datasets/raw/synth_sumarries/fandom/qwen3:8b',
+             './training_datasets/raw/synth_sumarries/fandom/mistral-small3.2:24b',
+             './training_datasets/raw/synth_sumarries/fandom/llama3.1:8b',
+             './training_datasets/raw/synth_sumarries/fandom/llama3.2:3b']
 
-    paths_ = ['./training_datasets/raw/async_summaries/granite3.1-moe:3b',
-              './training_datasets/raw/async_summaries/llama3.1:8b',
-              './training_datasets/raw/async_summaries/llama3.2:3b',
-              './training_datasets/raw/async_summaries/qwen3:8b'
+    # paths_ = ['./training_datasets/raw/async_summaries/granite3.1-moe:3b',
+    #           './training_datasets/raw/async_summaries/llama3.1:8b',
+    #           './training_datasets/raw/async_summaries/llama3.2:3b',
+    #           './training_datasets/raw/async_summaries/qwen3:8b'
 
-    ]
+    # ]
 
     paths = [[os.path.join(p, f) for f in os.listdir(p)] for p in paths_]
 
@@ -283,4 +339,5 @@ if __name__ == "__main__":
         for i, mps in enumerate(paths):
             for _ in range(1):
             
-                multi_turn(mps, save_to=f'./training_datasets/raw/synth_multi_round/async/{model.split("/")[1]}/{paths_[i].split("/")[-1]}', model=model)
+                multi_turn(mps, save_to=f'./training_datasets/raw/synth_multi_round/{model.split("/")[1]}/{paths_[i].split("/")[-1]}', model=model)
+                # multi_turn(mps, save_to=f'./training_datasets/raw/synth_multi_round/async/{model.split("/")[1]}/{paths_[i].split("/")[-1]}', model=model)
