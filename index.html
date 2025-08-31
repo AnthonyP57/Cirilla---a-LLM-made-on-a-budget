@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 <title>Cirilla - LLM Project</title>
+<link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.css" rel="stylesheet" />
 <style>
-    /* Use Apple's system font stack */
     body {
         font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
                     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
@@ -16,13 +16,75 @@
         margin: 0;
         padding: 0;
         display: flex;
-        justify-content: center;
     }
 
-
-    .container {
-        max-width: 900px;
+    header {
+        position: fixed;
+        top: 0;
+        left: 0;
         width: 100%;
+        height: 60px;
+        background: #111;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 20px;
+        border-bottom: 1px solid #333;
+        z-index: 1000;
+    }
+
+    header h1 {
+        font-size: 1.2rem;
+        margin: 0;
+        margin-left: 300px;
+    }
+
+    .search-bar {
+        background: #1a1a1a;
+        border: 1px solid #333;
+        border-radius: 8px;
+        padding: 6px 10px;
+        color: #fff;
+        width: 250px;
+        margin-right: 50px; /* move it left from the far edge */
+        font-size: 1rem;
+    }
+
+    .sidebar {
+        position: fixed;
+        top: 60px;
+        left: 0;
+        width: 200px;
+        height: 100%;
+        background: #0b0b0b;
+        border-right: 1px solid #333;
+        padding: 20px 10px;
+    }
+
+    .sidebar h2 {
+        font-size: 1rem;
+        margin-bottom: 15px;
+        color: #facc15;
+    }
+
+.sidebar {
+    position: fixed;
+    top: 60px;
+    left: 0;
+    width: 200px;           /* make it wider if needed */
+    height: 100%;
+    background: #0b0b0b;
+    border-right: 1px solid #333; 
+    padding: 20px 20px 20px 30px; /* move content away from the line */
+}
+
+    .sidebar a:hover {
+        text-decoration: underline;
+    }
+
+    main.container {
+        max-width: 1000px;
+        margin: 80px auto;
         padding: 0 20px;
     }
 
@@ -46,9 +108,9 @@
         margin-bottom: 20px;
     }
 
-    h1, h2 {
-        margin-top: 40px;
+    h1, h2, h3 {
         text-align: left;
+        scroll-margin-top: 80px; /* offset for fixed header */
     }
 
     .flex-container {
@@ -83,22 +145,212 @@
         border-radius: 10px;
         overflow-x: auto;
     }
+
+    .docs-section {
+        margin-top: 60px;
+        padding-top: 30px;
+        border-top: 1px solid #333;
+    }
+
+    .function-doc {
+        margin-bottom: 50px;
+    }
+
+    .function-signature {
+        font-family: monospace;
+        font-size: 1.1em;
+        color: #4ade80;
+        margin-bottom: 10px;
+    }
+
+    table {
+        border-collapse: collapse;
+        width: 100%;
+        margin: 15px 0;
+    }
+
+    table, th, td {
+        border: 1px solid #333;
+    }
+
+    th, td {
+        padding: 10px;
+        text-align: left;
+    }
+
+    th {
+        background-color: #1a1a1a;
+        color: #facc15;
+    }
+
+    code {
+        background: #222;
+        padding: 2px 6px;
+        border-radius: 4px;
+        color: #96e2dc;
+    }
+
+    hr.doc-divider {
+        border: none;
+        border-top: 1px solid #333;
+        margin: 40px 0;
+    }
+
+    p + pre {
+        margin-top: 0;
+    }
+
+    .function-doc pre {
+        margin-top: 0;
+        margin-bottom: 15px; /* keep some spacing below */
+    }
+
+    pre {
+        margin-top: 0 !important;      /* remove top space */
+        margin-bottom: 15px;           /* optional spacing below */
+        padding: 15px;
+        border-radius: 10px;
+        overflow-x: auto;
+    }
+
+    pre code {
+        display: block;                /* ensures the code fills the pre */
+        margin: 0;                     /* remove any extra margin */
+        line-height: 1.4;              /* adjust if needed */
+    }
+
+
+
 </style>
 </head>
 <body>
 
-<div class="container">
+<header>
+    <h1>Cirilla</h1>
+    <input type="text" id="search" class="search-bar" placeholder="Search the docs ..." />
+</header>
+
+<!-- Sidebar with collapsible subcategories showing full names -->
+<div class="sidebar" id="sidebar">
+
+    <div class="category">
+        <div class="category-header" data-toggle="model">
+            <span class="header-text">cirilla.model</span>
+            <span class="arrow">▾</span>
+        </div>
+        <div class="category-items" id="model-items">
+            <a href="#forward">cirilla.model.forward</a>
+            <a href="#backward">cirilla.model.backward</a>
+        </div>
+    </div>
+
+    <div class="category">
+        <div class="category-header" data-toggle="modules">
+            <span class="header-text">cirilla.modules</span>
+            <span class="arrow">▾</span>
+        </div>
+        <div class="category-items" id="modules-items">
+            <a href="#helper">cirilla.modules.helper</a>
+        </div>
+    </div>
+</div>
+
+<style>
+.category-header {
+    display: flex;
+    justify-content: space-between; /* text left, arrow right */
+    align-items: center;
+    cursor: pointer;
+    margin: 8px 0;
+    color: #bbbbbb;
+    font-size: 0.95rem;
+    font-weight: normal;
+}
+
+.category-header .arrow {
+    flex: 0 0 auto; /* arrow stays flush right */
+}
+
+.category-header .header-text {
+    flex: 1;
+    text-align: left; /* text stays flush left */
+    transition: box-shadow 0.2s;
+}
+
+/* underline on hover without moving the text */
+.category-header .header-text:hover {
+    box-shadow: inset 0 -2px 0 0 #bbbbbb; 
+}
+
+.category-items {
+    margin-left: 30px;
+    display: none;
+    flex-direction: column;
+}
+
+.category-items a {
+    display: block;
+    margin: 4px 0;
+    color: #8bd1cb;
+    text-decoration: none;
+    font-size: 0.9rem;
+}
+
+.category-items a:hover {
+    text-decoration: underline;
+}
+</style>
+
+<script>
+// Search functionality for sidebar links and function docs
+const searchInput = document.getElementById('search');
+searchInput.addEventListener('input', function() {
+    const query = this.value.toLowerCase();
+
+    // Sidebar links visibility
+    const links = document.querySelectorAll('.sidebar a');
+    links.forEach(link => {
+        const text = link.textContent.toLowerCase();
+        link.style.display = text.includes(query) ? 'block' : 'none';
+    });
+
+    // Function docs visibility
+    const functions = document.querySelectorAll('.function-doc');
+    let firstMatch = null;
+    functions.forEach(fn => {
+        const text = fn.innerText.toLowerCase();
+        if (text.includes(query)) {
+            fn.style.display = '';
+            if (!firstMatch) firstMatch = fn;
+        } else {
+            fn.style.display = 'none';
+        }
+    });
+
+    // Scroll to first matching function doc or to Documentation header if query exists
+    const docsHeader = document.querySelector('.docs-section h2');
+    if (query && docsHeader) {
+        const yOffset = -80; // offset for fixed header
+        const y = (firstMatch ? firstMatch : docsHeader).getBoundingClientRect().top + window.pageYOffset + yOffset;
+        window.scrollTo({ top: y, behavior: 'smooth' });
+    }
+});
+</script>
+
+
+
+<main class="container">
 
     <img src="https://github.com/AnthonyP57/Radovid---a-LLM-made-on-a-budget/blob/master/img/ciri_w4_2.png?raw=true" class="header-image" alt="Ciri from The Witcher 4 trailer">
     <div class="caption"><em>Ciri from The Witcher 4 trailer</em></div>
 
-    <h1>Cirilla</h1>
+    <!-- <h1>Cirilla</h1> -->
     <p>Cirilla is an open source learning project aiming at implementing various LLMs. It is focused mainly on showing how to make, train, infer and deploy a LLM from scratch using PyTorch and a budget-friendly GPU (RTX 4060Ti 16GiB ~500$).</p>
 
     <h2>Who is Cirilla</h2>
     <div class="flex-container">
         <div class="img-container">
-            <img src="https://github.com/AnthonyP57/Radovid---a-LLM-made-on-a-budget/blob/master/img/fake_ciri.webp?raw=true" alt="Ciri">
+            <img src="https://github.com/AnthonyP57/Radovid---a-LLM-made-on-a-budget/blob/master/img/fake_ciri.webp?raw=true" alt="Ciri" height="400">
             <div class="img-caption"><em>Fig.1 Ciri Gwent card by Bogna Gawrońska</em></div>
         </div>
         <div class="text">
@@ -116,7 +368,7 @@
             <p>Her combination of innate talent, adaptability, and the capacity for growth makes her a fitting symbol for a language model designed to acquire knowledge, evolve over time, and connect information across domains.</p>
         </div>
         <div class="img-container">
-            <img src="https://github.com/AnthonyP57/Radovid---a-LLM-made-on-a-budget/blob/master/img/Ciri.webp?raw=true" alt="Ciri">
+            <img src="https://github.com/AnthonyP57/Radovid---a-LLM-made-on-a-budget/blob/master/img/Ciri.webp?raw=true" alt="Ciri" width="250">
             <div class="img-caption"><em>Fig.2 Ciri Gwent card by Anna Podedworna</em></div>
         </div>
     </div>
@@ -126,8 +378,7 @@
     <p>On a lower level: an LLM is a neural network trained on big data to recognize patterns, generate human-like responses, and predict the most likely next word in a given context. While it can process and recall information efficiently, it lacks true understanding, reasoning, or consciousness, relying only on statistical correlations rather than genuine comprehension. The reasoning of LLMs is being improved in projects (most notably) like DeepSeek, which focus on enhancing the ability to understand context and simulate human-like reasoning.</p>
 
     <h2>Repo organization</h2>
-    <pre>
-Cirilla - a LLM made on a budget/
+    <pre><code class="language-bash">Cirilla - a LLM made on a budget/
   │
   ├── BERT/                           # overview of BERT
   │   └── RAG/                        # overview of RAG
@@ -160,9 +411,122 @@ Cirilla - a LLM made on a budget/
       ├── model.py
       ├── dataset.py
       ├── train.py
-      └── LongNet.py
-    </pre>
+      └── LongNet.py</code></pre>
 
-</div>
+    <!-- Documentation Section -->
+    <div class="docs-section">
+    <h2>Documentation</h2>
+
+        <div class="function-doc" id="forward">
+            <h3>cirilla.model.forward</h3>
+            <div class="function-signature">forward(input_ids: torch.Tensor, attention_mask: torch.Tensor = None) → torch.Tensor</div>
+            <p>Runs a forward pass through the Cirilla model.</p>
+
+            <table>
+                <tr><th>Argument</th><th>Type</th><th>Description</th></tr>
+                <tr><td><code>input_ids</code></td><td>torch.Tensor</td><td>Tokenized input sequence of shape <code>(batch_size, seq_len)</code>.</td></tr>
+                <tr><td><code>attention_mask</code></td><td>torch.Tensor, optional</td><td>Mask tensor with 1 for tokens to attend to and 0 otherwise.</td></tr>
+            </table>
+
+            <p><strong>Returns:</strong></p>
+            <table>
+                <tr><th>Type</th><th>Description</th></tr>
+                <tr><td>torch.Tensor</td><td>Output logits of shape <code>(batch_size, seq_len, vocab_size)</code>.</td></tr>
+            </table>
+
+            <p><strong>Example:</strong></p>
+            <pre><code class="language-python">>>> from cirilla_model import Cirilla
+>>> import torch
+>>> model = Cirilla(vocab_size=50000, hidden_dim=512)
+>>> input_ids = torch.randint(0, 50000, (2, 16))
+>>> output = model.forward(input_ids)
+>>> output.shape
+    torch.Size([2, 16, 50000])</code></pre>
+        </div>
+
+        <hr class="doc-divider" />
+
+        <div class="function-doc" id="generate">
+            <h3>cirilla.generate</h3>
+            <div class="function-signature">generate(input_ids: torch.Tensor, max_length: int = 50, temperature: float = 1.0) → torch.Tensor</div>
+            <p>Generates text autoregressively from a given prompt.</p>
+
+            <table>
+                <tr><th>Argument</th><th>Type</th><th>Description</th></tr>
+                <tr><td><code>input_ids</code></td><td>torch.Tensor</td><td>Prompt tokens of shape <code>(batch_size, seq_len)</code>.</td></tr>
+                <tr><td><code>max_length</code></td><td>int, optional</td><td>Maximum length of generated sequence. Default: 50.</td></tr>
+                <tr><td><code>temperature</code></td><td>float, optional</td><td>Sampling temperature for randomness. Default: 1.0.</td></tr>
+            </table>
+
+            <p><strong>Returns:</strong></p>
+            <table>
+                <tr><th>Type</th><th>Description</th></tr>
+                <tr><td>torch.Tensor</td><td>Generated token IDs of shape <code>(batch_size, max_length)</code>.</td></tr>
+            </table>
+
+            <p><strong>Example:</strong></p>
+            <pre><code class="language-python">>>> prompt = torch.tensor([[101, 42, 1337]])  # toy prompt
+>>> generated = model.generate(prompt, max_length=10, temperature=0.8)
+>>> generated.shape
+    torch.Size([1, 10])</code></pre>
+        </div>
+
+    </div>
+
+</main>
+
+<script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-python.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-bash.min.js"></script>
+<script>
+// Search functionality
+const searchInput = document.getElementById('search');
+searchInput.addEventListener('input', function() {
+    const query = this.value.toLowerCase();
+    const functions = document.querySelectorAll('.function-doc');
+    functions.forEach(fn => {
+        const text = fn.innerText.toLowerCase();
+        fn.style.display = text.includes(query) ? '' : 'none';
+    });
+});
+</script>
+
+<script>
+// Toggle arrows and show/hide category items
+const headers = document.querySelectorAll('.category-header');
+headers.forEach(header => {
+    header.addEventListener('click', () => {
+        const key = header.dataset.toggle + "-items";
+        const items = document.getElementById(key);
+        const arrow = header.querySelector('.arrow');
+
+        if (items.style.display === "none" || items.style.display === "") {
+            items.style.display = "flex";
+            arrow.textContent = "▴"; // arrow up
+        } else {
+            items.style.display = "none";
+            arrow.textContent = "▾"; // arrow down
+        }
+    });
+});
+</script>
+
+<script>
+// Adjust scroll for sidebar links to headers
+document.querySelectorAll('.sidebar a[href^="#"]').forEach(link => {
+    link.addEventListener('click', function(e) {
+        e.preventDefault(); // prevent default jump
+        const targetId = this.getAttribute('href').substring(1);
+        const target = document.getElementById(targetId);
+        if (target) {
+            const yOffset = -80; // same as header height
+            const y = target.getBoundingClientRect().top + window.pageYOffset + yOffset;
+            window.scrollTo({ top: y, behavior: 'smooth' });
+        }
+    });
+});
+</script>
+
+
 </body>
 </html>
