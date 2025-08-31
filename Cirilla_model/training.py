@@ -310,6 +310,7 @@ class CirillaTrainer:
         pulled_args = get_args_from_hub(self.args.hf_repo_id)
 
         if model_args != pulled_args:
+            print(f"Current model args don't correspond to the HF model's args.\nCurrent args:\n{model_args}\nThe model will use the HF args:\n{pulled_args}")
             self.model = Cirilla(pulled_args)
 
         file_path = hf_hub_download(
