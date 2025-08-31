@@ -10,7 +10,6 @@ from LLM_pieces import (
     MegablockMoE,
     MegablockdMoE,
 )
-from in_embeddings import InputEmbeddings
 from dataclasses import dataclass
 import torch.nn as nn
 from modules import select_torch_device, get_args_from_hub
@@ -24,11 +23,12 @@ from safetensors.torch import load_file
 @dataclass
 class Args:
     """general"""
-    vocab_size:int = 50_000
+    vocab_size:int = 60_000
     dim:int = 1024
     d_ff:int = 2048
     n_layers:int = 16
     tie_params:bool = True
+    out_bias:bool = True
 
     """attention"""
     context_window:int = 2048 # max seq len
@@ -60,6 +60,14 @@ class Args:
         assert self.dim % self.n_heads == 0
         assert self.n_heads % self.n_kv_heads == 0
 
+class InputEmbeddings(nn.Module):
+    def __init__(self, args:Args):
+        super().__init__()
+
+        self.embeddings = nn.Embedding(args.vocab_size, args.dim)
+    
+    def forward(self, x):
+        return self.embeddings(x)
 
 class Cirilla(
             nn.Module,
@@ -126,7 +134,7 @@ class Cirilla(
             print(self.args.moe_type)
             raise ValueError(f"allowed moe types: 'pytorch',  'megablocks-moe', 'megablocks-dmoe' ; got: {self.args.moe_type}")
 
-        self.output = nn.Linear(self.args.dim, self.args.vocab_size, bias=False)
+        self.output = nn.Linear(self.args.dim, self.args.vocab_size, bias=self.args.out_bias)
         if self.args.tie_params:
             self.output.weight = self.emb.embeddings.weight
 

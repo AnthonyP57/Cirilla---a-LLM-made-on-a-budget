@@ -18,6 +18,8 @@ class BertAttention(nn.Module):
     def __init__(self, args: BertAttentionArgs, rope:RoPE):
         super().__init__()
 
+        self.args = args
+
         self.n_kv_heads = args.n_heads if args.n_kv_heads is None else args.n_kv_heads
         self.n_heads_q = args.n_heads
         self.n_rep = self.n_heads_q // self.n_kv_heads

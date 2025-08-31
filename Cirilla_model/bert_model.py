@@ -7,7 +7,6 @@ from LLM_pieces import (
     MegablockdMoE,
     BertAttention
 )
-from in_embeddings import InputEmbeddings
 from dataclasses import dataclass
 import torch.nn as nn
 from modules import select_torch_device, get_bertargs_from_hub
@@ -26,6 +25,7 @@ class BertArgs:
     n_layers:int = 4
     output_what:bool = 'meanpool' # 'meanpool' or 'tokens' or 'vocab'
     tie_params:bool = False
+    out_bias:bool = True
     
     """attention"""
     context_window:int = 2048 # max seq len
@@ -54,6 +54,15 @@ class BertArgs:
             warnings.warn("hf kernels only work on cuda")
         assert self.dim % self.n_heads == 0
         assert self.n_heads % self.n_kv_heads == 0
+
+class InputEmbeddings(nn.Module):
+    def __init__(self, args:BertArgs):
+        super().__init__()
+
+        self.embeddings = nn.Embedding(args.vocab_size, args.dim)
+    
+    def forward(self, x):
+        return self.embeddings(x)
 
 class CirillaBERT(
             nn.Module,
@@ -110,7 +119,7 @@ class CirillaBERT(
 
         if self.args.output_what == 'vocab':
 
-            self.output = nn.Linear(self.args.dim, self.args.vocab_size, bias=False)
+            self.output = nn.Linear(self.args.dim, self.args.vocab_size, bias=self.args.out_bias)
             if self.args.tie_params:
                 self.output.weight = self.emb.embeddings.weight
 

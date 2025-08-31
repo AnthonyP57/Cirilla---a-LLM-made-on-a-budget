@@ -41,6 +41,8 @@ class SlidingWindowAttention(nn.Module):
     def __init__(self, args: AttentionArgs, rope:RoPE, mask:Union[BlockMask, create_dynamic_block_mask]=None, score_mod:Callable=None):
         super().__init__()
 
+        self.args = args
+
         self.n_kv_heads = args.n_heads if args.n_kv_heads is None else args.n_kv_heads
         self.n_heads_q = args.n_heads
         self.n_rep = self.n_heads_q // self.n_kv_heads

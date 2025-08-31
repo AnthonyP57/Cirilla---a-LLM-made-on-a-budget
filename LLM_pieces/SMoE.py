@@ -55,6 +55,7 @@ class SMoE(nn.Module):
         self.k = args.k
         self.gating = nn.Linear(args.dim, args.num_experts)
         self.experts = nn.ModuleList(experts)
+        self.args = args
 
         activation = get_activation('Motif-Technologies/activation')
         self.rmsnorm = activation.layers.RMSNorm(dim=self.args.dim) if self.args.device == torch.cuda.is_available() else nn.RMSNorm(self.args.dim)

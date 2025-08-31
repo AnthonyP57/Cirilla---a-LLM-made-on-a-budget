@@ -165,6 +165,7 @@ class CirillaTrainer:
             loss.backward()
             
             times.append(time.time())
+            times = times[-50:]
             print(f'average time: {np.mean(np.diff(times)):.4f} loss: {loss_item}', end='\r')
 
         print(f'average time for epoch: {np.mean(np.diff(times)):.4f}')
