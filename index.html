@@ -18,7 +18,7 @@
         display: flex;
     }
 
-    
+
     header {
         position: fixed;
         top: 0;
@@ -51,33 +51,22 @@
         font-size: 1rem;
     }
 
-    .sidebar {
-        position: fixed;
-        top: 60px;
-        left: 0;
-        width: 200px;
-        height: 100%;
-        background: #0b0b0b;
-        border-right: 1px solid #333;
-        padding: 20px 10px;
-    }
-
     .sidebar h2 {
         font-size: 1rem;
         margin-bottom: 15px;
         color: #facc15;
     }
 
-.sidebar {
-    position: fixed;
-    top: 60px;
-    left: 0;
-    width: 200px;           /* make it wider if needed */
-    height: 100%;
-    background: #0b0b0b;
-    border-right: 1px solid #333; 
-    padding: 20px 20px 20px 30px; /* move content away from the line */
-}
+    .sidebar {
+        position: fixed;
+        top: 60px;
+        left: 0;
+        width: 200px;           /* make it wider if needed */
+        height: 100%;
+        background: #0b0b0b;
+        border-right: 1px solid #333; 
+        padding: 20px 20px 20px 30px; /* move content away from the line */
+    }
 
     .sidebar a:hover {
         text-decoration: underline;
@@ -111,6 +100,8 @@
 
     h1, h2, h3 {
         text-align: left;
+        font-size: 1.5em;
+        font-weight: 600;
         scroll-margin-top: 80px; /* offset for fixed header */
     }
 
@@ -162,6 +153,20 @@
         font-size: 1.1em;
         color: #4ade80;
         margin-bottom: 10px;
+        margin-left: 5px;
+    }
+
+    .code-label {
+        font-family: monospace;
+        font-style: italic;
+        font-size: 1.5em;
+        color: #acb6b5;
+        margin-bottom: 10px;
+        margin-left: 5px;
+    }
+
+    .indented {
+    margin-left: 50px;
     }
 
     table {
@@ -471,6 +476,39 @@ searchInput.addEventListener('input', function() {
 >>> generated.shape
     torch.Size([1, 10])</code></pre>
         </div>
+
+        <div class="function-doc" id="Ollama_curate">
+        <h3>Ollama_curate</h3>
+        <div class="code-label">class cirilla.synth_data.Ollama_curate</div>
+
+        <div class="function-signature">
+            generate(input_ids: torch.Tensor, max_length: int = 50, temperature: float = 1.0) → torch.Tensor
+        </div>
+
+        <div class="indented">
+            <p>Generates text autoregressively from a given prompt.</p>
+
+            <table>
+            <tr><th>Argument</th><th>Type</th><th>Description</th></tr>
+            <tr><td><code>input_ids</code></td><td>torch.Tensor</td><td>Prompt tokens of shape <code>(batch_size, seq_len)</code>.</td></tr>
+            <tr><td><code>max_length</code></td><td>int, optional</td><td>Maximum length of generated sequence. Default: 50.</td></tr>
+            <tr><td><code>temperature</code></td><td>float, optional</td><td>Sampling temperature for randomness. Default: 1.0.</td></tr>
+            </table>
+
+            <p><strong>Returns:</strong></p>
+            <table>
+            <tr><th>Type</th><th>Description</th></tr>
+            <tr><td>torch.Tensor</td><td>Generated token IDs of shape <code>(batch_size, max_length)</code>.</td></tr>
+            </table>
+
+            <p><strong>Example:</strong></p>
+            <pre><code class="language-python">>>> prompt = torch.tensor([[101, 42, 1337]])  # toy prompt
+>>> generated = model.generate(prompt, max_length=10, temperature=0.8)
+>>> generated.shape
+    torch.Size([1, 10])</code></pre>
+        </div>
+        </div>
+
 
     </div>
 
