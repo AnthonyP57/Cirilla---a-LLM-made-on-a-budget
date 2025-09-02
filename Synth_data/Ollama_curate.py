@@ -8,6 +8,7 @@ from typing import Optional
 import copy
 from multi_turn_vllm import random_user_prompts
 import random
+from pathlib import Path
 
 """
 Ollama options
@@ -282,7 +283,20 @@ TEXT:
 
         os.system(f'ollama stop {self.model}')
 
-    def __call__(self, paths:list[str], save_to:str='./example', seed:int=42, checkpoint:int=10, skip=True):
+    def __call__(self, paths:list[Path], save_to:Path='./example', seed:int=42, checkpoint:int=10, skip:bool=True) -> None:
+        """
+        Generate instructions from files.
+
+        Args:
+            paths (list[Path]): List of paths to files to summarize.
+            save_to (Path, optional): Directory to save summaries. Defaults to './example'.
+            seed (int, optional): Random seed for reproducibility. Defaults to 42.
+            checkpoint (int, optional): Number of files to process before saving a checkpoint. Defaults to 10.
+            skip (bool, optional): Skip files that already have summaries. Defaults to True. Else, add index to file name.
+
+        Returns:
+            None
+        """
 
         start = time.time()
         n_skipped = 0
@@ -352,7 +366,7 @@ TEXT:
                 for k, v in self.convo.items():
                     # if not os.path.exists(f'{save_to}/{k}.json'):
                     with open(f'{save_to}/{k}.json', 'w') as f:
-                        json.dump(v, f)
+                        json.dump(v, f, indent=2)
                 
                 self.convo = {}
 
