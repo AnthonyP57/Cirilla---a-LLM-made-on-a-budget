@@ -4,24 +4,13 @@ import re
 import json
 import numpy as np
 
-def has_subfolders(folder_path):
-    assert any(not os.path.isdir(os.path.join(folder_path, name)) for name in os.listdir(folder_path)), "Folder must have only subfolders. No files allowed."
-    return all(os.path.isdir(os.path.join(folder_path, name)) for name in os.listdir(folder_path))
-
 def rm_duplicate_instructs(main_dir, save_to):
     files = []
 
-    main_has_subfolders = has_subfolders(main_dir)
-
-    if main_has_subfolders:
-        for model in os.listdir(main_dir):
-            model_dir = os.path.join(main_dir, model)
-            if os.path.isdir(model_dir):
-                for file in os.listdir(model_dir):
-                    files.append(os.path.join(model_dir, file))
-    else:
-        for file in os.listdir(main_dir):
-            files.append(os.path.join(main_dir, file))
+    for main_path, subfolders, _files in os.walk(main_dir):
+        for _file in _files:
+            if _file.endswith(".json"):
+                files.append(os.path.join(main_path, _file))
 
     print(f"Found {len(files)} files.")
 
@@ -79,10 +68,8 @@ def rm_duplicate_instructs(main_dir, save_to):
                     'subject': name.split('.')[0],
                     'text': [{'role':'user', 'content': qa['question']}, {'role': 'assistant', 'content': qa['answer']}],
                     'data type': 'conv',
+                    'model': model,
                 })
-
-                if main_has_subfolders:
-                    data_['model'] = model
 
                 data_to_save.append(data_)
 
