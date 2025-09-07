@@ -78,12 +78,25 @@ class OllamaCurate:
 
     def single_pass_summary(
         self,
-        paths: list[str],
-        save_to: str = "./summaries",
+        paths: list[Path],
+        save_to: Path = "./summaries",
         seed: int = 42,
         num_predict: int = 4096,  # allow longer completion
         use_response_template: bool = False,
     ):
+        """
+        Summarize a list of files using a single pass of the model
+        
+        Args:
+            paths (list[Path]): List of paths of files to summarize.
+            save_to (Path): Directory to save summaries. Defaults to './summaries'.
+            seed (int): Random seed for reproducibility. Defaults to 42.
+            num_predict (int): Number of tokens to predict. Defaults to 4096.
+            use_response_template (bool: Use a response template. Defaults to False.
+        
+        Returns:
+            None
+        """
         os.makedirs(save_to, exist_ok=True)
 
         def _call_model(prompt: str):
@@ -146,14 +159,29 @@ TEXT:
 
     def dynamic_hierarchical_summary(
         self,
-        paths: list[str],
-        save_to: str = './summaries',
+        paths: list[Path],
+        save_to: Path = './summaries',
         chunk_lines: int = 100, # number of lines per chunk
         seed: int = 42,
         num_predict: int = 2048, # max number of tokens
         max_words_summary: int = 500, # target maximum words per summary block
         use_response_template: bool = False
     ):
+        """
+        Summarize a list of files hierarchically. Meaning that for a text divided into chunks we subsequently generate a summary for each chunk, and then generate a final summary based on the summaries of the chunks.
+        
+        Args:
+            paths (list[Path]): List of paths of files to summarize.
+            save_to (Path): Directory to save summaries. Defaults to './summaries'.
+            chunk_lines (int): Number of lines per chunk. Defaults to 100.
+            seed (int): Random seed for reproducibility. Defaults to 42.
+            num_predict (int): Number of tokens to predict. Defaults to 2048.
+            max_words_summary (int): Maximum number of words per summary block and the final summary. Defaults to 500.
+            use_response_template (bool): Use a response template. Defaults to False.
+        
+        Returns:
+            None
+        """
         os.makedirs(save_to, exist_ok=True)
 
         def _call_model(prompt: str):
@@ -289,10 +317,10 @@ TEXT:
 
         Args:
             paths (list[Path]): List of paths to files to summarize.
-            save_to (Path, optional): Directory to save summaries. Defaults to './example'.
-            seed (int, optional): Random seed for reproducibility. Defaults to 42.
-            checkpoint (int, optional): Number of files to process before saving a checkpoint. Defaults to 10.
-            skip (bool, optional): Skip files that already have summaries. Defaults to True. Else, add index to file name.
+            save_to (Path): Directory to save summaries. Defaults to './example'.
+            seed (int): Random seed for reproducibility. Defaults to 42.
+            checkpoint (int): Number of files to process before saving a checkpoint. Defaults to 10.
+            skip (bool): Skip files that already have summaries. Defaults to True. Else, add index to file name.
 
         Returns:
             None
@@ -372,7 +400,28 @@ TEXT:
 
         os.system(f'ollama stop {self.model}')
 
-    def multi_turn(self, paths, save_to='./convos', bar=None, n_turns_range=(2,5), seed=random.randint(0, 1000), prob_chance_new_context=0.3):
+    def multi_turn(self,
+        paths: list[Path],
+        save_to: Path='./convos',
+        bar: tqdm=None,
+        n_turns_range: tuple[int,int]=(2,5),
+        seed: int=random.randint(0, 1000),
+        prob_chance_new_context: float=0.3):
+        """
+        Generate multi turn question answer pairs from files.
+
+        Args:
+            paths (list[Path]): List of paths to files to summarize.
+            save_to (Path): Directory to save summaries. Defaults to './example'.
+            bar (tqdm.tqdm): tqdm bar to track progress. Defaults to None.
+            n_turns_range (tuple[int,int]): Range of number of turns to generate. Defaults to (2, 5).
+            seed (int): Random seed for reproducibility. Defaults to 42.
+            prob_chance_new_context (float): Probability of starting a new context for the question answer pairs. Defaults to 0.3.
+
+        Returns:
+            None
+        """
+    
         sys_prompt = \
     """You are an AI assistant engaged in a multi-turn question answering conversation.  
 
