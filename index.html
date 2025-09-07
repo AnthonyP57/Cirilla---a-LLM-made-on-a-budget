@@ -507,14 +507,14 @@ searchInput.addEventListener('input', function() {
                         </table>
 
                     <p><strong>Example:</strong></p>
-                    <pre><code class="language-python"><pre><code class="language-python">>>> import os
->>> import random
+                    <pre><code class="language-python"><pre><code class="language-python">import os
+import random
 
 class Response(BaseModel):
     question: str = Field(description="What question is appropriate to this text?")
     answer: str = Field(description="Answer to the question")
 
->>> sys_prompt = """
+sys_prompt = """
 You are an expert dataset annotator for instruction-tuning large language models. 
 Your task is to create high-quality question-answer pairs from provided texts 
 for training instruct models.
@@ -534,23 +534,23 @@ Guidelines:
 - Return the output strictly as a JSON with two fields: "question" and "answer".
 """
 
->>> folder = "./witcher_fandom"
->>> paths = os.listdir(folder)
->>> paths = [os.path.join(folder, p) for p in paths]
->>> print(f"{len(paths)} paths found")
+folder = "./witcher_fandom"
+paths = os.listdir(folder)
+paths = [os.path.join(folder, p) for p in paths]
+print(f"{len(paths)} paths found")
 
->>> for _ in range(3):
-...     dual = OllamaCurate(
-...         "qwen3:8b",
-...         sys_prompt,
-...         Response
-...     )
-...     dual(
-...         paths,
-...         save_to="./witcher_synthetic_instruct/qwen3:8b",
-...         skip=False,
-...         seed=random.randint(0, 1000)
-...     )</code></pre></code></pre>
+for _ in range(3):
+        dual = OllamaCurate(
+            model="qwen3:8b",
+            system_prompt=sys_prompt,
+            response_template=Response
+        )
+        dual(
+            paths,
+            save_to="./witcher_synthetic_instruct/qwen3:8b",
+            skip=False,
+            seed=random.randint(0, 1000)
+        )</code></pre></code></pre>
 
                 <p><strong>Example created output file: <code class="language-bash">./witcher_synthetic_instruct/qwen3:8b/Deadly Plot.json</code></strong></p>
 <pre><code class="language-json">{
@@ -562,6 +562,44 @@ Guidelines:
 
 
                 </div>
+                <div class="code-label" style="margin-top: 50px;">single_pass_summary(paths, save_to, seed, num_predict, use_response_template) → None</div>
+        
+                <div class="indented">
+                <p>Create a simple summary of a text</p>
+                
+                        <table>
+                        <tr><th>Argument</th><th>Type</th><th>Description</th></tr>
+                        <tr><td><code>paths</code></td><td>list[Path]</td><td>paths to .txt files containing texts to summarize</td></tr>
+                        <tr><td><code>save_to</code></td><td>Path</td><td>folder to save generated question answer pairs to</td></tr>
+                        <tr><td><code>seed</code></td><td>int</td><td>seed for the ollama model</td></tr>
+                        <tr><td><code>num_predict</code></td><td>int</td><td>maximum number of tokens the ollama model can generate</td></tr>
+                        <tr><td><code>use_response_template</code></td><td>bool</td><td>whether to use a response template, that is set when initialing the <code>OllamaCurate</code> class</td></tr>
+                        </table>
+
+                    <p><strong>Example:</strong></p>
+                    <pre><code class="language-python"><pre><code class="language-python">import os
+import random
+from pydantic import BaseModel, Field
+
+class Response(BaseModel):
+    summary: str = Field(description="Final summary of the entire text. Pure summary only,
+    no introduction or reasoning.")
+
+paths = os.listdir("./witcher_fandom")
+paths = [os.path.join("./witcher_fandom", p) for p in paths]
+
+print(f"{len(paths)} paths found")
+
+for m in ["granite3.1-moe:3b"]:
+    model = OllamaCurate(model=m, system_prompt="", response_template=Response)
+    model.single_pass_summary(
+        paths,
+        save_to=f"./witcher_synth_summaries/{m}",
+        seed=random.randint(0, 1000),
+        num_predict=4096,
+        use_response_template=True,
+    )</code></pre></code></pre>
+
             </div>
         </div>
 
