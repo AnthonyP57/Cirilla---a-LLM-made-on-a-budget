@@ -3,8 +3,10 @@ import os
 import re
 import json
 import numpy as np
+from pathlib import Path
+from typing import Union
 
-def rm_duplicate_instructs(main_dir, save_to):
+def rm_duplicate_instructs(main_dir: Union[Path, list[Path]], save_to: Path):
     files = []
 
     for main_path, subfolders, _files in os.walk(main_dir):
