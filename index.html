@@ -249,7 +249,7 @@
         </div>
         <div class="category-items" id="model-items">
             <a href="#OllamaCurate">OllamaCurate</a>
-            <a href="#backward">cirilla.model.backward</a>
+            <a href="#scrape_fandom">scrape_fandom</a>
         </div>
     </div>
 
@@ -426,53 +426,7 @@ searchInput.addEventListener('input', function() {
     <div class="docs-section">
     <h2>Documentation</h2>
 
-        <div class="function-doc" id="forward">
-            <h3>cirilla.model.forward</h3>
-            <div class="function-signature">forward(input_ids: torch.Tensor, attention_mask: torch.Tensor = None) → torch.Tensor</div>
-            <p>Runs a forward pass through the Cirilla model.</p>
-
-            <table>
-                <tr><th>Argument</th><th>Type</th><th>Description</th></tr>
-                <tr><td><code>input_ids</code></td><td>torch.Tensor</td><td>Tokenized input sequence of shape <code>(batch_size, seq_len)</code>.</td></tr>
-                <tr><td><code>attention_mask</code></td><td>torch.Tensor, optional</td><td>Mask tensor with 1 for tokens to attend to and 0 otherwise.</td></tr>
-            </table>
-
-            <p><strong>Returns:</strong></p>
-            <table>
-                <tr><th>Type</th><th>Description</th></tr>
-                <tr><td>torch.Tensor</td><td>Output logits of shape <code>(batch_size, seq_len, vocab_size)</code>.</td></tr>
-            </table>
-
-            <p><strong>Example:</strong></p>
-            <pre><code class="language-python">>>> from cirilla_model import Cirilla
->>> import torch
->>> model = Cirilla(vocab_size=50000, hidden_dim=512)
->>> input_ids = torch.randint(0, 50000, (2, 16))
->>> output = model.forward(input_ids)
->>> output.shape
-    torch.Size([2, 16, 50000])</code></pre>
-        </div>
-
         <hr class="doc-divider" />
-
-        <div class="function-doc" id="generate">
-            <h3>cirilla.generate</h3>
-            <div class="function-signature">generate(input_ids: torch.Tensor, max_length: int = 50, temperature: float = 1.0) → torch.Tensor</div>
-            <p>Generates text autoregressively from a given prompt.</p>
-
-            <table>
-                <tr><th>Argument</th><th>Type</th><th>Description</th></tr>
-                <tr><td><code>input_ids</code></td><td>torch.Tensor</td><td>Prompt tokens of shape <code>(batch_size, seq_len)</code>.</td></tr>
-                <tr><td><code>max_length</code></td><td>int, optional</td><td>Maximum length of generated sequence. Default: 50.</td></tr>
-                <tr><td><code>temperature</code></td><td>float, optional</td><td>Sampling temperature for randomness. Default: 1.0.</td></tr>
-            </table>
-
-            <p><strong>Example:</strong></p>
-            <pre><code class="language-python">>>> prompt = torch.tensor([[101, 42, 1337]])  # toy prompt
->>> generated = model.generate(prompt, max_length=10, temperature=0.8)
->>> generated.shape
-    torch.Size([1, 10])</code></pre>
-        </div>
 
         <div class="function-doc" id="OllamaCurate">
         <h3>OllamaCurate</h3>
@@ -548,8 +502,9 @@ for _ in range(3):
         dual(
             paths,
             save_to="./witcher_synthetic_instruct/qwen3:8b",
+            seed=random.randint(0, 1000),
+            checkpoint=10
             skip=False,
-            seed=random.randint(0, 1000)
         )</code></pre></code></pre>
 
                 <p><strong>Example created output file: <code class="language-bash">./witcher_synthetic_instruct/qwen3:8b/Deadly Plot.json</code></strong></p>
@@ -641,10 +596,14 @@ for m in ['llama3.2:3b', 'llama3.1:8b', 'qwen3:8b']:
                         response_template=Response
                         )
     
-    model.dynamic_hierarchical_summary(paths, save_to=f'./synth_sumarries/witcher_texts/{m}',
-                                        seed=random.randint(0, 1000),
-                                        use_response_template=True
-                                        )</code></pre></code></pre>
+    model.dynamic_hierarchical_summary(paths,
+                                    save_to=f'./synth_sumarries/witcher_texts/{m}',
+                                    chunk_lines=100,
+                                    seed=random.randint(0, 1000),
+                                    num_predict=2048,
+                                    max_words_summary=500,
+                                    use_response_template=True
+                                    )</code></pre></code></pre>
 
             </div>
 
@@ -680,8 +639,10 @@ for model in ['qwen3:8b', 'phi4', 'llama3.1:8b']:
 
     for _ in range(3):
         ol = OllamaCurate(model, "", Response)
-        ol.multi_turn(paths, save_to=f'./synth_multi_round/{model}',
+        ol.multi_turn(paths,
+        save_to=f'./synth_multi_round/{model}',
         bar=bar,
+        n_turns_range=(2, 5),
         seed=random.randint(0, 1000),
         prob_chance_new_context=0.3)</code></pre></code></pre>
 
@@ -691,6 +652,66 @@ for model in ['qwen3:8b', 'phi4', 'llama3.1:8b']:
 
     </div>
 
+<div class="function-doc" id="scrape_fandom">
+        <h3>scrape_fandom</h3>
+        <div class="code-label">func cirilla.synth_data.scrape_fandom(in_path, out_path, instruct_path, n_workers, wiki, lang) → None</div>
+
+            <div class="indented">
+                <p>scrape a given fandom wiki. Use huggingface's span maker (Named Entity Recognition) to search for new pages to scrape</p>
+
+                <table style="margin-bottom: 50px;">
+                <tr><th>Argument</th><th>Type</th><th>Description</th></tr>
+                <tr><td><code>in_path</code></td><td>Path</td><td>path to a folder with <code>.json</code> files containing lists with key words to search for first (so-called seeds)</td></tr>
+                <tr><td><code>out_path</code></td><td>Path</td><td>path to save the scraped texts to</td></tr>
+                <tr><td><code>instruct_path</code></td><td>Path</td><td>path to save the scraped instructions to</td></tr>
+                <tr><td><code>n_workers</code></td><td>int</td><td>how many async wokers to use to fetch the fandom pages</td></tr>
+                <tr><td><code>wiki</code></td><td>str</td><td>what fandom wiki to scrape</td></tr>
+                <tr><td><code>lang</code></td><td>str</td><td>what language to use for the fandom</td></tr>
+                </table>
+                
+                <p><strong>Example:</strong></p>
+                <pre><code class="language-python"><pre><code class="language-python">in_path = Path("./witcher_json")
+out_path = Path("./async_fandom")
+instruct_path = Path("./async_fandom_instruct")
+
+scrape_fandom(in_path,
+            out_path,
+            instruct_path,
+            n_workers = 50,
+            wiki = "Witcher",
+            lang = "en"
+            )</code></pre></code></pre>
+
+<p><strong>Example input file: <code class="language-bash">./witcher_json/witcher_1.json</code></strong></p>
+<pre><code class="language-json">[
+    "Geralt of Rivia", "Triss Merigold", "Vesemir", "Leo", "Lambert", 
+    "Eskel", "Alvin", "Shani", "Zoltan Chivay", "Dandelion (Jaskier)", 
+    "King Foltest", "Adda the White", ...
+]
+</code></pre>
+
+<p><strong>Example created output file: <code class="language-bash">./async_fandom/Geralt of Rivia.txt</code></strong></p>
+<pre><code class="language-json">Geralt of Rivia
+Sub-Pages:
+Main
+Biography
+Geralt was born as the son of the sorceress Visenna and presumably, the warrior Korin. Shortly after his
+birth, his mother left him with the School of the Wolf at the stronghold of Kaer Morhen. There, Geralt
+was made and trained to become a Witcher.
+As a child, he ...
+</code></pre>
+
+<p><strong>Example created output file: <code class="language-bash">./async_fandom_instruct/Geralt of Rivia.txt</code></strong></p>
+<pre><code class="language-json">{
+  "Who is Geralt of Rivia?": "Geralt of Rivia is a witcher and the protagonist from The Witcher ...",
+  "What is Geralt's nickname?": "Geralt has a number of nicknames, with the more well known ones ...",
+  "Who trained Geralt to become a Witcher?": "Geralt was trained by his mentor Vesemir, who he ...",
+  "What is Geralt's profession?": "Geralt is a monster slayer for hire. He travels the world on ...",
+  "What is the Trial of The Grasses?": "The Trial of The Grasses was a painful process that ..."
+}
+</code></pre>
+
+</div>
 </main>
 
 <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.js"></script>
