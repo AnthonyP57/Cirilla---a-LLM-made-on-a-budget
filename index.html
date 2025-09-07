@@ -503,7 +503,7 @@ searchInput.addEventListener('input', function() {
                         <tr><td><code>save_to</code></td><td>Path</td><td>folder to save generated question answer pairs to</td></tr>
                         <tr><td><code>seed</code></td><td>int</td><td>seed for the ollama model</td></tr>
                         <tr><td><code>checkpoint</code></td><td>int</td><td>save the generated question answer pairs to the <code>save_to folder</code> after <code>checkpoint</code> iterations</td></tr>
-                        <tr><td><code>skip</code></td><td>bool</td><td>if <code>True</code>, skip the already existing question answer pairs, else save as <code>existing_name_{i}</code> where <code>i</code> is the number of existing question answer pairs</td></tr>
+                        <tr><td><code>skip</code></td><td>bool</td><td>if <code>True</code>, skip the already existing question answer pairs, else save as <code>existing_name_{i}</code> where <code>i</code> is the number of already existing files of the same name</td></tr>
                         </table>
 
                     <p><strong>Example:</strong></p>
@@ -560,17 +560,17 @@ for _ in range(3):
 </code></pre>
                 <p>The output file's contents depend on whatever was present in the corresponding text file:<br><code class="language-bash">./witcher_fandom/Deadly Plot.txt</code></p>
 
-
                 </div>
+
                 <div class="code-label" style="margin-top: 50px;">single_pass_summary(paths, save_to, seed, num_predict, use_response_template) → None</div>
         
                 <div class="indented">
-                <p>Create a simple summary of a text</p>
+                <p>For provided <code>.txt</code> files create a simple summary of them</p>
                 
                         <table>
                         <tr><th>Argument</th><th>Type</th><th>Description</th></tr>
-                        <tr><td><code>paths</code></td><td>list[Path]</td><td>paths to .txt files containing texts to summarize</td></tr>
-                        <tr><td><code>save_to</code></td><td>Path</td><td>folder to save generated question answer pairs to</td></tr>
+                        <tr><td><code>paths</code></td><td>list[Path]</td><td>paths to <code>.txt</code> files containing texts to summarize</td></tr>
+                        <tr><td><code>save_to</code></td><td>Path</td><td>folder to save generated summaries to</td></tr>
                         <tr><td><code>seed</code></td><td>int</td><td>seed for the ollama model</td></tr>
                         <tr><td><code>num_predict</code></td><td>int</td><td>maximum number of tokens the ollama model can generate</td></tr>
                         <tr><td><code>use_response_template</code></td><td>bool</td><td>whether to use a response template, that is set when initialing the <code>OllamaCurate</code> class</td></tr>
@@ -601,8 +601,93 @@ for m in ["granite3.1-moe:3b"]:
     )</code></pre></code></pre>
 
             </div>
-        </div>
 
+                            <div class="code-label" style="margin-top: 50px;">dynamic_hierarchical_summary(paths, save_to, chunk_lines, seed, num_predict, max_words_summary, use_response_template) → None</div>
+        
+                <div class="indented">
+                <p>For provided <code>.txt</code> files create a hierarchical summary of them. Meaning that for a text divided into chunks we subsequently generate a summary for each chunk, and then generate a final summary based on the summaries of the chunks</p>
+                
+                        <table>
+                        <tr><th>Argument</th><th>Type</th><th>Description</th></tr>
+                        <tr><td><code>paths</code></td><td>list[Path]</td><td>paths to <code>.txt</code> files containing texts to summarize</td></tr>
+                        <tr><td><code>save_to</code></td><td>Path</td><td>folder to save generated summaries to</td></tr>
+                        <tr><td><code>chunk_lines</code></td><td>int</td><td>the number of lines by which to chunk the text e.g. for a text of 1000 lines and <code>chunk_lines=200</code> the text will be divided into 5 chunks of 200 lines each, all the chunks will get their own summary and based on them a final summary will be generated</td></tr>
+                        <tr><td><code>seed</code></td><td>int</td><td>seed for the ollama model</td></tr>
+                        <tr><td><code>num_predict</code></td><td>int</td><td>maximum number of tokens the ollama model can generate</td></tr>
+                        <tr><td><code>max_words_summary</code></td><td>int</td><td>maximum number of words ollama should target for the summary</td></tr>
+                        <tr><td><code>use_response_template</code></td><td>bool</td><td>whether to use a response template, that is set when initialing the <code>OllamaCurate</code> class</td></tr>
+                        </table>
+
+                    <p><strong>Example:</strong></p>
+                    <pre><code class="language-python"><pre><code class="language-python">import os
+from pydantic import BaseModel, Field
+import os
+import random
+
+class Response(BaseModel):
+    summary: str = Field(description="Summary of the text, without the thinking process and without any
+    introduction. Provide only pure summary, be expressive but stick to the maximum number of words
+    that were provided.")
+
+paths = os.listdir('./witcher_texts')
+paths = [os.path.join('./witcher_texts', p) for p in paths]
+
+print(f"{len(paths)} paths found")
+
+for m in ['llama3.2:3b', 'llama3.1:8b', 'qwen3:8b']:
+
+    model = OllamaCurate(model=m,
+                        system_prompt="",
+                        response_template=Response
+                        )
+    
+    model.dynamic_hierarchical_summary(paths, save_to=f'./synth_sumarries/witcher_texts/{m}',
+                                        seed=random.randint(0, 1000),
+                                        use_response_template=True
+                                        )</code></pre></code></pre>
+
+            </div>
+
+            <div class="code-label" style="margin-top: 50px;">multi_turn(paths, save_to, bar, n_turns_range, seed, prob_chance_new_context) → None</div>
+        
+                <div class="indented">
+                <p>Create synthetic multi turn instructions (question-answer pairs)</p>
+                
+                        <table>
+                        <tr><th>Argument</th><th>Type</th><th>Description</th></tr>
+                        <tr><td><code>paths</code></td><td>list[Path]</td><td>paths to .txt files containing texts to create multi turn question answer pairs</td></tr>
+                        <tr><td><code>save_to</code></td><td>Path</td><td>folder to save generated mult turn question answer pairs to</td></tr>
+                        <tr><td><code>bar</code></td><td>tqdm.tqdm</td><td>tqdm bar to track progress</td></tr>
+                        <tr><td><code>n_turns_range</code></td><td>tuple[int,int]</td><td>range of number of turns to generate, e.g. <code>(2, 4)</code> will generate question answer pairs with 2 to 4 turns (the actual number of turns will be randomly chosen from this range and consistent for all the files)</td></tr>
+                        <tr><td><code>seed</code></td><td>int</td><td>seed for the ollama model</td></tr>
+                        <tr><td><code>prob_chance_new_context</code></td><td>float</td><td>Probability of starting a new context for the question answer pairs e.g. with a given chance we can continue the multi turn conversation with a new context from another randomly chosen <code>.txt</code> file</td></tr>
+                        </table>
+
+                    <p><strong>Example:</strong></p>
+                    <pre><code class="language-python"><pre><code class="language-python">from pydantic import BaseModel, Field
+import os
+import random
+
+class Response(BaseModel):
+    question: str = Field(description="What question is appropriate to this text?")
+    answer: str = Field(description="Answer to the question")
+
+paths = os.listdir('./witcher_fandom')
+paths = [os.path.join('./witcher_fandom', p) for p in paths]
+
+bar = tqdm(total=3*3*len(paths))
+for model in ['qwen3:8b', 'phi4', 'llama3.1:8b']:
+
+    for _ in range(3):
+        ol = OllamaCurate(model, "", Response)
+        ol.multi_turn(paths, save_to=f'./synth_multi_round/{model}',
+        bar=bar,
+        seed=random.randint(0, 1000),
+        prob_chance_new_context=0.3)</code></pre></code></pre>
+
+            </div>
+
+        </div>
 
     </div>
 
