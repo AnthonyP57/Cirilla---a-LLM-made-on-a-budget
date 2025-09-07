@@ -228,7 +228,9 @@
         line-height: 1.4;              /* adjust if needed */
     }
 
-
+    a[href="#rm_duplicate_instructs"] {
+    color: #00698f;
+    }
 
 </style>
 </head>
@@ -250,6 +252,7 @@
         <div class="category-items" id="model-items">
             <a href="#OllamaCurate">OllamaCurate</a>
             <a href="#scrape_fandom">scrape_fandom</a>
+            <a href="#rm_duplicate_instructs">rm_duplicate_instructs</a>
         </div>
     </div>
 
@@ -449,7 +452,7 @@ searchInput.addEventListener('input', function() {
                 <div class="code-label">__call__(paths, save_to, seed, checkpoint, skip) → None</div>
         
                 <div class="indented">
-                <p>Create synthetic instructions (question-answer pairs)</p>
+                <p>Create synthetic instructions (question-answer pairs)<br>to see how to turn the instructions into a <code>.jsonl</code> file see the <a href="#rm_duplicate_instructs">rm_duplicate_instructs</a> function</p>
                 
                         <table>
                         <tr><th>Argument</th><th>Type</th><th>Description</th></tr>
@@ -652,7 +655,7 @@ for model in ['qwen3:8b', 'phi4', 'llama3.1:8b']:
 
     </div>
 
-<div class="function-doc" id="scrape_fandom">
+        <div class="function-doc" id="scrape_fandom">
         <h3>scrape_fandom</h3>
         <div class="code-label">func cirilla.synth_data.scrape_fandom(in_path, out_path, instruct_path, n_workers, wiki, lang) → None</div>
 
@@ -710,6 +713,52 @@ As a child, he ...
   "What is the Trial of The Grasses?": "The Trial of The Grasses was a painful process that ..."
 }
 </code></pre>
+
+            </div>
+        </div>
+
+        <div class="function-doc" id="rm_duplicate_instructs">
+        <h3>rm_duplicate_instructs</h3>
+        <div class="code-label">func cirilla.synth_data.rm_duplicate_instructs(main_dir, save_to) → None</div>
+
+            <div class="indented">
+                <p>remove duplicate synthetic instructions</p>
+
+                <table style="margin-bottom: 50px;">
+                <tr><th>Argument</th><th>Type</th><th>Description</th></tr>
+                <tr><td><code>main_dir</code></td><td>Path</td><td>path to the directory containing the synthetic instructions</td></tr>
+                <tr><td><code>out_path</code></td><td>Path</td><td>path to save the cleaned instructions to</td></tr>
+                </table>
+                
+                <p><strong>Example:</strong></p>
+                <pre><code class="language-python"><pre><code class="language-python">main_dir = './witcher_synthetic_instruct'
+save_to = './witcher_synthetic_instruct.jsonl'
+
+rm_duplicate_instructs(main_dir, save_to)</code></pre></code></pre>
+
+<p><strong>Example input file: <code class="language-bash">./witcher_synthetic_instruct/qwen3:8b/Deadly Plot.json</code></strong></p>
+<pre><code class="language-json">{
+    "question": "What is the objective of the A Deadly Plot quest in The Witcher 3: Wild Hunt?",
+    "answer": "The objective of the A Deadly Plot quest is to help Dijkstra ..."
+}</code></pre>
+
+<p><strong>Example input file: <code class="language-bash">./witcher_synthetic_instruct/qwen3:8b/Deadly Plot_1.json</code></strong></p>
+<pre><code class="language-json">{
+    "question": "What is the main objective of the A Deadly Plot quest in The Witcher 3: Wild Hunt?",
+    "answer": "The objective of the A Deadly Plot quest is to help Dijkstra ..."
+}</code></pre>
+
+Since the second instruction is nearly identical, it will be deleted in the final <code>.jsonl</code> file.
+
+<p><strong>Example created output file (obviously the actual <code>.jsonl</code> file is saves in single lines): <code class="language-bash">./witcher_synthetic_instruct.jsonl</code></strong></p>
+<pre><code class="language-json">{"subject": "Silver sword", "text": [
+    {"role": "user", "content": "What material are silver swords made from in The Witcher?"},
+    {"role": "assistant", "content": "Meteoric iron coated with silver and inscribed with magical runes"}
+    ], "data type": "conv", "model": "llama3.1:8b"}
+
+...</code></pre>
+            </div>
+        </div>
 
 </div>
 </main>
