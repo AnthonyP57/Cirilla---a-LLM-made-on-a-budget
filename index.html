@@ -232,6 +232,10 @@
     color: #00698f;
     }
 
+    a[href="https://github.com/open-thought/reasoning-gym"] {
+    color: #00698f;
+    }
+
 </style>
 </head>
 <body>
@@ -253,6 +257,7 @@
             <a href="#OllamaCurate">OllamaCurate</a>
             <a href="#scrape_fandom">scrape_fandom</a>
             <a href="#rm_duplicate_instructs">rm_duplicate_instructs</a>
+            <a href="#get_synth_reasoning_dataset">get_synth_reasoning_dataset</a>
         </div>
     </div>
 
@@ -750,12 +755,47 @@ rm_duplicate_instructs(main_dir, save_to)</code></pre></code></pre>
 
 Since the second instruction is nearly identical, it will be deleted in the final <code>.jsonl</code> file.
 
-<p><strong>Example created output file (obviously the actual <code>.jsonl</code> file is saves in single lines): <code class="language-bash">./witcher_synthetic_instruct.jsonl</code></strong></p>
+<p><strong>Example created output file (obviously the actual <code>.jsonl</code> file is saved in single lines): <code class="language-bash">./witcher_synthetic_instruct.jsonl</code></strong></p>
 <pre><code class="language-json">{"subject": "Silver sword", "text": [
     {"role": "user", "content": "What material are silver swords made from in The Witcher?"},
     {"role": "assistant", "content": "Meteoric iron coated with silver and inscribed with magical runes"}
     ], "data type": "conv", "model": "llama3.1:8b"}
 
+...</code></pre>
+            </div>
+        </div>
+
+        <div class="function-doc" id="get_synth_reasoning_dataset">
+        <h3>get_synth_reasoning_dataset</h3>
+        <div class="code-label">func cirilla.synth_data.get_synth_reasoning_dataset(out_path, n_samples, specs) → None</div>
+
+            <div class="indented">
+                <p>create synthetic reasoning dataset with <a href="https://github.com/open-thought/reasoning-gym">reasoning_gym</a></p>
+
+                <table style="margin-bottom: 50px;">
+                <tr><th>Argument</th><th>Type</th><th>Description</th></tr>
+                <tr><td><code>out_path</code></td><td>Path</td><td>path to save the synthetic reasoning dataset to</td></tr>
+                <tr><td><code>n_samples</code></td><td>int</td><td>How many samples of the synthetic reasoning dataset to create (each sample contains 100 data points)</td></tr>
+                <tr><td><code>specs</code></td><td>list[reasoning_gym.composite.DataSpec]</td><td>specs for creating the synthetic reasoning dataset</td></tr>
+                </table>
+                
+                <p><strong>Example:</strong></p>
+                <pre><code class="language-python"><pre><code class="language-python">out_path = './reason_gym_synth.jsonl'
+n_samples = 400 # will contain 40'000 data points
+
+get_synth_resoning_dataset(out_path, n_samples)</code></pre></code></pre>
+
+<p><strong>Example output file: <code class="language-bash">./reason_gym_synth.jsonl</code> (obviously the actual <code>.jsonl</code> file is saved in single lines)</strong></p>
+<pre><code class="language-json">{"subject": "simple_equations", "text": [
+    {"role": "user", "text": "Solve for g: 65*g = 3185"},
+    {"role": "assistant", "text": "49"}],
+    "data type": "conv"}
+{"subject": "needle_haystack", "text": [
+    {"role": "user", "text": "Ismaeel worships lions. Yann embraces travel blogging. Malakhy
+    scorns historical documentaries. Kabeer cherishes sketching. \nWho scorns historical
+    documentaries? Reply only with a name."},
+    {"role": "assistant", "text": "Malakhy"}],
+    "data type": "conv"}
 ...</code></pre>
             </div>
         </div>
