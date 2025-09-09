@@ -248,6 +248,10 @@
     color: #00698f;
     }
 
+    a[href="#multi_turn_gather"] {
+    color: #00698f;
+    }
+
 </style>
 </head>
 <body>
@@ -270,6 +274,8 @@
             <a href="#scrape_fandom">scrape_fandom</a>
             <a href="#rm_duplicate_instructs">rm_duplicate_instructs</a>
             <a href="#get_synth_reasoning_dataset">get_synth_reasoning_dataset</a>
+            <a href="#vllm_multi_turn">vllm_multi_turn</a>
+            <a href="#multi_turn_gather">multi_turn_gather</a>
         </div>
     </div>
 
@@ -817,7 +823,7 @@ get_synth_resoning_dataset(out_path, n_samples)</code></pre></code></pre>
         <div class="code-label">func cirilla.synth_data.vllm_multi_turn(paths, save_to, batch_size, system_prompt, n_turns, template, model, prob_chance_new_context) → None</div>
 
             <div class="indented">
-                <p>create synthetic multi turn conversations about given topics with <a href="https://github.com/vllm-project/vllm">vllm</a></p>
+                <p>create synthetic multi turn conversations about given topics with <a href="https://github.com/vllm-project/vllm">vllm</a><br>to see how to turn the instructions into a <code>.jsonl</code> file see the <a href="#multi_turn_gather">multi_turn_gather</a> function</p>
 
                 <table style="margin-bottom: 50px;">
                 <tr><th>Argument</th><th>Type</th><th>Description</th></tr>
@@ -844,9 +850,64 @@ for model in ["unsloth/granite-3.2-2b-instruct-unsloth-bnb-4bit"]:
         for _ in range(1):
         
             vllm_multi_turn(sub_paths,
-            save_to=f'./synth_multi_round/async/{model.split("/")[1]}/{paths_[i].split("/")[-1]}',
+            save_to=f'./synth_multi_round/{model.split("/")[1]}/{paths_[i].split("/")[-1]}',
             model=model)</code></pre></code></pre>
         <p>Where the summaries may come from <a href="#OllamaCurate">OllamaCurate.single_pass_summary</a></p>
+
+        <p><strong>Example created output file <code class="language-bash">./synth_multi_round/granite-3.2-2b-.../granite3.1-moe:3b/A Book of Tales.json</code>:</strong></p>
+<pre><code class="language-json">[
+  {
+    "question": "Which specific adventure or mystery introduced in The Book of Tales ... ?",
+    "answer": "The given text does not specify a single adventure where the ...",
+    "context": "A Book of Tales"
+  },
+  {
+    "question": "Which three new playable races \u2013 Gnomes, ... ?",
+    "answer": "Gnomes are native to the mountainous region of Mount Carbon in Kovir ...",
+    "context": "A Book of Tales"
+  },
+  {
+    "question": "What central role does Radko hold in The Witcher ... ?",
+    "answer": "Radko, a soldier under the Bloody Baron's command ...",
+    "context": "Radko"
+  }
+]</code></pre>
+            </div>
+        </div>
+
+        <div class="function-doc" id="multi_turn_gather">
+        <h3>multi_turn_gather</h3>
+        <div class="code-label">func cirilla.synth_data.multi_turn_gather(input_path, save_to) → None</div>
+
+            <div class="indented">
+                <p>gather multi turn conversations into a <code>.jsonl</code> file</p>
+
+                <table style="margin-bottom: 50px;">
+                <tr><th>Argument</th><th>Type</th><th>Description</th></tr>
+                <tr><td><code>input_path</code></td><td>Path</td><td>path to a folder with <code>.jsonl</code> files containing multi turn conversations, they can be nested</td></tr>
+                <tr><td><code>save_to</code></td><td>Path</td><td>path to save the gathered conversations to</td></tr>
+                </table>
+                
+                <p><strong>Example:</strong></p>
+                <pre><code class="language-python"><pre><code class="language-python">inp = './synth_multi_round'
+outp = './multi_round.jsonl'
+
+multi_turn_gather(inp, outp)</code></pre></code></pre>
+        <p><strong>Example created output file <code class="language-bash">./multi_round.jsonl</code> (obviously the actual <code>.jsonl</code> file is saved in single lines):</strong></p>
+<pre><code class="language-json">{
+    "subject": "A Little Sacrifice", "text":
+    [
+    {"role": "user", "content": "What does Sh'eenaz do to help resolve the ... ?"},
+    {"role": "assistant", "content": "Sh'eenaz agrees to give up her tail for ..."},
+    {"role": "user", "content": "What does Sh'eenaz do to ... ?"},
+    {"role": "assistant", "content": "Sh'eenaz ..."},
+    {"role": "user", "content": "What is the nature of Geralt's ... ?"},
+    {"role": "assistant", "content": "Geralt ..."}
+    ],
+    "data type": "conv", "source": "fandom",
+    "metadata": {"contexts": ["A Little Sacrifice", "A Little Sacrifice", "A Little Sacrifice"]}
+}
+</code></pre>
             </div>
         </div>
 
