@@ -2,6 +2,7 @@ from reasoning_gym.composite import DatasetSpec
 import reasoning_gym
 import json
 import random
+from pathlib import Path
 
 specs = [
     DatasetSpec(name='aiw', weight=2, config={"max_entities":10}),
@@ -26,8 +27,19 @@ specs = [
     DatasetSpec(name='syllogism', weight=2, config={}),
 ]
 
-def get_synth_resoning_dataset(out_path, n_samples, specs=specs):
+def get_synth_reasoning_dataset(out_path: Path, n_samples: int, specs:list[DatasetSpec]=specs):
+    """
+    create synthetic reasoning dataset with reasoning_gym
 
+    Args:
+        out_path (Path): path to save the synthetic reasoning dataset to
+        n_samples (int): How many samples of the synthetic reasoning dataset to create (each sample contains 100 data points)
+        specs (list[DatasetSpec]): specs for creating the synthetic reasoning dataset. Defaults to specs.
+    
+    Returns:
+        None
+    """
+    
     n_failed=0
     for seed in random.sample(range(1_000_000), n_samples):
         data = reasoning_gym.create_dataset('composite', size=100, seed=seed, datasets=specs)

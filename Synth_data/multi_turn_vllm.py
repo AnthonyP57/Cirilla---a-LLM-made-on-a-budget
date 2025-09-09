@@ -7,11 +7,12 @@ import json
 import os
 import copy
 import re
-from typing import Optional, Dict, Any
+from typing import Optional, Any
 import vllm
 from transformers import AutoTokenizer
 from rich.progress import Progress, TextColumn, BarColumn, TimeElapsedColumn, ProgressColumn
 from datetime import timedelta
+from pathlib import Path
 
 llm = None
 llm_model_name = None
@@ -157,7 +158,7 @@ class StepEtaColumn(ProgressColumn):
 
         return TextColumn(self.cached_eta[task.id]).render(task)
 
-def best_effort_parse(text: str, schema: Optional[BaseModel] = None) -> Dict[str, Any]:
+def best_effort_parse(text: str, schema: Optional[BaseModel] = None) -> dict[str, Any]:
     text = text.strip()
 
     try:
@@ -191,7 +192,30 @@ def best_effort_parse(text: str, schema: Optional[BaseModel] = None) -> Dict[str
 
     return {"question": "", "answer": ""}
 
-def multi_turn(paths, save_to='./convos', batch_size=256, system_prompt=sys_prompt, n_turns=5, template=Response, model="unsloth/Meta-Llama-3.1-8B-Instruct", prob_chance_new_context=0.3, vllm_port=8000, timeout=45):
+def vllm_multi_turn(paths:list[Path],
+                    save_to:Path='./convos',
+                    batch_size:int=256,
+                    system_prompt:str=sys_prompt,
+                    n_turns:int=5,
+                    template:BaseModel=Response,
+                    model:str="unsloth/Meta-Llama-3.1-8B-Instruct",
+                    prob_chance_new_context:float=0.3):
+    """
+    Generate multi-turn conversations
+    
+    Args:
+        paths (list[Path]): paths to .txt files containing texts to create multi turn question answer pairs
+        save_to (Path): folder to save generated multi turn question answer pairs to. Defaults to './convos'.
+        batch_size (int): batch size for the model. Defaults to 256.
+        system_prompt (str): system prompt for the model. Defaults to sys_prompt.
+        n_turns (int): number of turns to generate. Defaults to 5.
+        template (BaseModel): template for the model. Defaults to Response.
+        model (str): model to use. Defaults to "unsloth/Meta-Llama-3.1-8B-Instruct".
+        prob_chance_new_context (float): probability of starting a new context for the question answer pairs. Defaults to 0.3.
+    
+    Returns:
+        None
+    """
 
     global llm, llm_model_name
 
@@ -318,26 +342,3 @@ def multi_turn(paths, save_to='./convos', batch_size=256, system_prompt=sys_prom
 
             with open(f'{path_}.json', 'w') as f:
                 json.dump(q, f, indent=2)
-
-if __name__ == "__main__":
-
-    # paths_ = ['./training_datasets/raw/synth_sumarries/fandom/qwen3:8b',
-    #          './training_datasets/raw/synth_sumarries/fandom/mistral-small3.2:24b',
-    #          './training_datasets/raw/synth_sumarries/fandom/llama3.1:8b',
-    #          './training_datasets/raw/synth_sumarries/fandom/llama3.2:3b']
-
-    paths_ = ['./training_datasets/raw/async_summaries/granite3.1-moe:3b',
-              './training_datasets/raw/async_summaries/llama3.1:8b',
-              './training_datasets/raw/async_summaries/llama3.2:3b',
-              './training_datasets/raw/async_summaries/qwen3:8b'
-
-    ]
-
-    paths = [[os.path.join(p, f) for f in os.listdir(p)] for p in paths_]
-
-    for model in ["unsloth/Qwen2.5-7B-Instruct-unsloth-bnb-4bit"]: # "unsloth/granite-3.2-2b-instruct-unsloth-bnb-4bit", 
-        for i, mps in enumerate(paths):
-            for _ in range(1):
-            
-                # multi_turn(mps, save_to=f'./training_datasets/raw/synth_multi_round/{model.split("/")[1]}/{paths_[i].split("/")[-1]}', model=model)
-                multi_turn(mps, save_to=f'./training_datasets/raw/synth_multi_round/async/{model.split("/")[1]}/{paths_[i].split("/")[-1]}', model=model)

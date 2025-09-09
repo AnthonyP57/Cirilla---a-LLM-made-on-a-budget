@@ -1,8 +1,19 @@
 import os
 import json
 import re
+from pathlib import Path
 
-def multiround_instructions_into_conv(input_path, out_path):
+def multi_turn_gather(input_path:Path, save_to:Path):
+    """
+    create synthetic multi turn conversations about given topics with vllm
+    
+    Args:
+        input_path (Path): path to the folder containing the .json files, they can be nested
+        save_to (Path): path to save the synthetic multi turn dataset to
+    
+    Returns:
+        None
+    """
     files = []
     for main_path, subfolders, _files in os.walk(input_path):
         for _file in _files:
@@ -17,7 +28,7 @@ def multiround_instructions_into_conv(input_path, out_path):
             if not isinstance(qa_list, list):
                 qa_list = [qa_list]
             for qa in qa_list:
-                out_data.append([{'role':'user', 'content': qa['question']}, {'role': 'assistant', 'content': qa['answer']}])
+                out_data.extend([{'role':'user', 'content': qa['question']}, {'role': 'assistant', 'content': qa['answer']}])
                 contexts.append(qa['context'])
             out = {'subject': re.sub(r'_\d+$', '', file.split('/')[-1].split('.')[0]),
                 'text': out_data,
@@ -25,7 +36,7 @@ def multiround_instructions_into_conv(input_path, out_path):
                 'source': 'fandom',
                 'metadata': {'contexts': contexts}}
                 
-            with open(out_path, 'a') as f:
+            with open(save_to, 'a') as f:
                 f.write(json.dumps(out) + '\n')
 
 if __name__ == "__main__":
@@ -33,4 +44,4 @@ if __name__ == "__main__":
     inp = './training_datasets/raw/synth_multi_round'
     outp = './training_datasets/domain_training/synth_multi_round.jsonl'
 
-    multiround_instructions_into_conv(inp, outp)
+    multi_turn_gather(inp, outp)
