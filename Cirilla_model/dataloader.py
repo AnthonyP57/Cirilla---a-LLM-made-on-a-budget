@@ -12,13 +12,25 @@ class JSONLDataset(IterableDataset):
                  shuffle_path=False,
                  device:torch.device='cuda',
                  tokenizer:CirillaTokenizer=None,
-                 max_len:int=32):
+                 max_len:int=32,
+                 pad_token:str='<pad>',
+                 eos_token:str='<eos>',
+                 sos_token:str='<sos>',
+                 user_token:str='<|user|>',):
         super().__init__()
         self.path = path
         self.shuffle_path = shuffle_path
         self.device = device
         self.tokenizer = tokenizer
         self.max_len = max_len
+
+        self.pad_token = pad_token
+        self.eos_token = eos_token
+        self.sos_token = sos_token
+        self.user_token = user_token
+
+        self.user_token_id = tokenizer.convert_tokens_to_ids(self.user_token)
+        self.pad_token_id = tokenizer.convert_tokens_to_ids(self.pad_token)
 
         if isinstance(self.path, list):
             self.path = tuple(self.path)
@@ -57,20 +69,31 @@ class JSONLDataset(IterableDataset):
                     if line['data type'] == 'plain text':
 
                         if self.tokenizer is not None:
-                            tokenized_data =  self.tokenizer(line['text'], return_tensors='pt', padding='max_length', truncation=True, max_length=self.max_len)
+                            tokenized_data =  self.tokenizer(self.sos_token + line['text'] + self.eos_token, return_tensors='pt', padding='max_length',
+                                                             truncation=True, max_length=self.max_len+1)
+                            
                             tokens = tokenized_data['input_ids'].squeeze(0).to(self.device)
                             mask = tokenized_data['attention_mask'].squeeze(0).to(self.device)
-                            yield tokens, mask
+                            print(tokens.shape, mask.shape)
+                            yield tokens[:-1], tokens[1:], mask[:-1]
                         else:
                             yield line['text']
 
                     elif line['data type'] == 'conv':
 
                         if self.tokenizer is not None:
-                            tokenized_data =  self.tokenizer.apply_chat_template(line['text'], return_tensors='pt', padding='max_length', truncation=True, max_length=self.max_len)
-                            tokens = tokenized_data['input_ids'].squeeze(0).to(self.device)
-                            mask = tokenized_data['attention_mask'].squeeze(0).to(self.device)
-                            yield tokens, mask
+                            tokens =  self.tokenizer.apply_chat_template(line['text'], return_tensors='pt', padding='do_not_pad',
+                                                                                 truncation=True, max_length=self.max_len-1, add_generation_prompt=False)
+                            tokens = tokens.squeeze(0)
+                            mask = torch.zeros(self.max_len, dtype=torch.int64)
+                            mask[:tokens.shape[0]] = 1
+                            tokens = torch.concat(
+                                [tokens, torch.tensor([self.user_token_id]),] + \
+                                [torch.tensor([self.pad_token_id])] * (self.max_len - tokens.shape[0]))
+                            tokens = tokens.to(self.device)
+                            mask = mask.to(self.device)
+                            print(tokens.shape, mask.shape)
+                            yield tokens[:-1], tokens[1:], mask
                         else:
                             yield '\n'.join([l['content'] for l in line['text']])
 

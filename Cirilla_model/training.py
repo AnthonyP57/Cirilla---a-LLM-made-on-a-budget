@@ -51,6 +51,7 @@ class CirillaTrainer:
         self.model = model
         self.args = training_args
         self.optim = self._prepare_optimizer(**training_args.optim_kwargs)
+        self.criterion = nn.CrossEntropyLoss()
 
         self.n_checkpoints = 0
 
@@ -71,7 +72,7 @@ class CirillaTrainer:
         if skip_n_data_points is None:
             skip_n_data_points = 0
 
-        n_iter = 0
+        n_iter = -1
 
         if self.args.renew_training:
             if os.path.exists(os.path.join(self.args.local_checkpoint_folder, 'optimizer_states.pt')) or not self.args.stateful_optim:
@@ -94,21 +95,22 @@ class CirillaTrainer:
 
         self._set_prior_training_vars()
 
-        criterion = nn.CrossEntropyLoss()
+        if self.criterion is None:
+            self.criterion = nn.CrossEntropyLoss()
 
         for epoch in range(1, self.args.n_epoch + 1):
 
             for x, y in dataloader:
 
+                n_iter += 1
+
                 if n_iter * self.args.batch_size < skip_n_data_points:
                     skip_n_data_points += self.args.batch_size
                     continue
 
-                n_iter += 1
-
                 torch.compiler.cudagraph_mark_step_begin()
                 out = self.model.pred(x)
-                loss = criterion(out.view(-1, self.model.args.vocab_size), y.view(-1))
+                loss = self.criterion(out.view(-1, self.model.args.vocab_size), y.view(-1))
 
                 loss.backward()
 

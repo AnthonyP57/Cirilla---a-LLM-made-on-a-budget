@@ -6,7 +6,7 @@ from pathlib import Path
 from typing import Iterator
 
 SPECIAL_TOKENS = {'unk_token':'<unk>', 'pad_token':'<pad>', 'mask_token':'<mask>',
-                  'sos_token':'<sos>', 'eos_token':'<eos>', 'system_token':'<|system|>', 'assistant_token':'<|assistant|>', 'user_token':'<|user|>'}
+                  'bos_token':'<sos>', 'eos_token':'<eos>', 'system_token':'<|system|>', 'assistant_token':'<|assistant|>', 'user_token':'<|user|>'}
 
 class CirillaTokenizer:
     def __init__(self, path:Path=None, hub_url=None):
@@ -69,6 +69,9 @@ class CirillaTokenizer:
     
     def __call__(self, text, **kwargs):
         return self.tokenizer(text, **kwargs)
+    
+    def convert_tokens_to_ids(self, tokens):
+        return self.tokenizer.convert_tokens_to_ids(tokens)
         
 if __name__ == '__main__':
     # tokenizer = CirillaTokenizer(hub_url='AnthonyPa57/HF-torch-demo2')
