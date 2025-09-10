@@ -38,10 +38,3 @@ def multi_turn_gather(input_path:Path, save_to:Path):
                 
             with open(save_to, 'a') as f:
                 f.write(json.dumps(out) + '\n')
-
-if __name__ == "__main__":
-
-    inp = './training_datasets/raw/synth_multi_round'
-    outp = './training_datasets/domain_training/synth_multi_round.jsonl'
-
-    multi_turn_gather(inp, outp)

@@ -78,9 +78,3 @@ def rm_duplicate_instructs(main_dir: Union[Path, list[Path]], save_to: Path):
     with open(save_to, 'w') as f:
         for d in data_to_save:
             f.write(json.dumps(d) + '\n')
-
-if __name__ == '__main__':
-    main_dir = './training_datasets/raw/witcher_synthetic_instruct'
-    save_to = './training_datasets/domain_training/witcher_synthetic_instruct.jsonl'
-
-    rm_duplicate_instructs(main_dir, save_to)

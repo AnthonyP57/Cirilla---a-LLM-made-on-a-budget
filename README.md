@@ -71,16 +71,15 @@ Cirilla - a LLM made on a budget/
   │   ...
   │
   ├── Synth_data/
-  │   ├── fandom_create_instruct.py   # create the so-called instructions from fandom data
-  │   ├── fandom_scraper.py           # scrape the data based on the witcher_json/
-  │   ├── Ollama_create_instruct.py   # based on the fandom data create instructions with LLMs
-  │   ├── reason_gym_synthetic.py     # with reasoning gym create synthetic data
-  │   └── rm_duplicate_instruct.py    # remove duplicate instructions from Ollama
+  │   ├── multi_turn_vllm.py          # create multi turn instructions with VLLM
+  │   ├── Ollama_create.py            # synthetic data creation with Ollama
+  │   ├── reason_gym_synthetic.py     # create synthetic reasoning dataset with reasoning_gym
+  │   ├── rm_duplicate_instruct.py    # remove duplicate instructions from Ollama
+  │   └── witcher_mr_gather.py        # create multi turn instructions with Witcher
   │
   ├── Training_optimizations/
   │   ├──FlexAttention/               # overview of Pytorch's FlexAttention
   │   └── HF_kernels/                 # overview of HF's kernel hub
-  │     └── examples/
   │
   └── Transformer_from_scratch/       # transformer implementation
       ├── model.py                    # transformer model
