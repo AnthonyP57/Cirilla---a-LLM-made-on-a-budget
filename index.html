@@ -232,25 +232,10 @@
     color: #00698f;
     }
 
-    a[href="https://github.com/open-thought/reasoning-gym"] {
+    a {
     color: #00698f;
     }
 
-    a[href="https://github.com/vllm-project/vllm"] {
-    color: #00698f;
-    }
-
-    a[href="https://huggingface.co/models"] {
-    color: #00698f;
-    }
-
-    a[href="#OllamaCurate"] {
-    color: #00698f;
-    }
-
-    a[href="#multi_turn_gather"] {
-    color: #00698f;
-    }
 
 </style>
 </head>
@@ -271,7 +256,6 @@
         </div>
         <div class="category-items" id="model-items">
             <a href="#OllamaCurate">OllamaCurate</a>
-            <a href="#scrape_fandom">scrape_fandom</a>
             <a href="#rm_duplicate_instructs">rm_duplicate_instructs</a>
             <a href="#get_synth_reasoning_dataset">get_synth_reasoning_dataset</a>
             <a href="#vllm_multi_turn">vllm_multi_turn</a>
@@ -281,11 +265,12 @@
 
     <div class="category">
         <div class="category-header" data-toggle="modules">
-            <span class="header-text">cirilla.modules</span>
+            <span class="header-text">fandom_scraper</span>
             <span class="arrow">▾</span>
         </div>
         <div class="category-items" id="modules-items">
-            <a href="#helper">cirilla.modules.helper</a>
+            <a href="#scrape_fandom">scrape_fandom</a>
+            <a href="#instructions_into_conv">instructions_into_conv</a>
         </div>
     </div>
 </div>
@@ -678,68 +663,6 @@ for model in ['qwen3:8b', 'phi4', 'llama3.1:8b']:
 
     </div>
 
-        <div class="function-doc" id="scrape_fandom">
-        <h3>scrape_fandom</h3>
-        <div class="code-label">func cirilla.synth_data.scrape_fandom(in_path, out_path, instruct_path, n_workers, wiki, lang) → None</div>
-
-            <div class="indented">
-                <p>scrape a given fandom wiki. Use huggingface's span maker (Named Entity Recognition) to search for new pages to scrape</p>
-
-                <table style="margin-bottom: 50px;">
-                <tr><th>Argument</th><th>Type</th><th>Description</th></tr>
-                <tr><td><code>in_path</code></td><td>Path</td><td>path to a folder with <code>.json</code> files containing lists with key words to search for first (so-called seeds)</td></tr>
-                <tr><td><code>out_path</code></td><td>Path</td><td>path to save the scraped texts to</td></tr>
-                <tr><td><code>instruct_path</code></td><td>Path</td><td>path to save the scraped instructions to</td></tr>
-                <tr><td><code>n_workers</code></td><td>int</td><td>how many async wokers to use to fetch the fandom pages</td></tr>
-                <tr><td><code>wiki</code></td><td>str</td><td>what fandom wiki to scrape</td></tr>
-                <tr><td><code>lang</code></td><td>str</td><td>what language to use for the fandom</td></tr>
-                </table>
-                
-                <p><strong>Example:</strong></p>
-                <pre><code class="language-python"><pre><code class="language-python">in_path = Path("./witcher_json")
-out_path = Path("./async_fandom")
-instruct_path = Path("./async_fandom_instruct")
-
-scrape_fandom(in_path,
-            out_path,
-            instruct_path,
-            n_workers = 50,
-            wiki = "Witcher",
-            lang = "en"
-            )</code></pre></code></pre>
-
-<p><strong>Example input file: <code class="language-bash">./witcher_json/witcher_1.json</code></strong></p>
-<pre><code class="language-json">[
-    "Geralt of Rivia", "Triss Merigold", "Vesemir", "Leo", "Lambert", 
-    "Eskel", "Alvin", "Shani", "Zoltan Chivay", "Dandelion (Jaskier)", 
-    "King Foltest", "Adda the White", ...
-]
-</code></pre>
-
-<p><strong>Example created output file: <code class="language-bash">./async_fandom/Geralt of Rivia.txt</code></strong></p>
-<pre><code class="language-json">Geralt of Rivia
-Sub-Pages:
-Main
-Biography
-Geralt was born as the son of the sorceress Visenna and presumably, the warrior Korin. Shortly after his
-birth, his mother left him with the School of the Wolf at the stronghold of Kaer Morhen. There, Geralt
-was made and trained to become a Witcher.
-As a child, he ...
-</code></pre>
-
-<p><strong>Example created output file: <code class="language-bash">./async_fandom_instruct/Geralt of Rivia.txt</code></strong></p>
-<pre><code class="language-json">{
-  "Who is Geralt of Rivia?": "Geralt of Rivia is a witcher and the protagonist from The Witcher ...",
-  "What is Geralt's nickname?": "Geralt has a number of nicknames, with the more well known ones ...",
-  "Who trained Geralt to become a Witcher?": "Geralt was trained by his mentor Vesemir, who he ...",
-  "What is Geralt's profession?": "Geralt is a monster slayer for hire. He travels the world on ...",
-  "What is the Trial of The Grasses?": "The Trial of The Grasses was a painful process that ..."
-}
-</code></pre>
-
-            </div>
-        </div>
-
         <div class="function-doc" id="rm_duplicate_instructs">
         <h3>rm_duplicate_instructs</h3>
         <div class="code-label">func cirilla.synth_data.rm_duplicate_instructs(main_dir, save_to) → None</div>
@@ -778,7 +701,6 @@ Since the second instruction is nearly identical, it will be deleted in the fina
     {"role": "user", "content": "What material are silver swords made from in The Witcher?"},
     {"role": "assistant", "content": "Meteoric iron coated with silver and inscribed with magical runes"}
     ], "data type": "conv", "model": "llama3.1:8b"}
-
 ...</code></pre>
             </div>
         </div>
@@ -908,6 +830,109 @@ multi_turn_gather(inp, outp)</code></pre></code></pre>
     "metadata": {"contexts": ["A Little Sacrifice", "A Little Sacrifice", "A Little Sacrifice"]}
 }
 </code></pre>
+            </div>
+        </div>
+
+        <div class="function-doc" id="scrape_fandom">
+        <h3>scrape_fandom</h3>
+        <div class="code-label">func fandom_scraper.scrape_fandom(in_path, out_path, instruct_path, n_workers, wiki, lang) → None</div>
+
+            <div class="indented">
+                <p>scrape a given fandom wiki. Use huggingface's span maker (Named Entity Recognition) to search for new pages to scrape<br><br><a href=https://github.com/AnthonyP57/fandom_scraper>fandom_scraper</a> is a standalone package</p>
+
+                <table style="margin-bottom: 50px;">
+                <tr><th>Argument</th><th>Type</th><th>Description</th></tr>
+                <tr><td><code>in_path</code></td><td>Path</td><td>path to a folder with <code>.json</code> files containing lists with key words to search for first (so-called seeds)</td></tr>
+                <tr><td><code>out_path</code></td><td>Path</td><td>path to save the scraped texts to</td></tr>
+                <tr><td><code>instruct_path</code></td><td>Path</td><td>path to save the scraped instructions to</td></tr>
+                <tr><td><code>n_workers</code></td><td>int</td><td>how many async wokers to use to fetch the fandom pages</td></tr>
+                <tr><td><code>wiki</code></td><td>str</td><td>what fandom wiki to scrape</td></tr>
+                <tr><td><code>lang</code></td><td>str</td><td>what language to use for the fandom</td></tr>
+                </table>
+                
+                <p><strong>Example:</strong></p>
+                <pre><code class="language-python"><pre><code class="language-python">in_path = "./witcher_json"
+out_path = "./async_fandom"
+instruct_path = "./async_fandom_instruct"
+
+scrape_fandom(in_path,
+            out_path,
+            instruct_path,
+            n_workers = 50,
+            wiki = "Witcher",
+            lang = "en"
+            )</code></pre></code></pre>
+
+<p><strong>Example input file: <code class="language-bash">./witcher_json/witcher_1.json</code></strong></p>
+<pre><code class="language-json">[
+    "Geralt of Rivia", "Triss Merigold", "Vesemir", "Leo", "Lambert", 
+    "Eskel", "Alvin", "Shani", "Zoltan Chivay", "Dandelion (Jaskier)", 
+    "King Foltest", "Adda the White", ...
+]
+</code></pre>
+
+<p><strong>Example created output file: <code class="language-bash">./async_fandom/Geralt of Rivia.txt</code></strong></p>
+<pre><code class="language-json">Geralt of Rivia
+Sub-Pages:
+Main
+Biography
+Geralt was born as the son of the sorceress Visenna and presumably, the warrior Korin. Shortly after his
+birth, his mother left him with the School of the Wolf at the stronghold of Kaer Morhen. There, Geralt
+was made and trained to become a Witcher.
+As a child, he ...
+</code></pre>
+
+<p><strong>Example created output file: <code class="language-bash">./async_fandom_instruct/Geralt of Rivia.json</code></strong></p>
+<pre><code class="language-json">{
+  "Who is Geralt of Rivia?": "Geralt of Rivia is a witcher and the protagonist from The Witcher ...",
+  "What is Geralt's nickname?": "Geralt has a number of nicknames, with the more well known ones ...",
+  "Who trained Geralt to become a Witcher?": "Geralt was trained by his mentor Vesemir, who he ...",
+  "What is Geralt's profession?": "Geralt is a monster slayer for hire. He travels the world on ...",
+  "What is the Trial of The Grasses?": "The Trial of The Grasses was a painful process that ..."
+}
+</code></pre>
+
+            </div>
+        </div>
+
+        <div class="function-doc" id="instructions_into_conv">
+        <h3>instructions_into_conv</h3>
+        <div class="code-label">func fandom_scraper.instructions_into_conv(input_path, out_path) → None</div>
+
+            <div class="indented">
+                <p>convert scraped fandom instructions into a <code>.jsonl</code> file</p>
+
+                <table style="margin-bottom: 50px;">
+                <tr><th>Argument</th><th>Type</th><th>Description</th></tr>
+                <tr><td><code>input_path</code></td><td>Path</td><td>path to a folder with scraped instructions</td></tr>
+                <tr><td><code>out_path</code></td><td>Path</td><td>path to save the <code>.jsonl</code> file to</td></tr>
+                </table>
+                
+                <p><strong>Example:</strong></p>
+                <pre><code class="language-python"><pre><code class="language-python">instructions_into_conv(input_path="./async_fandom_instruct",
+                       out_path="./async_fandom_instruct_gathered.jsonl")</code></pre></code></pre>
+
+<p><strong>Example input file: <code class="language-bash">./async_fandom_instruct/Geralt of Rivia.json</code></strong></p>
+<pre><code class="language-json">{
+  "Who is Geralt of Rivia?": "Geralt of Rivia is a witcher and the protagonist from The Witcher ...",
+  "What is Geralt's nickname?": "Geralt has a number of nicknames, with the more well known ones ...",
+  "Who trained Geralt to become a Witcher?": "Geralt was trained by his mentor Vesemir, who he ...",
+  "What is Geralt's profession?": "Geralt is a monster slayer for hire. He travels the world on ...",
+  "What is the Trial of The Grasses?": "The Trial of The Grasses was a painful process that ..."
+}
+</code></pre>
+
+<p><strong>Example created output file (obviously the actual <code>.jsonl</code> file is saved in single lines): <code class="language-bash">./async_fandom_instruct_gathered.jsonl</code></strong></p>
+<pre><code class="language-json">{"subject": "Geralt of Rivia", "text": [
+    {"role": "user", "content": "Who is Geralt of Rivia?"},
+    {"role": "assistant", "content": "Geralt of Rivia is a witcher and the protagonist from ..."}
+    ], "data type": "conv", "source": "fandom"}
+{"subject": "Geralt of Rivia", "text": [
+    {"role": "user", "content": "What is Geralt's nickname?"},
+    {"role": "assistant", "content": "Geralt has a number of nicknames, with the more well known ones ..."}
+    ], "data type": "conv", "source": "fandom"}
+...</code></pre>
+
             </div>
         </div>
 
