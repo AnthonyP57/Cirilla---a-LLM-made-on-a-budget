@@ -59,9 +59,12 @@ class JSONLDataset(IterableDataset):
                 del data
 
             cache_or_fetch('SHUFFLED', p, 1)
+        
+        self.path_signature = '-'.join(self.path)
+        cache_or_fetch('DATA_LEN', self.path_signature, sum(cache_or_fetch('DATA_LEN', p) for p in self.path))
 
     def __len__(self):
-        return sum(int(cache_or_fetch('DATA_LEN', p)) for p in self.path)
+        return cache_or_fetch('DATA_LEN', self.path_signature)
     
     def __iter__(self):
 

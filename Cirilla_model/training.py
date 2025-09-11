@@ -21,7 +21,7 @@ from progress_table import ProgressTable
 class TrainingArgs:
     n_epoch:int = 100
     optim:Optimizer = AdamW
-    lr:float = 1e-4
+    lr:float = 5e-5
     batch_size:int = 4
     xavier_init:bool = True
     local_checkpoint_folder:Path = './'
@@ -29,7 +29,7 @@ class TrainingArgs:
 
     renew_training:bool = True
     save_checkpoint_n_iterations:int = None
-    save_checkpoint_min:int = 15
+    save_checkpoint_min:int = 0.5
 
     push_checkpoint_to_hub:bool = False
     push_checkpoint_to_hub_n_local_saves:int = 4
@@ -61,7 +61,9 @@ class CirillaTrainer:
 
     def train(self, dataset:JSONLDataset):
 
-        dataset_path = dataset.path
+        assert cache_or_fetch('DATA_LEN', dataset.path_signature) % self.args.batch_size == 0, f"Dataset length: {cache_or_fetch('DATA_LEN', dataset.path_signature)} is not divisible by batch size: {self.args.batch_size}. It has to be for optimal training."
+        
+        dataset_path = dataset.path_signature
 
         dataloader = DataLoader(dataset, shuffle=False, batch_size=self.args.batch_size)
         del dataset
@@ -75,6 +77,8 @@ class CirillaTrainer:
             skip_n_data_points = 0
 
         n_iter = -1
+
+        os.makedirs(self.args.local_checkpoint_folder, exist_ok=True)
 
         if self.args.renew_training:
             if os.path.exists(os.path.join(self.args.local_checkpoint_folder, 'optimizer_states.pt')) or not self.args.stateful_optim:
@@ -100,6 +104,8 @@ class CirillaTrainer:
         if self.criterion is None:
             self.criterion = nn.CrossEntropyLoss()
 
+        times = [time.time()]
+
         for epoch in range(1, self.args.n_epoch + 1):
 
             for data in dataloader:
@@ -107,19 +113,23 @@ class CirillaTrainer:
                 n_iter += 1
 
                 if n_iter * self.args.batch_size < skip_n_data_points:
-                    skip_n_data_points += self.args.batch_size
                     continue
 
                 torch.compiler.cudagraph_mark_step_begin()
 
                 loss = self.training_step(data)
-
+                loss_item = loss.item()
                 loss.backward()
 
-                do_checkpoint, push_hub = self._check_if_do_checkpoint(start_time, n_iter)
+                times.append(time.time())
+
+                print(f"iter: {n_iter}, loss: {loss_item:.4f}, time: {times[-1]-times[-2]:.2f}")
+                do_checkpoint, push_hub = self._check_if_do_checkpoint(time.time() - start_time, n_iter)
                 
                 if do_checkpoint:
+                    start_time = time.time()
                     self._save_local_checkpoint()
+                    cache_or_fetch('N_DATA_POINTS', dataset_path, n_iter * self.args.batch_size)
                     if push_hub and self.args.push_checkpoint_to_hub:
                         try:
                             self._push_all_to_hub_async(loss, dataset_path.split('/')[-1].split('.')[0])
@@ -229,6 +239,8 @@ class CirillaTrainer:
             if iter_step % self.args.save_checkpoint_n_iterations == 0:
                 self.n_checkpoints += 1
                 return True, self.n_checkpoints % self.args.push_checkpoint_to_hub_n_local_saves == 0
+            
+        return False, False
 
     def _xavier_init(self):
         for param in self.model.parameters():
@@ -381,11 +393,17 @@ if __name__ == '__main__':
     import time
     import numpy as np
     from model import Args
+    from tokenizer_modules import CirillaTokenizer
 
     model = Cirilla(Args())
 
     targs = TrainingArgs(hf_repo_id='AnthonyPa57/HF-torch-demo-R', local_checkpoint_folder='./test_model')
     trainer = CirillaTrainer(model, targs)
+
+    tokenizer = CirillaTokenizer(hub_url='AnthonyPa57/HF-torch-demo2')
+    dl = JSONLDataset(['./example.jsonl', './example.jsonl'], shuffle_path=True, tokenizer=tokenizer, max_len=model.args.context_window)
+
+    trainer.train(dl)
 
     # trainer._fuse_optim()
     # trainer._save_local_checkpoint()
@@ -395,6 +413,6 @@ if __name__ == '__main__':
     # trainer._pull_all_from_hub()
     # trainer._pull_model_from_hub()
 
-    trainer.benchmark()
+    # trainer.benchmark()
 
     # time.sleep(60)

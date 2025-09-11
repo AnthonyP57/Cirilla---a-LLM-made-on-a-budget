@@ -120,7 +120,10 @@ def cache_or_fetch(category, variable, value=None):
             config[category][variable] = str(value)
             with open(CACHE_PATH, 'w') as c:
                 config.write(c)
-        return val
+        try:
+            return int(val)
+        except:
+            return val
     except (KeyError, configparser.NoSectionError):
         if value is not None:
             if category not in config:
@@ -128,6 +131,9 @@ def cache_or_fetch(category, variable, value=None):
             config[category][variable] = str(value)
             with open(CACHE_PATH, 'w') as c:
                 config.write(c)
-            return value
+            try:
+                return int(value)
+            except:
+                return value
         else:
             return None
