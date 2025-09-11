@@ -16,7 +16,9 @@ class JSONLDataset(IterableDataset):
                  pad_token:str='<pad>',
                  eos_token:str='<eos>',
                  sos_token:str='<sos>',
-                 user_token:str='<|user|>',):
+                 user_token:str='<|user|>',
+                 bert_append_tokens:list[str]=None #['<cls>']
+                 ):
         
         super().__init__()
         self.path = path
@@ -24,11 +26,13 @@ class JSONLDataset(IterableDataset):
         self.device = device
         self.tokenizer = tokenizer
         self.max_len = max_len
+        self.bert_append_tokens = bert_append_tokens
 
-        self.sos_token = sos_token
-        self.user_token_id = tokenizer.convert_tokens_to_ids(user_token)
-        self.pad_token_id = tokenizer.convert_tokens_to_ids(pad_token)
-        self.eos_token_id = tokenizer.convert_tokens_to_ids(eos_token)
+        if self.tokenizer is not None:
+            self.sos_token = sos_token
+            self.user_token_id = tokenizer.convert_tokens_to_ids(user_token)
+            self.pad_token_id = tokenizer.convert_tokens_to_ids(pad_token)
+            self.eos_token_id = tokenizer.convert_tokens_to_ids(eos_token)
 
         if isinstance(self.path, list):
             self.path = tuple(self.path)
@@ -73,19 +77,20 @@ class JSONLDataset(IterableDataset):
 
                             if self.tokenizer is not None:
                                 tokenized_data =  self.tokenizer(self.sos_token + line['text'], return_tensors='pt', padding='do_not_pad',
-                                                                truncation=True, max_length=self.max_len)
+                                                                truncation=True, max_length=self.max_len+1)
                                 
                                 tokens = tokenized_data['input_ids'].squeeze(0)
-                                mask = tokenized_data['attention_mask'].squeeze(0)
+                                # mask = tokenized_data['attention_mask'].squeeze(0)
                                 token_shape = tokens.shape[0]
 
-                                mask = torch.concat([mask, torch.ones(1, dtype=torch.int64), torch.zeros(self.max_len - token_shape, dtype=torch.int64)],
-                                                dim=0).to(self.device)
-
-                                tokens = torch.concat([tokens, torch.tensor([self.eos_token_id])] + \
-                                                    [torch.tensor([self.pad_token_id])] * (self.max_len - token_shape), dim=0).to(self.device)                            
-
-                                yield tokens[:-1], tokens[1:], mask[:-1]
+                                # mask = torch.concat([mask, torch.ones(1, dtype=torch.int64), torch.zeros(self.max_len - token_shape, dtype=torch.int64)],
+                                #                 dim=0).to(self.device)
+                                if token_shape <= self.max_len:
+                                    tokens = torch.concat([tokens, torch.tensor([self.eos_token_id])] + \
+                                                    [torch.tensor([self.pad_token_id])] * (self.max_len - token_shape), dim=0)
+                                
+                                tokens = tokens.to(self.device)
+                                yield tokens[:-1], tokens[1:]#, mask[:-1]
                             else:
                                 yield line['text']
 
@@ -97,22 +102,40 @@ class JSONLDataset(IterableDataset):
                                 tokens = tokens.squeeze(0).to(self.device)
                                 tokens_shape = tokens.shape[0]
 
-                                mask = torch.zeros(self.max_len, dtype=torch.int64, device=self.device)
-                                mask[:tokens_shape] = 1
+                                # mask = torch.zeros(self.max_len, dtype=torch.int64, device=self.device)
+                                # mask[:tokens_shape] = 1
                                 
                                 if tokens_shape <= self.max_len :
                                     tokens = torch.concat(
                                         [tokens, torch.tensor([self.user_token_id], device=self.device),] + \
                                         [torch.tensor([self.pad_token_id], device=self.device)] * (self.max_len - tokens_shape))
                                     
-                                    mask[tokens_shape] = 1
+                                    # mask[tokens_shape] = 1
                                 
-                                yield tokens[:-1], tokens[1:], mask
+                                yield tokens[:-1], tokens[1:]#, mask
                             else:
                                 yield '\n'.join([l['content'] for l in line['text']])
 
+                        case 'bert':
+
+                            if self.tokenizer is not None:
+                                text = line['text']
+
+                                if self.bert_append_tokens is not None:
+                                    for token in self.bert_append_tokens:
+                                        text += token
+
+                                tokenized_data =  self.tokenizer(text, return_tensors='pt', padding='max_length',
+                                                                truncation=True, max_length=self.max_len)
+                                
+                                tokens = tokenized_data['input_ids'].squeeze(0).to(self.device)
+                                mask = tokenized_data['attention_mask'].squeeze(0).to(self.device)
+                                yield tokens, mask
+                            else:
+                                yield line['text']
+
                         case _:
-                            raise NotImplementedError(f"Data type {line['data type']} is not supported, use one of: ['plain text', 'conv']")
+                            raise NotImplementedError(f"Data type {line['data type']} is not supported, use one of: ['plain text', 'conv', 'bert']")
 
 
 if __name__ == '__main__':
@@ -128,6 +151,6 @@ if __name__ == '__main__':
         times.append(time.time())
         for i in dl:
             print('-'*50)
-            print(i[0], i[1], i[-1], sep='\n')
+            print(i[0], i[1], sep='\n')
             times.append(time.time())
     print(np.mean(np.diff(times)))
