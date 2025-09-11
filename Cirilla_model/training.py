@@ -15,12 +15,13 @@ from modules import get_args_from_hub
 import time
 from modules import cache_or_fetch
 import threading
+from progress_table import ProgressTable
 
 @dataclass
 class TrainingArgs:
     n_epoch:int = 100
     optim:Optimizer = AdamW
-    lr:float = 5e-5
+    lr:float = 1e-4
     batch_size:int = 4
     xavier_init:bool = True
     local_checkpoint_folder:Path = './'
@@ -143,6 +144,22 @@ class CirillaTrainer:
         y = torch.randint(0, self.model.args.vocab_size,
                           (4, self.model.args.context_window),
                           dtype=torch.long, device=self.model.args.device)
+        
+        def loss_color(distance):
+            if distance < 8:
+                return "green"
+            elif distance < 9:
+                return "yellow"
+            else:
+                return "red"
+            
+        def time_color(distance):
+            if distance < 0.76:
+                return "green"
+            elif distance < 0.9:
+                return "yellow"
+            else:
+                return "red"
 
         if self.args.xavier_init:
             self._xavier_init()
@@ -151,8 +168,6 @@ class CirillaTrainer:
 
         self._set_prior_training_vars()
 
-        criterion = nn.CrossEntropyLoss()
-
         for i in range(5): #warm up for benchmark
             torch.compiler.cudagraph_mark_step_begin()
             loss = self.training_step((x, x))
@@ -160,10 +175,30 @@ class CirillaTrainer:
             loss.backward()
 
         torch.cuda.synchronize()
+
+        ptable = ProgressTable(
+                pbar_show_progress=False,
+                pbar_show_throughput=False,
+                pbar_show_eta=True,
+                default_column_width=8,
+                default_header_color="bold",
+                                )
         
-        times = []
+        main_pbar = ptable.pbar(
+                        100,
+                        position=1,
+                        show_progress=True,
+                        style="rich alt lightmagenta_ex lightwhite_ex",
+                    )
+        
+        times = [time.time()]
+        losses = []
 
         for i in range(100):
+
+            if i % 5 == 0:
+                ptable['epoch'] = i
+
             torch.compiler.cudagraph_mark_step_begin()
             loss = self.training_step((x, y))
             loss_item = loss.item()
@@ -171,9 +206,17 @@ class CirillaTrainer:
             loss.backward()
             
             times.append(time.time())
-            times = times[-50:]
-            print(f'average time: {np.mean(np.diff(times)):.4f} loss: {loss_item}', end='\r')
+            losses.append(loss_item)
+            
+            ptable.update('train loss', loss_item, aggregate='mean', color='cyan')
+            ptable.update('time', round(times[-1] - times[-2], 4), aggregate='mean', color='blue')
 
+            if i % 5 == 0: # new row every 5 iterations
+                ptable.next_row(split=True, color={'time': time_color(np.mean(np.diff(times[-5:]))), 'train loss': loss_color(np.mean(losses[-5:]))})
+
+            main_pbar.update(1)
+
+        ptable.close()
         print(f'average time for epoch: {np.mean(np.diff(times)):.4f}')
 
     def _check_if_do_checkpoint(self, time, iter_step):

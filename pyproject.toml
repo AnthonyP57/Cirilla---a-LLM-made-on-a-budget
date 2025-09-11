@@ -16,6 +16,7 @@ dependencies = [
     "megablocks[all]>=0.10.0",
     "ollama>=0.5.3",
     "openai>=1.90.0",
+    "progress-table>=3.1.2",
     "pydantic>=2.11.7",
     "python-levenshtein>=0.27.1",
     "reasoning-gym>=0.1.23",
