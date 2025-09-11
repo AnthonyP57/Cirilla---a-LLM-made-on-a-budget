@@ -51,7 +51,8 @@ class CirillaTrainer:
         self.model = model
         self.args = training_args
         self.optim = self._prepare_optimizer(**training_args.optim_kwargs)
-        self.criterion = nn.CrossEntropyLoss()
+        self.criterion = nn.CrossEntropyLoss(ignore_index=1, # tokenizer.convert_tokens_to_ids(padding token) ; by default it's 1
+                                             label_smoothing=0.1)
 
         self.n_checkpoints = 0
 
@@ -100,7 +101,7 @@ class CirillaTrainer:
 
         for epoch in range(1, self.args.n_epoch + 1):
 
-            for x, y in dataloader:
+            for data in dataloader:
 
                 n_iter += 1
 
@@ -109,8 +110,8 @@ class CirillaTrainer:
                     continue
 
                 torch.compiler.cudagraph_mark_step_begin()
-                out = self.model.pred(x)
-                loss = self.criterion(out.view(-1, self.model.args.vocab_size), y.view(-1))
+
+                loss = self.training_step(data)
 
                 loss.backward()
 
@@ -125,6 +126,11 @@ class CirillaTrainer:
                         except Exception as e:
                             print(f"Failed to push asynchronously to HF hub: {e}\nPushing synchronously")
                             self._push_all_to_hub(loss, dataset_path.split('/')[-1].split('.')[0])
+
+    def training_step(self, data):
+        out = self.model.pred(data[0])
+        loss = self.criterion(out.view(-1, self.model.args.vocab_size), data[1].view(-1))
+        return loss
 
     def benchmark(self):
         
@@ -149,8 +155,7 @@ class CirillaTrainer:
 
         for i in range(5): #warm up for benchmark
             torch.compiler.cudagraph_mark_step_begin()
-            out = model.pred(x)
-            loss = criterion(out.view(-1, self.model.args.vocab_size), x.view(-1))
+            loss = self.training_step((x, x))
 
             loss.backward()
 
@@ -160,8 +165,7 @@ class CirillaTrainer:
 
         for i in range(100):
             torch.compiler.cudagraph_mark_step_begin()
-            out = model.pred(x)
-            loss = criterion(out.view(-1, self.model.args.vocab_size), y.view(-1))
+            loss = self.training_step((x, y))
             loss_item = loss.item()
 
             loss.backward()
