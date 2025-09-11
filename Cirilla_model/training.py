@@ -59,7 +59,7 @@ class CirillaTrainer:
 
         print(f'n trainable params: {(model.n_params/1e6):.2f} M')
 
-    def train(self, dataset:JSONLDataset):
+    def train(self, dataset:JSONLDataset, valid_dataset:JSONLDataset=None):
 
         assert cache_or_fetch('DATA_LEN', dataset.path_signature) % self.args.batch_size == 0, f"Dataset length: {cache_or_fetch('DATA_LEN', dataset.path_signature)} is not divisible by batch size: {self.args.batch_size}. It has to be for optimal training."
         
@@ -67,6 +67,10 @@ class CirillaTrainer:
 
         dataloader = DataLoader(dataset, shuffle=False, batch_size=self.args.batch_size)
         del dataset
+
+        if valid_dataset is not None:
+            valid_dataloader = DataLoader(valid_dataset, shuffle=False, batch_size=self.args.batch_size)
+            del valid_dataset
 
         start_time = time.time()
 
@@ -108,6 +112,8 @@ class CirillaTrainer:
 
         for epoch in range(1, self.args.n_epoch + 1):
 
+            self.model.train()
+
             for data in dataloader:
 
                 n_iter += 1
@@ -133,7 +139,7 @@ class CirillaTrainer:
                     except Exception as e:
                         print(f"Failed to save local checkpoint asynchronously:{e}\nSaving synchronously")
                         self._save_local_checkpoint()
-                        
+
                     cache_or_fetch('N_DATA_POINTS', dataset_path, n_iter * self.args.batch_size)
                     if push_hub and self.args.push_checkpoint_to_hub:
                         try:
@@ -142,6 +148,21 @@ class CirillaTrainer:
                         except Exception as e:
                             print(f"Failed to push asynchronously to HF hub: {e}\nPushing synchronously")
                             self._push_all_to_hub(loss, dataset_path.split('/')[-1].split('.')[0])
+
+                if valid_dataloader is not None:
+                    self.model.eval()
+
+                    total_loss = 0
+                    with torch.no_grad():
+                        for data in valid_dataloader:
+                            loss = self.training_step(data)
+                            loss_item = loss.item()
+
+                            total_loss += loss_item
+
+                            print(f"iter: {n_iter}, loss: {loss_item:.4f}")
+
+                    print(f'{iter} valid loss: {total_loss / len(valid_dataloader)}')
 
     def training_step(self, data):
         out = self.model.pred(data[0])
@@ -414,7 +435,7 @@ if __name__ == '__main__':
     tokenizer = CirillaTokenizer(hub_url='AnthonyPa57/HF-torch-demo2')
     dl = JSONLDataset(['./example.jsonl', './example.jsonl'], shuffle_path=True, tokenizer=tokenizer, max_len=model.args.context_window)
 
-    trainer.train(dl)
+    trainer.train(dl, dl)
 
     # trainer._fuse_optim()
     # trainer._save_local_checkpoint()
