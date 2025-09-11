@@ -21,8 +21,10 @@ from progress_table import ProgressTable
 class TrainingArgs:
     n_epoch:int = 100
     optim:Optimizer = AdamW
-    lr:float = 5e-5
+    lr:float = 5e-4
     batch_size:int = 4
+    valid_every_n:int=5
+    save_local_async:bool = False
     xavier_init:bool = True
     local_checkpoint_folder:Path = './'
     optim_kwargs:dict[str,str] = field(default_factory=lambda: {'fused':True, 'foreach':False})
@@ -65,7 +67,12 @@ class CirillaTrainer:
         
         dataset_path = dataset.path_signature
 
+        skip_n_data_points = cache_or_fetch('N_DATA_POINTS', dataset_path)
+        if skip_n_data_points is None:
+            skip_n_data_points = 0
+
         dataloader = DataLoader(dataset, shuffle=False, batch_size=self.args.batch_size)
+        n_iter_total = self.args.n_epoch * len(dataset) - skip_n_data_points
         del dataset
 
         if valid_dataset is not None:
@@ -76,24 +83,28 @@ class CirillaTrainer:
 
         self._set_global_vars()
 
-        skip_n_data_points = cache_or_fetch('N_DATA_POINTS', dataset_path)
-        if skip_n_data_points is None:
-            skip_n_data_points = 0
-
         n_iter = -1
 
         os.makedirs(self.args.local_checkpoint_folder, exist_ok=True)
 
+        state_type = "stateful" if self.args.stateful_optim else "non-stateful"
+        optimizer_path = os.path.join(self.args.local_checkpoint_folder, "optimizer_states.pt")
+        model_path = os.path.join(self.args.local_checkpoint_folder, "model.pt")
+
         if self.args.renew_training:
-            if os.path.exists(os.path.join(self.args.local_checkpoint_folder, 'optimizer_states.pt')) or not self.args.stateful_optim:
-                if os.path.exists(os.path.join(self.args.local_checkpoint_folder, 'model.pt')):
+            if os.path.exists(optimizer_path) or not self.args.stateful_optim:
+                if os.path.exists(model_path):
                     self._load_local_checkpoint()
                 else:
                     if skip_n_data_points > 0:
-                        raise FileNotFoundError(f"Couldn't find model path at: {os.path.join(self.args.local_checkpoint_folder, 'model.pt')}")
+                        raise FileNotFoundError(
+                            f"Couldn't find model path at: {model_path}"
+                        )
             else:
                 if skip_n_data_points > 0:
-                    raise FileNotFoundError(f"Couldn't find optimizer states path for a {'stateful' if self.args.stateful_optim else 'non-stateful'} optimizer at: {os.path.join(self.args.local_checkpoint_folder, 'optimizer_states.pt')}")
+                    raise FileNotFoundError(
+                        f"Couldn't find optimizer states path for a {state_type} optimizer at: {optimizer_path}"
+                    )
 
         if not hasattr(self, 'optimizer_by_name'): # if didn't load from checkpoint
             print("Training from scratch")
@@ -108,9 +119,78 @@ class CirillaTrainer:
         if self.criterion is None:
             self.criterion = nn.CrossEntropyLoss()
 
-        times = [time.time()]
+        prev_mean_loss = 10
 
-        for epoch in range(1, self.args.n_epoch + 1):
+        def loss_color(loss:list):
+            nonlocal prev_mean_loss
+            mean_loss = np.mean(loss)
+
+            if mean_loss < prev_mean_loss * 0.95:
+                color = "green"
+            elif mean_loss < prev_mean_loss * 1.05:
+                color = "yellow"
+            else:
+                color = "red"
+            
+            prev_mean_loss = mean_loss
+            return color
+        
+        prev_mean_loss_valid = 10
+
+        def loss_color_valid(loss:list):
+            if len(loss) > 0:
+                nonlocal prev_mean_loss_valid
+                mean_loss = np.mean(loss)
+
+                if mean_loss < prev_mean_loss_valid * 0.95:
+                    color = "green"
+                elif mean_loss < prev_mean_loss_valid * 1.05:
+                    color = "yellow"
+                else:
+                    color = "red"
+                
+                prev_mean_loss_valid = mean_loss
+                return color
+
+            
+        prev_mean_time = 1
+                        
+        def time_color(times:list):
+            nonlocal prev_mean_time
+            mean_time = np.mean(np.diff(times))
+
+            if mean_time < prev_mean_time * 1.1:
+                color =  "green"
+            elif mean_time < prev_mean_time * 1.5:
+                color = "yellow"
+            else:
+                color = "red"
+
+            prev_mean_time = mean_time
+            return color
+            
+        ptable = ProgressTable(
+                pbar_show_progress=False,
+                pbar_show_throughput=False,
+                pbar_show_eta=True,
+                default_column_width=8,
+                default_header_color="bold",
+                                )
+        
+        main_pbar = ptable.pbar(
+                        n_iter_total,
+                        position=1,
+                        show_progress=True,
+                        style="rich alt lightmagenta_ex lightwhite_ex",
+                    )
+        
+        for epoch in range(self.args.n_epoch):
+
+            times = [time.time()]
+            losses = []
+            v_losses = []
+            
+            ptable['epoch'] = epoch
 
             self.model.train()
 
@@ -124,45 +204,65 @@ class CirillaTrainer:
                 torch.compiler.cudagraph_mark_step_begin()
 
                 loss = self.training_step(data)
-                loss_item = loss.item()
                 loss.backward()
 
+                loss_item = loss.item()
+                losses.append(loss_item)
                 times.append(time.time())
 
-                print(f"iter: {n_iter}, loss: {loss_item:.4f}, time: {times[-1]-times[-2]:.2f}")
+                ptable.update('train loss', round(loss_item, 3), aggregate='mean', color='cyan')
+                ptable.update('time', round(times[-1] - times[-2], 3), aggregate='mean', color='blue')
+
                 do_checkpoint, push_hub = self._check_if_do_checkpoint(time.time() - start_time, n_iter)
                 
                 if do_checkpoint:
                     start_time = time.time()
                     try:
-                        self._save_local_checkpoint_async()
+                        if self.args.save_local_async:
+                            self._save_local_checkpoint_async()
+                        else:
+                            self._save_local_checkpoint()
                     except Exception as e:
-                        print(f"Failed to save local checkpoint asynchronously:{e}\nSaving synchronously")
+                        sync_ = 'asynchronously' if self.args.save_local_async else 'synchronously'
+                        print(f"Failed to save local checkpoint {sync_}:{e}\nSaving synchronously")
                         self._save_local_checkpoint()
 
                     cache_or_fetch('N_DATA_POINTS', dataset_path, n_iter * self.args.batch_size)
                     if push_hub and self.args.push_checkpoint_to_hub:
                         try:
-                            self._push_all_to_hub_async(loss, dataset_path.split('/')[-1].split('.')[0])
+                            self._push_all_to_hub_async(loss_item, dataset_path)
                             
                         except Exception as e:
                             print(f"Failed to push asynchronously to HF hub: {e}\nPushing synchronously")
-                            self._push_all_to_hub(loss, dataset_path.split('/')[-1].split('.')[0])
+                            self._push_all_to_hub(loss_item, dataset_path)
+                
+                main_pbar.update(self.args.batch_size)
+                
+            if valid_dataloader is not None:
+                if epoch % self.args.valid_every_n == 0:
 
-                if valid_dataloader is not None:
+                    if n_iter * self.args.batch_size < skip_n_data_points:
+                        continue
+
                     self.model.eval()
 
-                    total_loss = 0
                     with torch.no_grad():
                         for data in valid_dataloader:
                             loss = self.training_step(data)
                             loss_item = loss.item()
 
-                            total_loss += loss_item
+                            v_losses.append(loss_item)
 
-                            print(f"iter: {n_iter}, loss: {loss_item:.4f}")
+                            ptable.update('valid loss', round(loss_item, 3), aggregate='mean', color='lightcyan_ex')
+                    
+                    torch.cuda.empty_cache()
+                    ptable.next_row(split=True, color={'time': time_color(times), 'train loss': loss_color(losses), 'valid loss': loss_color_valid(v_losses)})
 
-                    print(f'{iter} valid loss: {total_loss / len(valid_dataloader)}')
+            ptable.next_row(split=valid_dataloader is None, color={'time': time_color(times), 'train loss': loss_color(losses), 'valid loss': loss_color_valid(v_losses)})
+
+        self._save_local_checkpoint()
+        if self.args.push_checkpoint_to_hub:
+            self._push_all_to_hub(loss_item, dataset_path)
 
     def training_step(self, data):
         out = self.model.pred(data[0])
