@@ -128,7 +128,12 @@ class CirillaTrainer:
                 
                 if do_checkpoint:
                     start_time = time.time()
-                    self._save_local_checkpoint()
+                    try:
+                        self._save_local_checkpoint_async()
+                    except Exception as e:
+                        print(f"Failed to save local checkpoint asynchronously:{e}\nSaving synchronously")
+                        self._save_local_checkpoint()
+                        
                     cache_or_fetch('N_DATA_POINTS', dataset_path, n_iter * self.args.batch_size)
                     if push_hub and self.args.push_checkpoint_to_hub:
                         try:
@@ -293,6 +298,12 @@ class CirillaTrainer:
 
             optim_states = {name: opt.state_dict() for name, opt in self.optimizer_by_name.items()}
             torch.save(optim_states, os.path.join(self.args.local_checkpoint_folder, 'optimizer_states.pt'))
+
+    def _save_local_checkpoint_async(self):
+        def worker():
+            self._save_local_checkpoint()
+
+        threading.Thread(target=worker, daemon=True).start()
 
     def _load_local_checkpoint(self):
         self.model.load_state_dict(torch.load(\
