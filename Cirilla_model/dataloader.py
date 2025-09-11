@@ -17,6 +17,7 @@ class JSONLDataset(IterableDataset):
                  eos_token:str='<eos>',
                  sos_token:str='<sos>',
                  user_token:str='<|user|>',):
+        
         super().__init__()
         self.path = path
         self.shuffle_path = shuffle_path
@@ -24,13 +25,10 @@ class JSONLDataset(IterableDataset):
         self.tokenizer = tokenizer
         self.max_len = max_len
 
-        self.pad_token = pad_token
-        self.eos_token = eos_token
         self.sos_token = sos_token
-        self.user_token = user_token
-
-        self.user_token_id = tokenizer.convert_tokens_to_ids(self.user_token)
-        self.pad_token_id = tokenizer.convert_tokens_to_ids(self.pad_token)
+        self.user_token_id = tokenizer.convert_tokens_to_ids(user_token)
+        self.pad_token_id = tokenizer.convert_tokens_to_ids(pad_token)
+        self.eos_token_id = tokenizer.convert_tokens_to_ids(eos_token)
 
         if isinstance(self.path, list):
             self.path = tuple(self.path)
@@ -62,48 +60,74 @@ class JSONLDataset(IterableDataset):
         return sum(int(cache_or_fetch('DATA_LEN', p)) for p in self.path)
     
     def __iter__(self):
+
         for p in self.path:
             with open(p, 'r') as f:
+
                 for line in f:
                     line = json.loads(line)
-                    if line['data type'] == 'plain text':
 
-                        if self.tokenizer is not None:
-                            tokenized_data =  self.tokenizer(self.sos_token + line['text'] + self.eos_token, return_tensors='pt', padding='max_length',
-                                                             truncation=True, max_length=self.max_len+1)
-                            
-                            tokens = tokenized_data['input_ids'].squeeze(0).to(self.device)
-                            mask = tokenized_data['attention_mask'].squeeze(0).to(self.device)
-                            print(tokens.shape, mask.shape)
-                            yield tokens[:-1], tokens[1:], mask[:-1]
-                        else:
-                            yield line['text']
+                    match line['data type']:
 
-                    elif line['data type'] == 'conv':
+                        case 'plain text':
 
-                        if self.tokenizer is not None:
-                            tokens =  self.tokenizer.apply_chat_template(line['text'], return_tensors='pt', padding='do_not_pad',
-                                                                                 truncation=True, max_length=self.max_len-1, add_generation_prompt=False)
-                            tokens = tokens.squeeze(0)
-                            mask = torch.zeros(self.max_len, dtype=torch.int64)
-                            mask[:tokens.shape[0]] = 1
-                            tokens = torch.concat(
-                                [tokens, torch.tensor([self.user_token_id]),] + \
-                                [torch.tensor([self.pad_token_id])] * (self.max_len - tokens.shape[0]))
-                            tokens = tokens.to(self.device)
-                            mask = mask.to(self.device)
-                            print(tokens.shape, mask.shape)
-                            yield tokens[:-1], tokens[1:], mask
-                        else:
-                            yield '\n'.join([l['content'] for l in line['text']])
+                            if self.tokenizer is not None:
+                                tokenized_data =  self.tokenizer(self.sos_token + line['text'], return_tensors='pt', padding='do_not_pad',
+                                                                truncation=True, max_length=self.max_len)
+                                
+                                tokens = tokenized_data['input_ids'].squeeze(0)
+                                mask = tokenized_data['attention_mask'].squeeze(0)
+                                token_shape = tokens.shape[0]
+
+                                mask = torch.concat([mask, torch.ones(1, dtype=torch.int64), torch.zeros(self.max_len - token_shape, dtype=torch.int64)],
+                                                dim=0).to(self.device)
+
+                                tokens = torch.concat([tokens, torch.tensor([self.eos_token_id])] + \
+                                                    [torch.tensor([self.pad_token_id])] * (self.max_len - token_shape), dim=0).to(self.device)                            
+
+                                yield tokens[:-1], tokens[1:], mask[:-1]
+                            else:
+                                yield line['text']
+
+                        case 'conv':
+
+                            if self.tokenizer is not None:
+                                tokens =  self.tokenizer.apply_chat_template(line['text'], return_tensors='pt', padding='do_not_pad',
+                                                                                    truncation=True, max_length=self.max_len+1, add_generation_prompt=False)
+                                tokens = tokens.squeeze(0).to(self.device)
+                                tokens_shape = tokens.shape[0]
+
+                                mask = torch.zeros(self.max_len, dtype=torch.int64, device=self.device)
+                                mask[:tokens_shape] = 1
+                                
+                                if tokens_shape <= self.max_len :
+                                    tokens = torch.concat(
+                                        [tokens, torch.tensor([self.user_token_id], device=self.device),] + \
+                                        [torch.tensor([self.pad_token_id], device=self.device)] * (self.max_len - tokens_shape))
+                                    
+                                    mask[tokens_shape] = 1
+                                
+                                yield tokens[:-1], tokens[1:], mask
+                            else:
+                                yield '\n'.join([l['content'] for l in line['text']])
+
+                        case _:
+                            raise NotImplementedError(f"Data type {line['data type']} is not supported, use one of: ['plain text', 'conv']")
 
 
 if __name__ == '__main__':
+    import time
+    import numpy as np
     from tokenizer_modules import CirillaTokenizer
     tokenizer = CirillaTokenizer(hub_url='AnthonyPa57/HF-torch-demo2')
-    dl = JSONLDataset(['./example.jsonl', './example.jsonl'], shuffle_path=True, tokenizer=tokenizer)
+    dl = JSONLDataset(['./example.jsonl', './example.jsonl'], shuffle_path=True, tokenizer=tokenizer, max_len=32)
     print(len(dl))
+    times = []
     dl = DataLoader(dl, batch_size=2)
     for _ in range(2):
+        times.append(time.time())
         for i in dl:
-            print(i)
+            print('-'*50)
+            print(i[0], i[1], i[-1], sep='\n')
+            times.append(time.time())
+    print(np.mean(np.diff(times)))
