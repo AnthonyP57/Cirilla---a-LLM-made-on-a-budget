@@ -1,6 +1,5 @@
 import torch
 import torch.nn as nn
-from model import Cirilla
 from torch.utils.data import DataLoader
 from dataloader import JSONLDataset
 from functools import partial
@@ -21,7 +20,7 @@ from progress_table import ProgressTable
 class TrainingArgs:
     n_epoch:int = 100
     optim:Optimizer = AdamW
-    lr:float = 5e-4
+    lr:float = 5e-5
     batch_size:int = 4
     valid_every_n:int=5
     save_local_async:bool = False
@@ -31,7 +30,7 @@ class TrainingArgs:
 
     renew_training:bool = True
     save_checkpoint_n_iterations:int = None
-    save_checkpoint_min:int = 0.5
+    save_checkpoint_min:int = 2
 
     push_checkpoint_to_hub:bool = False
     push_checkpoint_to_hub_n_local_saves:int = 4
@@ -50,7 +49,7 @@ class TrainingArgs:
         return True
 
 class CirillaTrainer:
-    def __init__(self, model:Cirilla, training_args:TrainingArgs):
+    def __init__(self, model:nn.Module, training_args:TrainingArgs):
         self.model = model
         self.args = training_args
         self.optim = self._prepare_optimizer(**training_args.optim_kwargs)
@@ -263,6 +262,8 @@ class CirillaTrainer:
         self._save_local_checkpoint()
         if self.args.push_checkpoint_to_hub:
             self._push_all_to_hub(loss_item, dataset_path)
+
+        cache_or_fetch('N_DATA_POINTS', dataset_path, n_iter * self.args.batch_size)
 
     def training_step(self, data):
         out = self.model.pred(data[0])
@@ -526,16 +527,19 @@ if __name__ == '__main__':
     import numpy as np
     from model import Args
     from tokenizer_modules import CirillaTokenizer
+    from model import Cirilla
+    from bert_model import CirillaBERT, BertArgs
 
-    model = Cirilla(Args())
 
-    targs = TrainingArgs(hf_repo_id='AnthonyPa57/HF-torch-demo-R', local_checkpoint_folder='./test_model')
-    trainer = CirillaTrainer(model, targs)
+    # model = Cirilla(Args())
 
-    tokenizer = CirillaTokenizer(hub_url='AnthonyPa57/HF-torch-demo2')
-    dl = JSONLDataset(['./example.jsonl', './example.jsonl'], shuffle_path=True, tokenizer=tokenizer, max_len=model.args.context_window)
+    # targs = TrainingArgs(hf_repo_id='AnthonyPa57/HF-torch-demo-R', local_checkpoint_folder='./test_model')
+    # trainer = CirillaTrainer(model, targs)
 
-    trainer.train(dl, dl)
+    # tokenizer = CirillaTokenizer(hub_url='AnthonyPa57/HF-torch-demo2')
+    # dl = JSONLDataset(['./example.jsonl', './example.jsonl'], shuffle_path=True, tokenizer=tokenizer, max_len=model.args.context_window)
+
+    # trainer.train(dl, dl)
 
     # trainer._fuse_optim()
     # trainer._save_local_checkpoint()
@@ -548,3 +552,25 @@ if __name__ == '__main__':
     # trainer.benchmark()
 
     # time.sleep(60)
+
+    model = CirillaBERT(BertArgs(output_what='classify'))
+
+    targs = TrainingArgs(hf_repo_id='AnthonyPa57/HF-torch-demo-R', local_checkpoint_folder='./test_model_bert')
+    trainer = CirillaTrainer(model, targs)
+
+    tokenizer = CirillaTokenizer(hub_url='AnthonyPa57/HF-torch-demo2')
+    dl = JSONLDataset(['./example_bert.jsonl', './example_bert.jsonl'], shuffle_path=True, tokenizer=tokenizer, max_len=model.args.context_window)
+
+    from types import MethodType
+
+    def new_training_step(self, data):
+        out = self.model.pred(data[0], data[1]) # tokens, mask
+        loss = self.criterion(out, data[2])
+        return loss
+    
+    trainer.training_step = MethodType(new_training_step, trainer)
+    trainer.criterion == nn.CrossEntropyLoss()
+
+    trainer.train(dl, dl)
+
+    trainer._push_all_to_hub(0, 'test')

@@ -6,6 +6,7 @@ readme = "README.md"
 requires-python = ">=3.10"
 dependencies = [
     "aiofiles>=24.1.0",
+    "asciichartpy>=1.5.25",
     "attn-gym>=0.0.4",
     "bitsandbytes>=0.46.1",
     "datasets>=4.0.0",

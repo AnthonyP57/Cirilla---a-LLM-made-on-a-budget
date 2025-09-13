@@ -6,7 +6,7 @@ import json
 from tqdm import tqdm
 from typing import Optional
 import copy
-from multi_turn_vllm import random_user_prompts
+from .multi_turn_vllm import random_user_prompts
 import random
 from pathlib import Path
 

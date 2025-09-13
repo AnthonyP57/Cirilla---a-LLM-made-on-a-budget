@@ -133,7 +133,7 @@ class JSONLDataset(IterableDataset):
                                 
                                 tokens = tokenized_data['input_ids'].squeeze(0).to(self.device)
                                 mask = tokenized_data['attention_mask'].squeeze(0).to(self.device)
-                                yield tokens, mask
+                                yield tokens, mask, torch.tensor(line['label'], dtype=torch.int64, device=self.device)
                             else:
                                 yield line['text']
 

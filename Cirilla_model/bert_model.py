@@ -23,7 +23,9 @@ class BertArgs:
     dim:int = 1024
     d_ff:int = 2048
     n_layers:int = 4
-    output_what:bool = 'meanpool' # 'meanpool' or 'tokens' or 'vocab'
+    output_what:bool = 'meanpool' # 'meanpool' or 'tokens' or 'vocab' or 'classify'
+    cls_index:int = None
+    n_classes:int = 2
     tie_params:bool = False
     out_bias:bool = True
     
@@ -36,7 +38,7 @@ class BertArgs:
     """MoE"""
     num_experts:int = 8
     k:int = 4
-    moe_type:str = "megablocks-moe" # or "pytorch" or "megablocks-dmoe"
+    moe_type:str = "megablocks-dmoe" # or "pytorch" or "megablocks-moe"
     capacity_factor: float = 1.0
     impl: str = "grouped"   # or "sparse" Sparse MLP is not supported with triton >=3.2.0
     
@@ -123,6 +125,9 @@ class CirillaBERT(
             if self.args.tie_params:
                 self.output.weight = self.emb.embeddings.weight
 
+        elif self.args.output_what == 'classify':
+            self.output = nn.Linear(self.args.dim, self.args.n_classes, bias=self.args.out_bias)
+
         self.n_params = sum(p.numel() for p in self.parameters() if p.requires_grad)
 
         self.to(self.args.device, dtype=self.args.dtype)
@@ -132,7 +137,7 @@ class CirillaBERT(
         if attention_mask is None:
             return torch.mean(out, dim=1)
         
-        mask_expanded = attention_mask.unsqueeze(-1).expand(out.size())
+        mask_expanded = attention_mask.unsqueeze(-1).expand(out.size()).to(out.dtype)
         
         sum_embeddings = torch.sum(out * mask_expanded, dim=1)
         
@@ -154,6 +159,13 @@ class CirillaBERT(
             return x
         
         x = self.rmsnorm(x)
+
+        if self.args.output_what == 'classify':
+            if self.args.cls_index is None:
+                x = self.mean_pooling(x, attention_mask)
+            else:
+                x = x[:, self.args.cls_index]
+
         x = self.output(x)
 
         return x
