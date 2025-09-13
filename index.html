@@ -260,6 +260,8 @@
             <a href="#get_synth_reasoning_dataset">get_synth_reasoning_dataset</a>
             <a href="#vllm_multi_turn">vllm_multi_turn</a>
             <a href="#multi_turn_gather">multi_turn_gather</a>
+            <a href="#gather_summaries">gather_summaries</a>
+            <a href="#summaries_to_instruct">summaries_to_instruct</a>
         </div>
     </div>
 
@@ -415,7 +417,7 @@ searchInput.addEventListener('input', function() {
   │   ├── SMoE.py                     # Sparse mixture of Experts
   │   ...
   │
-  ├── Synth_data/
+  ├── synth_data/
   │   ├── fandom_create_instruct.py
   │   ├── fandom_scraper.py
   │   ├── Ollama_create_instruct.py
@@ -531,7 +533,7 @@ for _ in range(3):
                 <div class="code-label" style="margin-top: 50px;">single_pass_summary(paths, save_to, seed, num_predict, use_response_template) → None</div>
         
                 <div class="indented">
-                <p>For provided <code>.txt</code> files create a simple summary of them</p>
+                <p>For provided <code>.txt</code> files create a simple summary of them<br>See how to turn summaries into a dataset: <a href="#gather_summaries">gather_summaries</a> <a href="#summaries_to_instruct">summaries_to_instruct</a></p>
                 
                         <table>
                         <tr><th>Argument</th><th>Type</th><th>Description</th></tr>
@@ -702,6 +704,74 @@ Since the second instruction is nearly identical, it will be deleted in the fina
     {"role": "assistant", "content": "Meteoric iron coated with silver and inscribed with magical runes"}
     ], "data type": "conv", "model": "llama3.1:8b"}
 ...</code></pre>
+            </div>
+        </div>
+
+        <div class="function-doc" id="gather_summaries">
+        <h3>gather_summaries</h3>
+        <div class="code-label">func cirilla.synth_data.gather_summaries(in_path, out_path) → None</div>
+
+            <div class="indented">
+                <p>turn summaries into a training dataset</p>
+
+                <table style="margin-bottom: 50px;">
+                <tr><th>Argument</th><th>Type</th><th>Description</th></tr>
+                <tr><td><code>in_path</code></td><td>Path</td><td>path to the directory containing summaries in <code>.txt</code> files, they can be nested</td></tr>
+                <tr><td><code>out_path</code></td><td>Path</td><td>path to save the instructions to</td></tr>
+                </table>
+                
+                <p><strong>Example:</strong></p>
+                <pre><code class="language-python"><pre><code class="language-python">in_path = './witcher_synth_summaries'
+out_path = './witcher_summaries_gathered.jsonl'
+
+gather_summaries(in_path, out_path)</code></pre></code></pre>
+
+<p><strong>Example input file: <code class="language-bash">./witcher_synth_summaries/llama3.1:8b/Alchemist.txt</code></strong></p>
+<pre><code class="language-python">In the Witcher lore, Alchemists are individuals who practice alchemy ...</code></pre>
+
+<p><strong>Example created output file (obviously the actual <code>.jsonl</code> file is saved in single lines): <code class="language-bash">./witcher_summaries_gathered.jsonl</code></strong></p>
+<pre><code class="language-json">{
+    "subject": "sorcerers",
+    "text":"Mages, or sorcerers/sorceresses, ...",
+    "data type": "plain text", "source": "fandom", "model": "llama3.2:3b"
+}
+...</code></pre>
+            </div>
+        </div>
+
+        <div class="function-doc" id="summaries_to_instruct">
+        <h3>summaries_to_instruct</h3>
+        <div class="code-label">func cirilla.synth_data.summaries_to_instruct(in_path, out_path) → None</div>
+
+            <div class="indented">
+                <p>turn summaries into simple instructions. The user questions are chosen as one from a list</p>
+
+                <table style="margin-bottom: 50px;">
+                <tr><th>Argument</th><th>Type</th><th>Description</th></tr>
+                <tr><td><code>in_path</code></td><td>Path</td><td>path to the directory containing summaries in <code>.txt</code> files, they can be nested</td></tr>
+                <tr><td><code>out_path</code></td><td>Path</td><td>path to save the instructions to</td></tr>
+                </table>
+                
+                <p><strong>Example:</strong></p>
+                <pre><code class="language-python"><pre><code class="language-python">in_path = './witcher_synth_summaries'
+out_path = './witcher_summaries_gathered_instr.jsonl'
+
+gather_summaries(in_path, out_path)</code></pre></code></pre>
+
+<p><strong>Example input file: <code class="language-bash">./witcher_synth_summaries/llama3.1:8b/Alchemist.txt</code></strong></p>
+<pre><code class="language-python">In the Witcher lore, Alchemists are individuals who practice alchemy ...</code></pre>
+
+<p><strong>Example created output file (obviously the actual <code>.jsonl</code> file is saved in single lines): <code class="language-bash">./witcher_summaries_gathered_instr.jsonl</code></strong></p>
+<pre><code class="language-json">{
+    "subject": "Ravik",
+    "text": [
+    {"role": "user", "content": "What is notable about Ravik?"},
+    {"role": "assistant", "content": "Ravik, also known as Ravvy, was a friend ..."}
+    ],
+    "data type": "plain text", "source": "fandom", "model": "llama3.2:3b"
+}
+...</code></pre>
+As you may notice the user's question is asking about Ravik, which is the name of the file <code>./.../Ravik.txt</code>
             </div>
         </div>
 
