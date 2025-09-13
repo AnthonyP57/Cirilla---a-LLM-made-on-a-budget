@@ -2,7 +2,7 @@ import json
 import os
 import random
 
-def gater_summaries(in_path, out_path):
+def gather_summaries(in_path, out_path):
     summary_paths = []
     for main_path, subfolders, files in os.walk(in_path):
         for file in files:
