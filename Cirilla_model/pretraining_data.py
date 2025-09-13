@@ -6,16 +6,16 @@ pretraining = './training_datasets/pretraining.jsonl'
 pretraining_ = './training_datasets/pretraining_overview.jsonl'
 
 """"""
-dataset = load_dataset("roneneldan/TinyStories", split='train[:5%]')
+dataset = load_dataset("roneneldan/TinyStories", split='train[:2%]')
 
 data = []
 
 with open(pretraining_, 'a') as f:
-    f.write(json.dumps({'metadata': {'dataset':"roneneldan/TinyStories", 'split':'train[:5%]'},
+    f.write(json.dumps({'metadata': {'dataset':"roneneldan/TinyStories", 'split':'train[:2%]'},
         'num_rows':dataset.num_rows}) + '\n')
 
 for text in dataset:
-    data.append({'text': text['text'], 'data type': 'plain text', 'metadata': {'dataset':"roneneldan/TinyStories", 'split':'train[:5%]'}})
+    data.append({'text': text['text'], 'data type': 'plain text', 'metadata': {'dataset':"roneneldan/TinyStories", 'split':'train[:2%]'}})
 
 with open(pretraining, 'a') as f:
     for d in data:
@@ -41,17 +41,17 @@ with open(pretraining, 'a') as f:
 
 """"""
 
-dataset = load_dataset("nyu-mll/glue", "mnli", split="train[:5%]")
+dataset = load_dataset("nyu-mll/glue", "mnli", split="train[:3%]")
 
 with open(pretraining_, 'a') as f:
-    f.write(json.dumps({'metadata': {'dataset':"nyu-mll/glue", 'subset':'mnli', 'split':'train[:5%]'},
+    f.write(json.dumps({'metadata': {'dataset':"nyu-mll/glue", 'subset':'mnli', 'split':'train[:3%]'},
         'num_rows':dataset.num_rows * 2}) + '\n')
 
 data = []
 
 for text in dataset:
-    data.append({'text': text['premise'], 'data type': 'plain text', 'metadata': {'dataset':"nyu-mll/glue", "subset":"mnli", 'split':'train[:5%]'}})
-    data.append({'text': text['hypothesis'], 'data type': 'plain text', 'metadata': {'dataset':"nyu-mll/glue", "subset":"mnli", 'split':'train[:5%]'}})
+    data.append({'text': text['premise'], 'data type': 'plain text', 'metadata': {'dataset':"nyu-mll/glue", "subset":"mnli", 'split':'train[:3%]'}})
+    data.append({'text': text['hypothesis'], 'data type': 'plain text', 'metadata': {'dataset':"nyu-mll/glue", "subset":"mnli", 'split':'train[:3%]'}})
 
 with open(pretraining, 'a') as f:
     for d in data:
@@ -59,16 +59,16 @@ with open(pretraining, 'a') as f:
 
 """"""
 
-dataset = load_dataset("SimpleStories/SimpleStories", split="train[:10%]")
+dataset = load_dataset("SimpleStories/SimpleStories", split="train[:2%]")
 
 data = []
 
 with open(pretraining_, 'a') as f:
-    f.write(json.dumps({'metadata': {'dataset':"SimpleStories/SimpleStories", 'split':'train[:10%]'},
+    f.write(json.dumps({'metadata': {'dataset':"SimpleStories/SimpleStories", 'split':'train[:2%]'},
         'num_rows':dataset.num_rows}) + '\n')
 
 for text in dataset:
-    data.append({'text': text['story'], 'data type': 'plain text', 'metadata': {'dataset':"SimpleStories/SimpleStories", 'split':'train[:10%]'}})
+    data.append({'text': text['story'], 'data type': 'plain text', 'metadata': {'dataset':"SimpleStories/SimpleStories", 'split':'train[:2%]'}})
 
 with open(pretraining, 'a') as f:
     for d in data:

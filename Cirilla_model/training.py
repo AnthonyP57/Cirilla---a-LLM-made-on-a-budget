@@ -226,7 +226,7 @@ class CirillaTrainer:
                         print(f"Failed to save local checkpoint {sync_}:{e}\nSaving synchronously")
                         self._save_local_checkpoint()
 
-                    cache_or_fetch('N_DATA_POINTS', dataset_path, n_iter * self.args.batch_size)
+                    cache_or_fetch('N_DATA_POINTS', dataset_path, (n_iter + 1) * self.args.batch_size)
                     if push_hub and self.args.push_checkpoint_to_hub:
                         try:
                             self._push_all_to_hub_async(loss_item, dataset_path)
