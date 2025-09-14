@@ -274,6 +274,7 @@
             <a href="#get_activation">get_activation</a>
             <a href="#BertAttention">BertAttention</a>
             <a href="#RoPE">RoPE</a>
+            <a href="#SlidingWindowAttention">SlidingWindowAttention</a>
         </div>
     </div>
 
@@ -943,7 +944,7 @@ print(rmsnorm(torch.randn(1, dim, device='cuda')).shape)
         <div class="code-label">class cirilla.LLM_pieces.BertAttention(args, rope)</div>
 
             <div class="indented">
-                <p>get an optimized kernel from <a href="https://huggingface.co/models?other=kernel">Huggingface kernel hub</a><br>those kernels mostly work only on cuda</p>
+                <p>BERT attention with grouped query</p>
 
                 <table style="margin-bottom: 50px;">
                 <tr><th>Argument</th><th>Type</th><th>Description</th></tr>
@@ -999,6 +1000,78 @@ print(xq.shape, xq_out.shape, xq_out.dtype, xq_out.device)
 print(xk.shape, xk_out.shape, xk_out.dtype, xk_out.device)
 # torch.Size([2, 512, 4, 128]) torch.Size([2, 512, 4, 128]) torch.bfloat16 cuda:0
 # torch.Size([2, 512, 4, 128]) torch.Size([2, 512, 4, 128]) torch.bfloat16 cuda:0</code></pre>
+            </div>
+        </div>
+
+        <div class="function-doc" id="SlidingWindowAttention">
+        <h3>SlidingWindowAttention</h3>
+        <div class="code-label">class cirilla.LLM_pieces.SlidingWindowAttention(args, rope, mask, score_mod)</div>
+
+            <div class="indented">
+                <p>sliding window attention with grouped query</p>
+
+                <table style="margin-bottom: 50px;">
+                <tr><th>Argument</th><th>Type</th><th>Description</th></tr>
+                <tr><td><code>args</code></td><td>.AttentionArgs</td><td>arguments for the <code>SlidingWindowAttention</code> class</td></tr>
+                <tr><td><code>rope</code></td><td>cirilla.LLM_pieces.Rope.Rope</td><td>rotary positional embeddings class</code></td></tr>
+                <tr><td><code>mask</code></td><td>Union[BlockMask, .create_dynamic_block_mask]</td><td>attention mask or a function to create it</td></tr>
+                <tr><td><code>score_mod</code></td><td>Callable</td><td>a function to modify the attention scores, e.g. <a href="https://pytorch.org/blog/flexattention/#:~:text=need%20to%20recompile.-,Soft%2Dcapping,-Soft%2Dcapping%20is">Soft-capping</a></td></tr>
+                </table>
+                <p><strong>Signature:</strong></p>
+                <p align="center">
+                RMSNorm &rarr; W<sub>qkv</sub> &rarr; RoPE &rarr; FlexAttention
+                </p>
+
+                <p><strong>Example:</strong></p>
+                <pre><code class="language-python">import torch
+from cirilla.LLM_pieces import create_dynamic_block_mask, create_static_block_mask
+from attn_gym.mods import generate_tanh_softcap
+
+SOFT_CAP = 20
+
+x = torch.rand((1,2048,128*16), device='cuda', dtype=torch.bfloat16) # (b, seq, head_dim*h)
+
+""" static mask """
+static_mask = create_static_block_mask(sliding_window_causal, 2048, 2048)
+softcap = generate_tanh_softcap(SOFT_CAP, approx=False)
+# or you can do: softcap = None
+
+rope = RoPE(128, 2048)
+
+attention_layer = SlidingWindowAttention(AttentionArgs(),
+                                        rope,
+                                        mask=static_mask,
+                                        score_mod=softcap).to('cuda', dtype=torch.bfloat16)
+out = attention_layer(x)
+print(out.shape) # torch.Size([1, 2048, 2048])
+
+"""" dynamic mask - won't trigger recompilation """
+dynamic_args = AttentionArgs(static_mask=False)
+attention_layer = SlidingWindowAttention(dynamic_args,
+                                        mask=create_dynamic_block_mask,
+                                        rope=rope,
+                                        score_mod=softcap).to('cuda', dtype=torch.bfloat16)
+out = attention_layer(x)
+print(out.shape) # torch.Size([1, 2048, 2048])
+
+x = torch.rand((1,512,128*16), device='cuda', dtype=torch.bfloat16) # (b, seq, head_dim*h)
+
+out = attention_layer(x)
+print(out.shape) # torch.Size([1, 512, 2048])
+
+
+x = torch.rand((1,256,128*16), device='cuda', dtype=torch.bfloat16) # (b, seq, head_dim*h)
+
+out = attention_layer(x)
+print(out.shape) # torch.Size([1, 256, 2048])
+
+x = torch.rand((1,2048,128*16), device='cuda', dtype=torch.bfloat16) # (b, seq, head_dim*h)
+
+out = attention_layer(x)
+print(out.shape) # torch.Size([1, 2048, 2048])
+
+print(create_dynamic_block_mask.cache_info()) # how many times the mask template was reused
+# CacheInfo(hits=1, misses=3, maxsize=32, currsize=3)</code></pre>
             </div>
         </div>
 
