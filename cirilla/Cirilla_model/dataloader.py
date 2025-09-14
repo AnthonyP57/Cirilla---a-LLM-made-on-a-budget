@@ -3,7 +3,7 @@ from modules import cache_or_fetch
 import torch
 import json
 import random
-from torch.utils.data import IterableDataset, DataLoader
+from torch.utils.data import IterableDataset
 from typing import Union
 from tokenizer_modules import CirillaTokenizer
 
