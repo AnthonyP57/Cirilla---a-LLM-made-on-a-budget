@@ -3,7 +3,7 @@
 
 
 
-![](./img/ciri_w4_2.png)
+![](https://github.com/AnthonyP57/Radovid---a-LLM-made-on-a-budget/blob/master/img/ciri_w4_2.png?raw=true)
 *Ciri from The Witcher 4 trailer*
 
 # Cirilla
@@ -22,7 +22,7 @@ Her unique abilities make her one of the most pivotal figures in the saga. Known
 
 
 <p align="center">
-  <img src="./img/fake_ciri.webp" width="250"/>
+  <img src="https://github.com/AnthonyP57/Radovid---a-LLM-made-on-a-budget/blob/master/img/fake_ciri.webp?raw=true" width="250"/>
 </p>
 
 <div align='center'>
@@ -38,7 +38,7 @@ Guided by mentors and shaped by hardships, Ciri develops her abilities quickly, 
 Her combination of innate talent, adaptability, and the capacity for growth makes her an fitting symbol for a language model designed to acquire knowledge, evolve over time, and connect information across domains.
 
 <p align="center">
-  <img src="./img/Ciri.webp" width="220"/>
+  <img src="https://github.com/AnthonyP57/Radovid---a-LLM-made-on-a-budget/blob/master/img/Ciri.webp?raw=true" width="220"/>
 </p>
 
 <div align='center'>
@@ -70,7 +70,7 @@ Cirilla - a LLM made on a budget/
   │   ├── SMoE.py                     # Sparse mixture of Experts
   │   ...
   │
-  ├── Synth_data/
+  ├── synth_data/
   │   ├── multi_turn_vllm.py          # create multi turn instructions with VLLM
   │   ├── Ollama_create.py            # synthetic data creation with Ollama
   │   ├── reason_gym_synthetic.py     # create synthetic reasoning dataset with reasoning_gym
