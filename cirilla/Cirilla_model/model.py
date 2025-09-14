@@ -47,8 +47,8 @@ class Args:
     impl: str = "grouped"   # or "sparse" Sparse MLP is not supported with triton >=3.2.0
     
     """misc"""
-    dtype_str:str = 'fp8'
-    fp8_recipe:str="rowwise_with_gw_hp" # tensorwise (fastest), rowwise, rowwise_with_gw_hp (most accurate)
+    dtype_str:str = 'bfloat16'
+    fp8_recipe:str="tensorwise" # tensorwise (fastest), rowwise, rowwise_with_gw_hp (most accurate)
     theta:float = 10_000.0
     device:str = select_torch_device()
 
@@ -107,10 +107,9 @@ class Cirilla(
             if isinstance(mod, torch.nn.Linear):
                 if mod.in_features % 16 != 0 or mod.out_features % 16 != 0:
                     return False
-            print(f"Converting {mod} {fqn}")
             return True
 
-        config = Float8LinearConfig.from_recipe_name("tensorwise")
+        config = Float8LinearConfig.from_recipe_name(self.args.fp8_recipe)
         
         if self.args.static_mask:
             self.mask = create_static_block_mask(sliding_window_causal,self.args.context_window,

@@ -553,24 +553,24 @@ if __name__ == '__main__':
 
     # time.sleep(60)
 
-    # model = CirillaBERT(BertArgs(output_what='classify'))
+    model = CirillaBERT(BertArgs(output_what='classify'))
 
-    # targs = TrainingArgs(hf_repo_id='AnthonyPa57/HF-torch-demo-R', local_checkpoint_folder='./test_model_bert')
-    # trainer = CirillaTrainer(model, targs)
+    targs = TrainingArgs(hf_repo_id='AnthonyPa57/HF-torch-demo-R', local_checkpoint_folder='./test_model_bert')
+    trainer = CirillaTrainer(model, targs)
 
-    # tokenizer = CirillaTokenizer(hub_url='AnthonyPa57/HF-torch-demo2')
-    # dl = JSONLDataset(['./example_bert.jsonl', './example_bert.jsonl'], shuffle_path=True, tokenizer=tokenizer, max_len=model.args.context_window)
+    tokenizer = CirillaTokenizer(hub_url='AnthonyPa57/HF-torch-demo2')
+    dl = JSONLDataset(['./example_bert.jsonl', './example_bert.jsonl'], shuffle_path=True, tokenizer=tokenizer, max_len=model.args.context_window)
 
-    # from types import MethodType
+    from types import MethodType
 
-    # def new_training_step(self, data):
-    #     out = self.model.pred(data[0], data[1]) # tokens, mask
-    #     loss = self.criterion(out, data[2])
-    #     return loss
+    def new_training_step(self, data):
+        out = self.model.pred(data[0], data[1]) # tokens, mask
+        loss = self.criterion(out, data[2])
+        return loss
     
-    # trainer.training_step = MethodType(new_training_step, trainer)
-    # trainer.criterion == nn.CrossEntropyLoss()
+    trainer.training_step = MethodType(new_training_step, trainer)
+    trainer.criterion = nn.CrossEntropyLoss()
 
-    # trainer.train(dl, dl)
+    trainer.train(dl, dl)
 
     # trainer._push_all_to_hub(0, 'test')

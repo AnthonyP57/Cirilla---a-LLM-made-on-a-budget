@@ -15,6 +15,7 @@ import warnings
 import torch
 from huggingface_hub import PyTorchModelHubMixin, hf_hub_download
 from safetensors.torch import load_file
+from torchao.float8 import convert_to_float8_training, Float8LinearConfig
 
 @dataclass
 class BertArgs:
@@ -44,11 +45,14 @@ class BertArgs:
     
     """misc"""
     dtype_str:str = 'bfloat16'
+    fp8_recipe:str="tensorwise" # tensorwise (fastest), rowwise, rowwise_with_gw_hp (most accurate)
     theta:float = 10_000.0
     device:str = select_torch_device()
 
     @property
     def dtype(self):
+        if self.dtype_str == "fp8":
+            return torch.bfloat16 # for initialization, then convert to FP8
         return getattr(torch, self.dtype_str)
 
     def __post_init__(self):
@@ -77,7 +81,8 @@ class CirillaBERT(
         super().__init__()
 
         if isinstance(args, dict):
-               args = BertArgs(**args)
+            args = BertArgs(**args)
+
         if args is None:
             args = BertArgs()
 
@@ -91,16 +96,41 @@ class CirillaBERT(
         activation = get_activation('Motif-Technologies/activation')
         self.rmsnorm = activation.layers.RMSNorm(dim=self.args.dim) if self.args.device == torch.cuda.is_available() else nn.RMSNorm(self.args.dim)
 
+        def module_filter_fn(mod: torch.nn.Module, fqn: str):
+            # don't convert the last module
+            if fqn == "1":
+                return False
+            # don't convert linear modules with weight dimensions not divisible by 16
+            if isinstance(mod, torch.nn.Linear):
+                if mod.in_features % 16 != 0 or mod.out_features % 16 != 0:
+                    return False
+            return True
+
+        config = Float8LinearConfig.from_recipe_name(self.args.fp8_recipe)
+
+        self.attentions = [
+            BertAttention(self.args, self.rope)
+            for _ in range(self.args.n_layers)
+            ]
+
+        if self.args.dtype_str == "fp8":
+            self.attentions = [convert_to_float8_training(attention, config=config, module_filter_fn=module_filter_fn) for attention in self.attentions]
+        
         self.attentions = nn.ModuleList([
-            torch.compile(
-            BertAttention(self.args, self.rope),
-            mode='max-autotune') for _ in range(self.args.n_layers)
-        ])
+            torch.compile(attention, mode='max-autotune') for attention in self.attentions
+            ])
         
         if self.args.moe_type == 'pytorch':
-            self.smoes = nn.ModuleList([
-                torch.compile(SMoE(self.args, [Expert(self.args) for _ in range(self.args.num_experts)]), mode='max-autotune')
+            self.smoes = [
+                SMoE(self.args, [Expert(self.args) for _ in range(self.args.num_experts)])
                 for _ in range(self.args.n_layers)
+            ]
+
+            if self.args.dtype_str == 'fp8':
+                self.smoes = [convert_to_float8_training(smoe, config=config, module_filter_fn=module_filter_fn) for smoe in self.smoes]
+
+            self.smoes = nn.ModuleList([
+                torch.compile(smoe, mode='max-autotune') for smoe in self.smoes
             ])
 
         elif self.args.moe_type == 'megablocks-moe':
