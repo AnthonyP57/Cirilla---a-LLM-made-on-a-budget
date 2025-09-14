@@ -38,12 +38,3 @@ class RoPE(nn.Module):
         xk_out = xk_rot.flatten(-2)
 
         return xq_out, xk_out
-
-
-if __name__ == '__main__':
-    rope = RoPE(128, 512)
-    xq = torch.randn(2, 512, 4, 128, device='cuda', dtype=torch.bfloat16) # (b, seq_len, h, head_dim)
-    xk = torch.randn(2, 512, 4, 128, device='cuda', dtype=torch.bfloat16)
-    xq_out, xk_out = rope.apply_rotary_embeddings(xq, xk)
-    print(xq.shape, xq_out.shape, xq_out.dtype, xq_out.device)
-    print(xk.shape, xk_out.shape, xk_out.dtype, xk_out.device)

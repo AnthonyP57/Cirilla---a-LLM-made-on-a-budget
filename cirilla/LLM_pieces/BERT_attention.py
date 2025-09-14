@@ -4,7 +4,6 @@ from dataclasses import dataclass
 from typing import Optional
 import torch
 from .activations import get_activation
-from ..Cirilla_model.modules import select_torch_device
 
 flash_attention = get_activation("kernels-community/vllm-flash-attn3")
 
@@ -14,7 +13,7 @@ class BertAttentionArgs:
     n_kv_heads:int = 4
     dim:int = 128*16
     soft_cap:Optional[int] = 20
-    device:str = select_torch_device()
+    device:str = 'cuda:0'
 
 class BertAttention(nn.Module):
     def __init__(self, args: BertAttentionArgs, rope:RoPE):
@@ -80,12 +79,3 @@ class BertAttention(nn.Module):
 
         out = out.view(batch_size, seq_len, dim) # (b, seq, dim)
         return self.wo(out) #(b, seq, dim)
-
-if __name__=='__main__':
-
-    from cirilla.Cirilla_model.modules import benchmark_model_part
-
-    att = BertAttention(BertAttentionArgs(), RoPE(128, 512)).cuda().to(torch.bfloat16)
-    # att = torch.compile(att, mode='max-autotune')
-    x = torch.randn(4, 512, 128*16, device='cuda', dtype=torch.bfloat16)
-    benchmark_model_part(att, x, "BertAttention")
