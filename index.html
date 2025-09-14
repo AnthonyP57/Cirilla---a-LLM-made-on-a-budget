@@ -266,7 +266,17 @@
     </div>
 
     <div class="category">
-        <div class="category-header" data-toggle="modules">
+        <div class="category-header" data-toggle="pieces">
+            <span class="header-text">cirilla.LLM_pieces</span>
+            <span class="arrow">▾</span>
+        </div>
+        <div class="category-items" id="pieces-items">
+            <a href="#get_activation">get_activation</a>
+        </div>
+    </div>
+
+    <div class="category">
+        <div class="category-header" data-toggle="modules">LLM_pieces
             <span class="header-text">fandom_scraper</span>
             <span class="arrow">▾</span>
         </div>
@@ -443,7 +453,7 @@ searchInput.addEventListener('input', function() {
 
         <div class="function-doc" id="OllamaCurate">
         <h3>OllamaCurate</h3>
-        <div class="code-label">class cirilla.synth_data.OllamaCurate(model, system_prompt, response_template:BaseModel)</div>
+        <div class="code-label">class cirilla.synth_data.OllamaCurate(model, system_prompt, response_template)</div>
 
         <!-- <div class="function-signature">
             OllamaCurate(model, system_prompt, response_template:BaseModel)
@@ -903,6 +913,63 @@ multi_turn_gather(inp, outp)</code></pre></code></pre>
             </div>
         </div>
 
+        <div class="function-doc" id="get_activation">
+        <h3>get_activation</h3>
+        <div class="code-label">func cirilla.LLM_pieces.get_activation(path) → HF kernel</div>
+
+            <div class="indented">
+                <p>get an optimized kernel from <a href="https://huggingface.co/models?other=kernel">Huggingface kernel hub</a><br>those kernels mostly work only on cuda</p>
+
+                <table style="margin-bottom: 50px;">
+                <tr><th>Argument</th><th>Type</th><th>Description</th></tr>
+                <tr><td><code>path</code></td><td>Path</td><td>path to a Huggingface kernel e.g. <code>"kernels-community/activation"</code></td></tr>
+                </table>
+                
+                <p><strong>Example:</strong></p>
+                <pre><code class="language-python"><pre><code class="language-python">dim=256
+activation = get_activation('Motif-Technologies/activation')
+rmsnorm = activation.layers.RMSNorm(dim=dim).cuda()
+
+print(rmsnorm(torch.randn(1, dim, device='cuda')).shape)
+# torch.Size([1, 256])</code></pre></code></pre>
+</code></pre>
+            </div>
+        </div>
+
+        <div class="function-doc" id="BertAttention">
+        <h3>BertAttention</h3>
+        <div class="code-label">class cirilla.LLM_pieces.BertAttention(args, rope)</div>
+
+            <div class="indented">
+                <p>get an optimized kernel from <a href="https://huggingface.co/models?other=kernel">Huggingface kernel hub</a><br>those kernels mostly work only on cuda</p>
+
+                <table style="margin-bottom: 50px;">
+                <tr><th>Argument</th><th>Type</th><th>Description</th></tr>
+                <tr><td><code>args</code></td><td>.BertAttentionArgs</td><td>arguments for the <code>BertAttention</code> class</code></td></tr>
+                <tr><td><code>rope</code></td><td>cirilla.LLM_pieces.Rope.Rope</td><td>rotary positional embeddings class</code></td></tr>
+                </table>
+
+                <p><strong>Signature:</strong></p>
+                <p align="center">
+                RMSNorm &rarr; W<sub>qkv</sub> &rarr; RoPE &rarr; FlashAttention3
+                </p>
+                
+                <p><strong>Example:</strong></p>
+                <pre><code class="language-python">from cirilla.Cirilla_model.modules import benchmark_model_part
+
+att = BertAttention(BertAttentionArgs(), RoPE(128, 512)).cuda().to(torch.bfloat16)
+x = torch.randn(4, 512, 128*16, device='cuda', dtype=torch.bfloat16)
+benchmark_model_part(att, x, "BertAttention")
+
+# [BertAttention]
+# Forward time:   1.85 ms
+# Backward time:  4.03 ms
+# Forward memory: 56.12 MB
+# Backward memory:-36.12 MB
+</code></pre>
+            </div>
+        </div>
+
         <div class="function-doc" id="scrape_fandom">
         <h3>scrape_fandom</h3>
         <div class="code-label">func fandom_scraper.scrape_fandom(in_path, out_path, instruct_path, n_workers, wiki, lang) → None</div>
@@ -921,7 +988,7 @@ multi_turn_gather(inp, outp)</code></pre></code></pre>
                 </table>
                 
                 <p><strong>Example:</strong></p>
-                <pre><code class="language-python"><pre><code class="language-python">in_path = "./witcher_json"
+                <pre><code class="language-python">in_path = "./witcher_json"
 out_path = "./async_fandom"
 instruct_path = "./async_fandom_instruct"
 
@@ -931,7 +998,7 @@ scrape_fandom(in_path,
             n_workers = 50,
             wiki = "Witcher",
             lang = "en"
-            )</code></pre></code></pre>
+            )</code></pre>
 
 <p><strong>Example input file: <code class="language-bash">./witcher_json/witcher_1.json</code></strong></p>
 <pre><code class="language-json">[
@@ -1008,6 +1075,8 @@ As a child, he ...
 
 </div>
 </main>
+</body>
+</html>
 
 <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-python.min.js"></script>
