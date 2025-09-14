@@ -45,7 +45,7 @@ url = "https://download.pytorch.org/whl/cu128"
 explicit = true
 
 [tool.setuptools]
-packages = ["LLM_pieces", "Cirilla_model", "attention-gym.attn_gym", "synth_data"]
+packages = ["cirilla", "attention-gym.attn_gym"]
 
 [build-system]
 requires = ["setuptools", "wheel"]

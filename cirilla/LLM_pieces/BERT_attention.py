@@ -4,8 +4,9 @@ from dataclasses import dataclass
 from typing import Optional
 import torch
 from .activations import get_activation
+from ..Cirilla_model.modules import select_torch_device
 
-flash_attention = get_activation("kernels-community/flash-attn")
+flash_attention = get_activation("kernels-community/vllm-flash-attn3")
 
 @dataclass
 class BertAttentionArgs:
@@ -13,6 +14,7 @@ class BertAttentionArgs:
     n_kv_heads:int = 4
     dim:int = 128*16
     soft_cap:Optional[int] = 20
+    device:str = select_torch_device()
 
 class BertAttention(nn.Module):
     def __init__(self, args: BertAttentionArgs, rope:RoPE):
@@ -33,7 +35,7 @@ class BertAttention(nn.Module):
         # fused projection
         self.wqkv = nn.Linear(args.dim,
                               (self.n_heads_q + 2 * self.n_kv_heads) * self.head_dim,
-                              bias=False)
+                                bias=False)
         
         self.hq_dim = self.n_heads_q * self.head_dim
         self.hkv_dim = self.n_kv_heads * self.head_dim
@@ -74,14 +76,14 @@ class BertAttention(nn.Module):
         xv = self._repeat_kv(xv, self.n_rep)
 
         # (b, seq, h_q, head_dim)
-        out = flash_attention.flash_attn_func(q=xq, k=xk, v=xv, softcap=self.args.soft_cap, causal=False)#[0]
+        out = flash_attention.flash_attn_func(q=xq, k=xk, v=xv, softcap=self.args.soft_cap, causal=False)[0]
 
         out = out.view(batch_size, seq_len, dim) # (b, seq, dim)
         return self.wo(out) #(b, seq, dim)
 
 if __name__=='__main__':
 
-    from Cirilla_model.modules import benchmark_model_part
+    from cirilla.Cirilla_model.modules import benchmark_model_part
 
     att = BertAttention(BertAttentionArgs(), RoPE(128, 512)).cuda().to(torch.bfloat16)
     # att = torch.compile(att, mode='max-autotune')

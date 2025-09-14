@@ -6,8 +6,8 @@ from pathlib import Path
 from typing import Iterator
 
 SPECIAL_TOKENS = {'unk_token':'<unk>', 'pad_token':'<pad>', 'mask_token':'<mask>',
-                  'bos_token':'<sos>', 'eos_token':'<eos>', 'system_token':'<|system|>',
-                  'assistant_token':'<|assistant|>', 'user_token':'<|user|>', 'class_token':'<cls>'}
+                'bos_token':'<sos>', 'eos_token':'<eos>', 'system_token':'<|system|>',
+                'assistant_token':'<|assistant|>', 'user_token':'<|user|>', 'class_token':'<cls>'}
 
 class CirillaTokenizer:
     def __init__(self, path:Path=None, hub_url=None):

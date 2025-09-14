@@ -1,4 +1,4 @@
-from LLM_pieces import (
+from cirilla.LLM_pieces import (
     RoPE,
     SMoE,
     SlidingWindowAttention,
