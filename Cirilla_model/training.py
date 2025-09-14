@@ -54,7 +54,7 @@ class CirillaTrainer:
         self.args = training_args
         self.optim = self._prepare_optimizer(**training_args.optim_kwargs)
         self.criterion = nn.CrossEntropyLoss(ignore_index=1, # tokenizer.convert_tokens_to_ids(padding token) ; by default it's 1
-                                             label_smoothing=0.1)
+                                            label_smoothing=0.1)
 
         self.n_checkpoints = 0
 
@@ -275,12 +275,12 @@ class CirillaTrainer:
         self._set_global_vars()
 
         x = torch.randint(0, self.model.args.vocab_size,
-                          (4, self.model.args.context_window),
-                          dtype=torch.long, device=self.model.args.device)
+                        (4, self.model.args.context_window),
+                        dtype=torch.long, device=self.model.args.device)
         
         y = torch.randint(0, self.model.args.vocab_size,
-                          (4, self.model.args.context_window),
-                          dtype=torch.long, device=self.model.args.device)
+                        (4, self.model.args.context_window),
+                        dtype=torch.long, device=self.model.args.device)
         
         def loss_color(distance):
             if distance < 8:
@@ -531,15 +531,15 @@ if __name__ == '__main__':
     from bert_model import CirillaBERT, BertArgs
 
 
-    # model = Cirilla(Args())
+    model = Cirilla(Args())
 
-    # targs = TrainingArgs(hf_repo_id='AnthonyPa57/HF-torch-demo-R', local_checkpoint_folder='./test_model')
-    # trainer = CirillaTrainer(model, targs)
+    targs = TrainingArgs(hf_repo_id='AnthonyPa57/HF-torch-demo-R', local_checkpoint_folder='./test_model')
+    trainer = CirillaTrainer(model, targs)
 
-    # tokenizer = CirillaTokenizer(hub_url='AnthonyPa57/HF-torch-demo2')
-    # dl = JSONLDataset(['./example.jsonl', './example.jsonl'], shuffle_path=True, tokenizer=tokenizer, max_len=model.args.context_window)
+    tokenizer = CirillaTokenizer(hub_url='AnthonyPa57/HF-torch-demo2')
+    dl = JSONLDataset(['./example.jsonl', './example.jsonl'], shuffle_path=True, tokenizer=tokenizer, max_len=model.args.context_window)
 
-    # trainer.train(dl, dl)
+    trainer.train(dl, dl)
 
     # trainer._fuse_optim()
     # trainer._save_local_checkpoint()
@@ -553,24 +553,24 @@ if __name__ == '__main__':
 
     # time.sleep(60)
 
-    model = CirillaBERT(BertArgs(output_what='classify'))
+    # model = CirillaBERT(BertArgs(output_what='classify'))
 
-    targs = TrainingArgs(hf_repo_id='AnthonyPa57/HF-torch-demo-R', local_checkpoint_folder='./test_model_bert')
-    trainer = CirillaTrainer(model, targs)
+    # targs = TrainingArgs(hf_repo_id='AnthonyPa57/HF-torch-demo-R', local_checkpoint_folder='./test_model_bert')
+    # trainer = CirillaTrainer(model, targs)
 
-    tokenizer = CirillaTokenizer(hub_url='AnthonyPa57/HF-torch-demo2')
-    dl = JSONLDataset(['./example_bert.jsonl', './example_bert.jsonl'], shuffle_path=True, tokenizer=tokenizer, max_len=model.args.context_window)
+    # tokenizer = CirillaTokenizer(hub_url='AnthonyPa57/HF-torch-demo2')
+    # dl = JSONLDataset(['./example_bert.jsonl', './example_bert.jsonl'], shuffle_path=True, tokenizer=tokenizer, max_len=model.args.context_window)
 
-    from types import MethodType
+    # from types import MethodType
 
-    def new_training_step(self, data):
-        out = self.model.pred(data[0], data[1]) # tokens, mask
-        loss = self.criterion(out, data[2])
-        return loss
+    # def new_training_step(self, data):
+    #     out = self.model.pred(data[0], data[1]) # tokens, mask
+    #     loss = self.criterion(out, data[2])
+    #     return loss
     
-    trainer.training_step = MethodType(new_training_step, trainer)
-    trainer.criterion == nn.CrossEntropyLoss()
+    # trainer.training_step = MethodType(new_training_step, trainer)
+    # trainer.criterion == nn.CrossEntropyLoss()
 
-    trainer.train(dl, dl)
+    # trainer.train(dl, dl)
 
-    trainer._push_all_to_hub(0, 'test')
+    # trainer._push_all_to_hub(0, 'test')
