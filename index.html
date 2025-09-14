@@ -275,6 +275,10 @@
             <a href="#BertAttention">BertAttention</a>
             <a href="#RoPE">RoPE</a>
             <a href="#SlidingWindowAttention">SlidingWindowAttention</a>
+            <a href="#Expert">Expert</a>
+            <a href="#SMoE">SMoE</a>
+            <a href="#MegablockMoE">MegablockMoE</a>
+            <a href="#MegablockdMoE">MegablockdMoE</a>
         </div>
     </div>
 
@@ -1017,6 +1021,7 @@ print(xk.shape, xk_out.shape, xk_out.dtype, xk_out.device)
                 <tr><td><code>mask</code></td><td>Union[BlockMask, .create_dynamic_block_mask]</td><td>attention mask or a function to create it</td></tr>
                 <tr><td><code>score_mod</code></td><td>Callable</td><td>a function to modify the attention scores, e.g. <a href="https://pytorch.org/blog/flexattention/#:~:text=need%20to%20recompile.-,Soft%2Dcapping,-Soft%2Dcapping%20is">Soft-capping</a></td></tr>
                 </table>
+
                 <p><strong>Signature:</strong></p>
                 <p align="center">
                 RMSNorm &rarr; W<sub>qkv</sub> &rarr; RoPE &rarr; FlexAttention
@@ -1072,6 +1077,111 @@ print(out.shape) # torch.Size([1, 2048, 2048])
 
 print(create_dynamic_block_mask.cache_info()) # how many times the mask template was reused
 # CacheInfo(hits=1, misses=3, maxsize=32, currsize=3)</code></pre>
+            </div>
+        </div>
+
+        <div class="function-doc" id="Expert">
+        <h3>Expert</h3>
+        <div class="code-label">class cirilla.LLM_pieces.Expert(args)</div>
+
+            <div class="indented">
+                <p>a single expert used in Sparse Mixture of Experts (SMoE)</p>
+
+                <table style="margin-bottom: 50px;">
+                <tr><th>Argument</th><th>Type</th><th>Description</th></tr>
+                <tr><td><code>args</code></td><td>.ExpertArgs</td><td>arguments for the <code>Expert</code> class</td></tr>
+                </table>
+
+                <p><strong>Signature:</strong></p>
+                <p align="center">
+                SwiGLU 
+                <span style="color: gray;">
+                    (W<sub>1</sub> → [SiLU(x<sub>[:d<sub>ff</sub>]</sub>) ⊙ x<sub>[d<sub>ff</sub>:]</sub>] → W<sub>2</sub>)
+                </span>
+                </p>
+                
+            </div>
+        </div>
+
+        <div class="function-doc" id="SMoE">
+        <h3>SMoE</h3>
+        <div class="code-label">class cirilla.LLM_pieces.SMoE(args, experts)</div>
+
+            <div class="indented">
+                <p>pytorch implementation of SMoE</p>
+
+                <table style="margin-bottom: 50px;">
+                <tr><th>Argument</th><th>Type</th><th>Description</th></tr>
+                <tr><td><code>args</code></td><td>.SMoEArgs</td><td>arguments for the <code>SMoE</code> class</td></tr>
+                <tr><td><code>experts</code></td><td>list[<a href="#Expert">Expert</a>]</td><td>list of experts to use</td></tr>
+                </table>
+
+                <p><strong>Signature:</strong></p>
+                <p align="center">
+                RMSNorm &rarr; Gating &rarr; Experts
+                </p>
+                
+                <p><strong>Example:</strong></p>
+                <pre><code class="language-python">import torch
+
+moe = SMoE(
+    SMoEArgs(num_experts=4, k=2),
+        [Expert(ExpertArgs()) for _ in range(4)]
+    ).to("cuda") # hf kernel only work on cuda
+
+x = torch.randn(4, 1024, 128,
+                device='cuda', requires_grad=True) # (b, seq_len, dim) ; requires grad for smoe
+
+out = moe(x)
+</code></pre>
+            </div>
+        </div>
+    
+        <div class="function-doc" id="MegablockMoE">
+        <h3>MegablockMoE</h3>
+        <div class="code-label">class cirilla.LLM_pieces.MegablockMoE(args)</div>
+
+            <div class="indented">
+                <p><a href="#https://github.com/databricks/megablocks">megablocks</a> implementation of MoE</p>
+
+                <table style="margin-bottom: 50px;">
+                <tr><th>Argument</th><th>Type</th><th>Description</th></tr>
+                <tr><td><code>args</code></td><td>.MegablockArgs</td><td>arguments for the <code>MegablockMoE</code> class</td></tr>
+                </table>
+                
+                <p><strong>Example:</strong></p>
+                <pre><code class="language-python">import torch
+                    
+megamoe = MegablockMoE(MegablockArgs())
+x = torch.randn(4, 1024, 128,
+                device='cuda', requires_grad=True) # (b, seq_len, dim) ; requires grad for smoe
+
+out = megamoe(x)
+</code></pre>
+            </div>
+        </div>
+
+        <div class="function-doc" id="MegablockdMoE">
+        <h3>MegablockdMoE</h3>
+        <div class="code-label">class cirilla.LLM_pieces.MegablockdMoE(args)</div>
+
+            <div class="indented">
+                <p><a href="#https://github.com/databricks/megablocks">megablocks</a> implementation of dropless MoE (dMoE)</p>
+
+                <table style="margin-bottom: 50px;">
+                <tr><th>Argument</th><th>Type</th><th>Description</th></tr>
+                <tr><td><code>args</code></td><td>.MegablockArgs</td><td>arguments for the <code>MegablockdMoE</code> class</td></tr>
+                </table>
+                
+                <p><strong>Example:</strong></p>
+                <pre><code class="language-python">import torch
+
+megadmoe = MegablockdMoE(MegablockArgs())
+x = torch.randn(4, 1024, 128,
+                device='cuda', requires_grad=True) # (b, seq_len, dim) ; requires grad for smoe
+
+out = megadmoe(x)
+</code></pre>
             </div>
         </div>
 
