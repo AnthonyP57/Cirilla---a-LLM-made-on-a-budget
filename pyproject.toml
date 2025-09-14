@@ -31,25 +31,6 @@ dependencies = [
     "vllm>=0.9.2",
 ]
 
-[project.optional-dependencies]
-cu128 = [
-    "nvidia-cublas-cu12==12.8.3.14 ; sys_platform == 'linux' or sys_platform == 'win32'",
-    "nvidia-cuda-cupti-cu12==12.8.57 ; sys_platform == 'linux' or sys_platform == 'win32'",
-    "nvidia-cuda-nvrtc-cu12==12.8.61 ; sys_platform == 'linux' or sys_platform == 'win32'",
-    "nvidia-cuda-runtime-cu12==12.8.57 ; sys_platform == 'linux' or sys_platform == 'win32'",
-    "nvidia-cudnn-cu12==9.7.1.26 ; sys_platform == 'linux' or sys_platform == 'win32'",
-    "nvidia-cufft-cu12==11.3.3.41 ; sys_platform == 'linux' or sys_platform == 'win32'",
-    "nvidia-cufile-cu12==1.13.0.11 ; sys_platform == 'linux' or sys_platform == 'win32'",
-    "nvidia-curand-cu12==10.3.9.55 ; sys_platform == 'linux' or sys_platform == 'win32'",
-    "nvidia-cusolver-cu12==11.7.2.55 ; sys_platform == 'linux' or sys_platform == 'win32'",
-    "nvidia-cusparse-cu12==12.5.7.53 ; sys_platform == 'linux' or sys_platform == 'win32'",
-    "nvidia-cusparselt-cu12==0.6.3 ; sys_platform == 'linux' or sys_platform == 'win32'",
-    "nvidia-nccl-cu12==2.26.2 ; sys_platform == 'linux' or sys_platform == 'win32'",
-    "nvidia-nvjitlink-cu12==12.8.61 ; sys_platform == 'linux' or sys_platform == 'win32'",
-    "nvidia-nvtx-cu12==12.8.55 ; sys_platform == 'linux' or sys_platform == 'win32'"
-]
-
-
 [tool.uv.sources]
 torch = [
   { index = "pytorch-cu128", marker = "sys_platform == 'linux' or sys_platform == 'win32'" },
