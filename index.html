@@ -257,11 +257,11 @@
         <div class="category-items" id="model-items">
             <a href="#OllamaCurate">OllamaCurate</a>
             <a href="#rm_duplicate_instructs">rm_duplicate_instructs</a>
+            <a href="#gather_summaries">gather_summaries</a>
+            <a href="#summaries_to_instruct">summaries_to_instruct</a>
             <a href="#get_synth_reasoning_dataset">get_synth_reasoning_dataset</a>
             <a href="#vllm_multi_turn">vllm_multi_turn</a>
             <a href="#multi_turn_gather">multi_turn_gather</a>
-            <a href="#gather_summaries">gather_summaries</a>
-            <a href="#summaries_to_instruct">summaries_to_instruct</a>
         </div>
     </div>
 
@@ -272,11 +272,13 @@
         </div>
         <div class="category-items" id="pieces-items">
             <a href="#get_activation">get_activation</a>
+            <a href="#BertAttention">BertAttention</a>
+            <a href="#RoPE">RoPE</a>
         </div>
     </div>
 
     <div class="category">
-        <div class="category-header" data-toggle="modules">LLM_pieces
+        <div class="category-header" data-toggle="modules">
             <span class="header-text">fandom_scraper</span>
             <span class="arrow">▾</span>
         </div>
@@ -960,13 +962,43 @@ print(rmsnorm(torch.randn(1, dim, device='cuda')).shape)
 att = BertAttention(BertAttentionArgs(), RoPE(128, 512)).cuda().to(torch.bfloat16)
 x = torch.randn(4, 512, 128*16, device='cuda', dtype=torch.bfloat16)
 benchmark_model_part(att, x, "BertAttention")
-
 # [BertAttention]
 # Forward time:   1.85 ms
 # Backward time:  4.03 ms
 # Forward memory: 56.12 MB
 # Backward memory:-36.12 MB
+
+out = att(x)
 </code></pre>
+            </div>
+        </div>
+
+        <div class="function-doc" id="RoPE">
+        <h3>RoPE</h3>
+        <div class="code-label">class cirilla.LLM_pieces.RoPE(head_dim, seq_len, device, theta, dtype)</div>
+
+            <div class="indented">
+                <p>rotary positional embeddings</p>
+
+                <table style="margin-bottom: 50px;">
+                <tr><th>Argument</th><th>Type</th><th>Description</th></tr>
+                <tr><td><code>head_dim</code></td><td>int</td><td>size of the head dimension</td></tr>
+                <tr><td><code>seq_len</code></td><td>int</td><td>(maximum) sequence length</td></tr>
+                <tr><td><code>device</code></td><td>Union[torch.device, str]</td><td>device to use</td></tr>
+                <tr><td><code>theata</code></td><td>float</td><td>theta for sin and cos</td></tr>
+                <tr><td><code>dtype</code></td><td>torch.dtype</td><td>dtype to use</td></tr>
+                </table>
+                
+                <p><strong>Example:</strong></p>
+                <pre><code class="language-python">rope = RoPE(128, 512)
+xq = torch.randn(2, 512, 4, 128, device='cuda', dtype=torch.bfloat16) # (b, seq_len, head, head_dim)
+xk = torch.randn(2, 512, 4, 128, device='cuda', dtype=torch.bfloat16)
+xq_out, xk_out = rope.apply_rotary_embeddings(xq, xk)
+
+print(xq.shape, xq_out.shape, xq_out.dtype, xq_out.device)
+print(xk.shape, xk_out.shape, xk_out.dtype, xk_out.device)
+# torch.Size([2, 512, 4, 128]) torch.Size([2, 512, 4, 128]) torch.bfloat16 cuda:0
+# torch.Size([2, 512, 4, 128]) torch.Size([2, 512, 4, 128]) torch.bfloat16 cuda:0</code></pre>
             </div>
         </div>
 
