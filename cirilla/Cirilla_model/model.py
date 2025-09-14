@@ -177,7 +177,8 @@ class Cirilla(
         x = self.emb(x)
 
         for attention, moe in zip(self.attentions, self.smoes):
-            x = x + attention(x) + moe(x)
+            x = x + attention(x)
+            x = x + moe(x)
 
         x = self.rmsnorm(x)
         x = self.output(x)

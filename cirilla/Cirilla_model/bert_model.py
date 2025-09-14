@@ -180,7 +180,8 @@ class CirillaBERT(
         x = self.emb(x)
 
         for attention, moe in zip(self.attentions, self.smoes):
-            x = x + attention(x) + moe(x)
+            x = x + attention(x)
+            x = x + moe(x)
 
         if self.args.output_what == 'meanpool':
             return self.mean_pooling(x, attention_mask)
