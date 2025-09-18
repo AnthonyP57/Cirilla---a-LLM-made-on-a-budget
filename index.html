@@ -283,6 +283,16 @@
     </div>
 
     <div class="category">
+        <div class="category-header" data-toggle="models">
+            <span class="header-text">Cirilla_model</span>
+            <span class="arrow">▾</span>
+        </div>
+        <div class="category-items" id="models-items">
+            <a href="#CirillaBERT">CirillaBERT</a>
+        </div>
+    </div>
+
+    <div class="category">
         <div class="category-header" data-toggle="modules">
             <span class="header-text">fandom_scraper</span>
             <span class="arrow">▾</span>
@@ -1185,6 +1195,90 @@ out = megadmoe(x)
             </div>
         </div>
 
+        <div class="function-doc" id="CirillaBERT">
+        <h3>CirillaBERT</h3>
+        <div class="code-label">class cirilla.Cirilla_model.CirillaBERT(args)</div>
+
+            <div class="indented">
+                <p>implementation of ModernBERT with Cirilla LLM pieces</p>
+
+                <table style="margin-bottom: 50px;">
+                <tr><th>Argument</th><th>Type</th><th>Description</th></tr>
+                <tr><td><code>args</code></td><td>.BertArgs</td><td>arguments for the <code>CirillaBERT</code> class</td></tr>
+                </table>
+
+                <p><strong>Signature:</strong></p>
+                <p align="center">
+                Input Embeddings &rarr; N&times;(BertAttention &rarr; MoE) &rarr; Mean Pooling / tokens / classes / (RMSNorm &rarr; W<sub>out</sub>)
+                </p>
+
+                <p><strong>Example:</strong></p>
+                <pre><code class="language-python">model = CirillaBERT(BertArgs(output_what='classify'))
+
+targs = TrainingArgs(hf_repo_id='AnthonyPa57/HF-torch-demo-R', local_checkpoint_folder='./test_model_bert')
+trainer = CirillaTrainer(model, targs)
+
+tokenizer = CirillaTokenizer(hub_url='AnthonyPa57/HF-torch-demo2')
+dl = JSONLDataset(['./example_bert.jsonl', './example_bert.jsonl'],
+                    shuffle_path=True, tokenizer=tokenizer, max_len=model.args.context_window)
+
+from types import MethodType
+
+def new_training_step(self, data):
+    out = self.model.pred(data[0], data[1]) # tokens, mask
+    loss = self.criterion(out, data[2])
+    return loss
+
+trainer.training_step = MethodType(new_training_step, trainer)
+trainer.criterion = nn.CrossEntropyLoss()
+
+trainer.train(dl, dl)</code></pre>
+
+                <div class="code-label" style="margin-top: 50px;">pred(x, attention_mask) → torch.Tensor</div>
+        
+                <div class="indented">
+                <p>forward pass of the model, can return mean pooling / tokens / classes / llm output</p>
+                
+                        <table>
+                        <tr><th>Argument</th><th>Type</th><th>Description</th></tr>
+                        <tr><td><code>x</code></td><td>torch.Tensor</td><td>tensor of shape <code>(b, seq_len, dim)</code></td></tr>
+                        <tr><td><code>attention_mask</code></td><td>Optional[torch.Tensor]</td><td>attention mask, used for mean pooling</td></tr>
+                        </table>
+
+                    <p><strong>Example:</strong></p>
+                    <pre><code class="language-python">vocab_size = 60_000
+context_window = 2048
+x = torch.randint(0, vocab_size,
+    (4, context_window),
+    dtype=torch.long)
+
+mask = torch.zeros_like(x)
+mask[x != 0] = 1
+
+model = CirillaBERT(BertArgs(output_what='classify', n_classes=2))
+
+print(model.pred(x, mask).shape) # torch.Size([4, 2])</code></pre>
+            </div>
+
+                            <div class="code-label" style="margin-top: 50px;">pull_model_from_hub(hf_repo_id) → None</div>
+        
+                <div class="indented">
+                <p>pull model from huggingface, the pulled model has to be compatible with <code>CirillaBERT</code></p>
+                
+                        <table>
+                        <tr><th>Argument</th><th>Type</th><th>Description</th></tr>
+                        <tr><td><code>hf_repo_id</code></td><td>str</td><td>huggingface repo id to pull model from</code></td></tr>
+                        </table>
+
+                    <p><strong>Example:</strong></p>
+                    <pre><code class="language-python">model = CirillaBERT(BertArgs())
+
+mode.pull_model_from_hub('AnthonyPa57/HF-torch-demo-R')</code></pre>
+            </div>
+
+        </div>
+        </div>
+        
         <div class="function-doc" id="scrape_fandom">
         <h3>scrape_fandom</h3>
         <div class="code-label">func fandom_scraper.scrape_fandom(in_path, out_path, instruct_path, n_workers, wiki, lang) → None</div>
