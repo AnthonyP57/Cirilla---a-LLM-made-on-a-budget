@@ -284,11 +284,14 @@
 
     <div class="category">
         <div class="category-header" data-toggle="models">
-            <span class="header-text">Cirilla_model</span>
+            <span class="header-text">cirilla.Cirilla_model</span>
             <span class="arrow">▾</span>
         </div>
         <div class="category-items" id="models-items">
             <a href="#CirillaBERT">CirillaBERT</a>
+            <a href="#JSONLDataset">JSONLDataset</a>
+            <a href="#Cirilla">Cirilla</a>
+            <a href="#benchmark_model_part">benchmark_model_part</a>
         </div>
     </div>
 
@@ -501,7 +504,7 @@ searchInput.addEventListener('input', function() {
                         </table>
 
                     <p><strong>Example:</strong></p>
-                    <pre><code class="language-python"><pre><code class="language-python">import os
+                    <pre><code class="language-python">import os
 import random
 
 class Response(BaseModel):
@@ -545,7 +548,7 @@ for _ in range(3):
             seed=random.randint(0, 1000),
             checkpoint=10
             skip=False,
-        )</code></pre></code></pre>
+        )</code></pre>
 
                 <p><strong>Example created output file: <code class="language-bash">./witcher_synthetic_instruct/qwen3:8b/Deadly Plot.json</code></strong></p>
 <pre><code class="language-json">{
@@ -572,7 +575,7 @@ for _ in range(3):
                         </table>
 
                     <p><strong>Example:</strong></p>
-                    <pre><code class="language-python"><pre><code class="language-python">import os
+                    <pre><code class="language-python">import os
 import random
 from pydantic import BaseModel, Field
 
@@ -593,7 +596,7 @@ for m in ["granite3.1-moe:3b"]:
         seed=random.randint(0, 1000),
         num_predict=4096,
         use_response_template=True,
-    )</code></pre></code></pre>
+    )</code></pre>
 
             </div>
 
@@ -614,7 +617,7 @@ for m in ["granite3.1-moe:3b"]:
                         </table>
 
                     <p><strong>Example:</strong></p>
-                    <pre><code class="language-python"><pre><code class="language-python">import os
+                    <pre><code class="language-python">import os
 from pydantic import BaseModel, Field
 import os
 import random
@@ -643,7 +646,7 @@ for m in ['llama3.2:3b', 'llama3.1:8b', 'qwen3:8b']:
                                     num_predict=2048,
                                     max_words_summary=500,
                                     use_response_template=True
-                                    )</code></pre></code></pre>
+                                    )</code></pre>
 
             </div>
 
@@ -663,7 +666,7 @@ for m in ['llama3.2:3b', 'llama3.1:8b', 'qwen3:8b']:
                         </table>
 
                     <p><strong>Example:</strong></p>
-                    <pre><code class="language-python"><pre><code class="language-python">from pydantic import BaseModel, Field
+                    <pre><code class="language-python">from pydantic import BaseModel, Field
 import os
 import random
 
@@ -684,7 +687,7 @@ for model in ['qwen3:8b', 'phi4', 'llama3.1:8b']:
         bar=bar,
         n_turns_range=(2, 5),
         seed=random.randint(0, 1000),
-        prob_chance_new_context=0.3)</code></pre></code></pre>
+        prob_chance_new_context=0.3)</code></pre>
 
             </div>
 
@@ -706,10 +709,10 @@ for model in ['qwen3:8b', 'phi4', 'llama3.1:8b']:
                 </table>
                 
                 <p><strong>Example:</strong></p>
-                <pre><code class="language-python"><pre><code class="language-python">main_dir = './witcher_synthetic_instruct'
+                <pre><code class="language-python">main_dir = './witcher_synthetic_instruct'
 save_to = './witcher_synthetic_instruct.jsonl'
 
-rm_duplicate_instructs(main_dir, save_to)</code></pre></code></pre>
+rm_duplicate_instructs(main_dir, save_to)</code></pre>
 
 <p><strong>Example input file: <code class="language-bash">./witcher_synthetic_instruct/qwen3:8b/Deadly Plot.json</code></strong></p>
 <pre><code class="language-json">{
@@ -748,10 +751,10 @@ Since the second instruction is nearly identical, it will be deleted in the fina
                 </table>
                 
                 <p><strong>Example:</strong></p>
-                <pre><code class="language-python"><pre><code class="language-python">in_path = './witcher_synth_summaries'
+                <pre><code class="language-python">in_path = './witcher_synth_summaries'
 out_path = './witcher_summaries_gathered.jsonl'
 
-gather_summaries(in_path, out_path)</code></pre></code></pre>
+gather_summaries(in_path, out_path)</code></pre>
 
 <p><strong>Example input file: <code class="language-bash">./witcher_synth_summaries/llama3.1:8b/Alchemist.txt</code></strong></p>
 <pre><code class="language-python">In the Witcher lore, Alchemists are individuals who practice alchemy ...</code></pre>
@@ -780,10 +783,10 @@ gather_summaries(in_path, out_path)</code></pre></code></pre>
                 </table>
                 
                 <p><strong>Example:</strong></p>
-                <pre><code class="language-python"><pre><code class="language-python">in_path = './witcher_synth_summaries'
+                <pre><code class="language-python">in_path = './witcher_synth_summaries'
 out_path = './witcher_summaries_gathered_instr.jsonl'
 
-gather_summaries(in_path, out_path)</code></pre></code></pre>
+gather_summaries(in_path, out_path)</code></pre>
 
 <p><strong>Example input file: <code class="language-bash">./witcher_synth_summaries/llama3.1:8b/Alchemist.txt</code></strong></p>
 <pre><code class="language-python">In the Witcher lore, Alchemists are individuals who practice alchemy ...</code></pre>
@@ -817,10 +820,10 @@ As you may notice the user's question is asking about Ravik, which is the name o
                 </table>
                 
                 <p><strong>Example:</strong></p>
-                <pre><code class="language-python"><pre><code class="language-python">out_path = './reason_gym_synth.jsonl'
+                <pre><code class="language-python">out_path = './reason_gym_synth.jsonl'
 n_samples = 400 # will contain 40'000 data points
 
-get_synth_resoning_dataset(out_path, n_samples)</code></pre></code></pre>
+get_synth_resoning_dataset(out_path, n_samples)</code></pre>
 
 <p><strong>Example output file: <code class="language-bash">./reason_gym_synth.jsonl</code> (obviously the actual <code>.jsonl</code> file is saved in single lines)</strong></p>
 <pre><code class="language-json">{"subject": "simple_equations", "text": [
@@ -857,7 +860,7 @@ get_synth_resoning_dataset(out_path, n_samples)</code></pre></code></pre>
                 </table>
                 
                 <p><strong>Example:</strong></p>
-                <pre><code class="language-python"><pre><code class="language-python">paths_ = ['./summaries/granite3.1-moe:3b',
+                <pre><code class="language-python">paths_ = ['./summaries/granite3.1-moe:3b',
             './summaries/llama3.1:8b',
             './summaries/llama3.2:3b',
             './summaries/qwen3:8b']
@@ -870,7 +873,7 @@ for model in ["unsloth/granite-3.2-2b-instruct-unsloth-bnb-4bit"]:
         
             vllm_multi_turn(sub_paths,
             save_to=f'./synth_multi_round/{model.split("/")[1]}/{paths_[i].split("/")[-1]}',
-            model=model)</code></pre></code></pre>
+            model=model)</code></pre>
         <p>Where the summaries may come from <a href="#OllamaCurate">OllamaCurate.single_pass_summary</a></p>
 
         <p><strong>Example created output file <code class="language-bash">./synth_multi_round/granite-3.2-2b-.../granite3.1-moe:3b/A Book of Tales.json</code>:</strong></p>
@@ -908,10 +911,10 @@ for model in ["unsloth/granite-3.2-2b-instruct-unsloth-bnb-4bit"]:
                 </table>
                 
                 <p><strong>Example:</strong></p>
-                <pre><code class="language-python"><pre><code class="language-python">inp = './synth_multi_round'
+                <pre><code class="language-python">inp = './synth_multi_round'
 outp = './multi_round.jsonl'
 
-multi_turn_gather(inp, outp)</code></pre></code></pre>
+multi_turn_gather(inp, outp)</code></pre>
         <p><strong>Example created output file <code class="language-bash">./multi_round.jsonl</code> (obviously the actual <code>.jsonl</code> file is saved in single lines):</strong></p>
 <pre><code class="language-json">{
     "subject": "A Little Sacrifice", "text":
@@ -943,12 +946,12 @@ multi_turn_gather(inp, outp)</code></pre></code></pre>
                 </table>
                 
                 <p><strong>Example:</strong></p>
-                <pre><code class="language-python"><pre><code class="language-python">dim=256
+                <pre><code class="language-python">dim=256
 activation = get_activation('Motif-Technologies/activation')
 rmsnorm = activation.layers.RMSNorm(dim=dim).cuda()
 
 print(rmsnorm(torch.randn(1, dim, device='cuda')).shape)
-# torch.Size([1, 256])</code></pre></code></pre>
+# torch.Size([1, 256])</code></pre>
 </code></pre>
             </div>
         </div>
@@ -972,7 +975,7 @@ print(rmsnorm(torch.randn(1, dim, device='cuda')).shape)
                 </p>
                 
                 <p><strong>Example:</strong></p>
-                <pre><code class="language-python">from cirilla.Cirilla_model.modules import benchmark_model_part
+                <pre><code class="language-python">from cirilla.Cirilla_model import benchmark_model_part
 
 att = BertAttention(BertAttentionArgs(), RoPE(128, 512)).cuda().to(torch.bfloat16)
 x = torch.randn(4, 512, 128*16, device='cuda', dtype=torch.bfloat16)
@@ -1241,7 +1244,7 @@ trainer.train(dl, dl)</code></pre>
                 
                         <table>
                         <tr><th>Argument</th><th>Type</th><th>Description</th></tr>
-                        <tr><td><code>x</code></td><td>torch.Tensor</td><td>tensor of shape <code>(b, seq_len, dim)</code></td></tr>
+                        <tr><td><code>x</code></td><td>torch.Tensor</td><td>tensor of shape <code>(b, seq_len)</code></td></tr>
                         <tr><td><code>attention_mask</code></td><td>Optional[torch.Tensor]</td><td>attention mask, used for mean pooling</td></tr>
                         </table>
 
@@ -1278,7 +1281,162 @@ mode.pull_model_from_hub('AnthonyPa57/HF-torch-demo-R')</code></pre>
 
         </div>
         </div>
+
+        <div class="function-doc" id="JSONLDataset">
+        <h3>JSONLDataset</h3>
+        <div class="code-label">class cirilla.Cirilla_model.JSONLDataset(paths, shuffle_path, device, tokenizer, max_len, pad_token, eos_token, sos_token, user_token, bert_append_tokens, random_spelling_mistake_prob, random_missing_char_prob)</div>
+
+            <div class="indented">
+                <p>basic dataset for training Cirilla models with <code>.jsonl</code> files</p>
+
+                <table style="margin-bottom: 50px;">
+                <tr><th>Argument</th><th>Type</th><th>Description</th></tr>
+                <tr><td><code>path</code></td><td>Union[Path, tuple[Path]]</td><td>path to a folder with <code>.jsonl</code> file(s) that contain training data</td></tr>
+                <tr><td><code>shuffle_path</code></td><td>bool</td><td>whether to shuffle the order of the <code>.jsonl</code> files (in place)</td></tr>
+                <tr><td><code>device</code></td><td>torch.device</td><td>what devide to transfer data to</td></tr>
+                <tr><td><code>tokenizer</code></td><td>CirillaTokenizer</td><td>tokenizer to use</td></tr>
+                <tr><td><code>max_len</code></td><td>int</td><td>maximum length of the sequence</td></tr>
+                <tr><td><code>pad_token</code></td><td>str</td><td>padding token <code>&lt;pad&gt;</code></td></tr>
+                <tr><td><code>eos_token</code></td><td>str</td><td>end of sequence token <code>&lt;eos&gt;</code></td></tr>
+                <tr><td><code>sos_token</code></td><td>str</td><td>start of sequence token <code>&lt;sos&gt;</code></td></tr>
+                <tr><td><code>user_token</code></td><td>str</td><td>user token <code>&lt;|user|&gt;</code></td></tr>
+                <tr><td><code>bert_append_tokens</code></td><td>list[str]</td><td>tokens to append to the end of the sequence for BERT models e.g. <code>&lt;cls&gt;</code></td></tr>
+                <tr><td><code>random_spelling_mistake_prob</code></td><td>float</td><td>probability of adding a random spelling mistake</td></tr>
+                <tr><td><code>random_missing_char_prob</code></td><td>float</td><td>probability of removing a random character</td></tr>
+                </table>
+
+                <p><strong>Example:</strong></p>
+                <pre><code class="language-python">import time
+import numpy as np
+
+tokenizer = CirillaTokenizer(hub_url='AnthonyPa57/HF-torch-demo2')
+
+dl = JSONLDataset(['./example.jsonl', './example.jsonl'],
+                    shuffle_path=True, tokenizer=tokenizer, max_len=32)
+print(len(dl))
+times = []
+dl = DataLoader(dl, batch_size=2)
+for _ in range(2):
+    times.append(time.time())
+    for i in dl:
+        print('-'*50)
+        print(i[0], i[1], sep='\n')
+        times.append(time.time())
+print(np.mean(np.diff(times)))</code></pre>
+
+<pre><code class="language-python">dataset = JSONLDataset(['./example.jsonl', './example.jsonl'],
+                        random_missing_char_prob=0.01, random_spelling_mistake_prob=0.02)
+for _ in range(4):
+    print(dataset._apply_random_spelling_mistake('hello world, I am a sentence'))
+
+# hwllo world, I am a sentence
+# hello worls, I am a sentence
+# helo world, I am a sentemce
+# helloworld, I am a sentence</code></pre>
+        </div>
+        </div>
+
+        <div class="function-doc" id="Cirilla">
+        <h3>Cirilla</h3>
+        <div class="code-label">class cirilla.Cirilla_model.Cirilla(args)</div>
+
+            <div class="indented">
+                <p>implementation of modern transformer model with Cirilla LLM pieces</p>
+
+                <table style="margin-bottom: 50px;">
+                <tr><th>Argument</th><th>Type</th><th>Description</th></tr>
+                <tr><td><code>args</code></td><td>.Args</td><td>arguments for the <code>Cirilla</code> class</td></tr>
+                </table>
+
+                <p><strong>Signature:</strong></p>
+                <p align="center">
+                Input Embeddings &rarr; N&times;(SlidingWindowAttention &rarr; MoE) &rarr; RMSNorm &rarr; W<sub>out</sub>
+                </p>
+
+                <p><strong>Example:</strong></p>
+                <pre><code class="language-python">model = Cirilla(Args())
+
+targs = TrainingArgs(hf_repo_id='AnthonyPa57/HF-torch-demo-R',
+                        local_checkpoint_folder='./test_model')
+
+trainer = CirillaTrainer(model, targs)
+
+tokenizer = CirillaTokenizer(hub_url='AnthonyPa57/HF-torch-demo2')
+dl = JSONLDataset(['./example.jsonl', './example.jsonl'],
+                    shuffle_path=True, tokenizer=tokenizer,
+                    max_len=model.args.context_window)
+
+trainer.train(dl, dl)</code></pre>
+
+                <div class="code-label" style="margin-top: 50px;">pred(x) → torch.Tensor</div>
         
+                <div class="indented">
+                <p>forward pass of the model, can return llm output of shape <code>(b, seq_len, vocab_size)</code></p>
+                
+                        <table>
+                        <tr><th>Argument</th><th>Type</th><th>Description</th></tr>
+                        <tr><td><code>x</code></td><td>torch.Tensor</td><td>tensor of shape <code>(b, seq_len)</code></td></tr>
+                        </table>
+
+                    <p><strong>Example:</strong></p>
+                    <pre><code class="language-python">vocab_size = 60_000
+context_window = 2048
+x = torch.randint(0, vocab_size,
+    (4, context_window),
+    dtype=torch.long)
+
+model = Cirilla(Args())
+
+print(model.pred(x).shape) # torch.Size([4, context_window, vocab_size])</code></pre>
+            </div>
+
+                            <div class="code-label" style="margin-top: 50px;">pull_model_from_hub(hf_repo_id) → None</div>
+        
+                <div class="indented">
+                <p>pull model from huggingface, the pulled model has to be compatible with <code>Cirilla</code></p>
+                
+                        <table>
+                        <tr><th>Argument</th><th>Type</th><th>Description</th></tr>
+                        <tr><td><code>hf_repo_id</code></td><td>str</td><td>huggingface repo id to pull model from</code></td></tr>
+                        </table>
+
+                    <p><strong>Example:</strong></p>
+                    <pre><code class="language-python">model = Cirilla(Args())
+
+mode.pull_model_from_hub('AnthonyPa57/HF-torch-demo-R')</code></pre>
+            </div>
+
+        </div>
+        </div>
+
+        <div class="function-doc" id="benchmark_model_part">
+        <h3>benchmark_model_part</h3>
+        <div class="code-label">func cirilla.Cirilla_model.benchmark_model_part(model, x, label) → None</div>
+
+            <div class="indented">
+                <p>benchmark a part of the model</p>
+
+                <table style="margin-bottom: 50px;">
+                <tr><th>Argument</th><th>Type</th><th>Description</th></tr>
+                <tr><td><code>model</code></td><td>Callable</td><td>model or a piece of the model to benchmark</code></td></tr>
+                <tr><td><code>x</code></td><td>torch.Tensor</td><td>input to the model or piece of the model</code></td></tr>
+                <tr><td><code>label</code></td><td>str</td><td>label for the benchmark</code></td></tr>
+                </table>
+                
+                <p><strong>Example:</strong></p>
+                <pre><code class="language-python">att = BertAttention(BertAttentionArgs(), RoPE(128, 512)).cuda().to(torch.bfloat16)
+x = torch.randn(4, 512, 128*16, device='cuda', dtype=torch.bfloat16)
+benchmark_model_part(att, x, "BertAttention")
+
+# [BertAttention]
+# Forward time:   1.85 ms
+# Backward time:  4.03 ms
+# Forward memory: 56.12 MB
+# Backward memory:-36.12 MB</code></pre>
+</code></pre>
+            </div>
+        </div>
+
         <div class="function-doc" id="scrape_fandom">
         <h3>scrape_fandom</h3>
         <div class="code-label">func fandom_scraper.scrape_fandom(in_path, out_path, instruct_path, n_workers, wiki, lang) → None</div>
@@ -1330,11 +1488,11 @@ As a child, he ...
 
 <p><strong>Example created output file: <code class="language-bash">./async_fandom_instruct/Geralt of Rivia.json</code></strong></p>
 <pre><code class="language-json">{
-  "Who is Geralt of Rivia?": "Geralt of Rivia is a witcher and the protagonist from The Witcher ...",
-  "What is Geralt's nickname?": "Geralt has a number of nicknames, with the more well known ones ...",
-  "Who trained Geralt to become a Witcher?": "Geralt was trained by his mentor Vesemir, who he ...",
-  "What is Geralt's profession?": "Geralt is a monster slayer for hire. He travels the world on ...",
-  "What is the Trial of The Grasses?": "The Trial of The Grasses was a painful process that ..."
+    "Who is Geralt of Rivia?": "Geralt of Rivia is a witcher and the protagonist from The Witcher ...",
+    "What is Geralt's nickname?": "Geralt has a number of nicknames, with the more well known ones ...",
+    "Who trained Geralt to become a Witcher?": "Geralt was trained by his mentor Vesemir, who he ...",
+    "What is Geralt's profession?": "Geralt is a monster slayer for hire. He travels the world on ...",
+    "What is the Trial of The Grasses?": "The Trial of The Grasses was a painful process that ..."
 }
 </code></pre>
 
@@ -1355,8 +1513,8 @@ As a child, he ...
                 </table>
                 
                 <p><strong>Example:</strong></p>
-                <pre><code class="language-python"><pre><code class="language-python">instructions_into_conv(input_path="./async_fandom_instruct",
-                       out_path="./async_fandom_instruct_gathered.jsonl")</code></pre></code></pre>
+                <pre><code class="language-python">instructions_into_conv(input_path="./async_fandom_instruct",
+                        out_path="./async_fandom_instruct_gathered.jsonl")</code></pre>
 
 <p><strong>Example input file: <code class="language-bash">./async_fandom_instruct/Geralt of Rivia.json</code></strong></p>
 <pre><code class="language-json">{
