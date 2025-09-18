@@ -1,11 +1,11 @@
 from pathlib import Path
-from modules import cache_or_fetch
+from .modules import cache_or_fetch
 import torch
 import json
 import random
 from torch.utils.data import IterableDataset
 from typing import Union
-from tokenizer_modules import CirillaTokenizer
+from .tokenizer_modules import CirillaTokenizer
 
 KEYBOARD_NEIGHBORS = {
     'a': 'qs', 'b': 'vn', 'c': 'xv', 'd': 'sf', 'e': 'wr', 'f': 'dg', 'g': 'fh',
@@ -208,25 +208,3 @@ class JSONLDataset(IterableDataset):
 
                         case _:
                             raise NotImplementedError(f"Data type {line['data type']} is not supported, use one of: ['plain text', 'conv', 'bert']")
-
-
-if __name__ == '__main__':
-    # import time
-    # import numpy as np
-    # from tokenizer_modules import CirillaTokenizer
-    # tokenizer = CirillaTokenizer(hub_url='AnthonyPa57/HF-torch-demo2')
-    # dl = JSONLDataset(['./example.jsonl', './example.jsonl'], shuffle_path=True, tokenizer=tokenizer, max_len=32)
-    # print(len(dl))
-    # times = []
-    # dl = DataLoader(dl, batch_size=2)
-    # for _ in range(2):
-    #     times.append(time.time())
-    #     for i in dl:
-    #         print('-'*50)
-    #         print(i[0], i[1], sep='\n')
-    #         times.append(time.time())
-    # print(np.mean(np.diff(times)))
-
-    dataset = JSONLDataset(['./example.jsonl', './example.jsonl'], random_missing_char_prob=0.01, random_spelling_mistake_prob=0.02)
-    for _ in range(2):
-        print(dataset._apply_random_spelling_mistake('hello world, I am a sentence'))

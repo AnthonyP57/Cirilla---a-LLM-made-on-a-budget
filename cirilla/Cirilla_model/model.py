@@ -12,7 +12,7 @@ from cirilla.LLM_pieces import (
 )
 from dataclasses import dataclass
 import torch.nn as nn
-from modules import select_torch_device, get_args_from_hub
+from .modules import select_torch_device, get_args_from_hub
 from typing import Optional
 import warnings
 import torch

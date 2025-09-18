@@ -53,7 +53,7 @@ def benchmark_model_part(model, x, label=""):
     print(f"Backward memory:{sum(bwd_mems)/len(bwd_mems)/1024/1024:.2f} MB")
 
 def get_args_from_hub(hf_repo_id):
-    from model import Args
+    from .model import Args
 
     file_path = hf_hub_download(
         repo_id=hf_repo_id,
@@ -66,7 +66,7 @@ def get_args_from_hub(hf_repo_id):
     return args
 
 def get_bertargs_from_hub(hf_repo_id):
-    from model import BertArgs
+    from .model import BertArgs
 
     file_path = hf_hub_download(
         repo_id=hf_repo_id,

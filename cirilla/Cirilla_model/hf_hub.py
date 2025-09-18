@@ -3,7 +3,7 @@ from huggingface_hub.repocard import metadata_eval_result, metadata_save
 import json
 import tempfile
 from pathlib import Path
-from model import Cirilla
+from .model import Cirilla
 from dataclasses import dataclass
 import torch
 
