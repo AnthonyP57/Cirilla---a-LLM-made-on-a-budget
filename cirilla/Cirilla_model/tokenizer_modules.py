@@ -73,35 +73,3 @@ class CirillaTokenizer:
     
     def convert_tokens_to_ids(self, tokens):
         return self.tokenizer.convert_tokens_to_ids(tokens)
-        
-if __name__ == '__main__':
-    # tokenizer = CirillaTokenizer(hub_url='AnthonyPa57/HF-torch-demo2')
-
-    # tokenizer.pull_from_hub('AnthonyPa57/HF-torch-demo2')
-    # tokenizer.push_to_hub('AnthonyPa57/HF-torch-demo2')
-    # tokenizer.pull_from_hub('AnthonyPa57/HF-torch-demo2')
-
-    # print(tokenizer.decode(tokenizer.encode('hello world')))
-    # print(tokenizer.encode('hello world'))
-
-    from dataloader import JSONLDataset
-    dl = JSONLDataset('./example.jsonl', shuffle_path=True)
-
-    tokenizer = CirillaTokenizer()
-    tokenizer.train(dl, special_tokens=SPECIAL_TOKENS, min_frequency=2)
-
-    tokenizer.push_to_hub('AnthonyPa57/HF-torch-demo2')
-
-    print(tokenizer.decode(tokenizer.encode('hello world')))
-    print(tokenizer.encode('<sos>What is the capital of France?<pad><eos><pad>'))
-    print(tokenizer.decode(tokenizer.encode('What is the capital of France?')))
-
-    # tokenizer = CirillaTokenizer(hub_url='AnthonyPa57/HF-torch-demo2')
-
-    chat = [
-        {'role': 'system', 'content': 'What is the capital of France?'},
-        {'role': 'user', 'content': 'What is the capital of France?'},
-    ]
-
-    print(tokenizer.decode(tokenizer.apply_chat_template(chat, tokenize=True, add_generation_prompt=False)))
-    print(tokenizer.apply_chat_template(chat, tokenize=True, add_generation_prompt=False))

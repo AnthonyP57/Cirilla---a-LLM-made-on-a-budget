@@ -1,4 +1,4 @@
-from cirilla.LLM_pieces import (
+from ..LLM_pieces import (
     RoPE,
     SMoE,
     get_activation,

@@ -14,6 +14,8 @@ from .modules import get_args_from_hub, cache_or_fetch
 import time
 import threading
 from progress_table import ProgressTable
+import numpy as np
+from .model import Cirilla
 
 @dataclass
 class TrainingArgs:
@@ -520,56 +522,3 @@ class CirillaTrainer:
     def _pull_all_from_hub(self):
         self._pull_model_from_hub()
         self._pull_optim_from_hub()
-
-if __name__ == '__main__':
-    import time
-    import numpy as np
-    from model import Args
-    from tokenizer_modules import CirillaTokenizer
-    from model import Cirilla
-    from bert_model import CirillaBERT, BertArgs
-
-
-    model = Cirilla(Args())
-
-    targs = TrainingArgs(hf_repo_id='AnthonyPa57/HF-torch-demo-R', local_checkpoint_folder='./test_model')
-    trainer = CirillaTrainer(model, targs)
-
-    tokenizer = CirillaTokenizer(hub_url='AnthonyPa57/HF-torch-demo2')
-    dl = JSONLDataset(['./example.jsonl', './example.jsonl'], shuffle_path=True, tokenizer=tokenizer, max_len=model.args.context_window)
-
-    trainer.train(dl, dl)
-
-    # trainer._fuse_optim()
-    # trainer._save_local_checkpoint()
-    # trainer._push_all_to_hub_async(0, 'test')
-
-    # trainer._load_local_checkpoint()
-    # trainer._pull_all_from_hub()
-    # trainer._pull_model_from_hub()
-
-    # trainer.benchmark()
-
-    # time.sleep(60)
-
-    # model = CirillaBERT(BertArgs(output_what='classify'))
-
-    # targs = TrainingArgs(hf_repo_id='AnthonyPa57/HF-torch-demo-R', local_checkpoint_folder='./test_model_bert')
-    # trainer = CirillaTrainer(model, targs)
-
-    # tokenizer = CirillaTokenizer(hub_url='AnthonyPa57/HF-torch-demo2')
-    # dl = JSONLDataset(['./example_bert.jsonl', './example_bert.jsonl'], shuffle_path=True, tokenizer=tokenizer, max_len=model.args.context_window)
-
-    # from types import MethodType
-
-    # def new_training_step(self, data):
-    #     out = self.model.pred(data[0], data[1]) # tokens, mask
-    #     loss = self.criterion(out, data[2])
-    #     return loss
-    
-    # trainer.training_step = MethodType(new_training_step, trainer)
-    # trainer.criterion = nn.CrossEntropyLoss()
-
-    # trainer.train(dl, dl)
-
-    # trainer._push_all_to_hub(0, 'test')
