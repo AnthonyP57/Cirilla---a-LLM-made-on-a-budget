@@ -10,11 +10,11 @@
 Cirilla is an open source learning project aiming at implmenting various LLMs.
 It is focused mainly on showing how to make, train, infer and deploy a LLM from scratch using Pytorch and a budget friendly GPU (RTX 4060Ti 16GiB ~500$).
 
-## Guide
+- [About Cirilla](#who-is-cirilla)
 
-### [About Cirilla](https://github.com/AnthonyP57/Cirilla---a-LLM-made-on-a-budget?tab=readme-ov-file#who-is-cirilla)
-### [Repo organization](https://github.com/AnthonyP57/Cirilla---a-LLM-made-on-a-budget?tab=readme-ov-file#repo-organization)
-### [Getting started](https://github.com/AnthonyP57/Cirilla---a-LLM-made-on-a-budget?tab=readme-ov-file#getting-started)
+- [Repo organization](#repo-organization)
+
+- [Getting started](#getting-started)
 
 ## Who is Cirilla
 **Cirilla Fiona Elen Riannon**, known as *Ciri*, is one of the central characters in 
