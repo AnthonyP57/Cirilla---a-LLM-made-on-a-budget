@@ -10,6 +10,12 @@
 Cirilla is an open source learning project aiming at implmenting various LLMs.
 It is focused mainly on showing how to make, train, infer and deploy a LLM from scratch using Pytorch and a budget friendly GPU (RTX 4060Ti 16GiB ~500$).
 
+## Guide
+
+### [About Cirilla](https://github.com/AnthonyP57/Cirilla---a-LLM-made-on-a-budget?tab=readme-ov-file#who-is-cirilla)
+### [Repo organization](https://github.com/AnthonyP57/Cirilla---a-LLM-made-on-a-budget?tab=readme-ov-file#repo-organization)
+### [Getting started](https://github.com/AnthonyP57/Cirilla---a-LLM-made-on-a-budget?tab=readme-ov-file#getting-started)
+
 ## Who is Cirilla
 **Cirilla Fiona Elen Riannon**, known as *Ciri*, is one of the central characters in 
 *The Witcher* saga by Andrzej Sapkowski and its adaptations.  
@@ -87,3 +93,57 @@ Cirilla - a LLM made on a budget/
       ├── train.py                    # main transformer training loop
       └── LongNet.py                  # LongNet - crude dilated attention implementation
 ```
+
+## Getting started
+### 1. Installing Cirilla
+```bash
+uv add Cirilla
+#or
+pip install Cirilla # that's it
+```
+### 2. building megablocks (not required, but recommended)
+#### 2.1. check the Pytorch cuda version
+```bash
+# check pip packages
+pip list | grep -E "torch|cupy|cudatoolkit|nvidia"
+
+# inside Pytorch info
+python - <<'PY'
+try:
+    import torch
+    print("torch:", torch.__version__)
+    print("torch.version.cuda:", torch.version.cuda)   # linked cuda runtime (e.g. '12.8')
+    print("cuda available:", torch.cuda.is_available())
+except Exception as e:
+    print("torch not installed or import failed:", e)
+PY
+```
+You should see something like:
+```bash
+nvidia-cublas-cu12                       12.4.5.8
+...
+torchvision                              0.22.0.dev20250424+cu126
+torch: 2.7.0+cu128
+torch.version.cuda: 12.8 # <- your cuda version
+cuda available: True
+```
+#### 2.2. check the driver version
+```bash
+# toolkit compiler
+which nvcc || echo "nvcc not in PATH"
+
+nvcc --version    # prints CUDA compiler version (toolkit version)
+```
+You should see something like:
+```bash
+/usr/local/cuda-12.8/bin/nvcc
+nvcc: NVIDIA (R) Cuda compiler driver
+Copyright (c) 2005-2025 NVIDIA Corporation
+Built on Fri_Feb_21_20:23:50_PST_2025
+Cuda compilation tools, release 12.8, V12.8.93 # <- make sure that the CUDA toolkit version matches that of the Pytorch form step 1. (release 12.8 == 12.8 from step 1, so all is good)
+Build cuda_12.8.r12.8/compiler.35583870_0
+```
+#### 2.3. Install the correct CUDA toolkit
+You can see a guide of how to install the correct CUDA toolkit [here](https://www.cherryservers.com/blog/install-cuda-ubuntu)
+
+To verify that everything works you can try running: `./examples/train_bert.py`
