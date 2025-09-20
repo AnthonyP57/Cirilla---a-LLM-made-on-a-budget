@@ -24,48 +24,48 @@
         top: 0;
         left: 0;
         width: 100%;
-        height: 60px;
+        height: 5.6%;
         background: #111;
         display: flex;
         align-items: center;
         justify-content: space-between;
-        padding: 0 20px;
+        padding: 0 1px;
         border-bottom: 1px solid #333;
         z-index: 1000;
     }
 
     header h1 {
-        font-size: 1.2rem;
+        font-size: 1.65rem;
         margin: 0;
-        margin-left: 300px;
+        margin-left: 15.1%;
     }
 
     .search-bar {
         background: #1a1a1a;
         border: 1px solid #333;
         border-radius: 8px;
-        padding: 6px 10px;
+        padding: 0.3% 0.9%;
         color: #fff;
-        width: 250px;
-        margin-right: 50px; /* move it left from the far edge */
+        width: 13%;
+        margin-right: 2.6%; /* move it left from the far edge */
         font-size: 1rem;
     }
 
     .sidebar h2 {
         font-size: 1rem;
-        margin-bottom: 15px;
+        margin-bottom: 0.8%;
         color: #facc15;
     }
 
     .sidebar {
         position: fixed;
-        top: 60px;
+        top: 5.6%;
         left: 0;
-        width: 200px;           /* make it wider if needed */
+        width: 10.4%;           
         height: 100%;
         background: #0b0b0b;
         border-right: 1px solid #333; 
-        padding: 20px 20px 20px 20px; /* move content away from the line */
+        padding: 1% 1.85% 1.85% 1%;
     }
 
     .sidebar a:hover {
@@ -73,9 +73,9 @@
     }
 
     main.container {
-        max-width: 1000px;
-        margin: 80px auto;
-        padding: 0 20px;
+        max-width: 55%;
+        margin: 4.2% auto;
+        padding: 0 1.85%;
     }
 
     img {
@@ -95,14 +95,14 @@
         font-size: 0.9em;
         color: gray;
         text-align: right;
-        margin-bottom: 20px;
+        margin-bottom: 1.85%;
     }
 
     h1, h2, h3 {
         text-align: left;
         font-size: 1.5em;
         font-weight: 600;
-        scroll-margin-top: 80px; /* offset for fixed header */
+        scroll-margin-top: 7.4%; /* offset for fixed header */
     }
 
     .flex-container {
@@ -292,6 +292,8 @@
             <a href="#JSONLDataset">JSONLDataset</a>
             <a href="#Cirilla">Cirilla</a>
             <a href="#benchmark_model_part">benchmark_model_part</a>
+            <a href="#CirillaTokenizer">CirillaTokenizer</a>
+            <a href="#CirillaTrainer">CirillaTrainer</a>
         </div>
     </div>
 
@@ -428,42 +430,6 @@ searchInput.addEventListener('input', function() {
     <h2>What is a LLM</h2>
     <p>On a high level: imagine a toddler with a huge amount of knowledge but still possessing a toddler-like way of reasoning and understanding.</p>
     <p>On a lower level: an LLM is a neural network trained on big data to recognize patterns, generate human-like responses, and predict the most likely next word in a given context. While it can process and recall information efficiently, it lacks true understanding, reasoning, or consciousness, relying only on statistical correlations rather than genuine comprehension. The reasoning of LLMs is being improved in projects (most notably) like DeepSeek, which focus on enhancing the ability to understand context and simulate human-like reasoning.</p>
-
-    <h2>Repo organization</h2>
-    <pre><code class="language-bash">Cirilla - a LLM made on a budget/
-  │
-  ├── BERT/                           # overview of BERT
-  │   └── RAG/                        # overview of RAG
-  │
-  ├── Cirilla_model/                  # implementation of Cirilla LLM
-  │   ├── model.py
-  │   ...
-  │
-  ├── Decoder_only_architecture/      # overview of decoder only transformer architecture
-  │   └── Llama2/                     # implementation of Llama 2 inference loop
-  │   └── Mistral/                    # overview of the Mistral 7B architecture and inference tricks
-  │
-  ├── LLM_pieces/                     # elements of decoder-only model you can use
-  │   ├── SMoE.py                     # Sparse mixture of Experts
-  │   ...
-  │
-  ├── synth_data/
-  │   ├── fandom_create_instruct.py
-  │   ├── fandom_scraper.py
-  │   ├── Ollama_create_instruct.py
-  │   ├── reason_gym_synthetic.py
-  │   └── rm_duplicate_instruct.py
-  │
-  ├── Training_optimizations/
-  │   ├──FlexAttention/
-  │   └── HF_kernels/
-  │     └── examples/
-  │
-  └── Transformer_from_scratch/
-      ├── model.py
-      ├── dataset.py
-      ├── train.py
-      └── LongNet.py</code></pre>
 
     <!-- Documentation Section -->
     <div class="docs-section">
@@ -1435,6 +1401,134 @@ benchmark_model_part(att, x, "BertAttention")
 # Backward memory:-36.12 MB</code></pre>
 </code></pre>
             </div>
+        </div>
+
+        <div class="function-doc" id="CirillaTokenizer">
+        <h3>CirillaTokenizer</h3>
+        <div class="code-label">class cirilla.Cirilla_model.CirillaTokenizer(path, hub_url)</div>
+
+            <div class="indented">
+                <p>tokenizer for the Cirilla models, it retains the functionality of Huggingface tokenizers</p>
+
+                <table style="margin-bottom: 50px;">
+                <tr><th>Argument</th><th>Type</th><th>Description</th></tr>
+                <tr><td><code>path</code></td><td>Path</td><td>local path to a tokenizer file</tr>
+                <tr><td><code>hub_url</code></td><td>str</td><td>huggingface repo id to pull tokenizer from</tr>
+                </table>
+
+                <p><strong>Example:</strong></p>
+                <pre><code class="language-python">tokenizer = CirillaTokenizer(hub_url='AnthonyPa57/HF-torch-demo2')
+
+chat = [
+    {'role': 'system', 'content': 'What is the capital of France?'},
+    {'role': 'user', 'content': 'What is the capital of France?'},
+]
+
+print(tokenizer.decode(tokenizer.apply_chat_template(chat, tokenize=True, add_generation_prompt=False)))
+print(tokenizer.apply_chat_template(chat, tokenize=True, add_generation_prompt=False))</code></pre>
+
+                <div class="code-label" style="margin-top: 50px;">train(dataset, special_tokens, save_to_path, **kwargs) → self.tokenizer</div>
+        
+                <div class="indented">
+                <p>train the tokenizer on an iterator dataset</code></p>
+                
+                        <table>
+                        <tr><th>Argument</th><th>Type</th><th>Description</th></tr>
+                        <tr><td><code>dataset</code></td><td>Union[Iterator[str], Iterator[Iterator[str]]]</td><td>dataset to train on</td></tr>
+                        <tr><td><code>special_tokens</code></td><td>dict[str, str]</td><td>special tokens to add to the tokenizer</td></tr>
+                        <tr><td><code>save_to_path</code></td><td>Path</td><td>local path to save tokenizer to</td></tr>
+                        <tr><td><code>**kwargs</code></td><td>Any</td><td><code>**kwargs</code> for tokenizer training</td></tr>
+                        </table>
+
+                    <p><strong>Example:</strong></p>
+                    <pre><code class="language-python">dl = JSONLDataset('./example.jsonl', shuffle_path=True)
+
+tokenizer = CirillaTokenizer()
+tokenizer.train(dl, special_tokens=SPECIAL_TOKENS, min_frequency=2)
+
+tokenizer.push_to_hub('AnthonyPa57/HF-torch-demo2')
+
+print(tokenizer.decode(tokenizer.encode('hello world')))
+print(tokenizer.encode('<sos>What is the capital of France?<pad><eos><pad>'))
+print(tokenizer.decode(tokenizer.encode('What is the capital of France?')))</code></pre>
+            </div>
+
+        </div>
+        </div>
+
+        <div class="function-doc" id="CirillaTrainer">
+        <h3>CirillaTrainer</h3>
+        <div class="code-label">class cirilla.Cirilla_model.CirillaTrainer(model, training_args)</div>
+
+            <div class="indented">
+                <p>trainer for the Cirilla models</p>
+
+                <table style="margin-bottom: 50px;">
+                <tr><th>Argument</th><th>Type</th><th>Description</th></tr>
+                <tr><td><code>model</code></td><td>torch.nn.Module</td><td>model to train</tr>
+                <tr><td><code>training_args</code></td><td>.TrainingArgs</td><td>arguments for the trainer</tr>
+                </table>
+
+                <p><strong>Example:</strong></p>
+                <pre><code class="language-python">model = Cirilla(Args())
+
+targs = TrainingArgs(hf_repo_id='AnthonyPa57/HF-torch-demo-R', local_checkpoint_folder='./test_model')
+trainer = CirillaTrainer(model, targs)
+
+tokenizer = CirillaTokenizer(hub_url='AnthonyPa57/HF-torch-demo2')
+dl = JSONLDataset(['./example.jsonl', './example.jsonl'], shuffle_path=True,
+                    tokenizer=tokenizer, max_len=model.args.context_window)
+
+trainer.train(dl, dl)</code></pre>
+
+                <div class="code-label" style="margin-top: 50px;">train(dataset, valid_dataset) → None</div>
+        
+                <div class="indented">
+                <p>train the model on on a dataset</code></p>
+                
+                        <table>
+                        <tr><th>Argument</th><th>Type</th><th>Description</th></tr>
+                        <tr><td><code>dataset</code></td><td>JSONLDataset</td><td>dataset to train on</td></tr>
+                        <tr><td><code>valid_dataset</code></td><td>JSONLDataset</td><td>dataset to validate on</td></tr>
+                        </table>
+
+                    <p><strong>Example:</strong></p>
+                    <pre><code class="language-python">model = CirillaBERT(BertArgs(output_what='classify'))
+
+targs = TrainingArgs(hf_repo_id='AnthonyPa57/HF-torch-demo-R',
+                        local_checkpoint_folder='./test_model_bert')
+trainer = CirillaTrainer(model, targs)
+
+tokenizer = CirillaTokenizer(hub_url='AnthonyPa57/HF-torch-demo2')
+dl = JSONLDataset(['./example_bert.jsonl', './example_bert.jsonl'],
+                    shuffle_path=True, tokenizer=tokenizer, max_len=model.args.context_window)
+
+from types import MethodType
+
+def new_training_step(self, data):
+    out = self.model.pred(data[0], data[1]) # tokens, mask
+    loss = self.criterion(out, data[2])
+    return loss
+
+trainer.training_step = MethodType(new_training_step, trainer)
+trainer.criterion = nn.CrossEntropyLoss()
+
+trainer.train(dl, dl)</code></pre>
+            </div>
+
+                <div class="code-label" style="margin-top: 50px;">benchmark() → None</div>
+        
+                <div class="indented">
+                <p>benchmark the model on a randomly generated data of batch size 4</code></p>
+
+                    <p><strong>Example:</strong></p>
+                    <pre><code class="language-python">model = Cirilla(Args())
+
+trainer.benchmark()
+# average time for epoch: 0.8215 (seconds)</code></pre>
+            </div>
+
+        </div>
         </div>
 
         <div class="function-doc" id="scrape_fandom">
