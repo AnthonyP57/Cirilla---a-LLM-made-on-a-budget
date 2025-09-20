@@ -105,7 +105,7 @@ pip install Cirilla # that's it
 #### 2.1. check the Pytorch cuda version
 ```bash
 # check pip packages
-pip list | grep -E "torch|cupy|cudatoolkit|nvidia"
+uv pip list | grep -E "torch|cupy|cudatoolkit|nvidia" # or just pip list ...
 
 # inside Pytorch info
 python - <<'PY'
@@ -120,9 +120,9 @@ PY
 ```
 You should see something like:
 ```bash
-nvidia-cublas-cu12                       12.4.5.8
+cupy-cuda12x                      13.6.0
 ...
-torchvision                              0.22.0.dev20250424+cu126
+torchvision                       0.22.0+cu128
 torch: 2.7.0+cu128
 torch.version.cuda: 12.8 # <- your cuda version
 cuda available: True
