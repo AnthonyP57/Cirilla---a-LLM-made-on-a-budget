@@ -12,7 +12,7 @@ The main difference between what we call a language model today and ~10 years ag
 - introducing the Mixture of Experts layer
 - different activations
 
-All in all what we have today is not that much different in principle to what was initially discovered by *Ashish Vaswani et all.*
+All in all what we have today is not that much different in principle to what was initially discovered by *Ashish Vaswani et al.*
 
 ## Understanding the building blocks
 The main part of neural networks is that they are made of differentiable blocks, meaning that we have blocks or layers that enable us to both let us calculate the output of the network and then based on the loss function or criterion go back layer by layer in order to adjust the "knobs" of the blocks. These ideas are called the forward and backward pass of models.

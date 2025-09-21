@@ -16,6 +16,8 @@ It is focused mainly on showing how to make, train, infer and deploy a LLM from 
 
 - [Getting started](#getting-started)
 
+- [Why Cirilla](#why-cirilla)
+
 ## Who is Cirilla
 **Cirilla Fiona Elen Riannon**, known as *Ciri*, is one of the central characters in 
 *The Witcher* saga by Andrzej Sapkowski and its adaptations.  
@@ -147,3 +149,46 @@ Build cuda_12.8.r12.8/compiler.35583870_0
 You can see a guide of how to install the correct CUDA toolkit [here](https://www.cherryservers.com/blog/install-cuda-ubuntu)
 
 To verify that everything works you can try running: `./examples/train_bert.py`
+
+## Why Cirilla
+
+Cirilla is a project focused on building **simple and optimized transformer models**. The goal is to give you access to all the modern bells and whistles, like Mixture of Experts (MoE) and [FlexAttention](https://pytorch.org/blog/flexattention/), without requiring you to implement or learn about them from scratch.
+
+### Modular building blocks
+Cirilla is organized around reusable transformer components. Each module is implemented in a clean and transparent way, making it easy to experiment, swap, or optimize parts of the model.
+
+*Some highlights:*
+- **Attention mechanisms**: sliding window attention with PyTorch FlexAttention, and non-causal “BERT-like” attention with Hugging Face [Flash Attention 3 kernels](https://huggingface.co/kernels-community/vllm-flash-attn3).  
+- **Rotary Positional Embeddings (RoPE)**: lightweight and efficient PyTorch implementation.  
+- **Mixture of Experts (MoE)**: available both as a pure PyTorch version and integrated with [Megablocks](https://github.com/databricks/megablocks).  
+- **From-scratch transformer**: complete implementations including dataset handling, model definition, training loops and checkpointing.  
+
+#### LLM blocks - learn where the magic happens
+- You can learn about the RMS norm [here](https://github.com/AnthonyP57/Cirilla---a-LLM-made-on-a-budget/tree/master/Decoder_only_architecture#normalization-and-rms-norm)
+- RoPE embeddings [here](https://github.com/AnthonyP57/Cirilla---a-LLM-made-on-a-budget/tree/master/Decoder_only_architecture/Llama2#rope)
+- Grouped-Query Attention [here](https://github.com/AnthonyP57/Cirilla---a-LLM-made-on-a-budget/tree/master/Decoder_only_architecture#multi-query-attention---mqa)
+- Sliding window attention [here](https://github.com/AnthonyP57/Cirilla---a-LLM-made-on-a-budget/tree/master/Decoder_only_architecture/Mistral#sliding-window-attention)
+- Rolling buffer cache [here](https://github.com/AnthonyP57/Cirilla---a-LLM-made-on-a-budget/tree/master/Decoder_only_architecture/Mistral#kv-cache-with-rolling-buffer-cache)
+- SwiGLU [here](https://github.com/AnthonyP57/Cirilla---a-LLM-made-on-a-budget/tree/master/Decoder_only_architecture#swiglu)
+- Mixture of Experts [here](https://github.com/AnthonyP57/Cirilla---a-LLM-made-on-a-budget/tree/master/Decoder_only_architecture/Mistral#sparse-mixture-of-experts)
+- BERT models [here](https://github.com/AnthonyP57/Cirilla---a-LLM-made-on-a-budget/tree/master/BERT)
+- dropless-MoE (dMoE) [here](https://arxiv.org/abs/2211.15841)
+
+### Focus on efficiency
+- **Optimized kernels** from [HuggingFace kernel hub](https://huggingface.co/models?other=kernel).
+- **Alternative attention mechanisms** for handling longer contexts and specialized training setups.
+- **Sparse Mixture of Experts** to scale models without an increase in compute cost.
+- **Fused optimizers** that reduce memory usage.
+- **FlexAttention** for efficient and sparse attention computation.
+
+### Research + Education
+Cirilla explains and integrates ideas from notable papers. This makes it an great resource for:
+- **Researchers**, who want to test new variations of transformer modules quickly.  
+- **Practitioners**, who need efficient and flexible code for training on limited hardware.  
+- **Students and hobbyists**, who want to learn how modern LLMs are built.  
+
+### Hugging Face integration
+Cirilla models can be easily pushed to and pulled from the Hugging Face Hub, making collaboration, sharing, and deployment straightforward.
+
+### Data generation tools
+The repository also provides scripts for **synthetic data generation**, including multi-turn dialogues, reasoning datasets, and domain-specific examples. This allows users to create datasets for fine-tuning and evaluation without relying solely on large, external corpora of questionable quality.
