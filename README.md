@@ -1,5 +1,7 @@
 > [!IMPORTANT]  
 > For a much nicer README visit [Cirilla](https://anthonyp57.github.io/Cirilla---a-LLM-made-on-a-budget/)
+> 
+> *(Note: the site is made for 16:9 1080p displays — I’m not a web developer, so it may look a bit rough on other screen sizes.)*
 
 
 
@@ -66,24 +68,14 @@ Cirilla - a LLM made on a budget/
   ├── BERT/                           # overview of BERT
   │   └── RAG/                        # overview of RAG
   │
-  ├── Cirilla_model/                  # implementation of Cirilla LLM
-  │   ├── model.py
-  │   ...
+  ├── cirilla/
+  │   └── Cirilla_model/              # implementation of the Cirilla LLM
+  │   └── LLM_pieces/                 # building blocks of LLMs
+  │   └── synth_data/                 # creating synthetic data
   │
   ├── Decoder_only_architecture/      # overview of decoder only transformer architecture
   │   └── Llama2/                     # implementation of Llama 2 inference loop
   │   └── Mistral/                    # overview of the Mistral 7B architecture and inference tricks
-  │
-  ├── LLM_pieces/                     # elements of decoder-only model you can use
-  │   ├── SMoE.py                     # Sparse mixture of Experts
-  │   ...
-  │
-  ├── synth_data/
-  │   ├── multi_turn_vllm.py          # create multi turn instructions with VLLM
-  │   ├── Ollama_create.py            # synthetic data creation with Ollama
-  │   ├── reason_gym_synthetic.py     # create synthetic reasoning dataset with reasoning_gym
-  │   ├── rm_duplicate_instruct.py    # remove duplicate instructions from Ollama
-  │   └── witcher_mr_gather.py        # create multi turn instructions with Witcher
   │
   ├── Training_optimizations/
   │   ├──FlexAttention/               # overview of Pytorch's FlexAttention
