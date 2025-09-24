@@ -151,6 +151,7 @@ Cirilla is organized around reusable transformer components. Each module is impl
 - **Attention mechanisms**: sliding window attention with PyTorch FlexAttention, and non-causal “BERT-like” attention with Hugging Face [Flash Attention 3 kernels](https://huggingface.co/kernels-community/vllm-flash-attn3).  
 - **Rotary Positional Embeddings (RoPE)**: lightweight and efficient PyTorch implementation.  
 - **Mixture of Experts (MoE)**: available both as a pure PyTorch version and integrated with [Megablocks](https://github.com/databricks/megablocks).  
+- **Muon optimizer**: optimizer for hidden layers
 - **From-scratch transformer**: complete implementations including dataset handling, model definition, training loops and checkpointing.  
 
 #### LLM blocks - learn where the magic happens
