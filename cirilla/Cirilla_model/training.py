@@ -16,17 +16,20 @@ import threading
 from progress_table import ProgressTable
 import numpy as np
 from .model import Cirilla
+from ..LLM_pieces import get_activation
 
 @dataclass
 class TrainingArgs:
     n_epoch:int = 100
     optim:Optimizer = AdamW
+    use_muon_optim:bool = False
+    static_triton_graph:bool = False
     lr:float = 5e-5
     batch_size:int = 4
     valid_every_n:int=5
     save_local_async:bool = False
     xavier_init:bool = True
-    local_checkpoint_folder:Path = './'
+    local_checkpoint_folder:Path = './test_model'
     optim_kwargs:dict[str,str] = field(default_factory=lambda: {'fused':True, 'foreach':False})
 
     renew_training:bool = True
@@ -54,6 +57,9 @@ class CirillaTrainer:
         self.model = model
         self.args = training_args
         self.optim = self._prepare_optimizer(**training_args.optim_kwargs)
+        if self.args.use_muon_optim:
+            self.moun_optim = get_activation("motif-technologies/optimizer")
+            
         self.criterion = nn.CrossEntropyLoss(ignore_index=1, # tokenizer.convert_tokens_to_ids(padding token) ; by default it's 1
                                             label_smoothing=0.1)
 
@@ -63,7 +69,11 @@ class CirillaTrainer:
 
     def train(self, dataset:JSONLDataset, valid_dataset:JSONLDataset=None):
 
-        assert cache_or_fetch('DATA_LEN', dataset.path_signature) % self.args.batch_size == 0, f"Dataset length: {cache_or_fetch('DATA_LEN', dataset.path_signature)} is not divisible by batch size: {self.args.batch_size}. It has to be for optimal training."
+        if cache_or_fetch('DATA_LEN', dataset.path_signature) % self.args.batch_size == 0 and self.args.static_triton_graph:
+            print('Using static triton graph')
+            static_training = True
+        else:
+            static_training = False
         
         dataset_path = dataset.path_signature
 
@@ -114,7 +124,8 @@ class CirillaTrainer:
 
             self._fuse_optim()
 
-        self._set_prior_training_vars()
+        if static_training:
+            self._set_prior_training_vars()
 
         if self.criterion is None:
             self.criterion = nn.CrossEntropyLoss()
@@ -390,12 +401,36 @@ class CirillaTrainer:
         return partial(self.args.optim, **optim_kwargs, lr=self.args.lr)
     
     def _fuse_optim(self):
-        self.optimizer_by_name = {}
-        for name, p in self.model.named_parameters():
-            self.optimizer_by_name[name] = self.optim([p])
 
-        params_by_name = dict(self.model.named_parameters())
-        optimizer_dict = {params_by_name[name]: opt for name, opt in self.optimizer_by_name.items()}
+        if not self.args.use_muon_optim:
+
+            self.optimizer_by_name = {}
+            for name, p in self.model.named_parameters():
+                self.optimizer_by_name[name] = self.optim([p])
+
+            params_by_name = dict(self.model.named_parameters())
+            optimizer_dict = {params_by_name[name]: opt for name, opt in self.optimizer_by_name.items()}
+
+        else:
+            get_default_muon_param_groups = self.moun_optim.muon.get_default_muon_param_groups
+            muon_param_groups = get_default_muon_param_groups(self.model)
+
+            self.optimizer_by_name = {}
+            for name, p in self.model.named_parameters():
+
+                if name in muon_param_groups[0]['names']: # matrices
+                    group = {
+                        "params": [p],
+                        "names": [name],
+                        "use_muon": True
+                    }
+                    self.optimizer_by_name[name] = self.moun_optim.Muon([group], lr=self.args.lr)
+
+                else: # biases, LayerNorm weights
+                    self.optimizer_by_name[name] = self.optim([p])
+
+            params_by_name = dict(self.model.named_parameters())
+            optimizer_dict = {params_by_name[name]: opt for name, opt in self.optimizer_by_name.items()}
 
         self._register_hooks(optimizer_dict)
 
@@ -448,16 +483,35 @@ class CirillaTrainer:
         params_by_name = dict(self.model.named_parameters())
         self.optimizer_by_name = {}
 
+        if self.args.use_muon_optim:
+            get_default_muon_param_groups = self.moun_optim.muon.get_default_muon_param_groups
+            muon_param_groups = get_default_muon_param_groups(self.model)[0]['names']
+        else:
+            muon_param_groups = []
+        
         for name, state in loaded_states.items():
-
             if name not in params_by_name:
                 print(f"Skipping unknown param: {name}")
                 continue
 
             p = params_by_name[name]
-            opt = self.optim([p])
-            opt.load_state_dict(state)
-            self.optimizer_by_name[name] = opt
+
+            if name in muon_param_groups:
+
+                group = {
+                    "params": [p],
+                    "names": [name],
+                    "use_muon": True
+                }
+                opt = self.moun_optim.Muon([group], lr=self.args.lr)
+                opt.load_state_dict(state)
+                self.optimizer_by_name[name] = opt
+
+            else:
+
+                opt = self.optim([p])
+                opt.load_state_dict(state)
+                self.optimizer_by_name[name] = opt
 
         optimizer_dict = {params_by_name[n]: o for n, o in self.optimizer_by_name.items()}
 

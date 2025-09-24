@@ -3,8 +3,6 @@
 > 
 > *(Note: the site is made for 16:9 1080p displays — I’m not a web developer, so it may look a bit rough on other screen sizes.)*
 
-
-
 ![](https://github.com/AnthonyP57/Radovid---a-LLM-made-on-a-budget/blob/master/img/ciri_w4_2.png?raw=true)
 *Ciri from The Witcher 4 trailer*
 
@@ -69,12 +67,12 @@ Cirilla - a LLM made on a budget/
   │   └── RAG/                        # overview of RAG
   │
   ├── cirilla/
-  │   └── Cirilla_model/              # implementation of the Cirilla LLM
-  │   └── LLM_pieces/                 # building blocks of LLMs
+  │   ├── Cirilla_model/              # implementation of the Cirilla LLM
+  │   ├── LLM_pieces/                 # building blocks of LLMs
   │   └── synth_data/                 # creating synthetic data
   │
   ├── Decoder_only_architecture/      # overview of decoder only transformer architecture
-  │   └── Llama2/                     # implementation of Llama 2 inference loop
+  │   ├── Llama2/                     # implementation of Llama 2 inference loop
   │   └── Mistral/                    # overview of the Mistral 7B architecture and inference tricks
   │
   ├── Training_optimizations/
