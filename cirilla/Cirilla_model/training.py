@@ -17,6 +17,8 @@ from progress_table import ProgressTable
 import numpy as np
 from .model import Cirilla
 from ..LLM_pieces import get_activation
+from megablocks.layers.router import clear_router_zloss
+from megablocks.layers.moe import clear_load_balancing_loss
 
 @dataclass
 class TrainingArgs:
@@ -280,6 +282,10 @@ class CirillaTrainer:
     def training_step(self, data):
         out = self.model.pred(data[0])
         loss = self.criterion(out.view(-1, self.model.args.vocab_size), data[1].view(-1))
+
+        # clear losses that will cause a memory leak
+        clear_load_balancing_loss()
+        clear_router_zloss()
         return loss
 
     def benchmark(self):

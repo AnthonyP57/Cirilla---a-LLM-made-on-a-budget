@@ -41,7 +41,7 @@ class SMoEArgs:
     k:int=2
     dim:int=128
     dtype_str:str = 'bfloat16'
-
+    device:str = 'cuda'
     d_ff:int=256 # hidden dim
 
     @property
@@ -75,7 +75,7 @@ class SMoE(nn.Module):
         for ex_idx, expert in enumerate(self.experts):
             w = weights_per_expert[..., ex_idx].unsqueeze(-1)  # (B,S,1)
             out = out + w * expert(x)                         # expert(x) -> (B,S,D)
-        return out
+        return out, weights_per_expert
 
 @dataclass
 class MegablockArgs:
@@ -102,9 +102,8 @@ class MegablockMoE(nn.Module):
         self.rmsnorm = activation.layers.RMSNorm(dim=self.args.dim) if self.args.device == torch.cuda.is_available() else nn.RMSNorm(self.args.dim)
 
         init_method = torch.nn.init.xavier_uniform_
-        
-        self.moe = MoE(
-            Arguments(
+
+        self.args = Arguments(
                 hidden_size=args.dim,
                 ffn_hidden_size=args.d_ff,
                 moe_num_experts=args.num_experts,
@@ -116,20 +115,25 @@ class MegablockMoE(nn.Module):
                 mlp_impl=args.impl,
                 fp16= args.dtype_str == 'float16',
                 bf16= args.dtype_str == 'bfloat16',
-                device=args.device
+                device=args.device,
+                moe_zloss_weight=0.1
             )
+        
+        self.moe = MoE(
+            self.args
         )
 
     def forward(self, x: torch.Tensor):
 
         x = self.rmsnorm(x)
         # MegaBlocks expects (seq, batch, dim)
-        x_mb = x.transpose(0, 1).contiguous()
+        x = x.transpose(0, 1).contiguous()
 
-        out, _ = self.moe(x_mb)
+        x, _ = self.moe(x)
+        del _
 
-        out = out.transpose(0, 1)  # back to (batch, seq, dim)
-        return out
+        x = x.transpose(0, 1)  # back to (batch, seq, dim)
+        return x
 
 class MegablockdMoE(nn.Module):
     def __init__(self, args:MegablockArgs):
@@ -142,8 +146,7 @@ class MegablockdMoE(nn.Module):
 
         init_method = torch.nn.init.xavier_uniform_
         
-        self.moe = dMoE(
-            Arguments(
+        self.args = Arguments(
                 hidden_size=args.dim,
                 ffn_hidden_size=args.d_ff,
                 moe_num_experts=args.num_experts,
@@ -155,17 +158,22 @@ class MegablockdMoE(nn.Module):
                 mlp_impl=args.impl,
                 fp16= args.dtype_str == 'float16',
                 bf16= args.dtype_str == 'bfloat16',
-                device=args.device
+                device=args.device,
+                moe_zloss_weight=0.1
             )
+        
+        self.moe = dMoE(
+            self.args
         )
 
     def forward(self, x: torch.Tensor):
 
         x = self.rmsnorm(x)
         # MegaBlocks expects (seq, batch, dim)
-        x_mb = x.transpose(0, 1).contiguous()
+        x = x.transpose(0, 1).contiguous()
 
-        out, _ = self.moe(x_mb)
+        x, _ = self.moe(x)
+        del _
 
-        out = out.transpose(0, 1)  # back to (batch, seq, dim)
-        return out
+        x = x.transpose(0, 1)  # back to (batch, seq, dim)
+        return x

@@ -29,6 +29,7 @@ class BertArgs:
     n_classes:int = 2
     tie_params:bool = False
     out_bias:bool = True
+    output_moe_weights:bool = False
     
     """attention"""
     context_window:int = 2048 # max seq len
@@ -39,9 +40,7 @@ class BertArgs:
     """MoE"""
     num_experts:int = 8
     k:int = 4
-    moe_type:str = "megablocks-dmoe" # or "pytorch" or "megablocks-moe"
-    capacity_factor: float = 1.0
-    impl: str = "grouped"   # or "sparse" Sparse MLP is not supported with triton >=3.2.0
+    moe_type:str = "pytorch" # or "pytorch" or "megablocks-moe" or "megablocks-dmoe"
     
     """misc"""
     dtype_str:str = 'bfloat16'
@@ -60,6 +59,8 @@ class BertArgs:
             warnings.warn("hf kernels only work on cuda")
         assert self.dim % self.n_heads == 0
         assert self.n_heads % self.n_kv_heads == 0
+        if self.output_moe_weights:
+            assert self.moe_type == "pytorch"
 
 class InputEmbeddings(nn.Module):
     def __init__(self, args:BertArgs):
@@ -179,14 +180,31 @@ class CirillaBERT(
         
         x = self.emb(x)
 
-        for attention, moe in zip(self.attentions, self.smoes):
-            x = x + attention(x)
-            x = x + moe(x)
+        if self.args.output_moe_weights:
+            moe_weights = []
+
+            for attention, moe in zip(self.attentions, self.smoes):
+
+                x = x + attention(x)
+                moe_out, moe_w = moe(x)
+                moe_weights.append(moe_w)
+                x = x + moe_out
+
+        else:
+            for attention, moe in zip(self.attentions, self.smoes):
+                x = x + attention(x)
+                x = x + moe(x)[0]
 
         if self.args.output_what == 'meanpool':
+            if self.args.output_moe_weights:
+                return self.mean_pooling(x, attention_mask), moe_weights
+            
             return self.mean_pooling(x, attention_mask)
         
         if self.args.output_what == 'tokens':
+            if self.args.output_moe_weights:
+                return x, moe_weights
+            
             return x
         
         x = self.rmsnorm(x)
@@ -199,7 +217,13 @@ class CirillaBERT(
 
         x = self.output(x)
 
+        if self.args.output_moe_weights:
+            return x, moe_weights
+        
         return x
+    
+    def forward(self, x, attention_mask=None):
+        return self.pred(x, attention_mask)
     
     def pull_model_from_hub(self, hf_repo_id:str):
         model_args = self.args

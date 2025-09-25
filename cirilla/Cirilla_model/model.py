@@ -30,6 +30,7 @@ class Args:
     n_layers:int = 16
     tie_params:bool = False
     out_bias:bool = True
+    output_moe_weights:bool = False
 
     """attention"""
     context_window:int = 2048 # max seq len
@@ -42,7 +43,7 @@ class Args:
     """MoE"""
     num_experts:int = 8
     k:int = 4
-    moe_type:str = "megablocks-dmoe" # or "pytorch" or "megablocks-moe"
+    moe_type:str = "pytorch" # or "pytorch" or "megablocks-moe" or "megablocks-dmoe"
     capacity_factor: float = 1.0
     impl: str = "grouped"   # or "sparse" Sparse MLP is not supported with triton >=3.2.0
     
@@ -63,6 +64,8 @@ class Args:
             warnings.warn("hf kernels only work on cuda")
         assert self.dim % self.n_heads == 0
         assert self.n_heads % self.n_kv_heads == 0
+        if self.output_moe_weights:
+            assert self.moe_type == "pytorch"
 
 class InputEmbeddings(nn.Module):
     def __init__(self, args:Args):
@@ -176,14 +179,31 @@ class Cirilla(
         
         x = self.emb(x)
 
-        for attention, moe in zip(self.attentions, self.smoes):
-            x = x + attention(x)
-            x = x + moe(x)
+        if self.args.output_moe_weights:
+            moe_weights = []
+
+            for attention, moe in zip(self.attentions, self.smoes):
+
+                x = x + attention(x)
+                moe_out, moe_w = moe(x)
+                moe_weights.append(moe_w)
+                x = x + moe_out
+
+        else:
+            for attention, moe in zip(self.attentions, self.smoes):
+                x = x + attention(x)
+                x = x + moe(x)[0]
 
         x = self.rmsnorm(x)
         x = self.output(x)
-
+        
+        if self.args.output_moe_weights:
+            return x, moe_weights
+        
         return x
+
+    def forward(self, x):
+        return self.pred(x)
     
     def pull_model_from_hub(self, hf_repo_id:str):
         model_args = self.args
