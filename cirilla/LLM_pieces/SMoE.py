@@ -87,6 +87,7 @@ class MegablockArgs:
     impl: str = "grouped"   # or "sparse" Sparse MLP is not supported with triton >=3.2.0
     dtype_str:str = 'bfloat16'
     device:str = 'cuda'
+    moe_zloss_weight:float = 0.1
 
     @property
     def dtype(self):
@@ -116,7 +117,7 @@ class MegablockMoE(nn.Module):
                 fp16= args.dtype_str == 'float16',
                 bf16= args.dtype_str == 'bfloat16',
                 device=args.device,
-                moe_zloss_weight=0.1
+                moe_zloss_weight=args.moe_zloss_weight
             )
         
         self.moe = MoE(
@@ -159,7 +160,7 @@ class MegablockdMoE(nn.Module):
                 fp16= args.dtype_str == 'float16',
                 bf16= args.dtype_str == 'bfloat16',
                 device=args.device,
-                moe_zloss_weight=0.1
+                moe_zloss_weight=args.moe_zloss_weight
             )
         
         self.moe = dMoE(

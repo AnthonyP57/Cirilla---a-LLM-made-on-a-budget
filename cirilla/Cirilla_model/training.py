@@ -30,7 +30,7 @@ class TrainingArgs:
     batch_size:int = 4
     valid_every_n:int=5
     save_local_async:bool = False
-    xavier_init:bool = True
+    init_method_str:str = 'xavier_uniform_'
     local_checkpoint_folder:Path = './test_model'
     optim_kwargs:dict[str,str] = field(default_factory=lambda: {'fused':True, 'foreach':False})
 
@@ -53,6 +53,10 @@ class TrainingArgs:
         if self.optim == SGD:
             return False
         return True
+    
+    @property
+    def init_method(self):
+        return getattr(torch.nn.init, self.init_method_str)
 
 class CirillaTrainer:
     def __init__(self, model:nn.Module, training_args:TrainingArgs):
@@ -121,8 +125,8 @@ class CirillaTrainer:
         if not hasattr(self, 'optimizer_by_name'): # if didn't load from checkpoint
             print("Training from scratch")
 
-            if self.args.xavier_init:
-                self._xavier_init()
+            if self.args.init_method_str is not None:
+                self._weights_init()
 
             self._fuse_optim()
 
@@ -387,10 +391,10 @@ class CirillaTrainer:
             
         return False, False
 
-    def _xavier_init(self):
+    def _weights_init(self):
         for param in self.model.parameters():
             if param.dim() > 1:
-                nn.init.xavier_uniform_(param)
+                self.args.init_method(param)
 
     @staticmethod
     def _set_global_vars():

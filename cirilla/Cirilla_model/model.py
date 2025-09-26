@@ -45,6 +45,7 @@ class Args:
     k:int = 4
     moe_type:str = "pytorch" # or "pytorch" or "megablocks-moe" or "megablocks-dmoe"
     capacity_factor: float = 1.0
+    moe_zloss_weight:float = 0.1
     impl: str = "grouped"   # or "sparse" Sparse MLP is not supported with triton >=3.2.0
     
     """misc"""
@@ -101,18 +102,6 @@ class Cirilla(
         self.rope = RoPE(self.args.dim // self.args.n_heads, self.args.context_window, self.args.device, self.args.theta, self.args.device)
         activation = get_activation('Motif-Technologies/activation')
         self.rmsnorm = activation.layers.RMSNorm(dim=self.args.dim) if self.args.device == torch.cuda.is_available() else nn.RMSNorm(self.args.dim)
-
-        def module_filter_fn(mod: torch.nn.Module, fqn: str):
-            # don't convert the last module
-            if fqn == "1":
-                return False
-            # don't convert linear modules with weight dimensions not divisible by 16
-            if isinstance(mod, torch.nn.Linear):
-                if mod.in_features % 16 != 0 or mod.out_features % 16 != 0:
-                    return False
-            return True
-
-        config = Float8LinearConfig.from_recipe_name(self.args.fp8_recipe)
         
         if self.args.static_mask:
             self.mask = create_static_block_mask(sliding_window_causal,self.args.context_window,
@@ -132,6 +121,19 @@ class Cirilla(
             ]
 
         if self.args.dtype_str == 'fp8':
+
+            config = Float8LinearConfig.from_recipe_name(self.args.fp8_recipe)
+
+            def module_filter_fn(mod: torch.nn.Module, fqn: str):
+                # don't convert the last module
+                if fqn == "1":
+                    return False
+                # don't convert linear modules with weight dimensions not divisible by 16
+                if isinstance(mod, torch.nn.Linear):
+                    if mod.in_features % 16 != 0 or mod.out_features % 16 != 0:
+                        return False
+                return True
+            
             self.attentions = [convert_to_float8_training(attention, config=config, module_filter_fn=module_filter_fn) for attention in self.attentions]
 
         self.attentions = nn.ModuleList([
