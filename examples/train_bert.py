@@ -9,16 +9,17 @@ from cirilla.Cirilla_model import (
 import torch.nn as nn
 from torch.optim import AdamW
 
-model = CirillaBERT(BertArgs(output_what='classify'))
+model = CirillaBERT(BertArgs(output_what='classify', moe_type='pytorch'))
 
 targs = TrainingArgs(
 n_epoch = 4,
 optim = AdamW,
+use_muon_optim=True, # use Muon optimizer for hidden layers
 lr = 1e-3,
 batch_size = 4,
 valid_every_n = 5, # validate on the validation dataset every n epochs
 save_local_async = False, # you can save the model asynchronously to the local dir (not recommended if the model can crash but saves time)
-xavier_init = True, # initiate with xavier initialization
+init_method_str = 'xavier_uniform_', # initiate with xavier initialization
 local_checkpoint_folder = './bert_model',
 optim_kwargs = {'fused':True, 'foreach':False},
 renew_training = False, # renew the training session if the training failed and there exists a local checkpoint
