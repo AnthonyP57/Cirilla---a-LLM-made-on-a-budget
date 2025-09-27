@@ -152,6 +152,7 @@ Cirilla is organized around reusable transformer components. Each module is impl
 - **Rotary Positional Embeddings (RoPE)**: lightweight and efficient PyTorch implementation.  
 - **Mixture of Experts (MoE)**: available both as a pure PyTorch version and integrated with [Megablocks](https://github.com/databricks/megablocks).  
 - **Muon optimizer**: optimizer for hidden layers
+- **Accelerated Sparse Training**: available with [torchao](https://github.com/pytorch/ao/tree/main/torchao/sparsity/training)
 - **From-scratch transformer**: complete implementations including dataset handling, model definition, training loops and checkpointing.  
 
 #### LLM blocks - learn where the magic happens
