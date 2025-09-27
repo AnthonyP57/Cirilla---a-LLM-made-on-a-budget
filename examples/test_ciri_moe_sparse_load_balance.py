@@ -3,8 +3,8 @@ from cirilla.Cirilla_model import Cirilla, Args, CirillaTokenizer, TrainingArgs,
 from megablocks.layers.moe import clear_load_balancing_loss
 from megablocks.layers.router import clear_router_zloss, batched_router_zloss
 
-trainargs = TrainingArgs(n_epoch=1000, save_checkpoint_min=9999, use_muon_optim=True)
-model = Cirilla(Args(moe_type='megablocks-dmoe', n_layers=14, output_moe_weights=False))
+trainargs = TrainingArgs(n_epoch=1000, save_checkpoint_min=9999, use_muon_optim=False) # muon doesn't work with megablocks-moe
+model = Cirilla(Args(moe_type='megablocks-moe', n_layers=14, output_moe_weights=False, use_sparse=True))
 trainer = CirillaTrainer(model, trainargs)
 
 tokenizer = CirillaTokenizer(hub_url='AnthonyPa57/HF-torch-demo2')
@@ -18,6 +18,7 @@ def new_training_step(self, data): # define a custom training step
     clear_load_balancing_loss()
 
     out = self.model.pred(data[0])
+
     loss = self.criterion(out.view(-1, self.model.args.vocab_size), data[1].view(-1))
 
     return loss + 0.1 * batched_router_zloss(self.model.smoes[0].args).mean()
