@@ -16,6 +16,10 @@ import torch
 from huggingface_hub import PyTorchModelHubMixin, hf_hub_download
 from safetensors.torch import load_file
 from torchao.float8 import convert_to_float8_training, Float8LinearConfig
+from torchao.sparsity.training import (
+    SemiSparseLinear,
+    swap_linear_with_semi_sparse_linear,
+)
 
 @dataclass
 class BertArgs:
@@ -48,6 +52,7 @@ class BertArgs:
     """misc"""
     dtype_str:str = 'bfloat16'
     fp8_recipe:str="tensorwise" # tensorwise (fastest), rowwise, rowwise_with_gw_hp (most accurate)
+    use_sparse:bool = False
     theta:float = 10_000.0
     device:str = select_torch_device()
 
@@ -62,6 +67,8 @@ class BertArgs:
             warnings.warn("hf kernels only work on cuda")
         assert self.dim % self.n_heads == 0
         assert self.n_heads % self.n_kv_heads == 0
+        if self.use_sparse:
+            assert self.dtype_str != "fp8"
         if self.output_moe_weights:
             assert self.moe_type == "pytorch"
 
@@ -121,6 +128,20 @@ class CirillaBERT(
                 return True
 
             self.attentions = [convert_to_float8_training(attention, config=config, module_filter_fn=module_filter_fn) for attention in self.attentions]
+
+        if self.args.use_sparse:
+
+            def get_sparse_config(model, sparse_cls=SemiSparseLinear):
+                config = {}
+                for name, m in model.named_modules():
+                    if isinstance(m, torch.nn.Linear):
+                        out, inp = m.out_features, m.in_features
+                        if out % 128 == 0 and inp % 128 == 0:
+                            config[name] = sparse_cls
+                return config
+            
+            for attention in self.attentions:
+                swap_linear_with_semi_sparse_linear(attention, get_sparse_config(attention))
         
         self.attentions = nn.ModuleList([
             torch.compile(attention, mode='max-autotune') for attention in self.attentions
@@ -134,6 +155,10 @@ class CirillaBERT(
 
             if self.args.dtype_str == 'fp8':
                 self.smoes = [convert_to_float8_training(smoe, config=config, module_filter_fn=module_filter_fn) for smoe in self.smoes]
+
+            if self.args.use_sparse:
+                for smoe in self.smoes:
+                    swap_linear_with_semi_sparse_linear(smoe, get_sparse_config(smoe)) 
 
             self.smoes = nn.ModuleList([
                 torch.compile(smoe, mode='max-autotune') for smoe in self.smoes
