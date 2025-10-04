@@ -54,10 +54,9 @@ class SlidingWindowAttention(nn.Module):
 
         self.wo = nn.Linear(args.n_heads * self.head_dim, args.dim, bias=False)
 
-        # fused projection
-        self.wqkv = nn.Linear(args.dim,
-                              (self.n_heads_q + 2 * self.n_kv_heads) * self.head_dim,
-                                bias=False)
+        self.wq = nn.Linear(args.dim, args.n_heads * self.head_dim, bias=False)
+        self.wk = nn.Linear(args.dim, args.n_kv_heads * self.head_dim, bias=False)
+        self.wv = nn.Linear(args.dim, args.n_kv_heads * self.head_dim, bias=False)
         
         self.hq_dim = self.n_heads_q * self.head_dim
         self.hkv_dim = self.n_kv_heads * self.head_dim
@@ -76,12 +75,9 @@ class SlidingWindowAttention(nn.Module):
 
         x = self.rmsnorm(x)
 
-        qkv = self.wqkv(x)
-
-        # split last dim into q / k / v
-        xq = qkv[:, :, :self.hq_dim]
-        xk = qkv[:, :, self.hq_dim: self.hq_dim + self.hkv_dim]
-        xv = qkv[:, :, self.hq_dim + self.hkv_dim:]
+        xq = self.wq(x)
+        xk = self.wk(x)
+        xv = self.wv(x)
 
         xq = xq.view(batch_size, seq_len, self.n_heads_q, self.head_dim)
         xk = xk.view(batch_size, seq_len, self.n_kv_heads, self.head_dim)
