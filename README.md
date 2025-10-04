@@ -148,7 +148,7 @@ Cirilla is a project focused on building **simple and optimized transformer mode
 Cirilla is organized around reusable transformer components. Each module is implemented in a clean and transparent way, making it easy to experiment, swap, or optimize parts of the model.
 
 *Some highlights:*
-- **Attention mechanisms**: sliding window attention with PyTorch FlexAttention, and non-causal “BERT-like” attention with Hugging Face [Flash Attention 3 kernels](https://huggingface.co/kernels-community/vllm-flash-attn3).  
+- **Attention mechanisms**: sliding window attention with PyTorch FlexAttention, and non-causal “BERT-like” attention with HuggingFace [Flash Attention 3 kernels](https://huggingface.co/kernels-community/vllm-flash-attn3).  
 - **Rotary Positional Embeddings (RoPE)**: lightweight and efficient PyTorch implementation.  
 - **Mixture of Experts (MoE)**: available both as a pure PyTorch version and integrated with [Megablocks](https://github.com/databricks/megablocks).  
 - **Muon optimizer**: optimizer for hidden layers
@@ -175,12 +175,12 @@ Cirilla is organized around reusable transformer components. Each module is impl
 
 ### Research + Education
 Cirilla explains and integrates ideas from notable papers. This makes it an great resource for:
-- **Researchers**, who want to test new variations of transformer modules quickly.  
+- **Researchers**, who want to test new variations of transformer models quickly.  
 - **Practitioners**, who need efficient and flexible code for training on limited hardware.  
 - **Students and hobbyists**, who want to learn how modern LLMs are built.  
 
-### Hugging Face integration
-Cirilla models can be easily pushed to and pulled from the Hugging Face Hub, making collaboration, sharing, and deployment straightforward.
+### HuggingFace integration
+Cirilla models can be easily pushed to and pulled from the HuggingFace Hub, making collaboration, sharing, and deployment straightforward.
 
 ### Data generation tools
 The repository also provides scripts for **synthetic data generation**, including multi-turn dialogues, reasoning datasets, and domain-specific examples. This allows users to create datasets for fine-tuning and evaluation without relying solely on large, external corpora of questionable quality.
