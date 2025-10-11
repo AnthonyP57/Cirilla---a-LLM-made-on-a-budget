@@ -255,7 +255,7 @@ class CirillaTrainer:
                 
                 main_pbar.update(self.args.batch_size)
                 
-            if valid_dataloader is not None:
+            if valid_dataset is not None:
                 if epoch % self.args.valid_every_n == 0:
 
                     if n_iter * self.args.batch_size < skip_n_data_points:
@@ -275,7 +275,7 @@ class CirillaTrainer:
                     torch.cuda.empty_cache()
                     ptable.next_row(split=True, color={'time': time_color(times), 'train loss': loss_color(losses), 'valid loss': loss_color_valid(v_losses)})
 
-            ptable.next_row(split=valid_dataloader is None, color={'time': time_color(times), 'train loss': loss_color(losses), 'valid loss': loss_color_valid(v_losses)})
+            ptable.next_row(split=valid_dataset is None, color={'time': time_color(times), 'train loss': loss_color(losses), 'valid loss': loss_color_valid(v_losses)})
 
         self._save_local_checkpoint()
         if self.args.push_checkpoint_to_hub:
