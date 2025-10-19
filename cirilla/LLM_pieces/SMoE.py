@@ -134,7 +134,7 @@ class MegablockMoE(nn.Module):
         del _
 
         x = x.transpose(0, 1)  # back to (batch, seq, dim)
-        return x
+        return (x,)
 
 class MegablockdMoE(nn.Module):
     def __init__(self, args:MegablockArgs):
@@ -177,4 +177,4 @@ class MegablockdMoE(nn.Module):
         del _
 
         x = x.transpose(0, 1)  # back to (batch, seq, dim)
-        return x
+        return (x,)

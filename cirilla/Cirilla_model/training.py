@@ -93,7 +93,7 @@ class CirillaTrainer:
 
         if valid_dataset is not None:
             valid_dataloader = DataLoader(valid_dataset, shuffle=False, batch_size=self.args.batch_size)
-            del valid_dataset
+            valid_dataset = 1
 
         start_time = time.time()
 
