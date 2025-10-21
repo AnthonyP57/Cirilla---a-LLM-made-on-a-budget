@@ -11,7 +11,7 @@ from einops.layers.torch import Rearrange
 @dataclass
 class TRMArgs:
     """general"""
-    vocab_size:int = 60_000
+    vocab_size:int = 70
     dim:int = 256
     tie_params:bool = False
     out_bias:bool = True
@@ -31,12 +31,6 @@ class TRMArgs:
     def __post_init__(self):
         if not torch.cuda.is_available():
             warnings.warn("hf kernels only work on cuda")
-        assert self.dim % self.n_heads == 0
-        assert self.n_heads % self.n_kv_heads == 0
-        if self.use_sparse:
-            assert self.dtype_str != "fp8"
-        if self.output_moe_weights:
-            assert self.moe_type == "pytorch"
 
 class InputEmbeddings(nn.Module):
     def __init__(self, args:TRMArgs):
@@ -69,8 +63,8 @@ class CirillaTRM(
 
         self.emb = InputEmbeddings(self.args)
 
-        self.y_hat_init = nn.Parameter(torch.randn(self.args.dim))
-        self.z_init = nn.Parameter(torch.randn(self.args.dim))
+        self.y_hat_init = nn.Parameter(torch.randn(self.args.dim) * 1e-2)
+        self.z_init = nn.Parameter(torch.randn(self.args.dim) * 1e-2)
 
         self.output = nn.Linear(self.args.dim, self.args.vocab_size, bias=self.args.out_bias)
         if self.args.tie_params:
@@ -78,7 +72,6 @@ class CirillaTRM(
 
         self.to_halt = nn.Sequential(
                         nn.Linear(self.args.dim, 1),
-                        nn.Sigmoid(),
                         Rearrange('... 1 -> ...')
                         )
 
@@ -132,7 +125,7 @@ class CirillaTRM(
         x = self.emb(x)
 
         y_hat, z = self.refine(x, y_hat, z)
-        y_hat = self.rmsnorm(y_hat)
+
         pred = self.output(y_hat)
 
         haltp = self.get_halt(y_hat, attention_mask)

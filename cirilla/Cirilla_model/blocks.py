@@ -27,20 +27,20 @@ from torchao.sparsity.training import (
 @dataclass
 class EncoderArgs:
     """general"""
-    dim:int = 1024
-    d_ff:int = 2048
-    n_layers:int = 4
+    dim:int = 256
+    d_ff:int = 256
+    n_layers:int = 2
     output_moe_weights:bool = False
     
     """attention"""
-    context_window:int = 2048 # max seq len
-    n_heads:int = 8
-    n_kv_heads:int = 4
+    context_window:int = 512 # max seq len
+    n_heads:int = 2
+    n_kv_heads:int = 2
     soft_cap:Optional[int] = 20
 
     """MoE"""
-    num_experts:int = 8
-    k:int = 4
+    num_experts:int = 2
+    k:int = 1
     moe_type:str = "pytorch" # or "pytorch" or "megablocks-moe" or "megablocks-dmoe"
     moe_zloss_weight:float = 0.1
     capacity_factor: float = 1.0
