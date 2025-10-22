@@ -4,7 +4,7 @@ from .model import Cirilla, Args
 from .modules import benchmark_model_part, load_balancing_loss
 from .tokenizer_modules import CirillaTokenizer
 from .training import TrainingArgs, CirillaTrainer
-from .blocks import Encoder, EncoderArgs, Decoder, DecoderArgs
+from .blocks import Encoder, EncoderArgs, Decoder, DecoderArgs, MLPMixer1D, MixerArgs
 from .trm import CirillaTRM, TRMArgs
 
 __all__ = [
@@ -23,5 +23,7 @@ __all__ = [
             'Decoder',
             'DecoderArgs',
             'CirillaTRM',
-            'TRMArgs'
+            'TRMArgs',
+            'MLPMixer1D',
+            'MixerArgs'
         ]

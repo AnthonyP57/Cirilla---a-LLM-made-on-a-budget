@@ -5,31 +5,36 @@ from cirilla.Cirilla_model import (
                             CirillaTrainer,
                             CirillaTokenizer,
                             JSONLDataset,
-                            Encoder,
-                            EncoderArgs
+                            # Encoder,
+                            # EncoderArgs,
+                            MixerArgs,
+                            MLPMixer1D
                             )
-import torch.nn as nn
 import torch.nn.functional as F
 import torch
-# from ema_pytorch import EMA
+from torch.utils.data import DataLoader
 
-encoder = Encoder(EncoderArgs())
+# encoder = Encoder(EncoderArgs())
+mixer = MLPMixer1D(MixerArgs())
 
-model = CirillaTRM(encoder, TRMArgs())
+model = CirillaTRM(mixer, TRMArgs())
 
-targs = TrainingArgs(n_epoch=1000, save_checkpoint_min=9999, use_muon_optim=False, lr=1e-7)
+targs = TrainingArgs(n_epoch=1000, save_checkpoint_min=9999, use_muon_optim=False)
 
 trainer = CirillaTrainer(model, targs)
+trainer._set_global_vars()
+trainer._weights_init()
+trainer._fuse_optim()
 
 tokenizer = CirillaTokenizer(hub_url='AnthonyPa57/HF-torch-demo2')
 
 dl = JSONLDataset(['./examples/data/example_bert.jsonl', './examples/data/example_bert.jsonl'],
-                    shuffle_path=True, tokenizer=tokenizer, max_len=encoder.args.context_window)
+                    shuffle_path=True, tokenizer=tokenizer, max_len=mixer.args.context_window)
 
-from types import MethodType
+ds = DataLoader(dl, batch_size=4)
 
-max_recurrent_step = 4
-halt_weight = 0.2
+max_recurrent_step = 16
+halt_weight = 0.5
 halt_thresh = 0.5
 
 # ema_model = EMA(
@@ -39,56 +44,48 @@ halt_thresh = 0.5
 #                 forward_method_names=('predict',)
 #                 )
 
-def new_training_step(self, data): # define a custom training step
-    # out = self.model.pred(data[0], data[1]) # tokens, mask
-    # loss = self.criterion(out, data[2])
-    # return loss
-    y_hat, z = self.model.get_init()
+for _ in range(100):
+    epoch_loss = 0
+    n = 0
 
-    for step in range(max_recurrent_step):
+    for data in ds:
+        
+        y_hat, z = model.get_init()
+        x = data[0]
+        mask = data[1]
 
-        if not step == 0:
+        for step in range(max_recurrent_step):
+
             torch.compiler.cudagraph_mark_step_begin()
 
-        pred, y_hat, z, haltp = self.model(data[0], y_hat, z, data[1])
+            pred, y_hat, z, haltp = model(x, y_hat, z, mask)
 
-        loss = self.criterion(pred.view(-1, self.model.args.vocab_size), data[0].view(-1))
+            loss = F.cross_entropy(pred.view(-1, model.args.vocab_size), x.view(-1))
 
-        all_correct = (pred.argmax(dim=-1) == data[0]).all(dim=-1)
+            all_correct = (pred.argmax(dim=-1) == x).all(dim=-1)
 
-        # print(max(haltp), min(haltp), haltp.shape, all_correct.shape)
-        halt_loss = F.binary_cross_entropy_with_logits(haltp, all_correct.to(haltp.dtype))
-        print(loss.item(), halt_loss.item())
+            halt_loss = F.binary_cross_entropy_with_logits(haltp, all_correct.to(haltp.dtype))
 
-        loss = loss + halt_weight * halt_loss
+            loss = loss + halt_weight * halt_loss
 
-        # ema_model.update()
+            epoch_loss += loss.item()
+            n += 1
 
-        # halt_mask = haltp < halt_thresh
-        # print(halt_mask, haltp)
-
-        # if (~halt_mask).any():
-        #     print(halt_mask)
-        #     continue
-        
-        # y_hat = y_hat[halt_mask]
-        # z = z[halt_mask]
-        # data[0] = data[0][halt_mask]
-        # data[1] = data[1][halt_mask]
-
-        # print(z.shape, loss.item(), halt_loss.item())
-
-        if z.numel() == 0: # if is empty
-            return loss
-        
-        if step == max_recurrent_step - 1:
-            return loss
-        else:
             loss.backward()
+            # ema_model.update() # model needs to have .predict() method
+            print(f'loss: {epoch_loss / n:.2f} epoch: {_} n_steps: {step}')
 
-        # y_hat, z = y_hat.detach(), z.detach()
+            halt_mask = haltp < halt_thresh
 
-trainer.training_step = MethodType(new_training_step, trainer) # assign the custom training step to the trainer
-trainer.criterion = nn.CrossEntropyLoss() # override the default criterion
+            if halt_mask.all():
+                continue
+            
+            y_hat = y_hat[halt_mask]
+            z = z[halt_mask]
+            x = x[halt_mask]
+            mask = mask[halt_mask]
 
-trainer.train(dl, dl)
+            if z.numel() == 0: # if is empty
+                break
+
+            y_hat, z = y_hat.detach(), z.detach()

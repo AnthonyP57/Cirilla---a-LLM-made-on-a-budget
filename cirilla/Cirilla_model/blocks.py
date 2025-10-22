@@ -382,3 +382,98 @@ class Decoder(nn.Module):
 
     def forward(self, x):
         return self.pred(x)
+
+
+@dataclass
+class MixerArgs:
+    """general"""
+    dim: int = 256
+    depth: int = 8
+    context_window: int = 512
+    expansion_factor: float = 4
+    expansion_factor_token: float = 0.5
+    dropout: float = 0.0
+    dtype_str: str = 'bfloat16'
+    device = select_torch_device()
+
+    @property
+    def dtype(self):
+        return getattr(torch, self.dtype_str)
+
+class MLPMixer1D(nn.Module):
+    def __init__(self, args: Optional[MixerArgs] = None):
+        super().__init__()
+
+        if isinstance(args, dict):
+            args = MixerArgs(**args)
+        if args is None:
+            args = MixerArgs()
+
+        self.args = args
+        self._prepare_model()
+
+    def _prepare_model(self):
+        layers = []
+        for _ in range(self.args.depth):
+            # Token mixing
+            layers.append(PreNormResidual(
+                self.args.dim,
+                FeedForward(self.args.context_window, int(self.args.expansion_factor * self.args.dim),
+                                self.args.dropout, dense_type='conv1d')
+            ))
+            # Channel mixing
+            layers.append(PreNormResidual(
+                self.args.dim,
+                FeedForward(self.args.dim, int(self.args.expansion_factor_token * self.args.dim),
+                                self.args.dropout, dense_type='linear')
+            ))
+
+        self.norm = nn.LayerNorm(self.args.dim, bias = False)
+
+        layers.append(self.norm)
+        self.mixer = nn.Sequential(*layers)
+
+        self.to(dtype=self.args.dtype, device=self.args.device)
+
+        self.n_params = sum(p.numel() for p in self.parameters() if p.requires_grad)
+
+    def pred(self, x: torch.Tensor) -> torch.Tensor:
+        return self.mixer(x)
+
+    def forward(self, x: torch.Tensor) -> torch.Tensor:
+        return self.pred(x)
+
+class PreNormResidual(nn.Module):
+    def __init__(self, dim, fn):
+        super().__init__()
+        self.norm = nn.LayerNorm(dim, bias = False)
+        self.fn = fn
+
+    def forward(self, x):
+        return self.fn(self.norm(x)) + x
+
+class FeedForward(nn.Module):
+    def __init__(self, dim_in, dim_hidden, dropout=0., dense_type='linear'):
+        super().__init__()
+        if dense_type == 'conv1d':
+            self.net = nn.Sequential(
+                nn.Conv1d(dim_in, dim_hidden, kernel_size=1),
+                nn.GELU(),
+                nn.Dropout(dropout),
+                nn.Conv1d(dim_hidden, dim_in, kernel_size=1),
+                nn.Dropout(dropout)
+            )
+        elif dense_type == 'linear':
+            self.net = nn.Sequential(
+                nn.Linear(dim_in, dim_hidden),
+                nn.GELU(),
+                nn.Dropout(dropout),
+                nn.Linear(dim_hidden, dim_in),
+                nn.Dropout(dropout)
+            )
+        else:
+            raise NotImplementedError
+
+    def forward(self, x):
+        x = self.net(x)
+        return x
