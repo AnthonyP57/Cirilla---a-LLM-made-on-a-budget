@@ -21,10 +21,10 @@ def new_training_step(self, data): # define a custom training step
 
     loss = self.criterion(out.view(-1, self.model.args.vocab_size), data[1].view(-1))
 
-    return loss + 0.1 * batched_router_zloss(self.model.smoes[0].args).mean()
+    return loss + 0.1 * batched_router_zloss(self.model.decoder.smoes[0].args).mean()
 
 trainer.training_step = MethodType(new_training_step, trainer) # assign the custom training step to the trainer
 
 # trainer.benchmark()
 
-trainer.train(dl, dl)
+trainer.train(dl)

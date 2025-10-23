@@ -264,7 +264,6 @@ class Decoder(nn.Module):
 
     def _prepare_model(self):
 
-        self.emb = InputEmbeddings(self.args)
         self.rope = RoPE(self.args.dim // self.args.n_heads, self.args.context_window, self.args.device, self.args.theta, self.args.device)
         activation = get_activation('Motif-Technologies/activation')
         self.rmsnorm = activation.layers.RMSNorm(dim=self.args.dim) if self.args.device == torch.cuda.is_available() else nn.RMSNorm(self.args.dim)
@@ -359,8 +358,6 @@ class Decoder(nn.Module):
         
     def pred(self, x):
         
-        x = self.emb(x)
-
         if self.args.output_moe_weights:
             moe_weights = []
 

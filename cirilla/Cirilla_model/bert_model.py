@@ -1,25 +1,15 @@
 from ..LLM_pieces import (
-    RoPE,
-    SMoE,
     get_activation,
-    Expert,
-    MegablockMoE,
-    MegablockdMoE,
-    BertAttention
 )
 from dataclasses import dataclass
 import torch.nn as nn
 from .modules import select_torch_device, get_bertargs_from_hub
+from .blocks import Encoder
 from typing import Optional
 import warnings
 import torch
 from huggingface_hub import PyTorchModelHubMixin, hf_hub_download
 from safetensors.torch import load_file
-from torchao.float8 import convert_to_float8_training, Float8LinearConfig
-from torchao.sparsity.training import (
-    SemiSparseLinear,
-    swap_linear_with_semi_sparse_linear,
-)
 
 @dataclass
 class BertArgs:
@@ -103,82 +93,9 @@ class CirillaBERT(
     def _prepare_model(self):
 
         self.emb = InputEmbeddings(self.args)
-        self.rope = RoPE(self.args.dim // self.args.n_heads, self.args.context_window, self.args.device, self.args.theta, self.args.device)
         activation = get_activation('Motif-Technologies/activation')
         self.rmsnorm = activation.layers.RMSNorm(dim=self.args.dim) if self.args.device == torch.cuda.is_available() else nn.RMSNorm(self.args.dim)
-
-
-        self.attentions = [
-            BertAttention(self.args, self.rope)
-            for _ in range(self.args.n_layers)
-            ]
-
-        if self.args.dtype_str == "fp8":
-
-            config = Float8LinearConfig.from_recipe_name(self.args.fp8_recipe)
-
-            def module_filter_fn(mod: torch.nn.Module, fqn: str):
-                # don't convert the last module
-                if fqn == "1":
-                    return False
-                # don't convert linear modules with weight dimensions not divisible by 16
-                if isinstance(mod, torch.nn.Linear):
-                    if mod.in_features % 16 != 0 or mod.out_features % 16 != 0:
-                        return False
-                return True
-
-            self.attentions = [convert_to_float8_training(attention, config=config, module_filter_fn=module_filter_fn) for attention in self.attentions]
-
-        if self.args.use_sparse:
-
-            def get_sparse_config(model, sparse_cls=SemiSparseLinear):
-                config = {}
-                for name, m in model.named_modules():
-                    if isinstance(m, torch.nn.Linear):
-                        out, inp = m.out_features, m.in_features
-                        if out % 128 == 0 and inp % 128 == 0:
-                            config[name] = sparse_cls
-                return config
-            
-            for attention in self.attentions:
-                swap_linear_with_semi_sparse_linear(attention, get_sparse_config(attention))
-        
-        self.attentions = nn.ModuleList([
-            torch.compile(attention, mode='max-autotune') for attention in self.attentions
-            ])
-        
-        if self.args.moe_type == 'pytorch':
-            self.smoes = [
-                SMoE(self.args, [Expert(self.args) for _ in range(self.args.num_experts)])
-                for _ in range(self.args.n_layers)
-            ]
-
-            if self.args.dtype_str == 'fp8':
-                self.smoes = [convert_to_float8_training(smoe, config=config, module_filter_fn=module_filter_fn) for smoe in self.smoes]
-
-            if self.args.use_sparse:
-                for smoe in self.smoes:
-                    swap_linear_with_semi_sparse_linear(smoe, get_sparse_config(smoe)) 
-
-            self.smoes = nn.ModuleList([
-                torch.compile(smoe, mode='max-autotune') for smoe in self.smoes
-            ])
-
-        elif self.args.moe_type == 'megablocks-moe':
-            self.smoes = nn.ModuleList([
-                MegablockMoE(self.args)
-                for _ in range(self.args.n_layers)
-            ])
-
-        elif self.args.moe_type == 'megablocks-dmoe':
-            self.smoes = nn.ModuleList([
-                MegablockdMoE(self.args)
-                for _ in range(self.args.n_layers)
-            ])
-        
-        else:
-            print(self.args.moe_type)
-            raise ValueError(f"allowed moe types: 'pytorch',  'megablocks-moe', 'megablocks-dmoe' ; got: {self.args.moe_type}")
+        self.encoder = Encoder(self.args)
 
         if self.args.output_what == 'vocab':
 
@@ -211,19 +128,10 @@ class CirillaBERT(
         x = self.emb(x)
 
         if self.args.output_moe_weights:
-            moe_weights = []
-
-            for attention, moe in zip(self.attentions, self.smoes):
-
-                x = x + attention(x)
-                moe_out, moe_w = moe(x)
-                moe_weights.append(moe_w)
-                x = x + moe_out
+            x, moe_weights = self.encoder(x)
 
         else:
-            for attention, moe in zip(self.attentions, self.smoes):
-                x = x + attention(x)
-                x = x + moe(x)[0]
+            x = self.encoder(x)
 
         if self.args.output_what == 'meanpool':
             if self.args.output_moe_weights:
