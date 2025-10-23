@@ -148,6 +148,7 @@ Cirilla is a project focused on building **simple and optimized transformer mode
 Cirilla is organized around reusable transformer components. Each module is implemented in a clean and transparent way, making it easy to experiment, swap, or optimize parts of the model.
 
 *Some highlights:*
+- **Tiny Recursive Model (TRM)**: A simpler recursive reasoning approach than Hierarchical Reasoning Model (HRM)
 - **Attention mechanisms**: sliding window attention with PyTorch FlexAttention, and non-causal “BERT-like” attention with HuggingFace [Flash Attention 3 kernels](https://huggingface.co/kernels-community/vllm-flash-attn3).  
 - **Rotary Positional Embeddings (RoPE)**: lightweight and efficient PyTorch implementation.  
 - **Mixture of Experts (MoE)**: available both as a pure PyTorch version and integrated with [Megablocks](https://github.com/databricks/megablocks).  
