@@ -13,6 +13,7 @@ from cirilla.Cirilla_model import (
 import torch.nn.functional as F
 import torch
 from torch.utils.data import DataLoader
+from ema_pytorch import EMA
 
 # encoder = Encoder(EncoderArgs())
 mixer = MLPMixer1D(MixerArgs())
@@ -37,12 +38,12 @@ max_recurrent_step = 16
 halt_weight = 0.5
 halt_thresh = 0.5
 
-# ema_model = EMA(
-#                 model,
-#                 beta=0.999,
-#                 update_model_with_ema_every=10_000,
-#                 forward_method_names=('predict',)
-#                 )
+ema_model = EMA(
+                model,
+                beta=0.999,
+                update_model_with_ema_every=1_000,
+                forward_method_names=('predict',)
+                )
 
 for _ in range(100):
     epoch_loss = 0
@@ -53,6 +54,9 @@ for _ in range(100):
         y_hat, z = model.get_init()
         x = data[0]
         mask = data[1]
+
+        # preds, n_steps = model.predict(x, mask)
+        # print(preds.argmax(-1), n_steps)
 
         for step in range(max_recurrent_step):
 
@@ -72,10 +76,10 @@ for _ in range(100):
             n += 1
 
             loss.backward()
-            # ema_model.update() # model needs to have .predict() method
-            print(f'loss: {epoch_loss / n:.2f} epoch: {_} n_steps: {step}')
+            ema_model.update() # model needs to have .predict() method
 
-            halt_mask = haltp < halt_thresh
+            halt_mask = F.sigmoid(haltp) < halt_thresh
+            print(f'loss: {epoch_loss / n:.2f} epoch: {_} n_steps: {step}')
 
             if halt_mask.all():
                 continue

@@ -7,6 +7,7 @@ from huggingface_hub import PyTorchModelHubMixin, hf_hub_download
 from safetensors.torch import load_file
 from contextlib import nullcontext
 from einops.layers.torch import Rearrange
+import torch.nn.functional as F
 
 @dataclass
 class TRMArgs:
@@ -131,6 +132,47 @@ class CirillaTRM(
         haltp = self.get_halt(y_hat, attention_mask)
 
         return pred, y_hat, z, haltp
+    
+    @torch.inference_mode()
+    def predict(self, x, attention_mask=None, halt_thresh=0.5, max_recurrent_step=16):
+        
+        y_hat, z = self.get_init()
+
+        preds = []
+        pred_indices = []
+        n_steps = []
+        active_batch_indices = torch.arange(x.shape[0], device=x.device)
+
+        for step in range(max_recurrent_step):
+
+            pred, y_hat, z, haltp = self.forward(x, y_hat, z, attention_mask)
+
+            halt_mask = (F.sigmoid(haltp) < halt_thresh) & (step < max_recurrent_step - 1)
+
+            if halt_mask.all():
+                continue
+            
+            y_hat = y_hat[halt_mask]
+            z = z[halt_mask]
+            x = x[halt_mask]
+            attention_mask = attention_mask[halt_mask]
+
+            preds.append(pred[~halt_mask])
+            n_steps.extend([step] * (~halt_mask).sum().item())
+            pred_indices.append(active_batch_indices[~halt_mask])
+            active_batch_indices = active_batch_indices[halt_mask]
+
+            if z.numel() == 0: # if is empty
+                break
+
+        preds = torch.cat(preds, dim=0)
+        n_steps = torch.tensor(n_steps).to(x.device)
+        pred_indices = torch.cat(pred_indices, dim=0).to(x.device)
+        
+        preds = preds[pred_indices]
+        n_steps = n_steps[pred_indices]
+
+        return preds, n_steps
     
     def pull_model_from_hub(self, hf_repo_id:str):
         model_args = self.args
