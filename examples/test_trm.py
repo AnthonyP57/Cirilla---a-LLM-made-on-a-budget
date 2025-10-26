@@ -80,6 +80,8 @@ for _ in range(100):
 
             halt_mask = F.sigmoid(haltp) < halt_thresh
             print(f'loss: {epoch_loss / n:.2f} epoch: {_} n_steps: {step}')
+            
+            y_hat, z = y_hat.detach(), z.detach()
 
             if halt_mask.all():
                 continue
@@ -91,5 +93,3 @@ for _ in range(100):
 
             if z.numel() == 0: # if is empty
                 break
-
-            y_hat, z = y_hat.detach(), z.detach()
