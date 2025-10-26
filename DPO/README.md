@@ -64,7 +64,7 @@ What happens is that we want to maximize the reward of the models response, but 
 
 Amazing but this loss is not differentiable, because we sample from the LLMs with some strategies e.g. greedy, ... So we cannot use gradient descent for that.
 
-But there is an analutical solution to this equation:
+But there is an analitical solution to this equation:
 
 $\pi_{r}(y \vert x) = \frac{1}{Z(x)}\pi_{ref}(y \vert x) \space exp(\frac{1}{\beta}r(x, y))$
 
