@@ -1,6 +1,6 @@
 # Kolmogorov-Arnold Networks (KAN)
 
-[^1] [^2] MLPs are made up of linear learnable transformations with fixed non-linearities, such as ReLU. 
+[^1] [^2] MLPs are made up of linear learnable transformations with fixed non-linearities, such as ReLU. KANs just have non-linear layers. 
 
 ![](./img/kan_vs_mlp.png)
 
@@ -23,7 +23,7 @@ $B(t) = \sum_{i}^{n} \binom{n}{i}(1-t)^{n-i}t^kP_i = \sum_{i}^nb_{i,n}(t)P_i$
 $\binom{n}{i} = \frac{n!}{i!(n-i)!}$ is the binominal coefficient
 
 ## B-spline
-We stitch together multiple Bezier curves. We connect them at the ends, the points where they mean are colled knots.
+We stitch together multiple Bezier curves. We connect them at the ends, the points where they meet are colled knots.
 
 ![](./img/b-spline.png)
 
@@ -36,18 +36,18 @@ An order-$k$ B-spline is formed by joining several polynomial pieces of degree $
 
 ### Example
 Consider a cubic B-spline (order $k = 4$).  
-Each piece of the spline is a polynomial of degree $k - 1 = 3$.  
+Each piece of the spline is a polynomial of degree $p = k - 1 = 3$.  
 The spline segments are joined with $C^{k-2} = C^2$ continuity, meaning that the first and second derivatives are continuous across the knots.
 
-For instance, if we define a uniform knot vector:
+For instance if we divide a segment $m=6$-ways, and we define a uniform knot vector of $m+1$ number of knots:
 
 $\mathbf{t} = [0, 1, 2, 3, 4, 5, 6]$
 
 then the resulting cubic B-spline will consist of:
 
-$n - k = 7 - 4 = 3$
+$n=m+1-k=6+1-4=3$
 
-polynomial segments.
+$(p=3)$ cubic polynomial segments. Spanning $k=4$ knots each: $[t_0, t_4], [t_1, t_5], [t_2, t_6]$ i.e. $(t_{i:i+4})$
 
 This cubic B-spline is smooth up to the second derivative, unlike a simple piecewise cubic Bézier curve, which would only have $C^0$ continuity at the joins.
 
