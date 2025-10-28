@@ -18,4 +18,4 @@ $e_{text} = W_T \cdot CLS_{text}$
 
 and
 
-$\lambda = \frac{e_{image}}{exp(e_{image} + e_{text})}$
+$\lambda = \frac{exp(e_{image})}{exp(e_{image}) + exp(e_{text})}$
