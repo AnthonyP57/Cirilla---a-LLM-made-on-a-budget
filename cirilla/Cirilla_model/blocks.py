@@ -517,11 +517,3 @@ class VisionEmbeddingModel(nn.Module):
         tokens = self.token_norm(tokens)
 
         return tokens
-
-
-if __name__ == '__main__':
-    # quick smoke test
-    model = VisionEmbeddingModel(in_ch=3, embed_dim=128, patch_size=14)
-    dummy = torch.randn(2, 3, 224, 224)
-    out = model(dummy)
-    print('tokens:', out)      # (B, N, D)
