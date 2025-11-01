@@ -14,7 +14,7 @@ KEYBOARD_NEIGHBORS = {
     'v': 'cb', 'w': 'qe', 'x': 'zc', 'y': 'tu', 'z': 'x'
     }
 
-class JSONLDataset(IterableDataset):
+class GenericDataset:
     def __init__(self, path:Union[Path, tuple[Path]]='./training_dataset.jsonl',
                 shuffle_path=False,
                 device:torch.device='cuda',
@@ -29,7 +29,6 @@ class JSONLDataset(IterableDataset):
                 random_missing_char_prob:float=0.
                 ):
         
-        super().__init__()
         self.path = path
         self.shuffle_path = shuffle_path
         self.device = device
@@ -97,6 +96,10 @@ class JSONLDataset(IterableDataset):
             else:
                 new_text.append(letter)
         return ''.join(new_text)
+
+class JSONLDataset(IterableDataset, GenericDataset):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
     
     def __iter__(self):
 
@@ -126,7 +129,7 @@ class JSONLDataset(IterableDataset):
                                     
                                     out_tokens = out_tokens.to(self.device)
                                     
-                                    line['text'] = self.tokenizer._apply_random_spelling_mistake(line['text'])
+                                    line['text'] = self._apply_random_spelling_mistake(line['text'])
                                     
                                     tokenized_data =  self.tokenizer(self.sos_token + line['text'], return_tensors='pt', padding='do_not_pad',
                                                                     truncation=True, max_length=self.max_len+1)
@@ -145,7 +148,7 @@ class JSONLDataset(IterableDataset):
                                 else:
 
                                     if self.random_spelling_mistake_prob > 0. or self.random_missing_char_prob > 0.:
-                                        line['text'] = self.tokenizer._apply_random_spelling_mistake(line['text'])
+                                        line['text'] = self._apply_random_spelling_mistake(line['text'])
                                         
                                     tokenized_data =  self.tokenizer(self.sos_token + line['text'], return_tensors='pt', padding='do_not_pad',
                                                                     truncation=True, max_length=self.max_len+1)
