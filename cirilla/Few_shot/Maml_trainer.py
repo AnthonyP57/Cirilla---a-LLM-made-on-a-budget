@@ -22,6 +22,8 @@ class MAMLBinaryAdapterTrainer:
         self.tokenizer = tokenizer
         self.model = model
 
+        self.device = getattr(model.args, 'device', model.device)
+
         self.embedding_dim = self.model.args.dim
 
         self.classifier = nn.Sequential(
