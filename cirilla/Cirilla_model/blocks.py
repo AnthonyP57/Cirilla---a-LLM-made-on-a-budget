@@ -18,6 +18,7 @@ import torch.nn as nn
 from typing import Optional
 import warnings
 import torch
+import torch.nn.functional as F
 from torchao.float8 import convert_to_float8_training, Float8LinearConfig
 from torchao.sparsity.training import (
     SemiSparseLinear,
@@ -474,3 +475,53 @@ class FeedForward(nn.Module):
     def forward(self, x):
         x = self.net(x)
         return x
+
+class PatchEmbed(nn.Module):
+    def __init__(self, in_ch=3, embed_dim=768, patch_size=16):
+        super().__init__()
+        self.patch_size = patch_size
+        self.proj = nn.Conv2d(in_ch, embed_dim, kernel_size=patch_size, stride=patch_size)
+        self.norm = nn.LayerNorm(embed_dim)
+
+    def forward(self, x):
+        # x ~ (B, C, H, W)
+        x = self.proj(x)  # (B, D, H/ps, W/ps)
+        x = x.flatten(2).transpose(1, 2)  # (B, H/ps * W/ps, D)
+        x = self.norm(x)
+        return x
+
+class VisionEmbeddingModel(nn.Module):
+    def __init__(self,
+                    in_ch=3,
+                    embed_dim=768,
+                    patch_size=16,
+                    H=16,
+                    W=16
+                    ):
+        super().__init__()
+        self.patch_embed = PatchEmbed(in_ch=in_ch, embed_dim=embed_dim, patch_size=patch_size)
+        self.token_norm = nn.LayerNorm(embed_dim)
+        self.pos_embed = self._make_pos_embed((H, W), embed_dim)
+
+    def _make_pos_embed(self, grid_hw, embed_dim):
+        H, W = grid_hw
+        pe = nn.Parameter(torch.zeros(1, H * W, embed_dim))
+        nn.init.trunc_normal_(pe, std=0.02)
+        return pe
+
+    def forward(self, x):
+        # x ~ (B, C, H, W)
+        tokens = self.patch_embed(x)  # (B, N, D)
+
+        tokens = tokens + self.pos_embed
+        tokens = self.token_norm(tokens)
+
+        return tokens
+
+
+if __name__ == '__main__':
+    # quick smoke test
+    model = VisionEmbeddingModel(in_ch=3, embed_dim=128, patch_size=14)
+    dummy = torch.randn(2, 3, 224, 224)
+    out = model(dummy)
+    print('tokens:', out)      # (B, N, D)
