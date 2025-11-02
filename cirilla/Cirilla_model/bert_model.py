@@ -10,6 +10,7 @@ import warnings
 import torch
 from huggingface_hub import PyTorchModelHubMixin, hf_hub_download
 from safetensors.torch import load_file
+from einops.layers.torch import Rearrange
 
 @dataclass
 class BertArgs:
@@ -105,7 +106,10 @@ class CirillaBERT(
                 self.output.weight = self.emb.embeddings.weight
 
         elif self.args.output_what == 'classify':
-            self.output = nn.Linear(self.args.dim, self.args.n_classes, bias=self.args.out_bias)
+            if self.args.n_classes == 1:
+                self.output = nn.Sequential(nn.Linear(self.args.dim, 1, bias=self.args.out_bias), nn.Sigmoid(), Rearrange('... 1 -> ...'))
+            else:
+                self.output = nn.Linear(self.args.dim, self.args.n_classes, bias=self.args.out_bias)
 
         self.n_params = sum(p.numel() for p in self.parameters() if p.requires_grad)
 

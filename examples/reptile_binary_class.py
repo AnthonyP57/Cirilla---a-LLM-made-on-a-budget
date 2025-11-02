@@ -1,16 +1,24 @@
-from cirilla.Few_shot import MAMLBinaryAdapterTrainer, MamlPretrainingDataset
+from cirilla.Few_shot import ReptileTrainer, MamlPretrainingDataset
 from cirilla.Cirilla_model import CirillaBERT, BertArgs
 from cirilla.Cirilla_model import CirillaTokenizer
+import torch.nn as nn
 
 tasks = MamlPretrainingDataset(path=('examples/data/example_bert.jsonl',
                                     'examples/data/example_bert.jsonl'), batch_size=2)
 print(f"n tasks: {len(tasks)}")
 
-model = CirillaBERT(BertArgs(output_what='meanpool', moe_type='pytorch', n_layers=2, dim=128, d_ff=256, torch_compile=False))
+model = CirillaBERT(BertArgs(
+    output_what='classify',
+    moe_type='pytorch',
+    n_layers=2,
+    dim=128,
+    d_ff=256,
+    n_classes=1,
+    torch_compile=False))
 
 tokenizer = CirillaTokenizer(hub_url='AnthonyPa57/HF-torch-demo2')
 
-trainer = MAMLBinaryAdapterTrainer(model, tokenizer)
+trainer = ReptileTrainer(model, tokenizer)
 
 trainer.meta_train(tasks)
 
