@@ -217,14 +217,15 @@ class MagMaxMAMLTrainer:
         test_dataset = TensorDataset(test_ids, test_masks, test_labels_tensor)
         test_loader = DataLoader(test_dataset, batch_size=batch_size, shuffle=True)
 
-        self.model.train()
         for epoch in range(epochs):
             train_loss = 0
             valid_loss = 0
             nt = 0
             nv = 0
             for phase in ['train', 'valid']:
+
                 if phase == 'train':
+                    self.model.train()
 
                     adapted_model = type(self.model)(self.model.args).to(self.device)
                     adapted_model.load_state_dict(self.model.state_dict())
@@ -256,6 +257,7 @@ class MagMaxMAMLTrainer:
                         self.model.load_state_dict(original_param_dict)
                     
                 else:
+                    self.model.eval()
                     with torch.no_grad():
                         for batch_ids, masks, labels in test_loader:
 
@@ -353,7 +355,7 @@ class ReptileTrainer:
 
                     self.model.load_state_dict(original_param_dict)
 
-            print(f"Epoch {epoch+1}, Meta-Train Loss: {meta_train_loss/n:.4f}")
+            print(f"Epoch {epoch+1}, Tasks-specific Loss: {meta_train_loss/n:.4f}")
 
     def fine_tune(self,
                     train_texts: list[str],
@@ -383,14 +385,15 @@ class ReptileTrainer:
         test_dataset = TensorDataset(test_ids, test_masks, test_labels_tensor)
         test_loader = DataLoader(test_dataset, batch_size=batch_size, shuffle=True)
 
-        self.model.train()
         for epoch in range(epochs):
             train_loss = 0
             valid_loss = 0
             nt = 0
             nv = 0
             for phase in ['train', 'valid']:
+                
                 if phase == 'train':
+                    self.model.train()
 
                     adapted_model = type(self.model)(self.model.args).to(self.device)
                     adapted_model.load_state_dict(self.model.state_dict())
@@ -422,6 +425,7 @@ class ReptileTrainer:
                         self.model.load_state_dict(original_param_dict)
                     
                 else:
+                    self.model.eval()
                     with torch.no_grad():
                         for batch_ids, masks, labels in test_loader:
 
@@ -545,7 +549,7 @@ class MAMLBinaryAdapterTrainer:
                     meta_train_loss += meta_loss.item()
                     n+=1
 
-                print(f"Epoch {epoch+1}, Meta-Train Loss: {meta_train_loss/n:.4f}")
+                print(f"Epoch {epoch+1}, Tasks-specific Loss: {meta_train_loss/n:.4f}")
 
     def fine_tune(self,
                     train_texts: list[str],
@@ -571,14 +575,16 @@ class MAMLBinaryAdapterTrainer:
 
         optimizer = torch.optim.Adam(self.classifier.parameters(), lr=learning_rate)
 
-        self.classifier.train()
         for epoch in range(epochs):
             train_loss = 0
             valid_loss = 0
             nt = 0
             nv = 0
             for phase in ['train', 'valid']:
+                
                 if phase == 'train':
+
+                    self.classifier.train()
                     for batch_embeddings, batch_labels in train_loader:
                         batch_embeddings = batch_embeddings.to(self.device)
                         batch_labels = batch_labels.to(self.device)
@@ -595,6 +601,7 @@ class MAMLBinaryAdapterTrainer:
                         train_loss += loss.item()*b
                     
                 else:
+                    self.classifier.eval()
                     with torch.no_grad():
                         for batch_embeddings, batch_labels in test_loader:
                             batch_embeddings = batch_embeddings.to(self.device)
