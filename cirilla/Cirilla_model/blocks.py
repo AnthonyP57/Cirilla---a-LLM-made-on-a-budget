@@ -517,3 +517,16 @@ class VisionEmbeddingModel(nn.Module):
         tokens = self.token_norm(tokens)
 
         return tokens
+
+class KeylessAttention(nn.Module):
+    def __init__(self, dim):
+        super().__init__()
+        self.wi = nn.Linear(dim, 1, bias=False)
+        self.wt = nn.Linear(dim, 1, bias=False)
+
+    def forward(self, cls_image, cls_text):
+        ei = self.wi(cls_image)
+        et = self.wt(cls_text)
+        lmb = F.sigmoid(ei - et)
+
+        return lmb * cls_image + ((1 - lmb) * cls_text)
