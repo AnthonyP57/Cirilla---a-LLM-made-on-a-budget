@@ -466,7 +466,7 @@ class MAMLBinaryAdapterTrainer:
         self.inner_lr = inner_lr
         self.num_inner_steps = num_inner_steps
 
-        self.meta_optimizer = torch.optim.Adam([
+        self.meta_optimizer = torch.optim.AdamW([
             *self.model.parameters(),
             *self.classifier.parameters()
         ], lr=self.meta_lr)
@@ -535,11 +535,9 @@ class MAMLBinaryAdapterTrainer:
 
                     adapted_classifier, _ = self._inner_loop_adaptation(support_embeddings, support_labels)
 
-                    # Compute meta-loss on query set
                     query_predictions = adapted_classifier(query_embeddings)
                     meta_loss = self.loss_fn(query_predictions.view(-1), query_labels)
 
-                    # Meta-update
                     self.meta_optimizer.zero_grad(set_to_none=True)
                     meta_loss.backward()
                     self.meta_optimizer.step()
