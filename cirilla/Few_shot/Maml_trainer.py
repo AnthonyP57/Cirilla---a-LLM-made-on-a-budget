@@ -100,60 +100,24 @@ class MagMaxMAMLTrainer:
                 inner_lr=0.01,
                 num_inner_steps=5,
                 max_len=512):
-        """
-        Args:
-            model: Transformer model
-            device: Compute device
-            meta_lr: Learning rate for meta-optimization
-            inner_lr: Learning rate for inner loop adaptation
-            num_inner_steps: Number of inner loop adaptation steps
-        """
 
         self.tokenizer = tokenizer
         self.model = model
-
         self.device = getattr(model.args, 'device')
 
         self.inner_lr = inner_lr
         self.meta_lr = meta_lr
         self.num_inner_steps = num_inner_steps
 
-        self.meta_optimizer = torch.optim.Adam(model.parameters(), lr=self.meta_lr)
-
         self.loss_fn = nn.BCELoss()
         self.max_len = max_len
-
-    def _get_embeddings(self, texts: list[str]) -> torch.Tensor:
-        """
-        Get embeddings from model model
-
-        Args:
-            texts: list of text strings
-
-        Returns:
-            embeddings: Tensor of embeddings
-        """
-        inputs = self.tokenizer(texts, return_tensors='pt', padding='max_length', truncation=True, max_length=self.max_len)
-
-        with torch.no_grad():
-            embeddings = self.model(inputs['input_ids'], inputs['attention_mask'])
-
-        return embeddings
     
     def meta_train(self,
                     meta_train_tasks: list[dict[str, list]],
                     epochs: int = 50):
-        """
-        Meta-training loop
-
-        Args:
-            meta_train_tasks: list of tasks for meta-training
-            epochs: Number of meta-training epochs
-        """
-        losses = []
 
         for epoch in range(epochs):
-            meta_train_loss = 0
+            inner_loss_epoch = 0
             n=0
 
             model_zero_params = self.model.state_dict()
@@ -161,68 +125,69 @@ class MagMaxMAMLTrainer:
 
             adapted_model = type(self.model)(self.model.args).to(self.device, dtype=self.model.args.dtype)
             adapted_model.load_state_dict(self.model.state_dict())
-            inner_optimizer = torch.optim.SGD(adapted_model.parameters(), lr=self.inner_lr)
+            inner_optimizer = torch.optim.AdamW(adapted_model.parameters(), lr=self.inner_lr)
 
             meta_train_tasks.shuffle_tasks()
+
             for task in meta_train_tasks:
-                for n_iter, batch in enumerate(task):
-                    support_data = batch['support_data']
-                    support_labels = batch['support_labels']
-                    query_data = batch['query_data']
-                    query_labels = batch['query_labels']
 
-                    if support_labels.shape[0] == 0 or query_labels.shape[0] == 0:
-                        if (n_iter+1) != task.n_parts:
-                            print(f"Skipping empty task: {task.name} at iter: {n_iter+1}/{task.n_parts}")
+                for _ in range(self.num_inner_steps):
+                
+                    for n_iter, batch in enumerate(task):
+                        support_data = batch['support_data']
+                        support_labels = batch['support_labels']
+                        query_data = batch['query_data']
+                        query_labels = batch['query_labels']
 
-                        continue
+                        if support_labels.shape[0] == 0 or query_labels.shape[0] == 0:
+                            if (n_iter+1) != task.n_parts:
+                                print(f"Skipping empty task: {task.name} at iter: {n_iter+1}/{task.n_parts}")
 
-                    supports = self.tokenizer(support_data, return_tensors='pt', padding='max_length', truncation=True, max_length=self.max_len)
-                    support_ids, support_masks = supports['input_ids'], supports['attention_mask']
+                            continue
 
-                    querys = self.tokenizer(query_data, return_tensors='pt', padding='max_length', truncation=True, max_length=self.max_len)
-                    query_ids, query_masks = querys['input_ids'], querys['attention_mask']
+                        supports = self.tokenizer(support_data, return_tensors='pt', padding='max_length', truncation=True, max_length=self.max_len)
+                        support_ids, support_masks = supports['input_ids'], supports['attention_mask']
 
-                    ids = torch.cat((support_ids, query_ids), dim=0).to(self.device)
-                    masks = torch.cat((support_masks, query_masks), dim=0).to(self.device)
-                    labels = torch.cat((support_labels, query_labels), dim=0).to(self.device, dtype=self.model.args.dtype if type(self.loss_fn) == nn.BCELoss else torch.int64)
-                    
-                    for _ in range(self.num_inner_steps):
+                        querys = self.tokenizer(query_data, return_tensors='pt', padding='max_length', truncation=True, max_length=self.max_len)
+                        query_ids, query_masks = querys['input_ids'], querys['attention_mask']
+
+                        ids = torch.cat((support_ids, query_ids), dim=0).to(self.device)
+                        masks = torch.cat((support_masks, query_masks), dim=0).to(self.device)
+                        labels = torch.cat((support_labels, query_labels), dim=0).to(self.device, dtype=self.model.args.dtype if type(self.loss_fn) == nn.BCELoss else torch.int64)
 
                         predictions = adapted_model(ids, masks)
 
                         inner_loss = self.loss_fn(predictions, labels)
 
-                        inner_optimizer.zero_grad()
+                        inner_optimizer.zero_grad(set_to_none=True)
                         inner_loss.backward()
                         inner_optimizer.step()
 
-                        meta_train_loss += inner_loss.item()
+                        inner_loss_epoch += inner_loss.item()
                         n+=1
 
-                    with torch.no_grad():
-                        adapted_params = adapted_model.state_dict()
-                        param_deltas = {key: value - model_zero_params[key] for key, value in adapted_params.items()}
-
-                        for key in weight_update.keys():
-                            current_update = weight_update[key]
-                            new_update = param_deltas[key]
-
-                            # get biggest absolute changes mask
-                            mask = torch.abs(new_update) > torch.abs(current_update)
-                            current_update[mask] = new_update[mask]
-
-                            weight_update[key] = current_update
-
                 with torch.no_grad():
-                    
-                    for key in model_zero_params.keys():
-                        model_zero_params[key] += self.meta_lr * weight_update[key]
+                    adapted_params = adapted_model.state_dict()
+                    param_deltas = {key: value - model_zero_params[key] for key, value in adapted_params.items()}
 
-                    self.model.load_state_dict(model_zero_params)
+                    for key in weight_update.keys():
+                        current_update = weight_update[key]
+                        new_update = param_deltas[key]
 
-                print(f"Epoch {epoch+1}, Meta-Train Loss: {meta_train_loss/n:.4f}")
-                losses.append(meta_train_loss/n)
+                        # get biggest absolute changes mask
+                        mask = torch.abs(new_update) > torch.abs(current_update)
+                        current_update[mask] = new_update[mask]
+
+                        weight_update[key] = current_update
+
+            with torch.no_grad():
+                
+                for key in model_zero_params.keys():
+                    model_zero_params[key] += self.meta_lr * weight_update[key]
+
+                self.model.load_state_dict(model_zero_params)
+
+            print(f"Epoch {epoch+1}, Tasks-specific Loss: {inner_loss_epoch/n:.4f}")
 
     def fine_tune(self,
                     train_texts: list[str],
@@ -233,22 +198,7 @@ class MagMaxMAMLTrainer:
                     batch_size: int = 16,
                     learning_rate: float = 0.1,
                     verbose: bool = False):
-        """
-        Fine-tune the model on a specific downstream task
 
-        Args:
-            train_texts: list of training texts strings
-            train_labels: list of training labels
-            test_texts: list of test texts strings
-            test_labels: list of test labels
-            epochs: Number of fine-tuning epochs
-            batch_size: Batch size for training
-            learning_rate: Learning rate for fine-tuning
-            verbose: Whether to print training progress
-
-        Returns:
-            Trained MAMLChemBERTa model
-        """
         tokenized_train = self.tokenizer(train_texts, return_tensors='pt', padding='max_length', truncation=True, max_length=self.max_len)
         tokenized_test = self.tokenizer(test_texts, return_tensors='pt', padding='max_length', truncation=True, max_length=self.max_len)
 
@@ -275,13 +225,14 @@ class MagMaxMAMLTrainer:
             nv = 0
             for phase in ['train', 'valid']:
                 if phase == 'train':
-                    for batch_ids, masks, labels in train_loader:
 
-                        adapted_model = type(self.model)(self.model.args).to(self.device)
-                        adapted_model.load_state_dict(self.model.state_dict())
-                        inner_optimizer = torch.optim.SGD(adapted_model.parameters(), lr=self.inner_lr)
+                    adapted_model = type(self.model)(self.model.args).to(self.device)
+                    adapted_model.load_state_dict(self.model.state_dict())
+                    inner_optimizer = torch.optim.AdamW(adapted_model.parameters(), lr=self.inner_lr)
 
-                        for _ in range(self.num_inner_steps):
+                    for _ in range(self.num_inner_steps):
+
+                        for batch_ids, masks, labels in train_loader:
 
                             predictions = adapted_model(batch_ids.to(self.device), masks.to(self.device))
 
@@ -291,20 +242,18 @@ class MagMaxMAMLTrainer:
                             inner_loss.backward()
                             inner_optimizer.step()
 
-                        b = batch_ids.shape[0]
-                        nt += b
-                        train_loss += inner_loss.item()*b
+                            b = batch_ids.shape[0]
+                            nt += b
+                            train_loss += inner_loss.item()*b
 
-                        with torch.no_grad(): # for one task this is basically reduced to reptile
-                            original_param_dict = self.model.state_dict()
-                            adapted_param_dict = adapted_model.state_dict()
+                    with torch.no_grad(): # for one task this is basically reduced to reptile
+                        original_param_dict = self.model.state_dict()
+                        adapted_param_dict = adapted_model.state_dict()
 
-                            assert original_param_dict.keys() == adapted_param_dict.keys()
+                        for key in original_param_dict.keys():
+                            original_param_dict[key] = original_param_dict[key] + learning_rate * (adapted_param_dict[key] - original_param_dict[key])
 
-                            for key in original_param_dict.keys():
-                                original_param_dict[key] = original_param_dict[key] + learning_rate * (adapted_param_dict[key] - original_param_dict[key])
-
-                            self.model.load_state_dict(original_param_dict)
+                        self.model.load_state_dict(original_param_dict)
                     
                 else:
                     with torch.no_grad():
@@ -330,14 +279,6 @@ class ReptileTrainer:
                 inner_lr=0.01,
                 num_inner_steps=5,
                 max_len=512):
-        """
-        Args:
-            model: Transformer model
-            device: Compute device
-            meta_lr: Learning rate for meta-optimization
-            inner_lr: Learning rate for inner loop adaptation
-            num_inner_steps: Number of inner loop adaptation steps
-        """
 
         self.tokenizer = tokenizer
         self.model = model
@@ -348,99 +289,73 @@ class ReptileTrainer:
         self.meta_lr = meta_lr
         self.num_inner_steps = num_inner_steps
 
-        self.meta_optimizer = torch.optim.Adam(model.parameters(), lr=self.meta_lr)
-
         self.loss_fn = nn.BCELoss()
         self.max_len = max_len
-
-    def _get_embeddings(self, texts: list[str]) -> torch.Tensor:
-        """
-        Get embeddings from model model
-
-        Args:
-            texts: list of text strings
-
-        Returns:
-            embeddings: Tensor of embeddings
-        """
-        inputs = self.tokenizer(texts, return_tensors='pt', padding='max_length', truncation=True, max_length=self.max_len)
-
-        with torch.no_grad():
-            embeddings = self.model(inputs['input_ids'], inputs['attention_mask'])
-
-        return embeddings
     
     def meta_train(self,
                     meta_train_tasks: list[dict[str, list]],
                     epochs: int = 50):
-        """
-        Meta-training loop
-
-        Args:
-            meta_train_tasks: list of tasks for meta-training
-            epochs: Number of meta-training epochs
-        """
-        losses = []
 
         for epoch in range(epochs):
             meta_train_loss = 0
             n=0
 
             meta_train_tasks.shuffle_tasks()
+
             for task in meta_train_tasks:
-                for n_iter, batch in enumerate(task):
-                    support_data = batch['support_data']
-                    support_labels = batch['support_labels']
-                    query_data = batch['query_data']
-                    query_labels = batch['query_labels']
 
-                    if support_labels.shape[0] == 0 or query_labels.shape[0] == 0:
-                        if (n_iter+1) != task.n_parts:
-                            print(f"Skipping empty task: {task.name} at iter: {n_iter+1}/{task.n_parts}")
+                adapted_model = type(self.model)(self.model.args).to(self.device)
+                adapted_model.load_state_dict(self.model.state_dict())
+                inner_optimizer = torch.optim.SGD(adapted_model.parameters(), lr=self.inner_lr)
 
-                        continue
+                for _ in range(self.num_inner_steps):
 
-                    supports = self.tokenizer(support_data, return_tensors='pt', padding='max_length', truncation=True, max_length=self.max_len)
-                    support_ids, support_masks = supports['input_ids'], supports['attention_mask']
+                    for n_iter, batch in enumerate(task):
 
-                    querys = self.tokenizer(query_data, return_tensors='pt', padding='max_length', truncation=True, max_length=self.max_len)
-                    query_ids, query_masks = querys['input_ids'], querys['attention_mask']
+                        support_data = batch['support_data']
+                        support_labels = batch['support_labels']
+                        query_data = batch['query_data']
+                        query_labels = batch['query_labels']
 
-                    ids = torch.cat((support_ids, query_ids), dim=0).to(self.device)
-                    masks = torch.cat((support_masks, query_masks), dim=0).to(self.device)
-                    labels = torch.cat((support_labels, query_labels), dim=0).to(self.device, dtype=self.model.args.dtype if type(self.loss_fn) == nn.BCELoss else torch.int64)
+                        if support_labels.shape[0] == 0 or query_labels.shape[0] == 0:
+                            if (n_iter+1) != task.n_parts:
+                                print(f"Skipping empty task: {task.name} at iter: {n_iter+1}/{task.n_parts}")
 
-                    adapted_model = type(self.model)(self.model.args).to(self.device)
-                    adapted_model.load_state_dict(self.model.state_dict())
-                    inner_optimizer = torch.optim.SGD(adapted_model.parameters(), lr=self.inner_lr)
-                    
-                    for _ in range(self.num_inner_steps):
+                            continue
+
+                        supports = self.tokenizer(support_data, return_tensors='pt', padding='max_length', truncation=True, max_length=self.max_len)
+                        support_ids, support_masks = supports['input_ids'], supports['attention_mask']
+
+                        querys = self.tokenizer(query_data, return_tensors='pt', padding='max_length', truncation=True, max_length=self.max_len)
+                        query_ids, query_masks = querys['input_ids'], querys['attention_mask']
+
+                        ids = torch.cat((support_ids, query_ids), dim=0).to(self.device)
+                        masks = torch.cat((support_masks, query_masks), dim=0).to(self.device)
+                        labels = torch.cat((support_labels, query_labels), dim=0).to(self.device, dtype=self.model.args.dtype if type(self.loss_fn) == nn.BCELoss else torch.int64)
 
                         predictions = adapted_model(ids, masks)
 
                         inner_loss = self.loss_fn(predictions, labels)
 
-                        inner_optimizer.zero_grad()
+                        inner_optimizer.zero_grad(set_to_none=True)
                         inner_loss.backward()
                         inner_optimizer.step()
 
                         meta_train_loss += inner_loss.item()
                         n+=1
 
-                    with torch.no_grad():
-                        original_param_dict = self.model.state_dict()
-                        adapted_param_dict = adapted_model.state_dict()
+                        with torch.no_grad():
+                            original_param_dict = self.model.state_dict()
+                            adapted_param_dict = adapted_model.state_dict()
 
-                        assert original_param_dict.keys() == adapted_param_dict.keys()
+                            assert original_param_dict.keys() == adapted_param_dict.keys()
 
-                        for key in original_param_dict.keys():
-                            original_param_dict[key] = original_param_dict[key] + self.meta_lr * (adapted_param_dict[key] - original_param_dict[key])
+                            for key in original_param_dict.keys():
+                                original_param_dict[key] = original_param_dict[key] + self.meta_lr * (adapted_param_dict[key] - original_param_dict[key])
 
-                        self.model.load_state_dict(original_param_dict)
+                            self.model.load_state_dict(original_param_dict)
 
-
-                print(f"Epoch {epoch+1}, Meta-Train Loss: {meta_train_loss/n:.4f}")
-                losses.append(meta_train_loss/n)
+                    print(f"Epoch {epoch+1}, Meta-Train Loss: {meta_train_loss/n:.4f}")
 
     def fine_tune(self,
                     train_texts: list[str],
@@ -493,13 +408,14 @@ class ReptileTrainer:
             nv = 0
             for phase in ['train', 'valid']:
                 if phase == 'train':
-                    for batch_ids, masks, labels in train_loader:
 
-                        adapted_model = type(self.model)(self.model.args).to(self.device)
-                        adapted_model.load_state_dict(self.model.state_dict())
-                        inner_optimizer = torch.optim.SGD(adapted_model.parameters(), lr=self.inner_lr)
+                    adapted_model = type(self.model)(self.model.args).to(self.device)
+                    adapted_model.load_state_dict(self.model.state_dict())
+                    inner_optimizer = torch.optim.SGD(adapted_model.parameters(), lr=self.inner_lr)
 
-                        for _ in range(self.num_inner_steps):
+                    for _ in range(self.num_inner_steps):
+
+                        for batch_ids, masks, labels in train_loader:
 
                             predictions = adapted_model(batch_ids.to(self.device), masks.to(self.device))
 
@@ -509,9 +425,9 @@ class ReptileTrainer:
                             inner_loss.backward()
                             inner_optimizer.step()
 
-                        b = batch_ids.shape[0]
-                        nt += b
-                        train_loss += inner_loss.item()*b
+                            b = batch_ids.shape[0]
+                            nt += b
+                            train_loss += inner_loss.item()*b
 
                         with torch.no_grad():
                             original_param_dict = self.model.state_dict()
@@ -548,15 +464,7 @@ class MAMLBinaryAdapterTrainer:
                 inner_lr=0.01,
                 num_inner_steps=5,
                 max_len=512):
-        """
-        Args:
-            model: Transformer model
-            device: Compute device
-            meta_lr: Learning rate for meta-optimization
-            inner_lr: Learning rate for inner loop adaptation
-            num_inner_steps: Number of inner loop adaptation steps
-        """
-
+        
         self.tokenizer = tokenizer
         self.model = model
 
@@ -586,15 +494,7 @@ class MAMLBinaryAdapterTrainer:
         self.max_len = max_len
 
     def _get_embeddings(self, texts: list[str]) -> torch.Tensor:
-        """
-        Get embeddings from model model
 
-        Args:
-            texts: list of text strings
-
-        Returns:
-            embeddings: Tensor of embeddings
-        """
         inputs = self.tokenizer(texts, return_tensors='pt', padding='max_length', truncation=True, max_length=self.max_len)
 
         with torch.no_grad():
@@ -605,29 +505,17 @@ class MAMLBinaryAdapterTrainer:
     def _inner_loop_adaptation(self,
                                 support_embeddings: torch.Tensor,
                                 support_labels: torch.Tensor) -> tuple[nn.Module, float]:
-        """
-        Perform inner loop adaptation (few-shot learning)
 
-        Args:
-            support_embeddings: Support set embeddings
-            support_labels: Support set labels
-
-        Returns:
-            adapted_classifier: Fine-tuned classifier
-            inner_loss: Loss after adaptation
-        """
-        # Create a copy of the classifier to adapt
         adapted_classifier = type(self.classifier)(*self.classifier._modules.values()).to(self.device, dtype=self.model.args.dtype)
         adapted_classifier.load_state_dict(self.classifier.state_dict())
 
         inner_optimizer = torch.optim.SGD(adapted_classifier.parameters(), lr=self.inner_lr)
 
-        # Adaptation steps
         for _ in range(self.num_inner_steps):
             predictions = adapted_classifier(support_embeddings)
             inner_loss = self.loss_fn(predictions.view(-1), support_labels)
 
-            inner_optimizer.zero_grad()
+            inner_optimizer.zero_grad(set_to_none=True)
             inner_loss.backward(retain_graph=True)
             inner_optimizer.step()
 
@@ -636,21 +524,15 @@ class MAMLBinaryAdapterTrainer:
     def meta_train(self,
                     meta_train_tasks: list[dict[str, list]],
                     epochs: int = 50):
-        """
-        Meta-training loop
-
-        Args:
-            meta_train_tasks: list of tasks for meta-training
-            epochs: Number of meta-training epochs
-        """
-        losses = []
 
         for epoch in range(epochs):
             meta_train_loss = 0
             n=0
 
             meta_train_tasks.shuffle_tasks()
+            
             for task in meta_train_tasks:
+
                 for n_iter, batch in enumerate(task):
 
                     support_data = batch['support_data']
@@ -677,7 +559,7 @@ class MAMLBinaryAdapterTrainer:
                     meta_loss = self.loss_fn(query_predictions.view(-1), query_labels)
 
                     # Meta-update
-                    self.meta_optimizer.zero_grad()
+                    self.meta_optimizer.zero_grad(set_to_none=True)
                     meta_loss.backward()
                     self.meta_optimizer.step()
 
@@ -685,7 +567,6 @@ class MAMLBinaryAdapterTrainer:
                     n+=1
 
                 print(f"Epoch {epoch+1}, Meta-Train Loss: {meta_train_loss/n:.4f}")
-                losses.append(meta_train_loss/n)
 
     def fine_tune(self,
                     train_texts: list[str],
@@ -696,22 +577,7 @@ class MAMLBinaryAdapterTrainer:
                     batch_size: int = 16,
                     learning_rate: float = 1e-2,
                     verbose: bool = False):
-        """
-        Fine-tune the model on a specific downstream task
 
-        Args:
-            train_texts: list of training texts strings
-            train_labels: list of training labels
-            test_texts: list of test texts strings
-            test_labels: list of test labels
-            epochs: Number of fine-tuning epochs
-            batch_size: Batch size for training
-            learning_rate: Learning rate for fine-tuning
-            verbose: Whether to print training progress
-
-        Returns:
-            Trained MAMLChemBERTa model
-        """
         train_embeddings = self._get_embeddings(train_texts).detach()
         test_embeddings = self._get_embeddings(test_texts).detach()
 
