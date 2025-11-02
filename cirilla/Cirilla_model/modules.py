@@ -4,6 +4,45 @@ import os
 from huggingface_hub import hf_hub_download
 import json
 import time
+from safetensors.torch import load_file
+from huggingface_hub import PyTorchModelHubMixin
+
+class CirillaBaseModel(PyTorchModelHubMixin):
+    def __init__(self):
+        pass
+    
+    def pull_model_from_hub(self, hf_repo_id:str):
+        model_args = self.args
+        pulled_args = self.args_get_func(hf_repo_id)
+
+        if model_args != pulled_args:
+            print(f"Current model args don't correspond to the HF model's args.\nCurrent args:\n{model_args}\nThe model will use the HF args:\n{pulled_args}")
+            self.args = pulled_args
+            self._prepare_model()
+
+        file_path = hf_hub_download(
+            repo_id=hf_repo_id,
+            filename="model.safetensors",
+        )
+
+        loaded = load_file(file_path)
+        if "output.weight" not in loaded:
+            loaded['output.weight'] = loaded["emb.embeddings.weight"]
+
+        self.load_state_dict(loaded)
+
+    @staticmethod
+    def mean_pooling(out, attention_mask):
+        if attention_mask is None:
+            return torch.mean(out, dim=1)
+        
+        mask_expanded = attention_mask.unsqueeze(-1).expand(out.size()).to(out.dtype)
+        
+        sum_embeddings = torch.sum(out * mask_expanded, dim=1)
+        
+        sum_mask = mask_expanded.sum(dim=1)
+        
+        return sum_embeddings / torch.clamp(sum_mask, min=1e-9)
 
 def benchmark_model_part(model, x, label=""):
     model.train()

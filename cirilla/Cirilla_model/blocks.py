@@ -202,7 +202,6 @@ class Encoder(nn.Module):
 @dataclass
 class DecoderArgs:
     """general"""
-    vocab_size:int = 60_000
     dim:int = 1024
     d_ff:int = 2048
     n_layers:int = 16
@@ -230,6 +229,7 @@ class DecoderArgs:
     use_sparse:bool = False
     theta:float = 10_000.0
     device = select_torch_device()
+    torch_compile:bool=True
 
     @property
     def dtype(self):
@@ -246,15 +246,6 @@ class DecoderArgs:
             assert self.dtype_str != "fp8"
         if self.output_moe_weights:
             assert self.moe_type == "pytorch"
-
-class InputEmbeddings(nn.Module):
-    def __init__(self, args:DecoderArgs):
-        super().__init__()
-
-        self.embeddings = nn.Embedding(args.vocab_size, args.dim)
-    
-    def forward(self, x):
-        return self.embeddings(x)
 
 class Decoder(nn.Module):
 
@@ -323,9 +314,12 @@ class Decoder(nn.Module):
             for attention in self.attentions:
                 swap_linear_with_semi_sparse_linear(attention, get_sparse_config(attention))
 
-        self.attentions = nn.ModuleList([
-            torch.compile(attention, mode='max-autotune') for attention in self.attentions
-            ])
+        if self.args.torch_compile:
+            self.attentions = nn.ModuleList([
+                torch.compile(attention, mode='max-autotune') for attention in self.attentions
+                ])
+        else:
+            self.attentions = nn.ModuleList(self.attentions)
         
         if self.args.moe_type == 'pytorch':
             self.smoes = [
@@ -340,9 +334,12 @@ class Decoder(nn.Module):
                 for smoe in self.smoes:
                     swap_linear_with_semi_sparse_linear(smoe, get_sparse_config(smoe))        
 
-            self.smoes = nn.ModuleList([
-                torch.compile(smoe, mode='max-autotune') for smoe in self.smoes
-            ])
+            if self.args.torch_compile:
+                self.smoes = nn.ModuleList([
+                    torch.compile(smoe, mode='max-autotune') for smoe in self.smoes
+                ])
+            else:
+                self.smoes = nn.ModuleList(self.smoes)
 
         elif self.args.moe_type == 'megablocks-moe':
             self.smoes = nn.ModuleList([
@@ -537,3 +534,12 @@ class KeylessAttention(nn.Module):
         lmb = F.sigmoid(ei - et)
 
         return lmb * cls_image + ((1 - lmb) * cls_text)
+    
+class InputEmbeddings(nn.Module):
+    def __init__(self, args):
+        super().__init__()
+
+        self.embeddings = nn.Embedding(args.vocab_size, args.dim)
+    
+    def forward(self, x):
+        return self.embeddings(x)
