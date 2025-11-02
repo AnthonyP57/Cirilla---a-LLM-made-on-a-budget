@@ -228,7 +228,7 @@ class MagMaxMAMLTrainer:
 
                     adapted_model = type(self.model)(self.model.args).to(self.device)
                     adapted_model.load_state_dict(self.model.state_dict())
-                    inner_optimizer = torch.optim.AdamW(adapted_model.parameters(), lr=self.inner_lr)
+                    inner_optimizer = torch.optim.SGD(adapted_model.parameters(), lr=self.inner_lr)
 
                     for _ in range(self.num_inner_steps):
 
@@ -344,18 +344,16 @@ class ReptileTrainer:
                         meta_train_loss += inner_loss.item()
                         n+=1
 
-                        with torch.no_grad():
-                            original_param_dict = self.model.state_dict()
-                            adapted_param_dict = adapted_model.state_dict()
+                with torch.no_grad():
+                    original_param_dict = self.model.state_dict()
+                    adapted_param_dict = adapted_model.state_dict()
 
-                            assert original_param_dict.keys() == adapted_param_dict.keys()
+                    for key in original_param_dict.keys():
+                        original_param_dict[key] = original_param_dict[key] + self.meta_lr * (adapted_param_dict[key] - original_param_dict[key])
 
-                            for key in original_param_dict.keys():
-                                original_param_dict[key] = original_param_dict[key] + self.meta_lr * (adapted_param_dict[key] - original_param_dict[key])
+                    self.model.load_state_dict(original_param_dict)
 
-                            self.model.load_state_dict(original_param_dict)
-
-                    print(f"Epoch {epoch+1}, Meta-Train Loss: {meta_train_loss/n:.4f}")
+            print(f"Epoch {epoch+1}, Meta-Train Loss: {meta_train_loss/n:.4f}")
 
     def fine_tune(self,
                     train_texts: list[str],
@@ -366,22 +364,7 @@ class ReptileTrainer:
                     batch_size: int = 16,
                     learning_rate: float = 0.1,
                     verbose: bool = False):
-        """
-        Fine-tune the model on a specific downstream task
 
-        Args:
-            train_texts: list of training texts strings
-            train_labels: list of training labels
-            test_texts: list of test texts strings
-            test_labels: list of test labels
-            epochs: Number of fine-tuning epochs
-            batch_size: Batch size for training
-            learning_rate: Learning rate for fine-tuning
-            verbose: Whether to print training progress
-
-        Returns:
-            Trained MAMLChemBERTa model
-        """
         tokenized_train = self.tokenizer(train_texts, return_tensors='pt', padding='max_length', truncation=True, max_length=self.max_len)
         tokenized_test = self.tokenizer(test_texts, return_tensors='pt', padding='max_length', truncation=True, max_length=self.max_len)
 
@@ -429,16 +412,14 @@ class ReptileTrainer:
                             nt += b
                             train_loss += inner_loss.item()*b
 
-                        with torch.no_grad():
-                            original_param_dict = self.model.state_dict()
-                            adapted_param_dict = adapted_model.state_dict()
+                    with torch.no_grad():
+                        original_param_dict = self.model.state_dict()
+                        adapted_param_dict = adapted_model.state_dict()
 
-                            assert original_param_dict.keys() == adapted_param_dict.keys()
+                        for key in original_param_dict.keys():
+                            original_param_dict[key] = original_param_dict[key] + learning_rate * (adapted_param_dict[key] - original_param_dict[key])
 
-                            for key in original_param_dict.keys():
-                                original_param_dict[key] = original_param_dict[key] + learning_rate * (adapted_param_dict[key] - original_param_dict[key])
-
-                            self.model.load_state_dict(original_param_dict)
+                        self.model.load_state_dict(original_param_dict)
                     
                 else:
                     with torch.no_grad():
