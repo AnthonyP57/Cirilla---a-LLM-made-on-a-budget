@@ -1,9 +1,9 @@
-from cirilla.Few_shot import ReptileTrainer, MamlPretrainingDataset
+from cirilla.Few_shot import MagMaxMAMLTrainer, MamlPretrainingDataset
 from cirilla.Cirilla_model import CirillaBERT, BertArgs
 from cirilla.Cirilla_model import CirillaTokenizer
 
 tasks = MamlPretrainingDataset(path=('examples/data/example_bert.jsonl',
-                                    'examples/data/example_bert.jsonl'), batch_size=2)
+                                    'examples/data/example_bert.jsonl'), batch_size=16)
 print(f"n tasks: {len(tasks)}")
 
 model = CirillaBERT(BertArgs(
@@ -13,11 +13,12 @@ model = CirillaBERT(BertArgs(
     dim=128,
     d_ff=256,
     n_classes=1,
+    context_window=512,
     torch_compile=False))
 
 tokenizer = CirillaTokenizer(hub_url='AnthonyPa57/HF-torch-demo2')
 
-trainer = ReptileTrainer(model, tokenizer)
+trainer = MagMaxMAMLTrainer(model, tokenizer)
 
 trainer.meta_train(tasks)
 

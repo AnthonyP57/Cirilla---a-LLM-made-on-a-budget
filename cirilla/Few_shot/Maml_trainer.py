@@ -4,6 +4,7 @@ from torch.utils.data import DataLoader, TensorDataset, Dataset, IterableDataset
 from ..Cirilla_model.dataloader import GenericDataset
 import json
 import polars as pl
+import random
 
 class Task(Dataset):
     def __init__(self, name, data, batch_size=512):
@@ -76,6 +77,11 @@ class MamlPretrainingDataset(IterableDataset, GenericDataset):
             
             self.task_data[p.split('/')[-1].strip('.jsonl') + str(i)] = (texts, labels)
 
+    def shuffle_tasks(self):
+        self.task_data = list(self.task_data.items())
+        random.shuffle(self.task_data)
+        self.task_data = dict(self.task_data)
+
     def __len__(self):
         return len(self.task_data)
 
@@ -88,7 +94,7 @@ class MagMaxMAMLTrainer:
     def __init__(self,
                 model,
                 tokenizer,
-                meta_lr=0.001,
+                meta_lr=0.1,
                 inner_lr=0.01,
                 num_inner_steps=5,
                 max_len=512):
@@ -104,7 +110,7 @@ class MagMaxMAMLTrainer:
         self.tokenizer = tokenizer
         self.model = model
 
-        self.device = getattr(model.args, 'device', model.device)
+        self.device = getattr(model.args, 'device')
 
         self.inner_lr = inner_lr
         self.meta_lr = meta_lr
@@ -134,7 +140,7 @@ class MagMaxMAMLTrainer:
     
     def meta_train(self,
                     meta_train_tasks: list[dict[str, list]],
-                    epochs: int = 100):
+                    epochs: int = 50):
         """
         Meta-training loop
 
@@ -151,16 +157,17 @@ class MagMaxMAMLTrainer:
             model_zero_params = self.model.state_dict()
             weight_update = {k: torch.zeros_like(v) for k, v in model_zero_params.items()}
 
-            adapted_model = type(self.model)(*self.model._modules.values()).to(self.device)
+            adapted_model = type(self.model)(self.model.args).to(self.device, dtype=self.model.args.dtype)
             adapted_model.load_state_dict(self.model.state_dict())
-            inner_optimizer = torch.optim.AdamW(adapted_model.parameters(), lr=self.inner_lr)
+            inner_optimizer = torch.optim.SGD(adapted_model.parameters(), lr=self.inner_lr)
 
+            meta_train_tasks.shuffle_tasks()
             for task in meta_train_tasks:
                 for n_iter, batch in enumerate(task):
                     support_data = batch['support_data']
-                    support_labels = torch.tensor(batch['support_labels'], dtype=self.model.args.dtype if type(self.loss_fn) == nn.BCELoss else torch.int64).to(self.device)
+                    support_labels = batch['support_labels']
                     query_data = batch['query_data']
-                    query_labels = torch.tensor(batch['query_labels'], dtype=self.model.args.dtype if type(self.loss_fn) == nn.BCELoss else torch.int64).to(self.device)
+                    query_labels = batch['query_labels']
 
                     if support_labels.shape[0] == 0 or query_labels.shape[0] == 0:
                         if (n_iter+1) != task.n_parts:
@@ -174,25 +181,26 @@ class MagMaxMAMLTrainer:
                     querys = self.tokenizer(query_data, return_tensors='pt', padding='max_length', truncation=True, max_length=self.max_len)
                     query_ids, query_masks = querys['input_ids'], querys['attention_mask']
 
-                    ids = torch.cat((support_ids, query_ids), dim=0)
-                    masks = torch.cat((support_masks, query_masks), dim=0)
-                    labels = torch.cat((support_labels, query_labels), dim=0)
+                    ids = torch.cat((support_ids, query_ids), dim=0).to(self.device)
+                    masks = torch.cat((support_masks, query_masks), dim=0).to(self.device)
+                    labels = torch.cat((support_labels, query_labels), dim=0).to(self.device, dtype=self.model.args.dtype if type(self.loss_fn) == nn.BCELoss else torch.int64)
                     
                     for _ in range(self.num_inner_steps):
 
                         predictions = adapted_model(ids, masks)
 
-                        inner_loss = self.loss_fn(predictions.view(-1), labels)
+                        inner_loss = self.loss_fn(predictions, labels)
 
                         inner_optimizer.zero_grad()
-                        inner_loss.backward(retain_graph=True)
+                        inner_loss.backward()
                         inner_optimizer.step()
 
-                    meta_train_loss += inner_loss.item()
-                    n+=1
+                        meta_train_loss += inner_loss.item()
+                        n+=1
 
                     with torch.no_grad():
-                        param_deltas = {key: value - model_zero_params[key] for key, value in model_zero_params.items()}
+                        adapted_params = adapted_model.state_dict()
+                        param_deltas = {key: value - model_zero_params[key] for key, value in adapted_params.items()}
 
                         for key in weight_update.keys():
                             current_update = weight_update[key]
@@ -221,7 +229,7 @@ class MagMaxMAMLTrainer:
                     test_labels: list[int],
                     epochs: int = 50,
                     batch_size: int = 16,
-                    learning_rate: float = 1e-2,
+                    learning_rate: float = 0.1,
                     verbose: bool = False):
         """
         Fine-tune the model on a specific downstream task
@@ -257,7 +265,7 @@ class MagMaxMAMLTrainer:
         test_dataset = TensorDataset(test_ids, test_masks, test_labels_tensor)
         test_loader = DataLoader(test_dataset, batch_size=batch_size, shuffle=True)
 
-        self.classifier.train()
+        self.model.train()
         for epoch in range(epochs):
             train_loss = 0
             valid_loss = 0
@@ -267,18 +275,18 @@ class MagMaxMAMLTrainer:
                 if phase == 'train':
                     for batch_ids, masks, labels in train_loader:
 
-                        adapted_model = type(self.model)(*self.model._modules.values()).to(self.device)
+                        adapted_model = type(self.model)(self.model.args).to(self.device)
                         adapted_model.load_state_dict(self.model.state_dict())
-                        inner_optimizer = torch.optim.AdamW(adapted_model.parameters(), lr=self.inner_lr)
+                        inner_optimizer = torch.optim.SGD(adapted_model.parameters(), lr=self.inner_lr)
 
                         for _ in range(self.num_inner_steps):
 
-                            predictions = adapted_model(batch_ids, masks)
+                            predictions = adapted_model(batch_ids.to(self.device), masks.to(self.device))
 
-                            inner_loss = self.loss_fn(predictions, labels)
+                            inner_loss = self.loss_fn(predictions, labels.to(self.device, dtype=self.model.args.dtype if type(self.loss_fn) == nn.BCELoss else torch.int64))
 
                             inner_optimizer.zero_grad()
-                            inner_loss.backward(retain_graph=True)
+                            inner_loss.backward()
                             inner_optimizer.step()
 
                         b = batch_ids.shape[0]
@@ -298,10 +306,10 @@ class MagMaxMAMLTrainer:
                     
                 else:
                     with torch.no_grad():
-                        for batch_ids, masks, labels in train_loader:
+                        for batch_ids, masks, labels in test_loader:
 
-                            predictions = self.model(batch_ids, masks)
-                            loss = self.loss_fn(predictions, labels)
+                            predictions = self.model(batch_ids.to(self.device), masks.to(self.device))
+                            loss = self.loss_fn(predictions, labels.to(self.device, dtype=self.model.args.dtype if type(self.loss_fn) == nn.BCELoss else torch.int64))
 
                             b = batch_ids.shape[0]
                             nv += b
@@ -376,6 +384,7 @@ class ReptileTrainer:
             meta_train_loss = 0
             n=0
 
+            meta_train_tasks.shuffle_tasks()
             for task in meta_train_tasks:
                 for n_iter, batch in enumerate(task):
                     support_data = batch['support_data']
@@ -410,7 +419,7 @@ class ReptileTrainer:
                         inner_loss = self.loss_fn(predictions, labels)
 
                         inner_optimizer.zero_grad()
-                        inner_loss.backward(retain_graph=True)
+                        inner_loss.backward()
                         inner_optimizer.step()
 
                         meta_train_loss += inner_loss.item()
@@ -495,7 +504,7 @@ class ReptileTrainer:
                             inner_loss = self.loss_fn(predictions, labels.to(self.device, dtype=self.model.args.dtype if type(self.loss_fn) == nn.BCELoss else torch.int64))
 
                             inner_optimizer.zero_grad()
-                            inner_loss.backward(retain_graph=True)
+                            inner_loss.backward()
                             inner_optimizer.step()
 
                         b = batch_ids.shape[0]
@@ -638,6 +647,7 @@ class MAMLBinaryAdapterTrainer:
             meta_train_loss = 0
             n=0
 
+            meta_train_tasks.shuffle_tasks()
             for task in meta_train_tasks:
                 for n_iter, batch in enumerate(task):
 
