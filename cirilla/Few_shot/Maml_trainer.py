@@ -1,6 +1,88 @@
 import torch.nn as nn
 import torch
-from torch.utils.data import DataLoader, TensorDataset
+from torch.utils.data import DataLoader, TensorDataset, Dataset, IterableDataset
+from ..Cirilla_model.dataloader import GenericDataset
+import json
+import polars as pl
+
+class Task(Dataset):
+    def __init__(self, name, data, batch_size=512):
+        super().__init__()
+        self.name = name
+        self.batch_size = batch_size
+
+        data = pl.DataFrame({'x': data[0], 'y': data[1]})
+        data = data.sample(fraction=1.0, shuffle=True)
+
+        n_rows = data.shape[0]
+        n_parts = n_rows // batch_size
+        if n_rows % batch_size != 0:
+            n_parts += 1
+
+        self.data = tuple(
+            data[part * batch_size : (part + 1) * batch_size] 
+            for part in range(n_parts)
+        )
+
+        self.n_parts = n_parts
+
+    def __len__(self):
+        return self.n_parts
+
+    def __getitem__(self, idx):
+        data = self.data[idx]
+        shape = data.shape[0] // 2
+
+        support_smiles = data[shape:, 0].to_list()
+        support_labels = torch.tensor(data[shape:, 1].to_list())
+
+        query_smiles = data[:shape, 0].to_list()
+        query_labels = torch.tensor(data[:shape, 1].to_list())
+
+        return {
+                'support_data': support_smiles,
+                'support_labels': support_labels,
+                'query_data': query_smiles,
+                'query_labels': query_labels
+                }
+
+class MamlPretrainingDataset(IterableDataset, GenericDataset):
+    def __init__(self, batch_size=512, **kwargs):
+        super().__init__(**kwargs)
+        self.batch_size = batch_size
+        self._get_data()
+
+    def _get_data(self):
+        
+        self.task_data = {}
+
+        for i, p in enumerate(self.path):
+            texts = []
+            labels = []
+            with open(p, 'r') as f:
+
+                for line in f:
+                    line = json.loads(line)
+                    assert line['data type'] == 'bert', 'MAML supports only BERT data'
+
+                    text = line['text']
+
+                    if self.bert_append_tokens is not None:
+                                    for token in self.bert_append_tokens:
+                                        text += token
+
+                    texts.append(text)
+                    labels.append(line['label'])
+            
+            self.task_data[p.split('/')[-1].strip('.jsonl') + str(i)] = (texts, labels)
+
+    def __len__(self):
+        return len(self.task_data)
+
+    def __iter__(self):
+        for k, v in self.task_data.items():
+            yield Task(k, v, self.batch_size)
+        
 
 class MagMaxMAMLTrainer:
     def __init__(self,
@@ -76,9 +158,9 @@ class MagMaxMAMLTrainer:
             for task in meta_train_tasks:
                 for n_iter, batch in enumerate(task):
                     support_data = batch['support_data']
-                    support_labels = torch.tensor(batch['support_labels'], dtype=torch.float32).to(self.device)
+                    support_labels = torch.tensor(batch['support_labels'], dtype=self.model.args.dtype if type(self.loss_fn) == nn.BCELoss else torch.int64).to(self.device)
                     query_data = batch['query_data']
-                    query_labels = torch.tensor(batch['query_labels'], dtype=torch.float32).to(self.device)
+                    query_labels = torch.tensor(batch['query_labels'], dtype=self.model.args.dtype if type(self.loss_fn) == nn.BCELoss else torch.int64).to(self.device)
 
                     if support_labels.shape[0] == 0 or query_labels.shape[0] == 0:
                         if (n_iter+1) != task.n_parts:
@@ -466,15 +548,15 @@ class MAMLBinaryAdapterTrainer:
         self.tokenizer = tokenizer
         self.model = model
 
-        self.device = getattr(model.args, 'device', model.device)
+        self.device = getattr(model.args, 'device')
 
         self.embedding_dim = self.model.args.dim
 
         self.classifier = nn.Sequential(
             nn.Linear(self.embedding_dim, 64),
-            nn.ReLU(),
+            nn.SiLU(),
             nn.Linear(64, 32),
-            nn.ReLU(),
+            nn.SiLU(),
             nn.Linear(32, 1),
             nn.Sigmoid()
         ).to(self.device)
@@ -504,7 +586,7 @@ class MAMLBinaryAdapterTrainer:
         inputs = self.tokenizer(texts, return_tensors='pt', padding='max_length', truncation=True, max_length=self.max_len)
 
         with torch.no_grad():
-            embeddings = self.model(inputs['input_ids'], inputs['attention_mask'])
+            embeddings = self.model(inputs['input_ids'].to(self.device), inputs['attention_mask'].to(self.device))
 
         return embeddings
 
@@ -523,7 +605,7 @@ class MAMLBinaryAdapterTrainer:
             inner_loss: Loss after adaptation
         """
         # Create a copy of the classifier to adapt
-        adapted_classifier = type(self.classifier)(*self.classifier._modules.values()).to(self.device)
+        adapted_classifier = type(self.classifier)(*self.classifier._modules.values()).to(self.device, dtype=self.model.args.dtype)
         adapted_classifier.load_state_dict(self.classifier.state_dict())
 
         inner_optimizer = torch.optim.SGD(adapted_classifier.parameters(), lr=self.inner_lr)
@@ -541,7 +623,7 @@ class MAMLBinaryAdapterTrainer:
     
     def meta_train(self,
                     meta_train_tasks: list[dict[str, list]],
-                    epochs: int = 100):
+                    epochs: int = 50):
         """
         Meta-training loop
 
@@ -557,10 +639,11 @@ class MAMLBinaryAdapterTrainer:
 
             for task in meta_train_tasks:
                 for n_iter, batch in enumerate(task):
+
                     support_data = batch['support_data']
-                    support_labels = torch.tensor(batch['support_labels'], dtype=torch.float32).to(self.device)
+                    support_labels = batch['support_labels'].to(self.device, dtype=self.model.args.dtype)
                     query_data = batch['query_data']
-                    query_labels = torch.tensor(batch['query_labels'], dtype=torch.float32).to(self.device)
+                    query_labels = batch['query_labels'].to(self.device, dtype=self.model.args.dtype)
 
                     if support_labels.shape[0] == 0 or query_labels.shape[0] == 0:
                         if (n_iter+1) != task.n_parts:
@@ -569,10 +652,10 @@ class MAMLBinaryAdapterTrainer:
                         continue
 
                     support_embeddings = self.tokenizer(support_data, return_tensors='pt', padding='max_length', truncation=True, max_length=self.max_len)
-                    support_embeddings = self.model(support_embeddings['input_ids'], support_embeddings['attention_mask'])
+                    support_embeddings = self.model(support_embeddings['input_ids'].to(self.device), support_embeddings['attention_mask'].to(self.device))
 
                     query_embeddings = self.tokenizer(query_data, return_tensors='pt', padding='max_length', truncation=True, max_length=self.max_len)
-                    query_embeddings = self.model(query_embeddings['input_ids'], query_embeddings['attention_mask'])
+                    query_embeddings = self.model(query_embeddings['input_ids'].to(self.device), query_embeddings['attention_mask'].to(self.device))
 
                     adapted_classifier, _ = self._inner_loop_adaptation(support_embeddings, support_labels)
 
@@ -619,8 +702,8 @@ class MAMLBinaryAdapterTrainer:
         train_embeddings = self._get_embeddings(train_texts).detach()
         test_embeddings = self._get_embeddings(test_texts).detach()
 
-        train_labels_tensor = torch.tensor(train_labels, dtype=torch.float32)
-        test_labels_tensor = torch.tensor(test_labels, dtype=torch.float32)
+        train_labels_tensor = torch.tensor(train_labels, dtype=self.model.args.dtype)
+        test_labels_tensor = torch.tensor(test_labels, dtype=self.model.args.dtype)
 
         train_dataset = TensorDataset(train_embeddings, train_labels_tensor)
         train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)

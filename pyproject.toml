@@ -17,6 +17,7 @@ dependencies = [
     "megablocks[all]>=0.10.0",
     "ollama>=0.5.3",
     "openai>=1.90.0",
+    "polars>=1.35.1",
     "progress-table>=3.1.2",
     "pydantic>=2.11.7",
     "python-levenshtein>=0.27.1",
@@ -46,7 +47,7 @@ url = "https://download.pytorch.org/whl/cu128"
 explicit = true
 
 [tool.setuptools]
-packages = ["cirilla.Cirilla_model", "cirilla.LLM_pieces", "cirilla.synth_data", "attention-gym.attn_gym"]
+packages = ["cirilla.Cirilla_model", "cirilla.Few_shot", "cirilla.LLM_pieces", "cirilla.synth_data", "attention-gym.attn_gym"]
 
 [build-system]
 requires = ["setuptools", "wheel"]

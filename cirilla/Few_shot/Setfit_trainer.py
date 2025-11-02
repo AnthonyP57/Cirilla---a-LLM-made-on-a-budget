@@ -1,5 +1,5 @@
 from torch.utils.data import Dataset
-from Cirilla_model.dataloader import GenericDataset
+from ..Cirilla_model.dataloader import GenericDataset
 import json
 import torch
 import random

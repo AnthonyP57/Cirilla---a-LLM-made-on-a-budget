@@ -1,5 +1,5 @@
 from torch.utils.data import Dataset
-from Cirilla_model.dataloader import GenericDataset
+from ..Cirilla_model.dataloader import GenericDataset
 import json
 import torch
 import torch.nn.functional as F
@@ -126,7 +126,7 @@ def protonet_training_step(self, data):
     support_emb = self.model(support_input_ids, support_input_masks).view(b, sexamples, -1)
     query_emb = self.model(query_input_ids, query_input_masks).view(b, qexamples, -1)
 
-    class_prototypes ={}
+    class_prototypes = {}
     for class_id in torch.unique(support_labels):
         a = []
         for b_ in range(b):

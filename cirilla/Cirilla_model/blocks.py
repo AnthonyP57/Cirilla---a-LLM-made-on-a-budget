@@ -53,6 +53,7 @@ class EncoderArgs:
     use_sparse:bool = False
     theta:float = 10_000.0
     device:str = select_torch_device()
+    torch_compile:bool=True
 
     @property
     def dtype(self):
@@ -126,9 +127,12 @@ class Encoder(nn.Module):
             for attention in self.attentions:
                 swap_linear_with_semi_sparse_linear(attention, get_sparse_config(attention))
         
-        self.attentions = nn.ModuleList([
-            torch.compile(attention, mode='max-autotune') for attention in self.attentions
-            ])
+        if self.args.torch_compile:
+            self.attentions = nn.ModuleList([
+                torch.compile(attention, mode='max-autotune') for attention in self.attentions
+                ])
+        else:
+            self.attentions = nn.ModuleList(self.attentions)
         
         if self.args.moe_type == 'pytorch':
             self.smoes = [
@@ -143,9 +147,12 @@ class Encoder(nn.Module):
                 for smoe in self.smoes:
                     swap_linear_with_semi_sparse_linear(smoe, get_sparse_config(smoe)) 
 
-            self.smoes = nn.ModuleList([
-                torch.compile(smoe, mode='max-autotune') for smoe in self.smoes
-            ])
+            if self.args.torch_compile:
+                self.smoes = nn.ModuleList([
+                    torch.compile(smoe, mode='max-autotune') for smoe in self.smoes
+                ])
+            else:
+                self.smoes = nn.ModuleList(self.smoes)
 
         elif self.args.moe_type == 'megablocks-moe':
             self.smoes = nn.ModuleList([

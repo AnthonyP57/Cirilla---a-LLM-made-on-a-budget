@@ -45,6 +45,7 @@ class BertArgs:
     use_sparse:bool = False
     theta:float = 10_000.0
     device:str = select_torch_device()
+    torch_compile:bool=True
 
     @property
     def dtype(self):
