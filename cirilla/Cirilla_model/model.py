@@ -1,9 +1,7 @@
-from cirilla.LLM_pieces import (
-    get_activation,
-)
+from cirilla.LLM_pieces import get_activation
 from dataclasses import dataclass
 import torch.nn as nn
-from .modules import get_args_from_hub, CirillaBaseModel
+from .modules import CirillaBaseModel
 from .blocks import Decoder, DecoderArgs, InputEmbeddings
 import torch
 
@@ -30,7 +28,6 @@ class Cirilla(
             args = Args()
 
         self.args = args
-        self.args_get_func = get_args_from_hub
         self._prepare_model()
 
     def _prepare_model(self):

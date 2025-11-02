@@ -68,9 +68,11 @@ class MamlPretrainingDataset(IterableDataset, GenericDataset):
 
                     text = line['text']
 
-                    if self.bert_append_tokens is not None:
-                                    for token in self.bert_append_tokens:
-                                        text += token
+                    if self.prefix_tokens is not None:
+                        text = "".join(self.prefix_tokens) + text
+
+                    if self.suffix_tokens is not None:
+                        text += "".join(self.suffix_tokens)
 
                     texts.append(text)
                     labels.append(line['label'])

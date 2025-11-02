@@ -1,4 +1,10 @@
-from .blocks import VisionEmbeddingModel, KeylessAttention, Encoder, EncoderArgs
+from .blocks import (
+                    VisionEmbeddingModel,
+                    KeylessAttention,
+                    Encoder,
+                    EncoderArgs,
+                    InputEmbeddings
+)
 import torch.nn as nn
 from huggingface_hub import PyTorchModelHubMixin
 import torch
@@ -15,15 +21,6 @@ class CMAArgs(EncoderArgs):
     n_classes:int = [2, 3]
     cls_text_index:int = 0
     cls_image_index:int = 10
-
-class InputEmbeddings(nn.Module):
-    def __init__(self, args:CMAArgs):
-        super().__init__()
-
-        self.embeddings = nn.Embedding(args.vocab_size, args.dim)
-    
-    def forward(self, x):
-        return self.embeddings(x)
 
 class CMA(
         nn.Module,
@@ -65,10 +62,14 @@ class CMA(
 
         self.to(self.args.device, dtype=self.args.dtype)
 
-    def pred(self, texts, images):
+    def pred(self, texts, images, cls_image_token_index=None):
         texts = self.text_emb(texts)
         images = self.vision_emb(images)
-        x = torch.cat([images, texts], dim=1)
+        if cls_image_token_index is not None:
+            cls_i_em = self.text_emb(torch.tensor([cls_image_token_index]).to(self.args.device)).unsqueeze(0).expand(images.shape[0], -1, -1)
+            x = torch.cat([texts, cls_i_em, images], dim=1)
+        else:
+            x = torch.cat([texts, images], dim=1)
         x = self.encoder(x)
         x = self.rmsnorm(x)
         cls_text, cls_image = x[:, self.args.cls_text_index], x[:, self.args.cls_image_index]

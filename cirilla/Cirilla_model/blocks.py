@@ -534,9 +534,14 @@ class KeylessAttention(nn.Module):
         lmb = F.sigmoid(ei - et)
 
         return lmb * cls_image + ((1 - lmb) * cls_text)
-    
+
+@dataclass
+class EmbedArgs:
+    vocab_size: int
+    dim: int
+
 class InputEmbeddings(nn.Module):
-    def __init__(self, args):
+    def __init__(self, args: EmbedArgs):
         super().__init__()
 
         self.embeddings = nn.Embedding(args.vocab_size, args.dim)

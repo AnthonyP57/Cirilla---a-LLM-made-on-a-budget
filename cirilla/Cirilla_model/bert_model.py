@@ -1,9 +1,7 @@
-from ..LLM_pieces import (
-    get_activation,
-)
+from ..LLM_pieces import get_activation
 from dataclasses import dataclass
 import torch.nn as nn
-from .modules import get_bertargs_from_hub, CirillaBaseModel
+from .modules import CirillaBaseModel
 from .blocks import Encoder, EncoderArgs, InputEmbeddings
 import torch
 from einops.layers.torch import Rearrange
@@ -37,7 +35,6 @@ class CirillaBERT(
             args = BertArgs()
 
         self.args = args
-        self.args_get_func = get_bertargs_from_hub
         self._prepare_model()
 
     def _prepare_model(self):

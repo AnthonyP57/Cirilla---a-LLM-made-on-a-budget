@@ -24,7 +24,8 @@ class GenericDataset:
                 eos_token:str='<eos>',
                 sos_token:str='<sos>',
                 user_token:str='<|user|>',
-                bert_append_tokens:list[str]=None, #['<cls>']
+                suffix_tokens:list[str]=None, #['<cls>']
+                prefix_tokens:list[str]=None,
                 random_spelling_mistake_prob:float=0.,
                 random_missing_char_prob:float=0.
                 ):
@@ -34,7 +35,8 @@ class GenericDataset:
         self.device = device
         self.tokenizer = tokenizer
         self.max_len = max_len
-        self.bert_append_tokens = bert_append_tokens
+        self.suffix_tokens = suffix_tokens
+        self.prefix_tokens = prefix_tokens
         self.random_spelling_mistake_prob = random_spelling_mistake_prob
         self.random_missing_char_prob = random_missing_char_prob
 
@@ -195,10 +197,12 @@ class JSONLDataset(IterableDataset, GenericDataset):
 
                             if self.tokenizer is not None:
                                 text = line['text']
+                                
+                                if self.prefix_tokens is not None:
+                                    text = "".join(self.prefix_tokens) + text
 
-                                if self.bert_append_tokens is not None:
-                                    for token in self.bert_append_tokens:
-                                        text += token
+                                if self.suffix_tokens is not None:
+                                    text += "".join(self.suffix_tokens)
 
                                 tokenized_data =  self.tokenizer(text, return_tensors='pt', padding='max_length',
                                                                 truncation=True, max_length=self.max_len)

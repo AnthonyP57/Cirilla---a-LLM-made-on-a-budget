@@ -13,7 +13,7 @@ class CirillaBaseModel(PyTorchModelHubMixin):
     
     def pull_model_from_hub(self, hf_repo_id:str):
         model_args = self.args
-        pulled_args = self.args_get_func(hf_repo_id)
+        pulled_args = get_args_from_hub(hf_repo_id, type(self.args))
 
         if model_args != pulled_args:
             print(f"Current model args don't correspond to the HF model's args.\nCurrent args:\n{model_args}\nThe model will use the HF args:\n{pulled_args}")
@@ -91,29 +91,14 @@ def benchmark_model_part(model, x, label=""):
     print(f"Forward memory: {sum(fwd_mems)/len(fwd_mems)/1024/1024:.2f} MB")
     print(f"Backward memory:{sum(bwd_mems)/len(bwd_mems)/1024/1024:.2f} MB")
 
-def get_args_from_hub(hf_repo_id):
-    from .model import Args
-
+def get_args_from_hub(hf_repo_id, args_type):
     file_path = hf_hub_download(
         repo_id=hf_repo_id,
         filename="config.json",
     )
     with open(file_path, "r") as f:
         config = json.load(f)
-    args = Args(**config[list(config.keys())[0]])
-
-    return args
-
-def get_bertargs_from_hub(hf_repo_id):
-    from .model import BertArgs
-
-    file_path = hf_hub_download(
-        repo_id=hf_repo_id,
-        filename="config.json",
-    )
-    with open(file_path, "r") as f:
-        config = json.load(f)
-    args = BertArgs(**config[list(config.keys())[0]])
+    args = args_type(**config[list(config.keys())[0]])
 
     return args
 
