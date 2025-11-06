@@ -5,8 +5,10 @@ import torch
 import random
 
 class SetfitDataset(Dataset, GenericDataset):
-    def __init__(self, *args, **kwargs):
+    def __init__(self, tokenizer=None, *args, **kwargs):
         super().__init__(*args, **kwargs)
+
+        self.tokenizer = tokenizer
 
         self._get_data()
 
