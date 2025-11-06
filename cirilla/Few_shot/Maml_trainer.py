@@ -5,6 +5,7 @@ from ..Cirilla_model.dataloader import GenericDataset
 import json
 import polars as pl
 import random
+from types import MethodType
 
 class Task(Dataset):
     def __init__(self, name, data, batch_size=512):
@@ -92,6 +93,79 @@ class MamlPretrainingDataset(IterableDataset, GenericDataset):
             yield Task(k, v, self.batch_size)
         
 
+def _fine_tune(self,
+                train_texts: list[str],
+                train_labels: list[int],
+                test_texts: list[str],
+                test_labels: list[int],
+                epochs: int = 50,
+                batch_size: int = 16,
+                learning_rate: float = 0.1,
+                verbose: bool = False):
+
+    tokenized_train = self.tokenizer(train_texts, return_tensors='pt', padding='max_length', truncation=True, max_length=self.max_len)
+    tokenized_test = self.tokenizer(test_texts, return_tensors='pt', padding='max_length', truncation=True, max_length=self.max_len)
+
+    train_ids = tokenized_train['input_ids']
+    train_masks = tokenized_train['attention_mask']
+
+    test_ids = tokenized_test['input_ids']
+    test_masks = tokenized_test['attention_mask']
+
+    train_labels_tensor = torch.tensor(train_labels, dtype=torch.float32)
+    test_labels_tensor = torch.tensor(test_labels, dtype=torch.float32)
+
+    train_dataset = TensorDataset(train_ids, train_masks, train_labels_tensor)
+    train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
+
+    test_dataset = TensorDataset(test_ids, test_masks, test_labels_tensor)
+    test_loader = DataLoader(test_dataset, batch_size=batch_size, shuffle=True)
+
+    optimizer = torch.optim.AdamW(self.model.parameters(), lr=learning_rate)
+
+    for epoch in range(epochs):
+        train_loss = 0
+        valid_loss = 0
+        nt = 0
+        nv = 0
+        for phase in ['train', 'valid']:
+
+            if phase == 'train':
+                self.model.train()
+
+                for _ in range(self.num_inner_steps):
+
+                    for batch_ids, masks, labels in train_loader:
+
+                        predictions = self.model(batch_ids.to(self.device), masks.to(self.device))
+
+                        inner_loss = self.loss_fn(predictions, labels.to(self.device, dtype=self.model.args.dtype if type(self.loss_fn) == nn.BCELoss else torch.int64))
+
+                        optimizer.zero_grad()
+                        inner_loss.backward()
+                        optimizer.step()
+
+                        b = batch_ids.shape[0]
+                        nt += b
+                        train_loss += inner_loss.item()*b
+                
+            else:
+                self.model.eval()
+                with torch.no_grad():
+                    for batch_ids, masks, labels in test_loader:
+
+                        predictions = self.model(batch_ids.to(self.device), masks.to(self.device))
+                        loss = self.loss_fn(predictions, labels.to(self.device, dtype=self.model.args.dtype if type(self.loss_fn) == nn.BCELoss else torch.int64))
+
+                        b = batch_ids.shape[0]
+                        nv += b
+                        valid_loss += loss.item()*b
+
+        if verbose:
+            print(f"Epoch {epoch}, train loss: {train_loss/nt:.4f}, valid loss: {valid_loss/nv:.4f}")
+
+    return self
+
 class MagMaxMAMLTrainer:
     def __init__(self,
                 model,
@@ -111,6 +185,8 @@ class MagMaxMAMLTrainer:
 
         self.loss_fn = nn.BCELoss()
         self.max_len = max_len
+
+        self.fine_tune = MethodType(_fine_tune, self)
     
     def meta_train(self,
                     meta_train_tasks: list[dict[str, list]],
@@ -189,7 +265,7 @@ class MagMaxMAMLTrainer:
 
             print(f"Epoch {epoch+1}, Tasks-specific Loss: {inner_loss_epoch/n:.4f}")
 
-    def fine_tune(self,
+    def fine_tune_native(self,
                     train_texts: list[str],
                     train_labels: list[int],
                     test_texts: list[str],
@@ -293,6 +369,8 @@ class ReptileTrainer:
 
         self.loss_fn = nn.BCELoss()
         self.max_len = max_len
+
+        self.fine_tune = MethodType(_fine_tune, self)
     
     def meta_train(self,
                     meta_train_tasks: list[dict[str, list]],
@@ -357,7 +435,7 @@ class ReptileTrainer:
 
             print(f"Epoch {epoch+1}, Tasks-specific Loss: {meta_train_loss/n:.4f}")
 
-    def fine_tune(self,
+    def fine_tune_native(self,
                     train_texts: list[str],
                     train_labels: list[int],
                     test_texts: list[str],
@@ -573,7 +651,7 @@ class MAMLBinaryAdapterTrainer:
         test_dataset = TensorDataset(test_embeddings, test_labels_tensor)
         test_loader = DataLoader(test_dataset, batch_size=batch_size, shuffle=True)
 
-        optimizer = torch.optim.Adam(self.classifier.parameters(), lr=learning_rate)
+        optimizer = torch.optim.AdamW(self.classifier.parameters(), lr=learning_rate)
 
         for epoch in range(epochs):
             train_loss = 0
