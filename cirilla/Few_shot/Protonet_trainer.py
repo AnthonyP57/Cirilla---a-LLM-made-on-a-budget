@@ -5,11 +5,14 @@ import torch
 import torch.nn.functional as F
 
 class ProtonetDataset(Dataset, GenericDataset):
-    def __init__(self, n_support=None, n_query=None, **kwargs):
+    def __init__(self, n_support=None, n_query=None, tokenizer=None, **kwargs):
         super().__init__(**kwargs)
 
         self.n_support = n_support
         self.n_query = n_query
+        self.tokenizer = tokenizer
+
+        self._get_data()
 
     def _get_data(self):
 
@@ -46,7 +49,7 @@ class ProtonetDataset(Dataset, GenericDataset):
                 print(f"Label {s} has only {len(indices)} samples. Needs at least 2. It will be skipped.")
                 continue
 
-            self.label_to_indices[s] = indices.tolist()
+            self.label_to_indices[s] = indices
 
         if self.n_support is None or self.n_query is None:
             min_examples = min([len(indices) for indices in self.label_to_indices.values()])
@@ -109,7 +112,7 @@ def protonet_training_step(self, data):
     support_inputs_ids = data['support_inputs_id']
     b, sexamples, seq = support_inputs_ids.shape
 
-    support_input_ids = support_input_ids.view(b*sexamples, seq)
+    support_inputs_ids = support_inputs_ids.view(b*sexamples, seq)
 
     support_input_masks = data['support_inputs_mask']
     support_input_masks = support_input_masks.view(b*sexamples, seq)
@@ -118,15 +121,15 @@ def protonet_training_step(self, data):
 
     query_inputs_ids = data['query_inputs_id']
     b, qexamples, seq = query_inputs_ids.shape
-    query_input_ids = query_inputs_ids.view(b*qexamples, seq)
+    query_inputs_ids = query_inputs_ids.view(b*qexamples, seq)
 
     query_input_masks = data['query_inputs_mask']
     query_input_masks = query_input_masks.view(b*qexamples, seq)
 
     query_labels = data['query_labels']
 
-    support_emb = self.model(support_input_ids, support_input_masks).view(b, sexamples, -1)
-    query_emb = self.model(query_input_ids, query_input_masks).view(b, qexamples, -1)
+    support_emb = self.model(support_inputs_ids, support_input_masks).view(b, sexamples, -1)
+    query_emb = self.model(query_inputs_ids, query_input_masks).view(b, qexamples, -1)
 
     class_prototypes = {}
     for class_id in torch.unique(support_labels):
@@ -138,7 +141,7 @@ def protonet_training_step(self, data):
 
         class_prototypes[class_id.item()] = torch.concat(a)
 
-    distances = torch.empty(b, qexamples, len(class_prototypes), device=self.device, dtype=query_emb.dtype)
+    distances = torch.empty(b, qexamples, len(class_prototypes), device=getattr(self.model.args, 'device', 'cuda'), dtype=query_emb.dtype)
 
     for i, class_prototype in enumerate(class_prototypes.values()):
         distances[:, :, i] = - torch.norm(query_emb - class_prototype.unsqueeze(1), dim=2)
