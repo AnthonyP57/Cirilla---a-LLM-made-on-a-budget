@@ -40,17 +40,6 @@ class BertAttention(nn.Module):
 
         self.rope = rope
         self.args = args
-    
-    @staticmethod
-    def _repeat_kv(x:torch.Tensor, n_rep:int):
-        batch, seq, n_kv, head_dim = x.shape
-        if n_rep == 1:
-            return x
-        else:
-            return (
-                x[:, :, :, None, :].expand(batch, seq, n_kv, n_rep, head_dim)
-                .reshape(batch, seq, n_kv*n_rep, head_dim)
-            )
 
     def forward(self, x: torch.Tensor):
         batch_size, seq_len, dim = x.shape
@@ -66,9 +55,6 @@ class BertAttention(nn.Module):
         xv = xv.view(batch_size, seq_len, self.n_kv_heads, self.head_dim)
 
         xq, xk = self.rope.apply_rotary_embeddings(xq, xk)
-
-        xk = self._repeat_kv(xk, self.n_rep)
-        xv = self._repeat_kv(xv, self.n_rep)
 
         # (b, seq, h_q, head_dim)
         out = flash_attention.flash_attn_func(q=xq, k=xk, v=xv, softcap=self.args.soft_cap, causal=False)[0]
