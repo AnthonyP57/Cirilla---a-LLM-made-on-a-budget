@@ -33,6 +33,8 @@ This naively may require big VRAM overhead, however this can be simplified with:
 
 ![](./img/alt_arch.png)
 
+![](./img/efficient_impl_supl.png)
+
 ## Disclaimer
 > [!CAUTION]
 > This repo does not serve to amazingly describe and explain model architectures, it was made to give a broad simplified overview of the models and implement them.
