@@ -16,6 +16,7 @@ from .blocks import (
                     InputEmbeddings
                     )
 from .trm import CirillaTRM, TRMArgs
+from .mtp import CirillaMTP, MTPArgs
 
 __all__ = [
             'CirillaBERT',
@@ -41,4 +42,6 @@ __all__ = [
             'TRMArgs',
             'MLPMixer1D',
             'MixerArgs'
+            'CirillaMTP',
+            'MTPArgs'
         ]
