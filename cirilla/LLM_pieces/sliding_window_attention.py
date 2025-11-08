@@ -3,7 +3,7 @@ from functools import lru_cache, partial
 from .RoPE import RoPE
 import torch.nn as nn
 from dataclasses import dataclass
-from typing import Union, Callable, Optional
+from typing import Union, Callable
 import torch
 from .activations import get_activation
 
@@ -18,7 +18,7 @@ def create_static_block_mask(sliding_window_causal, q_len, kv_len, device='cuda'
     global SLIDING_WINDOW
     SLIDING_WINDOW = window_size
     # B,H set to None means that the mask is broadcasted for those dimentions as it doesn't require any calculation anyway
-    return create_block_mask(sliding_window_causal, B=None, H=None, Q_LEN=q_len, KV_LEN=kv_len, _compile=True, device=device)
+    return create_block_mask(sliding_window_causal, B=None, H=None, Q_LEN=q_len, KV_LEN=kv_len, device=device)
 
 @lru_cache(maxsize=32)
 def create_dynamic_block_mask(sliding_window_causal, q_len=2048, kv_len=2048, device='cuda', window_size=512):
@@ -34,7 +34,6 @@ class AttentionArgs:
     dim:int = 128*16
     static_mask:bool = True
     window_size:int = 512
-    soft_cap:Optional[int] = 20
     device:str = 'cuda:0'
 
 class SlidingWindowAttention(nn.Module):
@@ -94,7 +93,7 @@ class SlidingWindowAttention(nn.Module):
             out = self.attn(xq, xk, xv)
         else:
             mask = self.mask(sliding_window_causal, xq.shape[2], xk.shape[2], device=xq.device, window_size=self.window_size)
-            out = flex_attention(xq, xk, xv, block_mask=mask, score_mod=self.score_mode)
+            out = flex_attention(xq, xk, xv, block_mask=mask, score_mod=self.score_mode, enable_gqa= self.n_heads_q != self.n_kv_heads)
         
         out = out.transpose(1,2).contiguous().view(batch_size, seq_len, dim) # (b, seq, dim)
         return self.wo(out) #(b, seq, dim)

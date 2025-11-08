@@ -9,7 +9,7 @@ import torch
 class Args(DecoderArgs):
     vocab_size:int = 60_000
     tie_params:bool = False
-    out_bias:bool = True
+    out_bias:bool = False
 
 class Cirilla(
             nn.Module,

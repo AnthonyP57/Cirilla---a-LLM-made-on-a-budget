@@ -8,32 +8,31 @@ from megablocks import Arguments, MoE, dMoE
 activation = get_activation("kernels-community/activation")
 
 @dataclass
-class ExpertArgs:
+class SwiGLUArgs:
     dim:int=128
     d_ff:int=256 # hidden dim
     assert d_ff % 2 == 0
     drop:float=0.1
 
-class Expert(nn.Module):
-    def __init__(self, args: ExpertArgs):
+class SwiGLU(nn.Module):
+    def __init__(self, args: SwiGLUArgs):
         super().__init__()
         self.dim = args.dim
         self.d_ff = args.d_ff
 
-        self.w1 = nn.Linear(args.dim, args.d_ff * 2)
+        self.w1a = nn.Linear(args.dim, args.d_ff)
+        self.w1b = nn.Linear(args.dim, args.d_ff)
         self.w2 = nn.Linear(args.d_ff, args.dim)
 
 
-    def forward(self, x: torch.Tensor) -> torch.Tensor:  # SwiGLU 
-        x = self.w1(x)
+    def forward(self, x: torch.Tensor) -> torch.Tensor:
+        a = self.w1a(x)
+        b = self.w1b(x)
 
-        d = x.shape[-1] // 2
-        out = torch.empty(x.shape[:-1] + (d,), dtype=x.dtype, device=x.device)
+        x = F.silu(a) * b
 
-        activation.silu_and_mul(out, x)
-
-        out = self.w2(out)
-        return out
+        x = self.w2(x)
+        return x
 
 @dataclass
 class SMoEArgs:
@@ -49,7 +48,7 @@ class SMoEArgs:
         return getattr(torch, self.dtype_str)
 
 class SMoE(nn.Module):
-    def __init__(self, args:SMoEArgs, experts:list[Expert]):
+    def __init__(self, args:SMoEArgs, experts:list[SwiGLU]):
         super().__init__()
         self.n_experts = args.num_experts
         self.k = args.k

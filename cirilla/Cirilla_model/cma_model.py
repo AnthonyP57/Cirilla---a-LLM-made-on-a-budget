@@ -8,7 +8,7 @@ from .blocks import (
 import torch.nn as nn
 from huggingface_hub import PyTorchModelHubMixin
 import torch
-from ..LLM_pieces import get_activation, Expert
+from ..LLM_pieces import get_activation, SwiGLU
 from dataclasses import dataclass
 
 @dataclass
@@ -51,7 +51,7 @@ class CMA(
         self.outs = nn.ModuleList([nn.Sequential(
                                         KeylessAttention(self.args.dim),
                                         nn.Sequential(
-                                            Expert(self.args),
+                                            SwiGLU(self.args),
                                             nn.SiLU(),
                                             nn.Linear(self.args.dim, self.args.n_classes[i])
                                                 )

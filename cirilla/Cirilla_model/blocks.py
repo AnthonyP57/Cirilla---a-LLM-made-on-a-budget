@@ -2,7 +2,7 @@ from ..LLM_pieces import (
     RoPE,
     SMoE,
     get_activation,
-    Expert,
+    SwiGLU,
     MegablockMoE,
     MegablockdMoE,
     BertAttention,
@@ -136,7 +136,7 @@ class Encoder(nn.Module):
         
         if self.args.moe_type == 'pytorch':
             self.smoes = [
-                SMoE(self.args, [Expert(self.args) for _ in range(self.args.num_experts)])
+                SMoE(self.args, [SwiGLU(self.args) for _ in range(self.args.num_experts)])
                 for _ in range(self.args.n_layers)
             ]
 
@@ -323,7 +323,7 @@ class Decoder(nn.Module):
         
         if self.args.moe_type == 'pytorch':
             self.smoes = [
-                SMoE(self.args, [Expert(self.args) for _ in range(self.args.num_experts)])
+                SMoE(self.args, [SwiGLU(self.args) for _ in range(self.args.num_experts)])
                 for _ in range(self.args.n_layers)
             ]
 
