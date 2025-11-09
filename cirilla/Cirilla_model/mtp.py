@@ -4,6 +4,7 @@ import torch.nn as nn
 from .modules import CirillaBaseModel
 from .blocks import Decoder, DecoderArgs, InputEmbeddings
 import torch
+import torch.nn.functional as F
 
 @dataclass
 class MTPArgs(DecoderArgs):
@@ -81,3 +82,51 @@ class CirillaMTP(
     def forward(self, x):
         x = self.get_z(x)
         return [head for head in self.get_heads(x)]
+
+def mtp_training_step(self, data, pad_id):
+    step_loss = 0.0
+    n = 0
+
+    torch.compiler.cudagraph_mark_step_begin()
+    
+    x = data[0]
+    y = data[1]
+    
+    y_fill = torch.tensor([[pad_id] * self.model.args.n_token_heads] * y.shape[0], dtype=y.dtype, device=y.device)
+    y = torch.hstack([y, y_fill])
+
+    z = self.model.get_z(x)
+    zd = z.detach()
+    zd.requires_grad = True
+
+    for i in range(self.model.args.n_token_heads):
+        preds = self.model.get_heads(i, zd)
+        loss = F.cross_entropy(
+            preds.view(-1, self.model.args.vocab_size),
+            y[:, i:-(self.model.args.n_token_heads - i)].reshape(-1),
+            ignore_index=pad_id)
+        step_loss += loss.item()
+        n += 1
+        loss.backward()
+
+    z.backward(gradient=zd.grad)
+
+    return step_loss / n
+
+@torch.inference_mode()
+def mtp_inference_step(self, data, pad_id):
+
+    x = data[0]
+    y = data[1]
+    
+    z = self.model.get_z(x)
+    zd = z.detach()
+    zd.requires_grad = True
+
+    preds = self.model.get_heads(0, zd)
+    loss = F.cross_entropy(
+        preds.view(-1, self.model.args.vocab_size),
+        y.reshape(-1),
+        ignore_index=pad_id)
+
+    return loss.item()

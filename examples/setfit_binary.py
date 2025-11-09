@@ -1,4 +1,4 @@
-from cirilla.Few_shot import SetfitDataset, setfit_training_step
+from cirilla.Few_shot import SetfitDataset, setfit_training_step, setfit_inference_step
 from cirilla.Cirilla_model import (CirillaBERT,
                                     BertArgs,
                                     CirillaTokenizer,
@@ -20,5 +20,6 @@ trainer = CirillaTrainer(model, targs)
 
 trainer.criterion = nn.TripletMarginLoss() # override the default criterion
 trainer.training_step = MethodType(setfit_training_step, trainer)
+trainer.inference_step = MethodType(setfit_inference_step, trainer)
 
-trainer.train(dl)
+trainer.train(dl, dl)

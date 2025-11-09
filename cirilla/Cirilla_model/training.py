@@ -133,9 +133,6 @@ class CirillaTrainer:
         if static_training:
             self._set_prior_training_vars()
 
-        if self.criterion is None:
-            self.criterion = nn.CrossEntropyLoss()
-
         prev_mean_loss = 10
 
         def loss_color(loss:list):
@@ -218,12 +215,8 @@ class CirillaTrainer:
                 if n_iter * self.args.batch_size < skip_n_data_points:
                     continue
 
-                torch.compiler.cudagraph_mark_step_begin()
+                loss_item = self.training_step(data)
 
-                loss = self.training_step(data)
-                loss.backward()
-
-                loss_item = loss.item()
                 losses.append(loss_item)
                 times.append(time.time())
 
@@ -263,14 +256,12 @@ class CirillaTrainer:
 
                     self.model.eval()
 
-                    with torch.no_grad():
-                        for data in valid_dataloader:
-                            loss = self.training_step(data)
-                            loss_item = loss.item()
+                    for data in valid_dataloader:
+                        loss_item = self.inference_step(data)
 
-                            v_losses.append(loss_item)
+                        v_losses.append(loss_item)
 
-                            ptable.update('valid loss', round(loss_item, 3), aggregate='mean', color='lightcyan_ex')
+                        ptable.update('valid loss', round(loss_item, 3), aggregate='mean', color='lightcyan_ex')
                     
                     torch.cuda.empty_cache()
                     ptable.next_row(split=True, color={'time': time_color(times), 'train loss': loss_color(losses), 'valid loss': loss_color_valid(v_losses)})
@@ -284,13 +275,27 @@ class CirillaTrainer:
         cache_or_fetch('N_DATA_POINTS', dataset_path, n_iter * self.args.batch_size)
 
     def training_step(self, data):
+
+        torch.compiler.cudagraph_mark_step_begin()
+
         out = self.model.pred(data[0])
         loss = self.criterion(out.view(-1, self.model.args.vocab_size), data[1].view(-1))
 
         # clear losses that will cause a memory leak
         clear_load_balancing_loss()
         clear_router_zloss()
-        return loss
+        loss_item = loss.item()
+        loss.backward()
+
+        return loss_item
+    
+    @torch.inference_mode()
+    def inference_step(self, data):
+        clear_load_balancing_loss()
+        clear_router_zloss()
+        out = self.model.pred(data[0])
+        loss = self.criterion(out.view(-1, self.model.args.vocab_size), data[1].view(-1))
+        return loss.item()
 
     def benchmark(self):
         
@@ -328,10 +333,7 @@ class CirillaTrainer:
         self._set_prior_training_vars()
 
         for i in range(5): #warm up for benchmark
-            torch.compiler.cudagraph_mark_step_begin()
-            loss = self.training_step((x, x))
-
-            loss.backward()
+            loss_item = self.training_step((x, x))
 
         torch.cuda.synchronize()
 
@@ -358,12 +360,8 @@ class CirillaTrainer:
             if i % 5 == 0:
                 ptable['epoch'] = i
 
-            torch.compiler.cudagraph_mark_step_begin()
-            loss = self.training_step((x, y))
-            loss_item = loss.item()
+            loss_item = self.training_step((x, y))
 
-            loss.backward()
-            
             times.append(time.time())
             losses.append(loss_item)
             

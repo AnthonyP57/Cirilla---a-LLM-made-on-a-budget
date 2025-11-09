@@ -108,6 +108,7 @@ class ProtonetDataset(Dataset, GenericDataset):
         }
 
 def protonet_training_step(self, data):
+    torch.compiler.cudagraph_mark_step_begin()
     
     support_inputs_ids = data['support_inputs_id']
     b, sexamples, seq = support_inputs_ids.shape
@@ -147,5 +148,51 @@ def protonet_training_step(self, data):
         distances[:, :, i] = - torch.norm(query_emb - class_prototype.unsqueeze(1), dim=2)
 
     loss = F.cross_entropy(distances.view(b*qexamples, -1), query_labels.view(b*qexamples))
+    loss_item = loss.item()
+    loss.backward()
+    import time
+    return loss_item
 
-    return loss
+@torch.inference_mode()
+def protonet_inference_step(self, data):
+    support_inputs_ids = data['support_inputs_id']
+    b, sexamples, seq = support_inputs_ids.shape
+
+    support_inputs_ids = support_inputs_ids.view(b*sexamples, seq)
+
+    support_input_masks = data['support_inputs_mask']
+    support_input_masks = support_input_masks.view(b*sexamples, seq)
+
+    support_labels = data['support_labels']
+
+    query_inputs_ids = data['query_inputs_id']
+    b, qexamples, seq = query_inputs_ids.shape
+    query_inputs_ids = query_inputs_ids.view(b*qexamples, seq)
+
+    query_input_masks = data['query_inputs_mask']
+    query_input_masks = query_input_masks.view(b*qexamples, seq)
+
+    query_labels = data['query_labels']
+
+    support_emb = self.model(support_inputs_ids, support_input_masks).view(b, sexamples, -1)
+    query_emb = self.model(query_inputs_ids, query_input_masks).view(b, qexamples, -1)
+
+    class_prototypes = {}
+    for class_id in torch.unique(support_labels):
+        a = []
+        for b_ in range(b):
+            class_mask = support_labels[b_] == class_id
+            class_emb = support_emb[b_][class_mask]
+            a.append(class_emb.mean(dim=0).unsqueeze(0))
+
+        class_prototypes[class_id.item()] = torch.concat(a)
+
+    distances = torch.empty(b, qexamples, len(class_prototypes), device=getattr(self.model.args, 'device', 'cuda'), dtype=query_emb.dtype)
+
+    for i, class_prototype in enumerate(class_prototypes.values()):
+        distances[:, :, i] = - torch.norm(query_emb - class_prototype.unsqueeze(1), dim=2)
+
+    loss = F.cross_entropy(distances.view(b*qexamples, -1), query_labels.view(b*qexamples))
+    loss_item = loss.item()
+    
+    return loss_item

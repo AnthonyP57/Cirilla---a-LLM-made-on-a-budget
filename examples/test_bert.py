@@ -4,10 +4,13 @@ from cirilla.Cirilla_model import (
                             TrainingArgs,
                             CirillaTrainer,
                             CirillaTokenizer,
-                            JSONLDataset
+                            JSONLDataset,
+                            bert_training_step,
+                            bert_inference_step
                             )
 import torch.nn as nn
 from torch.optim import AdamW
+from types import MethodType
 
 model = CirillaBERT(BertArgs(output_what='classify', moe_type='pytorch'))
 
@@ -48,14 +51,8 @@ tokenizer.train(dl, special_tokens=SPECIAL_TOKENS, min_frequency=2)
 dl = JSONLDataset(['./examples/data/example_bert.jsonl', './examples/data/example_bert.jsonl'],
                     shuffle_path=True, tokenizer=tokenizer, max_len=model.args.context_window)
 
-from types import MethodType
-
-def new_training_step(self, data): # define a custom training step
-    out = self.model.pred(data[0], data[1]) # tokens, mask
-    loss = self.criterion(out, data[2])
-    return loss
-
-trainer.training_step = MethodType(new_training_step, trainer) # assign the custom training step to the trainer
+trainer.training_step = MethodType(bert_training_step, trainer) # assign the custom training step to the trainer
+trainer.inference_step = MethodType(bert_inference_step, trainer) # assign the custom inference step to the trainer
 trainer.criterion = nn.CrossEntropyLoss() # override the default criterion
 
 trainer.train(dl, dl)

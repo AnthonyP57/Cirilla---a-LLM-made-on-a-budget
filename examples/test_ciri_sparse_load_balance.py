@@ -3,7 +3,7 @@ from types import MethodType
 from cirilla.Cirilla_model import Cirilla, Args, CirillaTokenizer, TrainingArgs, CirillaTrainer, JSONLDataset, load_balancing_loss
 
 trainargs = TrainingArgs(n_epoch=1000, save_checkpoint_min=9999, use_muon_optim=True)
-model = Cirilla(Args(moe_type='pytorch', n_layers=14, output_moe_weights=True, use_sparse=True))
+model = Cirilla(Args(moe_type='pytorch', n_layers=6, output_moe_weights=True, use_sparse=True))
 trainer = CirillaTrainer(model, trainargs)
 
 tokenizer = CirillaTokenizer(hub_url='AnthonyPa57/HF-torch-demo2')
@@ -11,6 +11,7 @@ dl = JSONLDataset(['./examples/data/example.jsonl', './examples/data/example.jso
                     tokenizer=tokenizer, max_len=model.args.context_window)
 
 def new_training_step(self, data): # define a custom training step
+    torch.compiler.cudagraph_mark_step_begin()
 
     out, moe_weight_list = self.model.pred(data[0]) # tokens, mask
 
@@ -21,10 +22,20 @@ def new_training_step(self, data): # define a custom training step
     for w in moe_weight_list
         ]
     lb_loss = torch.stack(lb_losses).mean()
+    loss = loss + 0.1 * lb_loss
+    loss_item = loss.item()
+    loss.backward()
+    return loss_item
 
-    return loss + 0.1 * lb_loss
+@torch.inference_mode()
+def new_inference_step(self, data): # define a custom inference step
+    out, _ = self.model.pred(data[0]) # tokens, mask
+    loss = self.criterion(out.view(-1, self.model.args.vocab_size), data[1].view(-1))
+    loss_item = loss.item()
+    return loss_item
 
 trainer.training_step = MethodType(new_training_step, trainer) # assign the custom training step to the trainer
+trainer.inference_step = MethodType(new_inference_step, trainer) # assign the custom inference step to the trainer
 
 trainer.train(dl, dl)
 

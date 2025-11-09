@@ -88,6 +88,7 @@ class SetfitDataset(Dataset, GenericDataset):
                 )
     
 def setfit_training_step(self, data):
+    torch.compiler.cudagraph_mark_step_begin()
 
     anchor = data[0]
     positive = data[1]
@@ -98,4 +99,19 @@ def setfit_training_step(self, data):
     negative_out = self.model(*negative)
 
     loss = self.criterion(anchor_out, positive_out, negative_out) # criterion has to be triplet loss
-    return loss
+    loss_item = loss.item()
+    loss.backward()
+    return loss_item
+
+@torch.inference_mode()
+def setfit_inference_step(self, data):
+    anchor = data[0]
+    positive = data[1]
+    negative = data[2]
+
+    anchor_out = self.model(*anchor)
+    positive_out = self.model(*positive)
+    negative_out = self.model(*negative)
+
+    loss = self.criterion(anchor_out, positive_out, negative_out) # criterion has to be triplet loss
+    return loss.item()

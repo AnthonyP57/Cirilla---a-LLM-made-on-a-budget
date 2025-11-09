@@ -1,4 +1,4 @@
-from .bert_model import CirillaBERT, BertArgs
+from .bert_model import CirillaBERT, BertArgs, bert_inference_step, bert_training_step
 from .dataloader import JSONLDataset, GenericDataset
 from .model import Cirilla, Args
 from .modules import benchmark_model_part, load_balancing_loss, CirillaBaseModel
@@ -15,8 +15,8 @@ from .blocks import (
                     KeylessAttention,
                     InputEmbeddings
                     )
-from .trm import CirillaTRM, TRMArgs
-from .mtp import CirillaMTP, MTPArgs
+from .trm import CirillaTRM, TRMArgs, trm_training_step, trm_inference_step
+from .mtp import CirillaMTP, MTPArgs, mtp_training_step, mtp_inference_step
 
 __all__ = [
             'CirillaBERT',
@@ -44,4 +44,10 @@ __all__ = [
             'MixerArgs'
             'CirillaMTP',
             'MTPArgs'
+            'trm_training_step',
+            'bert_training_step',
+            'bert_inference_step',
+            'trm_inference_step',
+            'mtp_training_step',
+            'mtp_inference_step'
         ]

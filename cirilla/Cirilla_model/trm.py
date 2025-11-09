@@ -150,3 +150,62 @@ class CirillaTRM(
         n_steps = n_steps[pred_indices]
 
         return preds, n_steps
+
+def trm_training_step(self, data, max_recurrent_step=16, halt_weight=0.5, halt_thresh=0.5, ema_model=None):
+
+    step_loss = 0
+    n = 0
+
+    y_hat, z = self.model.get_init()
+    x = data[0]
+    mask = data[1]
+
+    for _ in range(max_recurrent_step):
+
+        torch.compiler.cudagraph_mark_step_begin()
+
+        pred, y_hat, z, haltp = self.model(x, y_hat, z, mask)
+
+        loss = F.cross_entropy(pred.view(-1, self.model.args.vocab_size), x.view(-1))
+
+        all_correct = (pred.argmax(dim=-1) == x).all(dim=-1)
+
+        halt_loss = F.binary_cross_entropy_with_logits(haltp, all_correct.to(haltp.dtype))
+
+        loss = loss + halt_weight * halt_loss
+
+        step_loss += loss.item()
+        n += 1
+
+        loss.backward()
+        if ema_model is not None:
+            ema_model.update() # model needs to have .predict() method
+
+        halt_mask = F.sigmoid(haltp) < halt_thresh
+        
+        y_hat, z = y_hat.detach(), z.detach()
+
+        if halt_mask.all():
+            continue
+        
+        y_hat = y_hat[halt_mask]
+        z = z[halt_mask]
+        x = x[halt_mask]
+        mask = mask[halt_mask]
+
+        if z.numel() == 0: # if is empty
+            break
+
+    return step_loss / n
+
+@torch.inference_mode()
+def trm_inference_step(self, data, max_recurrent_step=16, halt_thresh=0.5):
+    
+    x = data[0]
+    mask = data[1]
+
+    preds, n_steps = self.model.predict(x, mask, halt_thresh, max_recurrent_step)
+
+    loss = F.cross_entropy(preds.view(-1, self.model.args.vocab_size), x.view(-1))
+
+    return loss.item()

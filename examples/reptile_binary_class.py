@@ -26,4 +26,4 @@ finetune_labels = [0, 1]
 test_texts = ['some other text', 'some other text, different text']
 test_labels = [1, 0]
 
-trainer.fine_tune(finetune_texts, finetune_labels, test_texts, test_labels, verbose=True)
+trainer.fine_tune_native(finetune_texts, finetune_labels, test_texts, test_labels, verbose=True)
