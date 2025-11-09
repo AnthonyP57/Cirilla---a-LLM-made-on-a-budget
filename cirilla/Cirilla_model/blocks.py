@@ -129,7 +129,7 @@ class Encoder(nn.Module):
         
         if self.args.torch_compile:
             self.attentions = nn.ModuleList([
-                torch.compile(attention, mode='max-autotune') for attention in self.attentions
+                torch.compile(attention.to(dtype=self.args.dtype), mode='max-autotune') for attention in self.attentions
                 ])
         else:
             self.attentions = nn.ModuleList(self.attentions)
@@ -149,7 +149,7 @@ class Encoder(nn.Module):
 
             if self.args.torch_compile:
                 self.smoes = nn.ModuleList([
-                    torch.compile(smoe, mode='max-autotune') for smoe in self.smoes
+                    torch.compile(smoe.to(dtype=self.args.dtype), mode='max-autotune') for smoe in self.smoes
                 ])
             else:
                 self.smoes = nn.ModuleList(self.smoes)
@@ -316,7 +316,7 @@ class Decoder(nn.Module):
 
         if self.args.torch_compile:
             self.attentions = nn.ModuleList([
-                torch.compile(attention, mode='max-autotune') for attention in self.attentions
+                torch.compile(attention.to(dtype=self.args.dtype), mode='max-autotune') for attention in self.attentions
                 ])
         else:
             self.attentions = nn.ModuleList(self.attentions)
@@ -336,7 +336,7 @@ class Decoder(nn.Module):
 
             if self.args.torch_compile:
                 self.smoes = nn.ModuleList([
-                    torch.compile(smoe, mode='max-autotune') for smoe in self.smoes
+                    torch.compile(smoe.to(dtype=self.args.dtype), mode='max-autotune') for smoe in self.smoes
                 ])
             else:
                 self.smoes = nn.ModuleList(self.smoes)
