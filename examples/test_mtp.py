@@ -8,7 +8,6 @@ from cirilla.Cirilla_model import (
                             mtp_training_step,
                             mtp_inference_step
                             )
-from torch.utils.data import DataLoader
 from types import MethodType
 from functools import partial
 
