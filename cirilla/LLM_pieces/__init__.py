@@ -1,4 +1,4 @@
-from .activations import get_activation
+from .activations import get_activation, Dynamic_erf, DynamicTanh
 from .SMoE import SMoE, SwiGLU, MegablockMoE, MegablockdMoE
 from .RoPE import RoPE
 from .sliding_window_attention import (
@@ -20,5 +20,7 @@ __all__ = [
     'create_dynamic_block_mask',
     'create_static_block_mask',
     'sliding_window_causal',
-    'BertAttention'
+    'BertAttention',
+    'Dynamic_erf',
+    'DynamicTanh'
 ]

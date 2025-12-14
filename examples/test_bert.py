@@ -12,7 +12,7 @@ import torch.nn as nn
 from torch.optim import AdamW
 from types import MethodType
 
-model = CirillaBERT(BertArgs(output_what='classify', moe_type='pytorch'))
+model = CirillaBERT(BertArgs(output_what='classify', moe_type='pytorch', layer_norm="Derf"))
 
 targs = TrainingArgs(
 n_epoch = 4,

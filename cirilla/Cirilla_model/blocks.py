@@ -10,6 +10,8 @@ from ..LLM_pieces import (
     create_static_block_mask,
     create_dynamic_block_mask,
     sliding_window_causal,
+    DynamicTanh,
+    Dynamic_erf
 )
 from attn_gym.mods import generate_tanh_softcap
 from dataclasses import dataclass
@@ -54,6 +56,7 @@ class EncoderArgs:
     theta:float = 10_000.0
     device:str = select_torch_device()
     torch_compile:bool=True
+    layer_norm:str = "RMSNorm" # or "Derf" or "DyT"
 
     @property
     def dtype(self):
@@ -89,8 +92,14 @@ class Encoder(nn.Module):
 
         self.rope = RoPE(self.args.dim // self.args.n_heads, self.args.context_window, self.args.device, self.args.theta, self.args.device)
         activation = get_activation('Motif-Technologies/activation')
-        self.rmsnorm = activation.layers.RMSNorm(dim=self.args.dim) if self.args.device == torch.cuda.is_available() else nn.RMSNorm(self.args.dim)
-
+        if self.args.layer_norm == "RMSNorm":
+            self.layer_norm = activation.layers.RMSNorm(dim=self.args.dim) if self.args.device == torch.cuda.is_available() else nn.RMSNorm(self.args.dim)
+        elif self.args.layer_norm == "Derf":
+            self.layer_norm = Dynamic_erf(self.args.dim)
+        elif self.args.layer_norm == "DyT":
+            self.layer_norm = DynamicTanh(self.args.dim)
+        else:
+            raise ValueError(f"allowed layer norms: 'RMSNorm', 'Derf', 'DyT' ; got: {self.args.layer_norm}")
 
         self.attentions = [
             BertAttention(self.args, self.rope)
@@ -230,6 +239,7 @@ class DecoderArgs:
     theta:float = 10_000.0
     device = select_torch_device()
     torch_compile:bool=True
+    layer_norm:str = "RMSNorm" # or "Derf" or "DyT"
 
     @property
     def dtype(self):
@@ -265,8 +275,15 @@ class Decoder(nn.Module):
 
         self.rope = RoPE(self.args.dim // self.args.n_heads, self.args.context_window, self.args.device, self.args.theta, self.args.device)
         activation = get_activation('Motif-Technologies/activation')
-        self.rmsnorm = activation.layers.RMSNorm(dim=self.args.dim) if self.args.device == torch.cuda.is_available() else nn.RMSNorm(self.args.dim)
-        
+        if self.args.layer_norm == "RMSNorm":
+            self.layer_norm = activation.layers.RMSNorm(dim=self.args.dim) if self.args.device == torch.cuda.is_available() else nn.RMSNorm(self.args.dim)
+        elif self.args.layer_norm == "Derf":
+            self.layer_norm = Dynamic_erf(self.args.dim)
+        elif self.args.layer_norm == "DyT":
+            self.layer_norm = DynamicTanh(self.args.dim)
+        else:
+            raise ValueError(f"allowed layer norms: 'RMSNorm', 'Derf', 'DyT' ; got: {self.args.layer_norm}")
+    
         if self.args.static_mask:
             self.mask = create_static_block_mask(sliding_window_causal,self.args.context_window,
                                             self.args.context_window, self.args.device, self.args.window_size)

@@ -3,7 +3,7 @@ import torch.nn as nn
 from dataclasses import dataclass
 from typing import Optional
 import torch
-from .activations import get_activation
+from .activations import get_activation, Dynamic_erf, DynamicTanh
 
 flash_attention = get_activation("kernels-community/vllm-flash-attn3")
 
@@ -27,7 +27,14 @@ class BertAttention(nn.Module):
         self.head_dim = args.dim // args.n_heads
 
         activation = get_activation('Motif-Technologies/activation')
-        self.rmsnorm = activation.layers.RMSNorm(dim=self.args.dim) if self.args.device == torch.cuda.is_available() else nn.RMSNorm(self.args.dim)
+        if self.args.layer_norm == "RMSNorm":
+            self.layer_norm = activation.layers.RMSNorm(dim=self.args.dim) if self.args.device == torch.cuda.is_available() else nn.RMSNorm(self.args.dim)
+        elif self.args.layer_norm == "Derf":
+            self.layer_norm = Dynamic_erf(self.args.dim)
+        elif self.args.layer_norm == "DyT":
+            self.layer_norm = DynamicTanh(self.args.dim)
+        else:
+            raise ValueError(f"allowed layer norms: 'RMSNorm', 'Derf', 'DyT' ; got: {self.args.layer_norm}")
 
         self.wo = nn.Linear(args.n_heads * self.head_dim, args.dim, bias=False)
 
@@ -44,7 +51,7 @@ class BertAttention(nn.Module):
     def forward(self, x: torch.Tensor):
         batch_size, seq_len, dim = x.shape
 
-        x = self.rmsnorm(x)
+        x = self.layer_norm(x)
 
         xq = self.wq(x)
         xk = self.wk(x)

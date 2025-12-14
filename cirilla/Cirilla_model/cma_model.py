@@ -8,7 +8,7 @@ from .blocks import (
 import torch.nn as nn
 from huggingface_hub import PyTorchModelHubMixin
 import torch
-from ..LLM_pieces import get_activation, SwiGLU
+from ..LLM_pieces import get_activation, SwiGLU, DynamicTanh, Dynamic_erf
 from dataclasses import dataclass
 
 @dataclass
@@ -44,7 +44,14 @@ class CMA(
                                                 )
         self.text_emb = InputEmbeddings(self.args)
         activation = get_activation('Motif-Technologies/activation')
-        self.rmsnorm = activation.layers.RMSNorm(dim=self.args.dim) if self.args.device == torch.cuda.is_available() else nn.RMSNorm(self.args.dim)
+        if self.args.layer_norm == "RMSNorm":
+            self.layer_norm = activation.layers.RMSNorm(dim=self.args.dim) if self.args.device == torch.cuda.is_available() else nn.RMSNorm(self.args.dim)
+        elif self.args.layer_norm == "Derf":
+            self.layer_norm = Dynamic_erf(self.args.dim)
+        elif self.args.layer_norm == "DyT":
+            self.layer_norm = DynamicTanh(self.args.dim)
+        else:
+            raise ValueError(f"allowed layer norms: 'RMSNorm', 'Derf', 'DyT' ; got: {self.args.layer_norm}")
         self.encoder = Encoder(self.args)
 
         assert len(self.args.n_classes) == self.args.n_tasks
@@ -71,7 +78,7 @@ class CMA(
         else:
             x = torch.cat([texts, images], dim=1)
         x = self.encoder(x)
-        x = self.rmsnorm(x)
+        x = self.layer_norm(x)
         cls_text, cls_image = x[:, self.args.cls_text_index], x[:, self.args.cls_image_index]
         tasks = [out(cls_text, cls_image) for out in self.outs]
         return tasks

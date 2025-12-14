@@ -1,4 +1,4 @@
-from cirilla.LLM_pieces import get_activation
+from cirilla.LLM_pieces import get_activation, DynamicTanh, Dynamic_erf
 from dataclasses import dataclass
 import torch.nn as nn
 from .modules import CirillaBaseModel
@@ -36,7 +36,14 @@ class CirillaMTP(
 
         self.emb = InputEmbeddings(self.args)
         activation = get_activation('Motif-Technologies/activation')
-        self.rmsnorm = activation.layers.RMSNorm(dim=self.args.dim) if self.args.device == torch.cuda.is_available() else nn.RMSNorm(self.args.dim)
+        if self.args.layer_norm == "RMSNorm":
+            self.layer_norm = activation.layers.RMSNorm(dim=self.args.dim) if self.args.device == torch.cuda.is_available() else nn.RMSNorm(self.args.dim)
+        elif self.args.layer_norm == "Derf":
+            self.layer_norm = Dynamic_erf(self.args.dim)
+        elif self.args.layer_norm == "DyT":
+            self.layer_norm = DynamicTanh(self.args.dim)
+        else:
+            raise ValueError(f"allowed layer norms: 'RMSNorm', 'Derf', 'DyT' ; got: {self.args.layer_norm}")
         self.decoder = Decoder(self.args)
 
         self.output = nn.Linear(self.args.dim, self.args.vocab_size, bias=self.args.out_bias)
@@ -65,14 +72,14 @@ class CirillaMTP(
         if self.args.output_moe_weights:
             x, moe_weights = self.decoder(x)
 
-            x = self.rmsnorm(x)
+            x = self.layer_norm(x)
 
             return x, moe_weights
         
         else:
             x = self.decoder(x)
 
-            x = self.rmsnorm(x)
+            x = self.layer_norm(x)
         
             return x
         

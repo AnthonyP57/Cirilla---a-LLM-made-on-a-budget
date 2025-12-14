@@ -17,7 +17,8 @@ model = CirillaMTP(MTPArgs(
                         d_ff=256,
                         n_heads=8,
                         context_window=128,
-                        torch_compile=False))
+                        torch_compile=False,
+                        layer_norm='Derf'))
 
 targs = TrainingArgs(n_epoch=1000, save_checkpoint_min=9999, use_muon_optim=False)
 

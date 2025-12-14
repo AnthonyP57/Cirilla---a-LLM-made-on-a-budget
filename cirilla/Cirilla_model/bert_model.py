@@ -1,4 +1,4 @@
-from ..LLM_pieces import get_activation
+from ..LLM_pieces import get_activation, DynamicTanh, Dynamic_erf
 from dataclasses import dataclass
 import torch.nn as nn
 from .modules import CirillaBaseModel
@@ -41,7 +41,14 @@ class CirillaBERT(
 
         self.emb = InputEmbeddings(self.args)
         activation = get_activation('Motif-Technologies/activation')
-        self.rmsnorm = activation.layers.RMSNorm(dim=self.args.dim) if self.args.device == torch.cuda.is_available() else nn.RMSNorm(self.args.dim)
+        if self.args.layer_norm == "RMSNorm":
+            self.layer_norm = activation.layers.RMSNorm(dim=self.args.dim) if self.args.device == torch.cuda.is_available() else nn.RMSNorm(self.args.dim)
+        elif self.args.layer_norm == "Derf":
+            self.layer_norm = Dynamic_erf(self.args.dim)
+        elif self.args.layer_norm == "DyT":
+            self.layer_norm = DynamicTanh(self.args.dim)
+        else:
+            raise ValueError(f"allowed layer norms: 'RMSNorm', 'Derf', 'DyT' ; got: {self.args.layer_norm}")
         self.encoder = Encoder(self.args)
 
         if self.args.output_what == 'vocab':
@@ -82,7 +89,7 @@ class CirillaBERT(
             
             return x
         
-        x = self.rmsnorm(x)
+        x = self.layer_norm(x)
 
         if self.args.output_what == 'classify':
             if self.args.cls_index is None:

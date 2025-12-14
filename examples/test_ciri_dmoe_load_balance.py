@@ -5,7 +5,7 @@ from megablocks.layers.router import clear_router_zloss, batched_router_zloss
 import torch
 
 trainargs = TrainingArgs(n_epoch=1000, save_checkpoint_min=9999, use_muon_optim=True)
-model = Cirilla(Args(moe_type='megablocks-dmoe', n_layers=14, output_moe_weights=False))
+model = Cirilla(Args(moe_type='megablocks-dmoe', n_layers=14, output_moe_weights=False, layer_norm="DyT"))
 trainer = CirillaTrainer(model, trainargs)
 
 tokenizer = CirillaTokenizer(hub_url='AnthonyPa57/HF-torch-demo2')

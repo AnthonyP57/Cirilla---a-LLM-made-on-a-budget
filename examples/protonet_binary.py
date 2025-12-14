@@ -12,7 +12,7 @@ dl = ProtonetDataset(path=('examples/data/example_bert.jsonl',
                                     'examples/data/example_bert.jsonl'),
                                     tokenizer=tokenizer)
 
-model = CirillaBERT(BertArgs(output_what='meanpool', moe_type='pytorch', n_layers=2, dim=128, d_ff=256))
+model = CirillaBERT(BertArgs(output_what='meanpool', moe_type='pytorch', n_layers=2, dim=128, d_ff=256, torch_compile=False))
 
 targs = TrainingArgs(batch_size=16)
 trainer = CirillaTrainer(model, targs)

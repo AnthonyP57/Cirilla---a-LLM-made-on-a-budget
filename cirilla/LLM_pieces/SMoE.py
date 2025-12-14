@@ -2,7 +2,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 from dataclasses import dataclass
 import torch
-from .activations import get_activation
+from .activations import get_activation, Dynamic_erf, DynamicTanh
 from megablocks import Arguments, MoE, dMoE
 
 activation = get_activation("kernels-community/activation")
@@ -57,10 +57,17 @@ class SMoE(nn.Module):
         self.args = args
 
         activation = get_activation('Motif-Technologies/activation')
-        self.rmsnorm = activation.layers.RMSNorm(dim=self.args.dim) if self.args.device == torch.cuda.is_available() else nn.RMSNorm(self.args.dim)
+        if self.args.layer_norm == "RMSNorm":
+            self.layer_norm = activation.layers.RMSNorm(dim=self.args.dim) if self.args.device == torch.cuda.is_available() else nn.RMSNorm(self.args.dim)
+        elif self.args.layer_norm == "Derf":
+            self.layer_norm = Dynamic_erf(self.args.dim)
+        elif self.args.layer_norm == "DyT":
+            self.layer_norm = DynamicTanh(self.args.dim)
+        else:
+            raise ValueError(f"allowed layer norms: 'RMSNorm', 'Derf', 'DyT' ; got: {self.args.layer_norm}")
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
-        x = self.rmsnorm(x)                           # (B,S,D)
+        x = self.layer_norm(x)                           # (B,S,D)
 
         logits = self.gating(x)                       # (B,S,E)
         topk_vals, topk_idx = torch.topk(logits, self.k, dim=-1)
@@ -99,7 +106,14 @@ class MegablockMoE(nn.Module):
         self.args = args
 
         activation = get_activation('Motif-Technologies/activation')
-        self.rmsnorm = activation.layers.RMSNorm(dim=self.args.dim) if self.args.device == torch.cuda.is_available() else nn.RMSNorm(self.args.dim)
+        if self.args.layer_norm == "RMSNorm":
+            self.layer_norm = activation.layers.RMSNorm(dim=self.args.dim) if self.args.device == torch.cuda.is_available() else nn.RMSNorm(self.args.dim)
+        elif self.args.layer_norm == "Derf":
+            self.layer_norm = Dynamic_erf(self.args.dim)
+        elif self.args.layer_norm == "DyT":
+            self.layer_norm = DynamicTanh(self.args.dim)
+        else:
+            raise ValueError(f"allowed layer norms: 'RMSNorm', 'Derf', 'DyT' ; got: {self.args.layer_norm}")
 
         init_method = torch.nn.init.xavier_uniform_
 
@@ -125,7 +139,7 @@ class MegablockMoE(nn.Module):
 
     def forward(self, x: torch.Tensor):
 
-        x = self.rmsnorm(x)
+        x = self.layer_norm(x)
         # MegaBlocks expects (seq, batch, dim)
         x = x.transpose(0, 1).contiguous()
 
@@ -142,7 +156,14 @@ class MegablockdMoE(nn.Module):
         self.args = args
 
         activation = get_activation('Motif-Technologies/activation')
-        self.rmsnorm = activation.layers.RMSNorm(dim=self.args.dim) if self.args.device == torch.cuda.is_available() else nn.RMSNorm(self.args.dim)
+        if self.args.layer_norm == "RMSNorm":
+            self.layer_norm = activation.layers.RMSNorm(dim=self.args.dim) if self.args.device == torch.cuda.is_available() else nn.RMSNorm(self.args.dim)
+        elif self.args.layer_norm == "Derf":
+            self.layer_norm = Dynamic_erf(self.args.dim)
+        elif self.args.layer_norm == "DyT":
+            self.layer_norm = DynamicTanh(self.args.dim)
+        else:
+            raise ValueError(f"allowed layer norms: 'RMSNorm', 'Derf', 'DyT' ; got: {self.args.layer_norm}")
 
         init_method = torch.nn.init.xavier_uniform_
         
@@ -168,7 +189,7 @@ class MegablockdMoE(nn.Module):
 
     def forward(self, x: torch.Tensor):
 
-        x = self.rmsnorm(x)
+        x = self.layer_norm(x)
         # MegaBlocks expects (seq, batch, dim)
         x = x.transpose(0, 1).contiguous()
 
