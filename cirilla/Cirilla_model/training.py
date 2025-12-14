@@ -33,6 +33,7 @@ class TrainingArgs:
     save_local_async:bool = False
     init_method_str:str = 'xavier_uniform_'
     local_checkpoint_folder:Path = './test_model'
+    fuse_optim:bool = True
     optim_kwargs:dict[str,str] = field(default_factory=lambda: {'fused':True, 'foreach':False})
 
     renew_training:bool = True
@@ -129,7 +130,8 @@ class CirillaTrainer:
             if self.args.init_method_str is not None:
                 self._weights_init()
 
-            self._fuse_optim()
+            if self.args.fuse_optim:
+                self._fuse_optim()
 
         if static_training:
             self._set_prior_training_vars()
