@@ -19,6 +19,7 @@ from .model import Cirilla
 from ..LLM_pieces import get_activation
 from megablocks.layers.router import clear_router_zloss
 from megablocks.layers.moe import clear_load_balancing_loss
+import re
 
 @dataclass
 class TrainingArgs:
@@ -239,12 +240,19 @@ class CirillaTrainer:
 
                     cache_or_fetch('N_DATA_POINTS', dataset_path, (n_iter + 1) * self.args.batch_size)
                     if push_hub and self.args.push_checkpoint_to_hub:
+                        local_name = dataset_path
                         try:
-                            self._push_all_to_hub_async(loss_item, dataset_path)
+                            local_name = os.path.basename(local_name)
+                        except:
+                            local_name = local_name.replace('.jsonl', '').replace('.', '-')
+                        match_obj = re.match(r'^(?:[\w-]+\/)?[\w.-]+$', local_name)
+                        push_dataset_name = match_obj.group(0) if match_obj else None
+                        try:
+                            self._push_all_to_hub_async(loss_item, push_dataset_name)
                             
                         except Exception as e:
                             print(f"Failed to push asynchronously to HF hub: {e}\nPushing synchronously")
-                            self._push_all_to_hub(loss_item, dataset_path)
+                            self._push_all_to_hub(loss_item, push_dataset_name)
                 
                 main_pbar.update(self.args.batch_size)
                 
@@ -564,7 +572,7 @@ class CirillaTrainer:
 
     def _pull_model_from_hub(self):
         model_args = self.model.args
-        pulled_args = get_args_from_hub(self.args.hf_repo_id)
+        pulled_args = get_args_from_hub(self.args.hf_repo_id, type(self.model.args))
 
         if model_args != pulled_args:
             print(f"Current model args don't correspond to the HF model's args.\nCurrent args:\n{model_args}\nThe model will use the HF args:\n{pulled_args}")
@@ -576,7 +584,7 @@ class CirillaTrainer:
         )
 
         loaded = load_file(file_path)
-        if "output.weight" not in loaded:
+        if "output.weight" not in loaded and "output.weight" in self.model.state_dict():
             loaded['output.weight'] = loaded["emb.embeddings.weight"]
 
         self.model.load_state_dict(loaded)

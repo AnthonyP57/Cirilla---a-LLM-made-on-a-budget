@@ -25,7 +25,7 @@ class CirillaTokenizer:
         spm = SentencePieceBPETokenizer()
         spm.train_from_iterator(dataset, special_tokens=list(special_tokens.values()), **kwargs)
         spm.save(str(save_to_path))
-        self.tokenizer = self._turn_to_fast(save_to_path)
+        self.tokenizer = self._turn_to_fast(save_to_path, special_tokens=special_tokens)
         return self.tokenizer
 
     @staticmethod
