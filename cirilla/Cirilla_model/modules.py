@@ -6,6 +6,7 @@ import json
 import time
 from safetensors.torch import load_file
 from huggingface_hub import PyTorchModelHubMixin
+from ..LLM_pieces import get_activation
 
 class CirillaBaseModel(PyTorchModelHubMixin):
     def __init__(self):
@@ -206,3 +207,20 @@ def load_balancing_loss(expert_weights: torch.Tensor,
     loss = loss + torch.log(torch.tensor(num_experts, device=expert_weights.device, dtype=expert_weights.dtype))
 
     return loss
+
+def get_optims(model, use_muon_optim, optim, lr, weight_decay, moun_optim = get_activation("motif-technologies/optimizer")):
+
+    if use_muon_optim:
+        get_default_muon_param_groups = moun_optim.muon.get_default_muon_param_groups
+        muon_param_groups = get_default_muon_param_groups(model)
+
+        moptim = moun_optim.Muon(muon_param_groups, lr=lr, weight_decay=weight_decay)
+
+        rest_of_params = [p for n, p in model.named_parameters() if n not in muon_param_groups[0]['names']]
+
+        roptim = optim(rest_of_params, lr=lr, weight_decay=weight_decay, betas=(0.9, 0.95))
+
+        return moptim, roptim
+    
+    else:
+        return optim(model.parameters(), lr=lr, weight_decay=weight_decay, betas=(0.9, 0.95))

@@ -506,7 +506,7 @@ wheels = [
 
 [[package]]
 name = "cirilla"
-version = "0.1.81"
+version = "0.1.90"
 source = { editable = "." }
 dependencies = [
     { name = "aiofiles" },

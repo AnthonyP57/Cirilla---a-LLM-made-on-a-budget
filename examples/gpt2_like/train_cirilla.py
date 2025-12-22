@@ -366,9 +366,9 @@ if __name__ == "__main__":
             loss.backward()
 
         muon_opt.step()
-        muon_opt.zero_grad(set_to_none=True)
-
         adam_opt.step()
+
+        muon_opt.zero_grad(set_to_none=True)
         adam_opt.zero_grad(set_to_none=True)
 
     # torch.cuda.memory._dump_snapshot(f"vram_usage.pickle")

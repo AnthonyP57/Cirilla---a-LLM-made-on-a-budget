@@ -1,7 +1,7 @@
 from .bert_model import CirillaBERT, BertArgs, bert_inference_step, bert_training_step
 from .dataloader import JSONLDataset, GenericDataset
 from .model import Cirilla, Args
-from .modules import benchmark_model_part, load_balancing_loss, CirillaBaseModel
+from .modules import benchmark_model_part, load_balancing_loss, CirillaBaseModel, get_optims
 from .tokenizer_modules import CirillaTokenizer
 from .training import TrainingArgs, CirillaTrainer
 from .blocks import (
@@ -49,5 +49,6 @@ __all__ = [
             'bert_inference_step',
             'trm_inference_step',
             'mtp_training_step',
-            'mtp_inference_step'
+            'mtp_inference_step',
+            'get_optims'
         ]

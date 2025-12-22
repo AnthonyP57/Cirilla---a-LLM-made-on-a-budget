@@ -64,6 +64,8 @@ class CirillaTrainer:
     def __init__(self, model:nn.Module, training_args:TrainingArgs):
         self.model = model
         self.args = training_args
+        self.optims_to_save = None
+        self.pulled_from_hub = False
         self.optim = self._prepare_optimizer(**training_args.optim_kwargs)
         if self.args.use_muon_optim:
             self.moun_optim = get_activation("motif-technologies/optimizer")
@@ -77,7 +79,9 @@ class CirillaTrainer:
 
     def train(self, dataset:JSONLDataset, valid_dataset:JSONLDataset=None):
 
-        if cache_or_fetch('DATA_LEN', dataset.path_signature) % self.args.batch_size == 0 and self.args.static_triton_graph:
+        dataset_len = cache_or_fetch('DATA_LEN', dataset.path_signature)
+
+        if dataset_len % self.args.batch_size == 0 and self.args.static_triton_graph:
             print('Using static triton graph')
             static_training = True
         else:
@@ -102,6 +106,7 @@ class CirillaTrainer:
         self._set_global_vars()
 
         n_iter = -1
+        loaded_checkpoint = False
 
         os.makedirs(self.args.local_checkpoint_folder, exist_ok=True)
 
@@ -109,10 +114,11 @@ class CirillaTrainer:
         optimizer_path = os.path.join(self.args.local_checkpoint_folder, "optimizer_states.pt")
         model_path = os.path.join(self.args.local_checkpoint_folder, "model.pt")
 
-        if self.args.renew_training:
+        if self.args.renew_training and not self.pulled_from_hub:
             if os.path.exists(optimizer_path) or not self.args.stateful_optim:
                 if os.path.exists(model_path):
                     self._load_local_checkpoint()
+                    loaded_checkpoint = True
                 else:
                     if skip_n_data_points > 0:
                         raise FileNotFoundError(
@@ -124,7 +130,7 @@ class CirillaTrainer:
                         f"Couldn't find optimizer states path for a {state_type} optimizer at: {optimizer_path}"
                     )
 
-        if not hasattr(self, 'optimizer_by_name'): # if didn't load from checkpoint
+        if not loaded_checkpoint and not self.pulled_from_hub:
             print("Training from scratch")
 
             if self.args.init_method_str is not None:
@@ -202,6 +208,11 @@ class CirillaTrainer:
                     )
         
         for epoch in range(self.args.n_epoch):
+
+            if skip_n_data_points // dataset_len > 0:
+                skip_n_data_points -= dataset_len
+                n_iter += dataset_len // self.args.batch_size
+                continue
 
             times = [time.time()]
             losses = []
@@ -282,7 +293,7 @@ class CirillaTrainer:
         if self.args.push_checkpoint_to_hub:
             self._push_all_to_hub(loss_item, dataset_path)
 
-        cache_or_fetch('N_DATA_POINTS', dataset_path, n_iter * self.args.batch_size)
+        cache_or_fetch('N_DATA_POINTS', dataset_path, (n_iter+1) * self.args.batch_size)
 
     def training_step(self, data):
 
@@ -465,14 +476,19 @@ class CirillaTrainer:
                 print(f"Unknown param of shape: {p.shape}")
 
     def _save_local_checkpoint(self):
-        if not hasattr(self, 'optimizer_by_name'):
+        if not hasattr(self, 'optimizer_by_name') and self.args.fuse_optim:
             self._fuse_optim()
             
         torch.save(self.model.state_dict(), os.path.join(self.args.local_checkpoint_folder, 'model.pt'))
 
-        if self.args.stateful_optim:
+        if self.args.stateful_optim and self.args.fuse_optim:
 
             optim_states = {name: opt.state_dict() for name, opt in self.optimizer_by_name.items()}
+            torch.save(optim_states, os.path.join(self.args.local_checkpoint_folder, 'optimizer_states.pt'))
+        
+        elif self.args.stateful_optim and self.optims_to_save is not None:
+
+            optim_states = {name: opt.state_dict() for name, opt in self.optims_to_save.items()}
             torch.save(optim_states, os.path.join(self.args.local_checkpoint_folder, 'optimizer_states.pt'))
 
     def _save_local_checkpoint_async(self):
@@ -485,7 +501,7 @@ class CirillaTrainer:
         self.model.load_state_dict(torch.load(\
             os.path.join(self.args.local_checkpoint_folder,'model.pt')))
         
-        if self.args.stateful_optim:
+        if self.args.stateful_optim and self.args.fuse_optim:
 
             loaded_states = torch.load(\
                 os.path.join(self.args.local_checkpoint_folder, 'optimizer_states.pt'),
@@ -493,10 +509,26 @@ class CirillaTrainer:
 
             self._load_optim_from_checkpoint(loaded_states)
 
+        elif self.args.stateful_optim and self.optims_to_save is not None:
+
+            loaded_states = torch.load(\
+                os.path.join(self.args.local_checkpoint_folder, 'optimizer_states.pt'),
+                map_location=self.model.args.device)
+
+            for optim_name, optim in self.optims_to_save.items():
+                optim.load_state_dict(loaded_states[optim_name])
+
         else:
             self._fuse_optim()
         
     def _load_optim_from_checkpoint(self, loaded_states):
+
+        if self.optims_to_save is not None:
+            
+            for optim_name, optim in self.optims_to_save.items():
+                optim.load_state_dict(loaded_states[optim_name])
+
+            return
 
         params_by_name = dict(self.model.named_parameters())
         self.optimizer_by_name = {}
@@ -594,3 +626,5 @@ class CirillaTrainer:
     def _pull_all_from_hub(self):
         self._pull_model_from_hub()
         self._pull_optim_from_hub()
+        self.pulled_from_hub = True
+        print(f'pulled from hub: {self.args.hf_repo_id}')
