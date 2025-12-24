@@ -26,7 +26,7 @@ This model is linear and time invariant, because the parameters (A, B, C, D) don
 
 $h'(t) = \lambda h(t)$
 
-we can approzimae that $h(t + \Delta) \approx h'(t) \cdot \Delta + h(t)$
+we can approximate that $h(t + \Delta) \approx h'(t) \cdot \Delta + h(t)$
 
 We can replace $h(t + \Delta) \approx \lambda h(t) \cdot \Delta + h(t)$
 
@@ -55,9 +55,9 @@ $y = x \cdot \bar{K}$
 
 ![](./img/conv2.png)
 
-This can be parallelized easily, but we need to build the kernel, which may be expensive, but also for inference we have O(1) ince this is a convolution.
+This can be parallelized easily, but we need to build the kernel, which may be expensive, but also for inference we have O(1) since this is a convolution.
 
-We may not that previously we had:
+We may note that previously we had:
 
 $y(t) = Ch(t) + Dx(t)$
 
@@ -75,7 +75,7 @@ Ok, but how can we go from scalar to vector, we can use a separate SSM for each 
 
 ![](./img/separate_ssm.png)
 
-The $\bar{A}$ matrix can be thought of as a matrix that captures the previous state information, it catches all the history, so we need to be very careful about it, as in next token generation we depend on it. For that they used the HIPPO theory (this is something similar to a Fourier transform).
+The $\bar{A}$ matrix can be thought of as a matrix that captures the previous state information, it catches all the history, so we need to be very careful about it, as in next token generation we depend on it, the eigen values of the $\bar{A}$ matrix works as exponential moving average (EMA) and decide how much do we remember/forget the previous context. For that they used the HIPPO theory (this is something similar to a Fourier transform).
 
 ![](./img/hippo.png)
 
@@ -93,4 +93,8 @@ Much faster but smaller (in MiBs). This is where the GPU does the computation
 
 Sometimes our models may be slow because we are copying stuff to and from memory (IO-bound).
 
+![](https://github.com/state-spaces/mamba/raw/main/assets/selection.png)
+
 In Mamba it is used for more efficient computations: kernel fusion (doing computation in SRAM), recomputation (for bigger tensors it may be faster to just recompute them rather than moving them to and from memory)
+
+![](./img/complexity.png)
