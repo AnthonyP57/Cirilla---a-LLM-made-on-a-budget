@@ -1,5 +1,5 @@
 from .activations import get_activation, Dynamic_erf, DynamicTanh
-from .SMoE import SMoE, SwiGLU, MegablockMoE, MegablockdMoE
+from .SMoE import SMoE, SwiGLU
 from .RoPE import RoPE
 from .sliding_window_attention import (
                                     SlidingWindowAttention,
@@ -24,3 +24,13 @@ __all__ = [
     'Dynamic_erf',
     'DynamicTanh'
 ]
+
+try:
+    from .SMoE_megablocks import MegablockMoE, MegablockdMoE
+
+    __all__ += [
+        "MegablockMoE",
+        "MegablockdMoE",
+    ]
+except ImportError:
+    pass
