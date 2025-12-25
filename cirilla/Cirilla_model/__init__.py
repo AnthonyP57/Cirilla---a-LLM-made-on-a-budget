@@ -52,3 +52,16 @@ __all__ = [
             'mtp_inference_step',
             'get_optims'
         ]
+
+try:
+    from .mamba_blocks import (
+                        HybridDecoder,
+                        HybridDecoderArgs
+                        )
+
+    __all__ += [
+        "HybridDecoder",
+        "HybridDecoderArgs"
+    ]
+except ImportError:
+    pass
