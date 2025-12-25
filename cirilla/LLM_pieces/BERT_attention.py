@@ -3,9 +3,10 @@ import torch.nn as nn
 from dataclasses import dataclass
 from typing import Optional
 import torch
-from .activations import get_activation, Dynamic_erf, DynamicTanh
+from .activations import Dynamic_erf, DynamicTanh
+from torch.nn.attention.flex_attention import flex_attention
+from functools import partial
 
-flash_attention = get_activation("kernels-community/vllm-flash-attn3")
 
 @dataclass
 class BertAttentionArgs:
@@ -16,7 +17,7 @@ class BertAttentionArgs:
     device:str = 'cuda:0'
 
 class BertAttention(nn.Module):
-    def __init__(self, args: BertAttentionArgs, rope:RoPE):
+    def __init__(self, args: BertAttentionArgs, rope:RoPE, score_mod:callable=None):
         super().__init__()
 
         self.args = args
@@ -26,9 +27,8 @@ class BertAttention(nn.Module):
         self.n_rep = self.n_heads_q // self.n_kv_heads
         self.head_dim = args.dim // args.n_heads
 
-        activation = get_activation('Motif-Technologies/activation')
         if self.args.layer_norm == "RMSNorm":
-            self.layer_norm = activation.layers.RMSNorm(dim=self.args.dim) if self.args.device == torch.cuda.is_available() else nn.RMSNorm(self.args.dim)
+            self.layer_norm = nn.RMSNorm(self.args.dim)
         elif self.args.layer_norm == "Derf":
             self.layer_norm = Dynamic_erf(self.args.dim)
         elif self.args.layer_norm == "DyT":
@@ -46,7 +46,9 @@ class BertAttention(nn.Module):
         self.hkv_dim = self.n_kv_heads * self.head_dim
 
         self.rope = rope
-        self.args = args
+        self.window_size = args.window_size
+
+        self.attn = partial(flex_attention, score_mod=score_mod, enable_gqa= self.n_heads_q != self.n_kv_heads)
 
     def forward(self, x: torch.Tensor):
         batch_size, seq_len, dim = x.shape
@@ -63,8 +65,12 @@ class BertAttention(nn.Module):
 
         xq, xk = self.rope.apply_rotary_embeddings(xq, xk)
 
-        # (b, seq, h_q, head_dim)
-        out = flash_attention.flash_attn_func(q=xq, k=xk, v=xv, softcap=self.args.soft_cap, causal=False)[0]
+        # (b, seq, h_q, head_dim) -> (b, h_q, seq, head_dim)
+        xq = xq.transpose(1,2)
+        xk = xk.transpose(1,2)
+        xv = xv.transpose(1,2)
 
-        out = out.view(batch_size, seq_len, dim) # (b, seq, dim)
+        out = self.attn(xq, xk, xv)
+        
+        out = out.transpose(1,2).contiguous().view(batch_size, seq_len, dim) # (b, seq, dim)
         return self.wo(out) #(b, seq, dim)

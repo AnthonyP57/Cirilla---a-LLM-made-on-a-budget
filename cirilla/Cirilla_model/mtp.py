@@ -1,4 +1,4 @@
-from cirilla.LLM_pieces import get_activation, DynamicTanh, Dynamic_erf
+from cirilla.LLM_pieces import DynamicTanh, Dynamic_erf
 from dataclasses import dataclass
 import torch.nn as nn
 from .modules import CirillaBaseModel
@@ -35,9 +35,8 @@ class CirillaMTP(
     def _prepare_model(self):
 
         self.emb = InputEmbeddings(self.args)
-        activation = get_activation('Motif-Technologies/activation')
         if self.args.layer_norm == "RMSNorm":
-            self.layer_norm = activation.layers.RMSNorm(dim=self.args.dim) if self.args.device == torch.cuda.is_available() else nn.RMSNorm(self.args.dim)
+            self.layer_norm = nn.RMSNorm(self.args.dim)
         elif self.args.layer_norm == "Derf":
             self.layer_norm = Dynamic_erf(self.args.dim)
         elif self.args.layer_norm == "DyT":
@@ -54,10 +53,7 @@ class CirillaMTP(
         token_args['n_layers'] = 1
         self.token_head_args = DecoderArgs(**token_args)
 
-        if torch.cuda.is_available():
-            self.token_heads = [nn.Sequential(Decoder(self.token_head_args), activation.layers.RMSNorm(dim=self.args.dim)) for _ in range(self.args.n_token_heads)]
-        else:
-            self.token_heads = [nn.Sequential(Decoder(self.token_head_args), nn.RMSNorm(self.args.dim)) for _ in range(self.args.n_token_heads)]
+        self.token_heads = [nn.Sequential(Decoder(self.token_head_args), nn.RMSNorm(self.args.dim)) for _ in range(self.args.n_token_heads)]
         
         self.token_heads = nn.ModuleList(self.token_heads)
 

@@ -55,9 +55,8 @@ class SMoE(nn.Module):
         self.experts = nn.ModuleList(experts)
         self.args = args
 
-        activation = get_activation('Motif-Technologies/activation')
         if self.args.layer_norm == "RMSNorm":
-            self.layer_norm = activation.layers.RMSNorm(dim=self.args.dim) if self.args.device == torch.cuda.is_available() else nn.RMSNorm(self.args.dim)
+            self.layer_norm = nn.RMSNorm(self.args.dim)
         elif self.args.layer_norm == "Derf":
             self.layer_norm = Dynamic_erf(self.args.dim)
         elif self.args.layer_norm == "DyT":

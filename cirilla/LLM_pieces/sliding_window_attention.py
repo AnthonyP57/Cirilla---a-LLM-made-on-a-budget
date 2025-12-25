@@ -3,9 +3,9 @@ from functools import lru_cache, partial
 from .RoPE import RoPE
 import torch.nn as nn
 from dataclasses import dataclass
-from typing import Union, Callable
+from typing import Union
 import torch
-from .activations import get_activation, Dynamic_erf, DynamicTanh
+from .activations import Dynamic_erf, DynamicTanh
 
 SLIDING_WINDOW = 512
 
@@ -37,7 +37,7 @@ class AttentionArgs:
     device:str = 'cuda:0'
 
 class SlidingWindowAttention(nn.Module):
-    def __init__(self, args: AttentionArgs, rope:RoPE, mask:Union[BlockMask, create_dynamic_block_mask]=None, score_mod:Callable=None):
+    def __init__(self, args: AttentionArgs, rope:RoPE, mask:Union[BlockMask, create_dynamic_block_mask]=None, score_mod:callable=None):
         super().__init__()
 
         self.args = args
@@ -48,9 +48,8 @@ class SlidingWindowAttention(nn.Module):
         self.head_dim = args.dim // args.n_heads
         self.static_mask = args.static_mask
         
-        activation = get_activation('Motif-Technologies/activation')
         if self.args.layer_norm == "RMSNorm":
-            self.layer_norm = activation.layers.RMSNorm(dim=self.args.dim) if self.args.device == torch.cuda.is_available() else nn.RMSNorm(self.args.dim)
+            self.layer_norm = nn.RMSNorm(self.args.dim)
         elif self.args.layer_norm == "Derf":
             self.layer_norm = Dynamic_erf(self.args.dim)
         elif self.args.layer_norm == "DyT":

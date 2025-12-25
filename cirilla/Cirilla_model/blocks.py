@@ -1,7 +1,6 @@
 from ..LLM_pieces import (
     RoPE,
     SMoE,
-    get_activation,
     SwiGLU,
     MegablockMoE,
     MegablockdMoE,
@@ -92,9 +91,8 @@ class Encoder(nn.Module):
     def _prepare_model(self):
 
         self.rope = RoPE(self.args.dim // self.args.n_heads, self.args.context_window, self.args.device, self.args.theta, self.args.device)
-        activation = get_activation('Motif-Technologies/activation')
         if self.args.layer_norm == "RMSNorm":
-            self.layer_norm = activation.layers.RMSNorm(dim=self.args.dim) if self.args.device == torch.cuda.is_available() else nn.RMSNorm(self.args.dim)
+            self.layer_norm = nn.RMSNorm(self.args.dim)
         elif self.args.layer_norm == "Derf":
             self.layer_norm = Dynamic_erf(self.args.dim)
         elif self.args.layer_norm == "DyT":
@@ -103,7 +101,7 @@ class Encoder(nn.Module):
             raise ValueError(f"allowed layer norms: 'RMSNorm', 'Derf', 'DyT' ; got: {self.args.layer_norm}")
 
         self.attentions = [
-            BertAttention(self.args, self.rope)
+            BertAttention(self.args, self.rope, generate_tanh_softcap(self.args.soft_cap, approx=False) if self.args.soft_cap is not None else None)
             for _ in range(self.args.n_layers)
             ]
 
@@ -275,9 +273,8 @@ class Decoder(nn.Module):
     def _prepare_model(self):
 
         self.rope = RoPE(self.args.dim // self.args.n_heads, self.args.context_window, self.args.device, self.args.theta, self.args.device)
-        activation = get_activation('Motif-Technologies/activation')
         if self.args.layer_norm == "RMSNorm":
-            self.layer_norm = activation.layers.RMSNorm(dim=self.args.dim) if self.args.device == torch.cuda.is_available() else nn.RMSNorm(self.args.dim)
+            self.layer_norm = nn.RMSNorm(self.args.dim)
         elif self.args.layer_norm == "Derf":
             self.layer_norm = Dynamic_erf(self.args.dim)
         elif self.args.layer_norm == "DyT":
@@ -445,9 +442,8 @@ class HybridDecoder(nn.Module):
     def _prepare_model(self):
 
         self.rope = RoPE(self.args.dim // self.args.n_heads, self.args.context_window, self.args.device, self.args.theta, self.args.device)
-        activation = get_activation('Motif-Technologies/activation')
         if self.args.layer_norm == "RMSNorm":
-            self.layer_norm = activation.layers.RMSNorm(dim=self.args.dim) if self.args.device == torch.cuda.is_available() else nn.RMSNorm(self.args.dim)
+            self.layer_norm = nn.RMSNorm(self.args.dim)
         elif self.args.layer_norm == "Derf":
             self.layer_norm = Dynamic_erf(self.args.dim)
         elif self.args.layer_norm == "DyT":
