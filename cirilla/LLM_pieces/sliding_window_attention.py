@@ -103,3 +103,74 @@ class SlidingWindowAttention(nn.Module):
         
         out = out.transpose(1,2).contiguous().view(batch_size, seq_len, dim) # (b, seq, dim)
         return self.wo(out) #(b, seq, dim)
+    
+    @torch.no_grad
+    def forward_with_cache(self, x: torch.Tensor, cur_pos:int, seq_len:int=1, max_batch:int=1):
+
+        batch_size, seq_len, dim = x.shape
+
+        if not hasattr(self, 'k_cache'):
+            self.k_cache = torch.zeros(max_batch,
+                                       self.args.context_window,
+                                       self.n_kv_heads,
+                                       self.head_dim,
+                                       device=self.args.device,
+                                       dtype=x.dtype)
+            
+            self.v_cache = torch.zeros(max_batch,
+                                       self.args.context_window,
+                                       self.n_kv_heads,
+                                       self.head_dim,
+                                       device=self.args.device,
+                                       dtype=x.dtype)
+        
+        x = self.layer_norm(x)
+
+        xq = self.wq(x)
+        xk = self.wk(x)
+        xv = self.wv(x)
+
+        xq = xq.view(batch_size, seq_len, self.n_heads_q, self.head_dim)
+        xk = xk.view(batch_size, seq_len, self.n_kv_heads, self.head_dim)
+        xv = xv.view(batch_size, seq_len, self.n_kv_heads, self.head_dim)
+        
+        cos = self.rope.cos[:, cur_pos:cur_pos+seq_len, :, :]
+        sin = self.rope.sin[:, cur_pos:cur_pos+seq_len, :, :]
+
+        xq_even, xq_odd = xq[..., ::2], xq[..., 1::2]
+        xk_even, xk_odd = xk[..., ::2], xk[..., 1::2]
+
+        xq_rot = torch.stack([xq_even * cos - xq_odd * sin,
+                              xq_even * sin + xq_odd * cos], dim=-1)
+        xk_rot = torch.stack([xk_even * cos - xk_odd * sin,
+                              xk_even * sin + xk_odd * cos], dim=-1)
+
+        xq = xq_rot.flatten(-2)
+        xk = xk_rot.flatten(-2)
+
+        self.k_cache[:batch_size, cur_pos:cur_pos+seq_len, :, :] = xk
+        self.v_cache[:batch_size, cur_pos:cur_pos+seq_len, :, :] = xv
+
+        xk = self.k_cache[:batch_size, :cur_pos+seq_len, :, :]
+        xv = self.v_cache[:batch_size, :cur_pos+seq_len, :, :]
+
+        # (b, seq, h_q, head_dim) -> (b, h_q, seq, head_dim)
+        xq = xq.transpose(1,2)
+        xk = xk.transpose(1,2)
+        xv = xv.transpose(1,2)
+
+        mask = create_dynamic_block_mask(sliding_window_causal,
+                                         q_len=seq_len,
+                                         kv_len=cur_pos+seq_len,
+                                         device=xq.device,
+                                         window_size=self.window_size)
+
+        out = flex_attention(xq, xk, xv,
+                             block_mask=mask,
+                             score_mod=self.score_mode,
+                             enable_gqa=\
+                                self.n_heads_q != self.n_kv_heads
+                            )
+
+        out = out.transpose(1,2).contiguous().view(batch_size, seq_len, dim) # (b, seq, dim)
+        return self.wo(out) #(b, seq, dim)
