@@ -75,6 +75,37 @@ class Cirilla(
         return self.pred(x)
     
     @torch.no_grad()
+    def infer_with_cache(self, x, cur_pos:int, seq_len:int=1, max_batch:int=1):
+        
+        x = self.emb(x)
+
+        if self.args.output_moe_weights:
+
+            moe_weights = []
+            for attention, moe in zip(self.decoder.attentions, self.decoder.smoes):
+
+                x = x + attention.forward_with_cache(x, cur_pos, seq_len, max_batch)
+                moe_out, moe_w = moe(x)
+                moe_weights.append(moe_w)
+                x = x + moe_out
+
+            x = self.layer_norm(x)
+            x = self.output(x)
+
+            return x, moe_weights
+        
+        else:
+
+            for attention, moe in zip(self.decoder.attentions, self.decoder.smoes):
+                x = x + attention.forward_with_cache(x, cur_pos, seq_len, max_batch)
+                x = x + moe(x)[0]
+
+            x = self.layer_norm(x)
+            x = self.output(x)
+        
+            return x
+
+    @torch.no_grad()
     def infer(self, x):
         if self.args.output_moe_weights:
             logits, moe_weights = self.pred(x)
@@ -89,7 +120,7 @@ class Cirilla(
         next_token = torch.argmax(probs, dim=-1).unsqueeze(-1)
         return next_token
     
-    def generate_naive(self, x,
+    def generate_naive(self, x:torch.Tensor,
                        max_new_tokens:int=1024,
                        top_k:int=None,
                        top_p:float=None,
@@ -158,7 +189,7 @@ class Cirilla(
 
                         n_samples = min(n_beams,
                                         top_k if top_k is not None else float('inf'),
-                                        n_remaining_top_p if n_remaining_top_p is not None else float('inf'),
+                                        n_remaining_top_p if n_remaining_top_p is not None else float('inf')
                                         )
 
                         next_tokens = torch.multinomial(log_probs.exp(), num_samples=n_samples, replacement=n_samples < n_beams) #batch_size x n_beams
@@ -179,3 +210,105 @@ class Cirilla(
                     _beams = sorted(_beams, key=lambda x: x[1], reverse=True)[:n_beams]
 
                 return _beams[0][0]
+
+def generate_kv_cache(self,
+                          prompt_tokens_list: list[list[int]],
+                          max_new_tokens: int = 1024,
+                          top_k: int = None,
+                          top_p: float = None,
+                          temperature: float = 1.0,
+                          termination_tokens: list[int] = None,
+                          pad_token_id: int = 0
+                          ):
+        
+        batch_size = len(prompt_tokens_list)
+        
+        prompt_lens = torch.tensor([len(t) for t in prompt_tokens_list], device=self.args.device)
+        max_prompt_len = prompt_lens.max().item()
+        min_prompt_len = prompt_lens.min().item()
+        
+        total_len = min(self.args.context_window, max_prompt_len + max_new_tokens)
+        
+        tokens = torch.full((batch_size, total_len), pad_token_id, dtype=torch.long, device=self.args.device)
+        
+        for k, t in enumerate(prompt_tokens_list):
+            tokens[k, :len(t)] = torch.tensor(t, dtype=torch.long, device=self.args.device)
+
+        finished = torch.zeros(batch_size, dtype=torch.bool, device=self.args.device)
+        
+        with torch.no_grad():
+            
+            cur_pos = 0
+            
+            if min_prompt_len > 0:
+                initial_input = tokens[:, :min_prompt_len]
+                
+                logits = self.infer_with_cache(initial_input, cur_pos=0, seq_len=min_prompt_len, max_batch=batch_size)
+                
+                next_token_logits = logits[:, -1, :]
+                
+                cur_pos = min_prompt_len
+
+            while cur_pos < total_len:
+                
+                next_token_logits = next_token_logits / temperature
+
+                if top_k is not None:
+                    v, i = torch.topk(next_token_logits, top_k)
+                    log_probs = torch.full_like(next_token_logits, float('-inf'))
+                    log_probs.scatter_(1, i, torch.nn.functional.log_softmax(v, dim=-1))
+                    probs = torch.exp(log_probs)
+
+                elif top_p is not None:
+                    sorted_logits, sorted_indices = torch.sort(next_token_logits, descending=True)
+                    cumulative_probs = torch.cumsum(torch.nn.functional.softmax(sorted_logits, dim=-1), dim=-1)
+
+                    sorted_indices_to_remove = cumulative_probs > top_p
+                    sorted_indices_to_remove[:, 1:] = sorted_indices_to_remove[:, :-1].clone()
+                    sorted_indices_to_remove[:, 0] = 0
+                    
+                    mask = torch.zeros_like(next_token_logits, dtype=torch.bool).scatter_(1, sorted_indices, sorted_indices_to_remove)
+                    next_token_logits[mask] = float('-inf')
+                    probs = torch.nn.functional.softmax(next_token_logits, dim=-1)
+
+                else: # Greedy
+                    if temperature == 1.0 and top_k is None and top_p is None:
+                        probs = None
+                    else:
+                        probs = torch.nn.functional.softmax(next_token_logits, dim=-1)
+
+                if probs is not None:
+                    next_token_sample = torch.multinomial(probs, num_samples=1).squeeze(1)
+                else:
+                    next_token_sample = torch.argmax(next_token_logits, dim=-1)
+
+
+                is_prompt_phase = cur_pos < prompt_lens
+                safe_lookup_idx = torch.clamp(torch.tensor(cur_pos), max=total_len-1)
+                ground_truth = tokens[:, safe_lookup_idx]
+
+                next_token = torch.where(is_prompt_phase, ground_truth, next_token_sample)
+
+                if cur_pos < total_len:
+                    tokens[:, cur_pos] = next_token
+
+                if termination_tokens is not None:
+                    active_generation_mask = ~is_prompt_phase
+                    for t in termination_tokens:
+                        has_terminated = (next_token == t) & active_generation_mask
+                        finished = finished | has_terminated
+                
+                if finished.all() and cur_pos >= max_prompt_len:
+                    break
+
+                if cur_pos == total_len - 1:
+                    break
+                    
+                input_token = next_token.unsqueeze(1)
+                
+                logits = self.infer_with_cache(input_token, cur_pos=cur_pos, seq_len=1, max_batch=batch_size)
+                next_token_logits = logits[:, -1, :]
+                
+                cur_pos += 1
+
+        return tokens

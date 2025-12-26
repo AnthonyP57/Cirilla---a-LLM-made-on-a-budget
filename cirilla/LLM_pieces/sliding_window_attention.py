@@ -107,7 +107,7 @@ class SlidingWindowAttention(nn.Module):
     @torch.no_grad
     def forward_with_cache(self, x: torch.Tensor, cur_pos:int, seq_len:int=1, max_batch:int=1):
 
-        batch_size, seq_len, dim = x.shape
+        batch_size, seq_len, dim = x.shape # check if needed seq len
 
         if not hasattr(self, 'k_cache'):
             self.k_cache = torch.zeros(max_batch,
