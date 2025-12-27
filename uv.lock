@@ -1,5 +1,5 @@
 version = 1
-revision = 3
+revision = 2
 requires-python = ">=3.10"
 resolution-markers = [
     "(python_full_version >= '3.12' and platform_machine != 'aarch64' and sys_platform == 'linux') or (python_full_version >= '3.12' and sys_platform == 'win32')",
@@ -359,6 +359,18 @@ wheels = [
 ]
 
 [[package]]
+name = "causal-conv1d"
+version = "1.5.3.post1"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "ninja" },
+    { name = "packaging" },
+    { name = "torch", version = "2.7.0", source = { registry = "https://pypi.org/simple" }, marker = "sys_platform != 'linux' and sys_platform != 'win32'" },
+    { name = "torch", version = "2.7.0+cu128", source = { registry = "https://download.pytorch.org/whl/cu128" }, marker = "sys_platform == 'linux' or sys_platform == 'win32'" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/64/cb/104778c728dc3d5ea3bf65a484e3a4cdbe894bdaa2586320e2f61d007b8c/causal_conv1d-1.5.3.post1.tar.gz", hash = "sha256:aba1b717484472d0b2f2e40520a1c03f35fe5155555bd753d1c324afc56ba468", size = 24198, upload-time = "2025-10-10T10:16:23.921Z" }
+
+[[package]]
 name = "cellpylib"
 version = "2.4.0"
 source = { registry = "https://pypi.org/simple" }
@@ -518,6 +530,7 @@ dependencies = [
     { name = "fuzzywuzzy" },
     { name = "huggingface-hub" },
     { name = "kernels" },
+    { name = "mamba-ssm", extra = ["causal-conv1d"] },
     { name = "ollama" },
     { name = "openai" },
     { name = "polars" },
@@ -556,6 +569,7 @@ requires-dist = [
     { name = "fuzzywuzzy", specifier = ">=0.18.0" },
     { name = "huggingface-hub", specifier = ">=0.33.4" },
     { name = "kernels", specifier = ">=0.8.0" },
+    { name = "mamba-ssm", extras = ["causal-conv1d"], specifier = ">=2.2.6.post3" },
     { name = "megablocks", extras = ["all"], marker = "extra == 'megablocks'", specifier = ">=0.10.0" },
     { name = "ollama", specifier = ">=0.5.3" },
     { name = "openai", specifier = ">=1.90.0" },
@@ -1864,6 +1878,28 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/29/aa/008a6dc9884d855cf5f7e3e02466b0b44cb1e64fd4b5ce906d4ce03030f9/magiccube-0.3.0.tar.gz", hash = "sha256:4fa47df1e99c19ac74597279a17de5a652083d4d68f0d5e52cf09202317e5d04", size = 19407, upload-time = "2024-07-15T06:58:03.757Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/f7/8d/354a7357e03fb9277401989b7866b8f05ae407319e7bc450b958f9187308/magiccube-0.3.0-py3-none-any.whl", hash = "sha256:a8da38cac53dff1667949c9a12485bebb9d62c01ae73db41eb7aba1bc1c8a00c", size = 16931, upload-time = "2024-07-15T06:58:02.631Z" },
+]
+
+[[package]]
+name = "mamba-ssm"
+version = "2.2.6.post3"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "einops" },
+    { name = "ninja" },
+    { name = "packaging" },
+    { name = "setuptools", version = "79.0.1", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version >= '3.12'" },
+    { name = "setuptools", version = "80.9.0", source = { registry = "https://pypi.org/simple" }, marker = "python_full_version < '3.12'" },
+    { name = "torch", version = "2.7.0", source = { registry = "https://pypi.org/simple" }, marker = "sys_platform != 'linux' and sys_platform != 'win32'" },
+    { name = "torch", version = "2.7.0+cu128", source = { registry = "https://download.pytorch.org/whl/cu128" }, marker = "sys_platform == 'linux' or sys_platform == 'win32'" },
+    { name = "transformers" },
+    { name = "triton" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/b6/0c/9373a469ff7a33bdd0644e55fa45165ba3900274dcf7fe9f10ccc232aef9/mamba_ssm-2.2.6.post3.tar.gz", hash = "sha256:826a3cdb651959f191dac64502f8a29627d9116fe6bb7c57e4f562da1aea7bf3", size = 113913, upload-time = "2025-10-10T06:00:44.939Z" }
+
+[package.optional-dependencies]
+causal-conv1d = [
+    { name = "causal-conv1d" },
 ]
 
 [[package]]

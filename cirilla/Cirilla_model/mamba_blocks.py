@@ -1,9 +1,7 @@
-from ..LLM_pieces import (
+from cirilla.LLM_pieces import (
     RoPE,
     SMoE,
     SwiGLU,
-    MegablockMoE,
-    MegablockdMoE,
     SlidingWindowAttention,
     create_static_block_mask,
     create_dynamic_block_mask,
@@ -11,13 +9,19 @@ from ..LLM_pieces import (
     DynamicTanh,
     Dynamic_erf
 )
+try:
+    from cirilla.LLM_pieces import(
+        MegablockMoE,
+        MegablockdMoE,
+    )
+except ImportError:
+    pass
 from mamba_ssm import Mamba2
-from .blocks import DecoderArgs
+from cirilla.Cirilla_model.blocks import DecoderArgs
 from attn_gym.mods import generate_tanh_softcap
 from dataclasses import dataclass
 import torch.nn as nn
 import torch
-import torch.nn.functional as F
 from torchao.float8 import convert_to_float8_training, Float8LinearConfig
 from torchao.sparsity.training import (
     SemiSparseLinear,

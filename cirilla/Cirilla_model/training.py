@@ -17,8 +17,13 @@ from progress_table import ProgressTable
 import numpy as np
 from .model import Cirilla
 from ..LLM_pieces import get_activation
-from megablocks.layers.router import clear_router_zloss
-from megablocks.layers.moe import clear_load_balancing_loss
+try:
+    from megablocks.layers.router import clear_router_zloss
+    from megablocks.layers.moe import clear_load_balancing_loss
+    use_megablocks = True
+except ImportError:
+    use_megablocks = False
+    pass
 import re
 
 @dataclass
@@ -303,8 +308,9 @@ class CirillaTrainer:
         loss = self.criterion(out.view(-1, self.model.args.vocab_size), data[1].view(-1))
 
         # clear losses that will cause a memory leak
-        clear_load_balancing_loss()
-        clear_router_zloss()
+        if use_megablocks:
+            clear_load_balancing_loss()
+            clear_router_zloss()
         loss_item = loss.item()
         loss.backward()
 
@@ -312,8 +318,9 @@ class CirillaTrainer:
     
     @torch.inference_mode()
     def inference_step(self, data):
-        clear_load_balancing_loss()
-        clear_router_zloss()
+        if use_megablocks:
+            clear_load_balancing_loss()
+            clear_router_zloss()
         out = self.model.pred(data[0])
         loss = self.criterion(out.view(-1, self.model.args.vocab_size), data[1].view(-1))
         return loss.item()

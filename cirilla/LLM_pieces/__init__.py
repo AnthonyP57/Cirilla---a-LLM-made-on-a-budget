@@ -13,8 +13,6 @@ __all__ = [
     'get_activation',
     'SMoE',
     'SwiGLU',
-    'MegablockMoE',
-    'MegablockdMoE',
     'RoPE',
     'SlidingWindowAttention',
     'create_dynamic_block_mask',

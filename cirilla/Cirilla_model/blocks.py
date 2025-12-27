@@ -2,8 +2,6 @@ from ..LLM_pieces import (
     RoPE,
     SMoE,
     SwiGLU,
-    MegablockMoE,
-    MegablockdMoE,
     BertAttention,
     SlidingWindowAttention,
     create_static_block_mask,
@@ -12,6 +10,13 @@ from ..LLM_pieces import (
     DynamicTanh,
     Dynamic_erf
 )
+try:
+    from cirilla.LLM_pieces import(
+        MegablockMoE,
+        MegablockdMoE,
+    )
+except ImportError:
+    pass
 from attn_gym.mods import generate_tanh_softcap
 from dataclasses import dataclass
 from .modules import select_torch_device
