@@ -39,6 +39,10 @@ megablocks = [
     "megablocks[all]>=0.10.0",
 ]
 
+mamba = [
+    "mamba-ssm[causal-conv1d]>=2.2.6.post3"
+]
+
 [tool.uv.sources]
 torch = [
   { index = "pytorch-cu128", marker = "sys_platform == 'linux' or sys_platform == 'win32'" },

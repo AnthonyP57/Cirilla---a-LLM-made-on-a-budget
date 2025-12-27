@@ -68,16 +68,34 @@ Cirilla - a LLM made on a budget/
   │
   ├── cirilla/
   │   ├── Cirilla_model/              # implementation of the Cirilla LLM
+  │   ├── Few_shot/                   # Few-shot learning techniques
   │   ├── LLM_pieces/                 # building blocks of LLMs
   │   └── synth_data/                 # creating synthetic data
+  │
+  ├── cirilla_training/               # proper LLM training with the Cirilla package
   │
   ├── Decoder_only_architecture/      # overview of decoder only transformer architecture
   │   ├── Llama2/                     # implementation of Llama 2 inference loop
   │   └── Mistral/                    # overview of the Mistral 7B architecture and inference tricks
   │
+  ├── DPO/                            # overview of Direct Preference Optimization (DPO)
+  │
+  ├── examples/                       # examples how to use this package
+  │
+  ├── Few_shot/                       # overview of Few-shot ML techniques
+  │
+  ├── KAN/                            # overview of Kolmogorov-Arnold Networks (KAN)
+  │
+  ├── Multimodal/                     # overview of Paligemma (VLM)
+  │
+  ├── Tiny_recursive_model/           # overview of Tiny recursive model (TRM)
+  │
   ├── Training_optimizations/
-  │   ├──FlexAttention/               # overview of Pytorch's FlexAttention
-  │   └── HF_kernels/                 # overview of HF's kernel hub
+  │   ├── FlexAttention/              # overview of Pytorch's FlexAttention
+  │   ├── HF_kernels/                 # overview of HF's kernel hub
+  │   ├── Mamba/                      # overview of Mamba
+  │   ├── Multi_Token_Prediction/     # overview of MTP
+  │   └── Optimizer_dusion/           # fusing Pytorch optimizer into the backward pass
   │
   └── Transformer_from_scratch/       # transformer implementation
       ├── model.py                    # transformer model
@@ -94,6 +112,10 @@ uv add Cirilla
 pip install Cirilla # that's it
 ```
 ### 2. building megablocks (not required, but recommended)
+```bash
+uv add Cirilla[megablocks]
+```
+
 #### 2.1. check the Pytorch cuda version
 ```bash
 # check pip packages
@@ -140,6 +162,21 @@ You can see a guide of how to install the correct CUDA toolkit [here](https://ww
 
 To verify that everything works you can try running: `./examples/train_bert.py`
 
+### 3. Installing Mamaba (not required, but recommended)
+```bash
+uv add Cirilla[mamba]
+```
+
+In case the is some problem, try:
+```bash
+uv pip install --no-cache-dir --no-binary :all: --no-build-isolation mamba-ssm[causal-conv1d]
+```
+and then
+```bash
+uv add Cirilla[mamba]
+```
+To verify that everything works you can try running: `./examples/cirilla_hybrid.py`
+
 ## Why Cirilla
 
 Cirilla is a project focused on building **simple and optimized transformer models**. The goal is to give you access to all the modern bells and whistles, like Mixture of Experts (MoE) and [FlexAttention](https://pytorch.org/blog/flexattention/), without requiring you to implement or learn about them from scratch.
@@ -148,8 +185,11 @@ Cirilla is a project focused on building **simple and optimized transformer mode
 Cirilla is organized around reusable transformer components. Each module is implemented in a clean and transparent way, making it easy to experiment, swap, or optimize parts of the model.
 
 *Some highlights:*
-- **Tiny Recursive Model (TRM)**: A simpler recursive reasoning approach than Hierarchical Reasoning Model (HRM)
-- **Attention mechanisms**: sliding window attention with PyTorch FlexAttention, and non-causal “BERT-like” attention with HuggingFace [Flash Attention 3 kernels](https://huggingface.co/kernels-community/vllm-flash-attn3).  
+- **Hybrid Architecture**: Transformer architecture containing Mamba blocks (similar to [IBM Granite 4.0](https://www.ibm.com/new/announcements/ibm-granite-4-0-hyper-efficient-high-performance-hybrid-models)).
+- **Multimodal models**: Similar to [PaliGemma](https://arxiv.org/pdf/2407.07726).
+- **Tiny Recursive Model (TRM)**: A simpler recursive reasoning approach to Hierarchical Reasoning Model (HRM).
+- **Few-shot ML techniques**: like [ProtoNet](https://arxiv.org/pdf/1703.05175), [MAML](https://arxiv.org/pdf/1703.03400), [Setfit](https://arxiv.org/pdf/2209.11055)
+- **Attention mechanisms**: sliding window attention with PyTorch FlexAttention, and non-causal “BERT-like” attention.
 - **Rotary Positional Embeddings (RoPE)**: lightweight and efficient PyTorch implementation.  
 - **Mixture of Experts (MoE)**: available both as a pure PyTorch version and integrated with [Megablocks](https://github.com/databricks/megablocks).  
 - **Muon optimizer**: optimizer for hidden layers
