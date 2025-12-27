@@ -4,6 +4,7 @@ import torch.nn as nn
 from .modules import CirillaBaseModel
 from .blocks import Decoder, DecoderArgs, InputEmbeddings
 import torch
+from math import ceil
 
 @dataclass
 class Args(DecoderArgs):
@@ -75,29 +76,27 @@ class Cirilla(
         return self.pred(x)
     
     @torch.no_grad()
-    def infer_with_cache(self, x, cur_pos:int, seq_len:int=1, max_batch:int=1):
+    def infer_with_cache(self, x, cur_pos:int, max_batch:int=1, chunked_prefill:bool=False, non_finished_ids:torch.Tensor=None):
         
         x = self.emb(x)
 
         if self.args.output_moe_weights:
 
-            moe_weights = []
             for attention, moe in zip(self.decoder.attentions, self.decoder.smoes):
 
-                x = x + attention.forward_with_cache(x, cur_pos, seq_len, max_batch)
-                moe_out, moe_w = moe(x)
-                moe_weights.append(moe_w)
+                x = x + attention.forward_with_cache(x, cur_pos, max_batch, chunked_prefill, non_finished_ids)
+                moe_out, moe_weights = moe(x)
                 x = x + moe_out
 
             x = self.layer_norm(x)
             x = self.output(x)
 
-            return x, moe_weights
+            return x
         
         else:
 
             for attention, moe in zip(self.decoder.attentions, self.decoder.smoes):
-                x = x + attention.forward_with_cache(x, cur_pos, seq_len, max_batch)
+                x = x + attention.forward_with_cache(x, cur_pos, max_batch, chunked_prefill, non_finished_ids)
                 x = x + moe(x)[0]
 
             x = self.layer_norm(x)
@@ -211,104 +210,94 @@ class Cirilla(
 
                 return _beams[0][0]
 
-def generate_kv_cache(self,
-                          prompt_tokens_list: list[list[int]],
-                          max_new_tokens: int = 1024,
-                          top_k: int = None,
-                          top_p: float = None,
-                          temperature: float = 1.0,
-                          termination_tokens: list[int] = None,
-                          pad_token_id: int = 0
-                          ):
-        
-        batch_size = len(prompt_tokens_list)
-        
-        prompt_lens = torch.tensor([len(t) for t in prompt_tokens_list], device=self.args.device)
-        max_prompt_len = prompt_lens.max().item()
-        min_prompt_len = prompt_lens.min().item()
-        
-        total_len = min(self.args.context_window, max_prompt_len + max_new_tokens)
-        
-        tokens = torch.full((batch_size, total_len), pad_token_id, dtype=torch.long, device=self.args.device)
-        
-        for k, t in enumerate(prompt_tokens_list):
-            tokens[k, :len(t)] = torch.tensor(t, dtype=torch.long, device=self.args.device)
-
-        finished = torch.zeros(batch_size, dtype=torch.bool, device=self.args.device)
-        
-        with torch.no_grad():
+    def generate_kv_cache(self,
+                            prompt_tokens_list: list[list[int]],
+                            max_new_tokens: int = 1024,
+                            top_k: int = None,
+                            top_p: float = None,
+                            temperature: float = 1.0,
+                            termination_tokens: list[int] = None,
+                            pad_token_id: int = 0
+                            ):
             
-            cur_pos = 0
+            batch_size = len(prompt_tokens_list)
             
-            if min_prompt_len > 0:
-                initial_input = tokens[:, :min_prompt_len]
-                
-                logits = self.infer_with_cache(initial_input, cur_pos=0, seq_len=min_prompt_len, max_batch=batch_size)
-                
-                next_token_logits = logits[:, -1, :]
-                
-                cur_pos = min_prompt_len
+            prompt_lens = torch.tensor([len(t) for t in prompt_tokens_list], device=self.args.device)
+            max_prompt_len = prompt_lens.max().item()
+            min_prompt_len = prompt_lens.min().item()
+            n_chunked_prefill_steps = ceil(min_prompt_len / self.args.window_size)
+            
+            total_len = min(self.args.context_window, max_prompt_len + max_new_tokens)
+            
+            tokens = torch.full((batch_size, total_len), pad_token_id, dtype=torch.long, device=self.args.device)
+            
+            for k, t in enumerate(prompt_tokens_list):
+                tokens[k, :len(t)] = torch.tensor(t, dtype=torch.long, device=self.args.device)
 
-            while cur_pos < total_len:
+            finished = torch.zeros(batch_size, dtype=torch.bool, device=self.args.device)
+            non_finished_ids = torch.arange(batch_size, device=self.args.device)
+            
+            with torch.inference_mode():
                 
-                next_token_logits = next_token_logits / temperature
+                cur_pos = 0
 
-                if top_k is not None:
-                    v, i = torch.topk(next_token_logits, top_k)
-                    log_probs = torch.full_like(next_token_logits, float('-inf'))
-                    log_probs.scatter_(1, i, torch.nn.functional.log_softmax(v, dim=-1))
-                    probs = torch.exp(log_probs)
+                for _ in range(n_chunked_prefill_steps):
 
-                elif top_p is not None:
-                    sorted_logits, sorted_indices = torch.sort(next_token_logits, descending=True)
-                    cumulative_probs = torch.cumsum(torch.nn.functional.softmax(sorted_logits, dim=-1), dim=-1)
+                    chunk = tokens[:, cur_pos:min(cur_pos + self.args.window_size, min_prompt_len)]
+                    logits = self.infer_with_cache(chunk, cur_pos=cur_pos, max_batch=batch_size, chunked_prefill=True)
+                    next_token_logits = logits[:, -1, :]
+                    cur_pos += chunk.shape[1]
 
-                    sorted_indices_to_remove = cumulative_probs > top_p
-                    sorted_indices_to_remove[:, 1:] = sorted_indices_to_remove[:, :-1].clone()
-                    sorted_indices_to_remove[:, 0] = 0
+                while cur_pos < total_len: # single token generation loop
                     
-                    mask = torch.zeros_like(next_token_logits, dtype=torch.bool).scatter_(1, sorted_indices, sorted_indices_to_remove)
-                    next_token_logits[mask] = float('-inf')
-                    probs = torch.nn.functional.softmax(next_token_logits, dim=-1)
+                    next_token_logits = next_token_logits / temperature
 
-                else: # Greedy
-                    if temperature == 1.0 and top_k is None and top_p is None:
-                        probs = None
-                    else:
+                    if top_k is not None:
+                        v, i = torch.topk(next_token_logits, top_k)
+                        probs = torch.full_like(next_token_logits, 0)
+                        probs.scatter_(1, i, torch.nn.functional.softmax(v, dim=-1))
+
+                    elif top_p is not None:
+                        sorted_logits, sorted_indices = torch.sort(next_token_logits, descending=True)
+                        cumulative_probs = torch.cumsum(torch.nn.functional.softmax(sorted_logits, dim=-1), dim=-1)
+
+                        sorted_indices_to_remove = cumulative_probs > top_p
+                        sorted_indices_to_remove[:, 1:] = sorted_indices_to_remove[:, :-1].clone()
+                        sorted_indices_to_remove[:, 0] = 0
+                        
+                        mask = torch.zeros_like(next_token_logits, dtype=torch.bool).scatter_(1, sorted_indices, sorted_indices_to_remove)
+                        next_token_logits[mask] = float('-inf')
                         probs = torch.nn.functional.softmax(next_token_logits, dim=-1)
 
-                if probs is not None:
-                    next_token_sample = torch.multinomial(probs, num_samples=1).squeeze(1)
-                else:
-                    next_token_sample = torch.argmax(next_token_logits, dim=-1)
+                    else: # Greedy
+                        max_arg = torch.argmax(next_token_logits, dim=-1) # (b,)
+                        probs = torch.zeros_like(next_token_logits)
+                        probs[range(probs.size(0)), max_arg] = 1.0
 
+                    next_token_sample = torch.multinomial(probs, num_samples=1).squeeze(1) # (b,1) -> (b,)
 
-                is_prompt_phase = cur_pos < prompt_lens
-                safe_lookup_idx = torch.clamp(torch.tensor(cur_pos), max=total_len-1)
-                ground_truth = tokens[:, safe_lookup_idx]
+                    is_prompt_phase = cur_pos < prompt_lens[non_finished_ids] # (b,)
+                    ground_truth = tokens[non_finished_ids, cur_pos] # (b,)
 
-                next_token = torch.where(is_prompt_phase, ground_truth, next_token_sample)
+                    next_token = torch.where(is_prompt_phase, ground_truth, next_token_sample) # (b,)
 
-                if cur_pos < total_len:
-                    tokens[:, cur_pos] = next_token
+                    tokens[non_finished_ids, cur_pos] = next_token
 
-                if termination_tokens is not None:
-                    active_generation_mask = ~is_prompt_phase
-                    for t in termination_tokens:
-                        has_terminated = (next_token == t) & active_generation_mask
+                    if termination_tokens is not None:
+                        active_generation_mask = ~is_prompt_phase
+                        has_terminated = torch.isin(next_token, torch.tensor(termination_tokens, device=next_token.device, dtype=next_token.dtype)) & active_generation_mask
                         finished = finished | has_terminated
-                
-                if finished.all() and cur_pos >= max_prompt_len:
-                    break
-
-                if cur_pos == total_len - 1:
-                    break
+                        non_finished_ids = non_finished_ids[~has_terminated]
                     
-                input_token = next_token.unsqueeze(1)
-                
-                logits = self.infer_with_cache(input_token, cur_pos=cur_pos, seq_len=1, max_batch=batch_size)
-                next_token_logits = logits[:, -1, :]
-                
-                cur_pos += 1
+                    if finished.all():
+                        break
+                    
+                    if termination_tokens is not None and finished.any():
+                        input_token = next_token[~finished].unsqueeze(1) # add seq dim (b, 1)
+                    
+                    logits = self.infer_with_cache(input_token, cur_pos=cur_pos, non_finished_ids=non_finished_ids)
+                    next_token_logits = logits[:, -1, :]
+                    
+                    cur_pos += 1
 
-        return tokens
+            return tokens

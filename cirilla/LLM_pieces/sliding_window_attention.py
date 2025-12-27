@@ -14,6 +14,9 @@ def sliding_window_causal(b, h, q_idx, kv_idx):
     window_mask = q_idx - kv_idx <= SLIDING_WINDOW
     return causal_mask & window_mask
 
+def full_attention(b, h, q_idx, kv_idx):
+    return True
+
 def create_static_block_mask(sliding_window_causal, q_len, kv_len, device='cuda', window_size=512):
     global SLIDING_WINDOW
     SLIDING_WINDOW = window_size
@@ -104,10 +107,10 @@ class SlidingWindowAttention(nn.Module):
         out = out.transpose(1,2).contiguous().view(batch_size, seq_len, dim) # (b, seq, dim)
         return self.wo(out) #(b, seq, dim)
     
-    @torch.no_grad
-    def forward_with_cache(self, x: torch.Tensor, cur_pos:int, seq_len:int=1, max_batch:int=1):
+    @torch.inference_mode
+    def forward_with_cache(self, x: torch.Tensor, cur_pos:int, max_batch:int=1, chunked_prefill:bool=False, non_finished_ids:torch.Tensor=None):
 
-        batch_size, seq_len, dim = x.shape # check if needed seq len
+        batch_size, seq_len, dim = x.shape
 
         if not hasattr(self, 'k_cache'):
             self.k_cache = torch.zeros(max_batch,
@@ -123,6 +126,9 @@ class SlidingWindowAttention(nn.Module):
                                        self.head_dim,
                                        device=self.args.device,
                                        dtype=x.dtype)
+            
+        if non_finished_ids is None:
+            non_finished_ids = torch.arange(self.k_cache.size(0), device=x.device)
         
         x = self.layer_norm(x)
 
@@ -148,20 +154,45 @@ class SlidingWindowAttention(nn.Module):
         xq = xq_rot.flatten(-2)
         xk = xk_rot.flatten(-2)
 
-        self.k_cache[:batch_size, cur_pos:cur_pos+seq_len, :, :] = xk
-        self.v_cache[:batch_size, cur_pos:cur_pos+seq_len, :, :] = xv
+        self.k_cache[non_finished_ids, cur_pos:cur_pos+seq_len, :, :] = xk
+        self.v_cache[non_finished_ids, cur_pos:cur_pos+seq_len, :, :] = xv
 
-        xk = self.k_cache[:batch_size, :cur_pos+seq_len, :, :]
-        xv = self.v_cache[:batch_size, :cur_pos+seq_len, :, :]
+        window_end = cur_pos + seq_len
+
+        if chunked_prefill:
+            window_start = max(0, window_end - self.window_size - seq_len)
+            xk = self.k_cache[non_finished_ids, window_start:window_end] # chunked prefill uses an overlapping window atten~(window, 2*window)
+            xv = self.v_cache[non_finished_ids, window_start:window_end]
+
+        else:
+            window_start = max(0, window_end - self.window_size)
+            xk = self.k_cache[non_finished_ids, window_start:window_end] # rolling buffer cache
+            xv = self.v_cache[non_finished_ids, window_start:window_end]
 
         # (b, seq, h_q, head_dim) -> (b, h_q, seq, head_dim)
         xq = xq.transpose(1,2)
         xk = xk.transpose(1,2)
         xv = xv.transpose(1,2)
 
-        mask = create_dynamic_block_mask(sliding_window_causal,
+        if not chunked_prefill:
+            attention_mask = full_attention
+        
+        elif chunked_prefill and xk.size(2) <= self.window_size:
+            attention_mask = sliding_window_causal
+
+        elif chunked_prefill and xk.size(2) > self.window_size:
+            
+            def offset_sliding_window_causal(b, h, q_idx, kv_idx):
+                q_idx += seq_len
+                causal_mask = q_idx >= kv_idx
+                window_mask = q_idx - kv_idx <= SLIDING_WINDOW
+                return causal_mask & window_mask
+
+            attention_mask = offset_sliding_window_causal
+
+        mask = create_dynamic_block_mask(attention_mask,
                                          q_len=seq_len,
-                                         kv_len=cur_pos+seq_len,
+                                         kv_len=xk.size(2),
                                          device=xq.device,
                                          window_size=self.window_size)
 
