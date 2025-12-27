@@ -1,9 +1,4 @@
-from cirilla.Cirilla_model import HybridDecoder, HybridDecoderArgs
+from cirilla.Cirilla_model import HybridCirilla, HybridArgs
 
-model = HybridDecoder(HybridDecoderArgs(
-                    n_layers=5,
-                    layer_pattern='AAAAA',
-                    num_experts=4,
-                    k=2))
-
-print(model.n_params)
+model = HybridCirilla(HybridArgs(n_layers=5, layer_pattern='5M'))
+print(model.n_params / 1e6, "M")

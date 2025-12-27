@@ -58,10 +58,14 @@ try:
                         HybridDecoder,
                         HybridDecoderArgs
                         )
+    
+    from .hybrid_model import HybridCirilla, HybridArgs
 
     __all__ += [
         "HybridDecoder",
-        "HybridDecoderArgs"
+        "HybridDecoderArgs",
+        "HybridCirilla",
+        "HybridArgs"
     ]
 except ImportError:
     pass
