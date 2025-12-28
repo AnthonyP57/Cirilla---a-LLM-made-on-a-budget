@@ -4,6 +4,7 @@ from cirilla.Cirilla_model import Cirilla, Args, load_balancing_loss, get_optims
 from cirilla.Cirilla_model import CirillaTrainer, TrainingArgs, CirillaTokenizer, JSONLDataset
 from types import MethodType
 
+
 hf_repo = 'AnthonyPa57/Cirilla-0.3B-4E'
 
 model = Cirilla(Args(

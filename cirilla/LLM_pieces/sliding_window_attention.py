@@ -114,18 +114,18 @@ class SlidingWindowAttention(nn.Module):
 
         if not hasattr(self, 'k_cache'):
             self.k_cache = torch.zeros(max_batch,
-                                       self.args.context_window,
-                                       self.n_kv_heads,
-                                       self.head_dim,
-                                       device=self.args.device,
-                                       dtype=x.dtype)
+                                        self.args.context_window,
+                                        self.n_kv_heads,
+                                        self.head_dim,
+                                        device=self.args.device,
+                                        dtype=x.dtype)
             
             self.v_cache = torch.zeros(max_batch,
-                                       self.args.context_window,
-                                       self.n_kv_heads,
-                                       self.head_dim,
-                                       device=self.args.device,
-                                       dtype=x.dtype)
+                                        self.args.context_window,
+                                        self.n_kv_heads,
+                                        self.head_dim,
+                                        device=self.args.device,
+                                        dtype=x.dtype)
             
         if non_finished_ids is None:
             non_finished_ids = torch.arange(self.k_cache.size(0), device=x.device)
@@ -191,15 +191,15 @@ class SlidingWindowAttention(nn.Module):
             attention_mask = offset_sliding_window_causal
 
         mask = create_dynamic_block_mask(attention_mask,
-                                         q_len=seq_len,
-                                         kv_len=xk.size(2),
-                                         device=xq.device,
-                                         window_size=self.window_size)
+                                        q_len=seq_len,
+                                        kv_len=xk.size(2),
+                                        device=xq.device,
+                                        window_size=self.window_size)
 
         out = flex_attention(xq, xk, xv,
-                             block_mask=mask,
-                             score_mod=self.score_mode,
-                             enable_gqa=\
+                            block_mask=mask,
+                            score_mod=self.score_mode,
+                            enable_gqa=\
                                 self.n_heads_q != self.n_kv_heads
                             )
 

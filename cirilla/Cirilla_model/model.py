@@ -120,15 +120,15 @@ class Cirilla(
         return next_token
     
     def generate_naive(self, x:torch.Tensor,
-                       max_new_tokens:int=1024,
-                       top_k:int=None,
-                       top_p:float=None,
-                       n_beams:int=None,
-                       temperature:float=1.0,
-                       termination_tokens:list[int]=None
-                       ):
+                        max_new_tokens:int=1024,
+                        top_k:int=None,
+                        top_p:float=None,
+                        n_beams:int=None,
+                        temperature:float=1.0,
+                        termination_tokens:list[int]=None
+                        ):
 
-        if top_k is None and top_p is None and n_beams is None and temperature == 1.0: # pure greedy
+        if top_k is None and top_p is None and n_beams is None: # pure greedy
             for _ in range(max_new_tokens):
                 next_token = self._greedy_next_token(x)
                 if termination_tokens is not None and next_token.item() in termination_tokens:
@@ -200,9 +200,9 @@ class Cirilla(
                             token_prob = next_tokens_probs[i]
 
                             _new_beams.append([torch.cat([beam[0], token], dim=1),
-                                               beam[1] + token_prob.item(),
-                                               beam[2] or (termination_tokens is not None and token.item() in termination_tokens)
-                                               ])
+                                                beam[1] + token_prob.item(),
+                                                beam[2] or (termination_tokens is not None and token.item() in termination_tokens)
+                                                ])
 
                     _beams = _new_beams
                 
@@ -292,8 +292,8 @@ class Cirilla(
                     if finished.all():
                         break
                     
-                    if termination_tokens is not None and finished.any():
-                        input_token = next_token[~finished].unsqueeze(1) # add seq dim (b, 1)
+                    if termination_tokens is not None and has_terminated.any():
+                        input_token = next_token[~has_terminated].unsqueeze(1) # add seq dim (b, 1)
                     
                     logits = self.infer_with_cache(input_token, cur_pos=cur_pos, non_finished_ids=non_finished_ids)
                     next_token_logits = logits[:, -1, :]

@@ -554,6 +554,9 @@ dependencies = [
 ]
 
 [package.optional-dependencies]
+mamba = [
+    { name = "mamba-ssm", extra = ["causal-conv1d"] },
+]
 megablocks = [
     { name = "megablocks", extra = ["all"] },
 ]
@@ -570,6 +573,7 @@ requires-dist = [
     { name = "huggingface-hub", specifier = ">=0.33.4" },
     { name = "kernels", specifier = ">=0.8.0" },
     { name = "mamba-ssm", extras = ["causal-conv1d"], specifier = ">=2.2.6.post3" },
+    { name = "mamba-ssm", extras = ["causal-conv1d"], marker = "extra == 'mamba'", specifier = ">=2.2.6.post3" },
     { name = "megablocks", extras = ["all"], marker = "extra == 'megablocks'", specifier = ">=0.10.0" },
     { name = "ollama", specifier = ">=0.5.3" },
     { name = "openai", specifier = ">=1.90.0" },
@@ -591,7 +595,7 @@ requires-dist = [
     { name = "transformers", specifier = ">=4.53.2" },
     { name = "vllm", specifier = ">=0.9.2" },
 ]
-provides-extras = ["megablocks"]
+provides-extras = ["megablocks", "mamba"]
 
 [[package]]
 name = "click"
