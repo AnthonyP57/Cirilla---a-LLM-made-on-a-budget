@@ -207,4 +207,5 @@ class SlidingWindowAttention(nn.Module):
         return self.wo(out) #(b, seq, dim)
     
     def _clear_cache(self):
-        del self.k_cache, self.v_cache
+        if hasattr(self, 'k_cache'):
+            del self.k_cache, self.v_cache

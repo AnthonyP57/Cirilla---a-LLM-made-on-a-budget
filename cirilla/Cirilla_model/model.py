@@ -132,6 +132,7 @@ class Cirilla(
             for _ in range(max_new_tokens):
                 next_token = self._greedy_next_token(x)
                 if termination_tokens is not None and next_token.item() in termination_tokens:
+                    x = torch.cat((x, next_token), dim=1) # include termination token
                     break
                 x = torch.cat((x, next_token), dim=1)
             return x
@@ -197,7 +198,7 @@ class Cirilla(
                         for i in range(next_tokens.size(1)):
 
                             token = next_tokens[0, i].unsqueeze(0).unsqueeze(0)
-                            token_prob = next_tokens_probs[i]
+                            token_prob = next_tokens_probs[0, i]
 
                             _new_beams.append([torch.cat([beam[0], token], dim=1),
                                                 beam[1] + token_prob.item(),
@@ -300,7 +301,7 @@ class Cirilla(
                     
                     cur_pos += 1
 
-            return tokens[:, :cur_pos]
+            return tokens[:, :cur_pos+1]
     
     def clear_cache(self):
         for att in self.decoder.attentions:

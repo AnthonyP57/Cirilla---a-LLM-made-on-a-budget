@@ -15,18 +15,18 @@ prompts = [
 ]
 
 for p in prompts:
-    x = tokenizer.apply_chat_template([{"role": "user", "content": p}],
-                                    padding='do_not_pad', add_generation_prompt=True)
-    out = model.generate_kv_cache([x], termination_tokens=[tokenizer.convert_tokens_to_ids('<eos>'), tokenizer.convert_tokens_to_ids('<|user|>')])
     # x = tokenizer.apply_chat_template([{"role": "user", "content": p}],
-    #                                 return_tensors='pt', padding='do_not_pad', add_generation_prompt=True)
-    # out = model.generate_naive(x.to(model.args.device), termination_tokens=[tokenizer.convert_tokens_to_ids('<eos>'), tokenizer.convert_tokens_to_ids('<|user|>')])
+    #                                 padding='do_not_pad', add_generation_prompt=True)
+    # out = model.generate_kv_cache([x], termination_tokens=[tokenizer.convert_tokens_to_ids('<eos>'), tokenizer.convert_tokens_to_ids('<|user|>')])
+    x = tokenizer.apply_chat_template([{"role": "user", "content": p}],
+                                    return_tensors='pt', padding='do_not_pad', add_generation_prompt=True)
+    out = model.generate_naive(x.to(model.args.device), top_k=3, n_beams=3, termination_tokens=[tokenizer.convert_tokens_to_ids('<eos>'), tokenizer.convert_tokens_to_ids('<|user|>')])
     print(tokenizer.decode(out[0]))
-
-model.clear_cache()
 
 batch_prompts = [[{"role": "user", "content": p}] for p in prompts]
 x = tokenizer.apply_chat_template(batch_prompts, padding='do_not_pad', add_generation_prompt=True)
 out = model.generate_kv_cache(x, termination_tokens=[tokenizer.convert_tokens_to_ids('<eos>'), tokenizer.convert_tokens_to_ids('<|user|>')])
 for o in out:
     print(tokenizer.decode(o).replace('<pad>', ''))
+
+model.clear_cache()
