@@ -437,6 +437,7 @@ class CirillaTrainer:
         return partial(self.args.optim, **optim_kwargs, lr=self.args.lr)
     
     def _fuse_optim(self):
+        print('fusing optimizers...')
 
         if not self.args.use_muon_optim:
 

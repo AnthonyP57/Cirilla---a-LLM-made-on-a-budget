@@ -217,7 +217,7 @@ class Cirilla(
                             top_p: float = None,
                             temperature: float = 1.0,
                             termination_tokens: list[int] = None,
-                            pad_token_id: int = 0
+                            pad_token_id: int = 1
                             ):
             
             batch_size = len(prompt_tokens_list)
@@ -234,7 +234,6 @@ class Cirilla(
             for k, t in enumerate(prompt_tokens_list):
                 tokens[k, :len(t)] = torch.tensor(t, dtype=torch.long, device=self.args.device)
 
-            finished = torch.zeros(batch_size, dtype=torch.bool, device=self.args.device)
             non_finished_ids = torch.arange(batch_size, device=self.args.device)
             
             with torch.inference_mode():
@@ -286,18 +285,23 @@ class Cirilla(
                     if termination_tokens is not None:
                         active_generation_mask = ~is_prompt_phase
                         has_terminated = torch.isin(next_token, torch.tensor(termination_tokens, device=next_token.device, dtype=next_token.dtype)) & active_generation_mask
-                        finished = finished | has_terminated
                         non_finished_ids = non_finished_ids[~has_terminated]
                     
-                    if finished.all():
+                    if non_finished_ids.size(0) == 0:
                         break
                     
                     if termination_tokens is not None and has_terminated.any():
                         input_token = next_token[~has_terminated].unsqueeze(1) # add seq dim (b, 1)
-                    
+                    else:
+                        input_token = next_token.unsqueeze(1)
+
                     logits = self.infer_with_cache(input_token, cur_pos=cur_pos, non_finished_ids=non_finished_ids)
                     next_token_logits = logits[:, -1, :]
                     
                     cur_pos += 1
 
-            return tokens
+            return tokens[:, :cur_pos]
+    
+    def clear_cache(self):
+        for att in self.decoder.attentions:
+            att._clear_cache()

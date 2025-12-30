@@ -7,18 +7,21 @@ import time
 from safetensors.torch import load_file
 from huggingface_hub import PyTorchModelHubMixin
 from ..LLM_pieces import get_activation
+from cirilla.LLM_pieces.sliding_window_attention import create_dynamic_block_mask
 
 class CirillaBaseModel(PyTorchModelHubMixin):
     def __init__(self):
         pass
     
-    def pull_model_from_hub(self, hf_repo_id:str):
+    def pull_model_from_hub(self, hf_repo_id:str, inference_mode:bool=False):
         model_args = self.args
         pulled_args = get_args_from_hub(hf_repo_id, type(self.args))
 
         if model_args != pulled_args:
             print(f"Current model args don't correspond to the HF model's args.\nCurrent args:\n{model_args}\nThe model will use the HF args:\n{pulled_args}")
             self.args = pulled_args
+            if inference_mode:
+                self.args.torch_compile = False
             self._prepare_model()
 
         file_path = hf_hub_download(
@@ -30,7 +33,24 @@ class CirillaBaseModel(PyTorchModelHubMixin):
         if "output.weight" not in loaded:
             loaded['output.weight'] = loaded["emb.embeddings.weight"]
 
-        self.load_state_dict(loaded)
+        if inference_mode:
+            new_state_dict = {}
+            for key, value in loaded.items():
+                if "_orig_mod." in key:
+                    new_key = key.replace("_orig_mod.", "")
+                    new_state_dict[new_key] = value
+                else:
+                    new_state_dict[key] = value
+
+            if hasattr(self, 'decoder'):
+                for att in self.decoder.attentions:
+                    att.static_mask = False
+                    att.mask = create_dynamic_block_mask
+
+            self.load_state_dict(new_state_dict)
+
+        else:
+            self.load_state_dict(loaded)
 
     @staticmethod
     def mean_pooling(out, attention_mask):

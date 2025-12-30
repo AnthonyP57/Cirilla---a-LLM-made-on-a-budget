@@ -15,7 +15,7 @@ def sliding_window_causal(b, h, q_idx, kv_idx):
     return causal_mask & window_mask
 
 def full_attention(b, h, q_idx, kv_idx):
-    return True
+    return torch.tensor(True, device=q_idx.device)
 
 def create_static_block_mask(sliding_window_causal, q_len, kv_len, device='cuda', window_size=512):
     global SLIDING_WINDOW
@@ -107,7 +107,7 @@ class SlidingWindowAttention(nn.Module):
         out = out.transpose(1,2).contiguous().view(batch_size, seq_len, dim) # (b, seq, dim)
         return self.wo(out) #(b, seq, dim)
     
-    @torch.inference_mode
+    @torch.inference_mode()
     def forward_with_cache(self, x: torch.Tensor, cur_pos:int, max_batch:int=1, chunked_prefill:bool=False, non_finished_ids:torch.Tensor=None):
 
         batch_size, seq_len, dim = x.shape
@@ -205,3 +205,6 @@ class SlidingWindowAttention(nn.Module):
 
         out = out.transpose(1,2).contiguous().view(batch_size, seq_len, dim) # (b, seq, dim)
         return self.wo(out) #(b, seq, dim)
+    
+    def _clear_cache(self):
+        del self.k_cache, self.v_cache
