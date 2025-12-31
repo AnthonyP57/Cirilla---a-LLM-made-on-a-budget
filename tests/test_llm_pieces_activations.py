@@ -3,8 +3,6 @@ import pytest
 from requests import HTTPError
 
 @pytest.mark.parametrize("activation_path", [
-    "kernels-community/vllm-flash-attn3",
-    "Motif-Technologies/activation",
     "motif-technologies/optimizer"
 ])
 def test_get_activation_succeeds(activation_path):

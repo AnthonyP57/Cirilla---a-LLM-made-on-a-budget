@@ -1,5 +1,10 @@
-from cirilla.LLM_pieces import SMoE, MegablockdMoE, MegablockMoE
-from cirilla.LLM_pieces.SMoE import MegablockArgs, SMoEArgs, SwiGLUArgs, SwiGLU
+try:
+    from cirilla.LLM_pieces import SMoE, MegablockdMoE, MegablockMoE
+    from cirilla.LLM_pieces.SMoE import MegablockArgs
+except ImportError:
+    test_megablocks = False
+
+from cirilla.LLM_pieces.SMoE import SwiGLUArgs, SwiGLU, SMoEArgs
 import torch
 
 def test_expert():
@@ -43,47 +48,48 @@ def test_pytorch_smoe():
             if p.requires_grad and p.grad is None:
                 print(f"Parameter {name} has no gradient.")
         raise AssertionError("Not all parameters have gradients after initialization.")
-    
-def test_megablock_moe():
-    megablock_args = MegablockArgs(num_experts=4, k=2, dim=128, d_ff=256, device='cuda')
-    model = MegablockMoE(megablock_args).to('cuda')
 
-    x = torch.randn(4, 10, megablock_args.dim, device='cuda', dtype=torch.bfloat16)
-    out = model(x)
-    assert isinstance(out, tuple)
-    assert isinstance(out[0], torch.Tensor)
+if test_megablocks:
+    def test_megablock_moe():
+        megablock_args = MegablockArgs(num_experts=4, k=2, dim=128, d_ff=256, device='cuda')
+        model = MegablockMoE(megablock_args).to('cuda')
 
-    out = out[0]
-    assert out.shape == (4, 10, megablock_args.dim)
+        x = torch.randn(4, 10, megablock_args.dim, device='cuda', dtype=torch.bfloat16)
+        out = model(x)
+        assert isinstance(out, tuple)
+        assert isinstance(out[0], torch.Tensor)
 
-    loss = out.sum()
-    loss.backward()
+        out = out[0]
+        assert out.shape == (4, 10, megablock_args.dim)
 
-    grads_ok = all(p.grad is not None for n, p in model.named_parameters() if p.requires_grad if n != "moe.experts.bias")
-    if not grads_ok:
-        for name, p in model.named_parameters():
-            if p.requires_grad and p.grad is None:
-                print(f"Parameter {name} has no gradient.")
-        raise AssertionError("Not all parameters have gradients after initialization.")
+        loss = out.sum()
+        loss.backward()
 
-def test_megablock_dmoe():
-    megablock_args = MegablockArgs(num_experts=4, k=2, dim=128, d_ff=256, device='cuda')
-    model = MegablockdMoE(megablock_args).to('cuda')
+        grads_ok = all(p.grad is not None for n, p in model.named_parameters() if p.requires_grad if n != "moe.experts.bias")
+        if not grads_ok:
+            for name, p in model.named_parameters():
+                if p.requires_grad and p.grad is None:
+                    print(f"Parameter {name} has no gradient.")
+            raise AssertionError("Not all parameters have gradients after initialization.")
 
-    x = torch.randn(4, 10, megablock_args.dim, device='cuda', dtype=torch.bfloat16)
-    out = model(x)
-    assert isinstance(out, tuple)
-    assert isinstance(out[0], torch.Tensor)
+    def test_megablock_dmoe():
+        megablock_args = MegablockArgs(num_experts=4, k=2, dim=128, d_ff=256, device='cuda')
+        model = MegablockdMoE(megablock_args).to('cuda')
 
-    out = out[0]
-    assert out.shape == (4, 10, megablock_args.dim)
+        x = torch.randn(4, 10, megablock_args.dim, device='cuda', dtype=torch.bfloat16)
+        out = model(x)
+        assert isinstance(out, tuple)
+        assert isinstance(out[0], torch.Tensor)
 
-    loss = out.sum()
-    loss.backward()
+        out = out[0]
+        assert out.shape == (4, 10, megablock_args.dim)
 
-    grads_ok = all(p.grad is not None for n, p in model.named_parameters() if p.requires_grad if n != "moe.experts.bias")
-    if not grads_ok:
-        for name, p in model.named_parameters():
-            if p.requires_grad and p.grad is None:
-                print(f"Parameter {name} has no gradient.")
-        raise AssertionError("Not all parameters have gradients after initialization.")
+        loss = out.sum()
+        loss.backward()
+
+        grads_ok = all(p.grad is not None for n, p in model.named_parameters() if p.requires_grad if n != "moe.experts.bias")
+        if not grads_ok:
+            for name, p in model.named_parameters():
+                if p.requires_grad and p.grad is None:
+                    print(f"Parameter {name} has no gradient.")
+            raise AssertionError("Not all parameters have gradients after initialization.")

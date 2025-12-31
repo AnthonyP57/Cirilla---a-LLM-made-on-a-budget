@@ -41,6 +41,7 @@ class SMoEArgs:
     dtype_str:str = 'bfloat16'
     device:str = 'cuda'
     d_ff:int=256 # hidden dim
+    layer_norm:str = "RMSNorm"
 
     @property
     def dtype(self):

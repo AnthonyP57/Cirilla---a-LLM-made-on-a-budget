@@ -15,6 +15,7 @@ class BertAttentionArgs:
     dim:int = 128*16
     soft_cap:Optional[int] = 20
     device:str = 'cuda:0'
+    layer_norm:str = "RMSNorm"
 
 class BertAttention(nn.Module):
     def __init__(self, args: BertAttentionArgs, rope:RoPE, score_mod:callable=None):
@@ -46,7 +47,6 @@ class BertAttention(nn.Module):
         self.hkv_dim = self.n_kv_heads * self.head_dim
 
         self.rope = rope
-        self.window_size = args.window_size
 
         self.attn = partial(flex_attention, score_mod=score_mod, enable_gqa= self.n_heads_q != self.n_kv_heads)
 

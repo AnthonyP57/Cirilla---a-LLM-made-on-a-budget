@@ -38,6 +38,7 @@ class AttentionArgs:
     static_mask:bool = True
     window_size:int = 512
     device:str = 'cuda:0'
+    layer_norm:str = "RMSNorm"
 
 class SlidingWindowAttention(nn.Module):
     def __init__(self, args: AttentionArgs, rope:RoPE, mask:Union[BlockMask, create_dynamic_block_mask]=None, score_mod:callable=None):
