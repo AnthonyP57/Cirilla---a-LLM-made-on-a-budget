@@ -2,9 +2,7 @@ import torch
 import torch.nn as nn
 from dataclasses import dataclass
 from megablocks import Arguments, MoE, dMoE
-from .activations import get_activation, Dynamic_erf, DynamicTanh
-
-activation = get_activation("kernels-community/activation")
+from .activations import Dynamic_erf, DynamicTanh
 
 @dataclass
 class MegablockArgs:
@@ -59,7 +57,7 @@ class MegablockMoE(nn.Module):
             self.args
         )
 
-    def forward(self, x: torch.Tensor):
+    def forward(self, x: torch.Tensor) -> torch.Tensor:
 
         x = self.layer_norm(x)
         # MegaBlocks expects (seq, batch, dim)
@@ -108,7 +106,7 @@ class MegablockdMoE(nn.Module):
             self.args
         )
 
-    def forward(self, x: torch.Tensor):
+    def forward(self, x: torch.Tensor) -> torch.Tensor:
 
         x = self.layer_norm(x)
         # MegaBlocks expects (seq, batch, dim)

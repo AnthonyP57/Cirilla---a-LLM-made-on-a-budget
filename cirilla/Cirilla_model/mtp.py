@@ -53,7 +53,7 @@ class CirillaMTP(
         token_args['n_layers'] = 1
         self.token_head_args = DecoderArgs(**token_args)
 
-        self.token_heads = [nn.Sequential(Decoder(self.token_head_args), nn.RMSNorm(self.args.dim)) for _ in range(self.args.n_token_heads)]
+        self.token_heads = [nn.Sequential(Decoder(self.token_head_args), type(self.layer_norm)(self.args.dim)) for _ in range(self.args.n_token_heads)]
         
         self.token_heads = nn.ModuleList(self.token_heads)
 
@@ -61,7 +61,7 @@ class CirillaMTP(
 
         self.to(self.args.device, dtype=self.args.dtype)
         
-    def get_z(self, x):
+    def get_z(self, x) -> torch.Tensor:
         
         x = self.emb(x)
 
@@ -79,14 +79,14 @@ class CirillaMTP(
         
             return x
         
-    def get_heads(self, idx, z):
+    def get_heads(self, idx, z) -> torch.Tensor:
         return self.output(self.token_heads[idx](z))
 
-    def forward(self, x):
+    def forward(self, x) -> list[torch.Tensor]:
         x = self.get_z(x)
         return [head for head in self.get_heads(x)]
 
-def mtp_training_step(self, data, pad_id):
+def mtp_training_step(self, data, pad_id) -> float:
     step_loss = 0.0
     n = 0
 
@@ -117,7 +117,7 @@ def mtp_training_step(self, data, pad_id):
     return step_loss / n
 
 @torch.inference_mode()
-def mtp_inference_step(self, data, pad_id):
+def mtp_inference_step(self, data, pad_id) -> float:
 
     x = data[0]
     y = data[1]

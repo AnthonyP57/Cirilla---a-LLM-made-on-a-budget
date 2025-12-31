@@ -2,9 +2,8 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 from dataclasses import dataclass
-from .activations import get_activation, Dynamic_erf, DynamicTanh
+from .activations import Dynamic_erf, DynamicTanh
 
-activation = get_activation("kernels-community/activation")
 
 @dataclass
 class SwiGLUArgs:
@@ -22,7 +21,6 @@ class SwiGLU(nn.Module):
         self.w1a = nn.Linear(args.dim, args.d_ff)
         self.w1b = nn.Linear(args.dim, args.d_ff)
         self.w2 = nn.Linear(args.d_ff, args.dim)
-
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
         a = self.w1a(x)

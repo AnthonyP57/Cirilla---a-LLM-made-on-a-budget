@@ -1,11 +1,13 @@
-from cirilla.Cirilla_model import Cirilla
+from cirilla.Cirilla_model import Cirilla, Args
 from cirilla.Cirilla_model import CirillaTokenizer
 
 hf_model_id = 'AnthonyPa57/Cirilla-0.3B-4E'
 
-model = Cirilla()
+# args = Args()
+# args.device = 'cpu'
+model = Cirilla()#args)
 
-model.pull_model_from_hub(hf_model_id, inference_mode=True)
+model.pull_model_from_hub(hf_model_id, inference_mode=True)#, map_device='cpu')
 tokenizer = CirillaTokenizer(hub_url=hf_model_id)
 
 prompts = [

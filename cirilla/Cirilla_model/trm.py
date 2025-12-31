@@ -1,7 +1,6 @@
 from dataclasses import dataclass
 import torch.nn as nn
 from .modules import select_torch_device, CirillaBaseModel
-import warnings
 import torch
 from contextlib import nullcontext
 from einops.layers.torch import Rearrange
@@ -27,10 +26,6 @@ class TRMArgs:
         if self.dtype_str == "fp8":
             return torch.bfloat16 # for initialization, then convert to FP8
         return getattr(torch, self.dtype_str)
-
-    def __post_init__(self):
-        if not torch.cuda.is_available():
-            warnings.warn("hf kernels only work on cuda")
 
 class CirillaTRM(
             nn.Module,
@@ -70,13 +65,13 @@ class CirillaTRM(
 
         self.to(self.args.device, dtype=self.args.dtype)
 
-    def get_init(self):
+    def get_init(self) -> tuple[torch.Tensor, torch.Tensor]:
         return self.y_hat_init, self.z_init
     
-    def get_halt(self, x, attention_mask=None):
+    def get_halt(self, x, attention_mask=None) -> torch.Tensor:
         return self.to_halt(self.mean_pooling(x, attention_mask))
     
-    def single_refinement_step(self, x, y_hat, z):
+    def single_refinement_step(self, x, y_hat, z) -> tuple[torch.Tensor, torch.Tensor]:
 
         for _ in range(self.args.n_latent_refinements):
 
@@ -85,7 +80,7 @@ class CirillaTRM(
         y_hat = self.network(y_hat + z)
         return y_hat, z
     
-    def refine(self, x, y_hat, z):
+    def refine(self, x, y_hat, z) -> tuple[torch.Tensor, torch.Tensor]:
 
         for step in range(self.args.n_total_refinements):
 
@@ -98,7 +93,7 @@ class CirillaTRM(
 
         return y_hat, z
 
-    def forward(self, x, y_hat, z, attention_mask=None):
+    def forward(self, x, y_hat, z, attention_mask=None) -> tuple[torch.Tensor, torch.Tensor, torch.Tensor, torch.Tensor]:
         
         x = self.emb(x)
 
@@ -111,7 +106,7 @@ class CirillaTRM(
         return pred, y_hat, z, haltp
     
     @torch.inference_mode()
-    def predict(self, x, attention_mask=None, halt_thresh=0.5, max_recurrent_step=16):
+    def predict(self, x, attention_mask=None, halt_thresh=0.5, max_recurrent_step=16) -> tuple[torch.Tensor, torch.Tensor]:
         
         y_hat, z = self.get_init()
 
@@ -151,7 +146,7 @@ class CirillaTRM(
 
         return preds, n_steps
 
-def trm_training_step(self, data, max_recurrent_step=16, halt_weight=0.5, halt_thresh=0.5, ema_model=None):
+def trm_training_step(self, data, max_recurrent_step=16, halt_weight=0.5, halt_thresh=0.5, ema_model=None) -> float:
 
     step_loss = 0
     n = 0
@@ -168,7 +163,7 @@ def trm_training_step(self, data, max_recurrent_step=16, halt_weight=0.5, halt_t
 
         loss = F.cross_entropy(pred.view(-1, self.model.args.vocab_size), x.view(-1))
 
-        all_correct = (pred.argmax(dim=-1) == x).all(dim=-1)
+        all_correct = (pred.argmax(dim=-1) == x).all(dim=-1) # here we just want to predict the x itself, this is a trivial task
 
         halt_loss = F.binary_cross_entropy_with_logits(haltp, all_correct.to(haltp.dtype))
 
@@ -199,7 +194,7 @@ def trm_training_step(self, data, max_recurrent_step=16, halt_weight=0.5, halt_t
     return step_loss / n
 
 @torch.inference_mode()
-def trm_inference_step(self, data, max_recurrent_step=16, halt_thresh=0.5):
+def trm_inference_step(self, data, max_recurrent_step=16, halt_thresh=0.5) -> float:
     
     x = data[0]
     mask = data[1]

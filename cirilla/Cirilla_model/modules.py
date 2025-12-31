@@ -13,7 +13,7 @@ class CirillaBaseModel(PyTorchModelHubMixin):
     def __init__(self):
         pass
     
-    def pull_model_from_hub(self, hf_repo_id:str, inference_mode:bool=False):
+    def pull_model_from_hub(self, hf_repo_id:str, inference_mode:bool=False, map_device:str=None):
         model_args = self.args
         pulled_args = get_args_from_hub(hf_repo_id, type(self.args))
 
@@ -22,6 +22,8 @@ class CirillaBaseModel(PyTorchModelHubMixin):
             self.args = pulled_args
             if inference_mode:
                 self.args.torch_compile = False
+            if map_device is not None:
+                self.args.device = map_device
             self._prepare_model()
 
         file_path = hf_hub_download(

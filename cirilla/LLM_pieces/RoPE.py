@@ -19,7 +19,7 @@ class RoPE(nn.Module):
         self.register_buffer("cos", cos, persistent=False)
         self.register_buffer("sin", sin, persistent=False)
 
-    def apply_rotary_embeddings(self, xq: torch.Tensor, xk: torch.Tensor):
+    def apply_rotary_embeddings(self, xq: torch.Tensor, xk: torch.Tensor) -> torch.Tensor:
         seq_len = xq.size(1)
 
         cos = self.cos[:, :seq_len, :, :]  # [1, seq_len, 1, head_dim/2]

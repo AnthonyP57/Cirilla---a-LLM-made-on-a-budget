@@ -9,22 +9,22 @@ from .activations import Dynamic_erf, DynamicTanh
 
 SLIDING_WINDOW = 512
 
-def sliding_window_causal(b, h, q_idx, kv_idx):
+def sliding_window_causal(b, h, q_idx, kv_idx) -> torch.Tensor:
     causal_mask = q_idx >= kv_idx
     window_mask = q_idx - kv_idx <= SLIDING_WINDOW
     return causal_mask & window_mask
 
-def full_attention(b, h, q_idx, kv_idx):
+def full_attention(b, h, q_idx, kv_idx) -> torch.Tensor:
     return torch.tensor(True, device=q_idx.device)
 
-def create_static_block_mask(sliding_window_causal, q_len, kv_len, device='cuda', window_size=512):
+def create_static_block_mask(sliding_window_causal, q_len, kv_len, device='cuda', window_size=512) -> BlockMask:
     global SLIDING_WINDOW
     SLIDING_WINDOW = window_size
     # B,H set to None means that the mask is broadcasted for those dimentions as it doesn't require any calculation anyway
     return create_block_mask(sliding_window_causal, B=None, H=None, Q_LEN=q_len, KV_LEN=kv_len, device=device)
 
 @lru_cache(maxsize=32)
-def create_dynamic_block_mask(sliding_window_causal, q_len=2048, kv_len=2048, device='cuda', window_size=512):
+def create_dynamic_block_mask(sliding_window_causal, q_len=2048, kv_len=2048, device='cuda', window_size=512) -> BlockMask:
     global SLIDING_WINDOW
     SLIDING_WINDOW = window_size
     # B,H set to None means that the mask is broadcasted for those dimentions as it doesn't require any calculation anyway
@@ -79,7 +79,7 @@ class SlidingWindowAttention(nn.Module):
                             score_mod=score_mod if score_mod is not None else None, enable_gqa= self.n_heads_q != self.n_kv_heads)\
                         if self.static_mask else None
 
-    def forward(self, x: torch.Tensor):
+    def forward(self, x: torch.Tensor) -> torch.Tensor:
         batch_size, seq_len, dim = x.shape
 
         x = self.layer_norm(x)
@@ -109,7 +109,7 @@ class SlidingWindowAttention(nn.Module):
         return self.wo(out) #(b, seq, dim)
     
     @torch.inference_mode()
-    def forward_with_cache(self, x: torch.Tensor, cur_pos:int, max_batch:int=1, chunked_prefill:bool=False, non_finished_ids:torch.Tensor=None):
+    def forward_with_cache(self, x: torch.Tensor, cur_pos:int, max_batch:int=1, chunked_prefill:bool=False, non_finished_ids:torch.Tensor=None) -> torch.Tensor:
 
         batch_size, seq_len, dim = x.shape
 
@@ -175,7 +175,7 @@ class SlidingWindowAttention(nn.Module):
         xk = xk.transpose(1,2)
         xv = xv.transpose(1,2)
 
-        if not chunked_prefill:
+        if not chunked_prefill: # the kv size is limited, so this is the same as sliding window causal mask
             attention_mask = full_attention
         
         elif chunked_prefill and xk.size(2) <= self.window_size:

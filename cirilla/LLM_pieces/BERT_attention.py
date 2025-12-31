@@ -50,7 +50,7 @@ class BertAttention(nn.Module):
 
         self.attn = partial(flex_attention, score_mod=score_mod, enable_gqa= self.n_heads_q != self.n_kv_heads)
 
-    def forward(self, x: torch.Tensor):
+    def forward(self, x: torch.Tensor) -> torch.Tensor:
         batch_size, seq_len, dim = x.shape
 
         x = self.layer_norm(x)
