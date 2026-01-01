@@ -66,7 +66,7 @@ class CirillaBERT(
 
         self.to(self.args.device, dtype=self.args.dtype)
         
-    def pred(self, x, attention_mask=None):
+    def pred(self, x, attention_mask=None) -> torch.Tensor:
         
         x = self.emb(x)
 
@@ -103,10 +103,10 @@ class CirillaBERT(
         
         return x
     
-    def forward(self, x, attention_mask=None):
+    def forward(self, x, attention_mask=None) -> torch.Tensor:
         return self.pred(x, attention_mask)
 
-def bert_training_step(self, data): # define a custom training step
+def bert_training_step(self, data) -> float: # define a custom training step
     torch.compiler.cudagraph_mark_step_begin()
 
     out = self.model.pred(data[0], data[1]) # tokens, mask
@@ -116,7 +116,7 @@ def bert_training_step(self, data): # define a custom training step
     return loss_item
 
 @torch.inference_mode()
-def bert_inference_step(self, data): # define a custom inference step
+def bert_inference_step(self, data) -> float: # define a custom inference step
     out = self.model.pred(data[0], data[1]) # tokens, mask
     loss = self.criterion(out, data[2])
     loss_item = loss.item()

@@ -68,7 +68,7 @@ class CMA(
 
         self.to(self.args.device, dtype=self.args.dtype)
 
-    def pred(self, texts, images, cls_image_token_index=None):
+    def pred(self, texts, images, cls_image_token_index=None) -> list[torch.Tensor]:
         texts = self.text_emb(texts)
         images = self.vision_emb(images)
         if cls_image_token_index is not None:

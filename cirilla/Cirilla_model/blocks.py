@@ -186,7 +186,7 @@ class Encoder(nn.Module):
 
         self.to(dtype=self.args.dtype)
         
-    def pred(self, x):
+    def pred(self, x) -> torch.Tensor:
         
         if self.args.output_moe_weights:
             moe_weights = []
@@ -207,7 +207,7 @@ class Encoder(nn.Module):
         
             return x
             
-    def forward(self, x):
+    def forward(self, x) -> torch.Tensor:
         return self.pred(x)
 
 
@@ -380,7 +380,7 @@ class Decoder(nn.Module):
 
         self.to(dtype=self.args.dtype)
         
-    def pred(self, x):
+    def pred(self, x) -> torch.Tensor:
         
         if self.args.output_moe_weights:
             moe_weights = []
@@ -401,7 +401,7 @@ class Decoder(nn.Module):
         
             return x
 
-    def forward(self, x):
+    def forward(self, x) -> torch.Tensor:
         return self.pred(x)
 
 
@@ -470,7 +470,7 @@ class PreNormResidual(nn.Module):
         self.norm = nn.LayerNorm(dim, bias = False)
         self.fn = fn
 
-    def forward(self, x):
+    def forward(self, x) -> torch.Tensor:
         return self.fn(self.norm(x)) + x
 
 class FeedForward(nn.Module):
@@ -495,7 +495,7 @@ class FeedForward(nn.Module):
         else:
             raise NotImplementedError
 
-    def forward(self, x):
+    def forward(self, x) -> torch.Tensor:
         x = self.net(x)
         return x
 
@@ -506,7 +506,7 @@ class PatchEmbed(nn.Module):
         self.proj = nn.Conv2d(in_ch, embed_dim, kernel_size=patch_size, stride=patch_size)
         self.norm = nn.LayerNorm(embed_dim)
 
-    def forward(self, x):
+    def forward(self, x) -> torch.Tensor:
         # x ~ (B, C, H, W)
         x = self.proj(x)  # (B, D, H/ps, W/ps)
         x = x.flatten(2).transpose(1, 2)  # (B, H/ps * W/ps, D)
@@ -532,7 +532,7 @@ class VisionEmbeddingModel(nn.Module):
         nn.init.trunc_normal_(pe, std=0.02)
         return pe
 
-    def forward(self, x):
+    def forward(self, x) -> torch.Tensor:
         # x ~ (B, C, H, W)
         tokens = self.patch_embed(x)  # (B, N, D)
 
@@ -547,7 +547,7 @@ class KeylessAttention(nn.Module):
         self.wi = nn.Linear(dim, 1, bias=False)
         self.wt = nn.Linear(dim, 1, bias=False)
 
-    def forward(self, cls_image, cls_text):
+    def forward(self, cls_image, cls_text) -> torch.Tensor:
         ei = self.wi(cls_image)
         et = self.wt(cls_text)
         lmb = F.sigmoid(ei - et)
@@ -565,5 +565,5 @@ class InputEmbeddings(nn.Module):
 
         self.embeddings = nn.Embedding(args.vocab_size, args.dim)
     
-    def forward(self, x):
+    def forward(self, x) -> torch.Tensor:
         return self.embeddings(x)

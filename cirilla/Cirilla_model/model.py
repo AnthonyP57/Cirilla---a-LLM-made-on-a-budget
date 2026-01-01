@@ -52,7 +52,7 @@ class Cirilla(
 
         self.to(self.args.device, dtype=self.args.dtype)
         
-    def pred(self, x):
+    def pred(self, x) -> torch.Tensor:
         
         x = self.emb(x)
 
@@ -72,11 +72,11 @@ class Cirilla(
         
             return x
 
-    def forward(self, x):
+    def forward(self, x) -> torch.Tensor:
         return self.pred(x)
     
     @torch.no_grad()
-    def infer_with_cache(self, x, cur_pos:int, max_batch:int=1, chunked_prefill:bool=False, non_finished_ids:torch.Tensor=None):
+    def infer_with_cache(self, x, cur_pos:int, max_batch:int=1, chunked_prefill:bool=False, non_finished_ids:torch.Tensor=None) -> torch.Tensor:
         
         x = self.emb(x)
 
@@ -105,7 +105,7 @@ class Cirilla(
             return x
 
     @torch.no_grad()
-    def infer(self, x):
+    def infer(self, x) -> torch.Tensor:
         if self.args.output_moe_weights:
             logits, moe_weights = self.pred(x)
             return logits
@@ -113,7 +113,7 @@ class Cirilla(
             logits = self.pred(x)
             return logits
     
-    def _greedy_next_token(self, x):
+    def _greedy_next_token(self, x) -> torch.Tensor:
         logits = self.infer(x)
         probs = torch.nn.functional.softmax(logits[:, -1, :], dim=-1)
         next_token = torch.argmax(probs, dim=-1).unsqueeze(-1)
@@ -126,7 +126,7 @@ class Cirilla(
                         n_beams:int=None,
                         temperature:float=1.0,
                         termination_tokens:list[int]=None
-                        ):
+                        ) -> torch.Tensor:
 
         if top_k is None and top_p is None and n_beams is None: # pure greedy
             for _ in range(max_new_tokens):
@@ -219,7 +219,7 @@ class Cirilla(
                             temperature: float = 1.0,
                             termination_tokens: list[int] = None,
                             pad_token_id: int = 1
-                            ):
+                            ) -> torch.Tensor:
             
             batch_size = len(prompt_tokens_list)
             
@@ -303,6 +303,6 @@ class Cirilla(
 
             return tokens[:, :cur_pos+1]
     
-    def clear_cache(self):
+    def clear_cache(self) -> None:
         for att in self.decoder.attentions:
             att._clear_cache()

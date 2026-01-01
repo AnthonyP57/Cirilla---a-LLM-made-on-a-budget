@@ -119,7 +119,7 @@ class JSONLDataset(IterableDataset, GenericDataset):
 
                                 if self.random_spelling_mistake_prob > 0. or self.random_missing_char_prob > 0.:
 
-                                    v =  self.tokenizer(self.sos_token + line['text'], return_tensors='pt', padding='do_not_pad',
+                                    v = self.tokenizer(self.sos_token + line['text'], return_tensors='pt', padding='do_not_pad',
                                                                     truncation=True, max_length=self.max_len+1)
                                     
                                     out_tokens = v['input_ids'].squeeze(0)
@@ -133,7 +133,7 @@ class JSONLDataset(IterableDataset, GenericDataset):
                                     
                                     line['text'] = self._apply_random_spelling_mistake(line['text'])
                                     
-                                    tokenized_data =  self.tokenizer(self.sos_token + line['text'], return_tensors='pt', padding='do_not_pad',
+                                    tokenized_data = self.tokenizer(self.sos_token + line['text'], return_tensors='pt', padding='do_not_pad',
                                                                     truncation=True, max_length=self.max_len+1)
                                     
                                     in_tokens = tokenized_data['input_ids'].squeeze(0)

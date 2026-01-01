@@ -194,7 +194,7 @@ class HybridDecoder(nn.Module):
 
         self.to(dtype=self.args.dtype)
         
-    def pred(self, x):
+    def pred(self, x) -> torch.Tensor:
         
         if self.args.output_moe_weights:
             moe_weights = []
@@ -215,5 +215,5 @@ class HybridDecoder(nn.Module):
         
             return x
 
-    def forward(self, x):
+    def forward(self, x) -> torch.Tensor:
         return self.pred(x)
