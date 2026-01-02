@@ -25,6 +25,7 @@ dependencies = [
     "rich>=14.1.0",
     "sentencepiece>=0.2.0",
     "span-marker>=1.7.0",
+    "textual>=6.12.0",
     "tokenizers>=0.21.2",
     "torch>=2.7.0",
     "torchao==0.13.0",
@@ -56,7 +57,7 @@ url = "https://download.pytorch.org/whl/cu128"
 explicit = true
 
 [tool.setuptools]
-packages = ["cirilla.Cirilla_model", "cirilla.Few_shot", "cirilla.LLM_pieces", "cirilla.synth_data", "attention-gym.attn_gym"]
+packages = ["cirilla.cli", "cirilla.Cirilla_model", "cirilla.Few_shot", "cirilla.LLM_pieces", "cirilla.synth_data", "attention-gym.attn_gym"]
 
 [build-system]
 requires = ["setuptools", "wheel"]
