@@ -4,7 +4,7 @@ from textual.app import App, ComposeResult
 from textual.screen import Screen
 from textual.containers import VerticalScroll, Horizontal, Container
 from textual.widgets import Input, Static, Markdown, Label, Button
-from theme import CSS
+from .theme import CSS
 from cirilla.Cirilla_model import Cirilla
 from cirilla.Cirilla_model import CirillaTokenizer
 from cirilla.Cirilla_model.modules import select_torch_device
@@ -71,6 +71,15 @@ class ChatScreen(Screen):
         self.model.pull_model_from_hub(self.hub_url, inference_mode=True, map_device=select_torch_device())
         self.tokenizer = CirillaTokenizer(hub_url=self.hub_url)
         self.termination_tokens = [self.tokenizer.convert_tokens_to_ids('<eos>'), self.tokenizer.convert_tokens_to_ids('<|user|>')]
+        self.history = []
+        self.generation_config = {
+                                'kv_cache':True,
+                                'top_p':0.05,
+                                'top_k':None,
+                                'temperature':0.7,
+                                'n_beams':9,
+                                'auto_clear':True
+                                }
         super().__init__()
 
     def compose(self) -> ComposeResult:
@@ -89,22 +98,102 @@ class ChatScreen(Screen):
         text = event.value.strip()
         if not text:
             return
+        
+        if text.startswith("/set"):
+            try:
+                parts = text.split(" ")
+                if len(parts) < 2 or "=" not in parts[1]:
+                    await self.app.bell()
+                    return
 
-        chat = self.query_one("#chat-container")
-        await chat.mount(Markdown(text, classes="user-msg"))
+                command_part = parts[1]
+                key, val = command_part.split("=")
 
-        event.input.value = ""
+                if key == 'kv_cache':
+                    self.generation_config['kv_cache'] = val.lower() == "true"
+                elif key == 'top_p':
+                    self.generation_config['top_p'] = float(val)
+                elif key == 'top_k':
+                    self.generation_config['top_k'] = int(val)
+                elif key == 'temperature':
+                    self.generation_config['temperature'] = float(val)
+                elif key == 'n_beams':
+                    self.generation_config['n_beams'] = int(val)
+                elif key == 'auto_clear':
+                    self.generation_config['auto_clear'] = val.lower() == "true"
+                else:
+                    await self.app.bell()
+                    return
+                
+                self.notify(f"Set {key} to {val}")
+                event.input.value = "" 
+                return
+            
+            except Exception:
+                await self.app.bell()
+                return
+            
+        elif text.startswith("/clear"):
+            self.history = []
+            self.model.clear_cache()
+            event.input.value = ""
+            self.notify("Chat history cleared.")
+            return
+        
+        else:
 
-        batch_prompts = [[{"role": "user", "content": text}]]
-        x = self.tokenizer.apply_chat_template(batch_prompts, padding='do_not_pad', add_generation_prompt=True)
-        out = self.model.generate_kv_cache(x, termination_tokens=self.termination_tokens)
+            chat = self.query_one("#chat-container")
+            await chat.mount(Markdown(text, classes="user-msg"))
 
-        text = self.tokenizer.decode(out[0]).replace('<pad>', '').replace(text, '').replace('<|user|>', '').replace('<|assistant|>', '')
+            if self.generation_config['auto_clear']:
+                self.history = []
 
-        await chat.mount(Static(self.model_name, classes="ai-label ai-msg"))
-        await chat.mount(Markdown(text, classes="ai-msg"))
+            self.history.append({
+                "role": "user",
+                "content": text})
 
-        chat.scroll_end(animate=True)
+            event.input.value = ""
+
+            if self.generation_config['kv_cache']:
+                batch_prompts = [self.history for _ in range(self.generation_config['n_beams'])]
+                x = self.tokenizer.apply_chat_template(batch_prompts, padding='do_not_pad', add_generation_prompt=True)
+                out = self.model.generate_kv_cache(x, termination_tokens=self.termination_tokens,
+                                                        top_k=self.generation_config['top_k'],
+                                                        top_p=self.generation_config['top_p'],
+                                                        temperature=self.generation_config['temperature'],
+                                                        sample_parallel=self.generation_config['n_beams'] > 1)
+                if self.generation_config['n_beams'] == 1:
+                    out = out[0]
+
+                input_length = len(x[0])
+
+            else:
+                x = self.tokenizer.apply_chat_template(self.history, padding='do_not_pad', add_generation_prompt=True, return_tensors='pt')
+                out = self.model.generate_naive(x.to(self.model.args.device),
+                                                termination_tokens=self.termination_tokens,
+                                                top_k=self.generation_config['top_k'],
+                                                top_p=self.generation_config['top_p'],
+                                                n_beams=self.generation_config['n_beams'],
+                                                temperature=self.generation_config['temperature'])[0]
+                input_length = x.shape[1]
+
+            text = self.tokenizer.decode(out[input_length:])\
+                                            .replace('<pad>', '')\
+                                            .replace('<|user|>', '')\
+                                            .replace('<|assistant|>', '')\
+                                            .replace('<eos>', '')\
+                                            .replace('<sos>', '')\
+                                            .replace('<unk>', '')\
+                                            .strip()
+            
+            self.history.append({
+                "role": "assistant",
+                "content": text})
+
+            await chat.mount(Static(self.model_name, classes="ai-label ai-msg"))
+            await chat.mount(Markdown(text, classes="ai-msg"))
+
+            chat.scroll_end(animate=True)
 
 class SimpleVibeApp(App):
     CSS = CSS

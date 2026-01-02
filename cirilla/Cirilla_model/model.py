@@ -131,10 +131,9 @@ class Cirilla(
         if top_k is None and top_p is None and n_beams is None: # pure greedy
             for _ in range(max_new_tokens):
                 next_token = self._greedy_next_token(x)
-                if termination_tokens is not None and next_token.item() in termination_tokens:
-                    x = torch.cat((x, next_token), dim=1) # include termination token
-                    break
                 x = torch.cat((x, next_token), dim=1)
+                if termination_tokens is not None and next_token.item() in termination_tokens:
+                    break
             return x
         
         else:
@@ -218,7 +217,8 @@ class Cirilla(
                             top_p: float = None,
                             temperature: float = 1.0,
                             termination_tokens: list[int] = None,
-                            pad_token_id: int = 1
+                            pad_token_id: int = 1,
+                            sample_parallel: bool = False
                             ) -> torch.Tensor:
             
             batch_size = len(prompt_tokens_list)
@@ -236,6 +236,9 @@ class Cirilla(
                 tokens[k, :len(t)] = torch.tensor(t, dtype=torch.long, device=self.args.device)
 
             non_finished_ids = torch.arange(batch_size, device=self.args.device)
+
+            if sample_parallel:
+                response_prob = torch.tensor([0.] * batch_size, device=self.args.device)
             
             with torch.inference_mode():
                 
@@ -283,6 +286,9 @@ class Cirilla(
 
                     tokens[non_finished_ids, cur_pos] = next_token
 
+                    if sample_parallel and ~is_prompt_phase.any():
+                        response_prob[non_finished_ids] += torch.nn.functional.log_softmax(next_token_logits, dim=-1)[[i for i in range(next_token_logits.size(0))], next_token_sample]
+
                     if termination_tokens is not None:
                         active_generation_mask = ~is_prompt_phase
                         has_terminated = torch.isin(next_token, torch.tensor(termination_tokens, device=next_token.device, dtype=next_token.dtype)) & active_generation_mask
@@ -301,7 +307,7 @@ class Cirilla(
                     
                     cur_pos += 1
 
-            return tokens[:, :cur_pos+1]
+            return tokens[:, :cur_pos+1] if not sample_parallel else tokens[response_prob.argmax().item(), :cur_pos+1]
     
     def clear_cache(self) -> None:
         for att in self.decoder.attentions:

@@ -32,3 +32,8 @@ for o in out:
     print(tokenizer.decode(o).replace('<pad>', ''))
 
 model.clear_cache()
+
+batch_prompts = [[{"role": "user", "content": "Who is Geralt?"}] for _ in range(3)]
+x = tokenizer.apply_chat_template(batch_prompts, padding='do_not_pad', add_generation_prompt=True)
+out = model.generate_kv_cache(x, termination_tokens=[tokenizer.convert_tokens_to_ids('<eos>'), tokenizer.convert_tokens_to_ids('<|user|>')], beam_search=True, top_p=0.3)
+print(tokenizer.decode(out).replace('<pad>', ''))
