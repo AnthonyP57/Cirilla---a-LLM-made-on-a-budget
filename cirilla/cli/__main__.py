@@ -147,6 +147,7 @@ class ChatScreen(Screen):
 
             if self.generation_config['auto_clear']:
                 self.history = []
+                self.model.clear_cache()
 
             self.history.append({
                 "role": "user",
