@@ -62,16 +62,18 @@ def cirilla_grad_acc(self, data):
         logits, moe_weight_list = model.pred(x_)
         # logits = model.pred(x)
 
-        lb_losses = [
-            load_balancing_loss(w, num_experts=model.args.num_experts, top_k=model.args.k)
-            for w in moe_weight_list
-                ]
-        lb_loss = torch.stack(lb_losses).mean()
+        # lb_losses = [
+        #     load_balancing_loss(w, num_experts=model.args.num_experts, top_k=model.args.k)
+        #     for w in moe_weight_list
+        #         ]
+        # lb_loss = torch.stack(lb_losses).mean()
 
         loss = (F.cross_entropy(
             logits.view(-1, logits.size(-1)), y_.view(-1), ignore_index=pad_token_id, label_smoothing=0.1
         # ) + 0.1 * batched_router_zloss(model.smoes[0].args).mean()) / n_micro_steps
-        ) + 0.01 * lb_loss) / n_micro_steps
+        #)) #+ 0.005 * lb_loss) / n_micro_steps
+        )) / n_micro_steps
+
 
         train_loss += loss.detach()
 
@@ -124,7 +126,7 @@ def cirilla_grad_acc_inference(self, data):
 
 trainer = CirillaTrainer(model,
                             TrainingArgs(
-                                        n_epoch=10,
+                                        n_epoch=16,
                                         save_checkpoint_min=15,
                                         use_muon_optim=True,
                                         fuse_optim=False,
