@@ -16,7 +16,7 @@ model = CirillaBERT(BertArgs(
     context_window=512,
     torch_compile=False))
 
-tokenizer = CirillaTokenizer(hub_url='AnthonyPa57/HF-torch-demo2')
+tokenizer = CirillaTokenizer(hub_url='AnthonyPa57/Cirilla-0.3B-4E')
 
 trainer = MagMaxMAMLTrainer(model, tokenizer)
 
