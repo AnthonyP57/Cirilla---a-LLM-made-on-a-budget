@@ -65,18 +65,20 @@ class CirillaResponseGenerator:
 if __name__ == '__main__':
     import json
     import math
+    import torch
 
     crg = CirillaResponseGenerator('AnthonyPa57/Cirilla-0.3B-4E')
-    # print(crg.generate_batch('Who is Geralt?', 3, kv_cache=True))
-    # print(crg.generate_batch('Who is Geralt?', 3, kv_cache=False))
 
     prompts_path = './training_datasets/RL/prompts.jsonl'
     out_path = './training_datasets/RL/sampled_cirilla.jsonl'
     out = []
+    j = 0
+    prompts = {}
 
     for line in open(prompts_path, 'r'):
         line = json.loads(line)
         id = line['id']
+        prompts[id] = line
         if id > 3:
             break
         prompt = line['prompt']
@@ -85,8 +87,10 @@ if __name__ == '__main__':
         for ans in answers_naive:
             out.append({
                 'id': id,
-                'answer': ans
+                'answer': ans,
+                'log_probs_id':j
             })
+            j += 1
 
     batch_size = 32
     with open(prompts_path, 'r') as f:
@@ -107,10 +111,56 @@ if __name__ == '__main__':
             for ans, id in zip(answers_kv, ids):
                 out.append({
                     'id': id,
-                    'answer': ans
+                    'answer': ans,
+                    'log_probs_id':j
                 })
+                j += 1
 
     with open(out_path, 'w') as f:
         for d in out:
+            json.dump(d, f)
+            f.write('\n')
+
+    out_tensor = []
+    generate_batch = []
+    prompt_lens = []
+    js = []
+
+    last_out = out[-1]['id']
+    for ans_data in out:
+        prompt = prompts[ans_data['id']]
+        answer = ans_data['answer']
+        j = ans_data['log_probs_id']
+        end = ans_data['id'] == last_out
+        template = crg.tokenizer.apply_chat_template(
+                [
+                    {'role':'user', 'content': prompt},
+                    {'role':'assistant', 'content': answer}
+                ],
+                padding='do_not_pad',
+                add_generation_prompt=False
+            )
+        
+        prompt_len = len(crg.tokenizer.apply_chat_template(
+            [{'role':'user', 'content': prompt}],
+            padding='do_not_pad',
+            add_generation_prompt=True
+        ))
+        js.append(j)
+        generate_batch.append(template)
+        prompt_lens.append(prompt_len)
+        if len(generate_batch) == batch_size or end:
+            x = torch.full((len(generate_batch), max(len(t) for t in generate_batch)), crg.tokenizer.convert_tokens_to_ids('<pad>'), dtype=torch.int64) # one is padding
+            for i, t in enumerate(generate_batch):
+                x[i, :len(t)] = torch.tensor(t, dtype=torch.int64)
+            per_token_log_probs = crg.model.get_per_token_log_probs(x.to(crg.model.args.device))
+            for j, row_ptlp, plen, batch in zip(js, per_token_log_probs, prompt_lens, generate_batch):
+                out_tensor.append({'log_probs_id':j, 'per_token_log_probs':row_ptlp[plen-1:len(batch)-1].tolist()})
+            generate_batch = []
+            prompt_lens = []
+            js = []
+
+    with open('./training_datasets/RL/per_token_log_probs.jsonl', 'w') as f:
+        for d in out_tensor:
             json.dump(d, f)
             f.write('\n')

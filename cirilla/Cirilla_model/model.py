@@ -5,6 +5,7 @@ from .modules import CirillaBaseModel
 from .blocks import Decoder, DecoderArgs, InputEmbeddings
 import torch
 from math import ceil
+import torch.nn.functional as F
 
 @dataclass
 class Args(DecoderArgs):
@@ -115,7 +116,7 @@ class Cirilla(
     
     def _greedy_next_token(self, x) -> torch.Tensor:
         logits = self.infer(x)
-        probs = torch.nn.functional.softmax(logits[:, -1, :], dim=-1)
+        probs = F.softmax(logits[:, -1, :], dim=-1)
         next_token = torch.argmax(probs, dim=-1).unsqueeze(-1)
         return next_token
     
@@ -165,11 +166,11 @@ class Cirilla(
                         if top_k is not None:
                             values, indices = torch.topk(logits, top_k)
                             log_probs = torch.full_like(logits, float('-inf'))
-                            log_probs = log_probs.scatter_(1, indices, torch.nn.functional.log_softmax(values, dim=-1))
+                            log_probs = log_probs.scatter_(1, indices, F.log_softmax(values, dim=-1))
 
                         elif top_p is not None:
                             sorted_logits, sorted_indices = torch.sort(logits, descending=True)
-                            cumulative_probs = torch.cumsum(torch.nn.functional.softmax(sorted_logits, dim=-1), dim=-1)
+                            cumulative_probs = torch.cumsum(F.softmax(sorted_logits, dim=-1), dim=-1)
 
                             sorted_indices_to_remove = cumulative_probs > top_p
                             sorted_indices_to_remove[:, 1:] = sorted_indices_to_remove[:, :-1].clone()
@@ -178,13 +179,13 @@ class Cirilla(
                             indices_to_remove = sorted_indices[sorted_indices_to_remove]
                             n_remaining_top_p = logits.size(-1) - indices_to_remove.size(0)
 
-                            log_probs = torch.nn.functional.log_softmax(logits, dim=-1)
+                            log_probs = F.log_softmax(logits, dim=-1)
                             log_probs[0, indices_to_remove] = float('-inf')
 
                         else: # greedy
                             values, indices = torch.topk(logits, n_beams)
                             log_probs = torch.full_like(logits, float('-inf'))
-                            log_probs = log_probs.scatter_(1, indices, torch.nn.functional.log_softmax(values, dim=-1))
+                            log_probs = log_probs.scatter_(1, indices, F.log_softmax(values, dim=-1))
 
                         n_samples = min(n_beams,
                                         top_k if top_k is not None else float('inf'),
@@ -258,11 +259,11 @@ class Cirilla(
                     if top_k is not None:
                         v, i = torch.topk(next_token_logits, top_k)
                         probs = torch.full_like(next_token_logits, 0)
-                        probs.scatter_(1, i, torch.nn.functional.softmax(v, dim=-1))
+                        probs.scatter_(1, i, F.softmax(v, dim=-1))
 
                     elif top_p is not None:
                         sorted_logits, sorted_indices = torch.sort(next_token_logits, descending=True)
-                        cumulative_probs = torch.cumsum(torch.nn.functional.softmax(sorted_logits, dim=-1), dim=-1)
+                        cumulative_probs = torch.cumsum(F.softmax(sorted_logits, dim=-1), dim=-1)
 
                         sorted_indices_to_remove = cumulative_probs > top_p
                         sorted_indices_to_remove[:, 1:] = sorted_indices_to_remove[:, :-1].clone()
@@ -270,7 +271,7 @@ class Cirilla(
                         
                         mask = torch.zeros_like(next_token_logits, dtype=torch.bool).scatter_(1, sorted_indices, sorted_indices_to_remove)
                         next_token_logits[mask] = float('-inf')
-                        probs = torch.nn.functional.softmax(next_token_logits, dim=-1)
+                        probs = F.softmax(next_token_logits, dim=-1)
 
                     else: # Greedy
                         max_arg = torch.argmax(next_token_logits, dim=-1) # (b,)
@@ -287,7 +288,7 @@ class Cirilla(
                     tokens[non_finished_ids, cur_pos] = next_token
 
                     if sample_parallel and ~is_prompt_phase.any():
-                        response_prob[non_finished_ids] += torch.nn.functional.log_softmax(next_token_logits, dim=-1)[[i for i in range(next_token_logits.size(0))], next_token_sample]
+                        response_prob[non_finished_ids] += F.log_softmax(next_token_logits, dim=-1)[[i for i in range(next_token_logits.size(0))], next_token_sample]
 
                     if termination_tokens is not None:
                         active_generation_mask = ~is_prompt_phase
@@ -312,3 +313,22 @@ class Cirilla(
     def clear_cache(self) -> None:
         for att in self.decoder.attentions:
             att._clear_cache()
+
+    def get_log_probs(self, x) -> torch.Tensor:
+        if self.args.output_moe_weights:
+            x, moe_weights = self.pred(x)
+        else:
+            x = self.pred(x)
+
+        return F.log_softmax(x, dim=-1)
+    
+    def get_per_token_log_probs(self, x) -> torch.Tensor:
+        log_probs = self.get_log_probs(x)
+        log_probs = log_probs[:, :-1]
+        input_ids = x[:, 1:]
+        per_token_log_probs = []
+        for log_probs_row, input_id_row in zip(log_probs, input_ids): # for loop to reduce peak memory
+            ptlp = torch.gather(log_probs_row, dim=1, index=input_id_row.unsqueeze(1)).squeeze(1)
+            per_token_log_probs.append(ptlp)
+        return torch.stack(per_token_log_probs)
+
