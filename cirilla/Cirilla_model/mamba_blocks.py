@@ -9,13 +9,6 @@ from cirilla.LLM_pieces import (
     DynamicTanh,
     Dynamic_erf
 )
-try:
-    from cirilla.LLM_pieces import(
-        MegablockMoE,
-        MegablockdMoE,
-    )
-except ImportError:
-    pass
 from mamba_ssm import Mamba2
 from cirilla.Cirilla_model.blocks import DecoderArgs
 from attn_gym.mods import generate_tanh_softcap
@@ -173,22 +166,10 @@ class HybridDecoder(nn.Module):
                 ])
             else:
                 self.smoes = nn.ModuleList(self.smoes)
-
-        elif self.args.moe_type == 'megablocks-moe':
-            self.smoes = nn.ModuleList([
-                MegablockMoE(self.args)
-                for _ in range(self.args.n_layers)
-            ])
-
-        elif self.args.moe_type == 'megablocks-dmoe':
-            self.smoes = nn.ModuleList([
-                MegablockdMoE(self.args)
-                for _ in range(self.args.n_layers)
-            ])
         
         else:
             print(self.args.moe_type)
-            raise ValueError(f"allowed moe types: 'pytorch',  'megablocks-moe', 'megablocks-dmoe' ; got: {self.args.moe_type}")
+            raise ValueError(f"allowed moe types: 'pytorch'; got: {self.args.moe_type}")
 
         self.n_params = sum(p.numel() for p in self.parameters() if p.requires_grad)
 

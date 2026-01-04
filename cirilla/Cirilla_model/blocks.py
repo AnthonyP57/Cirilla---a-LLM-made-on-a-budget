@@ -10,13 +10,6 @@ from ..LLM_pieces import (
     DynamicTanh,
     Dynamic_erf
 )
-try:
-    from cirilla.LLM_pieces import(
-        MegablockMoE,
-        MegablockdMoE,
-    )
-except ImportError:
-    pass
 from attn_gym.mods import generate_tanh_softcap
 from dataclasses import dataclass
 from .modules import select_torch_device
@@ -48,10 +41,7 @@ class EncoderArgs:
     """MoE"""
     num_experts:int = 2
     k:int = 1
-    moe_type:str = "pytorch" # or "pytorch" or "megablocks-moe" or "megablocks-dmoe"
-    moe_zloss_weight:float = 0.1
-    capacity_factor: float = 1.0
-    impl: str = "grouped"   # or "sparse" Sparse MLP is not supported with triton >=3.2.0
+    moe_type:str = "pytorch" # "pytorch"
     
     """misc"""
     dtype_str:str = 'bfloat16'
@@ -165,22 +155,10 @@ class Encoder(nn.Module):
                 ])
             else:
                 self.smoes = nn.ModuleList(self.smoes)
-
-        elif self.args.moe_type == 'megablocks-moe':
-            self.smoes = nn.ModuleList([
-                MegablockMoE(self.args)
-                for _ in range(self.args.n_layers)
-            ])
-
-        elif self.args.moe_type == 'megablocks-dmoe':
-            self.smoes = nn.ModuleList([
-                MegablockdMoE(self.args)
-                for _ in range(self.args.n_layers)
-            ])
         
         else:
             print(self.args.moe_type)
-            raise ValueError(f"allowed moe types: 'pytorch',  'megablocks-moe', 'megablocks-dmoe' ; got: {self.args.moe_type}")
+            raise ValueError(f"allowed moe types: 'pytorch' ; got: {self.args.moe_type}")
 
         self.n_params = sum(p.numel() for p in self.parameters() if p.requires_grad)
 
@@ -230,10 +208,7 @@ class DecoderArgs:
     """MoE"""
     num_experts:int = 8
     k:int = 4
-    moe_type:str = "pytorch" # or "pytorch" or "megablocks-moe" or "megablocks-dmoe"
-    capacity_factor: float = 1.0
-    moe_zloss_weight:float = 0.1
-    impl: str = "grouped"   # or "sparse" Sparse MLP is not supported with triton >=3.2.0
+    moe_type:str = "pytorch" # "pytorch"
     
     """misc"""
     dtype_str:str = 'bfloat16'
@@ -359,22 +334,10 @@ class Decoder(nn.Module):
                 ])
             else:
                 self.smoes = nn.ModuleList(self.smoes)
-
-        elif self.args.moe_type == 'megablocks-moe':
-            self.smoes = nn.ModuleList([
-                MegablockMoE(self.args)
-                for _ in range(self.args.n_layers)
-            ])
-
-        elif self.args.moe_type == 'megablocks-dmoe':
-            self.smoes = nn.ModuleList([
-                MegablockdMoE(self.args)
-                for _ in range(self.args.n_layers)
-            ])
         
         else:
             print(self.args.moe_type)
-            raise ValueError(f"allowed moe types: 'pytorch',  'megablocks-moe', 'megablocks-dmoe' ; got: {self.args.moe_type}")
+            raise ValueError(f"allowed moe types: 'pytorch'; got: {self.args.moe_type}")
 
         self.n_params = sum(p.numel() for p in self.parameters() if p.requires_grad)
 

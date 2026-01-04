@@ -6,8 +6,6 @@ import numpy as np
 import torch
 from torch import nn
 import torch.nn.functional as F
-from megablocks.layers.moe import clear_load_balancing_loss
-from megablocks.layers.router import clear_router_zloss, batched_router_zloss
 from cirilla.Cirilla_model import load_balancing_loss
 
 with open(sys.argv[0]) as f:

@@ -13,7 +13,7 @@ dependencies = [
     "fandom-py>=0.2.1",
     "fuzzywuzzy>=0.18.0",
     "huggingface-hub>=0.33.4",
-    "kernels>=0.8.0",
+    "kernels>=0.11.5",
     "ollama>=0.5.3",
     "openai>=1.90.0",
     "polars>=1.35.1",
@@ -31,14 +31,10 @@ dependencies = [
     "torchao==0.13.0",
     "torchvision>=0.22.0",
     "transformers>=4.53.2",
-    "vllm>=0.9.2",
+    "vllm>=0.13.0",
 ]
 
 [project.optional-dependencies]
-megablocks = [
-    "megablocks[all]>=0.10.0",
-]
-
 mamba = [
     "mamba-ssm[causal-conv1d]>=2.2.6.post3"
 ]

@@ -2,7 +2,6 @@ from cirilla.Cirilla_model import Cirilla
 from cirilla.Cirilla_model import CirillaTokenizer
 from cirilla.Cirilla_model.modules import select_torch_device
 from datasets import Dataset
-import json
 import torch
 import math
 

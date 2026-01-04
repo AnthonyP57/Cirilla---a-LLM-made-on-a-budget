@@ -22,13 +22,3 @@ __all__ = [
     'Dynamic_erf',
     'DynamicTanh'
 ]
-
-try:
-    from .SMoE_megablocks import MegablockMoE, MegablockdMoE
-
-    __all__ += [
-        "MegablockMoE",
-        "MegablockdMoE",
-    ]
-except ImportError:
-    pass
