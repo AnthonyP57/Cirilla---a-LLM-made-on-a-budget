@@ -1,15 +1,18 @@
 import json
 import copy
+import os
 from typing import List, Any, Dict
 from pathlib import Path
 from vllm import LLM, SamplingParams
-from transformers import AutoTokenizer
 from rich.progress import Progress, TextColumn, BarColumn, TimeElapsedColumn, TimeRemainingColumn
+from mistralai import Mistral 
 
-MODEL_NAME = "mistralai/Ministral-3-3B-Reasoning-2512"
-MAX_MODEL_LEN = 2048
+MODEL_NAME = "mistralai/Ministral-3-3B-Instruct-2512"
+MAX_MODEL_LEN = 1024
 GPU_UTILIZATION = 0.9
 MAX_RETRIES = 3
+CONTEXT_LENGTH_THRESHOLD = 512
+MISTRAL_API_KEY = os.environ.get("MISTRAL_API_KEY", "your_api_key_here") 
 
 SYS_PROMPT = """You are an expert evaluator for a RAG (Retrieval Augmented Generation) system. 
 Your task is to score an Answer based strictly on a provided Context and the User Prompt.
@@ -59,7 +62,23 @@ def parse_model_output(text: str) -> Dict[str, Any]:
 
     return None
 
-def run_evaluation(input_file: str, output_file: str, batch_size: int = 256):
+def call_mistral_api(client, user_content):
+    try:
+        response = client.chat.complete(
+            model="mistral-large-latest",
+            messages=[
+                {"role": "system", "content": SYS_PROMPT},
+                {"role": "user", "content": user_content}
+            ],
+            temperature=0.2,
+            response_format={"type": "json_object"}
+        )
+        return response.choices[0].message.content
+    except Exception as e:
+        print(f"API Error: {e}")
+        return None
+
+def run_evaluation(input_file: str, output_file: str, batch_size: int = 256, id_col_name:str='id'):
     try:
         data = load_jsonl(input_file)
     except FileNotFoundError:
@@ -69,34 +88,43 @@ def run_evaluation(input_file: str, output_file: str, batch_size: int = 256):
     if not data:
         print("No data to process.")
         return
+    
+    mistral_client = Mistral(api_key=MISTRAL_API_KEY)
 
+    print(f"Loading Model {MODEL_NAME}...")
     llm = LLM(
         model=MODEL_NAME, 
         max_model_len=MAX_MODEL_LEN, 
         gpu_memory_utilization=GPU_UTILIZATION, 
         trust_remote_code=True
     )
-    tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
+    # tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
+    tokenizer = llm.get_tokenizer()
 
-    sampling_params = SamplingParams(temperature=0.2, max_tokens=512)
+    sampling_params = SamplingParams(temperature=0.2, max_tokens=256)
 
-    all_prompts = []
-    for entry in data:
+    local_processing_queue = []
+    api_processing_queue = []
+    
+    for idx, entry in enumerate(data):
         user_content = (
             f"Based solely on this context:\n{entry.get('context', '')}\n\n"
             f"And this prompt:\n{entry.get('prompt', '')}\n\n"
             f"Assess this answer:\n{entry.get('answer', '')}"
         )
         
-        conversation = [
-            {"role": "system", "content": SYS_PROMPT},
-            {"role": "user", "content": user_content}
-        ]
-        
-        text_prompt = tokenizer.apply_chat_template(conversation, tokenize=False, add_generation_prompt=True)
-        all_prompts.append(text_prompt)
+        context_len = len(entry.get('context', '').split())
+        if context_len > CONTEXT_LENGTH_THRESHOLD:
+            api_processing_queue.append((idx, user_content))
+        else:
+            conversation = [
+                {"role": "system", "content": SYS_PROMPT},
+                {"role": "user", "content": user_content}
+            ]
+            text_prompt = tokenizer.apply_chat_template(conversation, tokenize=True, add_generation_prompt=True)
+            local_processing_queue.append((idx, text_prompt))
 
-    results = [None] * len(data)  # Pre-allocate results to maintain order
+    results = [None] * len(data) # Pre-allocate results to maintain order
     
     with Progress(
         TextColumn("[progress.description]{task.description}"),
@@ -107,58 +135,76 @@ def run_evaluation(input_file: str, output_file: str, batch_size: int = 256):
         TimeRemainingColumn(), 
     ) as progress:
         
-        task = progress.add_task("Scoring...", total=len(all_prompts))
+        local_prompts = [p for _, p in local_processing_queue]
+        local_indices_map = [i for i, _ in local_processing_queue]
+        
+        task = progress.add_task("Scoring (Local)...", total=len(local_prompts))
 
-        for i in range(0, len(all_prompts), batch_size):
-            batch_indices = list(range(i, min(i + batch_size, len(all_prompts))))
-            
+        for i in range(0, len(local_prompts), batch_size):
+            batch_indices = list(range(i, min(i + batch_size, len(local_prompts))))
             active_indices = copy.deepcopy(batch_indices)
             
             for attempt in range(MAX_RETRIES + 1):
-                if not active_indices:
-                    break # All done for this batch
+                if not active_indices: break
 
-                current_prompts = [all_prompts[idx] for idx in active_indices]
-                
+                current_prompts = [{"prompt_token_ids": local_prompts[idx]} for idx in active_indices]
                 outputs = llm.generate(current_prompts, sampling_params=sampling_params, use_tqdm=False)
-
+                
                 next_retry_indices = []
 
                 for j, output in enumerate(outputs):
-                    global_idx = active_indices[j]
+                    local_idx = active_indices[j]
+                    global_idx = local_indices_map[local_idx]
+                    
                     raw_text = output.outputs[0].text
                     parsed_json = parse_model_output(raw_text)
 
                     if parsed_json:
-                        entry = data[global_idx]
+                        entry = {id_col_name: data[global_idx].get(id_col_name)}
                         entry['score'] = parsed_json
                         try:
-                            entry['total'] = (
+                            entry['total_score'] = (
                                 float(parsed_json.get('grammar', 0)) + 
                                 float(parsed_json.get('logic', 0)) + 
                                 float(parsed_json.get('encompassment', 0))
                             )
-                        except (ValueError, TypeError):
-                            entry['total'] = 0.0
-                        
+                        except: entry['total_score'] = 0.0
                         results[global_idx] = entry
                     else:
                         if attempt < MAX_RETRIES:
-                            next_retry_indices.append(global_idx)
+                            next_retry_indices.append(local_idx)
                         else:
-                            # Final failure after max retries
-                            entry = data[global_idx]
-                            entry['score'] = {
-                                "error": "parsing_failed_after_retries",
-                                "raw_output": raw_text,
-                                "grammar": 0, "logic": 0, "encompassment": 0, "reasoning": "Failed"
-                            }
-                            entry['total'] = 0.0
+                            entry = {id_col_name: data[global_idx].get(id_col_name)}
+                            entry['score'] = {"error": "parsing_failed", "raw": raw_text}
+                            entry['total_score'] = 0.0
                             results[global_idx] = entry
 
                 active_indices = next_retry_indices
-
             progress.update(task, advance=len(batch_indices))
+
+        if api_processing_queue:
+            api_task = progress.add_task("Scoring (API)...", total=len(api_processing_queue))
+            for global_idx, user_content in api_processing_queue:
+                
+                raw_text = call_mistral_api(mistral_client, user_content)
+                parsed_json = parse_model_output(raw_text) if raw_text else None
+                
+                entry = {id_col_name: data[global_idx].get(id_col_name)}
+                if parsed_json:
+                    entry['score'] = parsed_json
+                    try:
+                        entry['total_score'] = (
+                            float(parsed_json.get('grammar', 0)) + 
+                            float(parsed_json.get('logic', 0)) + 
+                            float(parsed_json.get('encompassment', 0))
+                        )
+                    except: entry['total_score'] = 0.0
+                else:
+                    entry['score'] = {"error": "api_failed", "raw": raw_text}
+                    entry['total_score'] = 0.0
+                
+                results[global_idx] = entry
+                progress.update(api_task, advance=1)
 
     clean_results = [r for r in results if r is not None]
     save_jsonl(clean_results, output_file)
@@ -167,12 +213,22 @@ if __name__ == "__main__":
     test_input = "input_eval.jsonl"
     if not Path(test_input).exists():
         with open(test_input, 'w') as f:
-            dummy = {
-                "context": "Geralt hates portals. He prefers riding Roach.",
-                "prompt": "What does Geralt think of portals?",
-                "answer": "He loves them."
-            }
             for _ in range(1000):
+                dummy = {
+                    "id": 0,
+                    "context": "Geralt hates portals. " * 100,
+                    "prompt": "What does Geralt think of portals?",
+                    "answer": "He loves them."
+                }
                 f.write(json.dumps(dummy) + "\n")
+
+            for _ in range(10):
+                dummy_long = {
+                    "id": 1,
+                    "context": "Long Context " * 1000,
+                    "prompt": "Test",
+                    "answer": "Test"
+                }
+                f.write(json.dumps(dummy_long) + "\n")
             
     run_evaluation(input_file=test_input, output_file="scored_output.jsonl")
