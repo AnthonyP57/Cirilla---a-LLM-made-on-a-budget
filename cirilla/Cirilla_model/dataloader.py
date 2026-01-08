@@ -19,12 +19,12 @@ class GenericDataset:
                 shuffle_path=False,
                 device:torch.device='cuda',
                 tokenizer:CirillaTokenizer=None,
-                max_len:int=32,
+                max_len:int=1024,
                 pad_token:str='<pad>',
                 eos_token:str='<eos>',
                 sos_token:str='<sos>',
                 user_token:str='<|user|>',
-                suffix_tokens:list[str]=None, #['<cls>']
+                suffix_tokens:list[str]=None,
                 prefix_tokens:list[str]=None,
                 random_spelling_mistake_prob:float=0.,
                 random_missing_char_prob:float=0.
@@ -42,9 +42,10 @@ class GenericDataset:
 
         if self.tokenizer is not None:
             self.sos_token = sos_token
-            self.user_token_id = tokenizer.convert_tokens_to_ids(user_token)
-            self.pad_token_id = tokenizer.convert_tokens_to_ids(pad_token)
-            self.eos_token_id = tokenizer.convert_tokens_to_ids(eos_token)
+            self.sos_token_id = torch.tensor([tokenizer.convert_tokens_to_ids(sos_token)])
+            self.user_token_id = torch.tensor([tokenizer.convert_tokens_to_ids(user_token)])
+            self.pad_token_id = torch.tensor([tokenizer.convert_tokens_to_ids(pad_token)])
+            self.eos_token_id = torch.tensor([tokenizer.convert_tokens_to_ids(eos_token)])
 
         if isinstance(self.path, list):
             self.path = tuple(self.path)
@@ -126,8 +127,8 @@ class JSONLDataset(IterableDataset, GenericDataset):
                                     token_shape = out_tokens.shape[0]
 
                                     if token_shape <= self.max_len:
-                                        out_tokens = torch.concat([out_tokens, torch.tensor([self.eos_token_id])] + \
-                                                        [torch.tensor([self.pad_token_id])] * (self.max_len - token_shape), dim=0)
+                                        out_tokens = torch.concat([out_tokens, self.eos_token_id] + \
+                                                        [self.pad_token_id] * (self.max_len - token_shape), dim=0)
                                     
                                     out_tokens = out_tokens.to(self.device)
                                     
@@ -140,33 +141,27 @@ class JSONLDataset(IterableDataset, GenericDataset):
                                     token_shape = in_tokens.shape[0]
 
                                     if token_shape <= self.max_len:
-                                        in_tokens = torch.concat([in_tokens, torch.tensor([self.eos_token_id])] + \
-                                                        [torch.tensor([self.pad_token_id])] * (self.max_len - token_shape), dim=0)
+                                        in_tokens = torch.concat([in_tokens, self.eos_token_id] + \
+                                                        [self.pad_token_id] * (self.max_len - token_shape), dim=0)
                                     
                                     in_tokens = in_tokens.to(self.device)
 
                                     yield in_tokens[:-1], out_tokens[1:]
 
                                 else:
-
-                                    if self.random_spelling_mistake_prob > 0. or self.random_missing_char_prob > 0.:
-                                        line['text'] = self._apply_random_spelling_mistake(line['text'])
                                         
                                     tokenized_data =  self.tokenizer(self.sos_token + line['text'], return_tensors='pt', padding='do_not_pad',
                                                                     truncation=True, max_length=self.max_len+1)
                                     
                                     tokens = tokenized_data['input_ids'].squeeze(0)
-                                    # mask = tokenized_data['attention_mask'].squeeze(0)
                                     token_shape = tokens.shape[0]
 
-                                    # mask = torch.concat([mask, torch.ones(1, dtype=torch.int64), torch.zeros(self.max_len - token_shape, dtype=torch.int64)],
-                                    #                 dim=0).to(self.device)
                                     if token_shape <= self.max_len:
-                                        tokens = torch.concat([tokens, torch.tensor([self.eos_token_id])] + \
-                                                        [torch.tensor([self.pad_token_id])] * (self.max_len - token_shape), dim=0)
+                                        tokens = torch.concat([tokens, self.eos_token_id] + \
+                                                        [self.pad_token_id] * (self.max_len - token_shape), dim=0)
                                     
                                     tokens = tokens.to(self.device)
-                                    yield tokens[:-1], tokens[1:]#, mask[:-1]
+                                    yield tokens[:-1], tokens[1:]
 
                             else:
                                 yield line['text']
@@ -176,20 +171,16 @@ class JSONLDataset(IterableDataset, GenericDataset):
                             if self.tokenizer is not None:
                                 tokens =  self.tokenizer.apply_chat_template(line['text'], return_tensors='pt', padding='do_not_pad',
                                                                                     truncation=True, max_length=self.max_len+1, add_generation_prompt=False)
-                                tokens = tokens.squeeze(0).to(self.device)
+                                tokens = tokens.squeeze(0)
                                 tokens_shape = tokens.shape[0]
 
-                                # mask = torch.zeros(self.max_len, dtype=torch.int64, device=self.device)
-                                # mask[:tokens_shape] = 1
-                                
-                                if tokens_shape <= self.max_len :
+                                if tokens_shape <= self.max_len:
                                     tokens = torch.concat(
-                                        [tokens, torch.tensor([self.user_token_id], device=self.device),] + \
-                                        [torch.tensor([self.pad_token_id], device=self.device)] * (self.max_len - tokens_shape))
+                                        [tokens, self.user_token_id] + \
+                                        [self.pad_token_id] * (self.max_len - tokens_shape))
                                     
-                                    # mask[tokens_shape] = 1
-                                
-                                yield tokens[:-1], tokens[1:]#, mask
+                                tokens = tokens.to(self.device)
+                                yield tokens[:-1], tokens[1:]
                             else:
                                 yield '\n'.join([l['content'] for l in line['text']])
 
@@ -215,3 +206,122 @@ class JSONLDataset(IterableDataset, GenericDataset):
 
                         case _:
                             raise NotImplementedError(f"Data type {line['data type']} is not supported, use one of: ['plain text', 'conv', 'bert']")
+
+class JSONDynamicDatset(IterableDataset, GenericDataset):
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+    
+    def __iter__(self):
+
+        for p in self.path:
+            with open(p, 'r') as f:
+
+                for line in f:
+                    line = json.loads(line)
+
+                    match line['data type']:
+
+                        case 'plain text':
+
+                            if self.tokenizer is not None:
+
+                                if self.random_spelling_mistake_prob > 0. or self.random_missing_char_prob > 0.:
+
+                                    v = self.tokenizer(line['text'], return_tensors='pt', padding='do_not_pad',
+                                                                    truncation=True, max_length=self.max_len)
+                                    
+                                    out_tokens = v['input_ids'].squeeze(0)
+                                    token_shape = out_tokens.shape[0]
+
+                                    if token_shape < self.max_len:
+                                        out_tokens = torch.concat([out_tokens, self.eos_token_id], dim=0)
+                                    
+                                    out_tokens = out_tokens.to(self.device)
+                                    
+                                    line['text'] = self._apply_random_spelling_mistake(line['text'])
+                                    
+                                    tokenized_data = self.tokenizer(line['text'], return_tensors='pt', padding='do_not_pad',
+                                                                    truncation=True, max_length=self.max_len-1)
+                                    
+                                    in_tokens = tokenized_data['input_ids'].squeeze(0)
+
+                                    in_tokens = torch.concat([self.sos_token_id, in_tokens], dim=0)
+                                    
+                                    in_tokens = in_tokens.to(self.device)
+
+                                    yield in_tokens, out_tokens
+
+                                else:
+
+                                    tokenized_data =  self.tokenizer(line['text'], return_tensors='pt', padding='do_not_pad',
+                                                                    truncation=True, max_length=self.max_len-1)
+                                    
+                                    tokens = tokenized_data['input_ids'].squeeze(0)
+                                    tokens = torch.concat([self.sos_token_id, tokens], dim=0)
+                                    
+                                    token_shape = tokens.shape[0]
+
+                                    if token_shape <= self.max_len:
+                                        tokens = torch.concat([tokens, self.eos_token_id], dim=0)
+                                    
+                                    tokens = tokens.to(self.device)
+                                    yield tokens[:-1], tokens[1:] # (in tokens, out tokens)
+
+                            else:
+                                yield line['text']
+
+                        case 'conv':
+
+                            if self.tokenizer is not None:
+                                tokens =  self.tokenizer.apply_chat_template(line['text'], return_tensors='pt', padding='do_not_pad',
+                                                                                    truncation=True, max_length=self.max_len, add_generation_prompt=False)
+                                tokens = tokens.squeeze(0)
+                                tokens_shape = tokens.shape[0]
+
+                                if tokens_shape <= self.max_len:
+                                    tokens = torch.concat(
+                                        [tokens, self.user_token_id])
+
+                                tokens = tokens.to(self.device)
+                                
+                                yield tokens[:-1], tokens[1:]
+                            else:
+                                yield '\n'.join([l['content'] for l in line['text']])
+
+                        case 'bert':
+
+                            if self.tokenizer is not None:
+                                text = line['text']
+                                
+                                if self.prefix_tokens is not None:
+                                    text = "".join(self.prefix_tokens) + text
+
+                                if self.suffix_tokens is not None:
+                                    text += "".join(self.suffix_tokens)
+
+                                tokenized_data =  self.tokenizer(text, return_tensors='pt', padding='do_not_pad',
+                                                                truncation=True, max_length=self.max_len)
+                                
+                                tokens = tokenized_data['input_ids'].squeeze(0).to(self.device)
+                                mask = tokenized_data['attention_mask'].squeeze(0).to(self.device)
+                                yield tokens, mask, torch.tensor(line['label'], dtype=torch.int64 if not isinstance(line['label'], list) else torch.bfloat16, device=self.device)
+                            else:
+                                yield line['text']
+
+                        case _:
+                            raise NotImplementedError(f"Data type {line['data type']} is not supported, use one of: ['plain text', 'conv', 'bert']")
+                        
+class DynamicCollator:
+    def __init__(self, pad_token_id):
+        self.pad_token_id = pad_token_id
+
+    def __call__(self, batch):
+
+        if isinstance(batch[0], tuple):
+            return tuple(torch.nn.utils.rnn.pad_sequence(b, batch_first=True, padding_value=self.pad_token_id) for b in batch)
+        
+        elif isinstance(batch[0], torch.Tensor):
+            return torch.nn.utils.rnn.pad_sequence(batch, batch_first=True, padding_value=self.pad_token_id)
+        
+        else:
+            raise NotImplementedError(f"Data type {type(batch[0])} is not supported")
