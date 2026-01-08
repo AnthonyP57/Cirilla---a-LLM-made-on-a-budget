@@ -2,7 +2,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 from dataclasses import dataclass
-from .activations import Dynamic_erf, DynamicTanh
+from cirilla.LLM_pieces.activations import Dynamic_erf, DynamicTanh
 
 
 @dataclass
@@ -41,6 +41,8 @@ class SMoEArgs:
     d_ff:int=256 # hidden dim
     layer_norm:str = "RMSNorm"
 
+    output_moe_weights:bool = False
+
     @property
     def dtype(self):
         return getattr(torch, self.dtype_str)
@@ -64,18 +66,44 @@ class SMoE(nn.Module):
             raise ValueError(f"allowed layer norms: 'RMSNorm', 'Derf', 'DyT' ; got: {self.args.layer_norm}")
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
-        x = self.layer_norm(x)                           # (B,S,D)
+        B, S, D = x.shape
 
-        logits = self.gating(x)                       # (B,S,E)
-        topk_vals, topk_idx = torch.topk(logits, self.k, dim=-1)
+        x = self.layer_norm(x) # (B,S,D)
 
-        topk_w = F.softmax(topk_vals, dim=-1)        # (B,S,k)
-        one_hot = F.one_hot(topk_idx, num_classes=self.n_experts).to(x.dtype)
+        logits = self.gating(x) # (B,S,E)
+        topk_vals, topk_idx = torch.topk(logits, self.k, dim=-1) # (B,S,K)
 
-        weights_per_expert = (one_hot * topk_w.unsqueeze(-1)).sum(dim=2)  # (B,S,E)
+        topk_w = F.softmax(topk_vals, dim=-1) # (B,S,K)
+        
+        if self.args.output_moe_weights:
+            one_hot = F.one_hot(topk_idx, num_classes=self.n_experts).to(x.dtype) # (B,S,K,E)
+            weights_per_expert = (one_hot * topk_w.unsqueeze(-1)).sum(dim=2) # (B,S,K,E) * (B,S,K,1) -> (B,S,E)
+        else:
+            weights_per_expert = None
 
-        out = torch.zeros_like(x)
-        for ex_idx, expert in enumerate(self.experts):
-            w = weights_per_expert[..., ex_idx].unsqueeze(-1)  # (B,S,1)
-            out = out + w * expert(x)                         # expert(x) -> (B,S,D)
+        x_flat = x.view(-1, D) # (B*S,D)
+        out = torch.zeros_like(x_flat) # (B*S,D)
+        topk_idx_flat = topk_idx.view(-1, self.k) # (B*S,K)
+        topk_w_flat = topk_w.view(-1, self.k) # (B*S,K)
+
+        for expert_id, expert in enumerate(self.experts):
+
+            is_selected = (topk_idx_flat == expert_id) # (B*S,K)
+            
+            batch_ids, k_ids = torch.where(is_selected) # (B*S,K), (B*S,K)
+
+            if batch_ids.numel() == 0:
+                continue
+
+            x_selected = x_flat[batch_ids] # (B'*S,D)
+
+            expert_out = expert(x_selected) # (B'*S,D)
+
+            gate_w = topk_w_flat[batch_ids, k_ids].unsqueeze(-1) # (B'*S,1)
+            expert_out = expert_out * gate_w.to(self.args.dtype) # (B'*S,D)
+
+            out.index_add_(dim=0, index=batch_ids, source=expert_out)
+
+        out = out.view(B,S,D)
+
         return out, weights_per_expert

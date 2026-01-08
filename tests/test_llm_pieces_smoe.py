@@ -19,7 +19,7 @@ def test_expert():
         raise AssertionError("Not all parameters have gradients after initialization.")
     
 def test_pytorch_smoe():
-    smoeargs = SMoEArgs(num_experts=4, k=2, dim=128, d_ff=256, device='cuda')
+    smoeargs = SMoEArgs(num_experts=4, k=2, dim=128, d_ff=256, device='cuda', output_moe_weights=True)
     experts = [SwiGLU(SwiGLUArgs(dim=128, d_ff=256)).to('cuda') for _ in range(smoeargs.num_experts)]
     model = SMoE(smoeargs, experts).to('cuda')
 

@@ -74,6 +74,8 @@ def benchmark_model_part(model, x, label=""):
     # Warmup (not measured)
     for _ in range(10):
         out = model(x)
+        if isinstance(out, tuple):
+            out = out[0]
         loss = out.sum()
         loss.backward()
         torch.cuda.synchronize()
@@ -89,6 +91,8 @@ def benchmark_model_part(model, x, label=""):
         start_time = time.time()
 
         out = model(x)
+        if isinstance(out, tuple):
+            out = out[0]
         loss = out.sum()
 
         torch.cuda.synchronize()
@@ -121,7 +125,14 @@ def get_args_from_hub(hf_repo_id, args_type):
     )
     with open(file_path, "r") as f:
         config = json.load(f)
-    args = args_type(**config[list(config.keys())[0]])
+        config = config[list(config.keys())[0]]
+        kwargs = {}
+        for k, v in config.items():
+            if k in args_type.__dataclass_fields__:
+                kwargs[k] = v
+            else:
+                print(f"WARNING: {k} is not a valid argument for {args_type.__name__}, skipping...")
+    args = args_type(**kwargs)
 
     return args
 
