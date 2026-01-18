@@ -1,5 +1,5 @@
 from .bert_model import CirillaBERT, BertArgs, bert_inference_step, bert_training_step
-from .dataloader import JSONLDataset, GenericDataset
+from .dataloader import JSONLDataset, GenericDataset, JSONDynamicDatset, DynamicCollator
 from .model import Cirilla, Args
 from .modules import benchmark_model_part, load_balancing_loss, CirillaBaseModel, get_optims
 from .tokenizer_modules import CirillaTokenizer
@@ -50,7 +50,9 @@ __all__ = [
             'trm_inference_step',
             'mtp_training_step',
             'mtp_inference_step',
-            'get_optims'
+            'get_optims',
+            'JSONDynamicDatset',
+            'DynamicCollator'
         ]
 
 try:
