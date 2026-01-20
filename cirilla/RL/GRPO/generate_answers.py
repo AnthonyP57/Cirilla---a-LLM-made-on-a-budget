@@ -66,8 +66,9 @@ class CirillaResponseGenerator:
         return texts
 
 class CirillaSampler:
-    def __init__(self, crg: CirillaResponseGenerator):
+    def __init__(self, crg: CirillaResponseGenerator, user_token='<|user|>'):
         self.crg = crg
+        self.user_token = [self.crg.tokenizer.convert_tokens_to_ids(user_token)]
 
     def sample(self, prompt_dataset:Dataset, batch_size:int=32, n_generate_with_kv_cache:int=1, n_generate_naive:int=2):
 
@@ -78,8 +79,6 @@ class CirillaSampler:
 
         for line in prompt_dataset:
             id = line['id']
-            if id > 3:
-                break
             prompt = line['prompt']
             answers_naive = crg.generate_batch(prompt, n=n_generate_naive, kv_cache=False)
 
@@ -99,8 +98,6 @@ class CirillaSampler:
                 for _ in range(batch_size):
                     line = next(_prompt_dataset)
                     if line != '':
-                        if line['id'] > 3:
-                            break
                         ids.append(line['id'])
                         prompts.append(line['prompt'])
 
@@ -117,7 +114,7 @@ class CirillaSampler:
         out.sort(key=lambda x: x['id'])
         return Dataset.from_list(out)
     
-    def get_log_probs(self, prompt_dataset:Dataset, sampled_dataset:Dataset, batch_size:int=32):
+    def get_log_probs(self, prompt_dataset:Dataset, sampled_dataset:Dataset, batch_size:int=32, max_len:int=2048):
 
         out_tensor = []
         generate_batch = []
@@ -136,12 +133,16 @@ class CirillaSampler:
                         {'role':'assistant', 'content': answer}
                     ],
                     padding='do_not_pad',
+                    max_len=max_len,
                     add_generation_prompt=False
                 )
+            if len(template) < max_len:
+                template += self.user_token
             
             prompt_len = len(self.crg.tokenizer.apply_chat_template(
                 [{'role':'user', 'content': prompt}],
                 padding='do_not_pad',
+                max_len=max_len,
                 add_generation_prompt=True
             ))
             js.append(j)

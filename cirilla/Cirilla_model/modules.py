@@ -22,6 +22,8 @@ class CirillaBaseModel(PyTorchModelHubMixin):
             self.args = pulled_args
             if inference_mode:
                 self.args.torch_compile = False
+                if hasattr(self.args, 'output_moe_weights'):
+                    self.args.output_moe_weights = False
             if map_device is not None:
                 self.args.device = map_device
             self._prepare_model()
