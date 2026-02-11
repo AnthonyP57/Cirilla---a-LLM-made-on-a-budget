@@ -13,7 +13,7 @@ class CirillaBaseModel(PyTorchModelHubMixin):
     def __init__(self):
         pass
     
-    def pull_model_from_hub(self, hf_repo_id:str, inference_mode:bool=False, map_device:str=None):
+    def pull_model_from_hub(self, hf_repo_id:str, inference_mode:bool=False, map_device:str=None, force_dynamic_mask:bool=False, force_eager:bool=False):
         model_args = self.args
         pulled_args = get_args_from_hub(hf_repo_id, type(self.args))
 
@@ -36,6 +36,14 @@ class CirillaBaseModel(PyTorchModelHubMixin):
         loaded = load_file(file_path)
         if "output.weight" not in loaded:
             loaded['output.weight'] = loaded["emb.embeddings.weight"]
+
+        if force_dynamic_mask:
+            for att in self.decoder.attentions:
+                att.static_mask = False
+                att.mask = create_dynamic_block_mask
+
+        if force_eager:
+            self.args.torch_compile = False
 
         if inference_mode:
             new_state_dict = {}

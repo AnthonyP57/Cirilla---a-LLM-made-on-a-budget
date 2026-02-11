@@ -7,7 +7,7 @@ class GRPO(nn.Module):
 
         self.epsilon = epsilon
         self.beta = beta
-        self.eps
+        self.eps = eps
 
     def forward(
             self,
