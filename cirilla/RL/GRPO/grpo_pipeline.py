@@ -8,6 +8,9 @@ import json
 import tempfile
 import os
 from pathlib import Path
+from torch.utils.data import DataLoader
+from cirilla.Cirilla_model import CirillaTokenizer, CirillaTrainer, TrainingArgs, Cirilla, Args, get_optims
+from cirilla.RL.GRPO.grpo_loss import GRPO
 
 class GRPO_DBMS:
     def __init__(self, model_hub_url:str, prompt_dataset_hub_url:str, 
@@ -281,13 +284,176 @@ class GRPO_Collator:
             torch.stack(batch_scores)        # Shape: (B, G)
         )
 
+class GRPO_Engine:
+    def __init__(self,
+                grpo_dbms:GRPO_DBMS,
+                tokenizer:CirillaTokenizer,
+                model:Cirilla,
+                hf_repo:str,
+                optimizers_dict:dict,
+                termination_tokens:list[int]=None,
+                pad_token:str='<pad>',
+                user_token:str='<|user|>',
+                epsilon:float=0.1,
+                beta:float=0.1,):
+        
+        self.dbms = grpo_dbms
+        self.tokenizer = tokenizer
+        self.model = model
+        
+        if termination_tokens is None:
+            self.termination_tokens = [self.tokenizer.convert_tokens_to_ids('<eos>'), self.tokenizer.convert_tokens_to_ids('<|user|>')]
+        else:
+            self.termination_tokens = termination_tokens
+
+        self.pad_token_id = self.tokenizer.convert_tokens_to_ids(pad_token)
+        self.pad_token = pad_token
+        self.user_token = user_token
+
+        dummy_training_args = TrainingArgs(
+                                    n_epoch=16,
+                                    save_checkpoint_min=15,
+                                    use_muon_optim=True,
+                                    fuse_optim=False,
+                                    batch_size=64,
+                                    local_checkpoint_folder=f'./{hf_repo.split("/")[-1]}',
+                                    hf_repo_id=hf_repo,
+                                    private_hf_repo=True
+                                    )
+        self.dummy_trainer = CirillaTrainer(model, dummy_training_args)
+        self.dummy_trainer.optims_to_save = optimizers_dict
+        self.optimizers_dict = optimizers_dict
+
+        self.criterion = GRPO(epsilon=epsilon, beta=beta)
+    
+    def train(self,
+            n_epochs:int=4,
+            batch_size:int=16,
+            n_iter_checkpoints:int=4,
+            test_prompts:list[str] = ['What is a troll?', 'Who is Geralt?', 'Who is Cirilla?'],
+            save_gen_path:Path=None
+                ):
+
+        batched_chat_prompts = [[{'role': 'user', 'content': p}] for p in test_prompts]
+
+        batched_chat_prompts = self.tokenizer.apply_chat_template(batched_chat_prompts, padding='do_not_pad', add_generation_prompt=True)
+        
+        self.dbms.populate_prompt_table()
+
+        for epoch in range(n_epochs):
+
+            epoch_loss = 0
+            _n = 0
+
+            self.dbms.crg.model.to(self.model.args.device)
+            self.dbms.sample()
+
+            # Offload generation model to CPU
+            self.dbms.crg.model.to('cpu')
+            self.model.to('cpu')
+            torch.cuda.empty_cache()
+
+            self.dbms.evaluate()
+            
+            dataset = GRPO_IterablaDataset(
+                grpo_dbms=self.dbms,
+                tokenizer=self.tokenizer,
+                device=self.model.args.device,
+                pad_token=self.pad_token,
+                user_token=self.user_token
+            )
+            
+            dataloader = DataLoader(dataset, batch_size=batch_size, collate_fn=GRPO_Collator(self.pad_token_id))
+            
+            self.model.to(self.model.args.device)
+            self.model.train()
+
+            for batch_idx, batch in enumerate(dataloader):
+
+                input_ids, labels, log_probs, scores = batch
+                input_ids = input_ids.to(self.model.args.device)
+                labels = labels.to(self.model.args.device)
+                scores = scores.to(self.model.args.device)
+
+                B, G, S = input_ids.shape
+
+                _old_log_probs = torch.zeros((B, G, S), dtype=self.model.args.dtype, device=self.model.args.device)
+                training_mask = (labels != self.pad_token_id)
+
+                for i, group in enumerate(log_probs):
+                    for j, seq_tensor in enumerate(group):
+                        ans_len = len(seq_tensor)
+                        full_seq_len = (input_ids[i, j] != self.pad_token_id).sum().item()
+                        offset = full_seq_len - ans_len
+                        
+                        if offset < 0: offset = 0 
+
+                        _old_log_probs[i, j, offset : offset + ans_len] = seq_tensor.to(self.model.args.device)
+                        
+                        training_mask[i, j, :offset] = False
+                        training_mask[i, j, offset + ans_len:] = False
+
+                input_ids_flat = input_ids.view(-1, S)
+                
+                new_log_probs_flat = self.model.get_per_token_log_probs(input_ids_flat) # (B*G, S-1)
+                new_log_probs = new_log_probs_flat.view(B, G, S - 1)
+
+                _old_log_probs_sliced = _old_log_probs[:, :, 1:]
+                training_mask_sliced = training_mask[:, :, 1:]
+
+                loss = self.criterion(
+                    model_log_probs=new_log_probs,
+                    old_model_log_probs=_old_log_probs_sliced,
+                    reference_model_log_probs=_old_log_probs_sliced,
+                    rewards=scores,
+                    mask=training_mask_sliced
+                )
+                
+                print(f"Batch {batch_idx} Loss: {loss.item()}")
+
+                epoch_loss += loss.item() * (B * G)
+                _n += (B * G)
+
+                loss.backward()
+
+                for optim in self.optimizers_dict.values():
+                    optim.step()
+
+                for optim in self.optimizers_dict.values():
+                    optim.zero_grad(set_to_none=True)
+
+                if batch_idx % n_iter_checkpoints == 0:
+                    self.dummy_trainer._save_local_checkpoint()
+
+            print(f"Epoch {epoch} Loss: {epoch_loss / _n}\n")
+
+            with torch.inference_mode():
+                test_outputs = self.model.generate_kv_cache(
+                    batched_chat_prompts, 
+                    termination_tokens=self.termination_tokens, 
+                    pad_token_id=self.pad_token_id
+                )
+                model.clear_cache()
+            
+            for i in range(test_outputs.shape[0]):
+                pred_text = self.tokenizer.decode(test_outputs[i].tolist())
+                clean_pred = pred_text.replace('<pad>', '').replace('<|user|>', '').replace('<|assistant|>', '').strip()
+                print(f"Sample {i}: {clean_pred}")
+            print("-------------------------------------------------\n")
+
+            if save_gen_path is not None:
+                gen_data = self.dbms.get_generated()
+                with open(save_gen_path, 'a') as f:
+                    for d in gen_data:
+                        json.dump(d, f)
+                        f.write('\n')
+
+            self.dbms.drop_generated_tables()
+
+        self.dummy_trainer._push_all_to_hub(epoch_loss / _n if _n > 0 else 0, 'grpo_training')
+        self.tokenizer.push_to_hub(hf_repo)
 
 if __name__ == "__main__":
-    from torch.utils.data import DataLoader
-    from cirilla.Cirilla_model import CirillaTokenizer, CirillaTrainer, TrainingArgs
-    from cirilla.RL.GRPO.grpo_loss import GRPO
-    from cirilla.Cirilla_model import Cirilla, Args, get_optims
-    import random
 
     save_gen_path = './saved_grpo_answers.jsonl'
     hf_repo = 'AnthonyPa57/Cirilla-0.3B-4E-grpo'
@@ -311,128 +477,18 @@ if __name__ == "__main__":
                                 optim=torch.optim.AdamW,
                                 lr=1e-5, weight_decay=1e-5,
                                 )
-    
-    dummy_training_args = TrainingArgs(
-                                        n_epoch=16,
-                                        save_checkpoint_min=15,
-                                        use_muon_optim=True,
-                                        fuse_optim=False,
-                                        batch_size=64,
-                                        local_checkpoint_folder=f'./{hf_repo.split("/")[-1]}',
-                                        hf_repo_id=hf_repo,
-                                        private_hf_repo=True
-                                        )
-    
-    dummy_trainer = CirillaTrainer(model, dummy_training_args)
-    dummy_trainer.optims_to_save = {'muon_opt': muon_opt, 'adam_opt': adam_opt}
 
-    criterion = GRPO(epsilon=0.1, beta=0.1)
-    dbms.populate_prompt_table()
+    grpo_engine = GRPO_Engine(
+        grpo_dbms=dbms,
+        tokenizer=tokenizer,
+        model=model,
+        hf_repo=hf_repo,
+        optimizers_dict={'muon_opt': muon_opt, 'adam_opt': adam_opt},
+    )
 
-    for epoch in range(4):
-
-        epoch_loss = 0
-        _n = 0
-
-        dbms.crg.model.to(model.args.device)
-        dbms.sample() 
-
-        dbms.crg.model.to('cpu')
-        model.to('cpu')
-        torch.cuda.empty_cache()
-
-        dbms.evaluate()
-        
-        dataset = GRPO_IterablaDataset(
-            grpo_dbms=dbms,
-            tokenizer=tokenizer,
-            device=model.args.device,
-            pad_token='<pad>',
-            user_token='<|user|>'
-        )
-        
-        pad_token_id = tokenizer.convert_tokens_to_ids('<pad>')
-        dataloader = DataLoader(dataset, batch_size=2, collate_fn=GRPO_Collator(pad_token_id))
-        model.to(model.args.device)
-        model.train()
-
-        for batch_idx, batch in enumerate(dataloader):
-
-            input_ids, labels, log_probs, scores = batch
-            input_ids = input_ids.to(model.args.device)
-            labels = labels.to(model.args.device)
-            scores = scores.to(model.args.device)
-
-            B, G, S = input_ids.shape
-
-            _old_log_probs = torch.zeros((B, G, S), dtype=torch.bfloat16, device=model.args.device)
-            training_mask = (labels != pad_token_id)
-
-            for i, group in enumerate(log_probs):
-                for j, seq_tensor in enumerate(group):
-                    ans_len = len(seq_tensor)
-                    full_seq_len = (input_ids[i, j] != pad_token_id).sum().item()
-                    offset = full_seq_len - ans_len
-                    
-                    if offset < 0: offset = 0 
-
-                    _old_log_probs[i, j, offset : offset + ans_len] = seq_tensor.to(model.args.device)
-                    training_mask[i, j, :offset] = False
-                    training_mask[i, j, offset + ans_len:] = False
-
-            input_ids_flat = input_ids.view(-1, S)
-            
-            new_log_probs_flat = model.get_per_token_log_probs(input_ids_flat) # (B*G, S-1)
-            new_log_probs = new_log_probs_flat.view(B, G, S - 1)
-
-            _old_log_probs_sliced = _old_log_probs[:, :, 1:]
-            training_mask_sliced = training_mask[:, :, 1:]
-
-            loss = criterion(
-                model_log_probs=new_log_probs,
-                old_model_log_probs=_old_log_probs_sliced,
-                reference_model_log_probs=_old_log_probs_sliced,
-                rewards=scores,
-                mask=training_mask_sliced
-            )
-            
-            print(f"Batch {batch_idx} Loss: {loss.item()}")
-
-            epoch_loss += loss
-            _n += 1
-
-            loss.backward()
-
-            muon_opt.step()
-            adam_opt.step()
-
-            muon_opt.zero_grad(set_to_none=True)
-            adam_opt.zero_grad(set_to_none=True)
-
-            if batch_idx % 10 == 0:
-                dummy_trainer._save_local_checkpoint()
-
-        print(f"Epoch {epoch} Loss: {epoch_loss / _n}")
-
-        preview_B = random.sample(range(B), min(B, 3))
-        sample_inputs = input_ids[preview_B, [0 for _ in range(G)], :].to(model.args.device)
-        with torch.no_grad():
-            logits = model.infer(sample_inputs) # (B, S, V)
-        pred_ids = torch.argmax(logits, dim=-1) # (B, S)
-        
-        for i in range(len(preview_B)):
-            pred_text = tokenizer.decode(pred_ids[i].tolist())
-            clean_pred = pred_text.replace('<pad>', '').replace('<|user|>', '').replace('<|assistant|>', '').strip()
-            print(f"Sample {i}: {clean_pred}")
-        print("-------------------------------------------------\n")
-
-        gen_data = dbms.get_generated()
-        with open(save_gen_path, 'a') as f:
-            for d in gen_data:
-                json.dump(d, f)
-                f.write('\n')
-
-        dbms.drop_generated_tables()
-
-    dummy_trainer._push_all_to_hub(epoch_loss / _n, 'grpo_training')
-    tokenizer.push_to_hub(hf_repo)
+    grpo_engine.train(
+        n_epochs=4,
+        batch_size=16,
+        n_iter_checkpoints=10,
+        save_gen_path=save_gen_path
+    )
