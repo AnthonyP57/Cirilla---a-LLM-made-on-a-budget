@@ -287,6 +287,8 @@ if __name__ == "__main__":
     from cirilla.Cirilla_model import CirillaTokenizer
     from cirilla.RL.GRPO.grpo_loss import GRPO
     from cirilla.Cirilla_model import Cirilla, Args, get_optims
+
+    save_gen_path = './saved_grpo_answers.jsonl'
     
     gen_config = {'batch_size': 2, 'n_generate_with_kv_cache': 1, 'n_generate_naive': 1}
     
@@ -298,93 +300,96 @@ if __name__ == "__main__":
 
     tokenizer = CirillaTokenizer(hub_url='AnthonyPa57/Cirilla-0.3B-4E')
 
-    # Pull model (force_eager=True is often safer for debugging custom loops)
-    model = Cirilla(Args())
+    model = Cirilla(Args(torch_compile=False))
     model.pull_model_from_hub('AnthonyPa57/Cirilla-0.3B-4E', map_device='cuda:0', force_dynamic_mask=True, force_eager=True)
 
     muon_opt, adam_opt = get_optims(
                                 model,
                                 use_muon_optim=True,
                                 optim=torch.optim.AdamW,
-                                lr=5e-4, weight_decay=1e-5,
+                                lr=1e-5, weight_decay=1e-5,
                                 )
     
     criterion = GRPO(epsilon=0.1, beta=0.1)
-
     dbms.populate_prompt_table()
-    dbms.sample() 
-    dbms.crg.model.to('cpu')
-    dbms.evaluate()
-    
-    dataset = GRPO_IterablaDataset(
-        grpo_dbms=dbms,
-        tokenizer=tokenizer,
-        device='cpu',
-        pad_token='<pad>',
-        user_token='<|user|>'
-    )
-    
-    pad_token_id = tokenizer.convert_tokens_to_ids('<pad>')
-    dataloader = DataLoader(dataset, batch_size=2, collate_fn=GRPO_Collator(pad_token_id))
 
-    model.train()
+    for _ in range(10):
 
-    for batch_idx, batch in enumerate(dataloader):
-
-        input_ids, labels, log_probs, scores = batch
-        input_ids = input_ids.to(model.args.device)
-        labels = labels.to(model.args.device)
-        scores = scores.to(model.args.device)
-
-        B, G, S = input_ids.shape
-
-        # Initialize full size first
-        _old_log_probs = torch.zeros((B, G, S), dtype=torch.bfloat16, device=model.args.device)
-        training_mask = (labels != pad_token_id)
-
-        for i, group in enumerate(log_probs):
-            for j, seq_tensor in enumerate(group):
-                ans_len = len(seq_tensor)
-                full_seq_len = (input_ids[i, j] != pad_token_id).sum().item()
-                offset = full_seq_len - ans_len
-                
-                if offset < 0: offset = 0 
-
-                _old_log_probs[i, j, offset : offset + ans_len] = seq_tensor.to(model.args.device)
-                training_mask[i, j, :offset] = False
-
-        # --- FIX START ---
-        # Flatten input for the model
-        input_ids_flat = input_ids.view(-1, S)
+        dbms.crg.model.to(model.args.device)
+        dbms.sample() 
+        dbms.crg.model.to('cpu')
+        model.to('cpu')
+        dbms.evaluate()
         
-        # Get new log probs (Shape: B*G, S-1)
-        new_log_probs_flat = model.get_per_token_log_probs(input_ids_flat) 
-        
-        # Reshape to (B, G, S-1)
-        new_log_probs = new_log_probs_flat.view(B, G, S - 1)
-
-        # Slice old_log_probs and mask to match (drop the first token)
-        # new_log_probs[t] predicts token t+1. 
-        # _old_log_probs[t+1] stores the probability of token t+1.
-        # So we align new[0:] with old[1:]
-        _old_log_probs_sliced = _old_log_probs[:, :, 1:]
-        training_mask_sliced = training_mask[:, :, 1:]
-
-        loss = criterion(
-            model_log_probs=new_log_probs,
-            old_model_log_probs=_old_log_probs_sliced,
-            reference_model_log_probs=_old_log_probs_sliced,
-            rewards=scores,
-            mask=training_mask_sliced
+        dataset = GRPO_IterablaDataset(
+            grpo_dbms=dbms,
+            tokenizer=tokenizer,
+            device=model.args.device,
+            pad_token='<pad>',
+            user_token='<|user|>'
         )
-        # --- FIX END ---
         
-        print(f"Batch {batch_idx} Loss: {loss.item()}")
+        pad_token_id = tokenizer.convert_tokens_to_ids('<pad>')
+        dataloader = DataLoader(dataset, batch_size=2, collate_fn=GRPO_Collator(pad_token_id))
+        model.to(model.args.device)
+        model.train()
 
-        loss.backward()
+        for batch_idx, batch in enumerate(dataloader):
 
-        muon_opt.step()
-        adam_opt.step()
+            input_ids, labels, log_probs, scores = batch
+            input_ids = input_ids.to(model.args.device)
+            labels = labels.to(model.args.device)
+            scores = scores.to(model.args.device)
 
-        muon_opt.zero_grad()
-        adam_opt.zero_grad()
+            B, G, S = input_ids.shape
+
+            _old_log_probs = torch.zeros((B, G, S), dtype=torch.bfloat16, device=model.args.device)
+            training_mask = (labels != pad_token_id)
+
+            for i, group in enumerate(log_probs):
+                for j, seq_tensor in enumerate(group):
+                    ans_len = len(seq_tensor)
+                    full_seq_len = (input_ids[i, j] != pad_token_id).sum().item()
+                    offset = full_seq_len - ans_len
+                    
+                    if offset < 0: offset = 0 
+
+                    _old_log_probs[i, j, offset : offset + ans_len] = seq_tensor.to(model.args.device)
+                    training_mask[i, j, :offset] = False
+                    training_mask[i, j, offset + ans_len:] = False
+
+            input_ids_flat = input_ids.view(-1, S)
+            
+            new_log_probs_flat = model.get_per_token_log_probs(input_ids_flat) # (B*G, S-1)
+            new_log_probs = new_log_probs_flat.view(B, G, S - 1)
+
+            _old_log_probs_sliced = _old_log_probs[:, :, 1:]
+            training_mask_sliced = training_mask[:, :, 1:]
+
+            loss = criterion(
+                model_log_probs=new_log_probs,
+                old_model_log_probs=_old_log_probs_sliced,
+                reference_model_log_probs=_old_log_probs_sliced,
+                rewards=scores,
+                mask=training_mask_sliced
+            )
+            
+            print(f"Batch {batch_idx} Loss: {loss.item()}")
+
+            print(new_log_probs.shape, new_log_probs[0, 0], _old_log_probs_sliced.shape, _old_log_probs_sliced[0, 0], training_mask_sliced.shape, training_mask_sliced[0, 0], scores.shape, scores[0, 0])
+
+            loss.backward()
+
+            muon_opt.step()
+            adam_opt.step()
+
+            muon_opt.zero_grad()
+            adam_opt.zero_grad()
+
+        gen_data = dbms.get_generated()
+        with open(save_gen_path, 'a') as f:
+            for d in gen_data:
+                json.dump(d, f)
+                f.write('\n')
+
+        dbms.drop_generated_tables()

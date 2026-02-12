@@ -26,6 +26,10 @@ class CirillaBaseModel(PyTorchModelHubMixin):
                     self.args.output_moe_weights = False
             if map_device is not None:
                 self.args.device = map_device
+
+            if force_eager:
+                self.args.torch_compile = False
+
             self._prepare_model()
 
         file_path = hf_hub_download(
@@ -37,15 +41,7 @@ class CirillaBaseModel(PyTorchModelHubMixin):
         if "output.weight" not in loaded:
             loaded['output.weight'] = loaded["emb.embeddings.weight"]
 
-        if force_dynamic_mask:
-            for att in self.decoder.attentions:
-                att.static_mask = False
-                att.mask = create_dynamic_block_mask
-
-        if force_eager:
-            self.args.torch_compile = False
-
-        if inference_mode:
+        if inference_mode or force_eager:
             new_state_dict = {}
             for key, value in loaded.items():
                 if "_orig_mod." in key:
@@ -54,7 +50,7 @@ class CirillaBaseModel(PyTorchModelHubMixin):
                 else:
                     new_state_dict[key] = value
 
-            if hasattr(self, 'decoder'):
+            if (inference_mode and hasattr(self, 'decoder')) or force_dynamic_mask:
                 for att in self.decoder.attentions:
                     att.static_mask = False
                     att.mask = create_dynamic_block_mask

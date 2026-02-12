@@ -11,7 +11,7 @@ MODEL_NAME = "mistralai/Ministral-3-3B-Instruct-2512"
 MAX_MODEL_LEN = 1024
 GPU_UTILIZATION = 0.9
 MAX_RETRIES = 3
-CONTEXT_LENGTH_THRESHOLD = 450
+CONTEXT_LENGTH_THRESHOLD = 350
 MISTRAL_API_KEY = os.environ.get("MISTRAL_API_KEY", "your_api_key_here") 
 
 SYS_PROMPT = """You are an expert evaluator for a RAG (Retrieval Augmented Generation) system. 
