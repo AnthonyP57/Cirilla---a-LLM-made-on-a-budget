@@ -15,7 +15,7 @@ class GRPO_DBMS:
                 local_folder:str='./GRPO_data', max_len:int=2048):
         
         self.model_hub_url = model_hub_url
-        self.prompt_dataset = load_dataset(prompt_dataset_hub_url, split='train[:6]')
+        self.prompt_dataset = load_dataset(prompt_dataset_hub_url, split='train[:7]')
         self.generation_config = generation_config
 
         self.crg = CirillaResponseGenerator(model_hub_url)
@@ -284,11 +284,13 @@ class GRPO_Collator:
 
 if __name__ == "__main__":
     from torch.utils.data import DataLoader
-    from cirilla.Cirilla_model import CirillaTokenizer
+    from cirilla.Cirilla_model import CirillaTokenizer, CirillaTrainer, TrainingArgs
     from cirilla.RL.GRPO.grpo_loss import GRPO
     from cirilla.Cirilla_model import Cirilla, Args, get_optims
+    import random
 
     save_gen_path = './saved_grpo_answers.jsonl'
+    hf_repo = 'AnthonyPa57/Cirilla-0.3B-4E-grpo'
     
     gen_config = {'batch_size': 2, 'n_generate_with_kv_cache': 1, 'n_generate_naive': 1}
     
@@ -310,15 +312,35 @@ if __name__ == "__main__":
                                 lr=1e-5, weight_decay=1e-5,
                                 )
     
+    dummy_training_args = TrainingArgs(
+                                        n_epoch=16,
+                                        save_checkpoint_min=15,
+                                        use_muon_optim=True,
+                                        fuse_optim=False,
+                                        batch_size=64,
+                                        local_checkpoint_folder=f'./{hf_repo.split("/")[-1]}',
+                                        hf_repo_id=hf_repo,
+                                        private_hf_repo=True
+                                        )
+    
+    dummy_trainer = CirillaTrainer(model, dummy_training_args)
+    dummy_trainer.optims_to_save = {'muon_opt': muon_opt, 'adam_opt': adam_opt}
+
     criterion = GRPO(epsilon=0.1, beta=0.1)
     dbms.populate_prompt_table()
 
-    for _ in range(10):
+    for epoch in range(4):
+
+        epoch_loss = 0
+        _n = 0
 
         dbms.crg.model.to(model.args.device)
         dbms.sample() 
+
         dbms.crg.model.to('cpu')
         model.to('cpu')
+        torch.cuda.empty_cache()
+
         dbms.evaluate()
         
         dataset = GRPO_IterablaDataset(
@@ -376,15 +398,33 @@ if __name__ == "__main__":
             
             print(f"Batch {batch_idx} Loss: {loss.item()}")
 
-            print(new_log_probs.shape, new_log_probs[0, 0], _old_log_probs_sliced.shape, _old_log_probs_sliced[0, 0], training_mask_sliced.shape, training_mask_sliced[0, 0], scores.shape, scores[0, 0])
+            epoch_loss += loss
+            _n += 1
 
             loss.backward()
 
             muon_opt.step()
             adam_opt.step()
 
-            muon_opt.zero_grad()
-            adam_opt.zero_grad()
+            muon_opt.zero_grad(set_to_none=True)
+            adam_opt.zero_grad(set_to_none=True)
+
+            if batch_idx % 10 == 0:
+                dummy_trainer._save_local_checkpoint()
+
+        print(f"Epoch {epoch} Loss: {epoch_loss / _n}")
+
+        preview_B = random.sample(range(B), min(B, 3))
+        sample_inputs = input_ids[preview_B, [0 for _ in range(G)], :].to(model.args.device)
+        with torch.no_grad():
+            logits = model.infer(sample_inputs) # (B, S, V)
+        pred_ids = torch.argmax(logits, dim=-1) # (B, S)
+        
+        for i in range(len(preview_B)):
+            pred_text = tokenizer.decode(pred_ids[i].tolist())
+            clean_pred = pred_text.replace('<pad>', '').replace('<|user|>', '').replace('<|assistant|>', '').strip()
+            print(f"Sample {i}: {clean_pred}")
+        print("-------------------------------------------------\n")
 
         gen_data = dbms.get_generated()
         with open(save_gen_path, 'a') as f:
@@ -393,3 +433,6 @@ if __name__ == "__main__":
                 f.write('\n')
 
         dbms.drop_generated_tables()
+
+    dummy_trainer._push_all_to_hub(epoch_loss / _n, 'grpo_training')
+    tokenizer.push_to_hub(hf_repo)

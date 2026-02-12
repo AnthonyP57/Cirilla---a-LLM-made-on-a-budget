@@ -92,14 +92,20 @@ class CirillaSampler:
 
         for _ in range(n_generate_with_kv_cache):
             _prompt_dataset = iter(prompt_dataset)
-            for _ in range(math.ceil(len(out) / batch_size)):
+            for _ in range(math.ceil(len(prompt_dataset) / batch_size)):
                 ids = []
                 prompts = []
                 for _ in range(batch_size):
-                    line = next(_prompt_dataset)
-                    if line != '':
-                        ids.append(line['id'])
-                        prompts.append(line['prompt'])
+                    try:
+                        line = next(_prompt_dataset)
+                        if line != '':
+                            ids.append(line['id'])
+                            prompts.append(line['prompt'])
+                    except StopIteration:
+                        break
+                
+                if not prompts:
+                    continue
 
                 answers_kv = crg.generate_batch(prompts, kv_cache=True)
 
