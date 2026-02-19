@@ -5,13 +5,18 @@ from typing import List, Any, Dict
 from pathlib import Path
 from vllm import LLM, SamplingParams
 from rich.progress import Progress, TextColumn, BarColumn, TimeElapsedColumn, TimeRemainingColumn
-from mistralai import Mistral 
+from mistralai import Mistral
+from dotenv import load_dotenv
+import concurrent.futures
+
+load_dotenv()
 
 MODEL_NAME = "mistralai/Ministral-3-3B-Instruct-2512"
-MAX_MODEL_LEN = 1024
-GPU_UTILIZATION = 0.9
+MAX_MODEL_LEN = 4096
+GPU_UTILIZATION = 0.8
 MAX_RETRIES = 3
-CONTEXT_LENGTH_THRESHOLD = 300
+CONTEXT_LENGTH_THRESHOLD = 1024
+MAX_WORDS_THRESHOLD = 4096
 MISTRAL_API_KEY = os.environ.get("MISTRAL_API_KEY", "your_api_key_here") 
 
 SYS_PROMPT = """You are an expert evaluator for a RAG (Retrieval Augmented Generation) system. 
@@ -21,9 +26,9 @@ Output a valid JSON object with the following structure:
 ```json
 {
     "reasoning": <str, very short explanation why did you score the answer in such a way, max 30 words>,
-    "grammar": <int, score this answer from 0 to 5 for grammar>,
-    "logic": <int, score this answer from 0 to 10 based on the logic, e.g. if there are repetitions or the answer doesn't make sense or isn't grounded in the context>,
-    "encompassment": <int, the answer should answer the question as much as the information can be found in the context, if the answer doesn't make sense or answer the question then 0, score this metric from 0 to 5>
+    "grammar": <int, score this answer from 0 to 4 for grammar>,
+    "logic": <int, score this answer from 0 to 3 based on the logic, e.g. if there are repetitions or the answer doesn't make sense or isn't grounded in the context>,
+    "encompassment": <int, the answer should answer the question as much as the information can be found in the context, if the answer doesn't make sense or answer the question then 0, score this metric from 0 to 3>
 }
 ```"""
 
@@ -65,7 +70,7 @@ def parse_model_output(text: str) -> Dict[str, Any]:
 def call_mistral_api(client, user_content):
     try:
         response = client.chat.complete(
-            model="mistral-large-latest",
+            model="ministral-3b-2512",
             messages=[
                 {"role": "system", "content": SYS_PROMPT},
                 {"role": "user", "content": user_content}
@@ -89,7 +94,7 @@ def run_evaluation(input_file: str, output_file: str, batch_size: int = 256, id_
         print("No data to process.")
         return
     
-    mistral_client = Mistral(api_key=MISTRAL_API_KEY)
+    mistral_client = Mistral(api_key=MISTRAL_API_KEY, timeout_ms=10000)
 
     print(f"Loading Model {MODEL_NAME}...")
     llm = LLM(
@@ -112,10 +117,15 @@ def run_evaluation(input_file: str, output_file: str, batch_size: int = 256, id_
             f"And this prompt:\n{entry.get('prompt', '')}\n\n"
             f"Assess this answer:\n{entry.get('answer', '')}"
         )
-        
-        context_len = len(entry.get('context', '').split())
+        _ctx = entry.get('context', '').split()
+        context_len = len(_ctx)
         if context_len > CONTEXT_LENGTH_THRESHOLD:
-            api_processing_queue.append((idx, user_content))
+            short_user_content = (
+                f"Based solely on this context:\n{' '.join(_ctx[:MAX_WORDS_THRESHOLD])}\n\n"
+                f"And this prompt:\n{entry.get('prompt', '')}\n\n"
+                f"Assess this answer:\n{entry.get('answer', '')}"
+            )
+            api_processing_queue.append((idx, short_user_content))
         else:
             conversation = [
                 {"role": "system", "content": SYS_PROMPT},
@@ -184,12 +194,15 @@ def run_evaluation(input_file: str, output_file: str, batch_size: int = 256, id_
 
         if api_processing_queue:
             api_task = progress.add_task("Scoring (API)...", total=len(api_processing_queue))
-            for global_idx, user_content in api_processing_queue:
+
+            def process_api_request(item):
+                global_idx, user_content = item
                 
                 raw_text = call_mistral_api(mistral_client, user_content)
                 parsed_json = parse_model_output(raw_text) if raw_text else None
                 
                 entry = {id_col_name: data[global_idx].get(id_col_name)}
+                
                 if parsed_json:
                     entry['score'] = parsed_json
                     try:
@@ -198,37 +211,27 @@ def run_evaluation(input_file: str, output_file: str, batch_size: int = 256, id_
                             float(parsed_json.get('logic', 0)) + 
                             float(parsed_json.get('encompassment', 0))
                         )
-                    except: entry['total_score'] = 0.0
+                    except (ValueError, TypeError): 
+                        entry['total_score'] = 0.0
                 else:
                     entry['score'] = {"error": "api_failed", "raw": raw_text}
                     entry['total_score'] = 0.0
+                    
+                return global_idx, entry
+
+            with concurrent.futures.ThreadPoolExecutor(max_workers=min(os.cpu_count(), 4)) as executor: # rate limits
+                futures = [executor.submit(process_api_request, item) for item in api_processing_queue]
                 
-                results[global_idx] = entry
-                progress.update(api_task, advance=1)
+                for future in concurrent.futures.as_completed(futures):
+                    try:
+                        g_idx, res_entry = future.result()
+                        results[g_idx] = res_entry
+                        
+                    except Exception as e:
+                        print(f"An error occurred in a thread: {e}")
+                    finally:
+                        progress.update(api_task, advance=1)
 
     clean_results = [r for r in results if r is not None]
     save_jsonl(clean_results, output_file)
 
-if __name__ == "__main__":
-    test_input = "input_eval.jsonl"
-    if not Path(test_input).exists():
-        with open(test_input, 'w') as f:
-            for _ in range(1000):
-                dummy = {
-                    "id": 0,
-                    "context": "Geralt hates portals. " * 100,
-                    "prompt": "What does Geralt think of portals?",
-                    "answer": "He loves them."
-                }
-                f.write(json.dumps(dummy) + "\n")
-
-            for _ in range(10):
-                dummy_long = {
-                    "id": 1,
-                    "context": "Long Context " * 1000,
-                    "prompt": "Test",
-                    "answer": "Test"
-                }
-                f.write(json.dumps(dummy_long) + "\n")
-            
-    run_evaluation(input_file=test_input, output_file="scored_output.jsonl")

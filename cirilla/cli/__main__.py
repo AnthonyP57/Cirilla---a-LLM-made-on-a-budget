@@ -9,7 +9,7 @@ from cirilla.Cirilla_model import Cirilla
 from cirilla.Cirilla_model import CirillaTokenizer
 from cirilla.Cirilla_model.modules import select_torch_device
 
-SAVED_HISTORY = ["Cirilla"]
+SAVED_HISTORY = []
 
 def save_to_history_in_file(model_name: str):
     global SAVED_HISTORY
@@ -44,6 +44,8 @@ class ModelSelectScreen(Screen):
             
             yield Label("Featured Models:", classes="section-label")
             yield Button("Cirilla-0.3B-4E", id="btn-large")
+            yield Button("Cirilla-0.3B-4E-grpo", id="btn-large2")
+            yield Button("Cirilla-0.3B-4E-grpo-icl", id="btn-large3")
 
             if SAVED_HISTORY:
                 yield Label("Recent Inputs:", classes="section-label")

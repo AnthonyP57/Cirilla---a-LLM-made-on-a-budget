@@ -4,6 +4,12 @@ from cirilla.Cirilla_model.modules import select_torch_device
 from datasets import Dataset
 import torch
 import math
+from mistralai import Mistral
+from dotenv import load_dotenv
+import os
+import json
+from concurrent.futures import ThreadPoolExecutor
+from tqdm import tqdm
 
 class CirillaResponseGenerator:
     def __init__(self, hub_url):
@@ -17,7 +23,7 @@ class CirillaResponseGenerator:
                                 'top_p':0.2,
                                 'top_k':None,
                                 'temperature':1.0,
-                                'n_beams':3,
+                                'n_beams':2,
                                 }
 
     def generate_batch(self, prompt:str, n:int=1, kv_cache:bool=True):
@@ -70,52 +76,138 @@ class CirillaSampler:
         self.crg = crg
         self.user_token = [self.crg.tokenizer.convert_tokens_to_ids(user_token)]
 
-    def sample(self, prompt_dataset:Dataset, batch_size:int=32, n_generate_with_kv_cache:int=1, n_generate_naive:int=2):
+    def sample(self, prompt_dataset:Dataset, batch_size:int=32, n_generate_with_kv_cache:int=1, n_generate_naive:int=2, generate_mistral:int=0, store_mistral_answers:str='./mistral_answers.jsonl'):
 
         crg = self.crg
 
         out = []
         j = 0
 
-        for line in prompt_dataset:
-            id = line['id']
-            prompt = line['prompt']
-            answers_naive = crg.generate_batch(prompt, n=n_generate_naive, kv_cache=False)
+        if n_generate_naive > 0:
 
-            for ans in answers_naive:
-                out.append({
-                    'id': id,
-                    'answer': ans,
-                    'log_probs_id':j
-                })
-                j += 1
+            for line in tqdm(prompt_dataset, desc="Naive sampling"):
+                id = line['id']
+                prompt = line['prompt']
+                answers_naive = crg.generate_batch(prompt, n=n_generate_naive, kv_cache=False)
 
-        for _ in range(n_generate_with_kv_cache):
-            _prompt_dataset = iter(prompt_dataset)
-            for _ in range(math.ceil(len(prompt_dataset) / batch_size)):
-                ids = []
-                prompts = []
-                for _ in range(batch_size):
-                    try:
-                        line = next(_prompt_dataset)
-                        if line != '':
-                            ids.append(line['id'])
-                            prompts.append(line['prompt'])
-                    except StopIteration:
-                        break
-                
-                if not prompts:
-                    continue
-
-                answers_kv = crg.generate_batch(prompts, kv_cache=True)
-
-                for ans, id in zip(answers_kv, ids):
+                for ans in answers_naive:
                     out.append({
                         'id': id,
                         'answer': ans,
                         'log_probs_id':j
                     })
                     j += 1
+
+        if n_generate_with_kv_cache > 0:
+
+            for i in range(n_generate_with_kv_cache):
+                _prompt_dataset = iter(prompt_dataset)
+                for _ in tqdm(range(math.ceil(len(prompt_dataset) / batch_size)), desc=f"KV sampling {i+1}/{n_generate_with_kv_cache}"):
+                    ids = []
+                    prompts = []
+                    for _ in range(batch_size):
+                        try:
+                            line = next(_prompt_dataset)
+                            if line != '':
+                                ids.append(line['id'])
+                                prompts.append(line['prompt'])
+                        except StopIteration:
+                            break
+                    
+                    if not prompts:
+                        continue
+
+                    answers_kv = crg.generate_batch(prompts, kv_cache=True)
+
+                    for ans, id in zip(answers_kv, ids):
+                        out.append({
+                            'id': id,
+                            'answer': ans,
+                            'log_probs_id':j
+                        })
+                        j += 1
+
+        if generate_mistral > 0:
+
+            if store_mistral_answers is not None and os.path.exists(store_mistral_answers):
+                with open(store_mistral_answers, 'r') as f:
+                    for line in f:
+                        line = json.loads(line)
+                        out.append({
+                            'id': line['id'],
+                            'answer': line['answer'],
+                            'log_probs_id':j
+                        })
+                        j += 1
+
+            else:
+
+                load_dotenv()
+
+                SYS_PROMPT = """\
+                Based on the context and the prompt you should generate an answer that would satisfy the following criteria:
+                - correct grammar
+                - correct logic
+                - the answer is only based on the context
+                - the answer has to be as short as possible, it does not need to encompass the whole prompt but it has to answer it, use up to 20 words to answer the prompt
+                - the answer has to use simple terms, pretend you are a very simple chatbot that is supposed to accurately answer the question based on the context, no elaboration
+                - the answer cannot contain any markdown, like ** or _ or * etc.
+                - the answer cannot contain any code blocks, like ``` or \`\`\`
+                
+                example prompt: Which two kings did Dethmold serve in The Witcher 2: Assassins of Kings?
+                example answer: King Esterad and King Henselt of Kaedwen.
+                
+                example prompt: In which book does the story of Ciri entering a portal and becoming trapped in a different world first appear?
+                example answer: The Lady of the Lake.
+                
+                example prompt: Who is Geralt of Rivia, and what is his role in The Witcher universe?
+                example answer: Geralt of Rivia is a highly skilled witcher known for his ability to hunt and defeat supernatural creatures. He serves as the protagonist in the Witcher series."""
+
+                MISTRAL_API_KEY = os.environ.get("MISTRAL_API_KEY", "your_api_key_here")
+                client = Mistral(api_key=MISTRAL_API_KEY, timeout_ms=10000)
+
+                def _mistral_call(client, prompt, context):
+                    try:
+                        response = client.chat.complete(
+                            model="ministral-8b-2512",
+                            messages=[
+                                {"role": "system", "content": SYS_PROMPT},
+                                {"role": "user", "content": f"Context: {context}\nPrompt: {prompt}"}
+                            ],
+                            temperature=0.2,
+                        )
+                        return response.choices[0].message.content.replace('*', '')
+                    except Exception as e:
+                        print(f"API Error: {e}")
+                        return ""
+
+                with ThreadPoolExecutor(max_workers=min(os.cpu_count(), 2)) as executor: # rate limits
+
+                    if store_mistral_answers is not None:
+                        f = open(store_mistral_answers, 'w')
+
+                    for ans, sample_id in tqdm(zip(
+                        executor.map(
+                            _mistral_call,
+                            [client] * len(prompt_dataset),
+                            [line['prompt'] for line in prompt_dataset],
+                            [line['context'] for line in prompt_dataset],
+                        ),
+                        [line['id'] for line in prompt_dataset],
+                    ), total=len(prompt_dataset), desc="Generating Mistral answers"):
+                        
+                        out.append({
+                            'id': sample_id,
+                            'answer': ans,
+                            'log_probs_id': j
+                        })
+                        j += 1
+
+                        if ans and store_mistral_answers is not None:
+                                f.write(json.dumps({'id': sample_id, 'answer': ans}) + '\n')
+                    
+                    if store_mistral_answers is not None:
+                        f.close()
                     
         out.sort(key=lambda x: x['id'])
         return Dataset.from_list(out)
@@ -136,7 +228,7 @@ class CirillaSampler:
             template = self.crg.tokenizer.apply_chat_template(
                     [
                         {'role':'user', 'content': prompt},
-                        {'role':'assistant', 'content': answer}
+                        {'role':'assistant', 'content': answer if answer is not None else ''}
                     ],
                     padding='do_not_pad',
                     max_len=max_len,
@@ -166,17 +258,3 @@ class CirillaSampler:
                 js = []
 
         return Dataset.from_list(out_tensor)
-
-if __name__ == '__main__':
-    from datasets import load_dataset
-    crg = CirillaResponseGenerator('AnthonyPa57/Cirilla-0.3B-4E')
-
-    sampler = CirillaSampler(crg)
-
-    prompt_dataset = load_dataset('AnthonyPa57/Witcher-GRPO-prompts', split='train')
-
-    sampled_dataset = sampler.sample(prompt_dataset, batch_size=32, n_generate_with_kv_cache=2)
-    sampled_dataset.to_json('./training_datasets/RL/sampled_cirilla.jsonl')
-
-    log_probs_dataset = sampler.get_log_probs(prompt_dataset, sampled_dataset, batch_size=32)
-    log_probs_dataset.to_json('./training_datasets/RL/per_token_log_probs.jsonl')

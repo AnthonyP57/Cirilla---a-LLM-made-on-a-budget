@@ -146,4 +146,4 @@ trainer._pull_all_from_hub()
 trainer.train(dl)
 
 final_loss = input('Enter final loss: ')
-trainer._push_all_to_hub(float(final_loss), 'mid_training')
+trainer._push_all_to_hub(float(final_loss), 'domain_training')

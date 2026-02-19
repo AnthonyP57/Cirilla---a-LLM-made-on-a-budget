@@ -11,14 +11,26 @@ from pathlib import Path
 from torch.utils.data import DataLoader
 from cirilla.Cirilla_model import CirillaTokenizer, CirillaTrainer, TrainingArgs, Cirilla, Args, get_optims
 from cirilla.RL.GRPO.grpo_loss import GRPO
+from dataclasses import dataclass
 
 class GRPO_DBMS:
     def __init__(self, model_hub_url:str, prompt_dataset_hub_url:str, 
                 generation_config:dict,
-                local_folder:str='./GRPO_data', max_len:int=2048):
+                local_folder:str='./GRPO_data', max_len:int=2048,
+                random_data_subset:int=None):
         
         self.model_hub_url = model_hub_url
-        self.prompt_dataset = load_dataset(prompt_dataset_hub_url, split='train[:7]')
+        _prompt_dataset = load_dataset(prompt_dataset_hub_url, split='train')
+
+        if random_data_subset is not None:
+            self.prompt_dataset = _prompt_dataset.shuffle(seed=42).select(range(random_data_subset))
+            self.prompt_dataset = self.prompt_dataset.map(
+                lambda _, idx: {'id': idx}, 
+                with_indices=True
+            )
+        else:
+            self.prompt_dataset = _prompt_dataset
+
         self.generation_config = generation_config
 
         self.crg = CirillaResponseGenerator(model_hub_url)
@@ -106,7 +118,10 @@ class GRPO_DBMS:
         except sqlite3.Error as e:
             print(f"An error occurred during insertion: {e}")
         
-        log_probs_ds = self.sampler.get_log_probs(self.prompt_dataset, sampled_ds, self.generation_config['batch_size'], self.max_len)
+        torch.cuda.empty_cache()
+
+        with torch.no_grad():
+            log_probs_ds = self.sampler.get_log_probs(self.prompt_dataset, sampled_ds, max(self.generation_config['batch_size'] // 10, 1), self.max_len)
         
         del sampled_ds
 
@@ -284,6 +299,15 @@ class GRPO_Collator:
             torch.stack(batch_scores)        # Shape: (B, G)
         )
 
+@dataclass
+class DummyArgs:
+    device: str
+
+class DummyModel:
+    def __init__(self, device):
+        self.n_params = 0
+        self.args = DummyArgs(device)
+
 class GRPO_Engine:
     def __init__(self,
                 grpo_dbms:GRPO_DBMS,
@@ -295,7 +319,7 @@ class GRPO_Engine:
                 pad_token:str='<pad>',
                 user_token:str='<|user|>',
                 epsilon:float=0.1,
-                beta:float=0.1,):
+                beta:float=0.1):
         
         self.dbms = grpo_dbms
         self.tokenizer = tokenizer
@@ -323,6 +347,7 @@ class GRPO_Engine:
         self.dummy_trainer = CirillaTrainer(model, dummy_training_args)
         self.dummy_trainer.optims_to_save = optimizers_dict
         self.optimizers_dict = optimizers_dict
+        self.hf_repo = hf_repo
 
         self.criterion = GRPO(epsilon=epsilon, beta=beta)
     
@@ -331,8 +356,10 @@ class GRPO_Engine:
             batch_size:int=16,
             n_iter_checkpoints:int=4,
             test_prompts:list[str] = ['What is a troll?', 'Who is Geralt?', 'Who is Cirilla?'],
-            save_gen_path:Path=None
-                ):
+            save_gen_path:Path=None,
+            pull_optim_from_hub:str=None,
+            load_local_checkpoint:bool=False,
+            ):
 
         batched_chat_prompts = [[{'role': 'user', 'content': p}] for p in test_prompts]
 
@@ -340,38 +367,72 @@ class GRPO_Engine:
         
         self.dbms.populate_prompt_table()
 
+        if pull_optim_from_hub:
+
+            _optim_loader = CirillaTrainer(DummyModel(self.model.args.device), TrainingArgs(
+                                    n_epoch=16,
+                                    save_checkpoint_min=15,
+                                    use_muon_optim=True,
+                                    fuse_optim=False,
+                                    batch_size=64,
+                                    hf_repo_id=pull_optim_from_hub,
+                                    private_hf_repo=True
+                                    ))
+            _optim_loader.optims_to_save = self.optimizers_dict
+            _vals = list(self.optimizers_dict.values())[0].defaults
+            _lr = _vals['lr']
+            _wd = _vals['weight_decay']
+            _optim_loader._pull_optim_from_hub()
+            for optimizer in self.optimizers_dict.values():
+                for param_group in optimizer.param_groups:
+                    param_group["lr"] = _lr
+                    param_group["weight_decay"] = _wd
+
+            del _optim_loader, _lr, _wd, _vals
+
+        self.dummy_trainer._set_global_vars()
+        if load_local_checkpoint and os.path.exists(self.dummy_trainer.args.local_checkpoint_folder + '/model.pt'):
+            self.dummy_trainer._load_local_checkpoint()
+
+        self.model.clear_cache()
+        self.model.train()
+
         for epoch in range(n_epochs):
+
+            self.dbms.drop_generated_tables()
 
             epoch_loss = 0
             _n = 0
+
+            self.model.to('cpu')
+            torch.cuda.empty_cache()
 
             self.dbms.crg.model.to(self.model.args.device)
             self.dbms.sample()
 
             # Offload generation model to CPU
             self.dbms.crg.model.to('cpu')
-            self.model.to('cpu')
             torch.cuda.empty_cache()
 
             self.dbms.evaluate()
+            torch.cuda.empty_cache()
             
             dataset = GRPO_IterablaDataset(
                 grpo_dbms=self.dbms,
                 tokenizer=self.tokenizer,
                 device=self.model.args.device,
                 pad_token=self.pad_token,
-                user_token=self.user_token
+                user_token=self.user_token,
             )
             
             dataloader = DataLoader(dataset, batch_size=batch_size, collate_fn=GRPO_Collator(self.pad_token_id))
             
             self.model.to(self.model.args.device)
-            self.model.train()
 
             for batch_idx, batch in enumerate(dataloader):
 
                 input_ids, labels, log_probs, scores = batch
-                input_ids = input_ids.to(self.model.args.device)
+                input_ids = input_ids.to(self.model.args.device).clone()
                 labels = labels.to(self.model.args.device)
                 scores = scores.to(self.model.args.device)
 
@@ -416,6 +477,8 @@ class GRPO_Engine:
 
                 loss.backward()
 
+                torch.nn.utils.clip_grad_norm_(self.model.parameters(), max_norm=10.0)
+
                 for optim in self.optimizers_dict.values():
                     optim.step()
 
@@ -423,23 +486,26 @@ class GRPO_Engine:
                     optim.zero_grad(set_to_none=True)
 
                 if batch_idx % n_iter_checkpoints == 0:
+
                     self.dummy_trainer._save_local_checkpoint()
 
-            print(f"Epoch {epoch} Loss: {epoch_loss / _n}\n")
+                    with torch.inference_mode():
+                        test_outputs = self.model.generate_kv_cache(
+                            batched_chat_prompts, 
+                            termination_tokens=self.termination_tokens, 
+                            pad_token_id=self.pad_token_id
+                        )
+                        self.model.clear_cache()
+                    
+                        for i in range(test_outputs.shape[0]):
+                            pred_text = self.tokenizer.decode(test_outputs[i].tolist())
+                            clean_pred = pred_text.replace('<pad>', '').replace('<|user|>', '').replace('<|assistant|>', '').strip()
+                            print(f"Sample {i}: {clean_pred}")
+                        print("-------------------------------------------------\n")
 
-            with torch.inference_mode():
-                test_outputs = self.model.generate_kv_cache(
-                    batched_chat_prompts, 
-                    termination_tokens=self.termination_tokens, 
-                    pad_token_id=self.pad_token_id
-                )
-                model.clear_cache()
-            
-            for i in range(test_outputs.shape[0]):
-                pred_text = self.tokenizer.decode(test_outputs[i].tolist())
-                clean_pred = pred_text.replace('<pad>', '').replace('<|user|>', '').replace('<|assistant|>', '').strip()
-                print(f"Sample {i}: {clean_pred}")
-            print("-------------------------------------------------\n")
+                    torch.cuda.empty_cache()
+
+            print(f"Epoch {epoch} Loss: {epoch_loss / _n}\n")
 
             if save_gen_path is not None:
                 gen_data = self.dbms.get_generated()
@@ -448,47 +514,5 @@ class GRPO_Engine:
                         json.dump(d, f)
                         f.write('\n')
 
-            self.dbms.drop_generated_tables()
-
         self.dummy_trainer._push_all_to_hub(epoch_loss / _n if _n > 0 else 0, 'grpo_training')
-        self.tokenizer.push_to_hub(hf_repo)
-
-if __name__ == "__main__":
-
-    save_gen_path = './saved_grpo_answers.jsonl'
-    hf_repo = 'AnthonyPa57/Cirilla-0.3B-4E-grpo'
-    
-    gen_config = {'batch_size': 2, 'n_generate_with_kv_cache': 1, 'n_generate_naive': 1}
-    
-    dbms = GRPO_DBMS(
-        model_hub_url="AnthonyPa57/Cirilla-0.3B-4E", 
-        prompt_dataset_hub_url="AnthonyPa57/Witcher-GRPO-prompts",
-        generation_config=gen_config
-    )
-
-    tokenizer = CirillaTokenizer(hub_url='AnthonyPa57/Cirilla-0.3B-4E')
-
-    model = Cirilla(Args(torch_compile=False))
-    model.pull_model_from_hub('AnthonyPa57/Cirilla-0.3B-4E', map_device='cuda:0', force_dynamic_mask=True, force_eager=True)
-
-    muon_opt, adam_opt = get_optims(
-                                model,
-                                use_muon_optim=True,
-                                optim=torch.optim.AdamW,
-                                lr=1e-5, weight_decay=1e-5,
-                                )
-
-    grpo_engine = GRPO_Engine(
-        grpo_dbms=dbms,
-        tokenizer=tokenizer,
-        model=model,
-        hf_repo=hf_repo,
-        optimizers_dict={'muon_opt': muon_opt, 'adam_opt': adam_opt},
-    )
-
-    grpo_engine.train(
-        n_epochs=4,
-        batch_size=16,
-        n_iter_checkpoints=10,
-        save_gen_path=save_gen_path
-    )
+        self.tokenizer.push_to_hub(self.hf_repo)
