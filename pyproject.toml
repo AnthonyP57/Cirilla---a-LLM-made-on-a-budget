@@ -1,6 +1,6 @@
 [project]
 name = "Cirilla"
-version = "1.0.0"
+version = "1.0.1"
 description = "Crilla is a simple way to introduce optimized single-GPU training into your project"
 readme = "README.md"
 requires-python = ">=3.10"
@@ -55,7 +55,7 @@ url = "https://download.pytorch.org/whl/cu130"
 explicit = true
 
 [tool.setuptools]
-packages = ["cirilla.RL", "cirilla.cli", "cirilla.Cirilla_model", "cirilla.Few_shot", "cirilla.LLM_pieces", "cirilla.synth_data", "attention-gym.attn_gym"]
+packages = ["cirilla.RL", "cirilla.RL.GRPO", "cirilla.cli", "cirilla.Cirilla_model", "cirilla.Few_shot", "cirilla.LLM_pieces", "cirilla.synth_data", "attention-gym.attn_gym"]
 
 [build-system]
 requires = ["setuptools", "wheel"]

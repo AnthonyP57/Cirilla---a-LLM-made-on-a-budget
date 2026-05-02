@@ -13,8 +13,11 @@ from .blocks import (
                     MixerArgs,
                     VisionEmbeddingModel,
                     KeylessAttention,
-                    InputEmbeddings
+                    InputEmbeddings,
+                    SwinEncoder,
+                    SwinArgs,
                     )
+from .vision_model import CirillaVision, VisionArgs
 from .trm import CirillaTRM, TRMArgs, trm_training_step, trm_inference_step
 from .mtp import CirillaMTP, MTPArgs, mtp_training_step, mtp_inference_step
 
@@ -38,6 +41,10 @@ __all__ = [
             'InputEmbeddings',
             'VisionEmbeddingModel',
             'KeylessAttention',
+            'SwinEncoder',
+            'SwinArgs',
+            'CirillaVision',
+            'VisionArgs',
             'CirillaTRM',
             'TRMArgs',
             'MLPMixer1D',
