@@ -1,6 +1,6 @@
 [project]
 name = "Cirilla"
-version = "1.0.1"
+version = "1.0.2"
 description = "Crilla is a simple way to introduce optimized single-GPU training into your project"
 readme = "README.md"
 requires-python = ">=3.10"
@@ -30,7 +30,7 @@ dependencies = [
     "textual>=6.12.0",
     "tokenizers>=0.21.2",
     "torch>=2.7.0",
-    "torchao==0.14.1",
+    "torchao==0.17.0",
     "torchvision>=0.22.0",
     "transformers>=4.53.2",
     "vllm>=0.13.0",
