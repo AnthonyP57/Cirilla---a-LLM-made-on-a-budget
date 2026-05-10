@@ -15,7 +15,6 @@ import time
 import threading
 from progress_table import ProgressTable
 import numpy as np
-from .model import Cirilla
 from ..LLM_pieces import get_activation
 import re
 
@@ -75,7 +74,7 @@ class CirillaTrainer:
 
         print(f'n trainable params: {(model.n_params/1e6):.2f} M')
 
-    def train(self, dataset:JSONLDataset, valid_dataset:JSONLDataset=None):
+    def train(self, dataset:JSONLDataset, valid_dataset:JSONLDataset=None, collator=None, n_workers:int=0):
 
         dataset_len = cache_or_fetch('DATA_LEN', dataset.path_signature)
 
@@ -91,12 +90,12 @@ class CirillaTrainer:
         if skip_n_data_points is None:
             skip_n_data_points = 0
 
-        dataloader = DataLoader(dataset, shuffle=False, batch_size=self.args.batch_size)
+        dataloader = DataLoader(dataset, shuffle=False, batch_size=self.args.batch_size, collate_fn=collator, num_workers=n_workers)
         n_iter_total = self.args.n_epoch * len(dataset) - skip_n_data_points
         del dataset
 
         if valid_dataset is not None:
-            valid_dataloader = DataLoader(valid_dataset, shuffle=False, batch_size=self.args.batch_size)
+            valid_dataloader = DataLoader(valid_dataset, shuffle=False, batch_size=self.args.batch_size, collate_fn=collator, num_workers=n_workers)
             valid_dataset = 1
 
         start_time = time.time()
@@ -604,7 +603,7 @@ class CirillaTrainer:
 
         if model_args != pulled_args:
             print(f"Current model args don't correspond to the HF model's args.\nCurrent args:\n{model_args}\nThe model will use the HF args:\n{pulled_args}")
-            self.model = Cirilla(pulled_args)
+            self.model = type(self.model)(pulled_args)
 
         file_path = hf_hub_download(
             repo_id=self.args.hf_repo_id,

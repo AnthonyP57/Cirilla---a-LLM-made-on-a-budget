@@ -3,8 +3,9 @@ from typing import Optional
 import torch
 import torch.nn as nn
 import torch.nn.functional as F
+from torchvision.models.swin_transformer import SwinTransformer
 from cirilla.LLM_pieces import DynamicTanh, Dynamic_erf
-from .blocks import Decoder, DecoderArgs, InputEmbeddings, EmbedArgs, SwinEncoder, SwinArgs
+from .blocks import Decoder, DecoderArgs, InputEmbeddings, EmbedArgs
 from .modules import CirillaBaseModel
 
 
@@ -13,6 +14,7 @@ class VisionArgs(DecoderArgs):
     """Combined args for CirillaVision (decoder + Swin encoder)."""
     vocab_size: int = 60_000
     out_bias: bool = False
+    tie_params: bool = False
 
     # Swin encoder
     img_size: int = 224
@@ -29,20 +31,16 @@ class VisionArgs(DecoderArgs):
     def swin_out_dim(self) -> int:
         return self.swin_embed_dim * (2 ** (len(self.swin_depths) - 1))
 
-    def to_swin_args(self) -> SwinArgs:
-        return SwinArgs(
-            img_size=self.img_size,
-            patch_size=self.patch_size,
-            in_channels=self.in_channels,
-            embed_dim=self.swin_embed_dim,
-            depths=self.swin_depths,
-            num_heads=self.swin_num_heads,
-            window_size=self.swin_window_size,
-            mlp_ratio=self.swin_mlp_ratio,
-            dropout=self.swin_dropout,
-            dtype_str=self.dtype_str,
-            device=self.device,
-        )
+    def to_swin_args(self) -> dict:
+        return {
+            "patch_size": [self.patch_size, self.patch_size],
+            "embed_dim": self.swin_embed_dim,
+            "depths": list(self.swin_depths),
+            "num_heads": list(self.swin_num_heads),
+            "window_size": [self.swin_window_size, self.swin_window_size],
+            "mlp_ratio": self.swin_mlp_ratio,
+            "dropout": self.swin_dropout,
+        }
 
     @property
     def n_img_tokens(self) -> int:
@@ -85,8 +83,17 @@ class CirillaVision(
     def _prepare_model(self):
         a = self.args
 
-        self.swin = SwinEncoder(a.to_swin_args())
-        # project image features from swin_out_dim to decoder dim
+        self.swin = SwinTransformer(**a.to_swin_args())
+        if a.in_channels != 3:
+            # torchvision always builds a 3-channel patch conv; replace it for grayscale/N-channel inputs
+            self.swin.features[0][0] = nn.Conv2d(
+                a.in_channels, a.swin_embed_dim,
+                kernel_size=a.patch_size, stride=a.patch_size,
+            )
+        if a.torch_compile:
+            self.swin.features = torch.compile(self.swin.features, mode="max-autotune")
+            self.swin.norm = torch.compile(self.swin.norm, mode="max-autotune")
+        
         self.img_proj = nn.Linear(a.swin_out_dim, a.dim, bias=False)
 
         self.emb = InputEmbeddings(EmbedArgs(vocab_size=a.vocab_size, dim=a.dim))
@@ -109,8 +116,11 @@ class CirillaVision(
     def _encode_image(self, image: torch.Tensor) -> torch.Tensor:
         """image: (B, C, H, W) → (B, N_img, dim)"""
         device = next(self.parameters()).device
-        feats = self.swin(image.to(device=device, dtype=self.args.dtype))  # (B, N_img, swin_out_dim)
-        return self.img_proj(feats)                     # (B, N_img, dim)
+        x = image.to(device=device, dtype=self.args.dtype)
+        x = self.swin.features(x)   # (B, H', W', swin_out_dim)  NHWC
+        x = self.swin.norm(x)       # (B, H', W', swin_out_dim)
+        x = x.flatten(1, 2)         # (B, N_img, swin_out_dim)
+        return self.img_proj(x)     # (B, N_img, dim)
 
     def pred(self, image: torch.Tensor, text_ids: torch.Tensor) -> torch.Tensor:
         img_tokens = self._encode_image(image)          # (B, N_img, dim)
