@@ -1,20 +1,25 @@
 import torch
+torch._inductor.config.triton.cudagraph_skip_dynamic_graphs=True
+torch._inductor.config.triton.cudagraph_dynamic_shape_warn_limit=None
 import torch.nn.functional as F
-from cirilla.Cirilla_model import CirillaMTP, Args, load_balancing_loss, get_optims
+from cirilla.Cirilla_model import CirillaMTP, MTPArgs, get_optims
 from cirilla.Cirilla_model import CirillaTrainer, TrainingArgs, CirillaTokenizer, JSONLDataset
 from types import MethodType
 
 
-hf_repo = 'AnthonyPa57/Cirilla-0.3B-4E'
+hf_repo = 'AnthonyPa57/CirillaMTP'
 
-model = CirillaMTP(Args(
-                    output_moe_weights=True,
+model = CirillaMTP(MTPArgs(
+                    dim=512,
+                    d_ff=1024,
                     out_bias=True,
-                    tie_params=True,
-                    n_layers=7,
-                    num_experts=4,
+                    tie_params=False,
+                    n_layers=8,
+                    num_experts=3,
                     k=2,
-                    vocab_size=30_000
+                    vocab_size=30_000,
+                    n_token_heads=3,
+                    window_size=256,
                     )
                 )
 tokenizer = CirillaTokenizer(hub_url=hf_repo)
@@ -44,7 +49,7 @@ muon_opt, adam_opt = get_optims(
                                 lr=5e-4, weight_decay=1e-5,
                                 )
 
-micro_batch_size = 8
+micro_batch_size = 16
 
 def mtp_training_step_grad_acc(self, data) -> float:
     step_loss = 0.0
@@ -65,13 +70,7 @@ def mtp_training_step_grad_acc(self, data) -> float:
         x_ = x[micro_step*micro_batch_size:(micro_step+1)*micro_batch_size]
         y_ = y[micro_step*micro_batch_size:(micro_step+1)*micro_batch_size]
 
-        # z = self.model.get_z(x_)
-        z, moe_weight_list = self.model.get_z(x_)
-        lb_losses = [
-            load_balancing_loss(w, num_experts=model.args.num_experts, top_k=model.args.k)
-            for w in moe_weight_list
-                ]
-        lb_loss = torch.stack(lb_losses).mean()
+        z = self.model.get_z(x_)
 
         zd = z.detach()
         zd.requires_grad = True
@@ -82,15 +81,20 @@ def mtp_training_step_grad_acc(self, data) -> float:
             loss = (F.cross_entropy(
                 preds.view(-1, self.model.args.vocab_size),
                 y_[:, i:-(self.model.args.n_token_heads - i)].reshape(-1),
-                ignore_index=pad_token_id, label_smoothing=0.1) + (0.01 * lb_loss / self.model.args.n_token_heads)\
+                ignore_index=pad_token_id, label_smoothing=0.1)\
                     ) / n_micro_steps
             
             step_loss += loss.item()
             n += 1
             loss.backward()
-
+        
         z.backward(gradient=zd.grad)
-
+    
+    for group in muon_opt.param_groups:
+        for p in group['params']:
+            if p.grad is not None:
+                p.grad = p.grad.clone() # this cretes a separate cudagraph that doesnt touch the models one, but were we create a copy of params, so more memory
+    
     muon_opt.step()
     adam_opt.step()
 
@@ -114,7 +118,7 @@ def mtp_inference_step_grad_acc(self, data) -> float:
         x_ = x[micro_step*micro_batch_size:(micro_step+1)*micro_batch_size]
         y_ = y[micro_step*micro_batch_size:(micro_step+1)*micro_batch_size]
 
-        z, moe_weight_list = self.model.get_z(x_)
+        z = self.model.get_z(x_)
 
         preds = self.model.get_heads(0, z)
         loss = F.cross_entropy(
@@ -125,7 +129,7 @@ def mtp_inference_step_grad_acc(self, data) -> float:
         step_loss += loss.item()
         n += 1
 
-    return step_loss
+    return step_loss / n
 
 dl = JSONLDataset(
                 './training_datasets/pretraining/pretraining.jsonl',
@@ -139,7 +143,6 @@ trainer = CirillaTrainer(model,
                             TrainingArgs(
                                         n_epoch=10,
                                         save_checkpoint_min=15,
-                                        # save_checkpoint_n_iterations=5,
                                         use_muon_optim=True,
                                         fuse_optim=False,
                                         batch_size=64,
@@ -153,7 +156,7 @@ trainer.inference_step = MethodType(mtp_inference_step_grad_acc, trainer)
 trainer.criterion = None
 trainer.optims_to_save = {'muon_opt': muon_opt, 'adam_opt': adam_opt}
 
-# trainer._pull_all_from_hub()
+trainer._pull_all_from_hub()
 
 trainer.train(dl)
 

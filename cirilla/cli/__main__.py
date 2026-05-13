@@ -5,7 +5,7 @@ from textual.screen import Screen
 from textual.containers import VerticalScroll, Horizontal, Container
 from textual.widgets import Input, Static, Markdown, Label, Button
 from .theme import CSS
-from cirilla.Cirilla_model import Cirilla
+from cirilla.Cirilla_model import Cirilla, CirillaMTP
 from cirilla.Cirilla_model import CirillaTokenizer
 from cirilla.Cirilla_model.modules import select_torch_device
 
@@ -68,7 +68,7 @@ class ModelSelectScreen(Screen):
 class ChatScreen(Screen):
     def __init__(self, model_name: str):
         self.model_name = model_name
-        self.model = Cirilla()
+        self.model = Cirilla() if not 'MTP' in model_name else CirillaMTP()
         self.hub_url = f'AnthonyPa57/{model_name}' if '/' not in model_name else model_name
         self.model.pull_model_from_hub(self.hub_url, inference_mode=True, map_device=select_torch_device())
         self.tokenizer = CirillaTokenizer(hub_url=self.hub_url)

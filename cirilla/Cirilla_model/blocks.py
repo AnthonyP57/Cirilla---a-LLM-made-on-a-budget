@@ -215,7 +215,7 @@ class DecoderArgs:
     fp8_recipe:str="tensorwise" # tensorwise (fastest), rowwise, rowwise_with_gw_hp (most accurate)
     use_sparse:bool = False
     theta:float = 10_000.0
-    device = select_torch_device()
+    device:str = select_torch_device()
     torch_compile:bool=True
     layer_norm:str = "RMSNorm" # or "Derf" or "DyT"
 

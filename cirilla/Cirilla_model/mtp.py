@@ -52,11 +52,10 @@ class CirillaMTP(
 
         token_args = {k:v for k,v in self.args.__dict__.items() if k in DecoderArgs.__dataclass_fields__}
         token_args['n_layers'] = 1
+        token_args['output_moe_weights'] = False
         self.token_head_args = DecoderArgs(**token_args)
 
-        self.token_heads = [nn.Sequential(Decoder(self.token_head_args), type(self.layer_norm)(self.args.dim)) for _ in range(self.args.n_token_heads)]
-        
-        self.token_heads = nn.ModuleList(self.token_heads)
+        self.token_heads = nn.ModuleList([nn.Sequential(Decoder(self.token_head_args), type(self.layer_norm)(self.args.dim)) for _ in range(self.args.n_token_heads)])
 
         self.n_params = sum(p.numel() for p in self.parameters() if p.requires_grad)
 
@@ -82,6 +81,15 @@ class CirillaMTP(
         
     def get_heads(self, idx, z) -> torch.Tensor:
         return self.output(self.token_heads[idx](z))
+
+    @torch.no_grad()
+    def _infer_head(self, idx: int, z: torch.Tensor) -> torch.Tensor:
+        decoder = self.token_heads[idx][0]
+        norm = self.token_heads[idx][1]
+        for attention, moe in zip(decoder.attentions, decoder.smoes):
+            z = z + attention.forward_with_cache(z, cur_pos=0, max_batch=z.shape[0])
+            z = z + moe(z)[0]
+        return self.output(norm(z))
 
     def forward(self, x) -> list[torch.Tensor]:
         if self.args.output_moe_weights:
@@ -113,10 +121,10 @@ class CirillaMTP(
                 x = x + moe_out
 
             x = self.layer_norm(x)
-            x = self.get_heads(0, x)
+            x = self._infer_head(0, x)
 
             return x
-        
+
         else:
 
             for attention, moe in zip(self.decoder.attentions, self.decoder.smoes):
@@ -124,7 +132,7 @@ class CirillaMTP(
                 x = x + moe(x)[0]
 
             x = self.layer_norm(x)
-            x = self.get_heads(0, x)
+            x = self._infer_head(0, x)
 
             return x
 
@@ -339,6 +347,9 @@ class CirillaMTP(
     def clear_cache(self) -> None:
         for att in self.decoder.attentions:
             att._clear_cache()
+        for head in self.token_heads:
+            for att in head[0].attentions:
+                att._clear_cache()
 
 def mtp_training_step(self, data, pad_id) -> float:
     step_loss = 0.0

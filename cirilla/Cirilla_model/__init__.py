@@ -14,8 +14,6 @@ from .blocks import (
                     VisionEmbeddingModel,
                     KeylessAttention,
                     InputEmbeddings,
-                    SwinEncoder,
-                    SwinArgs,
                     )
 from .vision_model import CirillaVision, VisionArgs
 from .trm import CirillaTRM, TRMArgs, trm_training_step, trm_inference_step
@@ -41,8 +39,6 @@ __all__ = [
             'InputEmbeddings',
             'VisionEmbeddingModel',
             'KeylessAttention',
-            'SwinEncoder',
-            'SwinArgs',
             'CirillaVision',
             'VisionArgs',
             'CirillaTRM',
