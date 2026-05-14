@@ -1,19 +1,23 @@
 import torch
 torch._inductor.config.triton.cudagraph_skip_dynamic_graphs=True
 torch._inductor.config.triton.cudagraph_dynamic_shape_warn_limit=None
+torch.set_float32_matmul_precision('medium')
+
 import torch.nn.functional as F
 from cirilla.Cirilla_model import CirillaMTP, MTPArgs, get_optims
 from cirilla.Cirilla_model import CirillaTrainer, TrainingArgs, CirillaTokenizer, JSONLDataset
 from types import MethodType
 
 
-hf_repo = 'AnthonyPa57/CirillaMTP'
+hf_repo = 'AnthonyPa57/CirillaMTP-0.1B-3E'
 
 model = CirillaMTP(MTPArgs(
                     dim=512,
                     d_ff=1024,
                     out_bias=True,
                     tie_params=False,
+                    n_heads=4,
+                    n_kv_heads=4,
                     n_layers=8,
                     num_experts=3,
                     k=2,
@@ -49,11 +53,10 @@ muon_opt, adam_opt = get_optims(
                                 lr=5e-4, weight_decay=1e-5,
                                 )
 
-micro_batch_size = 16
+micro_batch_size = 12
 
 def mtp_training_step_grad_acc(self, data) -> float:
     step_loss = 0.0
-    n = 0
 
     torch.compiler.cudagraph_mark_step_begin()
     
@@ -82,10 +85,9 @@ def mtp_training_step_grad_acc(self, data) -> float:
                 preds.view(-1, self.model.args.vocab_size),
                 y_[:, i:-(self.model.args.n_token_heads - i)].reshape(-1),
                 ignore_index=pad_token_id, label_smoothing=0.1)\
-                    ) / n_micro_steps
+                    ) / (n_micro_steps * self.model.args.n_token_heads)
             
             step_loss += loss.item()
-            n += 1
             loss.backward()
         
         z.backward(gradient=zd.grad)
@@ -101,12 +103,11 @@ def mtp_training_step_grad_acc(self, data) -> float:
     muon_opt.zero_grad(set_to_none=True)
     adam_opt.zero_grad(set_to_none=True)
 
-    return step_loss / n
+    return step_loss
 
 @torch.inference_mode()
 def mtp_inference_step_grad_acc(self, data) -> float:
     step_loss = 0.0
-    n = 0
 
     x = data[0]
     y = data[1]
@@ -127,9 +128,8 @@ def mtp_inference_step_grad_acc(self, data) -> float:
             ignore_index=pad_token_id) / n_micro_steps
             
         step_loss += loss.item()
-        n += 1
 
-    return step_loss / n
+    return step_loss
 
 dl = JSONLDataset(
                 './training_datasets/pretraining/pretraining.jsonl',
@@ -145,7 +145,7 @@ trainer = CirillaTrainer(model,
                                         save_checkpoint_min=15,
                                         use_muon_optim=True,
                                         fuse_optim=False,
-                                        batch_size=64,
+                                        batch_size=120,
                                         local_checkpoint_folder=f'./{hf_repo.split("/")[-1]}',
                                         hf_repo_id=hf_repo
                                         )
@@ -156,7 +156,7 @@ trainer.inference_step = MethodType(mtp_inference_step_grad_acc, trainer)
 trainer.criterion = None
 trainer.optims_to_save = {'muon_opt': muon_opt, 'adam_opt': adam_opt}
 
-trainer._pull_all_from_hub()
+# trainer._pull_all_from_hub()
 
 trainer.train(dl)
 
