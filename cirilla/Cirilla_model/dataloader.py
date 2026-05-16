@@ -318,7 +318,7 @@ class DynamicCollator:
     def __call__(self, batch):
 
         if isinstance(batch[0], tuple):
-            return tuple(torch.nn.utils.rnn.pad_sequence(b, batch_first=True, padding_value=self.pad_token_id) for b in batch)
+            return tuple(torch.nn.utils.rnn.pad_sequence(b, batch_first=True, padding_value=self.pad_token_id) for b in zip(*batch))
         
         elif isinstance(batch[0], torch.Tensor):
             return torch.nn.utils.rnn.pad_sequence(batch, batch_first=True, padding_value=self.pad_token_id)

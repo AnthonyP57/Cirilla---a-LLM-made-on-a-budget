@@ -281,10 +281,10 @@ class CirillaTrainer:
 
                         ptable.update('valid loss', round(loss_item, 3), aggregate='mean', color='lightcyan_ex')
                     
-                    torch.cuda.empty_cache()
                     ptable.next_row(split=True, color={'time': time_color(times), 'train loss': loss_color(losses), 'valid loss': loss_color_valid(v_losses)})
 
             ptable.next_row(split=valid_dataset is None, color={'time': time_color(times), 'train loss': loss_color(losses), 'valid loss': loss_color_valid(v_losses)})
+            torch.cuda.empty_cache()
 
         self._save_local_checkpoint()
         if self.args.push_checkpoint_to_hub:
@@ -597,27 +597,8 @@ class CirillaTrainer:
 
         self._load_optim_from_checkpoint(loaded_states)
 
-    def _pull_model_from_hub(self):
-        model_args = self.model.args
-        pulled_args = get_args_from_hub(self.args.hf_repo_id, type(self.model.args))
-
-        if model_args != pulled_args:
-            print(f"Current model args don't correspond to the HF model's args.\nCurrent args:\n{model_args}\nThe model will use the HF args:\n{pulled_args}")
-            self.model = type(self.model)(pulled_args)
-
-        file_path = hf_hub_download(
-            repo_id=self.args.hf_repo_id,
-            filename="model.safetensors",
-        )
-
-        loaded = load_file(file_path)
-        if "output.weight" not in loaded and "output.weight" in self.model.state_dict():
-            loaded['output.weight'] = loaded["emb.embeddings.weight"]
-
-        self.model.load_state_dict(loaded)
-
-    def _pull_all_from_hub(self):
-        self._pull_model_from_hub()
+    def _pull_all_from_hub(self, **kwargs):
+        self.model.pull_model_from_hub(self.args.hf_repo_id, **kwargs)
         self._pull_optim_from_hub()
         self.pulled_from_hub = True
         print(f'pulled from hub: {self.args.hf_repo_id}')

@@ -54,6 +54,12 @@ class CirillaBaseModel(PyTorchModelHubMixin):
                 for att in self.decoder.attentions:
                     att.static_mask = False
                     att.mask = create_dynamic_block_mask
+                if force_dynamic_mask and hasattr(self, 'token_heads'):
+                    for head in self.token_heads:
+                        if hasattr(head[0], 'attentions'):
+                            for att in head[0].attentions:
+                                att.static_mask = False
+                                att.mask = create_dynamic_block_mask
 
             self.load_state_dict(new_state_dict)
 
