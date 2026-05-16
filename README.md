@@ -1,7 +1,6 @@
 > [!IMPORTANT]  
 > For a much nicer README visit [Cirilla](https://anthonyp57.github.io/Cirilla---a-LLM-made-on-a-budget/)
-> 
-> *(Note: the site is made for 16:9 1080p displays — I’m not a web developer, so it may look a bit rough on other screen sizes.)*
+
 
 ![](https://github.com/AnthonyP57/Radovid---a-LLM-made-on-a-budget/blob/master/img/ciri_w4_2.png?raw=true)
 *Ciri from The Witcher 4 trailer*
