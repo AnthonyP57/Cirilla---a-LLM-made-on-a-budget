@@ -3,39 +3,40 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 <title>Cirilla - LLM Project</title>
 <link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.css" rel="stylesheet" />
 <style>
 /* ── Variables ───────────────────────────────────────────── */
 :root {
-    --header-h: 56px;
-    --sidebar-w: 220px;
-    --bg:        #0b0b0b;
-    --bg-mid:    #111111;
-    --bg-card:   #131313;
-    --bg-code:   #1a1a1a;
-    --border:    #333333;
-    --text:      #bbbbbb;
-    --accent:    #facc15;
-    --link:      #00698f;
-    --code-clr:  #96e2dc;
-    --fn-clr:    #4ade80;
-    --sb-link:   #8bd1cb;
-    --radius:    10px;
-    --radius-sm: 6px;
+    --header-h:   56px;
+    --sidebar-w:  220px;
+    --bg:         #0d0b08;
+    --bg-mid:     #100e0a;
+    --bg-card:    #141108;
+    --bg-code:    #0b0908;
+    --border:     #2c2210;
+    --border-acc: rgba(201,168,76,.2);
+    --text:       #c0b49e;
+    --accent:     #c9a84c;
+    --accent-dim: #7a6128;
+    --link:       #5b9b97;
+    --link-hov:   #88c4c0;
+    --code-clr:   #d9bf6a;
+    --fn-clr:     #c9a84c;
+    --sb-link:    #7aada9;
+    --radius:     8px;
+    --radius-sm:  4px;
 }
 
 *, *::before, *::after { box-sizing: border-box; }
-
-html { scroll-behavior: smooth; }
+html { scroll-behavior: smooth; background: #0d0b08; }
 
 body {
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-                 Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
     background: var(--bg);
     color: var(--text);
-    line-height: 1.6;
+    line-height: 1.7;
     margin: 0;
     padding: 0;
     padding-top: var(--header-h);
@@ -52,52 +53,57 @@ header {
     align-items: center;
     justify-content: space-between;
     padding: 0 1.5rem 0 calc(var(--sidebar-w) + 1.5rem);
-    border-bottom: 1px solid var(--border);
+    border-bottom: 1px solid var(--border-acc);
     z-index: 1000;
     gap: 1rem;
 }
 
 header h1 {
-    font-size: clamp(1.2rem, 1rem + 0.5vw, 1.65rem);
+    font-family: 'Cinzel', Georgia, serif;
+    font-size: clamp(1.3rem, 1.1rem + 0.5vw, 1.9rem);
+    font-weight: 700;
+    color: var(--accent);
     margin: 0;
     flex: 1;
+    letter-spacing: 0.14em;
 }
 
 #menu-toggle {
     display: none;
     background: none;
-    border: 1px solid var(--border);
-    color: var(--text);
+    border: 1px solid var(--border-acc);
+    color: var(--accent);
     border-radius: var(--radius-sm);
     padding: 0.3rem 0.55rem;
     cursor: pointer;
-    font-size: 1.15rem;
+    font-size: 1.1rem;
     line-height: 1;
     flex-shrink: 0;
     transition: background .15s;
 }
-#menu-toggle:hover { background: #1e1e1e; }
+#menu-toggle:hover { background: rgba(201,168,76,.08); }
 
 .search-bar {
     background: var(--bg-code);
     border: 1px solid var(--border);
     border-radius: var(--radius-sm);
     padding: 0.35rem 0.75rem;
-    color: #fff;
+    color: var(--text);
     width: clamp(130px, 13vw, 220px);
-    font-size: 0.9rem;
+    font-size: 0.88rem;
     flex-shrink: 0;
-    transition: border-color .15s;
+    transition: border-color .2s;
 }
-.search-bar:focus { outline: none; border-color: var(--link); }
+.search-bar::placeholder { color: #50452e; }
+.search-bar:focus { outline: none; border-color: var(--accent-dim); }
 
-/* ── Sidebar overlay (mobile) ────────────────────────────── */
+/* ── Sidebar overlay ─────────────────────────────────────── */
 #sidebar-overlay {
     display: none;
     position: fixed;
     inset: 0;
     z-index: 920;
-    background: rgba(0,0,0,0.55);
+    background: rgba(0,0,0,.65);
 }
 #sidebar-overlay.open { display: block; }
 
@@ -108,21 +114,13 @@ header h1 {
     left: 0;
     width: var(--sidebar-w);
     height: calc(100vh - var(--header-h));
-    background: var(--bg);
-    border-right: 1px solid var(--border);
-    padding: 1.25rem 0.75rem 2rem 1rem;
+    background: var(--bg-mid);
+    border-right: 1px solid var(--border-acc);
+    padding: 1.5rem 0.75rem 2rem 1rem;
     overflow-y: auto;
     scrollbar-width: thin;
-    scrollbar-color: #2a2a2a transparent;
+    scrollbar-color: var(--accent-dim) transparent;
     z-index: 930;
-}
-
-.sidebar h2 {
-    font-size: 0.78rem;
-    text-transform: uppercase;
-    letter-spacing: 0.06em;
-    color: var(--accent);
-    margin-bottom: 0.5rem;
 }
 
 /* ── Sidebar category headers ────────────────────────────── */
@@ -131,20 +129,22 @@ header h1 {
     justify-content: space-between;
     align-items: center;
     cursor: pointer;
-    margin: 6px 0;
-    color: #aaaaaa;
-    font-size: 0.85rem;
-    font-weight: normal;
-    padding: 3px 5px;
+    margin: 5px 0;
+    color: #6e6050;
+    font-size: 0.78rem;
+    padding: 4px 6px;
     border-radius: var(--radius-sm);
-    transition: background .12s, color .12s;
+    transition: background .15s, color .15s;
+    letter-spacing: 0.02em;
 }
-.category-header:hover { background: #1a1a1a; color: #cccccc; }
-.category-header .arrow  { flex: 0 0 auto; }
+.category-header:hover { background: rgba(201,168,76,.07); color: var(--accent); }
+.category-header .arrow  { flex: 0 0 auto; color: var(--accent-dim); font-size: 0.7rem; }
 .category-header .header-text { flex: 1; text-align: left; }
 
 .category-items {
-    margin-left: 8px;
+    margin-left: 4px;
+    padding-left: 8px;
+    border-left: 1px solid rgba(201,168,76,.12);
     display: none;
     flex-direction: column;
     gap: 1px;
@@ -154,22 +154,18 @@ header h1 {
     padding: 3px 8px;
     color: var(--sb-link);
     text-decoration: none;
-    font-size: 0.85rem;
+    font-size: 0.82rem;
     border-radius: var(--radius-sm);
-    transition: background .12s, color .12s;
+    transition: background .12s, color .12s, padding-left .12s;
 }
 .category-items a:hover {
-    background: #1e2d2c;
-    color: #aee8e3;
+    background: rgba(91,155,151,.1);
+    color: #a8d4d0;
+    padding-left: 12px;
     text-decoration: none;
 }
 
 /* ── Main content ────────────────────────────────────────── */
-/*
- * Center relative to the full viewport, not just the space after the sidebar.
- * max() ensures the content never slides under the fixed sidebar.
- * 525px = half of 1050px max-width.
- */
 main.container {
     max-width: 1050px;
     margin-top: 2rem;
@@ -186,24 +182,61 @@ img {
     display: block;
     margin: 20px auto;
 }
-.header-image { border-radius: 0; width: 100%; margin: 0; }
+.header-image {
+    border-radius: 0;
+    width: 100%;
+    margin: 0;
+    filter: brightness(.9) sepia(.12);
+}
 
 .caption {
-    font-size: 0.9em;
-    color: gray;
+    font-size: 0.85em;
+    color: #5a5040;
     text-align: right;
     margin-bottom: 1.5rem;
+    font-style: italic;
 }
 
 /* ── Typography ──────────────────────────────────────────── */
-h1, h2, h3 {
+/* Cinzel only for decorative/title headings — NOT for technical names (h3) */
+h1, h2 {
+    font-family: 'Cinzel', Georgia, serif;
     text-align: left;
-    font-size: clamp(1.15rem, 1rem + 0.5vw, 1.5em);
     font-weight: 600;
+    color: var(--accent);
+    letter-spacing: 0.07em;
     scroll-margin-top: calc(var(--header-h) + 1rem);
 }
 
-/* ── Flex layout (image + text pairs) ────────────────────── */
+h2 {
+    font-size: clamp(1.05rem, 0.9rem + 0.4vw, 1.35rem);
+    margin-top: 2.5rem;
+    padding-bottom: 0.4em;
+    border-bottom: 1px solid var(--border-acc);
+}
+
+/* Inter for h3 — class/function names must show case clearly */
+h3 {
+    font-family: 'Inter', -apple-system, sans-serif;
+    font-size: clamp(1rem, 0.9rem + 0.25vw, 1.15rem);
+    font-weight: 700;
+    color: #d4b45a;
+    letter-spacing: 0.01em;
+    text-align: left;
+    margin-top: 0;
+    scroll-margin-top: calc(var(--header-h) + 1rem);
+}
+
+/* ── Signature syntax colouring (.code-label spans) ─────── */
+.sig-kw    { color: #7a90b8; }           /* class / func  */
+.sig-mod   { color: #4a4030; }           /* module.path.  */
+.sig-name  { color: #e8d5a8; font-weight: 600; } /* FunctionName */
+.sig-param { color: var(--sb-link); }    /* param_name    */
+.sig-punc  { color: #4a4030; }           /* ( ) ,         */
+.sig-arrow { color: #4a4030; }           /* →             */
+.sig-ret   { color: #7a9080; font-style: italic; } /* return type */
+
+/* ── Flex layout ─────────────────────────────────────────── */
 .flex-container {
     display: flex;
     flex-wrap: wrap;
@@ -213,27 +246,29 @@ h1, h2, h3 {
 .flex-container > div { flex: 1; min-width: 250px; }
 .text { padding: 10px; }
 .img-container { text-align: center; }
-.img-caption { font-size: 0.9em; color: gray; margin-top: 5px; }
+.img-caption { font-size: 0.85em; color: #5a5040; margin-top: 5px; font-style: italic; }
 
 /* ── Code & Pre ──────────────────────────────────────────── */
 pre {
-    background-color: var(--bg-code);
-    padding: 15px;
+    background: var(--bg-code) !important; /* override Prism theme bg */
+    border: 1px solid var(--border);
+    border-left: 2px solid var(--accent-dim);
+    padding: 14px 16px;
     border-radius: var(--radius);
     overflow-x: auto;
     margin-top: 0 !important;
     margin-bottom: 15px;
-    font-size: 0.85rem;
+    font-size: 0.83rem;
 }
-pre code { display: block; margin: 0; line-height: 1.4; }
+pre code { display: block; margin: 0; line-height: 1.45; background: transparent !important; border: none; padding: 0; font-size: inherit; color: inherit; }
 
 code {
-    background: #222;
-    font-weight: 100;
-    padding: 2px 6px;
-    border-radius: 4px;
+    background: rgba(11,9,8,.7);
+    border: 1px solid var(--border);
+    padding: 1px 6px;
+    border-radius: 3px;
     color: var(--code-clr);
-    font-size: 1em;
+    font-size: 0.93em;
 }
 
 /* ── Tables ──────────────────────────────────────────────── */
@@ -241,79 +276,103 @@ table {
     border-collapse: collapse;
     width: 100%;
     margin: 15px 0;
-    display: block;
-    overflow-x: auto;
 }
 table, th, td { border: 1px solid var(--border); }
-th, td { padding: 10px; text-align: left; }
-th { background-color: var(--bg-code); color: #d4ae13; }
-tbody tr:hover td { background: #181818; }
+th, td { padding: 9px 12px; text-align: left; }
+th {
+    background: rgba(201,168,76,.07);
+    color: var(--accent);
+    font-family: 'Cinzel', Georgia, serif;
+    font-size: 0.78rem;
+    letter-spacing: 0.06em;
+}
+tbody tr:hover td { background: rgba(201,168,76,.03); }
 
 /* ── Documentation section ───────────────────────────────── */
 .docs-section {
     margin-top: 60px;
-    padding-top: 30px;
-    border-top: 1px solid var(--border);
+    padding-top: 20px;
 }
 
 .function-doc {
-    margin-bottom: 40px;
-    padding: 1.25rem 1.25rem 0.75rem;
+    margin-bottom: 36px;
+    padding: 1.25rem 1.5rem 0.75rem;
     background: var(--bg-card);
     border-radius: var(--radius);
-    border-left: 3px solid #2a2a2a;
-    transition: border-color .2s;
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent-dim);
+    transition: border-left-color .2s, box-shadow .2s;
 }
-.function-doc:hover { border-left-color: var(--link); }
+.function-doc:hover {
+    border-left-color: var(--accent);
+    box-shadow: 0 0 24px rgba(201,168,76,.06);
+}
 .function-doc h3 { margin-top: 0; }
 .function-doc pre { margin-top: 0; margin-bottom: 15px; }
 
 .function-signature {
     font-family: monospace;
-    font-size: 1.1em;
+    font-size: 1.05em;
     color: var(--fn-clr);
     margin-bottom: 10px;
     margin-left: 5px;
 }
 
 .code-label {
-    font-family: monospace;
-    font-style: italic;
-    font-size: clamp(0.95rem, 0.85rem + 0.25vw, 1.3em);
-    color: #6fc28d;
-    font-weight: 500;
-    margin-bottom: 10px;
-    margin-left: 5px;
+    font-family: 'Courier New', Courier, monospace;
+    font-style: normal;
+    font-size: clamp(0.8rem, 0.72rem + 0.22vw, 0.96rem);
+    color: #9abdb9;
+    font-weight: 400;
+    margin-bottom: 12px;
+    margin-left: 0;
+    padding: 4px 12px;
+    background: rgba(11,9,8,.6);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    display: inline-block;
 }
 
 .indented { margin-left: 35px; }
 
+/* ── Divider ─────────────────────────────────────────────── */
 hr.doc-divider {
     border: none;
-    border-top: 1px solid var(--border);
-    margin: 40px 0;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--accent-dim), transparent);
+    margin: 48px 0;
+    position: relative;
+}
+hr.doc-divider::after {
+    content: '✦';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: var(--accent-dim);
+    font-size: 0.65rem;
+    background: var(--bg);
+    padding: 0 12px;
+    line-height: 1;
 }
 
 p + pre { margin-top: 0; }
 
 /* ── Links ───────────────────────────────────────────────── */
-a { color: var(--link); }
-a:hover { text-decoration: underline; }
+a { color: var(--link); transition: color .15s; }
+a:hover { color: var(--link-hov); text-decoration: underline; }
 
-/* ── Responsive: tablet (640–1023 px) ───────────────────── */
+/* ── Responsive: tablet ──────────────────────────────────── */
 @media (max-width: 1023px) {
     :root { --sidebar-w: 180px; }
     header { padding-left: calc(var(--sidebar-w) + 1rem); }
 }
 
-/* ── Responsive: mobile (< 640 px) ──────────────────────── */
+/* ── Responsive: mobile ──────────────────────────────────── */
 @media (max-width: 639px) {
     :root { --sidebar-w: 250px; }
 
-    header {
-        padding: 0 0.75rem;
-        gap: 0.6rem;
-    }
+    header { padding: 0 0.75rem; gap: 0.6rem; }
     header h1 { text-align: center; }
 
     #menu-toggle { display: flex; align-items: center; }
@@ -323,12 +382,11 @@ a:hover { text-decoration: underline; }
     .sidebar {
         transform: translateX(-100%);
         transition: transform .25s ease;
-        box-shadow: 4px 0 20px rgba(0,0,0,0.6);
+        box-shadow: 4px 0 24px rgba(0,0,0,.7);
         z-index: 950;
     }
     .sidebar.open { transform: translateX(0); }
 
-    /* On mobile the sidebar is hidden, so use the full viewport */
     main.container { margin: 1.5rem 1rem 3rem; padding: 0; }
 
     .indented { margin-left: 14px; }
@@ -376,10 +434,10 @@ a:hover { text-decoration: underline; }
             <a href="#BertAttention">BertAttention</a>
             <a href="#RoPE">RoPE</a>
             <a href="#SlidingWindowAttention">SlidingWindowAttention</a>
-            <a href="#Expert">Expert</a>
+            <a href="#SwiGLU">SwiGLU</a>
             <a href="#SMoE">SMoE</a>
-            <a href="#MegablockMoE">MegablockMoE</a>
-            <a href="#MegablockdMoE">MegablockdMoE</a>
+            <a href="#Dynamic_erf">Dynamic_erf</a>
+            <a href="#DynamicTanh">DynamicTanh</a>
         </div>
     </div>
 
@@ -395,6 +453,23 @@ a:hover { text-decoration: underline; }
             <a href="#benchmark_model_part">benchmark_model_part</a>
             <a href="#CirillaTokenizer">CirillaTokenizer</a>
             <a href="#CirillaTrainer">CirillaTrainer</a>
+            <a href="#CirillaMTP">CirillaMTP</a>
+            <a href="#CirillaTRM">CirillaTRM</a>
+            <a href="#CirillaVision">CirillaVision</a>
+            <a href="#HybridCirilla">HybridCirilla</a>
+            <a href="#get_optims">get_optims</a>
+            <a href="#load_balancing_loss">load_balancing_loss</a>
+            <a href="#Encoder">Encoder</a>
+            <a href="#Decoder">Decoder</a>
+            <a href="#MLPMixer1D">MLPMixer1D</a>
+            <a href="#JSONDynamicDatset">JSONDynamicDatset</a>
+            <a href="#DynamicCollator">DynamicCollator</a>
+            <a href="#mtp_training_step">mtp_training_step</a>
+            <a href="#mtp_inference_step">mtp_inference_step</a>
+            <a href="#trm_training_step">trm_training_step</a>
+            <a href="#trm_inference_step">trm_inference_step</a>
+            <a href="#bert_training_step">bert_training_step</a>
+            <a href="#bert_inference_step">bert_inference_step</a>
         </div>
     </div>
 
@@ -406,6 +481,16 @@ a:hover { text-decoration: underline; }
         <div class="category-items" id="modules-items">
             <a href="#scrape_fandom">scrape_fandom</a>
             <a href="#instructions_into_conv">instructions_into_conv</a>
+        </div>
+    </div>
+
+    <div class="category">
+        <div class="category-header" data-toggle="cli">
+            <span class="header-text">cirilla.cli</span>
+            <span class="arrow">▾</span>
+        </div>
+        <div class="category-items" id="cli-items">
+            <a href="#cirilla-vibe">Cirilla Vibe</a>
         </div>
     </div>
 </div>
@@ -802,7 +887,7 @@ As you may notice the user's question is asking about Ravik, which is the name o
                 <pre><code class="language-python">out_path = './reason_gym_synth.jsonl'
 n_samples = 400 # will contain 40'000 data points
 
-get_synth_resoning_dataset(out_path, n_samples)</code></pre>
+get_synth_reasoning_dataset(out_path, n_samples)</code></pre>
 
 <p><strong>Example output file: <code class="language-bash">./reason_gym_synth.jsonl</code> (obviously the actual <code>.jsonl</code> file is saved in single lines)</strong></p>
 <pre><code class="language-json">{"subject": "simple_equations", "text": [
@@ -936,7 +1021,7 @@ print(rmsnorm(torch.randn(1, dim, device='cuda')).shape)
 
         <div class="function-doc" id="BertAttention">
         <h3>BertAttention</h3>
-        <div class="code-label">class cirilla.LLM_pieces.BertAttention(args, rope)</div>
+        <div class="code-label">class cirilla.LLM_pieces.BertAttention(args, rope, score_mod)</div>
 
             <div class="indented">
                 <p>BERT attention with grouped query</p>
@@ -945,11 +1030,12 @@ print(rmsnorm(torch.randn(1, dim, device='cuda')).shape)
                 <tr><th>Argument</th><th>Type</th><th>Description</th></tr>
                 <tr><td><code>args</code></td><td>.BertAttentionArgs</td><td>arguments for the <code>BertAttention</code> class</code></td></tr>
                 <tr><td><code>rope</code></td><td>cirilla.LLM_pieces.Rope.Rope</td><td>rotary positional embeddings class</code></td></tr>
+                <tr><td><code>score_mod</code></td><td>Callable</td><td>a function to modify the attention scores (optional)</td></tr>
                 </table>
 
                 <p><strong>Signature:</strong></p>
                 <p align="center">
-                RMSNorm &rarr; W<sub>qkv</sub> &rarr; RoPE &rarr; FlashAttention3
+                RMSNorm &rarr; W<sub>qkv</sub> &rarr; RoPE &rarr; FlexAttention
                 </p>
 
                 <p><strong>Example:</strong></p>
@@ -981,7 +1067,7 @@ out = att(x)
                 <tr><td><code>head_dim</code></td><td>int</td><td>size of the head dimension</td></tr>
                 <tr><td><code>seq_len</code></td><td>int</td><td>(maximum) sequence length</td></tr>
                 <tr><td><code>device</code></td><td>Union[torch.device, str]</td><td>device to use</td></tr>
-                <tr><td><code>theata</code></td><td>float</td><td>theta for sin and cos</td></tr>
+                <tr><td><code>theta</code></td><td>float</td><td>theta for sin and cos</td></tr>
                 <tr><td><code>dtype</code></td><td>torch.dtype</td><td>dtype to use</td></tr>
                 </table>
 
@@ -1071,26 +1157,31 @@ print(create_dynamic_block_mask.cache_info()) # how many times the mask template
             </div>
         </div>
 
-        <div class="function-doc" id="Expert">
-        <h3>Expert</h3>
-        <div class="code-label">class cirilla.LLM_pieces.Expert(args)</div>
+        <div class="function-doc" id="SwiGLU">
+        <h3>SwiGLU</h3>
+        <div class="code-label">class cirilla.LLM_pieces.SwiGLU(args)</div>
 
             <div class="indented">
-                <p>a single expert used in Sparse Mixture of Experts (SMoE)</p>
-
-                <table style="margin-bottom: 50px;">
-                <tr><th>Argument</th><th>Type</th><th>Description</th></tr>
-                <tr><td><code>args</code></td><td>.ExpertArgs</td><td>arguments for the <code>Expert</code> class</td></tr>
-                </table>
+                <p>Standalone SwiGLU feed-forward block used as the expert FFN inside <a href="#SMoE">SMoE</a>. Can also be used independently as a feed-forward layer.</p>
 
                 <p><strong>Signature:</strong></p>
                 <p align="center">
-                SwiGLU
-                <span style="color: gray;">
-                    (W<sub>1</sub> → [SiLU(x<sub>[:d<sub>ff</sub>]</sub>) ⊙ x<sub>[d<sub>ff</sub>:]</sub>] → W<sub>2</sub>)
-                </span>
+                (W<sub>1a</sub>(x) &odot; W<sub>1b</sub>(x)) &rarr; SiLU &rarr; W<sub>2</sub>
                 </p>
 
+                <table style="margin-bottom: 50px;">
+                <tr><th>Argument</th><th>Type</th><th>Description</th></tr>
+                <tr><td><code>args</code></td><td>.SwiGLUArgs</td><td><code>dim</code> (input/output dim), <code>d_ff</code> (hidden dim, must be even), <code>drop</code> (dropout, default <code>0.1</code>)</td></tr>
+                </table>
+
+                <p><strong>Example:</strong></p>
+                <pre><code class="language-python">from cirilla.LLM_pieces import SwiGLU
+from cirilla.LLM_pieces.SMoE import SwiGLUArgs
+import torch
+
+ffn = SwiGLU(SwiGLUArgs(dim=256, d_ff=512)).cuda().to(torch.bfloat16)
+x = torch.randn(4, 128, 256, device='cuda', dtype=torch.bfloat16)
+print(ffn(x).shape)  # torch.Size([4, 128, 256])</code></pre>
             </div>
         </div>
 
@@ -1117,7 +1208,7 @@ print(create_dynamic_block_mask.cache_info()) # how many times the mask template
 
 moe = SMoE(
     SMoEArgs(num_experts=4, k=2),
-        [Expert(ExpertArgs()) for _ in range(4)]
+        [SwiGLU(SwiGLUArgs()) for _ in range(4)]
     ).to("cuda") # hf kernel only work on cuda
 
 x = torch.randn(4, 1024, 128,
@@ -1128,51 +1219,57 @@ out = moe(x)
             </div>
         </div>
 
-        <div class="function-doc" id="MegablockMoE">
-        <h3>MegablockMoE</h3>
-        <div class="code-label">class cirilla.LLM_pieces.MegablockMoE(args)</div>
+
+        <div class="function-doc" id="Dynamic_erf">
+        <h3>Dynamic_erf</h3>
+        <div class="code-label">class cirilla.LLM_pieces.Dynamic_erf(normalized_shape, alpha_init_value, shift_init_value)</div>
 
             <div class="indented">
-                <p><a href="#https://github.com/databricks/megablocks">megablocks</a> implementation of MoE</p>
+                <p>Normalization-free alternative to RMSNorm from the <a href="https://github.com/zlab-princeton/Derf">Derf paper</a>. Uses a learnable <code>erf</code> activation as the normalizer: <code>weight · erf(α·x + shift) + bias</code>. Use as a drop-in replacement by passing <code>layer_norm='Derf'</code> in any model <code>Args</code> dataclass.</p>
 
                 <table style="margin-bottom: 50px;">
                 <tr><th>Argument</th><th>Type</th><th>Description</th></tr>
-                <tr><td><code>args</code></td><td>.MegablockArgs</td><td>arguments for the <code>MegablockMoE</code> class</td></tr>
+                <tr><td><code>normalized_shape</code></td><td>int</td><td>size of the last dimension to normalize</td></tr>
+                <tr><td><code>alpha_init_value</code></td><td>float</td><td>initial value for the learnable scaling parameter α (default <code>0.5</code>)</td></tr>
+                <tr><td><code>shift_init_value</code></td><td>float</td><td>initial value for the learnable shift (default <code>0.0</code>)</td></tr>
                 </table>
 
                 <p><strong>Example:</strong></p>
-                <pre><code class="language-python">import torch
+                <pre><code class="language-python">from cirilla.LLM_pieces import Dynamic_erf
+import torch
 
-megamoe = MegablockMoE(MegablockArgs())
-x = torch.randn(4, 1024, 128,
-                device='cuda', requires_grad=True) # (b, seq_len, dim) ; requires grad for smoe
+norm = Dynamic_erf(256).cuda().to(torch.bfloat16)
+x = torch.randn(4, 128, 256, device='cuda', dtype=torch.bfloat16)
+print(norm(x).shape)  # torch.Size([4, 128, 256])
 
-out = megamoe(x)
-</code></pre>
+# Enable in any model via Args:
+model = Cirilla(Args(layer_norm='Derf'))</code></pre>
             </div>
         </div>
 
-        <div class="function-doc" id="MegablockdMoE">
-        <h3>MegablockdMoE</h3>
-        <div class="code-label">class cirilla.LLM_pieces.MegablockdMoE(args)</div>
+        <div class="function-doc" id="DynamicTanh">
+        <h3>DynamicTanh</h3>
+        <div class="code-label">class cirilla.LLM_pieces.DynamicTanh(normalized_shape, alpha_init_value)</div>
 
             <div class="indented">
-                <p><a href="#https://github.com/databricks/megablocks">megablocks</a> implementation of dropless MoE (dMoE)</p>
+                <p>Normalization-free alternative to RMSNorm from the <a href="https://github.com/zlab-princeton/Derf">Derf paper</a>. Uses a learnable <code>tanh</code> activation: <code>weight · tanh(α·x) + bias</code>. Enable with <code>layer_norm='DyT'</code> in any model <code>Args</code> dataclass.</p>
 
                 <table style="margin-bottom: 50px;">
                 <tr><th>Argument</th><th>Type</th><th>Description</th></tr>
-                <tr><td><code>args</code></td><td>.MegablockArgs</td><td>arguments for the <code>MegablockdMoE</code> class</td></tr>
+                <tr><td><code>normalized_shape</code></td><td>int</td><td>size of the last dimension to normalize</td></tr>
+                <tr><td><code>alpha_init_value</code></td><td>float</td><td>initial value for the learnable scaling parameter α (default <code>0.5</code>)</td></tr>
                 </table>
 
                 <p><strong>Example:</strong></p>
-                <pre><code class="language-python">import torch
+                <pre><code class="language-python">from cirilla.LLM_pieces import DynamicTanh
+import torch
 
-megadmoe = MegablockdMoE(MegablockArgs())
-x = torch.randn(4, 1024, 128,
-                device='cuda', requires_grad=True) # (b, seq_len, dim) ; requires grad for smoe
+norm = DynamicTanh(256).cuda().to(torch.bfloat16)
+x = torch.randn(4, 128, 256, device='cuda', dtype=torch.bfloat16)
+print(norm(x).shape)  # torch.Size([4, 128, 256])
 
-out = megadmoe(x)
-</code></pre>
+# Enable in any model via Args:
+model = Cirilla(Args(layer_norm='DyT'))</code></pre>
             </div>
         </div>
 
@@ -1241,7 +1338,7 @@ model = CirillaBERT(BertArgs(output_what='classify', n_classes=2))
 print(model.pred(x, mask).shape) # torch.Size([4, 2])</code></pre>
             </div>
 
-                            <div class="code-label" style="margin-top: 50px;">pull_model_from_hub(hf_repo_id) → None</div>
+                            <div class="code-label" style="margin-top: 50px;">pull_model_from_hub(hf_repo_id, **kwargs) → None</div>
 
                 <div class="indented">
                 <p>pull model from huggingface, the pulled model has to be compatible with <code>CirillaBERT</code></p>
@@ -1262,7 +1359,7 @@ mode.pull_model_from_hub('AnthonyPa57/HF-torch-demo-R')</code></pre>
 
         <div class="function-doc" id="JSONLDataset">
         <h3>JSONLDataset</h3>
-        <div class="code-label">class cirilla.Cirilla_model.JSONLDataset(paths, shuffle_path, device, tokenizer, max_len, pad_token, eos_token, sos_token, user_token, bert_append_tokens, random_spelling_mistake_prob, random_missing_char_prob)</div>
+        <div class="code-label">class cirilla.Cirilla_model.JSONLDataset(path, shuffle_path, device, tokenizer, max_len, pad_token, eos_token, sos_token, user_token, suffix_tokens, prefix_tokens, random_spelling_mistake_prob, random_missing_char_prob)</div>
 
             <div class="indented">
                 <p>basic dataset for training Cirilla models with <code>.jsonl</code> files</p>
@@ -1271,14 +1368,15 @@ mode.pull_model_from_hub('AnthonyPa57/HF-torch-demo-R')</code></pre>
                 <tr><th>Argument</th><th>Type</th><th>Description</th></tr>
                 <tr><td><code>path</code></td><td>Union[Path, tuple[Path]]</td><td>path to a folder with <code>.jsonl</code> file(s) that contain training data</td></tr>
                 <tr><td><code>shuffle_path</code></td><td>bool</td><td>whether to shuffle the order of the <code>.jsonl</code> files (in place)</td></tr>
-                <tr><td><code>device</code></td><td>torch.device</td><td>what devide to transfer data to</td></tr>
+                <tr><td><code>device</code></td><td>torch.device</td><td>what device to transfer data to</td></tr>
                 <tr><td><code>tokenizer</code></td><td>CirillaTokenizer</td><td>tokenizer to use</td></tr>
                 <tr><td><code>max_len</code></td><td>int</td><td>maximum length of the sequence</td></tr>
                 <tr><td><code>pad_token</code></td><td>str</td><td>padding token <code>&lt;pad&gt;</code></td></tr>
                 <tr><td><code>eos_token</code></td><td>str</td><td>end of sequence token <code>&lt;eos&gt;</code></td></tr>
                 <tr><td><code>sos_token</code></td><td>str</td><td>start of sequence token <code>&lt;sos&gt;</code></td></tr>
                 <tr><td><code>user_token</code></td><td>str</td><td>user token <code>&lt;|user|&gt;</code></td></tr>
-                <tr><td><code>bert_append_tokens</code></td><td>list[str]</td><td>tokens to append to the end of the sequence for BERT models e.g. <code>&lt;cls&gt;</code></td></tr>
+                <tr><td><code>suffix_tokens</code></td><td>list[str]</td><td>tokens to append to the end of the sequence</td></tr>
+                <tr><td><code>prefix_tokens</code></td><td>list[str]</td><td>tokens to prepend to the beginning of the sequence</td></tr>
                 <tr><td><code>random_spelling_mistake_prob</code></td><td>float</td><td>probability of adding a random spelling mistake</td></tr>
                 <tr><td><code>random_missing_char_prob</code></td><td>float</td><td>probability of removing a random character</td></tr>
                 </table>
@@ -1368,7 +1466,7 @@ model = Cirilla(Args())
 print(model.pred(x).shape) # torch.Size([4, context_window, vocab_size])</code></pre>
             </div>
 
-                            <div class="code-label" style="margin-top: 50px;">pull_model_from_hub(hf_repo_id) → None</div>
+                            <div class="code-label" style="margin-top: 50px;">pull_model_from_hub(hf_repo_id, **kwargs) → None</div>
 
                 <div class="indented">
                 <p>pull model from huggingface, the pulled model has to be compatible with <code>Cirilla</code></p>
@@ -1542,6 +1640,432 @@ trainer.benchmark()
         </div>
         </div>
 
+        <div class="function-doc" id="CirillaMTP">
+        <h3>CirillaMTP</h3>
+        <div class="code-label">class cirilla.Cirilla_model.CirillaMTP(args)</div>
+
+            <div class="indented">
+                <p>Multi-Token Prediction model. Extends <code>Cirilla</code> with <code>n_token_heads</code> additional lightweight single-layer decoder heads, each predicting the next <em>k</em>-th token ahead in parallel. This improves convergence speed and sample efficiency with minimal extra compute.</p>
+
+                <table style="margin-bottom: 50px;">
+                <tr><th>Argument</th><th>Type</th><th>Description</th></tr>
+                <tr><td><code>args</code></td><td>.MTPArgs</td><td>arguments for <code>CirillaMTP</code>; extends <code>DecoderArgs</code> with <code>n_token_heads</code> (number of extra prediction heads, default <code>4</code>)</td></tr>
+                </table>
+
+                <p><strong>Signature:</strong></p>
+                <p align="center">
+                Input Embeddings &rarr; N&times;(SlidingWindowAttention &rarr; MoE) &rarr; RMSNorm &rarr; W<sub>out</sub><br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;+ n&times;(Decoder &rarr; RMSNorm &rarr; W<sub>out</sub>) &nbsp;[one head per future token]
+                </p>
+
+                <p><strong>Example:</strong></p>
+                <pre><code class="language-python">from cirilla.Cirilla_model import (
+    CirillaMTP, MTPArgs, CirillaTrainer, TrainingArgs,
+    CirillaTokenizer, JSONLDataset, mtp_training_step, mtp_inference_step
+)
+from types import MethodType
+from functools import partial
+
+model = CirillaMTP(MTPArgs(n_layers=4, dim=128, d_ff=256,
+                            n_heads=8, context_window=128,
+                            n_token_heads=4))
+
+targs = TrainingArgs(n_epoch=1000)
+trainer = CirillaTrainer(model, targs)
+
+tokenizer = CirillaTokenizer(hub_url='AnthonyPa57/HF-torch-demo2')
+pad_id = tokenizer.tokenizer.pad_token_id
+
+dl = JSONLDataset(['./example.jsonl'], tokenizer=tokenizer,
+                    max_len=model.args.context_window)
+
+trainer.training_step = MethodType(partial(mtp_training_step, pad_id=pad_id), trainer)
+trainer.inference_step = MethodType(partial(mtp_inference_step, pad_id=pad_id), trainer)
+trainer.criterion = None
+
+trainer.train(dl, dl)</code></pre>
+            </div>
+        </div>
+
+        <div class="function-doc" id="CirillaTRM">
+        <h3>CirillaTRM</h3>
+        <div class="code-label">class cirilla.Cirilla_model.CirillaTRM(network, args)</div>
+
+            <div class="indented">
+                <p>Tiny Recursive Model. Wraps any <code>nn.Module</code> in an adaptive computation loop: the same network refines an answer vector <code>y_hat</code> and latent state <code>z</code> across multiple steps. A learnable halt gate decides when to stop early at inference time — shallow inputs get fewer steps, harder inputs get more.</p>
+
+                <table style="margin-bottom: 50px;">
+                <tr><th>Argument</th><th>Type</th><th>Description</th></tr>
+                <tr><td><code>network</code></td><td>nn.Module</td><td>any network to use as the recursive core (e.g. <code>MLPMixer1D</code>, <code>Encoder</code>)</td></tr>
+                <tr><td><code>args</code></td><td>.TRMArgs</td><td>arguments: <code>n_total_refinements</code> (default <code>4</code>), <code>n_latent_refinements</code> (default <code>2</code>), <code>vocab_size</code>, <code>dim</code></td></tr>
+                </table>
+
+                <p><strong>Example:</strong></p>
+                <pre><code class="language-python">from cirilla.Cirilla_model import (
+    CirillaTRM, TRMArgs, MLPMixer1D, MixerArgs,
+    CirillaTrainer, TrainingArgs, CirillaTokenizer, JSONLDataset,
+    trm_training_step, trm_inference_step
+)
+from ema_pytorch import EMA
+from types import MethodType
+from functools import partial
+
+mixer = MLPMixer1D(MixerArgs())
+model = CirillaTRM(mixer, TRMArgs())
+
+ema_model = EMA(model, beta=0.999,
+                update_model_with_ema_every=1_000,
+                forward_method_names=('predict',))
+
+targs = TrainingArgs(n_epoch=1000)
+trainer = CirillaTrainer(model, targs)
+
+tokenizer = CirillaTokenizer(hub_url='AnthonyPa57/HF-torch-demo2')
+dl = JSONLDataset(['./example.jsonl'], tokenizer=tokenizer,
+                    max_len=mixer.args.context_window)
+
+trainer.training_step = MethodType(
+    partial(trm_training_step, max_recurrent_step=16,
+            halt_weight=0.5, halt_thresh=0.5, ema_model=ema_model), trainer)
+trainer.inference_step = MethodType(
+    partial(trm_inference_step, max_recurrent_step=16, halt_thresh=0.5), trainer)
+trainer.criterion = None
+
+trainer.train(dl, dl)</code></pre>
+            </div>
+        </div>
+
+        <div class="function-doc" id="CirillaVision">
+        <h3>CirillaVision</h3>
+        <div class="code-label">class cirilla.Cirilla_model.CirillaVision(args)</div>
+
+            <div class="indented">
+                <p>Vision-Language model. A Swin Transformer encodes image patches into token embeddings which are prepended to the text token sequence and passed into a Cirilla decoder — similar architecture to <a href="https://arxiv.org/pdf/2407.07726">PaliGemma</a>.</p>
+
+                <table style="margin-bottom: 50px;">
+                <tr><th>Argument</th><th>Type</th><th>Description</th></tr>
+                <tr><td><code>args</code></td><td>.VisionArgs</td><td>extends <code>DecoderArgs</code> with Swin encoder params: <code>img_size</code> (default <code>224</code>), <code>patch_size</code> (default <code>4</code>), <code>in_channels</code> (default <code>3</code>), <code>swin_embed_dim</code> (default <code>96</code>), <code>swin_depths</code>, <code>swin_num_heads</code>, <code>swin_window_size</code></td></tr>
+                </table>
+
+                <p><strong>Signature:</strong></p>
+                <p align="center">
+                Image &rarr; Swin Transformer &rarr; image tokens &rarr; concat(image tokens, text tokens) &rarr; N&times;(SlidingWindowAttention &rarr; MoE) &rarr; RMSNorm &rarr; W<sub>out</sub>
+                </p>
+            </div>
+        </div>
+
+        <div class="function-doc" id="HybridCirilla">
+        <h3>HybridCirilla</h3>
+        <div class="code-label">class cirilla.Cirilla_model.HybridCirilla(args)</div>
+
+            <div class="indented">
+                <p>Transformer–Mamba hybrid model. Replaces the standard transformer decoder with <code>HybridDecoder</code> blocks that interleave Mamba SSM layers with transformer attention layers (similar to <a href="https://www.ibm.com/new/announcements/ibm-granite-4-0-hyper-efficient-high-performance-hybrid-models">IBM Granite 4.0</a>). Requires the optional <code>mamba</code> dependency.</p>
+
+                <table style="margin-bottom: 50px;">
+                <tr><th>Argument</th><th>Type</th><th>Description</th></tr>
+                <tr><td><code>args</code></td><td>.HybridArgs</td><td>extends <code>HybridDecoderArgs</code>; key extra arg: <code>layer_pattern</code> — a string like <code>'5M'</code> meaning 5 transformer layers then 1 Mamba layer, repeated</td></tr>
+                </table>
+
+                <p><strong>Example:</strong></p>
+                <pre><code class="language-python"># requires: uv add Cirilla[mamba]
+from cirilla.Cirilla_model import HybridCirilla, HybridArgs
+
+model = HybridCirilla(HybridArgs(n_layers=5, layer_pattern='5M'))
+print(model.n_params / 1e6, "M")</code></pre>
+            </div>
+        </div>
+
+        <div class="function-doc" id="get_optims">
+        <h3>get_optims</h3>
+        <div class="code-label">func cirilla.Cirilla_model.get_optims(model, use_muon_optim, optim, lr, weight_decay) → tuple[Optimizer, ...]</div>
+
+            <div class="indented">
+                <p>Configure optimizers for a Cirilla model. Optionally combines a standard optimizer (default AdamW) for embedding and output layers with the <a href="https://github.com/KellerJordan/Muon">Muon</a> optimizer for hidden layers, which can improve convergence on transformer hidden weights.</p>
+
+                <table style="margin-bottom: 50px;">
+                <tr><th>Argument</th><th>Type</th><th>Description</th></tr>
+                <tr><td><code>model</code></td><td>nn.Module</td><td>model to configure optimizers for</td></tr>
+                <tr><td><code>use_muon_optim</code></td><td>bool</td><td>pair a Muon optimizer for hidden layers alongside the base optimizer</td></tr>
+                <tr><td><code>optim</code></td><td>torch.optim.Optimizer</td><td>base optimizer class (default <code>AdamW</code>)</td></tr>
+                <tr><td><code>lr</code></td><td>float</td><td>learning rate</td></tr>
+                <tr><td><code>weight_decay</code></td><td>float</td><td>weight decay</td></tr>
+                </table>
+
+                <p><strong>Example:</strong></p>
+                <pre><code class="language-python">from cirilla.Cirilla_model import Cirilla, Args, get_optims
+
+model = Cirilla(Args())
+optims = get_optims(model, use_muon_optim=True, lr=3e-4, weight_decay=0.1)</code></pre>
+            </div>
+        </div>
+
+        <div class="function-doc" id="load_balancing_loss">
+        <h3>load_balancing_loss</h3>
+        <div class="code-label">func cirilla.Cirilla_model.load_balancing_loss(expert_weights) → torch.Tensor</div>
+
+            <div class="indented">
+                <p>Auxiliary load-balancing loss for MoE models. Encourages uniform expert utilisation by penalising skewed routing distributions. Add a small multiple (e.g. <code>0.01</code>) of this to the main training loss. Requires <code>output_moe_weights=True</code> in the model args.</p>
+
+                <table style="margin-bottom: 50px;">
+                <tr><th>Argument</th><th>Type</th><th>Description</th></tr>
+                <tr><td><code>expert_weights</code></td><td>torch.Tensor</td><td>per-expert routing weights returned by the model when <code>output_moe_weights=True</code></td></tr>
+                </table>
+
+                <p><strong>Example:</strong></p>
+                <pre><code class="language-python">from cirilla.Cirilla_model import Cirilla, Args, load_balancing_loss
+import torch.nn as nn
+
+model = Cirilla(Args(output_moe_weights=True))
+criterion = nn.CrossEntropyLoss()
+
+out, moe_weights = model.pred(x)
+lb_losses = [
+    load_balancing_loss(w,
+    num_experts=model.args.num_experts,
+    top_k=model.args.k)
+    for w in moe_weights
+        ]
+lb_loss = torch.stack(lb_losses).mean()
+loss = criterion(out.view(-1, out.shape[-1]),
+    targets.view(-1))
+loss = loss + 0.01 * lb_loss
+loss.backward()</code></pre>
+            </div>
+        </div>
+
+        <div class="function-doc" id="Encoder">
+        <h3>Encoder</h3>
+        <div class="code-label">class cirilla.Cirilla_model.Encoder(args)</div>
+
+            <div class="indented">
+                <p>Non-causal (bidirectional) encoder block: N layers of <a href="#BertAttention">BertAttention</a> interleaved with <a href="#SMoE">SMoE</a>. Used as the recursive core in <a href="#CirillaTRM">CirillaTRM</a> and as a standalone encoder for classification / embedding tasks.</p>
+
+                <p><strong>Signature:</strong></p>
+                <p align="center">
+                N&times;(BertAttention &rarr; SMoE)
+                </p>
+
+                <table style="margin-bottom: 50px;">
+                <tr><th>Argument</th><th>Type</th><th>Description</th></tr>
+                <tr><td><code>args</code></td><td>.EncoderArgs</td><td><code>dim</code>, <code>d_ff</code>, <code>n_layers</code>, <code>n_heads</code>, <code>n_kv_heads</code>, <code>context_window</code>, <code>num_experts</code>, <code>k</code>, <code>layer_norm</code>, <code>dtype_str</code>, <code>use_sparse</code>, <code>fp8_recipe</code></td></tr>
+                </table>
+
+                <p><strong>Example:</strong></p>
+                <pre><code class="language-python">from cirilla.Cirilla_model import Encoder, EncoderArgs
+import torch
+
+enc = Encoder(EncoderArgs(dim=256, n_layers=4, context_window=512)).cuda()
+x = torch.randint(0, 60_000, (2, 512))
+emb = torch.randn(2, 512, 256, device='cuda', dtype=torch.bfloat16)
+out = enc.pred(emb)
+print(out.shape)  # torch.Size([2, 512, 256])</code></pre>
+            </div>
+        </div>
+
+        <div class="function-doc" id="Decoder">
+        <h3>Decoder</h3>
+        <div class="code-label">class cirilla.Cirilla_model.Decoder(args)</div>
+
+            <div class="indented">
+                <p>Causal decoder block: N layers of <a href="#SlidingWindowAttention">SlidingWindowAttention</a> interleaved with <a href="#SMoE">SMoE</a>. The building block inside <a href="#Cirilla">Cirilla</a>, <a href="#CirillaMTP">CirillaMTP</a>, and the token heads of MTP.</p>
+
+                <p><strong>Signature:</strong></p>
+                <p align="center">
+                N&times;(SlidingWindowAttention &rarr; SMoE)
+                </p>
+
+                <table style="margin-bottom: 50px;">
+                <tr><th>Argument</th><th>Type</th><th>Description</th></tr>
+                <tr><td><code>args</code></td><td>.DecoderArgs</td><td><code>dim</code>, <code>d_ff</code>, <code>n_layers</code>, <code>n_heads</code>, <code>n_kv_heads</code>, <code>context_window</code>, <code>window_size</code>, <code>static_mask</code>, <code>soft_cap</code>, <code>num_experts</code>, <code>k</code>, <code>layer_norm</code>, <code>dtype_str</code>, <code>use_sparse</code>, <code>fp8_recipe</code></td></tr>
+                </table>
+
+                <p><strong>Example:</strong></p>
+                <pre><code class="language-python">from cirilla.Cirilla_model import Decoder, DecoderArgs
+import torch
+
+dec = Decoder(DecoderArgs(dim=256, n_layers=4, context_window=512,
+                            torch_compile=False)).cuda()
+x = torch.randn(2, 512, 256, device='cuda', dtype=torch.bfloat16)
+out = dec.pred(x)
+print(out.shape)  # torch.Size([2, 512, 256])</code></pre>
+            </div>
+        </div>
+
+        <div class="function-doc" id="MLPMixer1D">
+        <h3>MLPMixer1D</h3>
+        <div class="code-label">class cirilla.Cirilla_model.MLPMixer1D(args)</div>
+
+            <div class="indented">
+                <p>1-D MLP-Mixer: alternating token-mixing (Conv1d across sequence) and channel-mixing (Linear across features) blocks with pre-norm residual connections. Commonly used as the recursive core network inside <a href="#CirillaTRM">CirillaTRM</a>.</p>
+
+                <table style="margin-bottom: 50px;">
+                <tr><th>Argument</th><th>Type</th><th>Description</th></tr>
+                <tr><td><code>args</code></td><td>.MixerArgs</td><td><code>dim</code> (default <code>256</code>), <code>depth</code> (number of mixer layers, default <code>8</code>), <code>context_window</code> (default <code>512</code>), <code>expansion_factor</code> (token-mix hidden ratio, default <code>4</code>), <code>expansion_factor_token</code> (channel-mix hidden ratio, default <code>0.5</code>), <code>dropout</code></td></tr>
+                </table>
+
+                <p><strong>Example:</strong></p>
+                <pre><code class="language-python">from cirilla.Cirilla_model import MLPMixer1D, MixerArgs, CirillaTRM, TRMArgs
+import torch
+
+mixer = MLPMixer1D(MixerArgs(dim=256, depth=6, context_window=512))
+model = CirillaTRM(mixer, TRMArgs(dim=256))
+print(model.n_params / 1e6, "M")</code></pre>
+            </div>
+        </div>
+
+        <div class="function-doc" id="JSONDynamicDatset">
+        <h3>JSONDynamicDatset</h3>
+        <div class="code-label">class cirilla.Cirilla_model.JSONDynamicDatset(paths, shuffle_path, device, tokenizer, max_len, ...)</div>
+
+            <div class="indented">
+                <p>Variant of <a href="#JSONLDataset">JSONLDataset</a> that yields variable-length tensors (no padding). Use together with <a href="#DynamicCollator">DynamicCollator</a> as the <code>DataLoader</code> collate function to pad each batch to its longest sequence rather than padding to a global <code>max_len</code>.</p>
+
+                <p>Accepts the same arguments as <a href="#JSONLDataset">JSONLDataset</a>.</p>
+
+                <p><strong>Example:</strong></p>
+                <pre><code class="language-python">from cirilla.Cirilla_model import (
+    JSONDynamicDatset, DynamicCollator, CirillaTokenizer
+)
+from torch.utils.data import DataLoader
+
+tokenizer = CirillaTokenizer(hub_url='AnthonyPa57/HF-torch-demo2')
+pad_id = tokenizer.tokenizer.pad_token_id
+
+ds = JSONDynamicDatset(['./example.jsonl'], tokenizer=tokenizer, max_len=512)
+dl = DataLoader(ds, batch_size=8, collate_fn=DynamicCollator(pad_id))</code></pre>
+            </div>
+        </div>
+
+        <div class="function-doc" id="DynamicCollator">
+        <h3>DynamicCollator</h3>
+        <div class="code-label">class cirilla.Cirilla_model.DynamicCollator(pad_token_id)</div>
+
+            <div class="indented">
+                <p>Collate function for use with <a href="#JSONDynamicDatset">JSONDynamicDatset</a>. Pads each batch to the length of its longest sequence using <code>pad_token_id</code>, rather than padding all sequences to a global maximum.</p>
+
+                <table style="margin-bottom: 50px;">
+                <tr><th>Argument</th><th>Type</th><th>Description</th></tr>
+                <tr><td><code>pad_token_id</code></td><td>int</td><td>token id to use for padding (e.g. <code>tokenizer.tokenizer.pad_token_id</code>)</td></tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="function-doc" id="mtp_training_step">
+        <h3>mtp_training_step</h3>
+        <div class="code-label">func cirilla.Cirilla_model.mtp_training_step(self, data, pad_id) → float</div>
+
+            <div class="indented">
+                <p>Training step for <a href="#CirillaMTP">CirillaMTP</a>. Computes cross-entropy loss across all <code>n_token_heads</code> prediction heads. Bind to <code>CirillaTrainer</code> via <code>MethodType</code>.</p>
+
+                <table style="margin-bottom: 50px;">
+                <tr><th>Argument</th><th>Type</th><th>Description</th></tr>
+                <tr><td><code>self</code></td><td>CirillaTrainer</td><td>the trainer instance (bound via <code>MethodType</code>)</td></tr>
+                <tr><td><code>data</code></td><td>tuple[Tensor, Tensor]</td><td>batch of (input_tokens, target_tokens) from the dataloader</td></tr>
+                <tr><td><code>pad_id</code></td><td>int</td><td>padding token id used to mask loss on padding positions</td></tr>
+                </table>
+
+                <p><strong>Example:</strong></p>
+                <pre><code class="language-python">from types import MethodType
+from functools import partial
+from cirilla.Cirilla_model import mtp_training_step, mtp_inference_step
+
+trainer.training_step = MethodType(partial(mtp_training_step, pad_id=pad_id), trainer)
+trainer.inference_step = MethodType(partial(mtp_inference_step, pad_id=pad_id), trainer)
+trainer.criterion = None</code></pre>
+            </div>
+        </div>
+
+        <div class="function-doc" id="mtp_inference_step">
+        <h3>mtp_inference_step</h3>
+        <div class="code-label">func cirilla.Cirilla_model.mtp_inference_step(self, data, pad_id) → float</div>
+
+            <div class="indented">
+                <p>Validation/inference step for <a href="#CirillaMTP">CirillaMTP</a>. Same signature as <a href="#mtp_training_step">mtp_training_step</a> — computes loss using only the first token head (the main next-token prediction head). Bind to <code>CirillaTrainer</code> via <code>MethodType</code>.</p>
+
+                <table style="margin-bottom: 50px;">
+                <tr><th>Argument</th><th>Type</th><th>Description</th></tr>
+                <tr><td><code>self</code></td><td>CirillaTrainer</td><td>the trainer instance</td></tr>
+                <tr><td><code>data</code></td><td>tuple[Tensor, Tensor]</td><td>batch of (input_tokens, target_tokens)</td></tr>
+                <tr><td><code>pad_id</code></td><td>int</td><td>padding token id</td></tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="function-doc" id="trm_training_step">
+        <h3>trm_training_step</h3>
+        <div class="code-label">func cirilla.Cirilla_model.trm_training_step(self, data, max_recurrent_step, halt_weight, halt_thresh, ema_model) → float</div>
+
+            <div class="indented">
+                <p>Training step for <a href="#CirillaTRM">CirillaTRM</a>. Unrolls the recursive refinement loop, computes classification cross-entropy loss, and adds a weighted halt loss that encourages the model to stop as early as possible.</p>
+
+                <table style="margin-bottom: 50px;">
+                <tr><th>Argument</th><th>Type</th><th>Description</th></tr>
+                <tr><td><code>self</code></td><td>CirillaTrainer</td><td>the trainer instance</td></tr>
+                <tr><td><code>data</code></td><td>tuple[Tensor, ...]</td><td>batch from the dataloader</td></tr>
+                <tr><td><code>max_recurrent_step</code></td><td>int</td><td>maximum number of recursive refinement steps (default <code>16</code>)</td></tr>
+                <tr><td><code>halt_weight</code></td><td>float</td><td>weight applied to the halt loss (default <code>0.5</code>)</td></tr>
+                <tr><td><code>halt_thresh</code></td><td>float</td><td>threshold above which the model considers itself done (default <code>0.5</code>)</td></tr>
+                <tr><td><code>ema_model</code></td><td>EMA</td><td><a href="https://github.com/lucidrains/ema-pytorch">EMA</a> wrapper around the model used to generate soft training targets</td></tr>
+                </table>
+
+                <p><strong>Example:</strong></p>
+                <pre><code class="language-python">from types import MethodType
+from functools import partial
+from cirilla.Cirilla_model import trm_training_step, trm_inference_step
+
+trainer.training_step = MethodType(
+    partial(trm_training_step, max_recurrent_step=16,
+            halt_weight=0.5, halt_thresh=0.5, ema_model=ema_model), trainer)
+trainer.inference_step = MethodType(
+    partial(trm_inference_step, max_recurrent_step=16, halt_thresh=0.5), trainer)
+trainer.criterion = None</code></pre>
+            </div>
+        </div>
+
+        <div class="function-doc" id="trm_inference_step">
+        <h3>trm_inference_step</h3>
+        <div class="code-label">func cirilla.Cirilla_model.trm_inference_step(self, data, max_recurrent_step, halt_thresh) → float</div>
+
+            <div class="indented">
+                <p>Validation/inference step for <a href="#CirillaTRM">CirillaTRM</a>. Runs the adaptive halt loop and reports accuracy. Bind to <code>CirillaTrainer</code> via <code>MethodType</code>.</p>
+
+                <table>
+                <tr><th>Argument</th><th>Type</th><th>Description</th></tr>
+                <tr><td><code>self</code></td><td>CirillaTrainer</td><td>the trainer instance</td></tr>
+                <tr><td><code>data</code></td><td>tuple[Tensor, ...]</td><td>batch from the dataloader</td></tr>
+                <tr><td><code>max_recurrent_step</code></td><td>int</td><td>maximum refinement steps (default <code>16</code>)</td></tr>
+                <tr><td><code>halt_thresh</code></td><td>float</td><td>halt threshold (default <code>0.5</code>)</td></tr>
+                </table>
+            </div>
+        </div>
+
+        <div class="function-doc" id="bert_training_step">
+        <h3>bert_training_step</h3>
+        <div class="code-label">func cirilla.Cirilla_model.bert_training_step(self, data) → float</div>
+
+            <div class="indented">
+                <p>Default training step for <a href="#CirillaBERT">CirillaBERT</a> classification tasks. Calls <code>model.pred(tokens, mask)</code> and computes cross-entropy against the provided labels. Bind to <code>CirillaTrainer</code> via <code>MethodType</code> to override the default LM training step.</p>
+
+                <p><strong>Example:</strong></p>
+                <pre><code class="language-python">from types import MethodType
+from cirilla.Cirilla_model import bert_training_step, bert_inference_step
+import torch.nn as nn
+
+trainer.training_step = MethodType(bert_training_step, trainer)
+trainer.inference_step = MethodType(bert_inference_step, trainer)
+trainer.criterion = nn.CrossEntropyLoss()</code></pre>
+            </div>
+        </div>
+
+        <div class="function-doc" id="bert_inference_step">
+        <h3>bert_inference_step</h3>
+        <div class="code-label">func cirilla.Cirilla_model.bert_inference_step(self, data) → float</div>
+
+            <div class="indented">
+                <p>Validation/inference step for <a href="#CirillaBERT">CirillaBERT</a> classification tasks. Reports accuracy over the batch. Same signature as <a href="#bert_training_step">bert_training_step</a>.</p>
+            </div>
+        </div>
+
         <div class="function-doc" id="scrape_fandom">
         <h3>scrape_fandom</h3>
         <div class="code-label">func fandom_scraper.scrape_fandom(in_path, out_path, instruct_path, n_workers, wiki, lang) → None</div>
@@ -1645,6 +2169,36 @@ As a child, he ...
             </div>
         </div>
 
+        <div class="function-doc" id="cirilla-vibe">
+        <h3>Cirilla Vibe</h3>
+
+            <div class="indented">
+                <p>Terminal chat UI. After installing Cirilla, launch a full TUI to chat with any Cirilla model pulled from HuggingFace Hub — no extra setup required.</p>
+
+                <pre><code class="language-bash">uv run python -m cirilla.cli</code></pre>
+
+                <p>On launch, choose a featured model or type any HuggingFace repo id (e.g. <code>AnthonyPa57/Cirilla-0.3B-4E-grpo</code>). Adjust generation settings live during chat with <code>/set key=value</code>:</p>
+
+                <table style="margin-bottom: 30px;">
+                <tr><th>Command</th><th>Description</th></tr>
+                <tr><td><code>/set temperature=0.8</code></td><td>sampling temperature</td></tr>
+                <tr><td><code>/set top_p=0.9</code></td><td>nucleus sampling probability</td></tr>
+                <tr><td><code>/set top_k=50</code></td><td>top-k sampling (<code>None</code> to disable)</td></tr>
+                <tr><td><code>/set n_beams=5</code></td><td>number of beams / parallel samples</td></tr>
+                <tr><td><code>/set kv_cache=true</code></td><td>toggle KV-cache generation</td></tr>
+                <tr><td><code>/set auto_clear=true</code></td><td>clear history and KV-cache before each new message</td></tr>
+                <tr><td><code>/clear</code></td><td>manually clear history and reset KV-cache</td></tr>
+                </table>
+
+                <p><strong>Featured models:</strong></p>
+                <ul>
+                    <li><code>Cirilla-0.3B-4E</code> — base pretrained model</li>
+                    <li><code>Cirilla-0.3B-4E-grpo</code> — GRPO fine-tuned</li>
+                    <li><code>Cirilla-0.3B-4E-grpo-icl</code> — GRPO + in-context learning fine-tuned</li>
+                </ul>
+            </div>
+        </div>
+
 </div>
 </main>
 
@@ -1693,6 +2247,47 @@ document.querySelectorAll('.sidebar a[href^="#"]').forEach(link => {
         overlay.classList.remove('open');
     });
 });
+
+// ── Signature colorizer ──────────────────────────────────
+// Parses each .code-label text into: keyword | module.path. | Name( params ) → ret
+// and wraps each part in a coloured span.
+(function colorizeSignatures() {
+    const esc = s => s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+
+    // Groups: (keyword?) (module.path.?) (name) ( (params) ) (rest?)
+    const SIG = /^((?:class|func)\s+)?((?:[A-Za-z_]\w*\.)+)?([A-Za-z_]\w*)(\()([^)]*)(\))(.*)?$/;
+
+    document.querySelectorAll('.code-label').forEach(el => {
+        const t = el.textContent.trim();
+        const m = t.match(SIG);
+        if (!m) return;                    // leave unrecognised shapes alone
+
+        const [, kw, mod, name, , params, , rest] = m;
+        let h = '';
+
+        if (kw)  h += `<span class="sig-kw">${esc(kw.trim())}</span> `;
+        if (mod) h += `<span class="sig-mod">${esc(mod)}</span>`;
+        h += `<span class="sig-name">${esc(name)}</span>`;
+        h += `<span class="sig-punc">(</span>`;
+
+        if (params.trim()) {
+            h += params.split(',').map((p, i, a) =>
+                `<span class="sig-param">${esc(p.trim())}</span>` +
+                (i < a.length - 1 ? '<span class="sig-punc">, </span>' : '')
+            ).join('');
+        }
+
+        h += `<span class="sig-punc">)</span>`;
+
+        if (rest) {
+            const arr = rest.match(/^(\s*→\s*)(.*)/);
+            if (arr) h += `<span class="sig-arrow"> → </span><span class="sig-ret">${esc(arr[2])}</span>`;
+            else     h += esc(rest);
+        }
+
+        el.innerHTML = h;
+    });
+})();
 
 // ── Search ───────────────────────────────────────────────
 searchEl.addEventListener('input', function() {
