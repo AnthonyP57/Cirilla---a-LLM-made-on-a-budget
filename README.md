@@ -70,6 +70,9 @@ Cirilla - a LLM made on a budget/
   │   ├── Cirilla_model/              # implementation of the Cirilla LLM
   │   ├── Few_shot/                   # Few-shot learning techniques
   │   ├── LLM_pieces/                 # building blocks of LLMs
+  │   ├── RL/                         # reinforcement learning
+  │   │   └── GRPO/                   # GRPO training pipeline
+  │   ├── cli/                        # `cirilla vibe` terminal chat UI
   │   └── synth_data/                 # creating synthetic data
   │
   ├── cirilla_training/               # proper LLM training with the Cirilla package
@@ -85,6 +88,8 @@ Cirilla - a LLM made on a budget/
   ├── Few_shot/                       # overview of Few-shot ML techniques
   │
   ├── KAN/                            # overview of Kolmogorov-Arnold Networks (KAN)
+  │
+  ├── HF_transformers/                # How to contribute to HuggingFace
   │
   ├── Multimodal/                     # overview of Paligemma (VLM)
   │
@@ -126,6 +131,13 @@ uv add Cirilla[mamba]
 ```
 To verify that everything works you can try running: `./examples/cirilla_hybrid.py`
 
+### 3. Terminal chat UI — Cirilla Vibe
+After installing, you can chat with any Cirilla model directly from the terminal:
+```bash
+uv run python -m cirilla.cli
+```
+This opens a UI where you can select a model from HuggingFace Hub (e.g. `AnthonyPa57/Cirilla-0.3B-4E-grpo`) or type a custom repo id. Generation settings (`top_p`, `top_k`, `temperature`, `n_beams`, `kv_cache`) can be adjusted live with `/set key=value`.
+
 ## Why Cirilla
 
 Cirilla is a project focused on building **simple and optimized transformer models**. The goal is to give you access to all the modern bells and whistles, like Mixture of Experts (MoE) and [FlexAttention](https://pytorch.org/blog/flexattention/), without requiring you to implement or learn about them from scratch.
@@ -154,6 +166,8 @@ Cirilla is organized around reusable transformer components. Each module is impl
 - Mixture of Experts [here](https://github.com/AnthonyP57/Cirilla---a-LLM-made-on-a-budget/tree/master/Decoder_only_architecture/Mistral#sparse-mixture-of-experts)
 - BERT models [here](https://github.com/AnthonyP57/Cirilla---a-LLM-made-on-a-budget/tree/master/BERT)
 - dropless-MoE (dMoE) [here](https://arxiv.org/abs/2211.15841)
+- Multi-Token Prediction [here](https://github.com/AnthonyP57/Cirilla---a-LLM-made-on-a-budget/tree/master/Training_optimizations/Multi_Token_Prediction)
+- GRPO [here](https://github.com/AnthonyP57/Cirilla---a-LLM-made-on-a-budget/tree/master/RL/GRPO)
 
 ### Focus on efficiency
 - **Optimized kernels** from [HuggingFace kernel hub](https://huggingface.co/models?other=kernel).
