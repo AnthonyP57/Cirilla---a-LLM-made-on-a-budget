@@ -7,244 +7,345 @@
 <title>Cirilla - LLM Project</title>
 <link href="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/themes/prism-tomorrow.css" rel="stylesheet" />
 <style>
-    body {
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-                    Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-        background-color: #0b0b0b;
-        color: #bbbbbb;
-        line-height: 1.6;
-        margin: 0;
-        padding: 0;
-        display: flex;
-    }
+/* ── Variables ───────────────────────────────────────────── */
+:root {
+    --header-h: 56px;
+    --sidebar-w: 220px;
+    --bg:        #0b0b0b;
+    --bg-mid:    #111111;
+    --bg-card:   #131313;
+    --bg-code:   #1a1a1a;
+    --border:    #333333;
+    --text:      #bbbbbb;
+    --accent:    #facc15;
+    --link:      #00698f;
+    --code-clr:  #96e2dc;
+    --fn-clr:    #4ade80;
+    --sb-link:   #8bd1cb;
+    --radius:    10px;
+    --radius-sm: 6px;
+}
 
+*, *::before, *::after { box-sizing: border-box; }
+
+html { scroll-behavior: smooth; }
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+                 Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+    padding-top: var(--header-h);
+    font-size: clamp(0.9rem, 0.85rem + 0.2vw, 1.05rem);
+}
+
+/* ── Header ─────────────────────────────────────────────── */
+header {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    height: var(--header-h);
+    background: var(--bg-mid);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 1.5rem 0 calc(var(--sidebar-w) + 1.5rem);
+    border-bottom: 1px solid var(--border);
+    z-index: 1000;
+    gap: 1rem;
+}
+
+header h1 {
+    font-size: clamp(1.2rem, 1rem + 0.5vw, 1.65rem);
+    margin: 0;
+    flex: 1;
+}
+
+#menu-toggle {
+    display: none;
+    background: none;
+    border: 1px solid var(--border);
+    color: var(--text);
+    border-radius: var(--radius-sm);
+    padding: 0.3rem 0.55rem;
+    cursor: pointer;
+    font-size: 1.15rem;
+    line-height: 1;
+    flex-shrink: 0;
+    transition: background .15s;
+}
+#menu-toggle:hover { background: #1e1e1e; }
+
+.search-bar {
+    background: var(--bg-code);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    padding: 0.35rem 0.75rem;
+    color: #fff;
+    width: clamp(130px, 13vw, 220px);
+    font-size: 0.9rem;
+    flex-shrink: 0;
+    transition: border-color .15s;
+}
+.search-bar:focus { outline: none; border-color: var(--link); }
+
+/* ── Sidebar overlay (mobile) ────────────────────────────── */
+#sidebar-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 920;
+    background: rgba(0,0,0,0.55);
+}
+#sidebar-overlay.open { display: block; }
+
+/* ── Sidebar ─────────────────────────────────────────────── */
+.sidebar {
+    position: fixed;
+    top: var(--header-h);
+    left: 0;
+    width: var(--sidebar-w);
+    height: calc(100vh - var(--header-h));
+    background: var(--bg);
+    border-right: 1px solid var(--border);
+    padding: 1.25rem 0.75rem 2rem 1rem;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    scrollbar-color: #2a2a2a transparent;
+    z-index: 930;
+}
+
+.sidebar h2 {
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--accent);
+    margin-bottom: 0.5rem;
+}
+
+/* ── Sidebar category headers ────────────────────────────── */
+.category-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    margin: 6px 0;
+    color: #aaaaaa;
+    font-size: 0.85rem;
+    font-weight: normal;
+    padding: 3px 5px;
+    border-radius: var(--radius-sm);
+    transition: background .12s, color .12s;
+}
+.category-header:hover { background: #1a1a1a; color: #cccccc; }
+.category-header .arrow  { flex: 0 0 auto; }
+.category-header .header-text { flex: 1; text-align: left; }
+
+.category-items {
+    margin-left: 8px;
+    display: none;
+    flex-direction: column;
+    gap: 1px;
+}
+.category-items a {
+    display: block;
+    padding: 3px 8px;
+    color: var(--sb-link);
+    text-decoration: none;
+    font-size: 0.85rem;
+    border-radius: var(--radius-sm);
+    transition: background .12s, color .12s;
+}
+.category-items a:hover {
+    background: #1e2d2c;
+    color: #aee8e3;
+    text-decoration: none;
+}
+
+/* ── Main content ────────────────────────────────────────── */
+/*
+ * Center relative to the full viewport, not just the space after the sidebar.
+ * max() ensures the content never slides under the fixed sidebar.
+ * 525px = half of 1050px max-width.
+ */
+main.container {
+    max-width: 1050px;
+    margin-top: 2rem;
+    margin-bottom: 4rem;
+    margin-left: max(calc(var(--sidebar-w) + 1.5rem), calc(50vw - 525px));
+    margin-right: max(1.5rem, calc(50vw - 525px));
+    padding: 0 1rem;
+}
+
+/* ── Images ──────────────────────────────────────────────── */
+img {
+    max-width: 100%;
+    border-radius: var(--radius);
+    display: block;
+    margin: 20px auto;
+}
+.header-image { border-radius: 0; width: 100%; margin: 0; }
+
+.caption {
+    font-size: 0.9em;
+    color: gray;
+    text-align: right;
+    margin-bottom: 1.5rem;
+}
+
+/* ── Typography ──────────────────────────────────────────── */
+h1, h2, h3 {
+    text-align: left;
+    font-size: clamp(1.15rem, 1rem + 0.5vw, 1.5em);
+    font-weight: 600;
+    scroll-margin-top: calc(var(--header-h) + 1rem);
+}
+
+/* ── Flex layout (image + text pairs) ────────────────────── */
+.flex-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin-bottom: 40px;
+}
+.flex-container > div { flex: 1; min-width: 250px; }
+.text { padding: 10px; }
+.img-container { text-align: center; }
+.img-caption { font-size: 0.9em; color: gray; margin-top: 5px; }
+
+/* ── Code & Pre ──────────────────────────────────────────── */
+pre {
+    background-color: var(--bg-code);
+    padding: 15px;
+    border-radius: var(--radius);
+    overflow-x: auto;
+    margin-top: 0 !important;
+    margin-bottom: 15px;
+    font-size: 0.85rem;
+}
+pre code { display: block; margin: 0; line-height: 1.4; }
+
+code {
+    background: #222;
+    font-weight: 100;
+    padding: 2px 6px;
+    border-radius: 4px;
+    color: var(--code-clr);
+    font-size: 1em;
+}
+
+/* ── Tables ──────────────────────────────────────────────── */
+table {
+    border-collapse: collapse;
+    width: 100%;
+    margin: 15px 0;
+    display: block;
+    overflow-x: auto;
+}
+table, th, td { border: 1px solid var(--border); }
+th, td { padding: 10px; text-align: left; }
+th { background-color: var(--bg-code); color: #d4ae13; }
+tbody tr:hover td { background: #181818; }
+
+/* ── Documentation section ───────────────────────────────── */
+.docs-section {
+    margin-top: 60px;
+    padding-top: 30px;
+    border-top: 1px solid var(--border);
+}
+
+.function-doc {
+    margin-bottom: 40px;
+    padding: 1.25rem 1.25rem 0.75rem;
+    background: var(--bg-card);
+    border-radius: var(--radius);
+    border-left: 3px solid #2a2a2a;
+    transition: border-color .2s;
+}
+.function-doc:hover { border-left-color: var(--link); }
+.function-doc h3 { margin-top: 0; }
+.function-doc pre { margin-top: 0; margin-bottom: 15px; }
+
+.function-signature {
+    font-family: monospace;
+    font-size: 1.1em;
+    color: var(--fn-clr);
+    margin-bottom: 10px;
+    margin-left: 5px;
+}
+
+.code-label {
+    font-family: monospace;
+    font-style: italic;
+    font-size: clamp(0.95rem, 0.85rem + 0.25vw, 1.3em);
+    color: #6fc28d;
+    font-weight: 500;
+    margin-bottom: 10px;
+    margin-left: 5px;
+}
+
+.indented { margin-left: 35px; }
+
+hr.doc-divider {
+    border: none;
+    border-top: 1px solid var(--border);
+    margin: 40px 0;
+}
+
+p + pre { margin-top: 0; }
+
+/* ── Links ───────────────────────────────────────────────── */
+a { color: var(--link); }
+a:hover { text-decoration: underline; }
+
+/* ── Responsive: tablet (640–1023 px) ───────────────────── */
+@media (max-width: 1023px) {
+    :root { --sidebar-w: 180px; }
+    header { padding-left: calc(var(--sidebar-w) + 1rem); }
+}
+
+/* ── Responsive: mobile (< 640 px) ──────────────────────── */
+@media (max-width: 639px) {
+    :root { --sidebar-w: 250px; }
 
     header {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 5.6%;
-        background: #111;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        padding: 0 1px;
-        border-bottom: 1px solid #333;
-        z-index: 1000;
+        padding: 0 0.75rem;
+        gap: 0.6rem;
     }
+    header h1 { text-align: center; }
 
-    header h1 {
-        font-size: 1.65rem;
-        margin: 0;
-        margin-left: 15.1%;
-    }
+    #menu-toggle { display: flex; align-items: center; }
 
-    .search-bar {
-        background: #1a1a1a;
-        border: 1px solid #333;
-        border-radius: 8px;
-        padding: 0.3% 0.9%;
-        color: #fff;
-        width: 13%;
-        margin-right: 2.6%; /* move it left from the far edge */
-        font-size: 1rem;
-    }
-
-    .sidebar h2 {
-        font-size: 1rem;
-        margin-bottom: 0.8%;
-        color: #facc15;
-    }
+    .search-bar { width: clamp(90px, 25vw, 140px); }
 
     .sidebar {
-        position: fixed;
-        top: 5.6%;
-        left: 0;
-        width: 10.4%;           
-        height: 100%;
-        background: #0b0b0b;
-        border-right: 1px solid #333; 
-        padding: 1% 1.85% 1.85% 1%;
+        transform: translateX(-100%);
+        transition: transform .25s ease;
+        box-shadow: 4px 0 20px rgba(0,0,0,0.6);
+        z-index: 950;
     }
+    .sidebar.open { transform: translateX(0); }
 
-    .sidebar a:hover {
-        text-decoration: underline;
-    }
+    /* On mobile the sidebar is hidden, so use the full viewport */
+    main.container { margin: 1.5rem 1rem 3rem; padding: 0; }
 
-    main.container {
-        max-width: 55%;
-        margin: 4.2% auto;
-        padding: 0 1.85%;
-    }
+    .indented { margin-left: 14px; }
 
-    img {
-        max-width: 100%;
-        border-radius: 10px;
-        display: block;
-        margin: 20px auto;
-    }
-
-    .header-image {
-        border-radius: 0;
-        width: 100%;
-        margin: 0;
-    }
-
-    .caption {
-        font-size: 0.9em;
-        color: gray;
-        text-align: right;
-        margin-bottom: 1.85%;
-    }
-
-    h1, h2, h3 {
-        text-align: left;
-        font-size: 1.5em;
-        font-weight: 600;
-        scroll-margin-top: 7.4%; /* offset for fixed header */
-    }
-
-    .flex-container {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 20px;
-        margin-bottom: 40px;
-    }
-
-    .flex-container > div {
-        flex: 1;
-        min-width: 250px;
-    }
-
-    .text {
-        padding: 10px;
-    }
-
-    .img-container {
-        text-align: center;
-    }
-
-    .img-caption {
-        font-size: 0.9em;
-        color: gray;
-        margin-top: 5px;
-    }
-
-    pre {
-        background-color: #1a1a1a;
-        padding: 15px;
-        border-radius: 10px;
-        overflow-x: auto;
-    }
-
-    .docs-section {
-        margin-top: 60px;
-        padding-top: 30px;
-        border-top: 1px solid #333;
-    }
-
-    .function-doc {
-        margin-bottom: 50px;
-    }
-
-    .function-signature {
-        font-family: monospace;
-        font-size: 1.1em;
-        color: #4ade80;
-        margin-bottom: 10px;
-        margin-left: 5px;
-    }
-
-    .code-label {
-        font-family: monospace;
-        font-style: italic;
-        font-size: 1.3em;
-        color: #6fc28d;
-        font-weight: 500;
-        margin-bottom: 10px;
-        margin-left: 5px;
-    }
-
-    .indented {
-    margin-left: 35px;
-    }
-
-    table {
-        border-collapse: collapse;
-        width: 100%;
-        margin: 15px 0;
-    }
-
-    table, th, td {
-        border: 1px solid #333;
-    }
-
-    th, td {
-        padding: 10px;
-        text-align: left;
-    }
-
-    th {
-        background-color: #1a1a1a;
-        color: #d4ae13;
-    }
-
-    code {
-        background: #222;
-        font-weight: 100;
-        padding: 2px 6px;
-        border-radius: 4px;
-        color: #96e2dc;
-        font-size: 1.2em;
-    }
-
-    hr.doc-divider {
-        border: none;
-        border-top: 1px solid #333;
-        margin: 40px 0;
-    }
-
-    p + pre {
-        margin-top: 0;
-    }
-
-    .function-doc pre {
-        margin-top: 0;
-        margin-bottom: 15px; /* keep some spacing below */
-    }
-
-    pre {
-        margin-top: 0 !important;      /* remove top space */
-        margin-bottom: 15px;           /* optional spacing below */
-        padding: 15px;
-        border-radius: 10px;
-        overflow-x: auto;
-    }
-
-    pre code {
-        display: block;                /* ensures the code fills the pre */
-        margin: 0;                     /* remove any extra margin */
-        line-height: 1.4;              /* adjust if needed */
-    }
-
-    a[href="#rm_duplicate_instructs"] {
-    color: #00698f;
-    }
-
-    a {
-    color: #00698f;
-    }
-
-
+    .flex-container > div { min-width: 100%; }
+}
 </style>
 </head>
 <body>
 
 <header>
+    <button id="menu-toggle" aria-label="Open navigation">&#9776;</button>
     <h1>Cirilla</h1>
     <input type="text" id="search" class="search-bar" placeholder="Search the docs ..." />
 </header>
+
+<div id="sidebar-overlay"></div>
 
 <!-- Sidebar with collapsible subcategories showing full names -->
 <div class="sidebar" id="sidebar">
@@ -309,90 +410,6 @@
     </div>
 </div>
 
-<style>
-.category-header {
-    display: flex;
-    justify-content: space-between; /* text left, arrow right */
-    align-items: center;
-    cursor: pointer;
-    margin: 8px 0;
-    color: #aaaaaa;
-    font-size: 0.95rem;
-    font-weight: normal;
-}
-
-.category-header .arrow {
-    flex: 0 0 auto; /* arrow stays flush right */
-}
-
-.category-header .header-text {
-    flex: 1;
-    text-align: left; /* text stays flush left */
-    transition: box-shadow 0.2s;
-}
-
-/* underline on hover without moving the text */
-.category-header .header-text:hover {
-    box-shadow: inset 0 -2px 0 0 #bbbbbb; 
-}
-
-.category-items {
-    margin-left: 10px;
-    display: none;
-    flex-direction: column;
-}
-
-.category-items a {
-    display: block;
-    margin: 4px 0;
-    color: #8bd1cb;
-    text-decoration: none;
-    font-size: 0.9rem;
-}
-
-.category-items a:hover {
-    text-decoration: underline;
-}
-</style>
-
-<script>
-// Search functionality for sidebar links and function docs
-const searchInput = document.getElementById('search');
-searchInput.addEventListener('input', function() {
-    const query = this.value.toLowerCase();
-
-    // Sidebar links visibility
-    const links = document.querySelectorAll('.sidebar a');
-    links.forEach(link => {
-        const text = link.textContent.toLowerCase();
-        link.style.display = text.includes(query) ? 'block' : 'none';
-    });
-
-    // Function docs visibility
-    const functions = document.querySelectorAll('.function-doc');
-    let firstMatch = null;
-    functions.forEach(fn => {
-        const text = fn.innerText.toLowerCase();
-        if (text.includes(query)) {
-            fn.style.display = '';
-            if (!firstMatch) firstMatch = fn;
-        } else {
-            fn.style.display = 'none';
-        }
-    });
-
-    // Scroll to first matching function doc or to Documentation header if query exists
-    const docsHeader = document.querySelector('.docs-section h2');
-    if (query && docsHeader) {
-        const yOffset = -80; // offset for fixed header
-        const y = (firstMatch ? firstMatch : docsHeader).getBoundingClientRect().top + window.pageYOffset + yOffset;
-        window.scrollTo({ top: y, behavior: 'smooth' });
-    }
-});
-</script>
-
-
-
 <main class="container">
 
     <img src="https://github.com/AnthonyP57/Radovid---a-LLM-made-on-a-budget/blob/master/img/ciri_w4_2.png?raw=true" class="header-image" alt="Ciri from The Witcher 4 trailer">
@@ -441,10 +458,6 @@ searchInput.addEventListener('input', function() {
         <h3>OllamaCurate</h3>
         <div class="code-label">class cirilla.synth_data.OllamaCurate(model, system_prompt, response_template)</div>
 
-        <!-- <div class="function-signature">
-            OllamaCurate(model, system_prompt, response_template:BaseModel)
-        </div> -->
-
             <div class="indented">
                 <p>Generall class for creating syntetic datasets with ollama</p>
 
@@ -454,12 +467,12 @@ searchInput.addEventListener('input', function() {
                 <tr><td><code>system_prompt</code></td><td>str</td><td>system prompt for the chosen ollama model, used by its functions: <code>__call__</code>,  <code>dynamic_hierarchical_summary</code> and <code>single_pass_summary</code></td></tr>
                 <tr><td><code>response_template</code></td><td>pydantic.BaseModel</td><td>template for structured responses, used by its functions: <code>__call__</code>,  <code>dynamic_hierarchical_summary</code>,  <code>single_pass_summary</code> and <code>multi_turn</code></td></tr>
                 </table>
-                
+
                 <div class="code-label">__call__(paths, save_to, seed, checkpoint, skip) → None</div>
-        
+
                 <div class="indented">
                 <p>Create synthetic instructions (question-answer pairs)<br>to see how to turn the instructions into a <code>.jsonl</code> file see the <a href="#rm_duplicate_instructs">rm_duplicate_instructs</a> function</p>
-                
+
                         <table>
                         <tr><th>Argument</th><th>Type</th><th>Description</th></tr>
                         <tr><td><code>paths</code></td><td>list[Path]</td><td>paths to .txt files containing texts to create question answer pairs</td></tr>
@@ -478,8 +491,8 @@ class Response(BaseModel):
     answer: str = Field(description="Answer to the question")
 
 sys_prompt = """
-You are an expert dataset annotator for instruction-tuning large language models. 
-Your task is to create high-quality question-answer pairs from provided texts 
+You are an expert dataset annotator for instruction-tuning large language models.
+Your task is to create high-quality question-answer pairs from provided texts
 for training instruct models.
 
 Guidelines:
@@ -527,10 +540,10 @@ for _ in range(3):
                 </div>
 
                 <div class="code-label" style="margin-top: 50px;">single_pass_summary(paths, save_to, seed, num_predict, use_response_template) → None</div>
-        
+
                 <div class="indented">
                 <p>For provided <code>.txt</code> files create a simple summary of them<br>See how to turn summaries into a dataset: <a href="#gather_summaries">gather_summaries</a> <a href="#summaries_to_instruct">summaries_to_instruct</a></p>
-                
+
                         <table>
                         <tr><th>Argument</th><th>Type</th><th>Description</th></tr>
                         <tr><td><code>paths</code></td><td>list[Path]</td><td>paths to <code>.txt</code> files containing texts to summarize</td></tr>
@@ -567,10 +580,10 @@ for m in ["granite3.1-moe:3b"]:
             </div>
 
                             <div class="code-label" style="margin-top: 50px;">dynamic_hierarchical_summary(paths, save_to, chunk_lines, seed, num_predict, max_words_summary, use_response_template) → None</div>
-        
+
                 <div class="indented">
                 <p>For provided <code>.txt</code> files create a hierarchical summary of them. Meaning that for a text divided into chunks we subsequently generate a summary for each chunk, and then generate a final summary based on the summaries of the chunks</p>
-                
+
                         <table>
                         <tr><th>Argument</th><th>Type</th><th>Description</th></tr>
                         <tr><td><code>paths</code></td><td>list[Path]</td><td>paths to <code>.txt</code> files containing texts to summarize</td></tr>
@@ -604,7 +617,7 @@ for m in ['llama3.2:3b', 'llama3.1:8b', 'qwen3:8b']:
                         system_prompt="",
                         response_template=Response
                         )
-    
+
     model.dynamic_hierarchical_summary(paths,
                                     save_to=f'./synth_sumarries/witcher_texts/{m}',
                                     chunk_lines=100,
@@ -617,10 +630,10 @@ for m in ['llama3.2:3b', 'llama3.1:8b', 'qwen3:8b']:
             </div>
 
             <div class="code-label" style="margin-top: 50px;">multi_turn(paths, save_to, bar, n_turns_range, seed, prob_chance_new_context) → None</div>
-        
+
                 <div class="indented">
                 <p>Create synthetic multi turn instructions (question-answer pairs)</p>
-                
+
                         <table>
                         <tr><th>Argument</th><th>Type</th><th>Description</th></tr>
                         <tr><td><code>paths</code></td><td>list[Path]</td><td>paths to .txt files containing texts to create multi turn question answer pairs</td></tr>
@@ -673,7 +686,7 @@ for model in ['qwen3:8b', 'phi4', 'llama3.1:8b']:
                 <tr><td><code>main_dir</code></td><td>Path</td><td>path to the directory containing the synthetic instructions</td></tr>
                 <tr><td><code>out_path</code></td><td>Path</td><td>path to save the cleaned instructions to</td></tr>
                 </table>
-                
+
                 <p><strong>Example:</strong></p>
                 <pre><code class="language-python">main_dir = './witcher_synthetic_instruct'
 save_to = './witcher_synthetic_instruct.jsonl'
@@ -715,7 +728,7 @@ Since the second instruction is nearly identical, it will be deleted in the fina
                 <tr><td><code>in_path</code></td><td>Path</td><td>path to the directory containing summaries in <code>.txt</code> files, they can be nested</td></tr>
                 <tr><td><code>out_path</code></td><td>Path</td><td>path to save the instructions to</td></tr>
                 </table>
-                
+
                 <p><strong>Example:</strong></p>
                 <pre><code class="language-python">in_path = './witcher_synth_summaries'
 out_path = './witcher_summaries_gathered.jsonl'
@@ -747,7 +760,7 @@ gather_summaries(in_path, out_path)</code></pre>
                 <tr><td><code>in_path</code></td><td>Path</td><td>path to the directory containing summaries in <code>.txt</code> files, they can be nested</td></tr>
                 <tr><td><code>out_path</code></td><td>Path</td><td>path to save the instructions to</td></tr>
                 </table>
-                
+
                 <p><strong>Example:</strong></p>
                 <pre><code class="language-python">in_path = './witcher_synth_summaries'
 out_path = './witcher_summaries_gathered_instr.jsonl'
@@ -784,7 +797,7 @@ As you may notice the user's question is asking about Ravik, which is the name o
                 <tr><td><code>n_samples</code></td><td>int</td><td>How many samples of the synthetic reasoning dataset to create (each sample contains 100 data points)</td></tr>
                 <tr><td><code>specs</code></td><td>list[reasoning_gym.composite.DataSpec]</td><td>specs for creating the synthetic reasoning dataset</td></tr>
                 </table>
-                
+
                 <p><strong>Example:</strong></p>
                 <pre><code class="language-python">out_path = './reason_gym_synth.jsonl'
 n_samples = 400 # will contain 40'000 data points
@@ -824,7 +837,7 @@ get_synth_resoning_dataset(out_path, n_samples)</code></pre>
                 <tr><td><code>model</code></td><td>str</td><td>model form <a href="https://huggingface.co/models">huggingface</a> for the conversations</td></tr>
                 <tr><td><code>prob_chance_new_context</code></td><td>float</td><td>probability of a new context being added into the conversations</td></tr>
                 </table>
-                
+
                 <p><strong>Example:</strong></p>
                 <pre><code class="language-python">paths_ = ['./summaries/granite3.1-moe:3b',
             './summaries/llama3.1:8b',
@@ -836,7 +849,7 @@ paths = [[os.path.join(p, f) for f in os.listdir(p)] for p in paths_]
 for model in ["unsloth/granite-3.2-2b-instruct-unsloth-bnb-4bit"]:
     for i, sub_paths in enumerate(paths):
         for _ in range(1):
-        
+
             vllm_multi_turn(sub_paths,
             save_to=f'./synth_multi_round/{model.split("/")[1]}/{paths_[i].split("/")[-1]}',
             model=model)</code></pre>
@@ -850,7 +863,7 @@ for model in ["unsloth/granite-3.2-2b-instruct-unsloth-bnb-4bit"]:
     "context": "A Book of Tales"
   },
   {
-    "question": "Which three new playable races \u2013 Gnomes, ... ?",
+    "question": "Which three new playable races – Gnomes, ... ?",
     "answer": "Gnomes are native to the mountainous region of Mount Carbon in Kovir ...",
     "context": "A Book of Tales"
   },
@@ -875,7 +888,7 @@ for model in ["unsloth/granite-3.2-2b-instruct-unsloth-bnb-4bit"]:
                 <tr><td><code>input_path</code></td><td>Path</td><td>path to a folder with <code>.jsonl</code> files containing multi turn conversations, they can be nested</td></tr>
                 <tr><td><code>save_to</code></td><td>Path</td><td>path to save the gathered conversations to</td></tr>
                 </table>
-                
+
                 <p><strong>Example:</strong></p>
                 <pre><code class="language-python">inp = './synth_multi_round'
 outp = './multi_round.jsonl'
@@ -910,7 +923,7 @@ multi_turn_gather(inp, outp)</code></pre>
                 <tr><th>Argument</th><th>Type</th><th>Description</th></tr>
                 <tr><td><code>path</code></td><td>Path</td><td>path to a Huggingface kernel e.g. <code>"kernels-community/activation"</code></td></tr>
                 </table>
-                
+
                 <p><strong>Example:</strong></p>
                 <pre><code class="language-python">dim=256
 activation = get_activation('Motif-Technologies/activation')
@@ -918,7 +931,6 @@ rmsnorm = activation.layers.RMSNorm(dim=dim).cuda()
 
 print(rmsnorm(torch.randn(1, dim, device='cuda')).shape)
 # torch.Size([1, 256])</code></pre>
-</code></pre>
             </div>
         </div>
 
@@ -939,7 +951,7 @@ print(rmsnorm(torch.randn(1, dim, device='cuda')).shape)
                 <p align="center">
                 RMSNorm &rarr; W<sub>qkv</sub> &rarr; RoPE &rarr; FlashAttention3
                 </p>
-                
+
                 <p><strong>Example:</strong></p>
                 <pre><code class="language-python">from cirilla.Cirilla_model import benchmark_model_part
 
@@ -972,7 +984,7 @@ out = att(x)
                 <tr><td><code>theata</code></td><td>float</td><td>theta for sin and cos</td></tr>
                 <tr><td><code>dtype</code></td><td>torch.dtype</td><td>dtype to use</td></tr>
                 </table>
-                
+
                 <p><strong>Example:</strong></p>
                 <pre><code class="language-python">rope = RoPE(128, 512)
 xq = torch.randn(2, 512, 4, 128, device='cuda', dtype=torch.bfloat16) # (b, seq_len, head, head_dim)
@@ -1073,12 +1085,12 @@ print(create_dynamic_block_mask.cache_info()) # how many times the mask template
 
                 <p><strong>Signature:</strong></p>
                 <p align="center">
-                SwiGLU 
+                SwiGLU
                 <span style="color: gray;">
                     (W<sub>1</sub> → [SiLU(x<sub>[:d<sub>ff</sub>]</sub>) ⊙ x<sub>[d<sub>ff</sub>:]</sub>] → W<sub>2</sub>)
                 </span>
                 </p>
-                
+
             </div>
         </div>
 
@@ -1099,7 +1111,7 @@ print(create_dynamic_block_mask.cache_info()) # how many times the mask template
                 <p align="center">
                 RMSNorm &rarr; Gating &rarr; Experts
                 </p>
-                
+
                 <p><strong>Example:</strong></p>
                 <pre><code class="language-python">import torch
 
@@ -1115,7 +1127,7 @@ out = moe(x)
 </code></pre>
             </div>
         </div>
-    
+
         <div class="function-doc" id="MegablockMoE">
         <h3>MegablockMoE</h3>
         <div class="code-label">class cirilla.LLM_pieces.MegablockMoE(args)</div>
@@ -1127,10 +1139,10 @@ out = moe(x)
                 <tr><th>Argument</th><th>Type</th><th>Description</th></tr>
                 <tr><td><code>args</code></td><td>.MegablockArgs</td><td>arguments for the <code>MegablockMoE</code> class</td></tr>
                 </table>
-                
+
                 <p><strong>Example:</strong></p>
                 <pre><code class="language-python">import torch
-                    
+
 megamoe = MegablockMoE(MegablockArgs())
 x = torch.randn(4, 1024, 128,
                 device='cuda', requires_grad=True) # (b, seq_len, dim) ; requires grad for smoe
@@ -1151,7 +1163,7 @@ out = megamoe(x)
                 <tr><th>Argument</th><th>Type</th><th>Description</th></tr>
                 <tr><td><code>args</code></td><td>.MegablockArgs</td><td>arguments for the <code>MegablockdMoE</code> class</td></tr>
                 </table>
-                
+
                 <p><strong>Example:</strong></p>
                 <pre><code class="language-python">import torch
 
@@ -1204,10 +1216,10 @@ trainer.criterion = nn.CrossEntropyLoss()
 trainer.train(dl, dl)</code></pre>
 
                 <div class="code-label" style="margin-top: 50px;">pred(x, attention_mask) → torch.Tensor</div>
-        
+
                 <div class="indented">
                 <p>forward pass of the model, can return mean pooling / tokens / classes / llm output</p>
-                
+
                         <table>
                         <tr><th>Argument</th><th>Type</th><th>Description</th></tr>
                         <tr><td><code>x</code></td><td>torch.Tensor</td><td>tensor of shape <code>(b, seq_len)</code></td></tr>
@@ -1230,10 +1242,10 @@ print(model.pred(x, mask).shape) # torch.Size([4, 2])</code></pre>
             </div>
 
                             <div class="code-label" style="margin-top: 50px;">pull_model_from_hub(hf_repo_id) → None</div>
-        
+
                 <div class="indented">
                 <p>pull model from huggingface, the pulled model has to be compatible with <code>CirillaBERT</code></p>
-                
+
                         <table>
                         <tr><th>Argument</th><th>Type</th><th>Description</th></tr>
                         <tr><td><code>hf_repo_id</code></td><td>str</td><td>huggingface repo id to pull model from</code></td></tr>
@@ -1335,10 +1347,10 @@ dl = JSONLDataset(['./example.jsonl', './example.jsonl'],
 trainer.train(dl, dl)</code></pre>
 
                 <div class="code-label" style="margin-top: 50px;">pred(x) → torch.Tensor</div>
-        
+
                 <div class="indented">
                 <p>forward pass of the model, can return llm output of shape <code>(b, seq_len, vocab_size)</code></p>
-                
+
                         <table>
                         <tr><th>Argument</th><th>Type</th><th>Description</th></tr>
                         <tr><td><code>x</code></td><td>torch.Tensor</td><td>tensor of shape <code>(b, seq_len)</code></td></tr>
@@ -1357,10 +1369,10 @@ print(model.pred(x).shape) # torch.Size([4, context_window, vocab_size])</code><
             </div>
 
                             <div class="code-label" style="margin-top: 50px;">pull_model_from_hub(hf_repo_id) → None</div>
-        
+
                 <div class="indented">
                 <p>pull model from huggingface, the pulled model has to be compatible with <code>Cirilla</code></p>
-                
+
                         <table>
                         <tr><th>Argument</th><th>Type</th><th>Description</th></tr>
                         <tr><td><code>hf_repo_id</code></td><td>str</td><td>huggingface repo id to pull model from</code></td></tr>
@@ -1388,7 +1400,7 @@ mode.pull_model_from_hub('AnthonyPa57/HF-torch-demo-R')</code></pre>
                 <tr><td><code>x</code></td><td>torch.Tensor</td><td>input to the model or piece of the model</code></td></tr>
                 <tr><td><code>label</code></td><td>str</td><td>label for the benchmark</code></td></tr>
                 </table>
-                
+
                 <p><strong>Example:</strong></p>
                 <pre><code class="language-python">att = BertAttention(BertAttentionArgs(), RoPE(128, 512)).cuda().to(torch.bfloat16)
 x = torch.randn(4, 512, 128*16, device='cuda', dtype=torch.bfloat16)
@@ -1399,7 +1411,6 @@ benchmark_model_part(att, x, "BertAttention")
 # Backward time:  4.03 ms
 # Forward memory: 56.12 MB
 # Backward memory:-36.12 MB</code></pre>
-</code></pre>
             </div>
         </div>
 
@@ -1428,10 +1439,10 @@ print(tokenizer.decode(tokenizer.apply_chat_template(chat, tokenize=True, add_ge
 print(tokenizer.apply_chat_template(chat, tokenize=True, add_generation_prompt=False))</code></pre>
 
                 <div class="code-label" style="margin-top: 50px;">train(dataset, special_tokens, save_to_path, **kwargs) → self.tokenizer</div>
-        
+
                 <div class="indented">
                 <p>train the tokenizer on an iterator dataset</code></p>
-                
+
                         <table>
                         <tr><th>Argument</th><th>Type</th><th>Description</th></tr>
                         <tr><td><code>dataset</code></td><td>Union[Iterator[str], Iterator[Iterator[str]]]</td><td>dataset to train on</td></tr>
@@ -1482,10 +1493,10 @@ dl = JSONLDataset(['./example.jsonl', './example.jsonl'], shuffle_path=True,
 trainer.train(dl, dl)</code></pre>
 
                 <div class="code-label" style="margin-top: 50px;">train(dataset, valid_dataset) → None</div>
-        
+
                 <div class="indented">
                 <p>train the model on on a dataset</code></p>
-                
+
                         <table>
                         <tr><th>Argument</th><th>Type</th><th>Description</th></tr>
                         <tr><td><code>dataset</code></td><td>JSONLDataset</td><td>dataset to train on</td></tr>
@@ -1517,7 +1528,7 @@ trainer.train(dl, dl)</code></pre>
             </div>
 
                 <div class="code-label" style="margin-top: 50px;">benchmark() → None</div>
-        
+
                 <div class="indented">
                 <p>benchmark the model on a randomly generated data of batch size 4</code></p>
 
@@ -1547,7 +1558,7 @@ trainer.benchmark()
                 <tr><td><code>wiki</code></td><td>str</td><td>what fandom wiki to scrape</td></tr>
                 <tr><td><code>lang</code></td><td>str</td><td>what language to use for the fandom</td></tr>
                 </table>
-                
+
                 <p><strong>Example:</strong></p>
                 <pre><code class="language-python">in_path = "./witcher_json"
 out_path = "./async_fandom"
@@ -1563,8 +1574,8 @@ scrape_fandom(in_path,
 
 <p><strong>Example input file: <code class="language-bash">./witcher_json/witcher_1.json</code></strong></p>
 <pre><code class="language-json">[
-    "Geralt of Rivia", "Triss Merigold", "Vesemir", "Leo", "Lambert", 
-    "Eskel", "Alvin", "Shani", "Zoltan Chivay", "Dandelion (Jaskier)", 
+    "Geralt of Rivia", "Triss Merigold", "Vesemir", "Leo", "Lambert",
+    "Eskel", "Alvin", "Shani", "Zoltan Chivay", "Dandelion (Jaskier)",
     "King Foltest", "Adda the White", ...
 ]
 </code></pre>
@@ -1605,7 +1616,7 @@ As a child, he ...
                 <tr><td><code>input_path</code></td><td>Path</td><td>path to a folder with scraped instructions</td></tr>
                 <tr><td><code>out_path</code></td><td>Path</td><td>path to save the <code>.jsonl</code> file to</td></tr>
                 </table>
-                
+
                 <p><strong>Example:</strong></p>
                 <pre><code class="language-python">instructions_into_conv(input_path="./async_fandom_instruct",
                         out_path="./async_fandom_instruct_gathered.jsonl")</code></pre>
@@ -1636,62 +1647,81 @@ As a child, he ...
 
 </div>
 </main>
-</body>
-</html>
 
 <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/prism.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-python.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-bash.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/prismjs@1.29.0/components/prism-json.min.js"></script>
-<script>
-// Search functionality
-const searchInput = document.getElementById('search');
-searchInput.addEventListener('input', function() {
-    const query = this.value.toLowerCase();
-    const functions = document.querySelectorAll('.function-doc');
-    functions.forEach(fn => {
-        const text = fn.innerText.toLowerCase();
-        fn.style.display = text.includes(query) ? '' : 'none';
-    });
-});
-</script>
 
 <script>
-// Toggle arrows and show/hide category items
-const headers = document.querySelectorAll('.category-header');
-headers.forEach(header => {
+const sidebar  = document.getElementById('sidebar');
+const overlay  = document.getElementById('sidebar-overlay');
+const toggle   = document.getElementById('menu-toggle');
+const searchEl = document.getElementById('search');
+
+// ── Hamburger ────────────────────────────────────────────
+toggle.addEventListener('click', () => {
+    sidebar.classList.toggle('open');
+    overlay.classList.toggle('open');
+});
+overlay.addEventListener('click', () => {
+    sidebar.classList.remove('open');
+    overlay.classList.remove('open');
+});
+
+// ── Sidebar category collapse ────────────────────────────
+document.querySelectorAll('.category-header').forEach(header => {
     header.addEventListener('click', () => {
-        const key = header.dataset.toggle + "-items";
-        const items = document.getElementById(key);
+        const items = document.getElementById(header.dataset.toggle + '-items');
         const arrow = header.querySelector('.arrow');
-
-        if (items.style.display === "none" || items.style.display === "") {
-            items.style.display = "flex";
-            arrow.textContent = "▴"; // arrow up
-        } else {
-            items.style.display = "none";
-            arrow.textContent = "▾"; // arrow down
-        }
+        const open  = items.style.display === 'flex';
+        items.style.display = open ? 'none' : 'flex';
+        arrow.textContent   = open ? '▾' : '▴';
     });
 });
-</script>
 
-<script>
-// Adjust scroll for sidebar links to headers
+// ── Sidebar anchor smooth-scroll ─────────────────────────
 document.querySelectorAll('.sidebar a[href^="#"]').forEach(link => {
     link.addEventListener('click', function(e) {
-        e.preventDefault(); // prevent default jump
-        const targetId = this.getAttribute('href').substring(1);
-        const target = document.getElementById(targetId);
+        e.preventDefault();
+        const target = document.getElementById(this.getAttribute('href').substring(1));
         if (target) {
-            const yOffset = -80; // same as header height
-            const y = target.getBoundingClientRect().top + window.pageYOffset + yOffset;
+            const y = target.getBoundingClientRect().top + window.pageYOffset - 80;
             window.scrollTo({ top: y, behavior: 'smooth' });
         }
+        sidebar.classList.remove('open');
+        overlay.classList.remove('open');
     });
 });
-</script>
 
+// ── Search ───────────────────────────────────────────────
+searchEl.addEventListener('input', function() {
+    const query = this.value.toLowerCase();
+
+    document.querySelectorAll('.sidebar a').forEach(link => {
+        link.style.display = link.textContent.toLowerCase().includes(query) ? 'block' : 'none';
+    });
+
+    const fns = document.querySelectorAll('.function-doc');
+    let firstMatch = null;
+    fns.forEach(fn => {
+        const match = fn.innerText.toLowerCase().includes(query);
+        fn.style.display = match ? '' : 'none';
+        if (match && !firstMatch) firstMatch = fn;
+    });
+
+    if (query) {
+        const fallback = document.querySelector('.docs-section h2');
+        const target   = firstMatch || fallback;
+        if (target) {
+            window.scrollTo({
+                top: target.getBoundingClientRect().top + window.pageYOffset - 80,
+                behavior: 'smooth'
+            });
+        }
+    }
+});
+</script>
 
 </body>
 </html>
